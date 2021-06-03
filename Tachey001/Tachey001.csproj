@@ -458,6 +458,7 @@
     <Content Include="Views\Shared\step\step_2.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Main.cshtml" />
+    <Content Include="Views\Shared\_bootstrap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
