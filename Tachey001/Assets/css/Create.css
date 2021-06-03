@@ -1,0 +1,471 @@
+/* ========================= 共用 start ============================= */
+step a,
+step a:active,
+step a:link,
+step a:visited {
+    color: black;
+    text-decoration: none;
+}
+h1 {
+  display: none;
+}
+
+bigpic_wrap h2,
+card_wrap h2,
+also_wrap h2,
+good_teacher h2,
+step h2,
+apply_wrap h2,
+online h2 {
+    line-height: 1.5em;
+}
+
+bigpic_wrap p,
+card_wrap p,
+also_wrap p,
+good_teacher p,
+step p,
+apply_wrap p,
+online p {
+    color: #000000a6;
+}
+.btn {
+  width: 260px;
+  height: 50px;
+}
+.text_none {
+  display: none;
+}
+.card_wrap,
+.also_wrap,
+.good_teacher,
+.step,
+.online {
+  padding: 12% 0;
+}
+.card_wrap,
+.card_wrap .card,
+.good_teacher,
+.online {
+  background-color: rgb(243, 243, 241);
+}
+.also_wrap .title::after,
+.good_teacher .title::after,
+.step .title::after,
+.online .title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: rgb(46, 225, 179);
+  margin: 10px auto 30px;
+}
+.card_wrap .card,
+.step .card .card-body {
+  padding: 0;
+}
+
+.online .container::before,
+.online .container::after {
+  display: none;
+}
+/* ========================= bigpic start ============================= */
+
+.bigpic_wrap {
+    max-height: 360px;
+    padding: 5vh 0;
+    background-image: url(https://hahow.in/static/media/kv2.2fc014cb.jpg);
+    background-size: cover;
+    background-position: center center;
+    text-align: center;
+}
+.bigpic_wrap.bottom {
+    background-size: auto;
+    background-image: url(https://hahow.in/static/media/bg-btmcta.3d2dce53.jpg);
+}
+.bigpic_wrap h2 {
+    font-size: 32px;
+    color: white;
+    padding: 10px;
+}
+.bigpic_wrap p {
+    color: white;
+    padding: 25px 15px 0;
+    margin: 0 0 30px;
+    font-size: 20px;
+}
+.btn_wrap {
+  display: flex;
+  align-content: center;
+  margin: auto;
+  padding: 30px 0 0 0;
+}
+
+/* ========================= card start============================= */
+.card_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.card_wrap .card-title {
+  font-size: 23px;
+  color: rgb(0, 190, 164);
+}
+.card_wrap .card_img {
+  width: 110px;
+  margin: auto;
+}
+
+/* ========================= also start============================= */
+
+.also_wrap .title {
+  text-align: center;
+  margin-bottom: 5%;
+}
+.also_wrap .title h2 {
+  font-size: 30px;
+}
+.also_wrap .title p {
+  font-size: 16px;
+  line-height: 1.75em;
+  padding: 5px 0 0;
+  margin-bottom: 3%;
+}
+.also_wrap .card {
+  margin-bottom: 5%;
+}
+.also_wrap .card h2 {
+  text-align: center;
+  font-size: 23px;
+}
+/* ========================= good teacher start============================= */
+.good_teacher {
+  text-align: center;
+}
+.good_teacher .title {
+  margin-bottom: 5%;
+  font-size: 30px;
+}
+
+.good_teacher .card {
+  margin: 0 auto 5%;
+  border-bottom: 6px solid rgb(0, 190, 164);
+}
+.good_teacher .card h2 {
+  line-height: 23px;
+  font-size: 23px;
+  margin-bottom: 5%;
+}
+.good_teacher .card-text:last-child {
+  font-size: 16px;
+  line-height: 1.75em;
+  margin: 0 0 50px 0;
+}
+/* ========================= step start============================= */
+.step .title {
+  text-align: center;
+  margin-bottom: 5%;
+  font-size: 30px;
+}
+.step .card {
+  border: 3px solid rgba(0, 0, 0, 0.24);
+  max-width: 370px;
+  margin: 15% auto;
+  padding: 30px 20px;
+  line-height: 1.5em;
+}
+.step .content_wrap {
+  position: relative;
+  top: -55px;
+  background-color: white;
+  display: inline-block;
+  padding: 0 10px;
+}
+.step .content_wrap .num {
+  font-size: 90px;
+  color: rgba(0, 0, 0, 0.24);
+}
+.step .content_wrap .num_title {
+  font-size: 23px;
+  margin: -15px 0 0 22px;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+}
+.step .card-text {
+  padding: 0 0 20px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* ========================= apply start============================= */
+.apply_wrap {
+  padding: 5vh 0;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB9AAAAEYCAMAAAAzjZ2oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRFAKOXALOfAL6kAJWQrj964gAADlxJREFUeNrs3duSFLcSBVDlzP//sxkDNgYHTHe1VHlZK+b1xMEqKbdSden1Vts7AJ+lane2igd6uIQAnxSqtkBPbLmGAGXyXKILdFMDoEOeK9sC3f0YgCbV3tGqQBfoQOV6e6PIdrh66L9boLuJDvDaWhtv3LR1EOgCHUClFemmmUAH+EZ3LicEunvogDxHogt0AGWWKYnuPXSAraSp3k+g23YB9TlwlxUC3a4L0KDjNHdKoGvQAUUW3V/9ueYOOqDIov2rP9fkOZCcW+gCXaDLc0CgI9AnBHq4fw4osgj0I3Mt9lniHBDoCPQDc03iAgh0T7mXn2vSHOCDKPXMVelA97QagBbdiXv9qSbPAbToGvQGgW4BA2jR3UGvP9PcPweQ6A7c6080B+4AEl2eN5hnGnSA//K9OPfPSwa6pQvwc60NmX5Pmg/qMZe9EEC60rziTNo5UhXoAh1gc0/vzjICHaCBcBaNQAdQoJVq88VDcQDde3SDK9BNE4Bj3D/n1kA3TwDSlmgH7maLFh2gS4uu8RLoZgrASeEOOncGukQHSFyjnbibLBIdQKAzarJIdACBTodA9w0iAIFOh0D/+tX/qjaN9ZcRmfBnLwfpa7SBNVn84N6FNDd8wMM85Y5Az5VJKwwf8ATvoSPQU034ZfiAVMXD0JotIskgS3Qo36BboAJdJCVbkrlZXXBV2HIj0DO92RGGD0hXPCS6QNeia9C16FA/zyW6QNdjGmLlAnpUZ2+jmDJ6TCfuztwZVCTvcaZwFP7+V8KPhwn0/j2m/RA49CZbv7EEukAX6AIdcY5IF+gCXaCD6ojHfExZgS7QQXFEopuzNyWS4QPn7Uh0gd4gkTzlDvIcXYdAb5BIAh0KUv+06ALd5s0Qd70/hTvoqPJm7ewO07fcwYk7+g6B3iGQLBRw4o46JdAbXGi/hw4CHYVKoHc4MF6WCaiMqFSmbYOrvIwfqIwoVabt8eZ8wzd+Zw205+Fw5I5APx7oFu6xoV5xzO4Nz28tkwqBjkAX6Lzoum7L9DBlmMBra0P0KvwWrkh3lg6/LCBR5/agQKdzi2G6MIasc+Iu0Gmc6GYLWnQ06AKd+olusmD54A66QKfBqaHxRKLjwF2gU78imStYP8hzgc5Nl1eDDkkWEOJcoHOFp0fgUoUMbXrLh+F6flBDoDszdOIObEiXdWAz5EtXAl2gC3SgVAVSlQS65WTpAPdFjDwX6Ah0QKKrSQKd7zwUB/RMdOkl0AW619aAg0KeC3SyrSRzBUjTohtYga5Bd+YO1K1D6pFA16Br0YEWhUg5EugjL64lBPSrRE7cBbpVJNGBHoHuxF2gj+KYCxDoAh1LyJeTgbzVyLD+30gXc2A8osHf1g8oX/mX2Q6AQBfoxRq5jb96ZzBq/2yhTIdZ3P4T6McvpDg/FemWHUyijgj001dSnkt0oExtNbBdYiwMhEQH5jboykijHAvjINGBArY9ousuepsgW1XmHJYiyHNlRKAfu3+iQdeiA6XyXB3pk2SrzqTDAy0gYDTpAv3M1kzAOnOHo6V3gCONUpz//phAF+g4K4NvddeZ4OaQF+iDA8EtdIEOqq4zQFOrwU1YC0ygwyG6cyVGoOvQrTaQ56gxAv33TH4HYqDkKjJmV4NrZdNsrcEJ1n7N+7ICvdClsmu21MCBu0N3gd7hSpn7GnTQoOsbBHqDQNCiW2ig4GoczK8O18lJmHUGCq5CY351uDUi0S0z2EyZUWkE+pGrZKmd2o7JcwQ6Al2g78wD31e2xkCgKzYC/Viab71EK14p2dClIM6ZzD10gT5mfvX72bssTb8cBQVXoJtfxr5+pItzyEHInmTDeFsP2XaIw9ACWnSdzJjpFcbY0IIWHQ36hbBZ8rx3jy7Pwf5egz5jduV4j8Km3KQGiY7Sdy3Q34185yWsQQflQJ6PCfQELXr7YTarge98XkYnsy3Ql7FvvIAVT0hYeGX6zkQZ28ekCPT+o7/slYCpewVftjoX6O8CXaADTgQVeIHuegt0QMHRnQt0gS7QgaaJrgQdDnQPxQl0QMnRrgl0qfMJnnIHZtQceX5roHsPfT/rCRhSdFrW9rWigJXiaKZ7i+5LccDAFr1LQ1Hl637LZW++tBQ2mGhp0F82lGU+A5TkXxpWlqEFBLqRvBLo3m3oPh3cRYeJ1PVxeZ4m0Bsn+u1DLNFBoCvrTwqBLncybe+cuoNAV3raN+hvqf6xsZ5hMmjSAYHedRiLBvqzk+bJWbNW7P7LtFmKVeBv2XpAn2bCMAr0MxtBv0ec9VrKdLjOC8kCva7V+SpNi3TFGFocFddfyyHQ8ye69rzV9gzI2bMIdIG+febIc4kOGnQtukCvf1Arz526Q2tpitwykAJ978yRl1p0kOeWcplbFwMDPerNdfreewN5Xv+4TaBnzwBhqUWHvpbF/EICPXege2PNXXS4PXXXps8zpTyBLPx1Kp9+zb0PFOgCHRyJO+Drd7EEOm6ig9uyIr3BobtAR6CD9twZX4PIEOg4cgd5roQ0uGYeikOggzx36v671Chy2by2RvvFCO6fu2139cptfTj/RS8n+LAMA9YiaNAd8/Xf662BEWCPbCnCPSxtbcHG3Z4fZ8FKBCfubtw1mB595tcjLZ2JbiGCQFdHms2PPvPLqrIOwS10KheSixOkS7Q9eMt1WVeWIQh0laTVQxZr6nXTpHfZnIFAp0ugX0umDrkWz121j1f/ijo0rrfQneMeOnPP+hxuTqwLkXKTBAh0gS7QyVMaxDkkLNc8aNxdGZVboruJDVp0DXqDGSLQ1QZ5Dlp0j9cKdPolujwHLboG/SaO3Ofa8WicUQWJLs8FOvXP7zToINGnvs1cvKYLdC26GQHlT9boUceW8m2z78QdSi3cVp+mSvfprcK5FgJ9MifuwDNbCh+t6FfRXQyBbkKASFcv6jforodANyFAeigXHa6ICyLQHbmD/BAfdljcbAl04JYEkR4vrubhhFWge8odeJLNf6M4F+iDl6MZAWLE3v/fRK3/IqHyrUHXooOeYHiD3uNjPwJdg25KwFihULz3+Ryv6m1TaU6AIjL5KK/Nt3gVb7PQpICxlkBv9G19tdssNCtAoM8N9EY/f6d0m4S+zwwKydxA7/Qjc5fNmfiZ7D8jilf/k5VOaHTQ12ZFd/p9+qWb+9w19wvGJgr043Q3BPqwTwYtaWyegNrWcTW/CfRZzZfu3DMboLj1XMwCfVallucSHTToTR+LE+ijTlOdt7+UGgo9iluToi/QRyW6DHYfHeR518Us0Ce1Xhp0h+6gtrVNdE+5TyrUEliLDg3jPJR9gT6tUGvQ3UWHOgXr47NTn/l7XeH/0/9V+o9KCfQ5hVqgC3SY1HTvOJZLnekh0AU67s2AWtVg2Qv0MYVaoAt0UKo6r/sl0HXoCHRQqSS6QLdM3EMHJhWqzIkeAv3n5x6sEwQ63CEsfZHuPfQ/E8Av5j10mNl4JM+IT77w9/XvVP5HPPLP8qW4Fjtft9BBg24z32wT9fDrfkuddubu2A0cJFr82bZRj4eqX1vTomvQQdth9Scb97jzH2TzizvoINAnbed3DvyN/56wWJDnoEbNOp+LXGO1XCan7vIcBLpAz3SAG3dNhFjWC2YKKFDzAn3X0D/5r7lqzIqJg27M3H2WOIdifaJAv2nonzzMVGSz7h9uWGwmA9RU5K6gvdTmrY8abol6nQyqdwCeoelVqAW6NWqlwVAadIEu0CW6PAfFQpkR6HRZpPIc5IoyI9BpcI5mFoBgked5irSn3LXoVhpIdHneoUYLdLs/DToM3v8njvS2RSZSDZhabtPtB02hSaSvV32tykel7m3Qn/30qzUwc7o4cQf9uzO7tC3Xcz/O4ooIdMMM0kecZ8rz566DayfQBTqoJ8pBrjx/KtEFukC3gkFBUQ3SVefHL4ZAF+iWMKgonpB9cCRPPLH86E9OC/TJRzrWMCgple+fr6M/bH3HT1w/9j6BCZ6aV0SBYzWl2XnDOGq5+apFBy16vTxYIcEFujw3C0BVqb61154r5X320qYBMDjQxbdKLs/NAxDo9V94cd6ukJdad2EiAAL90YMGgc70/acXHmB4oFc6ctegjwz0VVLcMltjlaVMw6hAF97zAt1rDWM4YIDLrW2dVeTEfVygi3ORDny+ta1zE12gTwt0V9xkBh6pi0t5VwNdcMxmqF8XQ31XAssdLGE6w0R/ug9ZJdEF+qwK6P75yPvoCjZcqotF1pBAHxXoLrf5DDxeFkOFVwA16GjRIXMGRqdUUOwmBborO5SyDd8T/OMbVf/8PbQxjvjxf/rLX4JPOenZBDomNDhf77DSFLs59c8NFhMaxHnjtabIC3RMaOjvyIF0DPhvVP8EOiY09M86ia7+ub/CRmo5rCH5oXET6Ah0aG3OehPpMwLddZ7Je+iwRgXI4gf2qGjQQfGz4hrs5WxS0aCDQBfoAj0vT0DKc3Di7qatQJfoeCIEBLo1J9AlOvpzEOgI9JITG+05CHQE+rb/vNCmj2jOQ10BgS7QuTqE6+CmYblgwG95yl2gc+kgwG4YyOFgh+HBFYHechytHWBai26sBbpEl+dA/RZdURLoEt3SAeonuqIk0K0hZ1tA/USX5wJdi+55OKB+ostzgd6ZBh0Y0WB8iXPZIdDtiW2GgSPFfcU2Pogh0G2JBToAAn10oLtOAAh0gQ6AQEegAyDQBbpAB0CgC3QPxQEg0I8K76ED1M/FFQd/ss5RbkouFED5OK8Z5nLitbPAZxYBiqsb5wK9SoPuSgHIczHRYxoYYgB5LtAbTAOH7gBbrTeBzpltnYsFsNGbQOfUrs4vFgJo0AX635drh5M3XT5+t7AWNQIoIgR6nTSvfrGKcvMfKOFNoDtLwSwDBLpSK8816QBi4rK/BBgAxXUB69iINKcAAAAASUVORK5CYII=);
+  background-position: center center;
+  background-size: cover;
+  color: white;
+}
+.apply_wrap h2 {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  padding: 10px;
+}
+.apply_wrap p {
+  text-align: center;
+  color: white;
+  padding: 15px 10px 0;
+  font-size: 16px;
+  line-height: 1.75em;
+}
+/* ========================= online start============================= */
+
+.online .title {
+  text-align: center;
+  margin-bottom: 5%;
+  font-size: 30px;
+}
+.online .title p {
+  text-align: center;
+  padding: 3% 0;
+  font-size: 16px;
+}
+
+.online .card {
+  box-shadow: rgb(0 0 0 / 24%) 0px 2px 8px;
+  border-radius: 3px;
+  margin: 0 auto 20px;
+}
+.online .card:last-child {
+  background: rgb(46, 225, 179);
+}
+
+.online .card .card-body {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.online .card-body p {
+  font-size: 16px;
+  line-height: 1.75em;
+  text-align: center;
+  margin: 0 0 16px;
+}
+
+/* ========================= RWD start============================= */
+
+@media screen and (min-width: 768px) {
+  /* ====== 共用 ====== */
+  .text_none {
+    display: block;
+  }
+  .card_wrap,
+  .also_wrap,
+  .good_teacher,
+  .step,
+  .online {
+    padding: 5% 0;
+  }
+  /* ======card start====== */
+  .card_wrap .card-text {
+    margin-bottom: 16px;
+  }
+  .card_wrap .card-text.text_none {
+    color: #000000a6;
+    font-size: 16px;
+    line-height: 1.75em;
+    text-align: left;
+  }
+  .card_wrap .card-title {
+    font-size: 30px;
+  }
+
+  /* ======card start====== */
+  .also_wrap .card h2 {
+    line-height: 1.5em;
+  }
+  .also_wrap .card-text {
+    line-height: 1.75em;
+    text-align: center;
+    margin-bottom: 2%;
+  }
+
+  /* ======step start====== */
+  .step .container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  .step .title {
+    margin: 0;
+  }
+  .step .card {
+    padding: 0 5px;
+    margin: 8% auto;
+  }
+  .step .card:nth-child(odd) {
+    position: relative;
+    top: 50px;
+  }
+  .step .content_wrap {
+    top: -30px;
+  }
+}
+@media screen and (min-width: 992px) {
+  /* ====== 共用 ====== */
+  .card_wrap,
+  .also_wrap,
+  .good_teacher,
+  .step {
+    padding: 5% 0;
+  }
+    /* ======bigpic start====== */
+.bigpic_wrap {
+    padding: 10vh;
+    max-height: 500px;
+    }
+ .bigpic_wrap h2 {
+    font-size: 48px;
+}
+
+  /* ======also start====== */
+  .also_wrap .card {
+    display: flex;
+    flex-direction: row;
+  }
+  .also_wrap .card:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+  .also_wrap .card-text {
+    text-align: left;
+  }
+
+  /* ======good teacher start====== */
+  .good_teacher .container {
+    display: flex;
+    padding: 0;
+  }
+  .good_teacher .title {
+    margin: 0;
+  }
+  .good_teacher .card {
+    max-width: 292px;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  /* ======step start====== */
+  .step .card {
+    position: relative;
+    max-width: 300px;
+    margin: 5% auto;
+  }
+  .step .card:hover {
+    border: 3px solid rgb(46, 225, 179);
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  .step .card:hover .num {
+    color: rgb(46, 225, 179);
+    transition: 0.5s;
+  }
+  .step .card:nth-child(3n-1) {
+    top: 0px;
+  }
+  .step .card:nth-child(3n) {
+    top: 40px;
+  }
+  .step .card:nth-child(3n + 1) {
+    top: 80px;
+  }
+
+  /* ======apply start====== */
+  .apply {
+    max-width: 570px;
+    margin: auto;
+  }
+  /* ======online start====== */
+  .online {
+    padding: 10% 0 15%;
+  }
+  .online .container {
+    display: flex;
+    position: relative;
+  }
+  .online .container::before,
+  .online .container::after {
+    display: block;
+    content: " ";
+    position: absolute;
+    width: 400px;
+    height: 290px;
+    background-size: auto;
+    background-size: cover;
+    z-index: 2;
+  }
+  .online .container::before {
+    left: -5%;
+    top: 100%;
+    background: url("https://hahow.in/static/media/dec-line.3a36d31a.svg");
+  }
+  .online .container::after {
+    right: -0%;
+    top: -150%;
+    background: url("https://hahow.in/static/media/dec-line.3a36d31a.svg");
+  }
+  .online .card:nth-child(1) {
+    position: relative;
+    top: -30px;
+    left: 10px;
+    z-index: 1;
+  }
+  .online .card:nth-child(2) {
+    position: relative;
+    top: 80px;
+    right: 10px;
+  }
+  .online .card .card-body {
+    padding: 40px 50px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  /* ====== 共用 ====== */
+  .also_wrap .title h2,
+  .good_teacher .title h2,
+  .step .title h2,
+  .online .title h2,
+  .apply h2 {
+    font-size: 40px;
+  }
+  .also_wrap .title p,
+  .also_wrap .card-text,
+  .good_teacher .card-text:last-child,
+  .card_wrap .card-text.text_none,
+  .card_wrap .card-text,
+  .apply_wrap p,
+  .online .title p,
+  .online .card-body p {
+    font-size: 18px;
+  }
+  /* ======also start====== */
+  .also_wrap .card {
+    margin-bottom: 8%;
+  }
+  /* ======step start====== */
+
+  .step .card-text {
+    font-size: 18px;
+    padding: 0 5px 20px;
+  }
+  /* ======online start====== */
+  .online .container::before {
+    left: -5%;
+    top: 90%;
+    background: url("https://hahow.in/static/media/dec-line.3a36d31a.svg");
+  }
+  .online .container::after {
+    right: 0%;
+    top: -170%;
+    background: url("https://hahow.in/static/media/dec-line.3a36d31a.svg");
+  }
+}

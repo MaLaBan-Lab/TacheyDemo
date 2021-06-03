@@ -1,0 +1,417 @@
+/* ========================= 共用 start ============================= */
+h1 {
+  display: none;
+}
+html,
+body {
+  font-family: "PingFang TC", 微軟正黑體, sans-serif;
+  height: 100%;
+}
+hero_wrap a,
+hero_wrap a:active,
+hero_wrap a:link,
+hero_wrap a:visited {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+hero_wrap .container {
+    padding-left: 0;
+    padding-right: 0;
+}
+/* ========================= hero_wrap start ============================= */
+.hero_wrap {
+  position: relative;
+  padding-bottom: 60px;
+}
+.breadcrumb {
+  font-size: 14px;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+  padding-right: 0.2rem;
+  color: white;
+}
+.hero_wrap .container {
+  padding-top: 10px;
+}
+.hero_wrap::after {
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  filter: blur(5px);
+  background-image: url("https://images.api.hahow.in/images/5f99af09f506d3716bf91b53");
+  z-index: -1;
+}
+.hero_wrap h2 {
+  color: white;
+  font-size: 30px;
+  margin: 20px 0 10px;
+  line-height: 1.5em;
+}
+.hero_wrap .list-toggle {
+  position: absolute;
+  left: 0;
+  height: 40px;
+  width: 100%;
+  bottom: 0px;
+  color: white;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background-color: rgb(29, 29, 29);
+  cursor: pointer;
+}
+.main_wrap {
+  display: flex;
+  margin-top: 20px;
+  padding: 0;
+}
+/* ========================= 影片區 start ============================= */
+.video_wrap {
+  padding: 0 5px;
+}
+.video_wrap iframe {
+  height: 250px;
+}
+/* ========================= 選單外層 start ============================= */
+.menu_wrap {
+  position: absolute;
+  top: -105%;
+  left: 0;
+  padding: 0;
+  background-color: gray;
+  display: none;
+  height: 9999px;
+  overflow: hidden;
+  z-index: 1;
+}
+.menu_wrap .title {
+  padding: 15px;
+  display: flex;
+}
+.menu_wrap .title p {
+  font-size: 12px;
+  line-height: 1.5em;
+  color: white;
+}
+.menu_wrap .title > div > div {
+  margin-top: 10px;
+}
+.menu_wrap .title > div > div > span {
+  display: inline-block;
+  margin-left: 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+  padding: 4px 10px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 14px;
+  cursor: pointer;
+  transition: background 250ms ease 0s;
+  box-shadow: rgb(0 0 0 / 43%) 0px 5px 5px;
+}
+.menu_wrap .title span:first-child {
+  background-color: orange;
+  color: white;
+}
+.menu_wrap .title span:last-child {
+  background-color: white;
+}
+.menu_wrap .title .close_button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  padding-right: 0;
+}
+.menu_wrap .title .close_button span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 0 0 1px 1px;
+  box-shadow: 1px 0px 17px white;
+}
+.menu_wrap .title .close_button i {
+  font-size: 33px;
+  color: black;
+}
+
+/* ========================= 選單區 start ============================= */
+.class_content {
+  width: 100%;
+  height: 800px;
+  border-top: 1px solid white;
+  overflow-y: scroll;
+  padding: 10px 10px 0 10px;
+}
+.class_content .wrap {
+  padding: 10px;
+  border-bottom: 1px solid white;
+}
+.class_content .list .title {
+  padding: 15px;
+  flex-grow: 2;
+}
+.class_content .content {
+  padding: 10px 20px 10px;
+  border-bottom: 1px solid white;
+  margin: auto;
+}
+.class_content .content .list .text {
+  padding: 5px;
+  word-wrap: break-word;
+  word-break: normal;
+  line-height: 1.5em;
+}
+.class_content .content .list {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.class_content .list .text {
+  width: 265px;
+  padding: 5px;
+  flex-grow: 2;
+}
+.class_content .list {
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid transparent;
+}
+.class_content .active {
+  background-color: white;
+  color: black;
+}
+.class_content .list .time,
+.class_content .list .icon,
+.class_content .list .arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+.class_content .list .arrow {
+  transform: rotate(180deg);
+}
+.class_content .btn_control {
+  border: 2px solid transparent;
+}
+.class_content .content .list:hover,
+.class_content .btn_control:hover,
+.class_content .btn_control:focus {
+  transition: 0.5s;
+  text-decoration: none;
+  border: 2px solid rgb(46, 225, 179);
+}
+
+/* ========================= detail start ============================= */
+.detail_wrap {
+  border-bottom: 2px solid rgb(233, 230, 230);
+  box-shadow: rgb(0 0 0 / 24%) 0px 1px 2px;
+}
+
+/* =========================  4icon+文字 =========================  */
+.sign_wrap {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.sign_wrap .item {
+  display: flex;
+  margin: 0 10px;
+}
+.sign_wrap .item img {
+  width: 20px;
+  height: 28px;
+}
+.sign_wrap .item p {
+  display: block;
+  padding: 6px 5px;
+  font-size: 14px;
+}
+
+/*  ========================= 課程價格 =========================  */
+.price_wrap {
+  padding: 15px;
+  border-top: 2px solid rgb(233, 230, 230);
+}
+.price_wrap p {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.price_wrap h2 {
+  text-align: center;
+  font-size: 40px;
+  padding: 10px 0;
+}
+
+/*  ========================= 購買區塊 =========================  */
+.buy_wrap {
+  position: fixed;
+  bottom: 0;
+  padding: 15px;
+  background-color: white;
+  border-top: 2px solid rgb(233, 230, 230);
+}
+.buy_wrap .collect {
+  margin-bottom: 15px;
+  padding: 0 20px;
+}
+.buy_wrap .btn_wrap {
+  display: flex;
+  justify-content: space-evenly;
+}
+.buy_wrap .btn_wrap > button:first-child {
+  padding: 10px 70px;
+}
+.buy_wrap .btn_wrap > button {
+  font-size: 20px;
+  padding: 10px 25px;
+}
+@media screen and (min-width: 768px) {
+  /* ========================= 共用 start ============================= */
+  body {
+    height: 80%;
+  }
+  /* ========================= hero_wrap start ============================= */
+  .hero_wrap {
+    height: inherit;
+  }
+  /* ========================= 影片區 start ============================= */
+  .video_wrap iframe {
+    height: 300px;
+  }
+  .menu_wrap {
+    top: -43%;
+  }
+  /*  ========================= 4icon+文字 =========================  */
+  .sign_wrap {
+    flex-direction: column;
+  }
+  .inline-block {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+  /*  ========================= 課程價格 =========================  */
+    .price_wrap {
+        padding: 30px 15px;
+        border-left: 2px solid rgb(233, 230, 230);
+        border-right: 2px solid rgb(233, 230, 230);
+        border-top: 2px solid transparent;
+    }
+  .price_wrap p {
+    text-align: left;
+  }
+  .price_wrap h2 {
+    text-align: left;
+    font-size: 30px;
+  }
+  /*  ========================= 購買區塊 =========================  */
+  .buy_wrap {
+    position: unset;
+    padding: 42px 0;
+    background-color: transparent;
+    border-top: 2px solid transparent;
+  }
+  .buy_wrap .btn_wrap > button:first-child {
+    padding: 10px 20px;
+  }
+  .buy_wrap .btn_wrap > button {
+    font-size: 20px;
+    padding: 10px 25px;
+  }
+}
+@media screen and (min-width: 992px) {
+  /* ========================= 共用 start ============================= */
+  .breadcrumb {
+    font-size: 18px;
+  }
+  /* ========================= hero_wrap start ============================= */
+  .hero_wrap {
+    height: auto;
+    padding-bottom: 0px;
+  }
+  .hero_wrap h2 {
+    font-size: 40px;
+  }
+  .hero_wrap .list-toggle {
+    display: none;
+  }
+  .main_wrap {
+    display: flex;
+    margin-top: 40px;
+    padding: 0;
+  }
+  /* ========================= 影片區 start ============================= */
+  .video_wrap {
+    padding: 0;
+  }
+  .video_wrap iframe {
+    height: 502px;
+  }
+  /* ========================= 選單外層 start ============================= */
+  .menu_wrap {
+    display: block;
+    position: unset;
+    height: inherit;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .menu_wrap .title .close_button {
+    display: none;
+  }
+  /* ========================= 選單區 start ============================= */
+  .class_content {
+    height: 400px;
+  }
+  /*  ========================= 4icon+文字 =========================  */
+  .sign_wrap {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px;
+    border-left: 0;
+  }
+  .sign_wrap .inline-block {
+    display: flex;
+    flex-direction: row;
+  }
+  .sign_wrap .inline-block:first-child {
+    margin-right: 0;
+  }
+  .sign_wrap .inline-block:last-child {
+    margin-left: 0;
+  }
+  .sign_wrap .item {
+    flex-direction: column;
+    margin: 0 20px;
+  }
+  .sign_wrap .item img {
+    width: 60px;
+    height: 60px;
+  }
+  .sign_wrap .item p {
+    padding: 15px 0 0;
+  }
+
+  /*  ========================= 課程價格 =========================  */
+  .price_wrap h2 {
+    font-size: 40px;
+  }
+  /*  ========================= 購買區塊 =========================  */
+  .buy_wrap {
+    padding: 48px 0;
+  }
+  .buy_wrap .btn_wrap > button:first-child {
+    padding: 10px 60px;
+  }
+}
