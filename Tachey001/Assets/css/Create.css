@@ -1,8 +1,8 @@
 /* ========================= 共用 start ============================= */
-step a,
-step a:active,
-step a:link,
-step a:visited {
+.step a,
+.step a:active,
+.step a:link,
+.step a:visited {
     color: black;
     text-decoration: none;
 }
@@ -10,28 +10,31 @@ h1 {
   display: none;
 }
 
-bigpic_wrap h2,
-card_wrap h2,
-also_wrap h2,
-good_teacher h2,
-step h2,
-apply_wrap h2,
-online h2 {
+.bigpic_wrap h2,
+.card_wrap h2,
+.also_wrap h2,
+.good_teacher h2,
+.step h2,
+.apply_wrap h2,
+.online h2 {
     line-height: 1.5em;
 }
 
-bigpic_wrap p,
-card_wrap p,
-also_wrap p,
-good_teacher p,
-step p,
-apply_wrap p,
-online p {
+.bigpic_wrap p,
+.card_wrap p,
+.also_wrap p,
+.good_teacher p,
+.step p,
+.apply_wrap p,
+.online p {
     color: #000000a6;
 }
-.btn {
-  width: 260px;
-  height: 50px;
+.bigpic_wrap .btn,
+.apply_wrap .btn,
+.online .btn
+{
+    width: 260px;
+    height: 50px;
 }
 .text_none {
   display: none;
