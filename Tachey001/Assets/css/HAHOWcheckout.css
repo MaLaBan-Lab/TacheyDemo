@@ -260,3 +260,90 @@ body {
     font-family: inherit;
     transition: all 0.2s ease 0s;
 }
+@media (min-width: 1200px) {
+    .container-fluid {
+        width: 1200px;
+    }
+
+    .left-panel {
+        /* width: 830px; */
+        /* height: 672.2px; */
+    }
+}
+
+@media (min-width: 768px) {
+    .cdRYGC {
+        /* height: 110vh; */
+        display: flex;
+        padding-left: 30px;
+        padding-right: 20px;
+        /* padding-bottom: 120px; */
+    }
+
+
+    .right-panel {
+        flex: 0 0 290px;
+        padding-left: 0px;
+        margin-left: 3rem;
+    }
+
+    .left-panel {
+        width: 65vw;
+        /* height: 75vh; */
+    }
+
+    .bBsZZl {
+        background-image: url(https://hahow.in/static/media/wa-icon-normal.32a1a60d.svg);
+        transition: background-image 0.3s ease-in-out 0s;
+    }
+
+    .half-width-field {
+        flex-basis: 260px;
+        max-width: 340px;
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+    }
+
+    .wh {
+        width: 230px;
+        /* height: 506px; */
+    }
+}
+
+@media (max-width: 767px) {
+    .container-fluid-padiing {
+        height: 230vh;
+    }
+
+    .cdRYGC {
+        display: flex;
+        padding-left: 20px;
+        padding-right: 30px;
+        /* padding-bottom: 120px; */
+    }
+
+    .sticky-inner-wrapper {
+        width: 100%;
+    }
+
+    .left-panel {
+        width: 90vw;
+        /* height: 75vh; */
+    }
+
+    .right-panel {
+        position: static;
+        width: 90vw;
+        margin-left: -1.8rem;
+        /* margin-top: 3rem; */
+    }
+
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .half-width-field {
+        width: 100%;
+    }
+}

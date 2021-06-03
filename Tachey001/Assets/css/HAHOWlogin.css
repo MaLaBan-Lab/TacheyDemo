@@ -31,7 +31,7 @@
 }
 
 .pic-height {
-    /*height: 100vh;*/
+    height: 100vh;
 }
 
 .boxright {
@@ -48,13 +48,15 @@
     text-align: center;
     width: 35%;
     margin-bottom: 3rem;
+    
 }
-}
+
 
 .boxrightinnertop {
     display: flex;
     justify-content: space-between;
     text-align: center;
+
 }
 
 .boxrightinner-1 {
