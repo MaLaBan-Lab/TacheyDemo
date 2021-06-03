@@ -1,4 +1,10 @@
     /* ----導覽列------ */
+    * {
+        padding: 0 ;
+        margin: 0 ;
+        list-style: none;
+    }
+
     .bg-gray {
         background-color: rgb(248, 248, 248);
     }
@@ -237,7 +243,7 @@
         .footer-block {
             order: 2;
         }
-
+        
         .footer-last-block {
             order: 1;
         }

@@ -215,11 +215,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\coupons.css" />
+    <Content Include="Assets\css\HAHOWcart.css" />
+    <Content Include="Assets\css\HAHOWcheckout.css" />
+    <Content Include="Assets\css\HAHOWlogin.css" />
+    <Content Include="Assets\css\HAHOWprivacy.css" />
+    <Content Include="Assets\css\HAHOWsingin.css" />
+    <Content Include="Assets\css\HAHOWterms.css" />
     <Content Include="Assets\css\Invite.css" />
     <Content Include="Assets\css\nav.css" />
     <Content Include="Assets\css\orders.css" />
     <Content Include="Assets\css\step.css" />
     <Content Include="Assets\js\coupons.js" />
+    <Content Include="Assets\js\HAHOWlogin.js" />
     <Content Include="Assets\js\Invite.js" />
     <Content Include="Assets\js\nav.js" />
     <Content Include="Assets\js\orders.js" />

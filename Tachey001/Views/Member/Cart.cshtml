@@ -1,4 +1,4 @@
-﻿
+﻿@Styles.Render("~/Assets/css/HAHOWcart.css")
 @{
     ViewBag.Title = "Cart";
 }
@@ -6,3 +6,78 @@
 <h2>購物車</h2>
 
 <h1>@Html.ActionLink("付款", "check", "Pay")</h1>
+<main class="content container-fluid">
+
+    <div class="content-1">
+        <div class="main-container totallyheight">
+            <!-- 右邊 -->
+            <div class="right-area">
+                <div class="sticky-outer-wrapper active" style="height: 100%;">
+                    <div class="sticky-inner-wrapper ">
+                        <div class="sc-1t3czdh-0 dfcsU pad-rl-15 pad-b-20 marg-b-20">
+                            <div class="sc-1t3czdh-2  gjCOGK">
+                                <div class="border-bottom-box">
+                                    <h6><b>訂單明細</b></h6>
+
+                                </div>
+                                <!-- 小記>約0 -->
+                                <div class="border-bottom-box">
+                                    <div class="entry sub-total">
+                                        <span class="title">小計</span><span class="ntd">NT$0</span>
+                                    </div>
+                                    <div class="paid-in-twd">
+                                        <div class="text-right">
+                                            本交易將以台幣支付&nbsp;<span data-tip="true"
+                                                                 data-for="paid-in-twd-tip" aria-hidden="true"
+                                                                 class="fa fa-question-circle" currentitem="false"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="total-amount text-right">
+                                        <h3 class="marg-tb-0">NT$0</h3>
+                                    </div>
+                                    <div class="approximate-total text-right">約 NT$0</div>
+                                </div>
+                                <button class="sc-1a6j6ze-0 RcKEn marg-t-20" disabled="">來去結帳</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 左邊~ -->
+            <div class="left-area">
+                <div class="cart-area marg-b-60">
+                    <h4 class="underline flex align-items-center justify-space-between m-3">
+                        <span>
+                            <span aria-hidden="true" class="fa fa-shopping-cart"></span>
+                            <spanclass ="marg-l-10">購物車</spanclass>
+                        </span>
+                    </h4>
+                    <hr>
+                    <div class="pt-6rem">
+                        <div class="vertical-horizontal-center pad-tb-100">
+                            <div class="text-center">
+                                <img alt="Empty shopping cart" class="marg-b-10"
+                                     src="https://hahow.in/static/media/empty-box.e2bf3c3b.svg" style="width: auto;">
+                                <div class="marg-b-10">購物車是空的，來去逛逛？</div><a href="#">
+                                    <button class="sc-1a6j6ze-0 fBQVEd">探索課程</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+</main>
