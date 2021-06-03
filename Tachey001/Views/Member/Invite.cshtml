@@ -1,0 +1,200 @@
+﻿@Styles.Render("~/Assets/css/Invite.css")
+@{
+    ViewBag.Title = "Invite";
+}
+
+<div class="container">
+    <div class="row justify-content-center my-5">
+        <div class="col-6 my-4 d-flex justify-content-center">
+            <div class="photo-Img bg-white position-relative">
+                <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
+                     alt=""
+                     class="photoImg position-absolute center" />
+            </div>
+        </div>
+        <div class="col-12 text-center mb-5 text-secondary">
+            <h2>哈囉 ! <span>林威志</span></h2>
+            <h2>
+                推薦朋友來上課，就可以獲得<span class="hahow-green">30,000 HP</span><img src="https://hahow.in/static/images/coins.png" alt="" />
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 text-center">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-2">
+                    <img src="data:image/png;base64,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"
+                         alt="" />
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                    <h4 class="hahow-green my-3">分享連結</h4>
+                    <p class="text-justify text-secondary">
+                        你可以分享專屬連結，邀請朋友註冊成 Hahow 會員！
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 text-center">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-2">
+                    <img src="data:image/png;base64,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"
+                         alt="" />
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                    <h4 class="hahow-green my-3">好友購買</h4>
+                    <p class="text-justify text-secondary">
+                        當朋友成功透過連結註冊，就會獲得 30,000 HP，並可用來折抵課程高達
+                        NTD$300！
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 text-center">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-2">
+                    <img src="data:image/png;base64,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"
+                         alt="" />
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                    <h4 class="hahow-green my-3">獲得回饋</h4>
+                    <p class="text-justify text-secondary">
+                        當朋友成功購買第一堂課程時，你也可以得到 30,000 HP！
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-12 my-3">
+            <h2 class="text-secondary text-center">快速邀請好友</h2>
+        </div>
+        <div class="col-cus border-hahow"></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-11 bg-white">
+            <div class="row mx-3 mt-5">
+                <div class="col-12">
+                    <label class="text-secondary">專屬連結</label>
+                </div>
+            </div>
+            <div class="row mx-3 mb-5 justify-content-center">
+                <div class="col-xl-6 col-lg-8">
+                    <input type="text"
+                           class="form-control w-100"
+                           value="https://hahow.in/ur/jason0311"
+                           readonly />
+                </div>
+                <div class="col-xl-2 col-lg-4">
+                    <button type="submit" class="btn btn-hahow w-100">
+                        複製連結
+                    </button>
+                </div>
+                <div class="col-xl-4 col-lg-12">
+                    <button type="submit" class="btn btn-facebook w-100">
+                        <i class="fab fa-facebook-square mx-2"></i>Facebook 上分享
+                    </button>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="accordion col-9 p-5" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header bg-white border-0 p-0" id="headingOne">
+                            <h2 class="mb-0 d-flex justify-content-center h-0">
+                                <button class="
+                        btn btn-link btn-block
+                        text-center text-secondary
+                        position-relative
+                      "
+                                        type="button"
+                                        data-toggle="collapse"
+                                        data-target="#collapseOne"
+                                        aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                    客製化推薦內容(非必填) ▲
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOne"
+                             class="collapse show"
+                             aria-labelledby="headingOne"
+                             data-parent="#accordionExample">
+                            <div class="card-body p-5">
+                                <div class="text-center text-black-50">
+                                    <h6>想對朋友說的話</h6>
+                                </div>
+                                <div class="my-1 d-flex justify-content-between">
+                                    <div class="imgPhotoCover bg-white position-relative mr-3">
+                                        <img src="https://inmywordz.com/wp-content/uploads/20170824164424_47.jpg"
+                                             alt=""
+                                             class="imgPhoto" />
+                                    </div>
+                                    <input class="form-control"
+                                           type=""
+                                           placeholder="歡迎加入 Hahow 好學校一起學習!"
+                                           aria-label="Search" />
+                                </div>
+                                <div class="text-right">
+                                    <button type="button"
+                                            class="btn btn-secondary px-5"
+                                            disabled>
+                                        儲存
+                                    </button>
+                                </div>
+                                <div class="text-center text-black-50 my-3">
+                                    <h6>再進一步</h6>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-outline-hahow px-5">
+                                        推薦課程
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100">
+                <img class="w-100"
+                     src="https://hahow.in/static/images/herobanner_ur.png"
+                     alt="" />
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-12 my-3">
+            <h2 class="text-secondary text-center">常見問題</h2>
+        </div>
+        <div class="col-cus border-hahow"></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10 mb-4">
+            <h4 class="text-secondary">我可以修改自己的連結網址嗎</h4>
+            <p class="text-secondary text-justify">不行喔。目前的網址皆是綁定你的個人帳號，暫時還沒有開放自行修改。</p>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12"></div>
+        <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10 mb-4">
+            <h4 class="text-secondary">我什麼時候會拿到 Hahow Point？</h4>
+            <p class="text-secondary text-justify">只要你的朋友透過「專屬連結」進入 Hahow，並在一天內註冊成為 Hahow 會員後， 隨時完成購買第一堂課程時， 你就會立刻收到我們回贈給你的 Hahow Point 喔！</p>
+        </div>
+        <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10 mb-4">
+            <h4 class="text-secondary">客製化推薦是什麼？一定要填嗎？</h4>
+            <p class="text-secondary text-justify">這邊的設定是「選填」！你可以決定是否要分享自己在 Hahow 學習的心得，或是推薦曾經修過的課程。根據我們的經驗，越發自內心、越有個人特色的推薦，越能夠吸引朋友關注喔！</p>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12"></div>
+        <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10 mb-4">
+            <h4 class="text-secondary">我可以怎麼運用這個連結呢？？</h4>
+            <p class="text-secondary text-justify">由於這個計畫是專門為「邀請朋友」而設計的，因此你可以透過自己的社群網絡、私人群組、Email 等個人所擁有的管道來推薦好友， 切勿作為商業用途、以大量信件寄送或在公開且非個人經營的社群頁面中張貼留言給不認識的人喔！</p>
+        </div>
+
+    </div>
+    <div class="row justify-content-center my-5">
+        <div class="col-11 d-flex justify-content-center">
+            <a href="" class="mx-3 hahow-green">關於好朋友推薦計畫</a>
+            <div class="border-lg"></div>
+            <a href="" class="mx-3 hahow-green">查詢更多常見問題</a>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Assets/js/Invite.js")

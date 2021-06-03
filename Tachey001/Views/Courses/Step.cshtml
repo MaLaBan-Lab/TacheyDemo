@@ -1,0 +1,73 @@
+﻿@Styles.Render("~/Assets/css/step.css")
+@{
+    ViewBag.Title = "Step";
+
+    var titleText = new List<string>() { "課程標題", "課程目標", "預計單元", "募資條件", "詳細內容", "影片上傳", "課程網址", "開課身份", "準備募資" };
+
+    var num = ViewBag.Id * 11;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-7 my-5 d-flex justify-content-between p-0"
+             id="step-progress">
+            <div class="progress position-absolute bg-hahow-orange">
+                <div class="progress-bar bg-hahow-green"
+                     role="progressbar"
+                     style="width:  @num%"
+                     id="progress-bar"></div>
+            </div>
+            <a href="@Url.Action("Step", new { id = 0} )">
+                <button type="button"
+                        class="btn bg-hahow-green btn-circle"
+                        title="開始">
+                    0
+                </button>
+            </a>
+            @for (int i = 1; i < 10; i++)
+            {
+                <a href="@Url.Action("Step", new { id = i} )">
+                    @if (ViewBag.Id >= i)
+                    {
+                        <button type="button"
+                                class="btn bg-hahow-green btn-circle"
+                                title="@titleText[i-1]">
+                            @i
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button"
+                                class="btn bg-hahow-orange btn-circle"
+                                title="@titleText[i-1]">
+                            @i
+                        </button>
+                    }
+                </a>
+            }
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 text-center text-mc">
+            <h1 id="titleContentH1">歡迎加入 Tachey 好老師的行列</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center m-2">
+        <div class="col-12 text-center text-mc text-secondary">
+            <h4 id="titleContentH4">跟著 Tachey 一步一步完成募資提案吧！</h4>
+        </div>
+    </div>
+    <div class="row justify-content-center bg-white mb-5"
+         id="contentHTML">
+        @if (@ViewBag.Id == null)
+        {
+            @Html.Partial($"step/step_0")
+        }
+        else
+        {
+            @Html.Partial($"step/step_{ViewBag.Id}")
+            @Scripts.Render("~/Assets/js/step.js")
+        }
+    </div>
+</div>
+

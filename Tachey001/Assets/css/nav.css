@@ -1,0 +1,281 @@
+    /* ----導覽列------ */
+    .bg-gray {
+        background-color: rgb(248, 248, 248);
+    }
+
+    .grow-0 {
+        flex-grow: 0;
+    }
+
+    #Homepage-logo {
+        width: 135px;
+        height: 33px;
+    }
+
+    #Recruit-logo {
+        width: 65px;
+        height: 43px;
+    }
+
+    #nav-space {
+        width: 200px;
+    }
+
+    #user-menu {
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+        /* background-color: khaki; */
+
+    }
+
+    #user-logo {
+        border-radius: 30px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .user-logo-content {
+        left: -100px
+    }
+
+    .user-notice {
+        left: -50px
+    }
+
+    /* ----導覽列------ */
+    /* 頁尾 */
+    .footer {
+
+        padding: 50px;
+        background-color: rgba(0, 0, 0, 6.5%);
+
+    }
+
+    .footer-block {
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .footer-h3 {
+        font-size: 16px;
+        color: #00bea4;
+    }
+
+    .footer-content {
+        font-size: 12px;
+        text-decoration: none;
+        color: #000000;
+    }
+
+    .footer-btn {
+        width: 100%;
+        text-align: start;
+        background-color: white;
+        color: #000000;
+    }
+
+    #footer-space {
+        width: 130px;
+        display: inline-block;
+    }
+
+    /* 頁尾 */
+    /* 第一塊 */
+    .search-content {
+        font-size: 28px;
+        font-family: sans-serif;
+    }
+
+    .search-half {
+        position: relative;
+        color: rgb(0, 190, 164);
+
+    }
+
+    .search-half::before {
+        content: "";
+        background-color: rgb(255, 238, 88);
+        z-index: -1;
+        position: absolute;
+        height: 20px;
+        width: 100%;
+        top: 15px;
+        left: 0;
+    }
+
+    .search-input {
+        height: 40px;
+        width: 246px;
+        position: relative;
+    }
+
+    .search-input:focus-visible {
+        outline: none;
+    }
+
+    .search-btn {
+        height: 40px;
+    }
+
+    .search-3 {
+        max-width: 23%;
+    }
+
+    .search-a {
+        text-decoration: none;
+        font-size: 8px;
+        color: #00bea4;
+        padding: 2px 2px;
+        background-color: rgba(46, 225, 179, 0.1);
+        border-radius: 16px;
+        margin: 6px 0;
+    }
+
+    #ug-pic {
+        display: block;
+        width: 270px;
+        height: 244;
+    }
+
+    .search-right {
+        position: relative;
+    }
+
+    #search-right-pic {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 80%;
+        height: 50%;
+        z-index: -2;
+    }
+
+    #search-right-leftbottom-pic {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    #search-right-a-pic {
+        position: absolute;
+        left: 80px;
+        top: 50px;
+        width: 30%;
+        height: 40%;
+        z-index: 0;
+    }
+
+    #mascot {
+        position: absolute;
+        left: 200px;
+        top: 100px;
+        width: 30%;
+        height: 40%;
+        z-index: 1;
+    }
+
+    #play {
+        position: absolute;
+        left: 350px;
+        top: 200px;
+        width: 20%;
+        height: 20%;
+        z-index: 1;
+    }
+
+    /* 第一塊 */
+    /* 第二塊 */
+    .advertising-text {
+        font-size: 18px;
+    }
+
+    #advertising-span {
+        color: #00bea4;
+    }
+
+    /* 第二塊 */
+    /* 延伸閱讀 */
+    .reading{
+        background-color: #f3f3f1;
+    }
+    .reading-h4 {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.65);
+        ;
+    }
+
+    .reading-8 {
+        max-width: 64%;
+    }
+    .reading-pic{
+        width: 100%;
+    }
+    .reading-h5{
+        font-size: 17px;
+    }
+    .reading-date{
+        color: rgba(0, 0, 0, 0.43);
+        font-size: 12px;
+    }
+    .reading-more{
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.63);
+        font-size: 10px;
+        padding: 4px 8px;
+        border-radius: 16px;
+        background-color: white;
+    }
+    /* 延伸閱讀 */
+    @media screen and (max-width:992px) {
+
+        /* 頁尾 */
+        .footer-block {
+            order: 2;
+        }
+
+        .footer-last-block {
+            order: 1;
+        }
+
+        #footer-space {
+            width: 290px;
+        }
+
+        /* 頁尾 */
+        #ug-pic {
+            display: none;
+            width: 270px;
+            height: 244;
+        }
+
+        /* 第一塊 */
+        .search-3 {
+            max-width: 100%;
+        }
+
+        .search-content {
+            text-align: center;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-a-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 第一塊 */
+        /* 延伸閱讀 */
+        .reading-8{
+            max-width: 100%;
+        }
+        /* 延伸閱讀 */
+    }
