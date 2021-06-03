@@ -479,6 +479,8 @@
     <Content Include="Views\Shared\_bootstrap.cshtml" />
     <Content Include="Views\Shared\_LayoutHomePage.cshtml" />
     <Content Include="Views\Shared\_LayoutCreate.cshtml" />
+    <Content Include="Views\Home\CourseCard.cshtml" />
+    <Content Include="Views\Shared\CardTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

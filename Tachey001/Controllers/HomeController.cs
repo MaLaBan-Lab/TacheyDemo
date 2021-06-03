@@ -25,5 +25,9 @@ namespace Tachey001.Controllers
 
             return View();
         }
+        public ActionResult CourseCard()
+        {
+            return View();
+        }
     }
 }
