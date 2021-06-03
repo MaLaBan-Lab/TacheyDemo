@@ -1,4 +1,5 @@
-﻿
+﻿@Styles.Render("~/Assets/css/assignments.css")
+@Styles.Render("~/Assets/css/discussions.css")
 @{
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
@@ -210,3 +211,723 @@
     </div>
 </section>
 
+<!--選單-->
+<!-- seletor -->
+<div class="container">
+    <div class="seletor">
+        <div class="seletor-item" id="main">
+            <a class="inline-block text-center" href="">課程簡介</a>
+        </div>
+        <div class="seletor-item" id="feedbacks">
+            <a class="inline-block text-center" href="">課程評價</a>
+        </div>
+        <div class="seletor-item" id="discussions">
+            <a class="inline-block text-center" href="">問題討論</a>
+        </div>
+        <div class="seletor-item" id="assignments">
+            <a class="inline-block text-center" href="">作業成果</a>
+        </div>
+    </div>
+</div>
+
+<!--問題討論-->
+<!-- content -->
+<div class="container discussions d-none">
+    <div class="row">
+        <div class="col-xl">
+            <!-- col-xl-3 col-lg-4 col-md-6 col-sm-12 -->
+            <!-- <div class="column-layout-container marg-t-60"> -->
+            <!-- fixed box -->
+            <div class="layout-right-panel sticky-top">
+                <span style="font-size: 0px;"></span>
+                <div class="white-wrap side-card  pad-b-30">
+                    <h4 class="heading text-center">喜歡這堂課嗎？</h4>
+                    <div class="pad-rl-25 text-left">
+                        <div>一起上課，參與老師同學的討論吧！</div>
+                        <div>讓你認識興趣相投的朋友，</div>
+                        <div>還能隨時向老師問問題～</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-wrap">
+                <div class="flex marg-b-30">
+                    <!-- search bar -->
+                    <div class="flex flex-1">
+                        <div class="search flex-1 marg-r-5">
+                            <span aria-hidden="true" class="fa fa-search fa-fw marg-r-5"></span>
+                            <input class="form-control" type="search" placeholder="搜尋看看～你的問題可能已經有人問過囉！" aria-label="Search">
+                        </div>
+                    </div>
+
+
+                    <div class="second-row flex">
+                        <!-- date search -->
+                        <div class="date-search sort" height="unset" width="unset">
+                            <div class="dropdown btn-group">
+                                <button id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        type="button" class="dropdown-toggle btn btn-default">
+                                    <span>日期最新</span>
+                                    <span class=""></span>
+                                </button>
+                                <div role="menu" class="dropdown-menu" aria-labelledby="filter-sort">
+                                    <a class="dropdown-item active" href="#">日期最新</a>
+                                    <a class="dropdown-item" href="#">日期最舊</a>
+                                    <a class="dropdown-item" href="#">愛心數</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- unit search -->
+                        <div class="unit marg-rl-15" height="unset" width="unset">
+                            <div id="unit-dropdown" class="dropdown btn-group">
+
+                                <!-- <button id="filter-unit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                                  type="button" class="dropdown-toggle btn btn-default unit-search-bar">
+                                  <div class="input-wrapper"><span aria-hidden="true"
+                                      class="fa fa-search fa-fw marg-r-5"></span><input class="pad-tb-0" placeholder="搜尋" value="">
+                                  </div> <span class=""></span>
+                                </button> -->
+
+                                <button id="filter-unit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        type="button" class="dropdown-toggle btn btn-default">
+                                    <span>全部單元</span>
+                                    <span class=""></span>
+                                </button>
+                                <div role="menu" class="dropdown-menu" aria-labelledby="filter-unit">
+                                    <a class="dropdown-item active" href="#">全部單元</a>
+                                    <a class="dropdown-item" href="#">第 1 章，第 1 單元</a>
+                                    <a class="dropdown-item" href="#">第 1 章，第 2 單元</a>
+                                    <a class="dropdown-item" href="#">第 1 章，第 3 單元</a>
+                                    <a class="dropdown-item" href="#">第 1 章，第 4 單元</a>
+                                    <a class="dropdown-item" href="#">第 1 章，第 5 單元</a>
+                                    <a class="dropdown-item" href="#">第 1 章，第 6 單元</a>
+                                    <a class="dropdown-item" href="#">第 1 章，作業 1</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- discuss box -->
+                <div class="discuss-box">
+                    <div class="white-wrap pad-tb-20">
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="discussion">
+                            <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                <a class="" href="/">
+                                    <img src="/Assets/img/member/photo.png" width="">
+                                </a>
+                            </div>
+                            <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                            <div class="flex">
+                                <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                <span class="resolve-state text-sm">解決中</span>
+                            </div>
+                            <div class="info text-sm">
+                                <!-- js edit -->
+                                <a class="username" target="_self" href="/">yenshuol</a>．
+                                <!-- js edit -->
+                                <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                    <span>19 天前</span>
+                                </a>
+                                <!-- js edit -->
+                                <div class="likes-btn">
+                                    <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                    <span>0</span>
+                                </div>
+                                <!-- js edit -->
+                                <span class="pseudo-btn">
+                                    <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                    <span>0</span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- </div> -->
+
+            </div>
+        </div>
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+
+        </div> -->
+    </div>
+</div>
+
+<!--作業成果-->
+<!-- content -->
+<div class="container assignments d-none">
+    <div class="row">
+        <div class="col-xl">
+
+            <div class="screen">
+                <!-- search bar -->
+                <div class="select-bar">
+                    <h4>作業單元：</h4>
+                    <select class="select-option">
+                        <option value="">請選擇</option>
+                        <option value="">第 1 章，作業 1 題目：本課程無作業設計，不過歡迎大家留下觀看心得於作業區！</option>
+                    </select>
+                </div>
+
+                <!-- works-area -->
+                <div class="creation-list">
+                    <h4>所有同學作品</h4>
+                    <div class="row">
+                        <!-- work-card -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                                <div class="creation-cover-image">
+                                    <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
+                                        <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
+                                    </a>
+                                    <div class="hh-like">
+                                        <span class="fa fa-heart-o"></span>
+                                        <span>0</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-wrap pad-b-20 block">
+                                        <div class="profile-image absolute">
+                                            <a class="" href="/">
+                                                <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div class="text-wrap block relative">驅動知識生態系論壇</div>
+                                        </a>
+                                        <a class="block text-sm" target="_self" href="/">dses5335</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- work-card -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                                <div class="creation-cover-image">
+                                    <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
+                                        <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
+                                    </a>
+                                    <div class="hh-like">
+                                        <span class="fa fa-heart-o"></span>
+                                        <span>0</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-wrap pad-b-20 block">
+                                        <div class="profile-image absolute">
+                                            <a class="" href="/">
+                                                <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div class="text-wrap block relative">驅動知識生態系論壇</div>
+                                        </a>
+                                        <a class="block text-sm" target="_self" href="/">dses5335</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- work-card -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                                <div class="creation-cover-image">
+                                    <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
+                                        <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
+                                    </a>
+                                    <div class="hh-like">
+                                        <span class="fa fa-heart-o"></span>
+                                        <span>0</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-wrap pad-b-20 block">
+                                        <div class="profile-image absolute">
+                                            <a class="" href="/">
+                                                <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div class="text-wrap block relative">驅動知識生態系論壇</div>
+                                        </a>
+                                        <a class="block text-sm" target="_self" href="/">dses5335</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- work-card -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                                <div class="creation-cover-image">
+                                    <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
+                                        <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
+                                    </a>
+                                    <div class="hh-like">
+                                        <span class="fa fa-heart-o"></span>
+                                        <span>0</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-wrap pad-b-20 block">
+                                        <div class="profile-image absolute">
+                                            <a class="" href="/">
+                                                <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div class="text-wrap block relative">驅動知識生態系論壇</div>
+                                        </a>
+                                        <a class="block text-sm" target="_self" href="/">dses5335</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- work-card -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                                <div class="creation-cover-image">
+                                    <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
+                                        <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
+                                    </a>
+                                    <div class="hh-like">
+                                        <span class="fa fa-heart-o"></span>
+                                        <span>0</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-wrap pad-b-20 block">
+                                        <div class="profile-image absolute">
+                                            <a class="" href="/">
+                                                <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div class="text-wrap block relative">驅動知識生態系論壇</div>
+                                        </a>
+                                        <a class="block text-sm" target="_self" href="/">dses5335</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- work-card -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                                <div class="creation-cover-image">
+                                    <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
+                                        <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
+                                    </a>
+                                    <div class="hh-like">
+                                        <span class="fa fa-heart-o"></span>
+                                        <span>0</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-wrap pad-b-20 block">
+                                        <div class="profile-image absolute">
+                                            <a class="" href="/">
+                                                <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div class="text-wrap block relative">驅動知識生態系論壇</div>
+                                        </a>
+                                        <a class="block text-sm" target="_self" href="/">dses5335</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Assets/js/point.js")
