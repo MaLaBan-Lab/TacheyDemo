@@ -214,9 +214,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\all.css" />
     <Content Include="Assets\css\card.css" />
+    <Content Include="Assets\css\console.css" />
     <Content Include="Assets\css\coupons.css" />
     <Content Include="Assets\css\Create.css" />
+    <Content Include="Assets\css\group.css" />
     <Content Include="Assets\css\HomePage.css" />
     <Content Include="Assets\css\HAHOWcart.css" />
     <Content Include="Assets\css\HAHOWcheckout.css" />

@@ -3,9 +3,6 @@
     ViewBag.Title = "Cart";
 }
 
-<h2>購物車</h2>
-
-<h1>@Html.ActionLink("付款", "check", "Pay")</h1>
 <main class="content container-fluid">
 
     <div class="content-1">
@@ -38,7 +35,7 @@
                                     </div>
                                     <div class="approximate-total text-right">約 NT$0</div>
                                 </div>
-                                <button class="sc-1a6j6ze-0 RcKEn marg-t-20" disabled="">來去結帳</button>
+                                <button class="sc-1a6j6ze-0 RcKEn marg-t-20">@Html.ActionLink("來去結帳", "check", "Pay", null, new { @class = "text-white text-decoration-none" })</button>
                             </div>
                         </div>
                     </div>
