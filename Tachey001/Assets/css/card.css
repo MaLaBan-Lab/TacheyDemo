@@ -1,0 +1,208 @@
+.star-gray{
+    color: rgb(202, 202, 202);
+  }
+  
+
+  .star-yellow{
+    color: #ffae00;
+    left: 0;
+  }
+  
+  .hahow-orange {
+    color: #fa8b00;
+  }
+  
+  .hahow-dark-orange {
+    color: rgb(238, 100, 87);
+  }
+  
+  .hahow-dark-green {
+    color: rgb(0, 190, 164);
+  }
+  
+  .bg-hahow-green {
+    background: rgb(46, 225, 179);
+    color: white;
+  }
+  
+  .bg-hahow-dark-green {
+    background: rgb(0, 190, 164);
+  }
+  
+  .bg-hahow-green:hover {
+    color: white;
+  }
+  
+  .bg-hahow-dark-orange {
+    background: rgb(250, 139, 0);
+  }
+  
+  .center {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  
+  .backgroundPhoto {
+    width: 58px;
+    height: 58px;
+    transform: translate(10%, -50%);
+    z-index: 1;
+  }
+  
+  .backgroundBookmark {
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .backgroundBookmark-sm {
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  
+  .backgroundBookmarkMove {
+    bottom: -50%;
+    left: 5%;
+    transition: 0.5s;
+  }
+  
+  .h-30 {
+    height: 10px;
+  }
+  
+  .line-height-40 {
+    line-height: 40px;
+  }
+  
+  .line-height-30 {
+    line-height: 30px;
+  }
+  
+  .card:hover {
+    cursor: pointer;
+  }
+  
+  .card-img-top {
+    transition: 0.5s;
+  }
+  
+  .fa-bookmark {
+    transform: scale(1.2);
+  }
+  
+  @media (min-width: 768px) {
+    #photoImag {
+      width: 55px;
+      height: 55px;
+    }
+  
+    .backgroundTape {
+      font-size: 14px;
+      width: 50%;
+      height: 25px;
+      line-height: 25px;
+      right: -15%;
+      top: 20px;
+      transform: rotate(45deg);
+    }
+  
+    .card:hover .card-img-top {
+      transform: scale(1.2);
+    }
+  
+    .card:hover .backgroundBookmarkMove {
+      bottom: 5%;
+    }
+  
+    .backgroundBookmark-sm {
+      display: none !important;
+      color: white;
+    }
+  
+    .backgroundBookmark:hover {
+      background-color: #fa8b00;
+    }
+  
+    .backgroundBookmark:hover i {
+      color: white;
+    }
+  
+    .card-bottom {
+      height: 6px;
+    }
+  
+    .classPrice {
+      font-size: 25px;
+    }
+  
+    .course-time::before{
+      content: "課時";
+    }
+    .couse-time-before{
+      display: none;
+    }
+  
+    .course-people::before{
+      content: "同學";
+    }
+    .course-people-before{
+      display: none;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .card-title-image {
+      display: none ;
+    }
+  
+    .backgroundBookmark{
+      display: none;
+    }
+  
+    .backgroundBookmark-sm:hover {
+      background-color: #fa8b00;
+    }
+  
+    .backgroundBookmark-sm:hover i {
+      color: white;
+    }
+  
+    .card-bottom {
+      height: 2px;
+    }
+  
+    .card-img-top{
+      width: 90%;
+    }
+  
+    .card{
+      border: 0px
+    }
+  }
+  .px-15{
+      padding: 0 15px;
+  } 
+  .card-h2-title{
+      font-size: 30px;
+      margin: 0;
+      color: rgba(0,0,0,0.65);
+      line-height: 60px;
+  }
+  .recommend-img{
+      height: 60px;
+      width: 90px;
+  }
+.more-class{
+    text-decoration: none;
+    color: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: flex-end;
+    font-size: 20px;
+    line-height: 1;
+}

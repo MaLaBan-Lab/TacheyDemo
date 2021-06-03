@@ -214,8 +214,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\card.css" />
     <Content Include="Assets\css\coupons.css" />
     <Content Include="Assets\css\Create.css" />
+    <Content Include="Assets\css\HomePage.css" />
     <Content Include="Assets\css\HAHOWcart.css" />
     <Content Include="Assets\css\HAHOWcheckout.css" />
     <Content Include="Assets\css\HAHOWlogin.css" />
@@ -226,13 +228,26 @@
     <Content Include="Assets\css\Main.css" />
     <Content Include="Assets\css\nav.css" />
     <Content Include="Assets\css\orders.css" />
+    <Content Include="Assets\css\owl.carousel.min.css" />
+    <Content Include="Assets\css\owl.theme.default.min.css" />
     <Content Include="Assets\css\step.css" />
+    <Content Include="Assets\img\右圖左下.jpg" />
+    <Content Include="Assets\img\右圖底部.jpg" />
+    <Content Include="Assets\img\吉祥物.jpg" />
+    <Content Include="Assets\img\太陽.jpg" />
+    <Content Include="Assets\img\延伸閱讀圖片1.jpg" />
+    <Content Include="Assets\img\延伸閱讀圖片2.jpg" />
+    <Content Include="Assets\img\延伸閱讀圖片3.jpg" />
+    <Content Include="Assets\img\播放圖.svg" />
+    <Content Include="Assets\img\超連結圖.jpg" />
+    <Content Include="Assets\img\醜圖.jpg" />
     <Content Include="Assets\js\coupons.js" />
     <Content Include="Assets\js\HAHOWlogin.js" />
     <Content Include="Assets\js\Invite.js" />
     <Content Include="Assets\js\Main.js" />
     <Content Include="Assets\js\nav.js" />
     <Content Include="Assets\js\orders.js" />
+    <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\step.js" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />
@@ -459,10 +474,11 @@
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Main.cshtml" />
     <Content Include="Views\Shared\_bootstrap.cshtml" />
+    <Content Include="Views\Shared\_LayoutHomePage.cshtml" />
+    <Content Include="Views\Shared\_LayoutCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\img\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
