@@ -1,31 +1,1565 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>好學校 首頁</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+
+<!-- 第一塊 -->
+<div class="container-fuild">
+    <div class="row justify-content-center m-0">
+        <div class="col-lg-3 search-3">
+            <h1 class="pt-5 search-content">
+                最有趣的<span class="search-half">線上課程平台</span><br>
+                學那些學校不會教的事
+            </h1>
+            <form class="form-inline my-2 my-lg-0 d-flex search-form">
+                <input class="bg-gray border-0 m-0 search-input" type="search" placeholder="今天想學習什麼?"
+                       aria-label="Search">
+                <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
+            </form>
+            <div class="search-a-wrap my-2">
+                <a href="#" class="search-a d-inline-block">優惠此時此課</a>
+                <a href="#" class="search-a d-inline-block">國際化人才</a>
+                <a href="#" class="search-a d-inline-block">吳寶春</a>
+                <a href="#" class="search-a d-inline-block">理財進擊之路</a>
+                <a href="#" class="search-a d-inline-block">免費資產配置講座</a>
+            </div>
+        </div>
+        <div class="col-lg-5 search-right p-0">
+            <img id="search-right-leftbottom-pic" src="~/Assets/img/右圖左下.jpg" alt="">
+            <img id="search-right-pic" src="~/Assets/img/右圖底部.jpg" alt="">
+            <a href="#"><img id="search-right-a-pic" src="~/Assets/img/超連結圖.jpg" alt=""></a>
+            <img id="mascot" src="~/Assets/img/吉祥物.jpg" alt="">
+
+        </div>
+    </div>
+</div>
+<div class="pic-wrap">
+    <img id="ug-pic" src="~/Assets/img/醜圖.jpg" alt="">
+</div>
+<!-- 第一塊 -->
+<!-- 第二塊 -->
+<div class="container-fuild py-3">
+    <div class="row justify-content-center text-center m-0">
+        <div class="col-8 ">
+            <h2 class="advertising-text">每周嚴選推薦</h2>
+        </div>
+        <div class="col-8 my-1">
+            <h3 class="advertising-text">
+                <span>一些很棒的</span>
+                <span id="advertising-span" class="mx-2">活動消息</span>
+                <span>走過路過別錯過</span>
+            </h3>
+        </div>
+    </div>
+</div>
+<!-- 第二塊 -->
+<!-- 輪盤一 -->
+<div class="owl-carousel  pb-5 auto-carousel">
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_2021hahowday_20210519/2021hahowday_l.png"
+                 alt="">
+        </div>
+    </a>
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_SV_singing_science_20210519/SV_singing_science_l.png"
+                 alt="">
+        </div>
+    </a>
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_202105_fight_for_wealth_20210510/202105_fight_for_wealth_l.png"
+                 alt="">
+        </div>
+    </a>
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_bundle_20210322/bundle_l.png" alt="">
+        </div>
+    </a>
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_rifat_english_20210513/rifat_english_l.png"
+                 alt="">
+        </div>
+    </a>
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_bao_bread_20210422/bao_bread_l.png" alt="">
+        </div>
+    </a>
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_procreate2_20210429/procreate2_l.png" alt="">
+        </div>
+    </a>
+    <a href="#">
+        <div class="item">
+            <img src="https://storage.googleapis.com/hh-static/banner_covid2021_20210519/covid2021_l.png" alt="">
+        </div>
+    </a>
+</div>
+<!-- 輪盤一 -->
+<!-- 第3塊 -->
+<div id="try-watch" class="container-fuild pt-5 ">
+    <div class="row justify-content-center text-center m-0">
+        <div class="col-8 ">
+            <h2 class="trywatch-h2">每日免費試看</h2>
+        </div>
+        <div class="col-8 my-1">
+            <h3 class="trywatch-text">
+                <span>一天</span>
+                <span id="trywatch-span" class="mx-2">五試看</span>
+                <span>00 點更新，遇見命定課程在這裡</span>
+            </h3>
+        </div>
+    </div>
+</div>
+<!-- 第3塊 -->
+<!-- 影片  owl-theme-->
+<div class="owl-carousel  video-carousel">
+    <div class="item-video">
+        <iframe id="player1" width="636" height="356" src="https://www.youtube.com/embed/h1PlaMI-Pms?enablejsapi=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <div class="content text-center">
+            <h4 class="my-2">網頁</h4>
+            <a href="#">設計網頁-網頁工程師的設計實戰</a>
+            <div>
+                <a href="#">
+                    <span>4.87</span>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="item-video">
+        <iframe id="player2" width="636" height="356" src="https://www.youtube.com/embed/TCaM1Tl01lQ?enablejsapi=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <div class="content text-center">
+            <h4 class="my-2">網頁</h4>
+            <a href="#">設計網頁-網頁工程師的設計實戰</a>
+            <div>
+                <a href="#">
+                    <span>4.87</span>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="item-video">
+        <iframe id="player3" width="636" height="356" src="https://www.youtube.com/embed/TCaM1Tl01lQ?enablejsapi=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <div class="content text-center">
+            <h4 class="my-2">網頁</h4>
+            <a href="#">設計網頁-網頁工程師的設計實戰</a>
+            <div>
+                <a href="#">
+                    <span>4.87</span>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="item-video">
+        <iframe id="player4" width="636" height="356" src="https://www.youtube.com/embed/TCaM1Tl01lQ?enablejsapi=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <div class="content text-center">
+            <h4 class="my-2">網頁</h4>
+            <a href="#">設計網頁-網頁工程師的設計實戰</a>
+            <div>
+                <a href="#">
+                    <span>4.87</span>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 影片 -->
+<!-- 課程精選 -->
+<div class="container-fuild py-5">
+    <div class="row justify-content-center text-center m-0">
+        <div class="col-8 ">
+            <h2 class="advertising-text">Hahow 精選好課程</h2>
+        </div>
+        <div class="col-8 my-1">
+            <h3 class="course-text">
+                <span>精挑細選了一些很棒的課程</span>
+                <span id="advertising-span" class="mx-2">推薦給你</span>
+            </h3>
+        </div>
+        <div class="col-8 course-8">
+            <div class="owl-carousel    advertising-carousel">
+
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt text-left card-1">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt text-left card-1">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt card-2 text-left">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt text-left card-1">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt text-left card-1">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt card-2 text-left">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt text-left card-1">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt text-left card-1">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                </div>
+                <div class="item">
+                    <div class="card  position-relative overflow-hidden" style="width: 100%; ">
+                        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+                        <div class="backgroundBookmark-me position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-h4-wrap">
+                                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                            </div>
+                            <div class="text-right card-RM">RM 443.30</div>
+                            <div class="card-divide"></div>
+                            <div class="card-content">
+                                <div class="card-logo"></div>
+                                <div class="card-Explan">
+                                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
+                                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
+                                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute bg-hahow-dark-orange text-center text-white backgroundTape">
+                            上課囉
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                    <div class="card-txt text-left card-2">
+                        <h3>課程簡介</h3>
+                        <div>
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>課程3小時46分</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <span>4章節15單元</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-user-tag"></i>
+                            <span>461位同學</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-copy"></i>
+                            <span>2份作業</span>
+                        </div>
+                        <h3 class="my-2">你可以學到的東西</h3>
+                        <p>
+                            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
+                            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+                        </p>
+                        <div class="d-flex justify-content-center card-txt-btn">
+                            <a href="#" class="w-100">
+                                <button class="w-100 bg-white">瞭解課程內容</button>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 字卡 -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 課程精選 -->
+<!-- 好學生這麼說 -->
+<div id="student-say" class="container-fuild pt-5 ">
+    <div class="row justify-content-center text-center m-0">
+        <div class="col-8 ">
+            <h2 class="trywatch-h2">Hahow 學生這麼說</h2>
+        </div>
+        <div class="col-8 my-1">
+            <h3 class="trywatch-text">
+                <span>超過</span>
+                <span id="studentsay-span" class="mx-2">5000+</span>
+                <span>則真實評論</span>
+            </h3>
+        </div>
+    </div>
+    <div class="row m-0 justify-content-center pb-4">
+        <div class="col-lg-8 d-flex justify-content-center reading-8 flex-wrap">
+            <div class="col-lg-4 px-2 ">
+                <div class="comment p-4">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURUdwTAC+owC8pAC+owC/nwC+owC/nwC+owC+pAC+pAC+pAC+owC+pAC+pAQrwd4AAAANdFJOUwClRN8h7xBggL9wj89yAOr7AAAAxUlEQVQY0yWOPQrCUBCE1xj/m9gKQnqb1EJAsLYRUlgEBLGIINhYWAhewMZe8AoeQPACKWIUYzF3cXbfFDt8+3berohI8xCKanPRusdOrZ2+WDMY+TlIfuxoCqUVMF5a88f4AwVB6sBJxAMC/eOIirWDUp8ktuZMsyItYEI7I1KqoVC7uljDYpxPFly3xSfhYaAqjVM3I4SO3pKqBY4qydUi/kIV3EA9eYTR2k16al/pqvGMoQV0dM69PaBk078P7OxRP5Q/PJBxjN9F5jIAAAAASUVORK5CYII="
+                         alt="" class="comment-top-img">
+                    <p class="comment-p">
+                        自從認識 Hahow，才發現這世界還有這麼多有趣的事可以透過線上課程自學，像是腹語、折氣球，而在專業技能的增進對我幫助也非常大，例如標準字設計、製作網站 UI
+                        等。後來認真研讀了好老師手冊，才知道 Hahow 對於課程製作的嚴謹和品質要求很高，讓我確信只要是 Hahow 出品的線上課程，都有品質保證，因此在線上課程中，我會優先選擇
+                        Hahow。
+                    </p>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUdwTAC9owC+owC/nwC+owC+owC/nwC+pAC+pAC+pAC9owC9owC+pAC+pAC+pN9i5Y0AAAAOdFJOUwCb7yDfPhCAv2CvUG/PuzEMbQAAAMlJREFUGNMljz8OAWEQxZ9gZS0JhVZkC4lG9gQaiVKUqo0jOIGIQiMRJxAnUDiAkIjaFaz1r/DOYN5+U8wvb2bel/cBQb0BK+9cj4D8kKyZOpBvoEDybkMDT9gKI+SENprCHFXh7VQrM/CHmfBAWUjQc6ooEBWn3A0wDrt8Af4iZKoYM3vFqsyPsOdOKCiMYmykjnxaz7l7b2ghZPs6mwVEibxp1VT44pqpfcy7kAMgJvu28pkNY/4ip5aGOJkiUx1hfFVHsJpY/wNR/nhLeHAxeQAAAABJRU5ErkJggg=="
+                         alt="" class="comment-bot-img">
+                    <a href="#" class="comment-a"><img src="me.jpg" alt="" id="user-logo">Victor</a>
+                </div>
+            </div>
+            <div class="col-lg-4 px-2">
+                <div class="comment p-4">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURUdwTAC+owC8pAC+owC/nwC+owC/nwC+owC+pAC+pAC+pAC+owC+pAC+pAQrwd4AAAANdFJOUwClRN8h7xBggL9wj89yAOr7AAAAxUlEQVQY0yWOPQrCUBCE1xj/m9gKQnqb1EJAsLYRUlgEBLGIINhYWAhewMZe8AoeQPACKWIUYzF3cXbfFDt8+3berohI8xCKanPRusdOrZ2+WDMY+TlIfuxoCqUVMF5a88f4AwVB6sBJxAMC/eOIirWDUp8ktuZMsyItYEI7I1KqoVC7uljDYpxPFly3xSfhYaAqjVM3I4SO3pKqBY4qydUi/kIV3EA9eYTR2k16al/pqvGMoQV0dM69PaBk078P7OxRP5Q/PJBxjN9F5jIAAAAASUVORK5CYII="
+                         alt="" class="comment-top-img">
+                    <p class="comment-p">
+                        之前不曾體驗過線上課程，以往求學過程中，下課後都是往補習班跑，然而離開校園後，就不再像以前那樣可以在下課後充實自我了。步入職場後，新人總是滿懷技能，才發現職場時刻猶如戰場，想要不被淘汰，就必須能與時俱進多學新技術，因此開始嘗試線上課程，非常感謝
+                        Hahow，可以讓我持續學習與成長！
+                    </p>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUdwTAC9owC+owC/nwC+owC+owC/nwC+pAC+pAC+pAC9owC9owC+pAC+pAC+pN9i5Y0AAAAOdFJOUwCb7yDfPhCAv2CvUG/PuzEMbQAAAMlJREFUGNMljz8OAWEQxZ9gZS0JhVZkC4lG9gQaiVKUqo0jOIGIQiMRJxAnUDiAkIjaFaz1r/DOYN5+U8wvb2bel/cBQb0BK+9cj4D8kKyZOpBvoEDybkMDT9gKI+SENprCHFXh7VQrM/CHmfBAWUjQc6ooEBWn3A0wDrt8Af4iZKoYM3vFqsyPsOdOKCiMYmykjnxaz7l7b2ghZPs6mwVEibxp1VT44pqpfcy7kAMgJvu28pkNY/4ip5aGOJkiUx1hfFVHsJpY/wNR/nhLeHAxeQAAAABJRU5ErkJggg=="
+                         alt="" class="comment-bot-img">
+                    <a href="#" class="comment-a"><img src="me.jpg" alt="" id="user-logo">Victor</a>
+                </div>
+            </div>
+            <div class="col-lg-4 px-2">
+                <div class="comment p-4">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURUdwTAC+owC8pAC+owC/nwC+owC/nwC+owC+pAC+pAC+pAC+owC+pAC+pAQrwd4AAAANdFJOUwClRN8h7xBggL9wj89yAOr7AAAAxUlEQVQY0yWOPQrCUBCE1xj/m9gKQnqb1EJAsLYRUlgEBLGIINhYWAhewMZe8AoeQPACKWIUYzF3cXbfFDt8+3berohI8xCKanPRusdOrZ2+WDMY+TlIfuxoCqUVMF5a88f4AwVB6sBJxAMC/eOIirWDUp8ktuZMsyItYEI7I1KqoVC7uljDYpxPFly3xSfhYaAqjVM3I4SO3pKqBY4qydUi/kIV3EA9eYTR2k16al/pqvGMoQV0dM69PaBk078P7OxRP5Q/PJBxjN9F5jIAAAAASUVORK5CYII="
+                         alt="" class="comment-top-img">
+                    <p class="comment-p">
+                        謝謝可愛的 Hahow
+                        吉祥物蛙蛙，在我大學生活感到迷茫的時候，向著我伸出了帶有希望曙光的援手，在這裡我重新拾起對學習的熱情，而獲得知識的範圍也不再僅限於單一領域，是真正地、發自內心地去學習自己熱愛的一切事物。因此我推薦各位朋友，如果你有什麼想學卻還沒開始的事情的話，試著在
+                        Hahow 挖寶看看吧！
+                    </p>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUdwTAC9owC+owC/nwC+owC+owC/nwC+pAC+pAC+pAC9owC9owC+pAC+pAC+pN9i5Y0AAAAOdFJOUwCb7yDfPhCAv2CvUG/PuzEMbQAAAMlJREFUGNMljz8OAWEQxZ9gZS0JhVZkC4lG9gQaiVKUqo0jOIGIQiMRJxAnUDiAkIjaFaz1r/DOYN5+U8wvb2bel/cBQb0BK+9cj4D8kKyZOpBvoEDybkMDT9gKI+SENprCHFXh7VQrM/CHmfBAWUjQc6ooEBWn3A0wDrt8Af4iZKoYM3vFqsyPsOdOKCiMYmykjnxaz7l7b2ghZPs6mwVEibxp1VT44pqpfcy7kAMgJvu28pkNY/4ip5aGOJkiUx1hfFVHsJpY/wNR/nhLeHAxeQAAAABJRU5ErkJggg=="
+                         alt="" class="comment-bot-img">
+                    <a href="#" class="comment-a"><img src="me.jpg" alt="" id="user-logo">Victor</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+
+<!-- 好學生這麼說 -->
+<!-- 猜你想學 -->
+<div class="container-md">
+    <div class="row justify-content-lg-between">
+        <div class="recommend-title-wrap d-flex">
+            <img src="https://hahow.in/static/images/homepage/icon-suggestion.svg" alt=""
+                 class="recommend-img px-15">
+            <h2 class=" card-h2-title">猜你想學</h2>
+        </div>
+        <a href="#" class="more-class">更多熱門課程<i class="fas fa-arrow-right"></i></a>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+
     </div>
 </div>
+<!-- 猜你想學 -->
+<!-- 本週熱門課程 -->
+<div class="container-md">
+    <div class="row justify-content-lg-between">
+        <div class="recommend-title-wrap d-flex">
+            <img src="https://hahow.in/static/images/homepage/popular.png" alt=""
+                 class="recommend-img px-15">
+            <h2 class=" card-h2-title">本週熱門課程</h2>
+        </div>
+        <a href="#" class="more-class">更多熱門課程<i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card my-5">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-12">
+                        <div class="card-title-image position-relative">
+                            <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                     alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
+                             class="card-img-top" />
+                        <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                            上課囉
+                        </div>
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <h4 class="card-title text-justify font-weight-normal text-secondary">
+                            Java 工程師必備！Spring Boot 零基
+                        </h4>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="star-show">
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                                </i>
+                            </span>
+                            (6)
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                        <span class="card-text text-black-50">
+                            <span class="couse-time-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-time">578</span>分鐘
+                        </span>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                        <span class="card-text text-black-50 mr-4">
+                            <span class="course-people-before">
+                                <i class="far fa-clock"></i>
+                            </span>
+                            <span class="course-people">260</span>人
+                        </span>
+                        <span class="card-text hahow-dark-green classPrice">
+                            NT$<span>3,200</span>
+                        </span>
+                    </div>
+                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-bottom bg-hahow-dark-green"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- 本週熱門課程 -->
+<!-- 延伸閱讀 -->
+<div class="container-fuild reading">
+    <div class="row justify-content-center m-0">
+        <div class="col-lg-8 reading-8">
+            <h4 class="reading-h4 my-3">延伸閱讀</h4>
+        </div>
+        <div class="col-lg-8 reading-8">
+            <div class="row m-0">
+                <div class="col-lg-4">
+                    <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片1.jpg" alt="">
+                    <h5 class="reading-h5 m-0">零基礎也能自學法文 —— 從文字到 Podcast、影片，免費法語自學</h5>
+                    <span class="d-block reading-date my-2">Dec 10, 2020</span>
+                    <p class="reading-date m-0">
+                        語言自學達人 Chihya
+                        繼兩年前自學德文後，又靠著自學建立了法文聽說讀寫的基礎。這篇文章會分享她自學法文的經驗，並提供「以中文、英文、或法文學習法文」的多種教材，如果你也正在找法文
+                    </p>
+                    <a class="reading-more" href="#">閱讀更多</a>
+                </div>
+                <div class="col-lg-4">
+                    <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片2.jpg" alt="">
+                    <h5 class="reading-h5 m-0">【2021】上升星座運勢：安心之法與人生發展策略</h5>
+                    <span class="d-block reading-date my-2">Dec 30, 2020</span>
+                    <p class="reading-date m-0">
+                        面對 2020
+                        年的不確定性，很多人心中的不安全感越來越深重。星象雖然會影響人世間的吉凶禍福，斗轉星移所產生的外在事件，人類可能無法全然控制，但是你可以決定你的「心」要如何去應對未來
+                    </p>
+                    <a class="reading-more" href="#">閱讀更多</a>
+                </div>
+                <div class="col-lg-4">
+                    <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片3.jpg" alt="">
+                    <h5 class="reading-h5 m-0">資深聲音培訓師周震宇 —— 聲音反映出人的內在，而溝通是一生的</h5>
+                    <span class="d-block reading-date my-2">Jan 8, 2021</span>
+                    <p class="reading-date m-0">
+                        「聲音反映出人的內在，而溝通是一生的自我覺察。」這是聲音訓練師周震宇亟欲傳達的核心概念。在聲波的交會當中，人們建立交集、共識，進而生長成為有意義的關係。你的每一次開口，也可
+                    </p>
+                    <a class="reading-more" href="#">閱讀更多</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- 延伸閱讀 -->
