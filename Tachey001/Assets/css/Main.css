@@ -84,7 +84,7 @@ body {
 /* ========================= 選單外層 start ============================= */
 .menu_wrap {
   position: absolute;
-  top: -105%;
+  top: -96%;
   left: 0;
   padding: 0;
   background-color: gray;
@@ -135,7 +135,7 @@ body {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  padding: 0 0 1px 1px;
+  padding: 0px;
   box-shadow: 1px 0px 17px white;
 }
 .menu_wrap .title .close_button i {
