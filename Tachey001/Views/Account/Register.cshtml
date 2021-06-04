@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_bootstrap.cshtml";
 }
 
-
-
 <div class="container-fluid pic-height mh-100">
     <div class="row justify-content-center">
         <div class="boxleft  col-lg-5 p-0 bg-orange col-md-5 col-sm-5 col-xs-0">
@@ -25,19 +23,12 @@
             <div class="boxrightinner-1 ">
                 <div class="boxrightinner col-lg-5 p-0 col-md-7 col-sm-7">
                     <div class="xs-right-title">
-                        <a href="">
+                        <a href="@Url.Action("Index", "Home")">
                             <img src="https://hahow.in/static/images/logo.svg" alt="" class="my-4 xs-right-img">
                         </a>
                         <b class="m-b-2 text-gray">今天也要透過學習，成為更好的自己</b>
 
                     </div>
-
-
-
-
-
-
-
 
                     <div class="boxrightinnertop ">
                         <div class="boxrightinnertop-fontsize ">
@@ -45,7 +36,7 @@
                         </div>
                         <div class="boxrightinnertop-right d-flex align-items-center boxrightinnertop-nowrap">
                             已經註冊，
-                            <a href="#" class="boxrightinnertop-a boxrightinnertop-nowrap">登入</a>
+                            <a href="@Url.Action("Login", "Account")" class="boxrightinnertop-a boxrightinnertop-nowrap">登入</a>
                         </div>
                     </div>
 
@@ -75,26 +66,39 @@
                         <span class="text-muted">或使用 Hahow 帳號密碼登入</span>
                         <div class="text-muted">--</div>
                     </div>
-                    <div class="boxrightinnermiddle-2">
-                        <div class="boxrightinnermiddle-2icon">
-                            <i class="fas fa-user"></i>
-                            <input placeholder="帳號(限4-21碼小寫英文數字)" type="text"
-                                   class="my-2 boxrightinnermiddle-2-input">
+
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="boxrightinnermiddle-2">
+                            @*<div class="boxrightinnermiddle-2icon">
+                                <i class="fas fa-user"></i>
+                                <input placeholder="帳號(限4-21碼小寫英文數字)" type="text"
+                                       class="my-2 boxrightinnermiddle-2-input">
+                            </div>*@
+                            <div class="boxrightinnermiddle-2icon boxrightinnermiddle-2icon-email">
+                                <i class="far fa-envelope i-email"></i>
+                                @*<input placeholder="信箱" type="text" class="my-2 boxrightinnermiddle-2-input">*@
+                                @Html.TextBoxFor(m => m.Email, new { @class = "my-2 boxrightinnermiddle-2-input" })
+                            </div>
+                            <div class="boxrightinnermiddle-2icon">
+                                <i class="fas fa-unlock-alt"></i>
+                                @*<input placeholder="密碼" type="text" class="my-2 boxrightinnermiddle-2-input">*@
+                                @Html.PasswordFor(m => m.Password, new { @class = "my-2 boxrightinnermiddle-2-input" })
+                            </div>
+                            <div class="boxrightinnermiddle-2icon">
+                                <i class="fas fa-unlock-alt"></i>
+                                @*<input placeholder="再次輸入密碼" type="text" class="my-2 boxrightinnermiddle-2-input">*@
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "my-2 boxrightinnermiddle-2-input" })
+                            </div>
+                            <button class="my-2 d-flex justify-content-center">
+                                <input type="submit" class="w-100 h-100 border-0" value="註冊" />
+                            </button>
                         </div>
-                        <div class="boxrightinnermiddle-2icon boxrightinnermiddle-2icon-email">
-                            <i class="far fa-envelope i-email"></i>
-                            <input placeholder="信箱" type="text" class="my-2 boxrightinnermiddle-2-input">
-                        </div>
-                        <div class="boxrightinnermiddle-2icon">
-                            <i class="fas fa-unlock-alt"></i>
-                            <input placeholder="密碼" type="text" class="my-2 boxrightinnermiddle-2-input">
-                        </div>
-                        <div class="boxrightinnermiddle-2icon">
-                            <i class="fas fa-unlock-alt"></i>
-                            <input placeholder="再次輸入密碼" type="text" class="my-2 boxrightinnermiddle-2-input">
-                        </div>
-                        <button disabled type="submit" class="my-2 d-flex justify-content-center">註冊</button>
-                    </div>
+
+                    }
+
                     <div class="flex justify-content-center desc marg-tb-10">
                         註冊即同意 <a class="text-link"
                                  target="_blank" href="/privacy">隱私權政策</a> 和 <a class="text-link" target="_blank"
@@ -108,3 +112,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
