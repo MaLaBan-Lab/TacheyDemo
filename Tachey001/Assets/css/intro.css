@@ -1,0 +1,78 @@
+.hahow-green {
+  color: rgb(0, 190, 164);
+}
+
+.btn-outline-hahow {
+  border: 1px solid #777;
+  color: #777;
+}
+
+.btn-outline-hahow:hover {
+  color: rgb(250, 139, 0);
+}
+
+.book-mark {
+  border: 3px solid #eee;
+}
+
+.center {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.photo-img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.h-30 {
+  height: 45px;
+}
+
+.score-content {
+  background-color: rgb(244, 247, 247);
+}
+
+.bg-light-gray {
+  background-color: rgb(243, 243, 241);
+}
+
+.light-height-45 {
+  line-height: 45px;
+}
+
+.date-content::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: calc(50% - 6px);
+  left: -8px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 8px solid rgba(0, 0, 0, 0.06);
+}
+
+.border-bottom-short{
+    border-bottom: 8px solid rgb(243, 243, 241);
+    width: 35px;
+    height: 5px;
+}
+
+@media (min-width: 992px) {
+  .book-mark-box {
+    position: absolute;
+    right: 0;
+    height: 100%;
+  }
+
+  .book-mark {
+    position: sticky;
+    top: 10px;
+  }
+}

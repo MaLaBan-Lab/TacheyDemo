@@ -28,8 +28,13 @@ namespace Tachey001.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Main()
+        public ActionResult Main(int? id)
         {
+            if (id == null)
+            {
+                id = 1;
+            }
+            ViewBag.Id = id;
             return View();
         }
 

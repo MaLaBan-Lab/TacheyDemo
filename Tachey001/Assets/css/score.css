@@ -1,0 +1,83 @@
+.star-gray {
+  color: rgb(202, 202, 202);
+}
+
+.star-yellow {
+  color: #ffae00;
+  left: 0;
+}
+
+.text-scale-12 {
+  transform: scale(1.2);
+}
+
+.btn-outline-hahow {
+  border: 1px solid #777;
+  color: #777
+}
+
+.btn-outline-hahow:hover {
+  color: rgb(250, 139, 0);
+}
+
+.book-mark {
+  border: 3px solid #eee;
+}
+
+.text-20 {
+  font-size: 20px;
+}
+
+.text-50 {
+  font-size: 80px;
+}
+
+.photoImg {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.photo-Img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+.center {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+.score-content{
+    background-color: rgb(244, 247, 247);
+}
+
+@media (min-width: 992px){
+    .book-mark-box{
+        position: absolute;
+        right: 0;
+        height: 100%;
+    }
+
+    .book-mark{
+        height: 200px;
+        position: sticky;
+        top: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .star-in{
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .star-out{
+        display: none;
+    }
+}

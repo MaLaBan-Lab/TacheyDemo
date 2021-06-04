@@ -230,6 +230,7 @@
     <Content Include="Assets\css\HAHOWprivacy.css" />
     <Content Include="Assets\css\HAHOWsingin.css" />
     <Content Include="Assets\css\HAHOWterms.css" />
+    <Content Include="Assets\css\intro.css" />
     <Content Include="Assets\css\Invite.css" />
     <Content Include="Assets\css\Main.css" />
     <Content Include="Assets\css\member.css" />
@@ -238,6 +239,7 @@
     <Content Include="Assets\css\owl.carousel.min.css" />
     <Content Include="Assets\css\owl.theme.default.min.css" />
     <Content Include="Assets\css\personal.css" />
+    <Content Include="Assets\css\score.css" />
     <Content Include="Assets\css\step.css" />
     <Content Include="Assets\img\右圖左下.jpg" />
     <Content Include="Assets\img\右圖底部.jpg" />
