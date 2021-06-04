@@ -1,0 +1,671 @@
+/* .container 媒體查詢 */
+.user-info {
+	width: 272px;
+	max-width: 100%;
+}
+
+@media (min-width: 520px) {
+		.container {
+				max-width: 520px;
+		}
+
+		.user-info {
+				width: 520px;
+		}
+}
+
+
+@media (min-width: 768px) {
+	.container {
+		max-width: 750px;
+	}
+
+	.user-info {
+		width: 750px;
+	}
+}
+
+@media (min-width: 992px) {
+	.container {
+		max-width: 970px;
+	}
+
+	.user-info {
+		width: 970px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1240px;
+	}
+
+	.user-info {
+		width: 1240px;
+	}
+}
+
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-top: 60px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+/* 基本共通設定 */
+body {
+	background-color: rgb(241, 239, 239);
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-underline {
+	text-decoration: underline;
+}
+
+.text-bold {
+	font-weight: 500;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.pad-b-5 {
+	padding-bottom: 5px;
+}
+
+.pad-b-15 {
+	padding-bottom: 15px;
+}
+
+.pad-b-20 {
+	padding-bottom: 20px;
+}
+
+.pad-b-30 {
+	padding-bottom: 30px;
+}
+
+.pad-b-45 {
+	padding-bottom: 45px;
+}
+
+.pad-t-0 {
+	padding-top: 0px;
+}
+
+.pad-t-5 {
+	padding-top: 5px;
+}
+
+.pad-t-30 {
+	padding-top: 30px;
+}
+
+.pad-t-45 {
+	padding-top: 45px;
+}
+
+.pad-t-60 {
+	padding-top: 60px;
+}
+
+.pad-rl-0 {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.pad-rl-5 {
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.pad-rl-10 {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.pad-rl-15 {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.pad-rl-20 {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.pad-rl-25 {
+	padding-right: 25px;
+	padding-left: 25px;
+}
+
+.pad-rl-30 {
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+.pad-rl-60 {
+	padding-right: 60px;
+	padding-left: 60px;
+}
+
+.pad-l-30 {
+	padding-left: 30px;
+}
+
+.pad-tb-10 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.pad-tb-15 {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.pad-tb-20 {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.pad-tb-30 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.marg-t-10 {
+	margin-top: 10px;
+}
+
+.marg-t-15 {
+	margin-top: 15px;
+}
+
+.marg-t-20 {
+	margin-top: 20px;
+}
+
+.marg-t-30 {
+	margin-top: 30px;
+}
+
+.marg-t-40 {
+	margin-top: 40px;
+}
+
+.marg-b-0 {
+	margin-bottom: 0px;
+}
+
+.marg-b-5 {
+	margin-bottom: 5px;
+}
+
+.marg-b-15 {
+	margin-bottom: 15px;
+}
+
+.marg-b-25 {
+	margin-bottom: 25px;
+}
+
+.marg-b-30 {
+	margin-bottom: 30px;
+}
+
+.marg-tb-0 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.marg-tb-15 {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.marg-l-5 {
+	margin-left: 5px;
+}
+
+.marg-l-10 {
+	margin-left: 10px;
+}
+
+.marg-l-25 {
+	margin-left: 25px;
+}
+
+.marg-rl-auto {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.marg-rl-5 {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.marg-rl-15 {
+	margin-right: 15px;
+	margin-left: 15px;
+}
+
+
+.marg-rl-20 {
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+.marg-rl-25 {
+	margin-right: 25px;
+	margin-left: 25px;
+}
+
+.flex {
+	display: flex;
+}
+
+.ta-l {
+	text-align: left;
+}
+
+.ta-r {
+	text-align: right;
+}
+
+.relative {
+	position: relative;
+}
+
+
+.absolute {
+	position: absolute;
+}
+
+.border-setting {
+	border-radius: 3px;
+	border: none;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+	overflow: auto;
+}
+
+.border-circle {
+	border-radius: 50%;
+	overflow: hidden;
+	height: 170px;
+	width: 170px;
+	border: 2px solid white;
+	display: inline-block;
+	box-shadow: rgb(0 0 0 / 24%) 0px 0px 2px;
+}
+
+/* 右邊資訊填寫 */
+/* 關於我 */
+.user-info {
+	border-radius: 3px;
+	border: none;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+	overflow: auto;
+}
+
+.user-digt {
+	overflow: hidden;
+}
+
+.user-digt .profile {
+	background: linear-gradient(rgb(2, 170, 176), rgb(0, 205, 172));
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	flex-flow: column;
+}
+
+.user-digt .profile .profile-image-wrapper {
+	position: relative;
+}
+
+.user-img-block {
+	border-radius: 50%;
+	overflow: hidden;
+	height: 170px;
+	width: 170px;
+	border: 2px solid white;
+	display: inline-block;
+	box-shadow: rgb(0 0 0 / 24%) 0px 0px 2px;
+}
+
+.user-img {
+	width: 100%;
+	height: 100%;
+	object-position: 50% 50%;
+	object-fit: cover;
+}
+
+img {
+	width: 100%;
+	vertical-align: middle;
+	border: 0;
+}
+
+.user-digt .profile .profile-image-wrapper .upload-btn {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+
+.cancel-btn {
+	font-size: 23px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background-color: white;
+	border: none;
+	box-shadow: rgb(0 0 0 / 24%) 0px 2px 4px 0px;
+	outline: none;
+}
+
+.fa {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.user-digt .profile .username.editable {
+	width: 100%;
+	border-bottom: 2px solid rgb(255, 255, 255);
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.user-digt .profile .username {
+	margin-bottom: 20px;
+}
+
+.user-digt .profile .username h3 {
+	font-weight: 400;
+	color: rgb(255, 255, 255);
+	margin: 0px;
+	text-align: center;
+}
+
+.user-digt .profile .username .edit-icon {
+	color: rgb(255, 255, 255);
+	font-size: 30px;
+	margin-left: 10px;
+}
+
+.user-digt .profile .links.editable {
+	cursor: pointer;
+	width: 100%;
+	border-bottom: 2px solid rgb(255, 255, 255);
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.user-digt .profile .links {
+	color: rgb(255, 255, 255);
+}
+
+.user-digt .profile .links .links-edit-icon {
+	color: rgb(255, 255, 255);
+	margin-left: 10px;
+}
+
+.course {
+	width: 100%;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	position: relative;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+	background-color: rgb(255, 255, 255);
+}
+
+.course>div {
+	text-align: center;
+	width: calc(50% - 30px);
+	display: flex;
+	flex-flow: column;
+}
+
+.course>div .txt-small {
+	color: rgb(204, 204, 204);
+	line-height: 18px;
+	margin-top: 10px;
+}
+
+.txt-small {
+	font-size: 14px;
+}
+
+.course>div .hightlight {
+	font-size: 23px;
+	padding-bottom: 10px;
+}
+
+.user-info-edit {
+	background-color: rgb(255, 255, 255);
+}
+
+.user-info-edit .info.editable {
+	cursor: pointer;
+}
+
+.user-info-edit .info:first-child {
+	padding-top: 24px;
+}
+
+.user-info-edit .info {
+	padding-bottom: 24px;
+}
+
+b,
+strong {
+	font-weight: 700;
+}
+
+.user-info-edit .about-content.editable {
+	border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.user-info-edit .about-content {
+	overflow: hidden;
+	word-break: break-word;
+	color: rgb(155, 155, 155);
+}
+
+.pan {
+	color: rgb(0, 190, 164);
+	font-size: 16px;
+	cursor: pointer;
+}
+
+/* 分享個人頁面 */
+.personal-page {
+	border-radius: 3px;
+	border: none;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+	overflow: auto;
+}
+
+.share-text {
+	text-align: center;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.preview {
+	text-align: center;
+	border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* 分享到社群 */
+.share-icon-group {
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.community-icon {
+	display: inline-block;
+	background-size: 30px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.fb {
+	background-image: url(https://hahow.in/static/media/facebook.9acfeb8d.svg);
+}
+
+.google {
+	background-image: url(https://hahow.in/static/media/google.4d5a98b4.svg);
+}
+
+.plurk {
+	background-image: url(https://hahow.in/static/media/plurk.ffefcf31.svg);
+}
+
+.line {
+	background-image: url(https://hahow.in/static/media/line.5fdfe008.svg);
+}
+
+/* 預覽我的檔案 */
+.mwun {
+	min-width: unset;
+}
+
+.preview-btn {
+	text-align: center;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid rgba(0, 0, 0, 0.43);
+	white-space: nowrap;
+	user-select: none;
+	font-weight: 400;
+	background-color: transparent;
+	color: rgba(0, 0, 0, 0.65);
+	padding: 5px 40px;
+	font-size: 20px;
+	border-radius: 3px;
+	min-width: 60px;
+	line-height: 1.8em;
+	display: block;
+	width: 100%;
+}
+
+/* 個人頁面 */
+.relative .cover-image img {
+	height: 350px;
+	width: 100%;
+	/*background: url(Assets/img/cover-default.png) center center / cover no-repeat;*/
+}
+
+.relative .upload-btn {
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+}
+
+input,
+button,
+.dropdown-menu {
+	font-size: 16px;
+}
+
+.update-btn {
+	font-size: 23px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background-color: white;
+	border: none;
+	box-shadow: rgb(0 0 0 / 24%) 0px 2px 4px 0px;
+	outline: none;
+}
+
+.underline {
+	border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+}
+
+.tab-block {
+	display: table;
+	width: 100%;
+}
+
+p {
+	margin: 0px 0px 1em;
+	line-height: 1.75em;
+}
+
+.fa.pull-right {
+	margin-left: .3em;
+}
+
+.pp-edit {
+	display: block;
+	cursor: pointer;
+	color: rgb(0, 190, 164);
+}
+
+.fa-pencil:before {
+	content: "\f040";
+}
+
+.pp-edit::after {
+	content: " 編輯";
+}
+
+/* 我開的課 */
+.course-overview {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.course-overview .spacer {
+	-webkit-box-flex: 1;
+	flex-grow: 1;
+}
+
+.course-overview input[type="checkbox"] {
+	margin: 0px 5px;
+}
+
+.course-card .briefs-container.brief-col-lg-3 {
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+.course-card .briefs-container {
+	margin-top: -20px;
+	margin-bottom: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	line-height: 1.5em;
+}
