@@ -74,6 +74,9 @@ body {
   margin-top: 20px;
   padding: 0;
 }
+.main_wrap .fa{
+    color: white;
+}
 /* ========================= 影片區 start ============================= */
 .video_wrap {
   padding: 0 5px;
@@ -189,6 +192,9 @@ body {
 }
 .class_content .active {
   background-color: white;
+  color: black;
+}
+.class_content .active .fa{
   color: black;
 }
 .class_content .list .time,
