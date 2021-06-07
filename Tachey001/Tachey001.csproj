@@ -235,6 +235,7 @@
     <Content Include="Assets\css\Main.css" />
     <Content Include="Assets\css\member.css" />
     <Content Include="Assets\css\nav.css" />
+    <Content Include="Assets\css\navbar-blue.css" />
     <Content Include="Assets\css\orders.css" />
     <Content Include="Assets\css\owl.carousel.min.css" />
     <Content Include="Assets\css\owl.theme.default.min.css" />

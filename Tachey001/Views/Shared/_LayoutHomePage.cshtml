@@ -26,15 +26,16 @@
     @Styles.Render("~/Assets/css/card.css")
     @Styles.Render("~/Assets/css/nav.css")
     @Styles.Render("~/Assets/css/HomePage.css")
+    @Styles.Render("~/Assets/css/navbar-blue.css")
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
-<body style="padding-top: 0px; padding-bottom: 0px">
-    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top bg-light justify-content-between shadow-sm">
+<body style="padding-top: 0px; padding-bottom: 0px" >
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top  justify-content-between shadow-sm">
         <div class="nav-log-wrap">
-            <a href="@Url.Action("Index", "Home")"><img id="Homepage-logo" src="https://hahow.in/static/media/logo-black.59fdbe30.svg" alt=""></a>
-            <a href="#"><img id="Recruit-logo" src="https://hahow.in/static/images/joinus/2018hiring.svg" alt=""></a>
+            <a href="@Url.Action("Index", "Home")"><img id="Homepage-logo" src="https://i.imgur.com/CG3B9gp.jpg" alt=""></a>
+            @*<a href="#"><img id="Recruit-logo" src="https://hahow.in/static/images/joinus/2018hiring.svg" alt=""></a>*@
         </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -46,28 +47,28 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-th-large"></i>
                         探索課程
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("All", "Courses")">所有課程</a>
+                    <ul class="dropdown-menu  " aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-white " href="@Url.Action("All", "Courses")">所有課程</a>
                         @foreach (var item in categoryList)
                         {
                             <li class="dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#!" data-toggle="dropdown">
+                                <a class="dropdown-item dropdown-toggle text-white" href="#!" data-toggle="dropdown">
                                     @item.CategoryName
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
+                                    <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
                                         所有 @item.CategoryName
                                     </a>
                                     @foreach (var detail in detailsList)
                                     {
                                         if (detail.CourseCategoryID == item.CourseCategoryID)
                                         {
-                                            <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
+                                            <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
                                                 @detail.DetailsName
                                             </a>
                                         }
@@ -79,12 +80,12 @@
                 </li>
                 <!-- 沒有下拉選單 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Create","Courses")"><i class="fas fa-pencil-alt"></i>我要開課</a>
+                    <a class="nav-link text-white " href="@Url.Action("Create","Courses")"><i class="fas fa-pencil-alt pr-1"></i>我要開課</a>
                 </li>
             </ul>
             <!-- 搜尋列 -->
             <form class="form-inline my-2 my-lg-0 ">
-                <i class="fas fa-search px-2"></i>
+                <i class="fas fa-search px-2 text-white"></i>
                 <input class="form-control mr-sm-2" type="search" placeholder="課程搜尋" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
