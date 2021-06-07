@@ -54,15 +54,15 @@ namespace Tachey001
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "522413578931098",
+               appSecret: "aa407cbe0f0b05bbadba8914df91c586");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1037350215092-9rcm57k133ffatrhs0i5tkanv0ppdppp.apps.googleusercontent.com",
+                ClientSecret = "QgQK1ahv7zUXBA5DqXv4NVHq"
+            });
         }
     }
 }

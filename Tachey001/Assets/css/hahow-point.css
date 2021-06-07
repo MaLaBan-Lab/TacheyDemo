@@ -1,0 +1,826 @@
+/* .container 媒體查詢 */
+.user-info {
+		width: 272px;
+		max-width: 100%;
+}
+
+.exchange.type-dark {
+		left: 140px;
+		top: 110px;
+}
+.expired.type-dark {
+		left: 100px;
+		top: 180px;
+}
+		
+@media (min-width: 768px) {
+		.container {
+				max-width: 750px;
+		}
+
+		.user-info {
+				max-width: 750px;
+		}
+		.exchange.type-dark {
+				left: 260px;
+				top: 110px;
+		}
+		.expired.type-dark {
+				left: 200px;
+				top: 180px;
+		}
+}
+
+@media (min-width: 992px) {
+		.container {
+				max-width: 970px;
+		}
+
+		.user-info {
+				max-width: 970px;
+		}
+		.exchange.type-dark {
+				left: 380px;
+				top: 110px;
+		}
+		.expired.type-dark {
+				left: 320px;
+				top: 180px;
+		}
+}
+
+@media (min-width: 1200px) {
+		.container {
+				max-width: 1240px;
+		}
+
+		.user-info {
+				max-width: 1240px;
+		}
+		.exchange.type-dark {
+				left: 100px;
+				top: 110px;
+		}
+		.expired.type-dark {
+				left: 50px;
+				top: 180px;
+		}
+}
+
+.container {
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+}
+
+/* 基本共通設定 */
+body {
+		background-color: rgb(241, 239, 239);
+}
+
+.text-center {
+		text-align: center;
+}
+
+.text-underline {
+		text-decoration: underline;
+}
+
+.text-bold {
+		font-weight: 500;
+}
+
+.inline-block {
+		display: inline-block;
+}
+
+.pad-b-15 {
+		padding-bottom: 15px;
+}
+
+.pad-b-20 {
+		padding-bottom: 20px;
+}
+
+.pad-b-30 {
+		padding-bottom: 30px;
+}
+
+.pad-b-45 {
+		padding-bottom: 45px;
+}
+
+.pad-t-30 {
+		padding-top: 30px;
+}
+
+.pad-t-60 {
+		padding-top: 60px;
+}
+
+.pad-rl-5 {
+		padding-right: 5px;
+		padding-left: 5px;
+}
+
+.pad-rl-10 {
+		padding-right: 10px;
+		padding-left: 10px;
+}
+
+.pad-rl-15 {
+		padding-right: 15px;
+		padding-left: 15px;
+}
+
+.pad-rl-60 {
+		padding-right: 60px;
+		padding-left: 60px;
+}
+
+.pad-l-30 {
+		padding-left: 30px;
+}
+
+.pad-tb-10 {
+		padding-top: 10px;
+		padding-bottom: 10px;
+}
+
+.pad-tb-15 {
+		padding-top: 15px;
+		padding-bottom: 15px;
+}
+
+.pad-tb-20 {
+		padding-top: 20px;
+		padding-bottom: 20px;
+}
+
+.pad-tb-30 {
+		padding-top: 30px;
+		padding-bottom: 30px;
+}
+
+.marg-t-10 {
+		margin-top: 10px;
+}
+
+.marg-t-15 {
+		margin-top: 15px;
+}
+
+.marg-t-20 {
+		margin-top: 20px;
+}
+
+.marg-t-30 {
+		margin-top: 30px;
+}
+
+.marg-t-40 {
+		margin-top: 40px;
+}
+
+.marg-b-0 {
+		margin-bottom: 0px;
+}
+
+.marg-b-10 {
+		margin-bottom: 10px;
+}
+
+.marg-b-15 {
+		margin-bottom: 15px;
+}
+
+.marg-tb-0 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+}
+
+.marg-tb-15 {
+		margin-top: 15px;
+		margin-bottom: 15px;
+}
+
+.marg-l-10 {
+		margin-left: 10px;
+}
+
+.marg-l-25 {
+		margin-left: 25px;
+}
+
+.marg-rl-5 {
+		margin-right: 5px;
+		margin-left: 5px;
+}
+
+.marg-rl-15 {
+		margin-right: 15px;
+		margin-left: 15px;
+}
+
+.marg-rl-20 {
+		margin-right: 20px;
+		margin-left: 20px;
+}
+
+.flex {
+		display: flex;
+}
+
+.ta-l {
+		text-align: left;
+}
+
+.ta-r {
+		text-align: right;
+}
+
+.relative {
+		position: relative;
+}
+
+
+.absolute {
+		position: absolute;
+}
+
+.border-setting {
+		border-radius: 3px;
+		border: none;
+		text-align: center;
+		background-color: rgb(255, 255, 255);
+		box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+		overflow: auto;
+}
+
+.border-circle {
+		border-radius: 50%;
+		overflow: hidden;
+		height: 170px;
+		width: 170px;
+		border: 2px solid white;
+		display: inline-block;
+		box-shadow: rgb(0 0 0 / 24%) 0px 0px 2px;
+}
+
+/* 標題 */
+@media (min-width: 991px) {
+		header {
+				height: 156px;
+		}
+}
+
+header {
+		background-color: rgb(26, 19, 70);
+		-webkit-box-pack: center;
+		justify-content: center;
+		height: 116px;
+		margin-bottom: 50px;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
+		display: block;
+}
+
+.header-img {
+		width: 100%;
+		height: 100%;
+		object-position: 50% 50%;
+		object-fit: cover;
+}
+
+
+img {
+		width: 100%;
+		vertical-align: middle;
+		border: 0;
+}
+
+header h1 {
+		z-index: 1;
+		align-self: center;
+		color: white;
+		text-shadow: rgb(0 0 0 / 87%) 2px 2px 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+		line-height: 1.5em;
+}
+
+h1 {
+		font-size: 40px;
+		color: rgba(0, 0, 0, 0.87);
+}
+
+h1,
+h2,
+h3 {
+		margin-top: 20px;
+		margin-bottom: 10px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+		font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+		font-weight: 400;
+		line-height: 1.1;
+		color: inherit;
+		text-align: left;
+}
+
+.h1,
+h1 {
+		font-size: 36px;
+}
+
+.h1,
+.h2,
+.h3,
+h1,
+h2,
+h3 {
+		margin-top: 20px;
+		margin-bottom: 10px;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+		font-family: inherit;
+		font-weight: 500;
+		line-height: 1.1;
+		color: inherit;
+}
+
+h1 {
+		margin: .67em 0;
+		font-size: 2em;
+}
+
+/* 右邊資訊填寫 */
+/* 目前擁有HP */
+@media (min-width: 1199px) {
+		.hp-summery-card,
+		.hp-rule-card-wrapper,
+		.hp-tips-card {
+				width: 360px;
+		}
+}
+
+@media (min-width: 991px) {
+		.flex-container .left-panel .card {
+				width: 290px;
+		}
+}
+
+@media (min-width: 767px) {
+		.flex-container .left-panel .card {
+				width: calc(50% - 30px);
+		}
+}
+
+.card,
+.hp-history-table {
+		margin: 0px 15px 20px;
+}
+
+.hp-summary {
+		border-radius: 3px;
+		border: none;
+		text-align: center;
+		background-color: rgb(255, 255, 255);
+		box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+		overflow: auto;
+}
+
+.hp-summery-card .hp-summery-card-body {
+		background: linear-gradient(0deg, rgb(250, 139, 0) 0%, rgb(255, 177, 21) 100%);
+		color: white;
+		font-weight: 400;
+		padding-top: 40px;
+		padding-bottom: 30px;
+}
+
+.hp-summery-card .hp-summery-card-body strong {
+		font-size: 40px;
+}
+
+.small,
+small {
+		font-size: 85%;
+}
+
+.fa {
+		display: inline-block;
+		font: normal normal normal 14px/1 FontAwesome;
+		font-size: inherit;
+		text-rendering: auto;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+}
+
+.react_component_tooltip {
+		border-radius: 3px;
+		display: inline-block;
+		font-size: 13px;
+		left: -999em;
+		opacity: 0;
+		padding: 8px 21px;
+		position: fixed;
+		pointer-events: none;
+		transition: opacity 0.3s ease-out;
+		top: -999em;
+		visibility: hidden;
+		z-index: 999;
+}
+
+.react_component_tooltip {
+		border-radius: 3px;
+		display: inline-block;
+		font-size: 13px;
+		left: -999em;
+		opacity: 0;
+		padding: 8px 21px;
+		position: fixed;
+		pointer-events: none;
+		transition: opacity 0.3s ease-out;
+		top: -999em;
+		visibility: hidden;
+		z-index: 999;
+}
+
+.link {
+		cursor: pointer;
+		color: rgb(250, 139, 0);
+		border-bottom: 1px solid rgb(250, 139, 0);
+}
+
+a,
+a:visited,
+a:hover,
+a:active,
+a:focus,
+input,
+select,
+textarea {
+		outline: none;
+		text-decoration: none;
+}
+
+a {
+		cursor: pointer;
+		color: rgba(52, 122, 183, 0.65);
+		text-decoration: none;
+		background-color: transparent;
+}
+
+span .type-dark {
+	color: #fff;
+    background: #222;
+	margin-left: 10px;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 13px;
+    left: -999em;
+    padding: 8px 21px;
+    position: absolute;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+    top: -999em;
+    visibility: hidden;
+    z-index: 999;
+}
+
+span:hover .type-dark {
+    visibility: visible;
+	opacity: 0.9;
+}
+
+.form-wrap {
+	position: relative;
+}
+
+
+.place-top {
+    margin-top: -10px;
+}
+
+/* 規則說明 */
+.hp-rule-card {
+		display: flex;
+		flex-direction: column;
+		-webkit-box-pack: justify;
+		justify-content: space-between;
+		margin-right: auto;
+		margin-left: auto;
+		padding: 0px;
+		height: 100%;
+		max-width: 260px;
+}
+
+.hp-rule-card .hp-rule-card-text {
+		display: flex;
+		-webkit-box-pack: justify;
+		justify-content: space-between;
+		-webkit-box-align: center;
+		align-items: center;
+}
+
+.v-align-baseline {
+		vertical-align: baseline;
+}
+
+p {
+		margin: 0 0 10px;
+		line-height: 1.75em;
+}
+
+.rule-btn {
+		text-align: center;
+		vertical-align: middle;
+		touch-action: manipulation;
+		cursor: pointer;
+		background-image: none;
+		border: 1px solid rgb(250, 139, 0);
+		white-space: nowrap;
+		user-select: none;
+		font-weight: 400;
+		background-color: rgb(250, 139, 0);
+		color: white;
+		padding: 5px 32px;
+		font-size: 16px;
+		border-radius: 3px;
+		min-width: 128px;
+		line-height: 1.75em;
+		display: block;
+		width: 100%;
+}
+
+.hp-rule-card-icon {
+		width: 72px;
+		height: 72px;
+}
+
+/* HP 提升小秘訣 */
+@media (min-width: 1200px) {
+		.visible-lg {
+				display: block;
+		}
+}
+
+.hp-secret {
+		text-align: center;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* slick slide */
+.slick-next:before {
+		content: url(https://hahow.in/static/media/white-arrow-r.cf3f8124.svg);
+}
+
+.slick-prev:before {
+		content: url(https://hahow.in/static/media/white-arrow-l.aef8ef5a.svg);
+}
+
+.slick-next,
+.slick-prev {
+		font-size: 0;
+		line-height: 0;
+		position: absolute;
+		top: 50%;
+		display: block;
+		width: 20px;
+		height: 20px;
+		padding: 0;
+		transform: translateY(-50%);
+		cursor: pointer;
+		border: none;
+}
+
+.slick-prev {
+		display: flex;
+		-webkit-box-align: center;
+		align-items: center;
+		height: 100%;
+		left: 10px;
+}
+
+.slick-next {
+		display: flex;
+		-webkit-box-align: center;
+		align-items: center;
+		height: 100%;
+		right: 10px;
+}
+
+.slick-slider .slick-list,
+.slick-slider .slick-track {
+		transform: translateZ(0);
+}
+
+.slick-list {
+		overflow: hidden;
+		margin: 10px 0;
+		padding: 0;
+}
+
+.slick-list,
+.slick-slider {
+		position: relative;
+		display: block;
+}
+
+.slick-track {
+		position: relative;
+		top: 0;
+		left: 0;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+}
+
+.slide.sm {
+		font-size: 16px;
+		min-width: 116px;
+		line-height: 24px;
+		padding: 0px 20px;
+}
+
+.slide {
+		display: inline-block;
+		border-radius: 3rem;
+		background-image: linear-gradient(90deg, rgb(255, 177, 21), rgb(250, 139, 0));
+		color: white;
+		white-space: nowrap;
+}
+
+.comment {
+		opacity: 0.43;
+}
+
+/* HP細項 */
+.hp-history {
+		border-radius: 3px;
+		border: none;
+		text-align: center;
+		background-color: rgb(255, 255, 255);
+		overflow: auto;
+}
+
+.hp-tablist {
+		display: flex;
+		width: 100%;
+}
+
+.hp-tablist span.tab.active-tab {
+		color: rgb(250, 139, 0);
+		border-bottom: 5px solid rgb(250, 139, 0);
+		font-weight: 500;
+}
+
+.hp-tablist span.tab {
+		-webkit-box-flex: 1;
+		flex-grow: 1;
+		padding-top: 10px;
+		padding-bottom: 6px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+		color: rgba(0, 0, 0, 0.65);
+}
+
+/* 動態產生塊 */
+.dynamic-block {
+		display: flex;
+		-webkit-box-align: center;
+		align-items: center;
+		background: white;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.hp-point {
+		display: inline-block;
+		border-radius: 3rem;
+		background-image: linear-gradient(90deg, rgb(255, 177, 21), rgb(250, 139, 0));
+		color: white;
+		white-space: nowrap;
+}
+
+.hp-point.sm {
+		font-size: 16px;
+		min-width: 116px;
+		line-height: 24px;
+		padding: 0px 20px;
+}
+
+.dynamic-block.table-row {
+		min-height: 72px;
+}
+
+.dynamic-block .text .message,
+.dynamic-block .text .expire-info,
+.dynamic-block .text .message a,
+.dynamic-block .text .expire-info a {
+		color: rgba(0, 0, 0, 0.43);
+}
+
+.dynamic-block .text .message,
+.dynamic-block .text .expire-info {
+		font-size: 14px;
+		line-height: 1.8em;
+}
+
+@media (min-width: 767px) {
+		.dynamic-block .date {
+				min-width: 12rem;
+		}
+}
+
+.dynamic-block .text {
+		-webkit-box-flex: 1;
+		flex-grow: 1;
+}
+
+/* 已用點數 */
+.fade {
+		/*opacity: 0;*/
+		display: none;
+		-webkit-transition: opacity .15s linear;
+		-o-transition: opacity .15s linear;
+		transition: opacity .15s linear;
+}
+/*
+.no-stuff.fade.in {
+		opacity: 1;
+}
+
+.no-stuff.fade {
+		opacity: 0;
+		transition: opacity 0.15s ease-in 0.3s;
+}
+
+.fade.in {
+		opacity: 1;
+}
+*/
+@media (min-width: 992px) {
+		.no-stuff {
+				margin-top: calc(50% - 200px);
+				margin-bottom: calc(50% - 200px);
+		}
+}
+
+.vertical-horizontal-center {
+		/*display: flex;*/
+		-webkit-box-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		justify-content: center;
+}
+
+.no-stuff img {
+		opacity: 0.24;
+		width: 120px;
+		margin: 0px 0px 10px;
+}
+
+.no-stuff p {
+		opacity: 0.43;
+}

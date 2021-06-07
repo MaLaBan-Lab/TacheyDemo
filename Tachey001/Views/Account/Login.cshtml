@@ -1,63 +1,114 @@
 ﻿@using Tachey001.Models
+@Styles.Render("~/Assets/css/HAHOWlogin.css")
 @model LoginViewModel
 @{
     ViewBag.Title = "登入";
+    Layout = "~/Views/Shared/_bootstrap.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>使用本機帳戶進行登入。</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+<div class="container-fluid pic-height mh-100">
+    <div class="row justify-content-center">
+        <div class="boxleft  col-lg-5 p-0 bg-green col-md-5 col-sm-5 col-xs-0">
+            <div class="boxleftinner pic-height">
+                <div class="none m-3">
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <a href="">
+                    <img src="https://hahow.in/static/media/logo-white.e547f0d1.svg" alt="" class="my-4 ">
+                </a>
+                <p class="m-b-2 text-white">今天也要透過學習，成為更好的自己</p>
+                <img src="https://hahow.in/static/media/slogan-login-1.4bf05dd3.svg" alt="" class="col-xs-0">
+            </div>
+        </div>
+
+        <div class="boxright  col-lg-7 p-0 col-md-7 col-sm-0">
+            <div class="boxrightinner-1 p-4">
+                <div class="boxrightinner col-lg-5 p-0 col-md-7 col-sm-0">
+                    <div class="xs-right-title">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="https://hahow.in/static/images/logo.svg" alt="" class="my-4 xs-right-img">
+                        </a>
+                        <b class="m-b-2 text-gray">今天也要透過學習，成為更好的自己</b>
+
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                    <div class="boxrightinnertop ">
+                        <div class="boxrightinnertop-span ">
+                            <span class="boxrightinnertop-fontsize boxrightinnertop-fontsize-login boxrightinnertop-nowrap">登入</span>
+                        </div>
+                        <div class="boxrightinnertop-right d-flex align-items-center boxrightinnertop-fontsize boxrightinnertop-nowrap">
+                            沒有帳號，
+                            <a href="@Url.Action("Register", "Account")" class="boxrightinnertop-fontsize boxrightinnertop-nowrap">快速註冊</a>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="登入" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("以新使用者身分註冊", "Register")
-                </p>
-                @* 只要您的密碼重設功能能夠進行帳戶確認，就啟用此項
-                    <p>
-                        @Html.ActionLink("忘記密碼?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    @*<button class="my-3 b-1-black buttondiv">
+                        <div class="button-i">
+                            <i class="fab fa-facebook-square " style="color:white;font-size: 33px; "></i>
+                        </div>
+                        <div class="buttonspan"><span class="spantext ml-3">使用FACEBOOK繼續</span></div>
+                    </button>
+                    <button class="my-3 b-2-green buttondiv ">
+                        <div class="buttonimg">
+                            <img src="https://hahow.in/static/media/line-icon.8c2f2751.svg" alt=""
+                                 class="lzvlq8-5 iqNXtm buttonimg-img ">
+                        </div>
+                        <div class="buttonspan"><span class="spantext ml-3">使用LINE繼續&emsp;&emsp;&emsp;</span></div>
+                    </button>
+                    <button class="my-3 b-3-gray "
+                            style="background-color: #000000 opacity 12.0%;border-radius: 4px;border: 1px solid #e4e4e4;">
+                        <img alt="Google"
+                             src="data:image/png;base64,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"
+                             class="lzvlq8-5 iqNXtm mr-3"><span class="buttonspan">使用GOOGLE繼續</span>
+                    </button>*@
+
+                    <div class="boxrightinnermiddle d-flex justify-content-center my-3">
+                        <div class="text-muted">----</div>
+                        <span class="text-muted">或使用 Hahow 帳號密碼登入</span>
+                        <div class="text-muted">----</div>
+                    </div>
+
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="boxrightinnermiddle-2">
+                            <div class="boxrightinnermiddle-2icon">
+                                <i class="far fa-envelope i-email"></i>
+                                @*<i class="fas fa-user"></i>*@
+                                @*<input placeholder="帳號" type="text" class="my-2" id="user_input">*@
+                                @Html.TextBoxFor(m => m.Email, new { @class = "my-2" })
+                            </div>
+                            <div class="boxrightinnermiddle-2icon">
+                                <i class="fas fa-unlock-alt"></i>
+                                @*<input placeholder="密碼" type="text" class="my-2" id="pwd_input">*@
+                                @Html.PasswordFor(m => m.Password, new { @class = "my-2" })
+                            </div>
+                            <button type="submit" class="my-2 d-flex justify-content-center"
+                                    id="input_btn">
+                                <input type="submit" value="登入" class="w-100 h-100 border-0" />
+                            </button>
+                        </div>
+
+                    }
+
+                    <div class="boxrightinnermiddle d-flex justify-content-center my-3 justify-content-around">
+                        <div class="text-muted">---------</div>
+                        <span class="text-muted"> 企業用戶入口</span>
+                        <div class="text-muted">---------</div>
+                    </div>
+                    <a href="#" class="bussines-a">
+                        <div>
+                            <img src="https://hahow.in/static/media/logo-white.e547f0d1.svg" alt="" class="my-2">
+                            <span id="a-span">企業用戶入口</span>
+                        </div>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    @Scripts.Render("~/Assets/js/HAHOWlogin.js")

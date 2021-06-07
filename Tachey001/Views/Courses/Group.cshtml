@@ -3,6 +3,36 @@
     ViewBag.Title = "音樂類";
 }
 
-<h2>音樂類</h2>
+@Styles.Render("~/Assets/css/group.css")
+@Styles.Render("~/Assets/css/card.css")
 
-<h1>@Html.ActionLink("課程影片", "Main", "Courses")</h1>
+<div class="container-fluid bg-white">
+    <div class="row justify-content-center my-3">
+        <div class="col-6">
+            <nav class="bg-white p-0">
+                <ol class="breadcrumb bg-white px-0">
+                    <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">攝影</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">所有影集</li>
+                </ol>
+            </nav>
+            <h1 class="text-hahow-green mb-4">
+                攝影
+            </h1>
+            <p class="text-justify text-secondary">
+                線上攝影課程，從影像創作、攝影打光開始學習，掌握 Premiere、PhotoShop 等影像剪輯、後製軟體能力，用影像創作說出自己的故事。
+            </p>
+        </div>
+        <div class="col-4 text-center">
+            <img src="https://hahow.in/static/images/seo-header.png" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @for (var i = 0; i < 30; i++)
+            {
+                @Html.Partial("CardTemplate")
+            }
+    </div>
+</div>

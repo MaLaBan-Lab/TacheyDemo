@@ -1,0 +1,1099 @@
+/* .container 媒體查詢 */
+.user-info {
+		width: 272px;
+		max-width: 100%;
+}
+
+@media (min-width: 520px) {
+		.container {
+				max-width: 520px;
+		}
+
+		.user-info {
+				width: 520px;
+		}
+}
+
+@media (min-width: 768px) {
+		.container {
+				max-width: 750px;
+		}
+
+		.user-info {
+				width: 750px;
+		}
+}
+
+@media (min-width: 992px) {
+		.container {
+				max-width: 970px;
+		}
+
+		.user-info {
+				width: 970px;
+		}
+}
+
+@media (min-width: 1200px) {
+		.container {
+				max-width: 1240px;
+		}
+
+		.user-info {
+				width: 1240px;
+		}
+}
+
+.container {
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+}
+
+/* 基本共通設定 */
+body {
+		background-color: rgb(241, 239, 239);
+}
+
+h1,
+h2,
+h3 {
+		margin-top: 20px;
+		margin-bottom: 10px;
+}
+
+h5 {
+		font-size: 20px;
+		color: rgba(0, 0, 0, 0.65);
+}
+
+h4,
+h5 {
+		margin-top: 10px;
+		margin-bottom: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+		line-height: 1.5em;
+		font-weight: 400;
+		line-height: 1.1;
+		color: inherit;
+		text-align: left;
+}
+
+button,
+select {
+		text-transform: none;
+}
+
+button,
+input,
+select,
+textarea {
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+		margin: 0;
+		font: inherit;
+		color: inherit;
+}
+
+p {
+		margin: 0px 0px 1em;
+		line-height: 1.75em;
+}
+
+a,
+a:visited,
+a:hover,
+a:active,
+a:focus,
+input,
+select,
+textarea {
+		outline: none;
+		text-decoration: none;
+}
+
+.text-center {
+		text-align: center;
+}
+
+.text-underline {
+		text-decoration: underline;
+}
+
+.text-bold {
+		font-weight: 500;
+}
+
+.inline-block {
+		display: inline-block;
+}
+
+.pad-b-15 {
+		padding-bottom: 15px;
+}
+
+.pad-b-30 {
+		padding-bottom: 30px;
+}
+
+.pad-b-45 {
+		padding-bottom: 45px;
+}
+
+.pad-t-30 {
+		padding-top: 30px;
+}
+
+.pad-t-60 {
+		padding-top: 60px;
+}
+
+.pad-rl-15 {
+		padding-right: 15px;
+		padding-left: 15px;
+}
+
+.pad-rl-60 {
+		padding-right: 60px;
+		padding-left: 60px;
+}
+
+.pad-l-30 {
+		padding-left: 30px;
+}
+
+.pad-tb-15 {
+		padding-top: 15px;
+		padding-bottom: 15px;
+}
+
+.pad-tb-20 {
+		padding-top: 20px;
+		padding-bottom: 20px;
+}
+
+.marg-t-10 {
+		margin-top: 10px;
+}
+
+.marg-t-15 {
+		margin-top: 15px;
+}
+
+.marg-t-20 {
+		margin-top: 20px;
+}
+
+.marg-t-30 {
+		margin-top: 30px;
+}
+
+.marg-t-40 {
+		margin-top: 40px;
+}
+
+.marg-t-50 {
+		margin-top: 50px;
+}
+
+.marg-b-0 {
+		margin-bottom: 0px;
+}
+
+.marg-b-20 {
+		margin-bottom: 20px;
+}
+
+.marg-tb-15 {
+		margin-top: 15px;
+		margin-bottom: 15px;
+}
+
+.marg-l-10 {
+		margin-left: 10px;
+}
+
+.marg-l-25 {
+		margin-left: 25px;
+}
+
+.marg-r-10 {
+		margin-right: 10px;
+}
+
+
+.marg-rl-5 {
+		margin-right: 5px;
+		margin-left: 5px;
+}
+
+.flex {
+		display: flex;
+}
+
+.ta-l {
+		text-align: left;
+}
+
+.ta-r {
+		text-align: right;
+}
+
+.relative {
+		position: relative;
+}
+
+.border-setting {
+		border-radius: 3px;
+		border: none;
+		text-align: center;
+		background-color: rgb(255, 255, 255);
+		box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+		overflow: auto;
+}
+
+.border-circle {
+		border-radius: 50%;
+		overflow: hidden;
+		height: 170px;
+		width: 170px;
+		border: 2px solid white;
+		display: inline-block;
+		box-shadow: rgb(0 0 0 / 24%) 0px 0px 2px;
+}
+
+/* 標題 */
+h1 {
+		margin: 60px 0;
+}
+
+/* 左邊使用者資訊 */
+.user-info {
+		position: relative;
+		top: 0px;
+		left: 0px;
+		margin-bottom: 30px;
+}
+
+.user-info .hint {
+		color: rgba(0, 0, 0, 0.43);
+		font-size: 14px;
+}
+
+.user-info .profile-wrap {
+		background: url(https://hahow.in/static/media/profile-bg.f593da78.png) 0% 0% / contain repeat-x;
+		background-repeat: repeat-x;
+}
+
+.user-info .profile-wrap .name {
+		color: white;
+}
+
+.profile-wrap>h3 {
+		margin-top: 50px;
+}
+
+.user_img {
+		width: 100%;
+		height: 100%;
+		object-position: 50% 50%;
+		object-fit: cover;
+}
+
+.user-info-btn {
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+		touch-action: manipulation;
+		cursor: pointer;
+		background-image: none;
+		border: 1px solid rgba(0, 0, 0, 0.43);
+		white-space: nowrap;
+		user-select: none;
+		font-weight: 400;
+		background-color: transparent;
+		color: rgba(0, 0, 0, 0.65);
+		padding: 5px 40px;
+		font-size: 20px;
+		border-radius: 3px;
+		min-width: unset;
+		line-height: 1.8em;
+}
+
+
+/* 右邊資訊填寫 */
+/* 個人資訊進度狀態 */
+.form-wrap input {
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		border-radius: 3px;
+		padding: 8px 10px;
+		font-weight: 400;
+		width: 100%;
+}
+
+.info-state {
+		display: flex;
+		-webkit-box-align: center;
+		align-items: center;
+		-webkit-box-pack: justify;
+		justify-content: space-between;
+		background-color: rgb(255, 249, 225);
+		padding: 30px 50px;
+		font-size: 14px;
+}
+
+.info-state>div {
+		width: 100%;
+}
+
+.info-state h4 {
+		display: flex;
+		-webkit-box-pack: justify;
+		justify-content: space-between;
+		-webkit-box-align: center;
+		align-items: center;
+		font-weight: bold;
+}
+
+.info-state>img {
+		flex: 0 1 0%;
+		width: 200px;
+		margin-left: 20px;
+		height: 100%;
+}
+
+.info-state .todo-hint {
+		color: rgba(0, 0, 0, 0.43);
+}
+
+.info-state .status {
+		margin-right: 5px;
+		text-decoration: underline;
+		color: rgb(250, 139, 0);
+		cursor: pointer;
+}
+
+.info-state .user-detail-progress-bar {
+		width: 100%;
+}
+
+.info-state .progress-container {
+		display: flex;
+		-webkit-box-align: center;
+		align-items: center;
+		-webkit-box-pack: justify;
+		justify-content: space-between;
+}
+
+.info-state .progress-container>span {
+		flex: 0 0 auto;
+		margin-right: 10px;
+}
+
+.progress-bar {
+		display: block;
+		background-color: rgb(204, 204, 204);
+		border-radius: 10px;
+		width: 100%;
+		height: 10px;
+		overflow: hidden;
+		margin: 20px 0;
+}
+
+.progress-bar-progress {
+    display: block;
+    background-image: linear-gradient(90deg, rgb(255, 177, 21), rgb(250, 139, 0) 50%, rgb(240, 108, 0));
+    height: 100%;
+    clip-path: inset(0px 80% 0px 0px);
+    transition: clip-path 1s ease 0s;
+}
+
+
+/* 登入方式區塊 */
+.sign-in {
+		padding: 40px 50px;
+		margin-top: 30px;
+}
+
+.sign-in .email-form button {
+		flex: 1 1 0%;
+		height: 46px;
+}
+
+.sign-in .email-form .email-input {
+		flex: 9 1 0%;
+		margin-right: 8px;
+}
+
+.signin-way-block {
+		width: 100%;
+		display: block;
+		background-color: white;
+}
+
+.signin-way-block .local-bar,
+.signin-way-block .google-bar,
+.signin-way-block .facebook-bar,
+.signin-way-block .line-bar {
+		position: relative;
+		width: 100%;
+		border-bottom: 1px dashed rgb(204, 204, 204);
+}
+
+.signin-way-block .local-bar .left-block .auth-provider-icon .profile-image,
+.signin-way-block .google-bar .left-block .auth-provider-icon .profile-image,
+.signin-way-block .facebook-bar .left-block .auth-provider-icon .profile-image,
+.signin-way-block .line-bar .left-block .auth-provider-icon .profile-image {
+		width: 48px;
+		height: 48px;
+		border-radius: 0px 6px 6px 0px;
+}
+
+.signin-way-block .local-bar .left-block .unbinded-account,
+.signin-way-block .google-bar .left-block .unbinded-account,
+.signin-way-block .facebook-bar .left-block .unbinded-account,
+.signin-way-block .line-bar .left-block .unbinded-account {
+		color: rgba(0, 0, 0, 0.43);
+}
+
+.signin-way-block .local-bar .left-block,
+.signin-way-block .google-bar .left-block,
+.signin-way-block .facebook-bar .left-block,
+.signin-way-block .line-bar .left-block {
+		float: left;
+}
+
+.signin-way-block .local-bar .right-block,
+.signin-way-block .google-bar .right-block,
+.signin-way-block .facebook-bar .right-block,
+.signin-way-block .line-bar .right-block {
+		float: right;
+		margin-top: 8px;
+}
+
+.signin-way-block .local-bar .right-block .unclickable-text,
+.signin-way-block .google-bar .right-block .unclickable-text,
+.signin-way-block .facebook-bar .right-block .unclickable-text,
+.signin-way-block .line-bar .right-block .unclickable-text {
+		cursor: not-allowed;
+		color: rgb(204, 204, 204);
+}
+
+.link-gray {
+		cursor: pointer;
+		color: rgb(101, 101, 101);
+}
+
+.text-underline {
+		text-decoration: underline;
+}
+
+.verification-btn {
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+		touch-action: manipulation;
+		cursor: pointer;
+		background-image: none;
+		border: 1px solid rgb(250, 139, 0);
+		white-space: nowrap;
+		user-select: none;
+		font-weight: 400;
+		background-color: rgb(250, 139, 0);
+		color: white;
+		padding: 5px 32px;
+		font-size: 16px;
+		border-radius: 3px;
+		min-width: unset;
+		line-height: 1.75em;
+}
+
+.mail-input {
+		width: 100%;
+		background-color: transparent;
+		display: block;
+		padding: 5px 10px;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		border-radius: 3px;
+		color: rgba(0, 0, 0, 0.65);
+		line-height: 1.75;
+		font-size: 16px;
+		font-weight: 400;
+		font-family: inherit;
+		transition: all 0.2s ease 0s;
+}
+
+/* 使用者個資填寫 */
+.info-block {
+		padding: 40px 50px;
+		margin-top: 30px;
+}
+
+.info-block .hint {
+		color: rgba(0, 0, 0, 0.43);
+		font-size: 14px;
+}
+
+.info-block .save-basic-info-btn {
+		width: calc(((100% - 135px) - 90px) * 0.46);
+		height: 46px;
+}
+
+.info-sub-block .birthday-wrap {
+		position: relative;
+}
+
+.info-sub-block .birthday-wrap .date-wrap {
+		width: calc(100% - 135px);
+}
+
+.info-sub-block .birthday-wrap .date-wrap select.bday-year {
+		width: calc((100% - 90px) * 0.46);
+}
+
+.info-sub-block .birthday-wrap .date-wrap select.bday-month,
+.info-sub-block .birthday-wrap .date-wrap select.bday-day {
+		width: calc((100% - 90px) * 0.27);
+}
+
+.info-sub-block .birthday-wrap .date-wrap select {
+		height: 40px;
+		font-size: 16px;
+		background: white;
+}
+
+.info-sub-block .birthday-wrap .date-wrap>select {
+		font-size: 20px;
+}
+
+.form-wrap label {
+		display: block;
+		font-weight: 500;
+		color: rgba(0, 0, 0, 0.87);
+		margin-bottom: 10px;
+}
+
+.radio-button label {
+		padding-left: 5px;
+		vertical-align: middle;
+		cursor: pointer;
+		margin-bottom: 0px;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(0, 0, 0, 0.43);
+}
+
+/*.form-wrap label .type-dark:after {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    left: -6px;
+    top: 50%;
+    margin-top: -4px;
+    border-right-color: #222;
+    border-right-style: solid;
+    border-right-width: 6px;
+}*/
+
+.form-wrap label .type-dark, .email-form label .type-dark {
+	color: #fff;
+    background: #222;
+	margin-left: 10px;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 13px;
+    left: -999em;
+    padding: 8px 21px;
+    /*position: fixed;*/
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+    top: -999em;
+    visibility: hidden;
+    z-index: 999;
+}
+
+.form-wrap label:hover .type-dark {
+    visibility: visible;
+}
+
+.email-form label:hover .type-dark {
+    visibility: visible;
+}
+
+.radio-button {
+		display: inline-block;
+		box-sizing: border-box;
+		cursor: pointer;
+}
+
+.align-items-center {
+		-webkit-box-align: center;
+		align-items: center;
+}
+
+.radio-unclicked {
+		display: inline-block;
+		width: 20px;
+		margin-top: 4px;
+		min-width: 20px;
+		align-self: flex-start;
+		height: 20px;
+		border-radius: 26px;
+		vertical-align: middle;
+		box-sizing: border-box;
+		text-align: center;
+		position: relative;
+		border: 3px solid rgba(0, 0, 0, 0.43);
+}
+
+.radio-clicked {
+		display: inline-block;
+		width: 20px;
+		margin-top: 4px;
+		min-width: 20px;
+		align-self: flex-start;
+		height: 20px;
+		border-radius: 26px;
+		vertical-align: middle;
+		box-sizing: border-box;
+		text-align: center;
+		position: relative;
+		border: 3px solid rgb(0, 190, 164);
+}
+
+.radio-clicked::after {
+		content: "";
+		width: 8px;
+		height: 8px;
+		display: inline-block;
+		background: rgb(0, 190, 164);
+		border-radius: 8px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+}
+
+.close-click-btn[disabled] {
+		background-color: rgb(204, 204, 204);
+		border-color: rgb(204, 204, 204);
+		color: white;
+		border: 1px solid;
+		border-radius: 3px;
+}
+
+.close-click-btn[disabled] {
+		cursor: not-allowed;
+		opacity: 0.65;
+		box-shadow: none;
+}
+
+/* 地區語言區塊 */
+.reg-lang-block {
+		padding: 40px 50px 20px;
+		margin-top: 30px;
+		overflow: unset;
+}
+
+.reg-lang-block label {
+		font-weight: 500;
+}
+
+.reg-lang-block .hint {
+		font-size: 14px;
+		color: rgba(0, 0, 0, 0.43);
+}
+
+.oval-btn {
+		width: 80px;
+		height: 40px;
+		min-width: unset;
+		padding: 0px;
+		font-size: 35px;
+		font-weight: bold;
+		line-height: 0;
+		color: rgba(0, 0, 0, 0.43);
+		border-radius: 24.5px;
+}
+
+.oval-btn-plus-text {
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+		touch-action: manipulation;
+		cursor: pointer;
+		background-image: none;
+		border: 1px solid rgba(0, 0, 0, 0.43);
+		white-space: nowrap;
+		user-select: none;
+		font-weight: 400;
+		background-color: transparent;
+		color: rgba(0, 0, 0, 0.65);
+		padding: 5px 32px;
+		font-size: 16px;
+		font-weight: bold;
+		/* border-radius: 3px;
+		min-width: 128px; */
+		line-height: 1.75em;
+}
+
+.language-selector .dropdown-toggle {
+		width: 340px;
+		min-width: 110px;
+		height: 40px;
+		color: inherit;
+		opacity: 1;
+		background: white;
+		text-align: left;
+		font-size: 16px;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		cursor: pointer;
+		white-space: initial;
+}
+
+.dropdown-menu {
+    padding: 0;
+}
+
+.dropdown-menu > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.active, .dropdown-item.active {
+    background-color: rgb(255, 249, 225);
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.65);
+	width: 100%;
+    padding: 0px 20px;
+    color: rgb(101, 101, 101);
+    white-space: initial;
+	padding: 7.5px 20px;
+}
+
+.dropdown-menu a {
+	 width: 340px;
+}
+
+.dropdown-header {
+    padding: 7px 15px;
+    color: rgba(0, 0, 0, 0.43);
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+.dropdown-menu > a {
+    padding: 7.5px 20px;
+    color: rgb(101, 101, 101);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    white-space: initial;
+}
+
+.text-note {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.43);
+}
+
+.btn-group,
+.btn-group-vertical {
+		position: relative;
+		display: inline-block;
+		vertical-align: middle;
+}
+
+.btn-group>.btn:first-child {
+		margin-left: 0;
+}
+
+.btn-group-vertical>.btn,
+.btn-group>.btn {
+		position: relative;
+		float: left;
+}
+
+.btn-group>.btn:first-child {
+		margin-left: 0;
+}
+
+.btn-group-vertical>.btn,
+.btn-group>.btn {
+		position: relative;
+		float: left;
+}
+
+.reg-ddlist .dropdown-toggle {
+		width: 340px;
+		min-width: 110px;
+		height: 43px;
+		color: inherit;
+		opacity: 1;
+		background: white;
+		text-align: left;
+		font-size: 16px;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		cursor: pointer;
+		white-space: initial;
+}
+
+input,
+button,
+.dropdown-menu {
+		font-size: 16px;
+}
+
+.link-primary {
+		cursor: pointer;
+		color: rgb(250, 139, 0);
+}
+
+/* 興趣與喜好 */
+.likes-area {
+		padding: 40px 50px 20px;
+		margin-top: 30px;
+}
+
+.likes-area .hint {
+		font-size: 14px;
+		color: rgba(0, 0, 0, 0.43);
+}
+
+/* 轉移課程 */
+.transfer-course {
+		padding: 40px 50px;
+		margin-top: 30px;
+		margin-bottom: 100px;
+}
+
+/* 彈跳視窗-我的興趣 */
+.overlay-interest, .overlay-likes, .overlay-jobs {
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+	z-index: 10130; 
+	align-items: unset; 
+	padding: 50px 15px 15vh;
+}
+
+.overlay-interest-modal, .overlay-likes-modal, .overlay-jobs-modal {
+	z-index: 10135;  
+	padding: 0px; 
+	width: 886px; 
+	height: unset; 
+	min-width: 300px; 
+	border-radius: 5px; 
+    max-width: unset;
+    position: relative;
+     background: rgb(243, 243, 241);
+    background-clip: padding-box;
+    box-shadow: 0 12px 15px 0 rgb(0 0 0 / 25%);
+    margin: auto;
+	padding: 0px; 
+}
+
+.overlay-interest-h4, .overlay-likes-h4, .overlay-jobs-h4 {
+    color: rgba(0, 0, 0, 0.65);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.overlay-interest-block, .overlay-likes-block, .overlay-jobs-block {
+    height: 100%;
+    border-radius: 5px;
+    overflow: unset;
+}
+
+.overlay-interest-size, .overlay-likes-size, .overlay-jobs-size {
+    min-height: 460px;
+    padding: 0px 30px 30px;
+}
+
+.flex-1 {
+    flex: 1 1 0%;
+}
+
+.interval {
+	position: relative; 
+	height: 0px; 
+	overflow: hidden;
+}
+
+.kind-btn .confirm-btn {
+    align-self: center;
+}
+
+.overlay-interest-size .categories-wrap {
+    margin-bottom: 15px;
+}
+
+.overlay-interest-size .categories-wrap .category {
+    width: calc(25% - 15px);
+    margin-right: 15px;
+}
+
+.kind-btn {
+    min-width: 87px;
+    height: 120px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 5px 0px;
+    user-select: none;
+}
+
+.kind-btn:hover {
+    color: white;
+    background-image: linear-gradient(rgb(253, 191, 0), rgb(250, 139, 0));
+}
+
+.pseudo-btn {
+    cursor: pointer;
+}
+
+.justify-center {
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.kind-btn img {
+    width: 48px;
+	vertical-align: middle;
+	border: 0;
+}
+
+.block {
+    display: block;
+}
+
+.confirm {
+    align-self: center;
+}
+
+.confirm-btn[disabled] {
+    background-color: rgb(204, 204, 204);
+    border-color: rgb(204, 204, 204);
+    color: white;
+}
+
+.confirm-btn[disabled] {
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none;
+}
+button[disabled], html input[disabled] {
+    cursor: default;
+}
+
+.confirm-btn {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid rgb(250, 139, 0);
+    white-space: nowrap;
+    user-select: none;
+    font-weight: 400;
+    background-color: rgb(250, 139, 0);
+    color: white;
+    padding: 5px 40px;
+    font-size: 20px;
+    border-radius: 3px;
+    min-width: 260px;
+    line-height: 1.8em;
+}
+
+.close-button {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    display: flex;
+}
+
+/* 彈跳視窗-其他個人喜好 */
+.likes-btn, .jobs-btn {
+    color: rgba(0, 0, 0, 0.65);
+    background-color: white;
+    opacity: 1;
+    padding: 2px 16px;
+    border-radius: 100px;
+    border: 1px solid rgb(204, 204, 204);
+    cursor: pointer;
+    user-select: none;
+}
+
+.likes-btn.toggle {
+    color: white;
+    background-color: rgb(250, 139, 0);
+    border: 1px solid transparent;
+}
+
+/* 彈跳視窗-職業行業 */
+.visible-lg, .visible-md, .visible-sm, .visible-xs {
+    display: none;
+}
+
+.jobs-btn-group {
+    padding: 0px 30px 30px;
+    overflow: unset;
+}
+
+.likes-btn:hover, .jobs-btn:hover, .student-dropdown .dropdown-toggle:hover {
+    color: rgb(250, 139, 0);
+}
+
+.student-dropdown .dropdown-toggle:active, .student-dropdown .dropdown-toggle:hover, .student-dropdown .dropdown-toggle:focus {
+    box-shadow: none;
+    background: white;
+}
+.btn-group>.btn:first-child {
+    margin-left: 0;
+}
+
+.student-dropdown .dropdown-toggle {
+    width: 250px;
+    min-width: 110px;
+    height: 40px;
+    color: inherit;
+    opacity: 1;
+    background: white;
+    text-align: left;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    white-space: initial;
+}
+
+

@@ -1,0 +1,74 @@
+.bg-light-gray{
+    background-color: rgb(243, 243, 241);
+}
+.nav{
+    margin-top: 3%;
+    justify-content: space-evenly;
+    align-content: center;
+}
+.searchcourse{
+    width: 40%;
+}
+.searchcourse input{
+    width: 100%;
+    border-radius: 5px;
+}
+.coursebtn button{
+    margin: 5px;
+    background-color: #fff;
+    border: 1px solid #bebebe;
+    width: 96px;;
+    height:36px;
+    border-radius: 50px;
+}
+.coursebtn button:hover{
+    border: none;
+    color: white !important;
+    background-color: rgb(250, 139, 0);
+}
+.pagesbutton{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+.buttong button{
+    margin: 5px;
+    background-color: #fff;
+    border: 1px solid #bebebe;
+}
+.buttong button:hover{
+    border: none;
+    color: rgb(250, 139, 0);
+}
+.buttonpg button{
+    margin: 5px;
+    border: none;
+    background-color: #fff;
+}
+.buttonpg button:hover{
+    border: none;
+    color: rgb(250, 139, 0);
+}
+
+.guess{
+    width: 100%;
+    padding: 15px;
+    margin-top: 5%;
+    display: flex;
+    background-color: #fff;
+    justify-content: center;
+}
+.guessimg{
+    width: 100px; /*can be anything*/
+}
+.guessimg img{
+    max-width:100px; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
+    height: auto;
+}
+.container{
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}

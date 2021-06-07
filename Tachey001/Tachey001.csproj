@@ -214,16 +214,32 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\all.css" />
+    <Content Include="Assets\css\assignments.css" />
     <Content Include="Assets\css\card.css" />
+    <Content Include="Assets\css\console.css" />
     <Content Include="Assets\css\coupons.css" />
     <Content Include="Assets\css\Create.css" />
+    <Content Include="Assets\css\discussions.css" />
+    <Content Include="Assets\css\group.css" />
+    <Content Include="Assets\css\hahow-point.css" />
     <Content Include="Assets\css\HomePage.css" />
+    <Content Include="Assets\css\HAHOWcart.css" />
+    <Content Include="Assets\css\HAHOWcheckout.css" />
+    <Content Include="Assets\css\HAHOWlogin.css" />
+    <Content Include="Assets\css\HAHOWprivacy.css" />
+    <Content Include="Assets\css\HAHOWsingin.css" />
+    <Content Include="Assets\css\HAHOWterms.css" />
+    <Content Include="Assets\css\intro.css" />
     <Content Include="Assets\css\Invite.css" />
     <Content Include="Assets\css\Main.css" />
+    <Content Include="Assets\css\member.css" />
     <Content Include="Assets\css\nav.css" />
     <Content Include="Assets\css\orders.css" />
     <Content Include="Assets\css\owl.carousel.min.css" />
     <Content Include="Assets\css\owl.theme.default.min.css" />
+    <Content Include="Assets\css\personal.css" />
+    <Content Include="Assets\css\score.css" />
     <Content Include="Assets\css\step.css" />
     <Content Include="Assets\img\右圖左下.jpg" />
     <Content Include="Assets\img\右圖底部.jpg" />
@@ -236,11 +252,15 @@
     <Content Include="Assets\img\超連結圖.jpg" />
     <Content Include="Assets\img\醜圖.jpg" />
     <Content Include="Assets\js\coupons.js" />
+    <Content Include="Assets\js\course.js" />
+    <Content Include="Assets\js\HAHOWlogin.js" />
     <Content Include="Assets\js\Invite.js" />
     <Content Include="Assets\js\Main.js" />
+    <Content Include="Assets\js\member.js" />
     <Content Include="Assets\js\nav.js" />
     <Content Include="Assets\js\orders.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
+    <Content Include="Assets\js\point.js" />
     <Content Include="Assets\js\step.js" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />
@@ -466,8 +486,11 @@
     <Content Include="Views\Shared\step\step_2.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Main.cshtml" />
+    <Content Include="Views\Shared\_bootstrap.cshtml" />
     <Content Include="Views\Shared\_LayoutHomePage.cshtml" />
     <Content Include="Views\Shared\_LayoutCreate.cshtml" />
+    <Content Include="Views\Home\CourseCard.cshtml" />
+    <Content Include="Views\Shared\CardTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

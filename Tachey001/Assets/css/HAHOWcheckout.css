@@ -1,0 +1,349 @@
+.left-panel-bottom,
+.left-panel-top {
+    background-color: white;
+    padding: 1.3rem;
+}
+
+.cdRYGC {
+    display: flex;
+    /* padding-left: 20px; */
+    /* padding-right: 20px; */
+    /* padding-bottom: 120px; */
+    padding: 60px 18px 0;
+}
+
+.container-fluid-padiing {
+    height: 168vh;
+}
+
+.heading {
+    margin-top: 0px;
+    padding-top: 0px;
+
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    padding-top: 30px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.form-block {
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.sticky-inner-wrapper {
+    /* position: fixed; */
+    margin-left: 1.8rem;
+    width: 18%;
+}
+
+::selection {
+    background-color: orange;
+}
+
+
+.icon-text {
+    display: none;
+    position: absolute;
+    top: -2.5rem;
+    left: -11.5rem;
+}
+
+.icon-text p {
+    line-height: 1rem;
+    width: 23rem;
+    white-space: nowrap;
+    color: white;
+    background-color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    opacity: .5;
+}
+
+.form-check i:hover .icon-text {
+    display: block;
+}
+
+.form-check i {
+    position: relative;
+}
+
+.form-check input {
+    width: 15px;
+    height: 15px;
+}
+
+.form-check lable {
+    margin-left: 0.5rem;
+}
+
+select {
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    border: 1px solid rgb(88, 88, 88);
+}
+
+.right-panel {
+    width: 260px;
+    height: 562px;
+    margin-left: 2rem;
+    position: sticky;
+    top: 5rem;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.062);
+}
+
+.form-block {
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    /* -webkit-box-pack: justify; */
+    justify-content: space-between;
+}
+
+.left-panel {
+    width: 840px;
+    /* height: 672.2px; */
+}
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.pad-rl-15 {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.sc-1jpg0tr-0 {
+    width: 87%;
+}
+
+.dfcsU {
+
+    border-radius: 3px;
+    border: none;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+    /* overflow: auto; */
+
+}
+
+
+.gjCOGK {
+    text-align: left;
+}
+
+.border-bottom-box {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    transition: border-bottom-width 0.3s ease 0s;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.sticky-inner-wrapper {
+    width: 256px;
+    height: 506px;
+}
+
+.entry {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.title {
+    color: rgba(0, 0, 0, 0.43);
+}
+
+.text-right {
+    text-align: right;
+}
+
+.marg-tb-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: inline-block;
+    color: rgb(250, 139, 0);
+}
+
+.bAxhjG {
+    display: grid;
+    grid-template-areas:
+        "title icon applyText"
+        "description description applyText";
+    grid-template-columns: 108px 24px auto;
+    gap: 2px 4px;
+    background-color: rgba(46, 225, 179, 0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 8px 8px 12px;
+}
+
+.RkRRz {
+    grid-area: title / title / title / title;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.8rem;
+    margin: 0px;
+}
+
+.bBsZZl {
+    grid-area: icon / icon / icon / icon;
+    background-image: url(https://hahow.in/static/media/wa-icon-hover.43783ef8.svg);
+    width: 24px;
+    height: 14px;
+}
+
+.kubfix {
+    grid-area: description / description / description / description;
+    color: rgb(0, 190, 164);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2.1rem;
+    margin: 0px;
+}
+
+.jCElci {
+    grid-area: applyText / applyText / applyText / applyText;
+    place-self: center end;
+    background-color: rgb(0, 190, 164);
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    transition: background-color 0.2s ease-in-out 0s;
+    width: fit-content;
+    height: 26px;
+    padding: 0px 8px;
+}
+
+.text-error {
+    color: rgb(240, 80, 80);
+}
+
+.cdRYGC .form-block {
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.cdRYGC .form-block .half-width-field {
+    /* flex: 1 0 100%; */
+    margin-bottom: 15px;
+}
+
+.fgjnMp {
+    width: 100%;
+    background-color: transparent;
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 1.75;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: inherit;
+    transition: all 0.2s ease 0s;
+}
+@media (min-width: 1200px) {
+    .container-fluid {
+        width: 1200px;
+    }
+
+    .left-panel {
+        /* width: 830px; */
+        /* height: 672.2px; */
+    }
+}
+
+@media (min-width: 768px) {
+    .cdRYGC {
+        /* height: 110vh; */
+        display: flex;
+        padding-left: 30px;
+        padding-right: 20px;
+        /* padding-bottom: 120px; */
+    }
+
+
+    .right-panel {
+        flex: 0 0 290px;
+        padding-left: 0px;
+        margin-left: 3rem;
+    }
+
+    .left-panel {
+        width: 65vw;
+        /* height: 75vh; */
+    }
+
+    .bBsZZl {
+        background-image: url(https://hahow.in/static/media/wa-icon-normal.32a1a60d.svg);
+        transition: background-image 0.3s ease-in-out 0s;
+    }
+
+    .half-width-field {
+        flex-basis: 260px;
+        max-width: 340px;
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+    }
+
+    .wh {
+        width: 230px;
+        /* height: 506px; */
+    }
+}
+
+@media (max-width: 767px) {
+    .container-fluid-padiing {
+        height: 230vh;
+    }
+
+    .cdRYGC {
+        display: flex;
+        padding-left: 20px;
+        padding-right: 30px;
+        /* padding-bottom: 120px; */
+    }
+
+    .sticky-inner-wrapper {
+        width: 100%;
+    }
+
+    .left-panel {
+        width: 90vw;
+        /* height: 75vh; */
+    }
+
+    .right-panel {
+        position: static;
+        width: 90vw;
+        margin-left: -1.8rem;
+        /* margin-top: 3rem; */
+    }
+
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .half-width-field {
+        width: 100%;
+    }
+}

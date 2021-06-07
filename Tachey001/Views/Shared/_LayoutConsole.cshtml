@@ -1,0 +1,181 @@
+﻿@using Tachey001.Models
+@{
+    List<Course_Category> categoryList = new List<Course_Category>();
+    List<Category_Details> detailsList = new List<Category_Details>();
+
+    using (TacheyDBContext context = new TacheyDBContext())
+    {
+        categoryList = context.Course_Category.ToList();
+        detailsList = context.Category_Details.ToList();
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Assets/css/nav.css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+</head>
+<body class="bg-gray" style="padding-top: 0px; padding-bottom: 0px">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top bg-light justify-content-between shadow-sm">
+        <div class="nav-log-wrap">
+            <a href="@Url.Action("Index", "Home")"><img id="Homepage-logo" src="https://hahow.in/static/media/logo-black.59fdbe30.svg" alt=""></a>
+            <a href="#"><img id="Recruit-logo" src="https://hahow.in/static/images/joinus/2018hiring.svg" alt=""></a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- 下拉選單有2層 -->
+        <div class="collapse navbar-collapse  grow-0" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-th-large"></i>
+                        探索課程
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("All", "Courses")">所有課程</a>
+                        @foreach (var item in categoryList)
+                        {
+                            <li class="dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#!" data-toggle="dropdown">
+                                    @item.CategoryName
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
+                                        所有 @item.CategoryName
+                                    </a>
+                                    @foreach (var detail in detailsList)
+                                    {
+                                        if (detail.CourseCategoryID == item.CourseCategoryID)
+                                        {
+                                            <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
+                                                @detail.DetailsName
+                                            </a>
+                                        }
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <!-- 沒有下拉選單 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Create","Courses")"><i class="fas fa-pencil-alt"></i>我要開課</a>
+                </li>
+            </ul>
+            <!-- 搜尋列 -->
+            <form class="form-inline my-2 my-lg-0 ">
+                <i class="fas fa-search px-2"></i>
+                <input class="form-control mr-sm-2" type="search" placeholder="課程搜尋" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+        <!-- 移動距離就創一個空的div -->
+        <!-- <div id="nav-space"></div> -->
+        <!-- <div id="nav-space"></div> -->
+
+        <div class="collapse navbar-collapse  grow-0" id="navbarSupportedContent">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+
+
+
+    @*<div class="container body-content">
+            @RenderBody()
+        </div>*@
+
+    @RenderBody()
+
+    <div class="container-fuild footer mb-0">
+        <div class="row justify-content-center">
+            <div class="col-lg-2 footer-block p-0">
+                <h3 class="footer-h3">關於</h3>
+                <ul>
+                    <li><a href="#" class="footer-content">關於我們</a></li>
+                    <li><a href="#" class="footer-content">加入Hahow</a></li>
+                    <li><a href="#" class="footer-content">使用者條款</a></li>
+                    <li><a href="#" class="footer-content">服務契約</a></li>
+                    <li><a href="#" class="footer-content">隱私權政策</a></li>
+                    <li><a href="#" class="footer-content">功能更新</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 footer-block p-0">
+                <h3 class="footer-h3">幫助</h3>
+                <ul>
+                    <li><a href="#" class="footer-content">企業學習方案</a></li>
+                    <li><a href="#" class="footer-content">異業合作洽談</a></li>
+                    <li><a href="#" class="footer-content">常見問題</a></li>
+                    <li><a href="#" class="footer-content">課程許願池</a></li>
+                    <li><a href="#" class="footer-content">兌換課程</a></li>
+                    <li><a href="#" class="footer-content">線上課程禮物卡</a></li>
+                    <li><a href="#" class="footer-content">填課程問卷拿優惠</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 footer-block p-0">
+                <h3 class="footer-h3">追蹤動態</h3>
+                <ul>
+                    <li><a href="#" class="footer-content">Facebook</a></li>
+                    <li><a href="#" class="footer-content">Instagram</a></li>
+                    <li><a href="#" class="footer-content">LINE</a></li>
+                    <li><a href="#" class="footer-content">YouTube</a></li>
+                    <li><a href="#" class="footer-content">Blog</a></li>
+
+                </ul>
+            </div>
+            <div class="col-lg-2 footer-block footer-last-block p-0">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>輸入地點</span>
+                        <!-- <span id="footer-space"></span> -->
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item btn-item-first" href="#">輸入地點</a>
+                        <a class="dropdown-item" href="#">TW&nbsp;台灣 &nbsp;新台幣(&nbsp;TWD&nbsp;)</a>
+                        <a class="dropdown-item" href="#">HK&nbsp;香港 &nbsp;港幣幣(&nbsp;HKD&nbsp;)</a>
+                        <a class="dropdown-item" href="#">MY&nbsp;馬來西亞 &nbsp;林吉特(&nbsp;MYR&nbsp;)</a>
+                        <a class="dropdown-item" href="#">US&nbsp;美國 &nbsp;美元(&nbsp;USD&nbsp;)</a>
+                        <a class="dropdown-item" href="#">JP&nbsp;日本 &nbsp;日圓(&nbsp;JPY&nbsp;)</a>
+                        <a class="dropdown-item" href="#">CN&nbsp;中國 &nbsp;人民幣(&nbsp;CNY&nbsp;)</a>
+                        <a class="dropdown-item" href="#">MO&nbsp;澳門 &nbsp;澳門幣(&nbsp;MOP&nbsp;)</a>
+                        <a class="dropdown-item" href="#">SG&nbsp;新加坡 &nbsp;新幣(&nbsp;SGD&nbsp;)</a>
+                        <a class="dropdown-item" href="#">AU&nbsp;澳洲 &nbsp;澳幣(&nbsp;AUD&nbsp;)</a>
+                        <a class="dropdown-item" href="#">CU&nbsp;加拿大 &nbsp;加幣(&nbsp;CAD&nbsp;)</a>
+                    </div>
+                </div>
+                <div class="dropdown mt-3">
+                    <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>語言選擇</span>
+                        <!-- <span id="footer-space"></span> -->
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">繁體中文</a>
+                        <a class="dropdown-item" href="#">簡體中文</a>
+                    </div>
+                    <span class="pb-3 pt-2 footer-content">Hahow 好學校 © All Rights Reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Assets/js/nav.js")
+    @Scripts.Render("~/Assets/js/step.js")
+    @Scripts.Render("~/Assets/js/Main.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
