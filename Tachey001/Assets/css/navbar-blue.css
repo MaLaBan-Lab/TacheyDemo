@@ -34,3 +34,8 @@
         top: 15px;
         left: 0;
     }
+
+.dropdown-item:focus {
+    background-color: transparent;
+    color: #ffeb00 !important;
+}
