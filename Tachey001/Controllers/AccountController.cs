@@ -22,6 +22,14 @@ namespace Tachey001.Controllers
         {
         }
 
+        [AllowAnonymous]
+        public ActionResult LineLoginDirect()
+        {
+            string LineLoginUrl = "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1656071224&redirect_uri=https://localhost:44394/Home/Index&state=12345abcde&scope=profile%20openid&nonce=09876xyz";
+
+            return Redirect(LineLoginUrl);
+        }
+
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
