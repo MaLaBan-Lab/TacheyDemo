@@ -13,10 +13,10 @@
         flex-grow: 0;
     }
 
-    #Homepage-logo {
-        width: 135px;
-        height: 33px;
-    }
+#Homepage-logo {
+    width: 180px;
+    height: 65px;
+}
 
     #Recruit-logo {
         width: 65px;
