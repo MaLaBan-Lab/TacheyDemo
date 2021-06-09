@@ -1,4 +1,9 @@
-﻿@Styles.Render("~/Assets/css/discussions.css")
+﻿
+
+
+@section topCSS{
+    @Styles.Render("~/Assets/css/discussions.css")
+}
 @{
     ViewBag.Title = "Tachey";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
@@ -2343,9 +2348,3 @@ else if (ViewBag.Id == 4)
 
 
 @Scripts.Render("~/Assets/js/point.js")
-
-
-
-
-
-

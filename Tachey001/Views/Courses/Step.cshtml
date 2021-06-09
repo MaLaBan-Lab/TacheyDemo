@@ -1,4 +1,8 @@
-﻿@Styles.Render("~/Assets/css/step.css")
+﻿
+@section topCSS{
+    @Styles.Render("~/Assets/css/step.css")
+}
+
 @{
     ViewBag.Title = "Step";
 
@@ -71,3 +75,18 @@
     </div>
 </div>
 
+@section endJS{
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
+    <script>
+        DecoupledEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                const toolbarContainer = document.querySelector('#toolbar-container');
+
+                toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
