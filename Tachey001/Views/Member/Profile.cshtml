@@ -54,19 +54,29 @@
                             <div><span class="txt-small">已參加</span><!-- js edit --><span class="hightlight">0 堂課</span><!-- js edit --></div>
                             <div><span class="txt-small">已開設</span><!-- js edit --><span class="hightlight">0 堂課</span><!-- js edit --></div>
                         </div>
+
                         <!-- 關於我 -->
                         <div class="user-info-edit pad-rl-30">
                             <div class="info editable">
                                 <h6 class="marg-b-0"><b>關於我</b></h6>
-                                <div class="about-content editable">
+                                <div class="about-content editable about-content">
                                     <!-- js edit -->
                                     <span>
                                         簡單介紹一下自己吧！
-                                        <span class="pan marg-l-10">
+                                        <span class="pan marg-l-10" id="about-textarea-pen">
                                             <span aria-hidden="true" class="fa fa-pencil"></span>
                                         </span>
                                     </span>
                                     <!-- js edit -->
+                                </div>
+                                <div id="about-textarea" style="display: none;">
+                                    <div class="marg-tb-10 textarea">
+                                        <textarea class="textarea-content marg-tb-10 textarea" placeholder="簡單介紹一下自己吧！" rows="2"></textarea>
+                                    </div>
+                                    <div class="txt-right">
+                                        <button class="textarea-cancel-btn marg-r-5">取消</button>
+                                        <button class="textarea-submit-btn marg-l-5">確定</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="info editable">
@@ -260,4 +270,4 @@
     </div>
 </div>
 
-
+@Scripts.Render("~/Assets/js/personal.js")
