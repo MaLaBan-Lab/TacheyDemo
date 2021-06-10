@@ -22,7 +22,7 @@ namespace Tachey001.Models
     {
 
         public ApplicationDbContext()
-            : base("TacheyDBContext", throwIfV1Schema: false)
+            : base("TacheyContext", throwIfV1Schema: false)
         {
         }
 
