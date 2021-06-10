@@ -97,7 +97,10 @@ h1 {
     margin: 0 0 30px;
     font-size: 20px;
 }
-.btn_wrap {
+
+.bigpic_wrap .btn_wrap,
+.apply_wrap .btn_wrap
+{
   display: flex;
   align-content: center;
   margin: auto;
