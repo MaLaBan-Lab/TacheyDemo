@@ -6,13 +6,15 @@ namespace Tachey001.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Owner")]
-    public partial class Owner
+    [Table("CourseBuyed")]
+    public partial class CourseBuyed
     {
-        public int MemberID { get; set; }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CourseID { get; set; }
+
+        public int OrderID { get; set; }
+
+        public int MemberID { get; set; }
     }
 }

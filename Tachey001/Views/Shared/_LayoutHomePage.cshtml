@@ -1,12 +1,13 @@
 ﻿@using Tachey001.Models
 @{
-    List<Course_Category> categoryList = new List<Course_Category>();
-    List<Category_Details> detailsList = new List<Category_Details>();
+    List<CourseCategory> categoryList = new List<CourseCategory>();
 
-    using (TacheyDBContext context = new TacheyDBContext())
+    List<CategoryDetail> detailList = new List<CategoryDetail>();
+
+    using (TacheyContext context = new TacheyContext())
     {
-        categoryList = context.Course_Category.ToList();
-        detailsList = context.Category_Details.ToList();
+        categoryList = context.CourseCategory.ToList();
+        detailList = context.CategoryDetail.ToList();
     }
 }
 
@@ -64,12 +65,12 @@
                                     <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
                                         所有 @item.CategoryName
                                     </a>
-                                    @foreach (var detail in detailsList)
+                                    @foreach (var detail in detailList)
                                     {
-                                        if (detail.CourseCategoryID == item.CourseCategoryID)
+                                        if (detail.CategoryID == item.CategoryID)
                                         {
                                             <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
-                                                @detail.DetailsName
+                                                @detail.DetailName
                                             </a>
                                         }
                                     }

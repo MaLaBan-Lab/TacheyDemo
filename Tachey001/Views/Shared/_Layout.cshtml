@@ -1,12 +1,13 @@
 ﻿@using Tachey001.Models
 @{
-    List<Course_Category> categoryList = new List<Course_Category>();
-    List<Category_Details> detailsList = new List<Category_Details>();
+    List<CourseCategory> categoryList = new List<CourseCategory>();
 
-    using (TacheyDBContext context = new TacheyDBContext())
+    List<CategoryDetail> detailList = new List<CategoryDetail>();
+
+    using (TacheyContext context = new TacheyContext())
     {
-        categoryList = context.Course_Category.ToList();
-        detailsList = context.Category_Details.ToList();
+        categoryList = context.CourseCategory.ToList();
+        detailList = context.CategoryDetail.ToList();
     }
 }
 
@@ -20,6 +21,7 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Assets/css/nav.css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("topCSS", required: false)
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
 <body class="bg-gray" style="padding-top: 0px; padding-bottom: 0px">
@@ -53,14 +55,14 @@
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
-                                        所有 @item.CategoryName
+                                        所有(@item.CategoryName)
                                     </a>
-                                    @foreach (var detail in detailsList)
+                                    @foreach (var detail in detailList)
                                     {
-                                        if (detail.CourseCategoryID == item.CourseCategoryID)
+                                        if (detail.CategoryID == item.CategoryID)
                                         {
                                             <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
-                                                @detail.DetailsName
+                                                @detail.DetailName
                                             </a>
                                         }
                                     }
@@ -180,5 +182,6 @@
     @Scripts.Render("~/Assets/js/step.js")
     @Scripts.Render("~/Assets/js/Main.js")
     @RenderSection("scripts", required: false)
+    @RenderSection("endJS", required: false)
 </body>
 </html>
