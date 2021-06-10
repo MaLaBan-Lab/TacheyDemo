@@ -1,41 +1,14 @@
 ﻿@using Tachey001.Models
 @{
-    List<CourseCategory> categoryList = new List<CourseCategory>
-{
-    new CourseCategory{CategoryID = 1, CategoryName = "音樂"},
-    new CourseCategory{CategoryID = 2, CategoryName = "語言"},
-    new CourseCategory{CategoryID = 3, CategoryName = "攝影"},
-    new CourseCategory{CategoryID = 4, CategoryName = "藝術"},
-    new CourseCategory{CategoryID = 5, CategoryName = "設計"},
-    new CourseCategory{CategoryID = 6, CategoryName = "人文"},
-    new CourseCategory{CategoryID = 7, CategoryName = "行銷"},
-    new CourseCategory{CategoryID = 8, CategoryName = "程式"},
-    new CourseCategory{CategoryID = 9, CategoryName = "投資理財"},
-    new CourseCategory{CategoryID = 10, CategoryName = "職場技能"},
-    new CourseCategory{CategoryID = 11, CategoryName = "手作"},
-    new CourseCategory{CategoryID = 12, CategoryName = "生活品味"}
-};
-    List<CategoryDetail> detailsList = new List<CategoryDetail>
-{
-    new CategoryDetail{CategoryID = 1, DetailID = 10001, DetailName = "更多音樂"},
-    new CategoryDetail{CategoryID = 2, DetailID = 20001, DetailName = "更多語言"},
-    new CategoryDetail{CategoryID = 3, DetailID = 30001, DetailName = "更多攝影"},
-    new CategoryDetail{CategoryID = 4, DetailID = 40001, DetailName = "更多藝術"},
-    new CategoryDetail{CategoryID = 5, DetailID = 50001, DetailName = "更多設計"},
-    new CategoryDetail{CategoryID = 6, DetailID = 60001, DetailName = "更多人文"},
-    new CategoryDetail{CategoryID = 7, DetailID = 70001, DetailName = "更多行銷"},
-    new CategoryDetail{CategoryID = 8, DetailID = 80001, DetailName = "更多程式"},
-    new CategoryDetail{CategoryID = 9, DetailID = 90001, DetailName = "更多投資理財"},
-    new CategoryDetail{CategoryID = 10, DetailID = 100001, DetailName = "更多職場技能"},
-    new CategoryDetail{CategoryID = 11, DetailID = 110001, DetailName = "更多手作"},
-    new CategoryDetail{CategoryID = 12, DetailID = 120001, DetailName = "更多生活品味"}
-};
+    List<CourseCategory> categoryList = new List<CourseCategory>();
 
-    //using (TacheyContext context = new TacheyDBContext())
-    //{
-    //    categoryList = context.CourseCategory.ToList();
-    //    detailList = context.CategoryDetail.ToList();
-    //}
+    List<CategoryDetail> detailList = new List<CategoryDetail>();
+
+    using (TacheyContext context = new TacheyContext())
+    {
+        categoryList = context.CourseCategory.ToList();
+        detailList = context.CategoryDetail.ToList();
+    }
 }
 
 <!DOCTYPE html>
@@ -86,7 +59,7 @@
                                     <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
                                         所有(@item.CategoryName)
                                     </a>
-                                    @foreach (var detail in detailsList)
+                                    @foreach (var detail in detailList)
                                     {
                                         if (detail.CategoryID == item.CategoryID)
                                         {

@@ -51,12 +51,10 @@
 
     /* ----導覽列------ */
     /* 頁尾 */
-    .footer {
-
-        padding: 50px;
-        background-color: rgba(0, 0, 0, 6.5%);
-
-    }
+.footer {
+    padding: 50px;
+    background-color: #1b1b3b;
+}
 
     .footer-block {
         width: 100%;
@@ -66,15 +64,17 @@
 
     .footer-h3 {
         font-size: 16px;
-        color: #00bea4;
+        color: white;
     }
 
-    .footer-content {
-        font-size: 12px;
-        text-decoration: none;
-        color: #000000;
+.footer-content {
+    font-size: 12px;
+    text-decoration: none;
+    color: #ffffff;
+}
+    .footer-content:hover{
+        color:yellow;
     }
-
     .footer-btn {
         width: 100%;
         text-align: start;
@@ -142,7 +142,7 @@
     #ug-pic {
         display: block;
         width: 270px;
-        height: 244;
+        /*height: 244px;*/
     }
 
     .search-right {
@@ -236,6 +236,8 @@
         border-radius: 16px;
         background-color: white;
     }
+  color: #ffffff;
+}
     /* 延伸閱讀 */
     @media screen and (max-width:992px) {
 
