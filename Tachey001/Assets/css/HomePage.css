@@ -319,7 +319,7 @@ body {
         height: 100%;
         position: absolute;
         top: 0;
-       
+        color:black;
         visibility: hidden;
         background-color: white;
         z-index: 2;
@@ -585,16 +585,10 @@ body {
 
         /* 好學生評論 */
         /* 課程精選 */
-        .item:hover .card-txt {
-            visibility: hidden;
-        }
-
-        .card-txt:hover {
-            visibility: hidden;
-        }
+        
 
         .card:hover .backgroundBookmark-me {
-            bottom: 63%;
+            bottom: 50%;
         }
 
         /* 課程精選 */
