@@ -9,27 +9,23 @@ namespace Tachey001.Models
     [Table("Member")]
     public partial class Member
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MemberID { get; set; }
+        public string MemberID { get; set; }
 
-        [Required]
         [StringLength(30)]
         public string Account { get; set; }
 
-        [Required]
         [StringLength(30)]
         public string Password { get; set; }
 
         [StringLength(30)]
         public string Name { get; set; }
 
-        [Required]
         [StringLength(30)]
         public string Email { get; set; }
 
-        public bool EmailStatus { get; set; }
+        public bool? EmailStatus { get; set; }
 
-        public DateTime JoinTime { get; set; }
+        public DateTime? JoinTime { get; set; }
 
         public bool? Sex { get; set; }
 
@@ -49,7 +45,6 @@ namespace Tachey001.Models
 
         public DateTime? Birthday { get; set; }
 
-        [Required]
         [StringLength(80)]
         public string Interest { get; set; }
 
