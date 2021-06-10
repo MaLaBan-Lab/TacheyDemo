@@ -60,19 +60,21 @@ body {
     margin-top: 10rem;
 }
 
-    .search-a {
-        text-decoration: none;
-        font-size: 8px;
-        color: #00bea4;
-        padding: 2px 2px;
-        background-color: rgba(46, 225, 179, 0.1);
-        border-radius: 16px;
-        margin: 6px 0;
-    }
+.search-a {
+    text-decoration: none;
+    font-size: 8px;
+    color: #00bea4;
+    padding: 2px 2px;
+    background-color: rgba(46, 225, 179, 0.1);
+    border-radius: 16px;
+    margin: 6px 0;
+    white-space: nowrap;
+}
 
     #ug-pic {
         display: block;
-        width: 30%;
+        width: 35%;
+        padding:0px;
         
     }
 
@@ -132,18 +134,22 @@ body {
     justify-content:center;
 }
 .advertising-text {
-    font-size: 18px;
+    font-size: 20px;
+    background-color: #11082F;
 }
 
-    #advertising-span {
-        color: #00bea4;
-    }
+#advertising-span {
+    color: #FCDE0A;
+}
 
     /* 第二塊 */
     /* 延伸閱讀 */
-    .reading {
-        background-color: #f3f3f1;
-    }
+.reading {
+    background-color: #f3f3f1;
+    background-image: url(https://media.discordapp.net/attachments/845189336801476628/852422501098061844/image0.jpg);
+    background-size: cover;
+    padding-bottom: 5rem;
+}
 
     .reading-h4 {
         font-size: 20px;
@@ -155,18 +161,19 @@ body {
         max-width: 64%;
     }
 
-    .reading-pic {
-        width: 100%;
-    }
+.reading-pic {
+    width: 100%;
+    margin-bottom: 2rem;
+}
 
     .reading-h5 {
         font-size: 17px;
     }
 
-    .reading-date {
-        color: rgba(0, 0, 0, 0.43);
-        font-size: 12px;
-    }
+.reading-date {
+    color: white;
+    font-size: 12px;
+}
 
     .reading-more {
         text-decoration: none;
@@ -180,6 +187,7 @@ body {
 
     /* 延伸閱讀 */
     /* 第一塊輪盤 */
+    
     .item {
         height: 100%;
         width: 100%;
@@ -192,49 +200,49 @@ body {
 
     /* 第一塊輪盤 */
     /* 第三塊 */
-    #try-watch {
-        background-color: rgb(243, 243, 241);
-    }
+#try-watch {
+    background-color: rgb(14 8 42);
+}
 
-    .trywatch-h2 {
-        font-size: 18px;
-        color: rgba(0, 0, 0, 0.65);
-    }
+.trywatch-h2 {
+    font-size: 21px;
+    color: white;
+}
 
     .trywatch-text {
         font-size: 14px;
     }
 
-    #trywatch-span {
-        color: #00bea4;
-    }
+#trywatch-span {
+    color: #FCDE0A;
+}
 
     /* 第三塊 */
     /* 好學生評論 */
-    #studentsay-span {
-        font-size: 18px;
-        color: #00bea4;
-    }
+#studentsay-span {
+    font-size: 18px;
+    color: #FCDE0A;
+}
 
     .comment {
         font-size: 14px;
         height: 300px;
-        background-color: white;
+        /*background-color: white;*/
         position: relative;
     }
 
     #student-say {
-        background-color: #e6eff0;
+        /*background-color: #e6eff0;*/
     }
 
-    .comment-p {
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 10;
-        -webkit-box-orient: vertical;
-    }
+.comment-p {
+    background-color: #12072F;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+}
 
     .comment-top-img {
         height: 15px;
@@ -278,6 +286,7 @@ body {
     .owl-nav {
         text-align: center;
         line-height: 20px;
+        margin-top:2rem;
     }
 
     .owl-prev {
@@ -460,26 +469,26 @@ body {
 
     .content a {
         text-decoration: none;
-        color: rgba(0, 0, 0, 0.65);
+        color: white;
     }
 
-    .fa-star {
-        color: rgb(255, 177, 21);
-    }
+.fa-star {
+    color: rgb(233 229 77);
+}
 
     .video-carousel {
-        background-color: rgb(243, 243, 241);
+        /*background-color: rgb(243, 243, 241);*/
     }
 
-    .content {
-        width: 636px;
-        color: rgb(245, 126, 16);
-    }
+.content {
+    width: 636px;
+    color: rgb(233 229 77);
+}
 
-    .item-video {
-        border-radius: 15px;
-        background-color: white;
-    }
+.item-video {
+    border-radius: 15px;
+    background-color: #30302b;
+}
 
     /* 影片 */
 
@@ -488,6 +497,7 @@ body {
             max-width: 62%;
             padding: 0;
         }
+       
     }
 
     @media screen and (max-width:992px) {
@@ -513,10 +523,21 @@ body {
             height: 244px;
         }
 
+        /**/
+        .d-f-direction-c-r {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        }
         /* 第一塊 */
         .search-3 {
             max-width: 100%;
-            color:white;
+            color: white;
+            display: flex;
+            justify-items: center;
+            flex-direction: column;
+            margin: 0;
+            margin-top: 5rem;
         }
 
         .search-content {
