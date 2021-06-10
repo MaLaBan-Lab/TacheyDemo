@@ -9,15 +9,6 @@ namespace Tachey001.Models
     [Table("Course")]
     public partial class Course
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Course()
-        {
-            Course_Chapter = new HashSet<Course_Chapter>();
-            Course_Score = new HashSet<Course_Score>();
-            Owner = new HashSet<Owner>();
-            Questions = new HashSet<Questions>();
-        }
-
         public int CourseID { get; set; }
 
         [Required]
@@ -56,30 +47,23 @@ namespace Tachey001.Models
         [StringLength(4000)]
         public string Introduction { get; set; }
 
-        [Required]
-        [StringLength(4000)]
-        public string CourseURL { get; set; }
+        public int MemberID { get; set; }
 
         [Required]
         [StringLength(50)]
         public string LecturerIdentity { get; set; }
 
+        public int CategoryID { get; set; }
+
         [Required]
         [StringLength(50)]
         public string CategoryDetailsID { get; set; }
 
-        public virtual Category_Details Category_Details { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime CreateDate { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course_Chapter> Course_Chapter { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course_Score> Course_Score { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Owner> Owner { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Questions> Questions { get; set; }
+        [Required]
+        [StringLength(40)]
+        public string Status { get; set; }
     }
 }

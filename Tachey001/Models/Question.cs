@@ -6,31 +6,33 @@ namespace Tachey001.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Answer")]
-    public partial class Answer
+    [Table("Question")]
+    public partial class Question
     {
-        [Key]
-        [Column(Order = 0)]
+        public bool? BeforeAfter { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int QuestionID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MemberID { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        public int CourseID { get; set; }
+
+        [StringLength(50)]
+        public string ChapterID { get; set; }
+
+        [StringLength(50)]
+        public string UnitID { get; set; }
+
+        public bool Done { get; set; }
+
+        public int Likes { get; set; }
+
+        [Required]
         [StringLength(4000)]
         public string QuestionContent { get; set; }
 
-        [Key]
-        [Column(Order = 3, TypeName = "date")]
+        [Column(TypeName = "date")]
         public DateTime QuestionDate { get; set; }
-
-        [Key]
-        [Column(Order = 4)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Likes { get; set; }
     }
 }

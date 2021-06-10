@@ -195,21 +195,25 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\Category_Details.cs" />
+    <Compile Include="Models\CategoryDetail.cs" />
     <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\Course_Category.cs" />
-    <Compile Include="Models\Course_Chapter.cs" />
-    <Compile Include="Models\Course_HomeWork.cs" />
-    <Compile Include="Models\Course_Score.cs" />
-    <Compile Include="Models\Course_Unit.cs" />
+    <Compile Include="Models\CourseBuyed.cs" />
+    <Compile Include="Models\CourseCategory.cs" />
+    <Compile Include="Models\CourseChapter.cs" />
+    <Compile Include="Models\CourseUnit.cs" />
+    <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Owner.cs" />
-    <Compile Include="Models\Owner_Type.cs" />
-    <Compile Include="Models\Questions.cs" />
+    <Compile Include="Models\PersonalUrl.cs" />
+    <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\Question.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
-    <Compile Include="Models\TacheyDBContext.cs" />
+    <Compile Include="Models\TacheyContext.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

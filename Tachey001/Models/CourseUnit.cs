@@ -6,32 +6,26 @@ namespace Tachey001.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Course Unit")]
-    public partial class Course_Unit
+    [Table("CourseUnit")]
+    public partial class CourseUnit
     {
-        [Key]
-        [Column(Order = 0)]
+        [Required]
         [StringLength(50)]
         public string ChapterID { get; set; }
 
         [Key]
-        [Column(Order = 1)]
         [StringLength(50)]
-        public string UnitID { get; set; }
+        public string UnutID { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Required]
         [StringLength(200)]
         public string UnitName { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
+        [Required]
         [StringLength(4000)]
-        public string URL { get; set; }
+        public string CourseURI { get; set; }
 
         [StringLength(4000)]
         public string PS { get; set; }
-
-        public virtual Course_Chapter Course_Chapter { get; set; }
     }
 }

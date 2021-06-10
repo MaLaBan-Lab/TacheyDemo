@@ -1,40 +1,40 @@
 ﻿@using Tachey001.Models
 @{
-    List<Course_Category> categoryList = new List<Course_Category>
-    {
-        new Course_Category{CourseCategoryID = 1, CategoryName = "音樂"},
-        new Course_Category{CourseCategoryID = 2, CategoryName = "語言"},
-        new Course_Category{CourseCategoryID = 3, CategoryName = "攝影"},
-        new Course_Category{CourseCategoryID = 4, CategoryName = "藝術"},
-        new Course_Category{CourseCategoryID = 5, CategoryName = "設計"},
-        new Course_Category{CourseCategoryID = 6, CategoryName = "人文"},
-        new Course_Category{CourseCategoryID = 7, CategoryName = "行銷"},
-        new Course_Category{CourseCategoryID = 8, CategoryName = "程式"},
-        new Course_Category{CourseCategoryID = 9, CategoryName = "投資理財"},
-        new Course_Category{CourseCategoryID = 10, CategoryName = "職場技能"},
-        new Course_Category{CourseCategoryID = 11, CategoryName = "手作"},
-        new Course_Category{CourseCategoryID = 12, CategoryName = "生活品味"}
-    };
-    List<Category_Details> detailsList = new List<Category_Details>
-    {
-        new Category_Details{CourseCategoryID = 1, CategoryDetailsID = "10001", DetailsName = "更多音樂"},
-        new Category_Details{CourseCategoryID = 2, CategoryDetailsID = "20001", DetailsName = "更多語言"},
-        new Category_Details{CourseCategoryID = 3, CategoryDetailsID = "30001", DetailsName = "更多攝影"},
-        new Category_Details{CourseCategoryID = 4, CategoryDetailsID = "40001", DetailsName = "更多藝術"},
-        new Category_Details{CourseCategoryID = 5, CategoryDetailsID = "50001", DetailsName = "更多設計"},
-        new Category_Details{CourseCategoryID = 6, CategoryDetailsID = "60001", DetailsName = "更多人文"},
-        new Category_Details{CourseCategoryID = 7, CategoryDetailsID = "70001", DetailsName = "更多行銷"},
-        new Category_Details{CourseCategoryID = 8, CategoryDetailsID = "80001", DetailsName = "更多程式"},
-        new Category_Details{CourseCategoryID = 9, CategoryDetailsID = "90001", DetailsName = "更多投資理財"},
-        new Category_Details{CourseCategoryID = 10, CategoryDetailsID = "100001", DetailsName = "更多職場技能"},
-        new Category_Details{CourseCategoryID = 11, CategoryDetailsID = "110001", DetailsName = "更多手作"},
-        new Category_Details{CourseCategoryID = 12, CategoryDetailsID = "120001", DetailsName = "更多生活品味"}
-    };
+    List<CourseCategory> categoryList = new List<CourseCategory>
+{
+    new CourseCategory{CategoryID = 1, CategoryName = "音樂"},
+    new CourseCategory{CategoryID = 2, CategoryName = "語言"},
+    new CourseCategory{CategoryID = 3, CategoryName = "攝影"},
+    new CourseCategory{CategoryID = 4, CategoryName = "藝術"},
+    new CourseCategory{CategoryID = 5, CategoryName = "設計"},
+    new CourseCategory{CategoryID = 6, CategoryName = "人文"},
+    new CourseCategory{CategoryID = 7, CategoryName = "行銷"},
+    new CourseCategory{CategoryID = 8, CategoryName = "程式"},
+    new CourseCategory{CategoryID = 9, CategoryName = "投資理財"},
+    new CourseCategory{CategoryID = 10, CategoryName = "職場技能"},
+    new CourseCategory{CategoryID = 11, CategoryName = "手作"},
+    new CourseCategory{CategoryID = 12, CategoryName = "生活品味"}
+};
+    List<CategoryDetail> detailsList = new List<CategoryDetail>
+{
+    new CategoryDetail{CategoryID = 1, DetailID = 10001, DetailName = "更多音樂"},
+    new CategoryDetail{CategoryID = 2, DetailID = 20001, DetailName = "更多語言"},
+    new CategoryDetail{CategoryID = 3, DetailID = 30001, DetailName = "更多攝影"},
+    new CategoryDetail{CategoryID = 4, DetailID = 40001, DetailName = "更多藝術"},
+    new CategoryDetail{CategoryID = 5, DetailID = 50001, DetailName = "更多設計"},
+    new CategoryDetail{CategoryID = 6, DetailID = 60001, DetailName = "更多人文"},
+    new CategoryDetail{CategoryID = 7, DetailID = 70001, DetailName = "更多行銷"},
+    new CategoryDetail{CategoryID = 8, DetailID = 80001, DetailName = "更多程式"},
+    new CategoryDetail{CategoryID = 9, DetailID = 90001, DetailName = "更多投資理財"},
+    new CategoryDetail{CategoryID = 10, DetailID = 100001, DetailName = "更多職場技能"},
+    new CategoryDetail{CategoryID = 11, DetailID = 110001, DetailName = "更多手作"},
+    new CategoryDetail{CategoryID = 12, DetailID = 120001, DetailName = "更多生活品味"}
+};
 
-    //using (TacheyDBContext context = new TacheyDBContext())
+    //using (TacheyContext context = new TacheyDBContext())
     //{
-    //    categoryList = context.Course_Category.ToList();
-    //    detailsList = context.Category_Details.ToList();
+    //    categoryList = context.CourseCategory.ToList();
+    //    detailList = context.CategoryDetail.ToList();
     //}
 }
 
@@ -89,10 +89,10 @@
                                     </a>
                                     @foreach (var detail in detailsList)
                                     {
-                                        if (detail.CourseCategoryID == item.CourseCategoryID)
+                                        if (detail.CategoryID == item.CategoryID)
                                         {
                                             <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
-                                                @detail.DetailsName
+                                                @detail.DetailName
                                             </a>
                                         }
                                     }
