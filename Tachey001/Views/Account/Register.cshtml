@@ -72,31 +72,32 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="boxrightinnermiddle-2">
-                            @*<div class="boxrightinnermiddle-2icon">
-                                    <i class="fas fa-user"></i>
-                                    <input placeholder="帳號(限4-21碼小寫英文數字)" type="text"
-                                           class="my-2 boxrightinnermiddle-2-input">
-                                </div>*@
-                            <div class="boxrightinnermiddle-2icon boxrightinnermiddle-2icon-email">
-                                <i class="far fa-envelope i-email"></i>
-                                @*<input placeholder="信箱" type="text" class="my-2 boxrightinnermiddle-2-input">*@
-                                @Html.TextBoxFor(m => m.Email, new { @class = "my-2 boxrightinnermiddle-2-input" })
-                            </div>
-                            <div class="boxrightinnermiddle-2icon">
-                                <i class="fas fa-unlock-alt"></i>
-                                @*<input placeholder="密碼" type="text" class="my-2 boxrightinnermiddle-2-input">*@
-                                @Html.PasswordFor(m => m.Password, new { @class = "my-2 boxrightinnermiddle-2-input" })
-                            </div>
-                            <div class="boxrightinnermiddle-2icon">
-                                <i class="fas fa-unlock-alt"></i>
-                                @*<input placeholder="再次輸入密碼" type="text" class="my-2 boxrightinnermiddle-2-input">*@
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "my-2 boxrightinnermiddle-2-input" })
-                            </div>
-                            <button class="my-2 d-flex justify-content-center">
-                                <input type="submit" class="w-100 h-100 border-0" value="註冊" />
-                            </button>
-                        </div>
+                <div class="boxrightinnermiddle-2">
+                    @*<div class="boxrightinnermiddle-2icon">
+            <i class="fas fa-user"></i>
+            <input placeholder="帳號(限4-21碼小寫英文數字)" type="text"
+                   class="my-2 boxrightinnermiddle-2-input">
+        </div>*@
+                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                    <div class="boxrightinnermiddle-2icon boxrightinnermiddle-2icon-email">
+                        <i class="far fa-envelope i-email"></i>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "my-2" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+                    <div class="boxrightinnermiddle-2icon">
+                        <i class="fas fa-unlock-alt"></i>
+                        @Html.PasswordFor(m => m.Password, new { @class = "my-2" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
+                    <div class="boxrightinnermiddle-2icon">
+                        <i class="fas fa-unlock-alt"></i>
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "my-2" })
+                    </div>
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <button class="my-2 d-flex justify-content-center">
+                        <input type="submit" class="w-100 h-100 border-0" value="註冊" />
+                    </button>
+                </div>
 
                     }
 

@@ -195,12 +195,17 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\AspNetRoles.cs" />
+    <Compile Include="Models\AspNetUserClaims.cs" />
+    <Compile Include="Models\AspNetUserLogins.cs" />
+    <Compile Include="Models\AspNetUsers.cs" />
     <Compile Include="Models\CategoryDetail.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseBuyed.cs" />
     <Compile Include="Models\CourseCategory.cs" />
     <Compile Include="Models\CourseChapter.cs" />
     <Compile Include="Models\CourseUnit.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
