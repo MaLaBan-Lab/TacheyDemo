@@ -21,11 +21,11 @@
     height:36px;
     border-radius: 50px;
 }
-.coursebtn button:hover{
-    border: none;
-    color: white !important;
-    background-color: rgb(250, 139, 0);
-}
+    .coursebtn button:hover {
+        border: none;
+        color: white !important;
+        background-color: #fac227;
+    }
 .pagesbutton{
     width: 100%;
     margin: auto;
