@@ -1,4 +1,23 @@
 ﻿@using Microsoft.AspNet.Identity
+
+@{ 
+    var UserId = User.Identity.GetUserId();
+
+    string photoUrl = null;
+
+    using(TacheyContext context = new TacheyContext())
+    {
+        var result = context.Member.Find(User.Identity.GetUserId());
+
+        if(result != null)
+        {
+            photoUrl = result.Photo;
+        }
+
+        context.SaveChanges();
+    }
+}
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -24,7 +43,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarDropdown"
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div id="user-menu"><img src="https://inmywordz.com/wp-content/uploads/20170824164424_47.jpg" alt="" id="user-logo"></div>
+                    <div id="user-menu"><img src="@photoUrl" alt="" id="user-logo"></div>
                 </a>
                 <div class="dropdown-menu user-logo-content text-white" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item text-white" href="@Url.Action("Point", "Member" )">積分</a>
