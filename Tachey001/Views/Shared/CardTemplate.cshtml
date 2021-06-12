@@ -1,4 +1,14 @@
-﻿<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+﻿@{ 
+    var col = 3;
+
+    if(HttpContext.Current.Request.RawUrl == "/Member/Console")
+    {
+        col = 4;
+    }
+}
+
+
+<div class="col-xl-@col col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
         <div class="row no-gutters justify-content-center">
             <div class="col-12">

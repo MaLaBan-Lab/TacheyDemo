@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-12 text-center mt-5">
             <h3 class="text-white">我的課程紀錄</h3>
-            <h2>@currentUserId</h2>
+            <h2>@HttpContext.Current.Request.RawUrl</h2>
         </div>
         <div class="col-12 text-center my-3">
             <img src="data://image/png;base64,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"
@@ -27,183 +27,10 @@
         <div class="col-12 border-bottom my-4"></div>
     </div>
     <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ">
-            <div class="card my-5">
-                <div class="row no-gutters justify-content-center">
-                    <div class="col-12">
-                        <div class="card-title-image position-relative">
-                            <div class="
-                        backgroundPhoto
-                        position-absolute
-                        rounded-circle
-                        bg-white
-                      ">
-                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
-                                     alt=""
-                                     class="rounded-circle position-absolute center"
-                                     id="photoImag" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
-                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
-                             class="card-img-top" />
-                        <div class="
-                    position-absolute
-                    bg-hahow-dark-green
-                    text-center text-white
-                    backgroundTape
-                  ">
-                            上課囉
-                        </div>
-                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
-                        <h4 class="card-title text-justify font-weight-normal text-secondary">
-                            Java 工程師必備！Spring Boot 零基
-                        </h4>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
-                        <span class="card-text text-black-50">
-                            <span class="star-show">
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                            </span>
-                            (6)
-                        </span>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
-                        <span class="card-text text-black-50">
-                            <span class="couse-time-before">
-                                <i class="far fa-clock"></i>
-                            </span>
-                            <span class="course-time">578</span>分鐘
-                        </span>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
-                        <span class="card-text text-black-50 mr-4">
-                            <span class="course-people-before">
-                                <i class="far fa-clock"></i>
-                            </span>
-                            <span class="course-people">260</span>人
-                        </span>
-                        <span class="card-text hahow-dark-green classPrice">
-                            NT$<span>3,200</span>
-                        </span>
-                    </div>
-                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
-                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
-                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="card-bottom bg-hahow-dark-green"></div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ">
-            <div class="card my-5">
-                <div class="row no-gutters justify-content-center">
-                    <div class="col-12">
-                        <div class="card-title-image position-relative">
-                            <div class="
-                        backgroundPhoto
-                        position-absolute
-                        rounded-circle
-                        bg-white
-                      ">
-                                <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
-                                     alt=""
-                                     class="rounded-circle position-absolute center"
-                                     id="photoImag" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
-                        <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
-                             class="card-img-top" />
-                        <div class="
-                    position-absolute
-                    bg-hahow-dark-green
-                    text-center text-white
-                    backgroundTape
-                  ">
-                            上課囉
-                        </div>
-                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
-                        <h4 class="card-title text-justify font-weight-normal text-secondary">
-                            Java 工程師必備！Spring Boot 零基
-                        </h4>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
-                        <span class="card-text text-black-50">
-                            <span class="star-show">
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                                <i class="fas fa-star star-gray position-relative">
-                                    <i class="fas fa-star star-yellow position-absolute star-display"></i>
-                                </i>
-                            </span>
-                            (6)
-                        </span>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
-                        <span class="card-text text-black-50">
-                            <span class="couse-time-before">
-                                <i class="far fa-clock"></i>
-                            </span>
-                            <span class="course-time">578</span>分鐘
-                        </span>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
-                        <span class="card-text text-black-50 mr-4">
-                            <span class="course-people-before">
-                                <i class="far fa-clock"></i>
-                            </span>
-                            <span class="course-people">260</span>人
-                        </span>
-                        <span class="card-text hahow-dark-green classPrice">
-                            NT$<span>3,200</span>
-                        </span>
-                    </div>
-                    <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
-                        <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
-                            <i class="far fa-bookmark hahow-orange line-height-30"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="card-bottom bg-hahow-dark-green"></div>
-            </div>
-        </div>
-
+        @for (var i = 0; i < 30; i++)
+        {
+            @Html.Partial("CardTemplate")
+        }
     </div>
     <div class="row mt-5">
         <div class="col-12 p-0">
@@ -486,7 +313,6 @@
                 <div class="card-bottom bg-hahow-dark-green"></div>
             </div>
         </div>
-
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ">
             <div class="card my-5">
                 <div class="row no-gutters justify-content-center">
