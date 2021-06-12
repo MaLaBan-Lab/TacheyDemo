@@ -276,7 +276,8 @@ body {
   padding: 0 10%;
   font-size:13px;
   color:gray;
-    transition:0.5s;
+   transition:0.5s;
+   display:inline-block;
 }
 .buy_wrap .collect:hover{
     color:black;
