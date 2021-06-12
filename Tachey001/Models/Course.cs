@@ -9,9 +9,9 @@ namespace Tachey001.Models
     [Table("Course")]
     public partial class Course
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CourseID { get; set; }
 
-        [Required]
         [StringLength(40)]
         public string Title { get; set; }
 
@@ -37,32 +37,31 @@ namespace Tachey001.Models
         public string CoursePerson { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal OriginalPrice { get; set; }
+        public decimal? OriginalPrice { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal PreOrderPrice { get; set; }
+        public decimal? PreOrderPrice { get; set; }
 
-        public int TotalMinTime { get; set; }
+        public int? TotalMinTime { get; set; }
 
         [StringLength(4000)]
         public string Introduction { get; set; }
 
-        public int MemberID { get; set; }
-
         [Required]
+        [StringLength(128)]
+        public string MemberID { get; set; }
+
         [StringLength(50)]
         public string LecturerIdentity { get; set; }
 
-        public int CategoryID { get; set; }
+        public int? CategoryID { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string CategoryDetailsID { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
-        [Required]
         [StringLength(40)]
         public string Status { get; set; }
     }
