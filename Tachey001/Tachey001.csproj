@@ -249,6 +249,7 @@
     <Content Include="Assets\css\owl.carousel.min.css" />
     <Content Include="Assets\css\owl.theme.default.min.css" />
     <Content Include="Assets\css\personal.css" />
+    <Content Include="Assets\css\record.css" />
     <Content Include="Assets\css\score.css" />
     <Content Include="Assets\css\step.css" />
     <Content Include="Assets\img\右圖左下.jpg" />
@@ -501,6 +502,7 @@
     <Content Include="Views\Shared\_LayoutCreate.cshtml" />
     <Content Include="Views\Home\CourseCard.cshtml" />
     <Content Include="Views\Shared\CardTemplate.cshtml" />
+    <Content Include="Views\Shared\_RecordCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
