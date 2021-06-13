@@ -354,6 +354,55 @@ body {
 	object-fit: cover;
 }
 
+.username-input input {
+	font-size: 30px;
+	text-align: center;
+	border-width: 0px 0px 1px;
+	border-top-style: initial;
+	border-right-style: initial;
+	border-left-style: initial;
+	border-top-color: initial;
+	border-right-color: initial;
+	border-left-color: initial;
+	border-image: initial;
+	color: rgb(255, 255, 255);
+	border-bottom-style: solid;
+	border-bottom-color: rgb(255, 255, 255);
+	padding: 0px;
+}
+
+.name-style {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	white-space: nowrap;
+	user-select: none;
+	font-weight: 400;
+	padding: 5px 32px;
+	font-size: 16px;
+	border-radius: 3px;
+	min-width: unset;
+	line-height: 1.75em;
+}
+
+.name-cancel {
+	border: 1px solid rgba(0, 0, 0, 0.43);
+	background-color: transparent;
+	color: rgba(0, 0, 0, 0.65);
+	background-color: rgb(255, 255, 255);
+	border: none;
+}
+
+.name-submit {
+	border: 1px solid rgb(250, 139, 0);
+	background-color: rgb(250, 139, 0);
+	color: white;
+	line-height: 1.75em;
+}
+
 img {
 	width: 100%;
 	vertical-align: middle;
@@ -366,7 +415,7 @@ img {
 	right: 5px;
 }
 
-.cancel-btn {
+.cancel-btn-photo {
 	font-size: 23px;
 	width: 50px;
 	height: 50px;
@@ -520,7 +569,7 @@ strong {
 	text-align: right;
 }
 
-.textarea-submit-btn {
+.submit-btn {
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
@@ -540,7 +589,7 @@ strong {
 	line-height: 1.75em;
 }
 
-.textarea-cancel-btn {
+.cancel-btn {
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
@@ -647,6 +696,10 @@ strong {
 	/*background: url(Assets/img/cover-default.png) center center / cover no-repeat;*/
 }
 
+.update-behind-btn {
+	display: none;
+}
+
 .relative .upload-btn {
 	position: absolute;
 	bottom: 16px;
@@ -680,7 +733,7 @@ button,
 }
 
 p {
-	margin: 0px 0px 1em;
+	/*margin: 0px 0px 1em;*/
 	line-height: 1.75em;
 }
 
@@ -720,14 +773,15 @@ p {
 	margin: 0px 5px;
 }
 
-.course-card .briefs-container.brief-col-lg-3 {
-	margin-left: -10px;
-	margin-right: -10px;
+.course-card {
+	margin-top: 20px;
 }
 
 .course-card .briefs-container {
 	margin-top: -20px;
 	margin-bottom: 20px;
+	margin-left: -10px;
+	margin-right: -10px;
 }
 
 h1,
@@ -737,3 +791,69 @@ h4,
 h5 {
 	line-height: 1.5em;
 }
+
+/* 彈跳視窗 */
+.styles-overlay {
+	background: rgba(0, 0, 0, 0.75);
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	z-index: 1000;
+	padding: 1.2rem;
+}
+
+.styles-modal {
+	position: relative;
+	box-shadow: 0 12px 15px 0 rgb(0 0 0 / 25%);
+	z-index: 10135;
+	margin: auto;
+	padding: 24px;
+	width: 600px;
+	height: unset;
+	min-width: unset;
+	max-width: unset;
+	border-radius: 5px;
+	background: white;
+}
+
+.styles-overlay-title {
+	color: rgba(0, 0, 0, 0.65);
+	border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.relative {
+	position: relative;
+}
+
+.input-element {
+	width: 100%;
+	background-color: transparent;
+	display: block;
+	padding: 5px 10px;
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	border-radius: 3px;
+	color: rgba(0, 0, 0, 0.65);
+	line-height: 1.75;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: inherit;
+	transition: all 0.2s ease 0s;
+}
+
+.styles-close-button {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	border: none;
+	padding: 0;
+	background-color: transparent;
+	display: flex;
+}
+

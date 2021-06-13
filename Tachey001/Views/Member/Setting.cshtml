@@ -2,16 +2,23 @@
 @{
     ViewBag.Title = "Setting";
 }
-@*@{
-        List<Course_Category> categoryList = new List<Course_Category>();
-        List<Category_Details> detailsList = new List<Category_Details>();
+@{
+    Dictionary<string, string> link_corr = new Dictionary<string, string>();
+    link_corr.Add("個人喜好", "#likes-area");
+    link_corr.Add("職業行業", "#reg-lang-block");
+    link_corr.Add("個人興趣", "#likes-area");
+    link_corr.Add("所在地區", "#reg-lang-block");
+    link_corr.Add("性別生日", "#user-detail-basic-info");
 
-        using (TacheyDBContext context = new TacheyDBContext())
-        {
-            categoryList = context.Course_Category.ToList();
-            detailsList = context.Category_Details.ToList();
-        }
-    }*@
+    Dictionary<int, int> progressbar = new Dictionary<int, int>();
+    progressbar.Add(5, 0);
+    progressbar.Add(4, 20);
+    progressbar.Add(3, 40);
+    progressbar.Add(2, 60);
+    progressbar.Add(1, 80);
+    progressbar.Add(0, 100);
+}
+
 
 <div class="container">
 
@@ -36,17 +43,16 @@
                         <div class="profile-wrap pad-b-15 pad-t-60 text-center">
                             <div class="border-circle" size="170">
                                 <a class="">
-                                    <!-- js edit -->
-                                    <img src="/Assets/img/member/hn.jpg"
-                                         class="user_img">
-                                    <!-- js edit -->
+                                    <!-- db edit -->
+                                    <img src=@(ViewBag.photoUrl) class="user_img">
+                                    <!-- db edit -->
                                 </a>
                             </div>
-                            <!-- js edit -->
+                            <!-- db edit -->
                             <h3 class="name text-center marg-tb-15 pad-rl-15">
-                                威志
+                                @(ViewBag.name)
                             </h3>
-                            <!-- js edit -->
+                            <!-- db edit -->
                         </div>
                         <div class="pad-rl-15 pad-tb-20 text-center">
                             <button class="user-info-btn">@Html.ActionLink("修改個人檔案", "Profile", "Member", null, new { @class = "text-dark text-decoration-none" })</button>
@@ -69,29 +75,32 @@
                     </h4>
                     <div>
                         <span class="todo-hint">還有這些資料未填寫：</span>
-                        <!-- js edit -->
-                        <a class="status" href="#likes-area">個人喜好</a>
-                        <a class="status" href="#reg-lang-block">職業行業</a>
-                        <a class="status" href="#likes-area">個人興趣</a>
-                        <a class="status" href="#reg-lang-block">
-                            所在地區</span>
-                            <a class="status"
-                               href="#user-detail-basic-info">性別生日</a>
-                            <!-- js edit -->
+                        @foreach (var item in ViewBag.link)
+                        {
+                            <a class="status" href=@(link_corr[item])>@(item)</a>
+                        }
+                        <!-- db edit -->
+                        @*<a class="status" href="#likes-area">個人喜好</a>
+                            <a class="status" href="#reg-lang-block">職業行業</a>
+                            <a class="status" href="#likes-area">個人興趣</a>
+                            <a class="status" href="#reg-lang-block">所在地區</a>
+                            <a class="status" href="#user-detail-basic-info">性別生日</a>*@
+                        <!-- db edit -->
                     </div>
 
                     <div class="progress-container">
-                        <!-- js edit -->
+                        <!-- db edit -->
                         <span>完成 0%</span>
+                        <!-- db edit -->
                         <div class="user-detail-progress-bar">
                             <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: @(progressbar[ViewBag.link.Count])%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <img alt="完成個人資訊，獲得生日優惠禮與更精準的課程推薦！" src="/Assets/img/member/frog-3.png">
+                <img alt="完成個人資訊，獲得生日優惠禮與更精準的課程推薦！" src="/Assets/img/frog-3.png">
             </div>
 
             <!-- 登入方式區塊 -->
@@ -104,128 +113,215 @@
                                   aria-hidden="true" class="fa fa-question-circle"
                                   currentitem="false"></span>
                             <!-- 彈跳提示 -->
-                            <div class="type-dark" id="about-login"
-                                 data-id="tooltip"
-                                 style="left: 611px; top: 167px;">
+                            <div class="type-dark" id="about-login" data-id="tooltip" style="left: 611px; top: 167px;">
                                 <span>你現有的登入方式，以及可進行的相關動作</span>
                             </div>
                         </label>
                         <div class="signin-way-block">
-                            <!-- hahow(未登入) -->
+
+                            <!-- hahow -->
                             <div class="local-bar marg-t-30 pad-b-30 clearfix">
-                                <div class="left-block">
-                                    <div class="auth-provider-icon inline-block">
-                                        <img alt="icon"
-                                             class="wide-icon"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAAwCAMAAAGuz79rAAAABGdBTUEAALGPC/xhBQAAAcJQTFRFAAAAAMCnAL6lAL+mAL+lAL+kAL6kAL+lAL6kAb6kAr6kA76lBL+lBb+lBr+mB7+mCMCmCsCnC8CnDMGoDcGoDsGoD8GpEcKqEsKqFMOrFsOrF8OsGMSsGcSsGsStG8StHMWtHcWuH8WvIcavI8awJMewJsexKMiyKciyKsiyK8izLcm0Lsm0L8m0Mcq1Msq1NMq1Nsu3N8y3O825Pc25Qs67RM+8Rc+8Rs+8R9C9SNC9StC+TNG/TdG/VNPBVtPCWNTDWdTDWtTEXNXEXdXFZNfHZtjIadjJatnJa9nKbNnKbtrLcdrMc9vNddvNeNzOet3Pf97Rgt/Sg9/ShN/Thd/Th+DUi+HVjOHVjuLWj+LXkeLXkuPYk+PYlePZmeTanebcnuXbnubcoObdoufdo+fep+jfqOjfrOnhrurir+ris+vjtOvkue3mu+3mvu7nv+7owe/ow+/pxfDqyPDryvHszvLtz/Lt0PPu1PTv2PXx2fXx2vXx2/Xy3fby3vbz4ff04/f15Pj16Pn26fn36vn36/n37Pr47fr48Pv58vv68/v69Pz79vz79/z8+P38+f38+v39/P79/f7+/v7+////ogT+igAAAAh0Uk5TAD16e7Lm/f676wOiAAACX0lEQVRYw2Ng4EAAZDaEIzp16lSEzFSOZASnY6o0ph5WBJsF0zSgYRZIesKRLIVYg9s0Dg7s7jSFOhBNYioIcCKkEDpap05VRNLCwIHLDhZcEow4xHEbRYQE0LnuWCR6wB6JwO5Bx1psHoxJA0UUFjuAiidNnYRFQgBo1kTSnEusBCMHSYCNgYNEgEODbW29PdEaVKdMhQEnIjRMRQAjrpypU/kI2uADVhzIUQShiPGDxlQXEGU01Yo4P4gX1pvztIDtaSY2lKS7pk6dpE1ajJKcBHBqYGAjST0TA84ciQ2wMpJqAQcjqX5gpUMoYRXlzujJ5iNBQyk4XTTyEakhDZ6+a7mI0BCClCFq7OUIaihGKM/nsOmZWklIgx9MeR2nA4hKJ+gk/jaQum5hPRDVJUyMp6UmTFEBUhJ9k5WIDNasGm4QlV9OXLCqg9wSxJEEoqyJsiGgLYPDHeJzLeKc5AsNqFji01I0UHkmx0AVAoNOAwsDM4k1FgMDEzsHzQAbieUeGYCFgYPGYERZYFcNzYRNnvxUt0A/dyoqaHDloZoFMnETp2IFFZZUsEC3GbvheWYcHFyapjo8lFpQh8XwMksOHrd6KEee0iBybkAxvMWLl8O6AsZr9eamRiSLBnWDjZsYKwXkCfp3gnn9UZLUTKbKiQZIPMV4LaomU4WESSA3VzlwgluymWAfFBhSzQLjdkiIl5hwiIT2IuIjkopBpKYsLKLhXY0U2z3BotQtKsRCeuCGT05Vpk1hJ+QUlhLlITtaXFPZAlbams/KwMhGS/PZgN0jBkYWGvmClQVoPAAoJIArkVTPLQAAAABJRU5ErkJggg==">
-                                    </div>
-                                    <h5 class="unbinded-account inline-block marg-l-25">
-                                        尚未建立 Hahow 帳號
-                                    </h5>
-                                </div>
-                                <div class="right-block">
-                                    <div class="inline-block text-underline marg-r-5 link-gray ">
-                                        建立並連結帳號
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- google(已登入) -->
-                            <div class="google-bar marg-t-30 pad-b-30 clearfix">
-                                <div class="left-block">
-                                    <div class="auth-provider-icon inline-block">
-                                        <img alt="icon"
-                                             class="narrow-icon"
-                                             src="https://hahow.in/static/media/icon_google.9a3e4567.svg"><img alt="pic"
-                                                                                                               class="profile-image"
-                                                                                                               src="/Assets/img/member/hn.jpg"
-                                                                                                               width="">
-                                    </div>
-                                    <!-- js edit -->
-                                    <h5 class="binded-account inline-block marg-l-25">
-                                        連結為 威志
-                                    </h5>
-                                    <!-- js edit -->
-                                </div>
-                                <div class="right-block">
-                                    <div>
-                                        <div class="inline-block marg-r-5 unclickable-text"
-                                             data-for="unbinding"
-                                             data-tip="如欲取消<br />請先連結其他登入方式"
-                                             currentitem="false">
-                                            取消連結
+                                @{
+                                    if (ViewBag.account == null)
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="wide-icon" src="~/Assets/img/icon-hahow.png" />
+                                            </div>
+                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                                尚未建立 Hahow 帳號
+                                            </h5>
                                         </div>
-                                        <!-- 彈跳提示 -->
-                                        <div class="type-dark"
-                                             id="unbinding"
-                                             data-id="tooltip"></div>
-                                    </div>
-                                </div>
+                                        <div class="right-block">
+                                            <div class="inline-block text-underline marg-r-5 link-gray ">
+                                                建立並連結帳號
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-hahow-half.png"><img alt="pic" class="profile-image" src=@(ViewBag.photoUrl) width="">
+                                            </div>
+                                            <h5 class="binded-account inline-block marg-l-25">
+                                                已建立帳號@(ViewBag.account)
+                                            </h5>
+                                        </div>
+                                        <div class="right-block">
+                                            <div class="inline-block text-underline marg-r-5 link-gray ">
+                                                修改密碼
+                                            </div>
+                                        </div>
+                                        <div class="right-block mr-2">
+                                            <div class="inline-block text-underline marg-r-5 link-gray ">
+                                                帳號與個人網址
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             </div>
-                            <!-- facebook(未登入) -->
+
+                            <!-- google -->
+                            <div class="google-bar marg-t-30 pad-b-30 clearfix">
+                                @{
+                                    if (ViewBag.google == null)
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="wide-icon" src="~/Assets/img/icon-google.svg">
+                                            </div>
+                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                                尚未連結 Google 帳號
+                                            </h5>
+                                        </div>
+                                        <div class="right-block">
+                                            <div class="inline-block text-underline marg-r-5 link-gray ">
+                                                建立並連結帳號
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-google-half.svg"><img alt="pic" class="profile-image" src=@(ViewBag.photoUrl) width="">
+                                            </div>
+                                            <h5 class="binded-account inline-block marg-l-25">
+                                                連結為@(ViewBag.google)
+                                            </h5>
+                                        </div>
+                                        <div class="right-block">
+                                            <div>
+                                                <div class="inline-block marg-r-5 unclickable-text" data-for="unbinding" data-tip="如欲取消<br />請先連結其他登入方式" currentitem="false">
+                                                    取消連結
+                                                </div>
+                                                <!-- 彈跳提示 -->
+                                                <div class="type-dark" id="unbinding" data-id="tooltip"></div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+                            <!-- facebook -->
                             <div class="facebook-bar marg-t-30 pad-b-30 clearfix">
-                                <div class="left-block">
-                                    <div class="auth-provider-icon inline-block">
-                                        <img alt="icon"
-                                             class="wide-icon"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAAwCAMAAAGuz79rAAAABGdBTUEAALGPC/xhBQAAAJNQTFRFAAAAP1ybPVybPFuZPFqZPVuZPFuZPFqaPFqZPluaQl+cRGGdSGSfSWWgSmagS2ahVW+mWHGnXXaqaoGxdou3gJS9kKHFkaLFl6fJnKvLtL/XusTbwcvfwsvfxM3gx8/hyNHiy9PjztXl1Nro1dzp2d/r2t/r2+Ds3eLt8PL38vT49ff69vf6+Pn7+vv8/v7+////nLhOOwAAAAh0Uk5TAD16e7Lm/f676wOiAAABgElEQVRYw+1Xa1eDMAwts2DqA18I6OYDFPBZ8/9/nYVxRudaR5CesXO8fFjTcHObrATKGHTQx62BmGmGujqjwk2O3435ZjSJmoG6UWICv0YDMK9TImJpcKjpl2s0O8oYzSmvaXCbw7PM20Ntd6RqWSjMy70FSx6rEv5wNP8UiWFx0PPoWSsbAgZEjEFoit+iF6G7N6MQSohJCtEVnEfoSEE0hAoSxNxNWbcQWEC6f8asT6QJvkcVAI+ag7+T3UomiKLdrzIFyvaukVIIp2okCYQL7S3Qi7D8dUdY1INjAuEpAohuJpVDSyh6EfKOICayW3dM4OyA+MZibHYIzhAQ+94AcAaO8S8wjoDI0YBcjCZQrkf+eJ7P79+MzWSgwFr4u+VcZmxvIwi8K/vs8fMLXQnUB4/Y+uH4V4GHMDxR9lEYhq9OBBarqcs9LZErAWkWkKMJ6EeOStmJ9XNraC8SaSG1DJSALFKxR81u2gK+2/g+8wKX8QN1PGIed5SFz1X4b9Vf1GoRgeWfAAAAAElFTkSuQmCC">
-                                    </div>
-                                    <h5 class="unbinded-account inline-block marg-l-25">
-                                        尚未連結 Facebook 帳號
-                                    </h5>
-                                </div>
-                                <div class="right-block">
-                                    <div class="inline-block text-underline marg-r-5 link-gray">
-                                        前往連結帳號
-                                    </div>
-                                </div>
+                                @{
+                                    if (ViewBag.fb == null)
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="wide-icon" src="~/Assets/img/icon-fb.png" />
+                                            </div>
+                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                                尚未連結 Facebook 帳號
+                                            </h5>
+                                        </div>
+                                        <div class="right-block">
+                                            <div class="inline-block text-underline marg-r-5 link-gray">
+                                                前往連結帳號
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-fb-half.png"><img alt="pic" class="profile-image" src=@(ViewBag.photoUrl) width="">
+                                            </div>
+                                            <h5 class="binded-account inline-block marg-l-25">
+                                                連結為@(ViewBag.fb)
+                                            </h5>
+                                        </div>
+                                        <div class="right-block">
+                                            <div>
+                                                <div class="inline-block marg-r-5 unclickable-text" data-for="unbinding" data-tip="如欲取消<br />請先連結其他登入方式" currentitem="false">
+                                                    取消連結
+                                                </div>
+                                                <!-- 彈跳提示 -->
+                                                <div class="type-dark" id="unbinding" data-id="tooltip"></div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             </div>
-                            <!-- line(未登入) -->
+
+                            <!-- line -->
                             <div class="line-bar marg-t-30 pad-b-30 clearfix">
-                                <div class="left-block">
-                                    <div class="auth-provider-icon inline-block">
-                                        <img alt="icon"
-                                             class="wide-icon"
-                                             src="https://hahow.in/static/media/icon_line_wide.7fddac90.svg">
-                                    </div>
-                                    <h5 class="unbinded-account inline-block marg-l-25">
-                                        尚未連結 LINE 帳號
-                                    </h5>
-                                </div>
-                                <div class="right-block text-right">
-                                    <div class="inline-block text-underline marg-r-5 link-gray text-right">
-                                        前往連結帳號
-                                    </div>
-                                </div>
+                                @{
+                                    if (ViewBag.fb == null)
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="wide-icon" src="~/Assets/img/icon-line.svg">
+                                            </div>
+                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                                尚未連結 LINE 帳號
+                                            </h5>
+                                        </div>
+                                        <div class="right-block text-right">
+                                            <div class="inline-block text-underline marg-r-5 link-gray text-right">
+                                                前往連結帳號
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="left-block">
+                                            <div class="auth-provider-icon inline-block">
+                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-line-half.png"><img alt="pic" class="profile-image" src=@(ViewBag.photoUrl) width="">
+                                            </div>
+                                            <h5 class="binded-account inline-block marg-l-25">
+                                                連結為@(ViewBag.line)
+                                            </h5>
+                                        </div>
+                                        <div class="right-block">
+                                            <div>
+                                                <div class="inline-block marg-r-5 unclickable-text" data-for="unbinding" data-tip="如欲取消<br />請先連結其他登入方式" currentitem="false">
+                                                    取消連結
+                                                </div>
+                                                <!-- 彈跳提示 -->
+                                                <div class="type-dark" id="unbinding" data-id="tooltip"></div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
-                    <!-- email(未登入) -->
+
+                    <!-- email -->
                     <form novalidate="" class="email-form pad-t-30" name="emailForm">
                         <label for="email">
                             電子信箱
-                            <span data-tip="true" data-for="verify-email"
-                                  aria-hidden="true" class="fa fa-question-circle"
-                                  currentitem="false"></span>
+                            <span data-tip="true" data-for="verify-email" aria-hidden="true" class="fa fa-question-circle" currentitem="false"></span>
                             <!-- 彈跳提示 -->
-                            <div class="type-dark" id="verify-email"
-                                 data-id="tooltip">
+                            <div class="type-dark" id="verify-email" data-id="tooltip">
                                 <span>驗證信箱，讓 Hahow 帶給你更完整的體驗。</span>
                             </div>
                         </label>
                         <div class="flex">
                             <div class="email-input">
                                 <div class="flex">
-                                    <input placeholder="信箱" type="email"
-                                           class="mail-input"
-                                           input-element" value="">
+                                    <input placeholder="信箱" type="email" class="mail-input" value=@(ViewBag.email)>
                                 </div>
                             </div>
-                            <button class="verification-btn">
-                                <div>
-                                    <span aria-hidden="true"
-                                          class="fa fa-envelope-o"></span>&nbsp;驗證&nbsp;
-                                </div>
-                            </button>
+                            @{
+                                if (ViewBag.emailStatus == null || ViewBag.emailStatus == false)
+                                {
+                                    <button class="verification-btn">
+                                        <div>
+                                            <span aria-hidden="true" class="fas fa-envelope"></span>&nbsp;驗證&nbsp;
+                                        </div>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button disabled class="verification-btn-disable">
+                                        &nbsp;已驗證&nbsp;
+                                    </button>
+                                }
+                            }
                         </div>
                     </form>
                 </div>
@@ -237,25 +333,56 @@
                     <div class="ta-l">
                         <div class="info-sub-block">
                             <!-- 性別 -->
+                            <!-- db edit -->
                             <div class="">
                                 <label>性別</label>
                                 <div class="form-check-inline">
                                     <label class="form-check-label" for="radio1">
-                                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">男
+                                        @{
+                                            if (ViewBag.sex == "男")
+                                            {
+                                                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+                                                                            }
+                                            else
+                                            {
+                                                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">
+                                            }
+                                        }
+                                        男
                                     </label>
                                 </div>
                                 <div class="form-check-inline">
                                     <label class="form-check-label" for="radio2">
-                                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">女
+                                        @{
+                                            if (ViewBag.sex == "女")
+                                            {
+                                                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2" checked>
+                                            }
+                                            else
+                                            {
+                                                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                                            }
+                                        }
+                                        女
                                     </label>
                                 </div>
                                 <div class="form-check-inline">
                                     <label class="form-check-label" for="radio3">
-                                        <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option2">多元性別
+                                        @{
+                                            if (ViewBag.sex == "多元性別")
+                                            {
+                                                <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3" checked>
+                                            }
+                                            else
+                                            {
+                                                <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">
+                                            }
+                                        }
+                                        多元性別
                                     </label>
                                 </div>
-
-
+                                @*varselectedColor=$('#color input:radio:checked').val();*@
+                                <!-- db edit -->
                                 @*<div class="">
                                         <div class="radio-button undefined">
                                             <div class="flex align-items-center">
@@ -290,8 +417,15 @@
                             <div class="marg-t-15 birthday-wrap clearfix">
                                 <label for="birthday">生日</label>
                                 <div class="date-wrap">
-                                    <select class="bday-year"
-                                            name="year">
+                                    <select class="bday-year" name="year">
+                                        @{
+                                            if (ViewBag.birthday != null)
+                                            {
+                                                <option value=@(ViewBag.birthday.Year) selected>
+                                                    @(ViewBag.birthday.Year)
+                                                </option>
+                                            }
+                                        }
                                         <option></option>
                                         <option value="2016">
                                             2016
@@ -536,7 +670,18 @@
                                         <option value="1936">
                                             1936
                                         </option>
-                                    </select><span class="marg-rl-5">年</span><select class="bday-month" name="month">
+                                    </select>
+                                    <span class="marg-rl-5">年</span>
+                                    
+                                    <select class="bday-month" name="month">
+                                        @{
+                                            if (ViewBag.birthday != null)
+                                            {
+                                                <option value=@(ViewBag.birthday.Month) selected>
+                                                    @(ViewBag.birthday.Month)
+                                                </option>
+                                            }
+                                        }
                                         <option></option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -550,7 +695,18 @@
                                         <option value="10">10</option>
                                         <option value="11">11</option>
                                         <option value="12">12</option>
-                                    </select><span class="marg-rl-5">月</span><select class="bday-day" name="date">
+                                    </select>
+                                    <span class="marg-rl-5">月</span>
+
+                                    <select class="bday-day" name="date">
+                                        @{
+                                            if (ViewBag.birthday != null)
+                                            {
+                                                <option value=@(ViewBag.birthday.Day) selected>
+                                                    @(ViewBag.birthday.Day)
+                                                </option>
+                                            }
+                                        }
                                         <option></option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -583,18 +739,24 @@
                                         <option value="29">29</option>
                                         <option value="30">30</option>
                                         <option value="31">31</option>
-                                    </select><span class="marg-rl-5">日</span>
+                                    </select>
+                                    <span class="marg-rl-5">日</span>
                                 </div>
                             </div>
                         </div>
                         <div class="marg-t-30">
                             <p class="hint">*性別與生日儲存後將無法修改，請確認資料是否正確</p>
-                            <button class="close-click-btn save-basic-info-btn" disabled="">
-                                儲存
-                            </button>
-                            @*判斷是否生日填寫完成，if是刪除close-click-btn的disabled*@
+                            @{
+                                if (ViewBag.birthday != null)
+                                {
+                                    <button class="close-click-btn save-basic-info-btn" disabled="">儲存</button>
+                                }
+                                else
+                                {
+                                    <button class="close-click-btn save-basic-info-btn">儲存</button>
+                                }
+                            }
                         </div>
-                        <div></div>
                     </div>
                 </div>
             </div>
@@ -642,788 +804,25 @@
                                         <span class="jobs-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">法律、社會及文化專業</span>
                                         <span class="jobs-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">醫療</span>
                                         <span class="jobs-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">退休</span>
+                                        <span class="jobs-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">學生</span>
                                         <span class="jobs-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">非營利組織</span>
                                         <span class="jobs-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">其他</span>
-                                        <div class="marg-t-20">或</div>
-                                        <div class="student-field flex align-items-center">
-                                            <span class="jobs-btn toggle-btn marg-t-20 marg-r-10  inline-block text-center"
-                                                  role="button">我是學生</span>
-                                            <div class="student-dropdown" marg-t-20"
-                                                 height="40px"
-                                                 width="250px">
-                                                <select class="form-select dropdown-toggle" aria-label="Default select example">
-                                                    <option selected>就讀科系</option>
-                                                    <option value="1">資訊工程學系</option>
-                                                    <option value="2">資訊管理學系</option>
-                                                    <option value="3">其他資訊相關學系</option>
-                                                </select>
-                                                @*<div
-                                            class="dropdown btn-group">
-                                            <button id="OccupationDialog-department-filter"
-                                                    role="button"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    type="button"
-                                                    class="dropdown-toggle btn btn-default"><span>就讀科系</span>
-                                                    <span
-                                                            class="caret"></span></button>
-                                            <ul role="menu"
-                                                    class="dropdown-menu"
-                                                    aria-labelledby="OccupationDialog-department-filter">
-                                                    <li role="presentation"
-                                                            class="active ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">就讀科系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">資訊工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">資訊管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">遊戲與多媒體應用學</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他資訊相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">電機工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">電子工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">機械工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">土木工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">化學工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">材料工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">工業工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">通訊工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">光電工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他工程相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">數學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">物理系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">化學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">統計系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他數理化相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">中醫學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">醫學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">口腔醫學</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">藥學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">護理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">營養學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">醫學技術與檢驗學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">復健治療學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">公共衛生學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他醫藥衛生相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">生命科學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">生化與生物科技學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">生物學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">生物醫學科學</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他生命科學相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">食品科學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">農藝學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">動物科學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">園藝學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">森林學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">漁業資源學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">獸醫學</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他生物資源相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">地球科學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">大氣科學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">地理與地質科學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">環境工程學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他地球與環境相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">建築學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">景觀與空間設計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">都市計畫學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">工業設計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">商業設計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">媒體與視覺傳達設計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">時尚與服裝設計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">美容與美髮設計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">產品與工藝設計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他建築與設計相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">美術學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">音樂學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">戲劇與舞蹈學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">視覺與藝術創作學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他藝術相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">社會學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">社會工作學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">心理與輔導學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">幼兒保育學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">老年服務學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">宗教與生死學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">人類與民族學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他社會與心理相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">大眾傳播學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">新聞學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">廣播電視與電影學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">廣告學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">資訊傳播學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他大眾傳播相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">英語å&shy;¸系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">應用外語系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">日本語文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">德國語文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">法國與文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">西班牙語文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">義大利語文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">韓國語文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">翻譯學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他外語相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">中國文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">歷史學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">哲學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">台灣文學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">文化創意產業學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他文史哲相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">教育學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">幼兒教育學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">特殊教育學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">學科教育學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他教育相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">法律學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">財經法律學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">政治學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">外交與國際事務學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">公共行政學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他法政相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">企業管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">行銷與流通管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">運輸管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">工業與商業管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">醫務管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">新媒體暨傳播管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">不動產與城鄉環境學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他管理相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">財務金融學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">會計學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">經濟學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">國際貿易學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">風險管理與保險學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">財政與稅務學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他財經相關學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">觀光學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">餐飲與餐旅管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">旅館與旅運管理學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">休閒與遊憩學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">體育與運動學系</a>
-                                                    </li>
-                                                    <li role="presentation"
-                                                            class=" ">
-                                                            <a role="menuitem"
-                                                                    tabindex="-1"
-                                                                    href="#">其他遊憩與運動相關學系</a>
-                                                    </li>
-                                            </ul>
-                                    </div>*@
-                                            </div>
-                                        </div>
+
+                                        @*<div class="student-field flex align-items-center">
+                                                <span class="jobs-btn toggle-btn marg-t-20 marg-r-10  inline-block text-center"
+                                                      role="button">我是學生</span>
+                                                <div class="student-dropdown" marg-t-20"
+                                                     height="40px"
+                                                     width="250px">
+                                                    <select class="form-select dropdown-toggle" aria-label="Default select example">
+                                                        <option selected>就讀科系</option>
+                                                        <option value="1">資訊工程學系</option>
+                                                        <option value="2">資訊管理學系</option>
+                                                        <option value="3">其他資訊相關學系</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>*@
                                         <div class="text-center marg-t-50 confirm">
                                             <button disabled=""
                                                     class="confirm-btn">
@@ -1665,8 +1064,8 @@
 
                     <label class="marg-t-30" id="user-detail-recreations">其他個人喜好（多選）</label>
                     <!-- <div class="relative inline-block">
-            <div class="mask pseudo-btn absolute"></div>
-    </div> -->
+                            <div class="mask pseudo-btn absolute"></div>
+                    </div> -->
                     <button class="oval-btn-plus-text oval-btn" id="user-like-btn">+</button>
                     <!-- 彈跳視窗-其他個人喜好 -->
                     <div>
@@ -1680,38 +1079,36 @@
                                 <div overflow="hidden"
                                      class="overlay-likes-block">
                                     <div class="overlay-likes-size">
-                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                              role="button">旅行旅遊</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                             role="button">運動健身</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                            role="button">瑜珈</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                         role="button">桌遊</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                      role="button">棋類遊戲</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                     role="button">插花</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                  role="button">素描</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                               role="button">插畫</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                            role="button">水彩</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                         role="button">速寫</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                      role="button">手寫字</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                    role="button">書法</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                 role="button">電腦繪圖</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                role="button">手作</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                             role="button">寫作</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          role="button">社會服務</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         role="button">電玩</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      role="button">手遊</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   role="button">電影</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                role="button">電視劇</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              role="button">舞台劇</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            role="button">舞蹈</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         role="button">閱讀</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      role="button">貓派</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   role="button">狗派</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                role="button">占卜</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             role="button">美容妝髮</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            role="button">區塊鏈</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          role="button">金融理財</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         role="button">運動賽事</span><span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        role="button">政治經濟</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">旅行旅遊</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">運動健身</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">瑜珈</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">桌遊</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">棋類遊戲</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">插花</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">素描</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">插畫</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">水彩</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">速寫</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">手寫字</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">書法</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">電腦繪圖</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">手作</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">寫作</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">社會服務</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">電玩</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">手遊</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">電影</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">電視劇</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">舞台劇</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">舞蹈</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">閱讀</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">狗派</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">占卜</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">美容妝髮</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">區塊鏈</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">金融理財</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">運動賽事</span>
+                                        <span class="likes-btn toggle-btn marg-t-20 marg-r-10 inline-block text-center" role="button">政治經濟</span>
                                         <div class="text-center marg-t-50 confirm">
                                             <button disabled=""
                                                     class="confirm-btn">
