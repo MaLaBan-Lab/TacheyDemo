@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using Tachey001.Models;
 
 namespace Tachey001.Controllers
@@ -44,20 +46,54 @@ namespace Tachey001.Controllers
             return View();
         }
 
-        public ActionResult Step(int? id)
+        public ActionResult Step(int? id, string CourseId)
         {
             ViewBag.UserId = User.Identity.GetUserId();
 
             ViewBag.Id = id;
-            return View();
+            ViewBag.CourseId = CourseId;
+
+            var result = tacheyDb.Course.Find(CourseId);
+
+            return View(result);
         }
+        public string GetRandomId(int Length)
+        {
+            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+            int passwordLength = Length;
+            char[] chars = new char[passwordLength];
+            Random rd = new Random();
 
+            for (int i = 0; i < passwordLength; i++)
+            {
+                chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
+            }
 
+            return new string(chars);
+        }
+        public ActionResult DeleteCourse(string id)
+        {
+            var result = tacheyDb.Course.Find(id);
+
+            tacheyDb.Course.Remove(result);
+
+            tacheyDb.SaveChanges();
+
+            tacheyDb.Dispose();
+
+            return RedirectToAction("Console", "Member");
+        }
         public ActionResult Step0()
         {
+            var CourseId = GetRandomId(12);
             var currentUserId = User.Identity.GetUserId();
 
-            Course newCourse = new Course { CourseID = 1, MemberID = currentUserId };
+            while(tacheyDb.Course.Find(CourseId) != null)
+            {
+                CourseId = GetRandomId(12);
+            }
+
+            Course newCourse = new Course { CourseID = CourseId, MemberID = currentUserId };
 
             tacheyDb.Course.Add(newCourse);
 
@@ -65,7 +101,73 @@ namespace Tachey001.Controllers
 
             tacheyDb.Dispose();
 
-            return RedirectToAction("Step", "Courses", new { id = 1});
+            return RedirectToAction("Step", "Courses", new { id = 0, CourseId = CourseId });
+        }
+        public ActionResult Step1(string CourseId)
+        {
+            return RedirectToAction("Step", "Courses", new { id = 1, CourseId = CourseId });
+        }
+        [HttpPost]
+        public ActionResult Step2(string Title, string Description, string TitlePageImageURL, string MarketingImageURL, string CourseId)
+        {
+            var result = tacheyDb.Course.Find(CourseId);
+
+            result.Title = Title;
+            result.Description = Description;
+            result.TitlePageImageURL = TitlePageImageURL;
+            result.MarketingImageURL = MarketingImageURL;
+
+            tacheyDb.SaveChanges();
+
+            return RedirectToAction("Step", "Courses", new { id = 2, CourseId = CourseId });
+        }
+        public ActionResult Step3(string Tool, string CourseLevel, string Effect, string CoursePerson, string CourseId)
+        {
+            var result = tacheyDb.Course.Find(CourseId);
+
+            result.Tool = Tool;
+            result.CourseLevel = CourseLevel;
+            result.Effect = Effect;
+            result.CoursePerson = CoursePerson;
+
+            tacheyDb.SaveChanges();
+
+            return RedirectToAction("Step", "Courses", new { id = 3, CourseId = CourseId });
+        }
+        public ActionResult Step4(string CourseId)
+        {
+
+            return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
+        }
+        public ActionResult Step5(string CourseId)
+        {
+
+            return RedirectToAction("Step", "Courses", new { id = 5, CourseId = CourseId });
+        }
+        public ActionResult Step6(string CourseId)
+        {
+
+            return RedirectToAction("Step", "Courses", new { id = 6, CourseId = CourseId });
+        }
+        public ActionResult Step7(string CourseId)
+        {
+
+            return RedirectToAction("Step", "Courses", new { id = 7, CourseId = CourseId });
+        }
+        public ActionResult Step8(string CourseId)
+        {
+
+            return RedirectToAction("Step", "Courses", new { id = 8, CourseId = CourseId });
+        }
+        public ActionResult Step9(string CourseId)
+        {
+
+            return RedirectToAction("Step", "Courses", new { id = 9, CourseId = CourseId });
+        }
+        public ActionResult StepFinish(string CourseId)
+        {
+
+            return RedirectToAction("Console", "Member");
         }
     }
 }

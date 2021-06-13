@@ -134,12 +134,8 @@
         <div class="col-10">
             <div class="row justify-content-center">
                 <button type="button" class="btn btn-outline-secondary btn-lg px-5 w-25 mx-3">
-                    前往課程預覽
+                    @Html.ActionLink("送出審核", "StepFinish", "Courses", new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })
                 </button>
-                <button type="button" class="btn btn-secondary btn-lg px-5 w-25 mx-3" disabled>
-                    送出審核
-                </button>
-
             </div>
         </div>
     </div>
