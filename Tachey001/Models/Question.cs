@@ -14,9 +14,13 @@ namespace Tachey001.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int QuestionID { get; set; }
 
-        public int MemberID { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string MemberID { get; set; }
 
-        public int CourseID { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string CourseID { get; set; }
 
         [StringLength(50)]
         public string ChapterID { get; set; }
