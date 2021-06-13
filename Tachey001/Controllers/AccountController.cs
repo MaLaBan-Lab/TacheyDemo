@@ -171,17 +171,6 @@ namespace Tachey001.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", "請按一下此連結確認您的帳戶 <a href=\"" + callbackUrl + "\">這裏</a>");
 
-                    using (TacheyContext context = new TacheyContext())
-                    {
-                        var email = User.Identity.GetUserName();
-
-                        Member member = new Member { MemberID = "abc123", Email = email };
-
-                        context.Member.Add(member);
-
-                        context.SaveChanges();
-                    }
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
