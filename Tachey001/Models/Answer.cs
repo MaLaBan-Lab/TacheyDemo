@@ -16,8 +16,7 @@ namespace Tachey001.Models
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MemberID { get; set; }
+        public string MemberID { get; set; }
 
         [Key]
         [Column(Order = 2)]

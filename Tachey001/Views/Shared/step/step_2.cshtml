@@ -1,94 +1,96 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-lg-7 col-sm-11 m-4">
-            <div class="row text-secondary my-4">
-                <div class="col-12">
-                    <label for="basic-url">學生需要用到的工具/材料/軟體（若為付費軟體務必標明）</label>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control"
-                                  aria-label="With textarea"
-                                  rows="3"></textarea>
+﻿@model Course
+
+
+@using (Html.BeginForm("Step3", "Courses", new { CourseId = ViewBag.CourseId }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-sm-11 m-4">
+                <div class="row text-secondary my-4">
+                    <div class="col-12">
+                        <label for="basic-url">學生需要用到的工具/材料/軟體（若為付費軟體務必標明）</label>
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(m => m.Tool, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <label for="basic-url" class="text-black-50 fs-5">記得清楚標明版本、型號等資訊。詳細建議參考右側《課前資訊撰寫指南與範例》</label>
                     </div>
-                    <label for="basic-url" class="text-black-50 fs-5">記得清楚標明版本、型號等資訊。詳細建議參考右側《課前資訊撰寫指南與範例》</label>
                 </div>
-            </div>
-            <div class="row text-secondary my-4">
-                <div class="col-12">
-                    <label for="basic-url">這堂課適合什麼程度的學生？需具備哪些背景知識？（如：初學、進階）</label>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control"
-                                  aria-label="With textarea"
-                                  rows="3"></textarea>
+                <div class="row text-secondary my-4">
+                    <div class="col-12">
+                        <label for="basic-url">這堂課適合什麼程度的學生？需具備哪些背景知識？（如：初學、進階）</label>
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(m => m.CourseLevel, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <label for="basic-url" class="text-black-50 fs-5">
+                            <ul>
+                                <li class="mb-2">
+                                    這堂課是為了什麼程度的學生設計的：是初學者或進階學習的學生？
+                                </li>
+                                <li>並用具體或可客觀參考的標準描述需要的背景知識或能力</li>
+                            </ul>
+                        </label>
                     </div>
-                    <label for="basic-url" class="text-black-50 fs-5">
-                        <ul>
-                            <li class="mb-2">
-                                這堂課是為了什麼程度的學生設計的：是初學者或進階學習的學生？
-                            </li>
-                            <li>並用具體或可客觀參考的標準描述需要的背景知識或能力</li>
-                        </ul>
-                    </label>
                 </div>
-            </div>
-            <div class="row text-secondary my-4">
-                <div class="col-12">
-                    <label for="basic-url">上完這堂課後，學生可以達成的學習成效是什麼？</label>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control"
-                                  aria-label="With textarea"
-                                  rows="3"></textarea>
+                <div class="row text-secondary my-4">
+                    <div class="col-12">
+                        <label for="basic-url">上完這堂課後，學生可以達成的學習成效是什麼？</label>
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(m => m.Effect, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <label for="basic-url" class="text-black-50 fs-5">
+                            <ul>
+                                <li class="mb-2">
+                                    可具體描寫如：可學會的知識技能、如何應用、實際做出的東西、達成哪種目標等
+                                </li>
+                                <li>
+                                    若課程同時適合不同程度、背景的學生，則應針對不同學生列出不同的學習成效
+                                </li>
+                            </ul>
+                        </label>
                     </div>
-                    <label for="basic-url" class="text-black-50 fs-5">
-                        <ul>
-                            <li class="mb-2">
-                                可具體描寫如：可學會的知識技能、如何應用、實際做出的東西、達成哪種目標等
-                            </li>
-                            <li>
-                                若課程同時適合不同程度、背景的學生，則應針對不同學生列出不同的學習成效
-                            </li>
-                        </ul>
-                    </label>
                 </div>
-            </div>
-            <div class="row text-secondary my-4">
-                <div class="col-12">
-                    <label for="basic-url">哪些人適合這堂課呢？</label>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control"
-                                  aria-label="With textarea"
-                                  rows="3"></textarea>
+                <div class="row text-secondary my-4">
+                    <div class="col-12">
+                        <label for="basic-url">哪些人適合這堂課呢？</label>
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(m => m.CoursePerson, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <label for="basic-url" class="text-black-50 fs-5">
+                            <ul>
+                                <li class="mb-2">
+                                    形容這堂課適合的族群，建議可從「情境、需求或工作」角度切入，鎖定這堂課的目標客群（如：平常需要基礎設計排版的小編）
+                                </li>
+                                <li>也可考慮將「不適合」這堂課的族群清楚標註</li>
+                            </ul>
+                        </label>
                     </div>
-                    <label for="basic-url" class="text-black-50 fs-5">
-                        <ul>
-                            <li class="mb-2">
-                                形容這堂課適合的族群，建議可從「情境、需求或工作」角度切入，鎖定這堂課的目標客群（如：平常需要基礎設計排版的小編）
-                            </li>
-                            <li>也可考慮將「不適合」這堂課的族群清楚標註</li>
-                        </ul>
-                    </label>
                 </div>
+                <!--<button type="button" class="btn btn-outline-secondary btn-lg px-5">-->
+                    @*@Html.ActionLink("下一步", "Step3", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
+                <!--</button>-->
+                <input type="submit" value="儲存，下一步" class="btn btn-outline-secondary btn-lg px-5" />
             </div>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-5">
-                下一步
-            </button>
-        </div>
-        <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
-            <div class="row bg-light-gray px-3">
-                <div class="row p-4">
-                    <h6 class="my-3">
-                        <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>更快掌握撰寫訣竅？
-                    </h6>
-                    <h6 class="my-3">
-                        <i class="
+            <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
+                <div class="row bg-light-gray px-3">
+                    <div class="row p-4">
+                        <h6 class="my-3">
+                            <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>更快掌握撰寫訣竅？
+                        </h6>
+                        <h6 class="my-3">
+                            <i class="
                     far
                     fa-lightbulb fa-2x
                     hahow-dark-orange
                     mr-2
                     invisible
                   "></i><a href="" class="hahow-orange fs-2">查看《課前資訊撰寫指南與範例》</a>
-                    </h6>
+                        </h6>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+}

@@ -11,7 +11,7 @@
             </div>
             <div class="row m-3">
                 <button type="button" class="btn btn-outline-secondary btn-lg px-5">
-                    下一步
+                    @Html.ActionLink("下一步", "Step8", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })
                 </button>
             </div>
         </div>

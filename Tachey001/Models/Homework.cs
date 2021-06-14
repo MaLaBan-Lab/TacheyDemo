@@ -13,7 +13,7 @@ namespace Tachey001.Models
         public int HwkID { get; set; }
 
         [Required]
-        [StringLength(80)]
+        [StringLength(128)]
         public string MemberID { get; set; }
 
         [Required]

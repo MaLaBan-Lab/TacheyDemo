@@ -1,4 +1,4 @@
-﻿
+﻿@model Course
 @section topCSS{
     @Styles.Render("~/Assets/css/step.css")
 }
@@ -21,7 +21,7 @@
                      style="width:  @num%"
                      id="progress-bar"></div>
             </div>
-            <a href="@Url.Action("Step", new { id = 0} )">
+            <a href="@Url.Action("Step", new { id = 0, CourseId = ViewBag.CourseId} )">
                 <button type="button"
                         class="btn bg-hahow-green btn-circle"
                         title="開始">
@@ -30,7 +30,7 @@
             </a>
             @for (int i = 1; i < 10; i++)
             {
-                <a href="@Url.Action("Step", new { id = i} )">
+                <a href="@Url.Action("Step", new { id = i, CourseId = ViewBag.CourseId} )">
                     @if (ViewBag.Id >= i)
                     {
                         <button type="button"
@@ -65,26 +65,21 @@
          id="contentHTML">
         @if (@ViewBag.Id == null)
         {
-            @Html.Partial($"step/step_0")
+            @Html.Partial($"step/step_0", Model)
         }
         else
         {
-            @Html.Partial($"step/step_{ViewBag.Id}")
+            @Html.Partial($"step/step_{ViewBag.Id}", Model)
             @Scripts.Render("~/Assets/js/step.js")
         }
     </div>
 </div>
 
 @section endJS{
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
     <script>
-        DecoupledEditor
+        ClassicEditor
             .create(document.querySelector('#editor'))
-            .then(editor => {
-                const toolbarContainer = document.querySelector('#toolbar-container');
-
-                toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-            })
             .catch(error => {
                 console.error(error);
             });

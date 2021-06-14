@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿@model Course
+
+<div class="container">
     <div class="row justify-content-center my-3">
         <div class="
           col-11
@@ -17,7 +19,23 @@
         <div class="col-6">
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">課程標題</a>
+                    <a href="@Url.Action("Step", new { id = 1, CourseId = Model.CourseID} )" class="text-secondary">課程標題</a>
+                </div>
+                <div class="col-7">
+                    @if (Model.Title == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增課程標題喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">@Model.Title</span>
+                    }
+                </div>
+            </div>
+            <div class="row justify-content-center my-4">
+                <div class="col-2">
+                    <a href="@Url.Action("Step", new { id = 7, CourseId = Model.CourseID} )" class="text-secondary">課程網址</a>
                 </div>
                 <div class="col-7">
                     <i class="fas fa-exclamation-triangle hahow-orange"></i>
@@ -26,96 +44,129 @@
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">課程網址</a>
+                    <a href="@Url.Action("Step", new { id = 1, CourseId = Model.CourseID} )" class="text-secondary">課程描述</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    @if (Model.Description == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">@Model.Description</span>
+                    }
                 </div>
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">課程描述</a>
+                    <a href="@Url.Action("Step", new { id = 6, CourseId = Model.CourseID} )" class="text-secondary">課程影片</a>
                 </div>
                 <div class="col-7">
                     <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    <span class="text-secondary">還沒有新增課程影片喔～</span>
                 </div>
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">募資影片</a>
+                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.CourseID} )" class="text-secondary">需要工具</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    @if (Model.Tool == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增需要工具喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">@Model.Tool</span>
+                    }
                 </div>
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">需要工具</a>
+                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.CourseID} )" class="text-secondary">背景知識</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    @if (Model.CourseLevel == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增背景知識喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">@Model.CourseLevel</span>
+                    }
                 </div>
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">背景知識</a>
+                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.CourseID} )" class="text-secondary">課程成就</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    @if (Model.Effect == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增課程成就喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">@Model.Effect</span>
+                    }
                 </div>
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">課程成就</a>
+                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.CourseID} )" class="text-secondary">適合族群</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    @if (Model.CoursePerson == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增適合族群喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">@Model.CoursePerson</span>
+                    }
                 </div>
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">適合族群</a>
+                    <a href="@Url.Action("Step", new { id = 3, CourseId = Model.CourseID} )" class="text-secondary">課程單元</a>
                 </div>
                 <div class="col-7">
                     <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    <span class="text-secondary">還沒有新增課程單元喔～</span>
                 </div>
             </div>
             <div class="row justify-content-center my-4">
                 <div class="col-2">
-                    <a href="" class="text-secondary">課程單元</a>
+                    <a href="@Url.Action("Step", new { id = 8, CourseId = Model.CourseID} )" class="text-secondary">老師身份</a>
                 </div>
                 <div class="col-7">
                     <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="" class="text-secondary">老師身份</a>
-                </div>
-                <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    <span class="text-secondary">還沒有新增老師身份喔～</span>
                 </div>
             </div>
         </div>
         <div class="col-5">
-            <div class="row my-4">
-                <div class="col-12">
-                    <a href="" class="text-secondary">詳細的課程內容</a>
+            <div class="row my-4 border-bottom">
+                <div class="col-12 pb-4">
+                    <a href="@Url.Action("Step", new { id = 5, CourseId = Model.CourseID} )" class="text-secondary">詳細的課程內容</a>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    @if (Model.Introduction == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增詳細的課程內容喔～</span>
+                    }
+                    else
+                    {
+                        <div class="text-secondary">@Html.Raw(Model.Introduction)</div>
+                    }
                 </div>
             </div>
         </div>
@@ -134,12 +185,8 @@
         <div class="col-10">
             <div class="row justify-content-center">
                 <button type="button" class="btn btn-outline-secondary btn-lg px-5 w-25 mx-3">
-                    前往課程預覽
+                    @Html.ActionLink("送出審核", "StepFinish", "Courses", new { CourseId = Model.CourseID }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })
                 </button>
-                <button type="button" class="btn btn-secondary btn-lg px-5 w-25 mx-3" disabled>
-                    送出審核
-                </button>
-
             </div>
         </div>
     </div>

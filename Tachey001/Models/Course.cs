@@ -9,8 +9,7 @@ namespace Tachey001.Models
     [Table("Course")]
     public partial class Course
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CourseID { get; set; }
+        public string CourseID { get; set; }
 
         [StringLength(40)]
         public string Title { get; set; }
@@ -62,7 +61,8 @@ namespace Tachey001.Models
         [Column(TypeName = "date")]
         public DateTime? CreateDate { get; set; }
 
-        [StringLength(40)]
-        public string Status { get; set; }
+        public bool? CreateFinish { get; set; }
+
+        public bool? CreateVerify { get; set; }
     }
 }

@@ -11,8 +11,7 @@ namespace Tachey001.Models
     {
         [Key]
         [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CourseID { get; set; }
+        public string CourseID { get; set; }
 
         [Key]
         [Column(Order = 1)]
