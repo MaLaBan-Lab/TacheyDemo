@@ -1,12 +1,28 @@
-﻿
-
-
-@section topCSS{
+﻿@section topCSS{
     @Styles.Render("~/Assets/css/discussions.css")
 }
 @{
     ViewBag.Title = "Tachey";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+}
+@{
+    string chapter = null;
+    string title = null;
+    string videourl = null;
+
+    using (TacheyContext context = new TacheyContext())
+    {
+        var result = context.CourseUnit.FirstOrDefault(x=>x.ChapterID == "第一章");
+
+        if (result != null)
+        {
+            chapter = result.ChapterID;
+            title = result.UnitName;
+            videourl = result.CourseURI;
+        }
+
+        context.SaveChanges();
+    }
 }
 
 <h1>Hahow 線上課程</h1>
@@ -22,7 +38,7 @@
             </ol>
         </nav>
         <!-- title 區塊 -->
-        <h2 class="title text-center">MVC 進階課程：觀念、語法、專案</h2>
+        <h2 class="title text-center">@title</h2>
 
         <!-- 主要內容 -->
         <div class="main_wrap col-12">
@@ -31,7 +47,7 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe width="100%" height="100%" src="https://drive.google.com/file/d/1o4e8Ooy1a-UpnBsCZPugNmBQ-1BHfCPH/preview"
+                <iframe width="100%" height="100%" src="@videourl"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -75,7 +91,7 @@
                                     <div class="icon">
                                         <i class="fa fa-th-list" aria-hidden="true"></i>
                                     </div>
-                                    <div class="text">第一章</div>
+                                    <div class="text">@chapter</div>
                                     <div class="arrow">
                                         <i class="fa fa-chevron-up" aria-hidden="true"></i>
                                     </div>
@@ -203,10 +219,10 @@
         </div>
 
         <div class="buy_wrap col-12 col-md-4 col-lg-4">
-             <div class="collect">
+            <div class="collect">
                 <i class="fa fa-bookmark" aria-hidden="true"></i>
                 <span>收藏</span>
-            </div> 
+            </div>
             <div class="btn_wrap">
                 <button class="btn btn-success">馬上購買</button>
                 <button class="btn btn-outline-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
