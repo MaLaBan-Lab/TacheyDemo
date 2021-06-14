@@ -190,6 +190,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\PayController.cs" />
+    <Compile Include="Controllers\StepController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Order_Detail.cs" />
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\PersonalUrl.cs" />
     <Compile Include="Models\Point.cs" />

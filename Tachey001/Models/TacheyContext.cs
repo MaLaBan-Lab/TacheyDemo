@@ -17,21 +17,22 @@ namespace Tachey001.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<CategoryDetail> CategoryDetail { get; set; }
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<CourseBuyed> CourseBuyed { get; set; }
+        public virtual DbSet<CourseCategory> CourseCategory { get; set; }
         public virtual DbSet<CourseUnit> CourseUnit { get; set; }
         public virtual DbSet<Homework> Homework { get; set; }
         public virtual DbSet<Invoice> Invoice { get; set; }
         public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Order_Detail> Order_Detail { get; set; }
         public virtual DbSet<Owner> Owner { get; set; }
         public virtual DbSet<Point> Point { get; set; }
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<Answer> Answer { get; set; }
-        public virtual DbSet<CategoryDetail> CategoryDetail { get; set; }
-        public virtual DbSet<CourseCategory> CourseCategory { get; set; }
         public virtual DbSet<CourseChapter> CourseChapter { get; set; }
         public virtual DbSet<PersonalUrl> PersonalUrl { get; set; }
 
@@ -71,6 +72,10 @@ namespace Tachey001.Models
             modelBuilder.Entity<CourseUnit>()
                 .Property(e => e.UnutID)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Order_Detail>()
+                .Property(e => e.UnitPrice)
+                .HasPrecision(19, 4);
 
             modelBuilder.Entity<Question>()
                 .Property(e => e.ChapterID)

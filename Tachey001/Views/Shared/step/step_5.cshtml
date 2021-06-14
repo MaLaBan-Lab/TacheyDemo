@@ -1,69 +1,78 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-lg-7 col-sm-11 m-4">
-            <div class="row text-secondary my-3">
-                <div class="col-12">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1" class="mb-5">主要的課程介紹</label>
-                            <div class="d-flex">
-                                <select class="form-control w-25 mr-3" id="exampleFormControlSelect1">
-                                    <option>課程緣起</option>
-                                    <option>課程核心特色</option>
-                                    <option>課程單元規劃</option>
-                                    <option>關於講師</option>
-                                    <option>講師作品</option>
-                                    <option>回覆與作業設計</option>
-                                </select>
-                                <button type="button" id="example" class="btn btn-white" data-toggle="tooltip" data-placement="right" title="插入我們建議的章節段落與段落編輯說明，方便你製作符合提案審核標準的課程介紹。">
-                                    <span class="bg-dark d-block rounded-circle font-weight-bold btn-sm-circle text-white text-center line-height-20">?</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row text-secondary">
-                <div class="col-12 mb-5">
-                    <!-- The toolbar will be rendered in this container. -->
-                    <div id="toolbar-container"></div>
+﻿@model Course
 
-                    <!-- This container will become the editable. -->
-                    <div id="editor" class="border">
-                        <h1>課程緣起</h1>
+
+@using (Html.BeginForm("Step6", "Courses", new { CourseId = ViewBag.CourseId }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-sm-11 m-4">
+                <div class="row text-secondary my-3">
+                    <div class="col-12">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1" class="mb-5">主要的課程介紹</label>
+                                <div class="d-flex">
+                                    <select class="form-control w-25 mr-3" id="exampleFormControlSelect1">
+                                        <option>課程緣起</option>
+                                        <option>課程核心特色</option>
+                                        <option>課程單元規劃</option>
+                                        <option>關於講師</option>
+                                        <option>講師作品</option>
+                                        <option>回覆與作業設計</option>
+                                    </select>
+                                    <button type="button" id="example" class="btn btn-white" data-toggle="tooltip" data-placement="right" title="插入我們建議的章節段落與段落編輯說明，方便你製作符合提案審核標準的課程介紹。">
+                                        <span class="bg-dark d-block rounded-circle font-weight-bold btn-sm-circle text-white text-center line-height-20">?</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                <div class="row text-secondary">
+                    <div class="col-12 mb-5">
+                        <!-- The toolbar will be rendered in this container. -->
+                        <div id="toolbar-container">
+                        </div>
+
+                        <!-- This container will become the editable. -->
+                        @*<textarea name="content" id="editor"></textarea>*@
+                        @Html.TextAreaFor(m=>m.Introduction, new { @id = "editor", @class = "border"})
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-secondary btn-lg px-5">
+                    儲存，下一步
+                    @*@Html.ActionLink("下一步", "Step6", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
+                </button>
             </div>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-5">
-                下一步
-            </button>
-        </div>
-        <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
-            <div class="row bg-light-gray px-3">
-                <div class="row p-4">
-                    <h6 class="my-3">
-                        <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>文案撰寫提醒
-                    </h6>
-                    <p class="line-height">
-                        提案需包含以下內容，才能通過<a href="" class="hahow-orange">提案審核標準</a>唷！
-                    </p>
-                    <p class="line-height">
-                        <ul>
-                            <li class="m-2"><a href="" class="text-secondary">課程緣起 >></a></li>
-                            <li class="m-2"><a href="" class="text-secondary">課程核心特色 >></a></li>
-                            <li class="m-2"><a href="" class="text-secondary">課程單元規劃 >></a></li>
-                            <li class="m-2"><a href="" class="text-secondary">課程解鎖活動（非必要） >></a></li>
-                            <li class="m-2"><a href="" class="text-secondary">關於講師 >></a></li>
-                            <li class="m-2"><a href="" class="text-secondary">講師作品 >></a></li>
-                            <li class="m-2"><a href="" class="text-secondary">回覆與作業設計 >></a></li>
-                        </ul>
-                    </p>
-                    <p class="line-height">
-                        越詳細的內容將會提升學生對課程的信任感；你可以任意地調整段落順序、新增章節，並善用編輯排版功能，客製化完整的提案，使提案更具獨特性更吸引人！
-                    </p>
-                    <a href="" class="w-100 text-center hahow-orange my-3 fs-2">查看課程撰寫範例</a>
+            <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
+                <div class="row bg-light-gray px-3">
+                    <div class="row p-4">
+                        <h6 class="my-3">
+                            <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>文案撰寫提醒
+                        </h6>
+                        <p class="line-height">
+                            提案需包含以下內容，才能通過<a href="" class="hahow-orange">提案審核標準</a>唷！
+                        </p>
+                        <p class="line-height">
+                            <ul>
+                                <li class="m-2"><a href="" class="text-secondary">課程緣起 >></a></li>
+                                <li class="m-2"><a href="" class="text-secondary">課程核心特色 >></a></li>
+                                <li class="m-2"><a href="" class="text-secondary">課程單元規劃 >></a></li>
+                                <li class="m-2"><a href="" class="text-secondary">課程解鎖活動（非必要） >></a></li>
+                                <li class="m-2"><a href="" class="text-secondary">關於講師 >></a></li>
+                                <li class="m-2"><a href="" class="text-secondary">講師作品 >></a></li>
+                                <li class="m-2"><a href="" class="text-secondary">回覆與作業設計 >></a></li>
+                            </ul>
+                        </p>
+                        <p class="line-height">
+                            越詳細的內容將會提升學生對課程的信任感；你可以任意地調整段落順序、新增章節，並善用編輯排版功能，客製化完整的提案，使提案更具獨特性更吸引人！
+                        </p>
+                        <a href="" class="w-100 text-center hahow-orange my-3 fs-2">查看課程撰寫範例</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+}

@@ -27,7 +27,8 @@ namespace Tachey001.Models
 
         public DateTime? JoinTime { get; set; }
 
-        public bool? Sex { get; set; }
+        [StringLength(6)]
+        public string Sex { get; set; }
 
         [StringLength(10)]
         public string CountryRegion { get; set; }
@@ -63,7 +64,7 @@ namespace Tachey001.Models
         [StringLength(10)]
         public string Language { get; set; }
 
-        [StringLength(80)]
+        [StringLength(4000)]
         public string Photo { get; set; }
 
         [StringLength(200)]

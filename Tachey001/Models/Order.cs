@@ -12,13 +12,17 @@ namespace Tachey001.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrderID { get; set; }
 
-        public int CourseID { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string CourseID { get; set; }
 
         public int TicketID { get; set; }
 
         public int InvoiceID { get; set; }
 
-        public int MemberID { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string MemberID { get; set; }
 
         [Required]
         [StringLength(20)]

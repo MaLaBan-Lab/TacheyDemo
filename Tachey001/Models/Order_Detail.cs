@@ -6,15 +6,19 @@ namespace Tachey001.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CourseCategory")]
-    public partial class CourseCategory
+    public partial class Order_Detail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CategoryID { get; set; }
+        public int OrderID { get; set; }
+
+        public int CourseID { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal UnitPrice { get; set; }
 
         [Required]
-        [StringLength(40)]
-        public string CategoryName { get; set; }
+        [StringLength(200)]
+        public string CourseName { get; set; }
     }
 }
