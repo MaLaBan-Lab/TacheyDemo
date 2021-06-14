@@ -2,9 +2,9 @@
 @Styles.Render("~/Assets/css/card.css")
 
 @{
+    //Layout = null;
     ViewBag.Title = "Profile";
 }
-
 
 <div class="container">
 
@@ -20,9 +20,7 @@
                             <div class="profile-image-wrapper marg-b-25">
                                 <div class="user-img-block profile-image profile-image-xlg " size="170">
                                     <a class="no-pointer" href="/">
-                                        <!-- db edit -->
-                                        <img src="/Assets/img/photo.png" width="" class="user-img">
-                                        <!-- db edit -->
+                                        <img src=@(ViewBag.photoUrl) width="" class="user-img">
                                     </a>
                                 </div>
                                 <div class="upload-btn">
@@ -36,9 +34,7 @@
                             </div>
                             <div class="username editable">
                                 <h3>
-                                    <!-- db edit -->
-                                    底迪
-                                    <!-- db edit -->
+                                    @(ViewBag.name)
                                     <span class="pan edit-icon" id="name-textarea-pen">
                                         <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                     </span>
@@ -47,7 +43,7 @@
                                     <div class="username-input">
                                         <div class="input-wrapper flex relative">
                                             <!-- db edit -->
-                                            <input type="text" class="input-element" id="name-input-textarea" value="">
+                                            <input type="text" class="input-element" id="name-input-textarea" value=@(ViewBag.name)>
                                             <!-- db edit -->
                                         </div>
                                     </div>
@@ -75,7 +71,7 @@
                                                     <span>Facebook 個人頁面網址</span>
                                                     <div class="marg-b-15">
                                                         <div class="input-wrapper flex relative">
-                                                            <input placeholder="https://www.facebook.com/yourAccountId" class="input-element" data-type="facebook" value="">
+                                                            <input placeholder="https://www.facebook.com/yourAccountId" class="input-element" data-type="facebook" value=@(ViewBag.fbConnection)>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -83,7 +79,7 @@
                                                     <span>Google Plus 個人頁面網址</span>
                                                     <div class="marg-b-15">
                                                         <div class="input-wrapper flex relative">
-                                                            <input placeholder="https://plus.google.com/yourAccountId/posts" class="input-element" data-type="googlePlus" value="">
+                                                            <input placeholder="https://plus.google.com/yourAccountId/posts" class="input-element" data-type="googlePlus" value=@(ViewBag.googleConnection)>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -91,7 +87,7 @@
                                                     <span>YouTube 頻道</span>
                                                     <div class="marg-b-15">
                                                         <div class="input-wrapper flex relative">
-                                                            <input placeholder="https://www.youtube.com/yourChannel" class="input-element" data-type="youtube" value="">
+                                                            <input placeholder="https://www.youtube.com/yourChannel" class="input-element" data-type="youtube" value=@(ViewBag.ytConnection)>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -99,7 +95,7 @@
                                                     <span>Behance 網址</span>
                                                     <div class="marg-b-15">
                                                         <div class="input-wrapper flex relative">
-                                                            <input placeholder="https://www.behance.net/yourName" class="input-element" data-type="behance" value="">
+                                                            <input placeholder="https://www.behance.net/yourName" class="input-element" data-type="behance" value=@(ViewBag.behanceConnection)>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,7 +103,7 @@
                                                     <span>Pinterest 網址</span>
                                                     <div class="marg-b-15">
                                                         <div class="input-wrapper flex relative">
-                                                            <input placeholder="https://www.pinterest.com/yourName/" class="input-element" data-type="pinterest" value="">
+                                                            <input placeholder="https://www.pinterest.com/yourName/" class="input-element" data-type="pinterest" value=@(ViewBag.pinterestConnection)>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -115,7 +111,7 @@
                                                     <span>個人網站或部落格網址</span>
                                                     <div class="marg-b-15">
                                                         <div class="input-wrapper flex relative">
-                                                            <input placeholder="https://www.yourBlog.com/" class="input-element" data-type="website" value="">
+                                                            <input placeholder="https://www.yourBlog.com/" class="input-element" data-type="website" value=@(ViewBag.blogConnection)>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,8 +131,8 @@
 
                         </div>
                         <div class="course">
-                            <div><span class="txt-small">已參加</span><span class="hightlight"><!-- db edit -->0<!-- db edit --> 堂課</span></div>
-                            <div><span class="txt-small">已開設</span><span class="hightlight"><!-- db edit -->0<!-- db edit --> 堂課</span></div>
+                            <div><span class="txt-small">已參加</span><span class="hightlight">@(ViewBag.takeCourseCount) 堂課</span></div>
+                            <div><span class="txt-small">已開設</span><span class="hightlight">@(ViewBag.giveCourseCount) 堂課</span></div>
                         </div>
 
                         <!-- 關於我 -->
@@ -145,9 +141,7 @@
                                 <h6 class="marg-b-0"><b>關於我</b></h6>
                                 <div class="about-content editable about-content-intro">
                                     <span style="display: flex;">
-                                        <!-- db edit -->
-                                        <p id="intro-p">簡單介紹一下自己吧！</p>
-                                        <!-- db edit -->
+                                        <p id="intro-p">@(ViewBag.about)</p>
                                         <span class="pan marg-l-10" id="intro-textarea-pen">
                                             <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                         </span>
@@ -168,9 +162,7 @@
                                 <h6 class="marg-b-0"><b>自己的專長</b></h6>
                                 <div class="about-content editable about-content-expert">
                                     <span style="display: flex;">
-                                        <!-- db edit -->
-                                        <p id="expert-p">有什麼擅長的事情嗎？</p>
-                                        <!-- db edit -->
+                                        <p id="expert-p">@(ViewBag.expertise)</p>
                                         <span class="pan marg-l-10" id="expert-textarea-pen">
                                             <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                         </span>
@@ -188,30 +180,28 @@
                             </div>
 
                             @*.caoJBn {
-                            width: 100%;
-                            margin-bottom: 10px;
-                            min-height: 42px;
-                            color: white;
-                            background-color: rgb(0, 190, 164);
-                            font-weight: 600;
-                            line-height: 1.75;
-                            border-radius: 6px;
-                            box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px;
-                            padding: 0px 20px;
-                            display: flex;
-                            -webkit-box-align: center;
-                            align-items: center;
-                            }*@
-                            
+                                width: 100%;
+                                margin-bottom: 10px;
+                                min-height: 42px;
+                                color: white;
+                                background-color: rgb(0, 190, 164);
+                                font-weight: 600;
+                                line-height: 1.75;
+                                border-radius: 6px;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px;
+                                padding: 0px 20px;
+                                display: flex;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                }*@
+
                             @*<div class="sc-19hrkds-1 caoJBn"><div class="toaster-icon pad-tb-15 pad-r-20 marg-r-20"><span aria-hidden="true" class="fa fa-check-circle"></span></div>更新成功</div>*@
 
                             <div class="info editable">
                                 <h6 class="marg-b-0"><b>感興趣的事物</b></h6>
                                 <div class="about-content editable about-content-like">
                                     <span style="display: flex;">
-                                        <!-- db edit -->
-                                        <p id="like-p">平常喜歡做什麼呢？</p>
-                                        <!-- db edit -->
+                                        <p id="like-p">@(ViewBag.interestContent)</p>
                                         <span class="pan marg-l-10" id="like-textarea-pen">
                                             <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                         </span>
@@ -265,12 +255,10 @@
                     <div class="ta-l">
                         <div class="relative pad-rl-0">
                             <div class="cover-image">
-                                <!--db edit-->
-                                <img alt="icon" class="" src="/Assets/img/cover-default.png">
-                                <!--db edit-->
+                                <img alt="icon" class="" src=@(ViewBag.theme)>
                             </div>
                             <div class="upload-btn">
-                                <input accept=".jpg,.png" id="file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@ >
+                                <input accept=".jpg,.png" id="file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@>
                                 <div class="click-container">
                                     <button class="update-btn" height="50px" width="50px" onclick="file.click()">
                                         <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
@@ -283,9 +271,7 @@
                                 <div class="tab-block underline marg-b-5" id="text-textarea-pen">
                                     <span contenttext="編輯" aria-hidden="true" class="fas fa-pencil-alt pp-edit pull-right pad-tb-15"></span>
                                 </div>
-                                <!--db edit-->
-                                <p>編輯個人頁面，和大家分享更多精彩故事</p>
-                                <!--db edit-->
+                                <p>@(ViewBag.introduction)</p>
                             </div>
                             <!--編輯框-->
                             <div class="row text-secondary mt-4" style="display:none;">
@@ -319,6 +305,10 @@
                 <!-- 課程卡 -->
                 <div class="course-card">
                     <div class="briefs-container row mt-1">
+                        @{
+
+                            ViewBag.ParentViewBag = ViewBag;
+                        }
                         @for (var i = 0; i < 30; i++)
                         {
                             @Html.Partial("CardTemplate")
@@ -385,7 +375,6 @@
             <!--</div>
                 </div>
             </div>-->
-
             <!-- 我的課程作品 -->
             <div class="marg-b-30">
                 <div class="course-overview underline">

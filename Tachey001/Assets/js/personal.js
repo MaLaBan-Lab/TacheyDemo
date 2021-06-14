@@ -68,8 +68,8 @@ $(".style-submit-btn").on('click', function () {
 
 // 使用者姓名
 $("#name-textarea-pen").on('click', function () {
-    let h3 = document.getElementsByTagName('h3');
-    $('.name-input-textarea').value(h3.text());
+    //let h3 = document.getElementsByTagName('h3');
+    //$('.name-input-textarea').value(h3.text());
     $('.username-input-block').css("display", "block");
     $('#name-textarea-pen').parent().css("display", "none");
 });

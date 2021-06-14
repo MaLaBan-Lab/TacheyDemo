@@ -15,6 +15,6 @@ namespace Tachey001.Models
 
         public int OrderID { get; set; }
 
-        public int MemberID { get; set; }
+        public string MemberID { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@Styles.Render("~/Assets/js/slick/slick.css")
+﻿@model IEnumerable<Tachey001.Models.Point>
+@Styles.Render("~/Assets/js/slick/slick.css")
 @Styles.Render("~/Assets/js/slick/slick-theme.css")
 @Styles.Render("~/Assets/css/hahow-point.css")
 @{
@@ -30,18 +31,11 @@
                             <span>
                                 <span class="">= NT$ @(ViewBag.totalPoint/100)</span>&nbsp;
                                 <span class="">
-                                    <span data-tip="true"
-                                          data-for="tooltip-兌換比率為 100 : 1"
-                                          aria-hidden="true"
-                                          class="fas fa-question-circle"
-                                          currentitem="false"></span>
+                                    <span data-tip="true" data-for="tooltip-兌換比率為 100 : 1" aria-hidden="true" class="fas fa-question-circle" currentitem="false"></span>
                                     <!-- 彈跳提示 -->
-                                    <div class="exchange type-dark place-top"
-                                         id="tooltip-兌換比率為 100 : 1"
-                                         data-id="tooltip">
+                                    <div class="exchange type-dark place-top" id="tooltip-兌換比率為 100 : 1" data-id="tooltip">
                                         <span>
-                                            兌換比率為 100 :
-                                            1
+                                            兌換比率為 100 : 1
                                         </span>
                                     </div>
                                 </span>
@@ -57,14 +51,14 @@
                                 <span data-tip="true"
                                       data-for="tooltip-獲得之點數"
                                       aria-hidden="true"
-                                      class="fa fa-question-circle"
+                                      class="fas fa-question-circle"
                                       currentitem="false"></span>
                                 <!-- 彈跳提示 -->
                                 <div class="expired type-dark place-top"
                                      id="tooltip-獲得之點數"
                                      data-id="tooltip">
                                     <span>
-                                        2020/05/01 ~ 2020/05/31
+                                        2020/06/01 ~ 2020/06/31
                                         獲得之點數
                                     </span>
                                 </div>
@@ -86,7 +80,7 @@
                             <button class="rule-btn">
                                 HP
                                 規則說明 <span aria-hidden="true"
-                                           class="fa fa-play"></span>
+                                           class="fas fa-play"></span>
                             </button>
                         </a>
                     </div>
@@ -406,32 +400,66 @@
                         <span class="tab" role="tab" tabindex="0" id="used-point">已用點數</span>
                     </div>
                     <!-- 已獲點數 -->
-                    <!-- js edit -->
-                    <div class="dynamic-block table-row marg-rl-20 pad-tb-10">
-                        <div class="date">2021/05/17</div>
-                        <div class="text">
-                            <div class="title">每日登入 Hahow</div>
-                            <div class="message"></div>
-                            <div class="expire-info">有效期限 2022/05/31</div>
+                    @if (Enumerable.Count(ViewBag.pointHistoGet) == 0)
+                    {
+                        <div class="no-stuff text-center vertical-horizontal-center fade out">
+                            <div class="pad-tb-30">
+                                <img alt="No POSITIVE Hahow Point History"
+                                     src="https://hahow.in/static/media/icon-empty.39f7f2df.svg">
+                                <p>目前沒有已獲得的點數</p>
+                            </div>
                         </div>
-                        <div class="points pad-rl-5 text-center">
-                            <span class="hp-point sm text-center">
-                                + 50
-                                HP
-                            </span>
-                        </div>
-                    </div>
-                    <!-- js edit -->
+                    }
+                    else
+                    {
+                        foreach (var item in ViewBag.pointHistoGet)
+                        {
+                            <div class="dynamic-block table-row marg-rl-20 pad-tb-10">
+                                <div class="date">@item.GetTime.ToString("yyyy/MM/dd")</div>
+                                <div class="text">
+                                    <div class="title">@item.PointName</div>
+                                    <div class="message"></div>
+                                    <div class="expire-info">有效期限 @item.Deadline.ToString("yyyy/MM/dd")</div>
+                                </div>
+                                <div class="points pad-rl-5 text-center">
+                                    <span class="hp-point sm text-center">
+                                        + @item.PointNum HP
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    }
+
                     <!-- 已用點數 -->
-                    <!-- js edit -->
-                    <div class="no-stuff text-center vertical-horizontal-center fade out">
-                        <div class="pad-tb-30">
-                            <img alt="No POSITIVE Hahow Point History"
-                                 src="https://hahow.in/static/media/icon-empty.39f7f2df.svg">
-                            <p>目前沒有已獲得的點數</p>
+                    @if (Enumerable.Count(ViewBag.pointHistoUsed) == 0)
+                    {
+                        <div class="no-stuff text-center vertical-horizontal-center fade out">
+                            <div class="pad-tb-30">
+                                <img alt="No POSITIVE Hahow Point History"
+                                     src="https://hahow.in/static/media/icon-empty.39f7f2df.svg">
+                                <p>目前沒有已獲得的點數</p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- js edit -->
+                    }
+                    else
+                    {
+                        foreach (var item in ViewBag.pointHistoUsed)
+                        {
+                            <div class="dynamic-block table-row marg-rl-20 pad-tb-10">
+                                <div class="date">@item.GetTime.ToString("yyyy/MM/dd")</div>
+                                <div class="text">
+                                    <div class="title">@item.PointName</div>
+                                    <div class="message"></div>
+                                    <div class="expire-info">有效期限 @item.Deadline.ToString("yyyy/MM/dd")</div>
+                                </div>
+                                <div class="points pad-rl-5 text-center">
+                                    <span class="hp-point sm text-center">
+                                        + @item.PointNum HP
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
 

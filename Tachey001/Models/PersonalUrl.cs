@@ -11,7 +11,7 @@ namespace Tachey001.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MemberID { get; set; }
+        public string MemberID { get; set; }
 
         [StringLength(80)]
         public string FbUrl { get; set; }

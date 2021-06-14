@@ -9,7 +9,7 @@ namespace Tachey001.Models
     [Table("Owner")]
     public partial class Owner
     {
-        public int MemberID { get; set; }
+        public string MemberID { get; set; }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

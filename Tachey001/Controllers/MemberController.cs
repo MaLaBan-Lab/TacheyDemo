@@ -12,7 +12,11 @@ namespace Tachey001.Controllers
     [Authorize]
     public class MemberController : Controller
     {
-
+        private TacheyContext _context;
+        public MemberController()
+        {
+            _context = new TacheyContext();
+        }
         // GET: Member
         public ActionResult Console()
         {
@@ -35,11 +39,10 @@ namespace Tachey001.Controllers
                 {
                     ViewBag.totalPoint = result.Point;
                 }
-
-                //var point_histo = context.Point.Where(x => x.MemberID);
-
-                //ViewBag.point_histo = point_histo;
             }
+
+            ViewBag.pointHistoGet = from p in _context.Point where p.MemberID == UserId && p.Status == false select p; // 已獲得
+            ViewBag.pointHistoUsed = from p in _context.Point where p.MemberID == UserId && p.Status == true select p; // 已使用
 
             return View();
         }
@@ -130,6 +133,114 @@ namespace Tachey001.Controllers
 
         public ActionResult Profile()
         {
+            var UserId = User.Identity.GetUserId();
+
+            using (TacheyContext context = new TacheyContext())
+            {
+                var result = context.Member.Find(User.Identity.GetUserId());
+
+                if (result.Photo != null)
+                {
+                    ViewBag.photoUrl = result.Photo;
+                }
+                else
+                {
+                    ViewBag.photoUrl = "/Assets/img/photo.png";
+                }
+                if (result.Theme != null)
+                {
+                    ViewBag.theme = result.Theme;
+                }
+                else
+                {
+                    ViewBag.theme = "/Assets/img/cover-default.png";
+                }
+                if (result.Name != null)
+                {
+                    ViewBag.name = result.Name;
+                }
+                else
+                {
+                    ViewBag.name = "無名氏";
+                }
+
+                if (result.About != null)
+                {
+                    ViewBag.about = result.About;
+                }
+                else
+                {
+                    ViewBag.about = "簡單介紹一下自己吧！";
+                }
+                if (result.Expertise != null)
+                {
+                    ViewBag.expertise = result.Expertise;
+                }
+                else
+                {
+                    ViewBag.expertise = "有什麼擅長的事情嗎？";
+                }
+                if (result.InterestContent != null)
+                {
+                    ViewBag.interestContent = result.InterestContent;
+                }
+                else
+                {
+                    ViewBag.interestContent = "平常喜歡做什麼呢？";
+                }
+                if (result.Introduction != null)
+                {
+                    ViewBag.introduction = result.Introduction;
+                }
+                else
+                {
+                    ViewBag.introduction = "編輯個人頁面，和大家分享更多精彩故事";
+                }
+                
+            }
+
+            ViewBag.giveCourseCount = from p in _context.Course where p.MemberID == UserId select p; // 已開設
+            ViewBag.giveCourseCount = Enumerable.Count(ViewBag.giveCourseCount);
+            ViewBag.takeCourseCount = from p in _context.CourseBuyed where p.MemberID == UserId select p; // 已參加
+            ViewBag.takeCourseCount = Enumerable.Count(ViewBag.takeCourseCount);
+
+            ViewBag.fbConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.FbUrl;
+            if (Enumerable.Count(ViewBag.fbConnection) == 0)
+            {
+                ViewBag.fbConnection = "";
+            } 
+            ViewBag.googleConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.GoogleUrl;
+            if (Enumerable.Count(ViewBag.googleConnection) == 0)
+            {
+                ViewBag.googleConnection = "";
+            }
+            ViewBag.ytConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.YouTubeUrl;
+            if (Enumerable.Count(ViewBag.ytConnection) == 0)
+            {
+                ViewBag.ytConnection = "";
+            }
+            ViewBag.behanceConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.BehanceUrl;
+            if (Enumerable.Count(ViewBag.behanceConnection) == 0)
+            {
+                ViewBag.behanceConnection = "";
+            }
+            ViewBag.pinterestConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.PinterestUrl;
+            if (Enumerable.Count(ViewBag.pinterestConnection) == 0)
+            {
+                ViewBag.pinterestConnection = "";
+            }
+            ViewBag.blogConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.BlogUrl;
+            if (Enumerable.Count(ViewBag.blogConnection) == 0)
+            {
+                ViewBag.blogConnection = "";
+            }
+
+            // 課程
+            ViewBag.courseGive = from p in _context.Course where p.MemberID == UserId select p; // 開課
+            ViewBag.courseTake = from p in _context.CourseBuyed where p.MemberID == UserId select p; // 修課
+            ViewBag.courseFavorites = from p in _context.Owner where p.MemberID == UserId select p; // 收藏
+            ViewBag.courseWork = from p in _context.Homework where p.MemberID == UserId select p; // 作品
+
             return View();
         }
 

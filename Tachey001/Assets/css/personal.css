@@ -735,6 +735,7 @@ button,
 p {
 	/*margin: 0px 0px 1em;*/
 	line-height: 1.75em;
+	margin-bottom: 0;
 }
 
 .fa.pull-right {

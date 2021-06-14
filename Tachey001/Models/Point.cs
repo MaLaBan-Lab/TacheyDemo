@@ -12,7 +12,7 @@ namespace Tachey001.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PointID { get; set; }
 
-        public int MemberID { get; set; }
+        public string MemberID { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -20,8 +20,10 @@ namespace Tachey001.Models
 
         public int PointNum { get; set; }
 
+        [DisplayFormat(DataFormatString = " {0:yyyy/MM/dd} ")]
         public DateTime GetTime { get; set; }
 
+        [DisplayFormat(DataFormatString = " {0:yyyy/MM/dd} ")]
         public DateTime Deadline { get; set; }
 
         public bool Status { get; set; }
