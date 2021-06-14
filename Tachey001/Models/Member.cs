@@ -27,7 +27,7 @@ namespace Tachey001.Models
 
         public DateTime? JoinTime { get; set; }
 
-        [StringLength(10)]
+        [StringLength(6)]
         public string Sex { get; set; }
 
         [StringLength(10)]
