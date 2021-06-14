@@ -1,194 +1,198 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-lg-7 col-sm-11 m-4">
-            <div class="row text-secondary my-4">
-                <div class="col-12">
-                    <label for="basic-url">課程標題</label>
-                    <div class="input-group mb-2">
-                        <input type="text"
-                               class="form-control"
-                               id="basic-url"
-                               aria-describedby="basic-addon3"
-                               placeholder="課程標題" />
-                    </div>
-                    <label for="basic-url" class="text-black-50 fs-5">吸引人的標題很重要</label>
-                </div>
-            </div>
-            <div class="row text-secondary">
-                <div class="col-12">
-                    <label for="basic-url">簡短的課程描述（建議 64 字內）</label>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control"
-                                  aria-label="With textarea"
-                                  placeholder="輸入文字"
-                                  rows="8"></textarea>
+﻿@model Course
+
+
+@using (Html.BeginForm("Step2", "Courses", new { CourseId = ViewBag.CourseId }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-sm-11 m-4">
+                <div class="row text-secondary my-4">
+                    <div class="col-12">
+                        <label for="basic-url">課程標題</label>
+                        <div class="input-group mb-2">
+                            @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "課程標題" } })
+                        </div>
+                        <label for="basic-url" class="text-black-50 fs-5">吸引人的標題很重要</label>
                     </div>
                 </div>
-            </div>
-            <div class="row text-secondary mt-4">
-                <div class="col-12">
-                    <h6>課程的封面照片</h6>
-                </div>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-6 border-right">
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <input type="file"
-                                   class="custom-file-input"
-                                   id="inputGroupFile02" />
-                            <label class="custom-file-label text-center"
-                                   for="inputGroupFile02"
-                                   aria-describedby="inputGroupFileAddon02"><i class="far fa-image mx-2"></i>上傳課程封面</label>
+                <div class="row text-secondary">
+                    <div class="col-12">
+                        <label for="basic-url">簡短的課程描述（建議 64 字內）</label>
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "輸入文字" } })
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <label for="basic-url" class="text-black-50">
-                                建議照片比例為 1000 : 620，且寬度大於 1000
-                                像素以維持圖像品質。
-                            </label>
-                            <label for="basic-url" class="text-black-50">檔案格式僅支援 jpg, png, gif</label>
-                            <div class="col-12 border-bottom"></div>
-                        </div>
+                </div>
+                <div class="row text-secondary mt-4">
+                    <div class="col-12">
+                        <h6>課程的封面照片</h6>
                     </div>
-                    <div class="row">
-                        <div class="col-10">
-                            <div class="card my-5">
-                                <div class="card-title-image position-relative">
-                                    <div class="
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-6 border-right">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                @*<input type="file"
+                                       class="custom-file-input"
+                                       id="inputGroupFile02" />
+                                <label class="custom-file-label text-center"
+                                       for="inputGroupFile02"
+                                       aria-describedby="inputGroupFileAddon02"><i class="far fa-image mx-2"></i>上傳課程封面</label>*@
+                                @Html.EditorFor(m=>m.TitlePageImageURL, new { htmlAttributes = new { @class = "form-control", @placeholder = "上傳課程封面網址" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="basic-url" class="text-black-50">
+                                    建議照片比例為 1000 : 620，且寬度大於 1000
+                                    像素以維持圖像品質。
+                                </label>
+                                <label for="basic-url" class="text-black-50">檔案格式僅支援 jpg, png, gif</label>
+                                <div class="col-12 border-bottom"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <div class="card my-5">
+                                    <div class="card-title-image position-relative">
+                                        <div class="
                           backgroundPhoto
                           position-absolute
                           rounded-circle
                           bg-white
                         ">
-                                        <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
-                                             alt=""
-                                             class="rounded-circle position-absolute center"
-                                             id="photoImag" />
+                                            <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                                                 alt=""
+                                                 class="rounded-circle position-absolute center"
+                                                 id="photoImag" />
+                                        </div>
+                                        <div></div>
                                     </div>
-                                    <div></div>
-                                </div>
-                                <div class="card-header overflow-hidden p-0 position-relative">
-                                    <img src="data:image/png;base64,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"
-                                         class="card-img-top"
-                                         height="150px" />
-                                    <div class="
+                                    <div class="card-header overflow-hidden p-0 position-relative">
+                                        <img src="data:image/png;base64,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"
+                                             class="card-img-top"
+                                             height="150px" />
+                                        <div class="
                           position-absolute
                           bg-tape-yellow
                           text-center text-dark
                           backgroundTape
                         ">
-                                        草稿
+                                            草稿
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body"></div>
-                                <div class="card-body"></div>
-                                <div class="card-body">
-                                    <h3 class="card-title mb-4"></h3>
-                                    <p class="
+                                    <div class="card-body"></div>
+                                    <div class="card-body"></div>
+                                    <div class="card-body">
+                                        <h3 class="card-title mb-4"></h3>
+                                        <p class="
                           card-text
                           text-black-50
                           mb-1
                           d-flex
                           justify-content-between
                         ">
-                                        <span>預購價 <span class="hahow-orange">NT$0</span></span>
-                                        <span>剩30天</span>
-                                    </p>
-                                    <div class="progress mb-1 h-30">
-                                        <div class="progress-bar bg-hahow-dark-orange"
-                                             role="progressbar"
-                                             style="width: 0%"></div>
+                                            <span>預購價 <span class="hahow-orange">NT$0</span></span>
+                                            <span>剩30天</span>
+                                        </p>
+                                        <div class="progress mb-1 h-30">
+                                            <div class="progress-bar bg-hahow-dark-orange"
+                                                 role="progressbar"
+                                                 style="width: 0%"></div>
+                                        </div>
                                     </div>
+                                    <div class="card-bottom bg-hahow-dark-orange"></div>
                                 </div>
-                                <div class="card-bottom bg-hahow-dark-orange"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                @*<input type="file"
+               class="custom-file-input"
+               id="inputGroupFile02" />
+        <label class="custom-file-label text-center"
+               for="inputGroupFile02"
+               aria-describedby="inputGroupFileAddon02"><i class="far fa-image mx-2"></i>上傳方形行銷照片</label>*@
+                                @Html.EditorFor(m => m.MarketingImageURL, new { htmlAttributes = new { @class = "form-control", @placeholder = "上傳方形行銷照片網址" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="basic-url" class="text-black-50">
+                                    建議照片比例為 1:1，尺寸為 800x800
+                                    像素以維持圖像品質，應用於行銷宣傳上。
+                                </label>
+                                <label for="basic-url" class="text-black-50">檔案格式僅支援 jpg，png。</label>
+                                <div class="col-12 border-bottom"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-7">
+                                <img src="data:image/png;base64,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"
+                                     alt=""
+                                     id="cardImg" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <input type="file"
-                                   class="custom-file-input"
-                                   id="inputGroupFile02" />
-                            <label class="custom-file-label text-center"
-                                   for="inputGroupFile02"
-                                   aria-describedby="inputGroupFileAddon02"><i class="far fa-image mx-2"></i>上傳方形行銷照片</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <label for="basic-url" class="text-black-50">
-                                建議照片比例為 1:1，尺寸為 800x800
-                                像素以維持圖像品質，應用於行銷宣傳上。
-                            </label>
-                            <label for="basic-url" class="text-black-50">檔案格式僅支援 jpg，png。</label>
-                            <div class="col-12 border-bottom"></div>
-                        </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-7">
-                            <img src="data:image/png;base64,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"
-                                 alt=""
-                                 id="cardImg" />
-                        </div>
-                    </div>
+                <div class="">
+                    @*@Html.ActionLink("下一步", "Step2", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
+                    <input type="submit" value="儲存，下一步" class="btn btn-outline-secondary btn-lg px-5" />
                 </div>
             </div>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-5">
-                下一步
-            </button>
-        </div>
-        <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
-            <div class="row bg-light-gray px-3">
-                <div class="row p-4">
-                    <h6 class="my-3">
-                        <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>課程標題該怎麼取？
-                    </h6>
-                    <p class="line-height">
-                        一個好的標題應該要包含主題、適合族群和課程目標。 像是『Wordpress
-                        -
-                        自己架個人網站』、『給小資族的理財規劃』、『在家就可以做的孕婦瑜伽』等都是很好的例子！
-                    </p>
-                    <a href=""
-                       class="
+            <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
+                <div class="row bg-light-gray px-3">
+                    <div class="row p-4">
+                        <h6 class="my-3">
+                            <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>課程標題該怎麼取？
+                        </h6>
+                        <p class="line-height">
+                            一個好的標題應該要包含主題、適合族群和課程目標。 像是『Wordpress
+                            -
+                            自己架個人網站』、『給小資族的理財規劃』、『在家就可以做的孕婦瑜伽』等都是很好的例子！
+                        </p>
+                        <a href=""
+                           class="
                   w-100
                   text-right text-secondary text-decoration-none
                   my-3
                 ">>> 更多好的標題範例</a>
-                </div>
-                <div class="row p-4">
-                    <h6 class="my-3">
-                        <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>封面照片該注意的事
-                    </h6>
-                    <p class="line-height">
-                        好的封面照片會是單純、直接，並且呼應主題。更多尺寸的選擇可讓課程在其他版位出現時也能完美呈現！
-                    </p>
-                    <a href=""
-                       class="
+                    </div>
+                    <div class="row p-4">
+                        <h6 class="my-3">
+                            <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>封面照片該注意的事
+                        </h6>
+                        <p class="line-height">
+                            好的封面照片會是單純、直接，並且呼應主題。更多尺寸的選擇可讓課程在其他版位出現時也能完美呈現！
+                        </p>
+                        <a href=""
+                           class="
                   w-100
                   text-right text-secondary text-decoration-none
                   my-3
                 ">>> 如何選擇一張好的封面</a>
-                </div>
-                <div class="row p-4">
-                    <h6 class="my-3">
-                        <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>課程描述是做什麼用的？
-                    </h6>
-                    <p class="line-height">
-                        當其他人把你的課程貼到 Facebook
-                        上時，這段敘述和封面照片就會顯示在 Facebook 上的網站介紹喔！
-                    </p>
-                    <a href=""
-                       class="
+                    </div>
+                    <div class="row p-4">
+                        <h6 class="my-3">
+                            <i class="far fa-lightbulb fa-2x hahow-dark-orange mr-2"></i>課程描述是做什麼用的？
+                        </h6>
+                        <p class="line-height">
+                            當其他人把你的課程貼到 Facebook
+                            上時，這段敘述和封面照片就會顯示在 Facebook 上的網站介紹喔！
+                        </p>
+                        <a href=""
+                           class="
                   w-100
                   text-right text-secondary text-decoration-none
                   my-3
                 ">>> 更多推薦的課程敘述</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+}
