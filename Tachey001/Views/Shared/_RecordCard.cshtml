@@ -1,14 +1,17 @@
-﻿
+﻿@model OrderRecord
+
+
+
 <div class="container">
     <div class="row px-3 ">
         <div class="col-7 border-right-0 border">
             <div class=" d-inline-block mr-3 record-color ">
-                <div class="record-text py-2">訂單成立:2018-05-06 10:02</div>
-                <div class="record-text py-2">付款時間:2018-05-06 10:22</div>
+                <div class="record-text py-2">訂單成立:@Model.OrderDate</div>
+                <div class="record-text py-2">付款時間:@Model.PayDate</div>
             </div>
             <div class=" d-inline-block record-color ">
-                <div class="record-text py-2">付款方式:信用卡</div>
-                <div class="record-text py-2">實付金額:<span class="record-orange">NT$1800</span></div>
+                <div class="record-text py-2">付款方式:@Model.PayMethod</div>
+                <div class="record-text py-2">實付金額:<span class="record-orange">@Model.UnitPrice</span></div>
             </div>
         </div>
         <div class="col-5 d-flex justify-content-end align-items-center record-text border-left-0 border">
@@ -29,7 +32,7 @@
             </a>
         </div>
         <div class="col-7 d-flex justify-content-end align-items-center record-text border-left-0 border">
-            <span>NT$1800</span>
+            <span>@Model.UnitPrice</span>
         </div>
     </div>
 </div>
@@ -43,14 +46,14 @@
                     <h6 class="p-15  w-100  m-0 pt-2">發票資訊</h6>
                     <div class="invoice-wrap d-flex flex-wrap">
                         <div class="col-lg-4 col-md-4 col-sm-12 record-color ">
-                            <div class="record-text py-2">發票號碼:CD99471889</div>
-                            <div class="record-text py-2">發票隨機碼:5419</div>
-                            <div class="record-text py-2">開立日期:2018/03/22 08:32:07</div>
+                            <div class="record-text py-2">發票號碼:@Model.InvoiceNum</div>
+                            <div class="record-text py-2">發票隨機碼:@Model.InvoiceRandomNum</div>
+                            <div class="record-text py-2">開立日期:@Model.InvoiceDate</div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-12 w-100 ">
-                            <div class="record-text py-2">發票類型:電子發票 - 手機條碼: /GRKQKO2</div>
-                            <div class="record-text py-2">聯絡姓名:黃竣達</div>
-                            <div class="record-text py-2">聯絡信箱:love84031116@gmail.com</div>
+                            <div class="record-text py-2">發票類型:@Model.InvoiceType</div>
+                            <div class="record-text py-2">聯絡姓名:@Model.InvoiceName</div>
+                            <div class="record-text py-2">聯絡信箱:@Model.InvoiceEmail</div>
                         </div>
                     </div>
                 </div>

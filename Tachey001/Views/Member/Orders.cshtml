@@ -1,4 +1,5 @@
-﻿@Styles.Render("~/Assets/css/orders.css")
+﻿@model IEnumerable<Tachey001.ViewModel.OrderRecord>
+@Styles.Render("~/Assets/css/orders.css")
 @Styles.Render("~/Assets/css/record.css")
 @{
     ViewBag.Title = "Orders";
@@ -44,8 +45,11 @@
     </div>
 </div>
 
+@foreach (var item in Model)
+{
+    @Html.Partial("_RecordCard",item);
+}
 
-@Html.Partial("_RecordCard");    
 
 
 @*<div class="container mb-5">
