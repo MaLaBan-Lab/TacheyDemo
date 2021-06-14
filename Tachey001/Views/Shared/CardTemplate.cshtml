@@ -73,7 +73,7 @@
                             <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                     </span>
-                    (6)
+                    (0)
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
@@ -81,7 +81,7 @@
                     <span class="couse-time-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-time">578</span>分鐘
+                    <span class="course-time">@Html.DisplayFor(m=>m.TotalMinTime)</span>分鐘
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
@@ -89,10 +89,10 @@
                     <span class="course-people-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-people">260</span>人
+                    <span class="course-people">0</span>人
                 </span>
                 <span class="card-text hahow-dark-green classPrice">
-                    NT$<span>3,200</span>
+                    NT$<span>@Html.DisplayFor(m => m.OriginalPrice)</span>
                 </span>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
