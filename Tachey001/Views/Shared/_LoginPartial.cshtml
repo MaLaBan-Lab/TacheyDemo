@@ -1,8 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 
 @{ 
-    var UserId = User.Identity.GetUserId();
-
     string photoUrl = null;
 
     using(TacheyContext context = new TacheyContext())

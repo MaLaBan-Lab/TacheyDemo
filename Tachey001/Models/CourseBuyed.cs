@@ -10,11 +10,12 @@ namespace Tachey001.Models
     public partial class CourseBuyed
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CourseID { get; set; }
+        public string CourseID { get; set; }
 
         public int OrderID { get; set; }
 
+        [Required]
+        [StringLength(128)]
         public string MemberID { get; set; }
     }
 }

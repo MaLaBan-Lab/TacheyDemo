@@ -1,4 +1,5 @@
-﻿<div class="container">
+﻿@model Course
+<div class="container">
     <div class="row justify-content-center my-3">
         <div class="col-5 text-center text-muted text-mc">
             <h6>接下來我們會一步步的開始編輯課程，主要的內容包含了</h6>
@@ -83,7 +84,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-3 btn btn-hahow-green m-5 py-3">
-            @Html.ActionLink("點擊開課", "Step0", "Courses", new {@class = "text-decoration-none text-white w-100 h-100"})
+            @Html.ActionLink("開始編輯", "Step1", "Courses", new { CourseId = ViewBag.CourseId },new {@class = "text-decoration-none text-white w-100 h-100"})
         </div>
     </div>
 </div>

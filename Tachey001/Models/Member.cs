@@ -64,7 +64,7 @@ namespace Tachey001.Models
         [StringLength(10)]
         public string Language { get; set; }
 
-        [StringLength(80)]
+        [StringLength(4000)]
         public string Photo { get; set; }
 
         [StringLength(200)]

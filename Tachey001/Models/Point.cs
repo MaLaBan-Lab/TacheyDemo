@@ -12,6 +12,8 @@ namespace Tachey001.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PointID { get; set; }
 
+        [Required]
+        [StringLength(128)]
         public string MemberID { get; set; }
 
         [Required]

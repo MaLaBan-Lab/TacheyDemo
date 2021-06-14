@@ -10,7 +10,6 @@ namespace Tachey001.Models
     public partial class PersonalUrl
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string MemberID { get; set; }
 
         [StringLength(80)]
