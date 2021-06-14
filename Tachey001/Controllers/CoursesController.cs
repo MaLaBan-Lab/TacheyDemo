@@ -121,6 +121,7 @@ namespace Tachey001.Controllers
 
             return RedirectToAction("Step", "Courses", new { id = 2, CourseId = CourseId });
         }
+        [HttpPost]
         public ActionResult Step3(string Tool, string CourseLevel, string Effect, string CoursePerson, string CourseId)
         {
             var result = tacheyDb.Course.Find(CourseId);
@@ -134,31 +135,43 @@ namespace Tachey001.Controllers
 
             return RedirectToAction("Step", "Courses", new { id = 3, CourseId = CourseId });
         }
+        [HttpPost]
         public ActionResult Step4(string CourseId)
         {
 
             return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
         }
+        [HttpPost]
         public ActionResult Step5(string CourseId)
         {
 
             return RedirectToAction("Step", "Courses", new { id = 5, CourseId = CourseId });
         }
-        public ActionResult Step6(string CourseId)
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Step6(string Introduction, string CourseId)
         {
+            var result = tacheyDb.Course.Find(CourseId);
+
+            result.Introduction = Introduction;
+
+            tacheyDb.SaveChanges();
 
             return RedirectToAction("Step", "Courses", new { id = 6, CourseId = CourseId });
         }
+        [HttpPost]
         public ActionResult Step7(string CourseId)
         {
 
             return RedirectToAction("Step", "Courses", new { id = 7, CourseId = CourseId });
         }
+        [HttpPost]
         public ActionResult Step8(string CourseId)
         {
 
             return RedirectToAction("Step", "Courses", new { id = 8, CourseId = CourseId });
         }
+        [HttpPost]
         public ActionResult Step9(string CourseId)
         {
 
@@ -166,6 +179,12 @@ namespace Tachey001.Controllers
         }
         public ActionResult StepFinish(string CourseId)
         {
+            var result = tacheyDb.Course.Find(CourseId);
+
+            result.CreateDate = DateTime.Now;
+            result.CreateFinish = true;
+
+            tacheyDb.SaveChanges();
 
             return RedirectToAction("Console", "Member");
         }

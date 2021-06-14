@@ -27,7 +27,8 @@ namespace Tachey001.Models
 
         public DateTime? JoinTime { get; set; }
 
-        public bool? Sex { get; set; }
+        [StringLength(6)]
+        public string Sex { get; set; }
 
         [StringLength(10)]
         public string CountryRegion { get; set; }

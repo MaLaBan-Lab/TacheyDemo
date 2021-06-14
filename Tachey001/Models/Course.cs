@@ -14,7 +14,6 @@ namespace Tachey001.Models
         [StringLength(40)]
         public string Title { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [StringLength(128)]
         public string Description { get; set; }
 
@@ -24,19 +23,15 @@ namespace Tachey001.Models
         [StringLength(4000)]
         public string MarketingImageURL { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [StringLength(4000)]
         public string Tool { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [StringLength(100)]
         public string CourseLevel { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [StringLength(4000)]
         public string Effect { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [StringLength(4000)]
         public string CoursePerson { get; set; }
 
@@ -66,7 +61,8 @@ namespace Tachey001.Models
         [Column(TypeName = "date")]
         public DateTime? CreateDate { get; set; }
 
-        [StringLength(40)]
-        public string Status { get; set; }
+        public bool? CreateFinish { get; set; }
+
+        public bool? CreateVerify { get; set; }
     }
 }
