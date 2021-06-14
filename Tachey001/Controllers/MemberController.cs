@@ -134,6 +134,21 @@ namespace Tachey001.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Email(string Title, string Description, string TitlePageImageURL, string MarketingImageURL, string CourseId)
+        {
+            var result = tacheyDb.Course.Find(CourseId);
+
+            result.Title = Title;
+            result.Description = Description;
+            result.TitlePageImageURL = TitlePageImageURL;
+            result.MarketingImageURL = MarketingImageURL;
+
+            tacheyDb.SaveChanges();
+
+            return RedirectToAction("Step", "Courses", new { id = 2, CourseId = CourseId });
+        }
+
         public ActionResult Orders()
         {
             return View();
@@ -248,6 +263,15 @@ namespace Tachey001.Controllers
             ViewBag.courseTake = from p in _context.CourseBuyed where p.MemberID == UserId select p; // 修課
             ViewBag.courseFavorites = from p in _context.Owner where p.MemberID == UserId select p; // 收藏
             ViewBag.courseWork = from p in _context.Homework where p.MemberID == UserId select p; // 作品
+
+
+            //var currentId = User.Identity.GetUserId();
+
+            //ViewBag.UserPhoto = tacheyDb.Member.Find(currentId).Photo;
+
+            //var courseList = tacheyDb.Course.Where(x => x.MemberID == currentId).Select(x => x).ToList();
+
+            //return View(courseList);
 
             return View();
         }

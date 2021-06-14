@@ -303,7 +303,12 @@
                         <div class="flex">
                             <div class="email-input">
                                 <div class="flex">
-                                    <input placeholder="信箱" type="email" class="mail-input" value=@(ViewBag.email)>
+                                    @using (Html.BeginForm("Email", "Courses", new { CourseId = ViewBag.CourseId }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input placeholder="信箱" type="email" class="mail-input" value=@(ViewBag.email)>
+                                        @*@Html.EditorFor(m => m.Tool, new { htmlAttributes = new { @class = "mail-input" } })*@
+                                    }
                                 </div>
                             </div>
                             @{
@@ -746,16 +751,7 @@
                         </div>
                         <div class="marg-t-30">
                             <p class="hint">*性別與生日儲存後將無法修改，請確認資料是否正確</p>
-                            @{
-                                if (ViewBag.birthday != null)
-                                {
-                                    <button class="close-click-btn save-basic-info-btn" disabled="">儲存</button>
-                                }
-                                else
-                                {
-                                    <button class="close-click-btn save-basic-info-btn">儲存</button>
-                                }
-                            }
+                            <button class="close-click-btn save-basic-info-btn" disabled="">儲存</button>
                         </div>
                     </div>
                 </div>
