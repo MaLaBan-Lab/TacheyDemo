@@ -503,6 +503,9 @@
     <Content Include="Views\Shared\_LayoutCreate.cshtml" />
     <Content Include="Views\Home\CourseCard.cshtml" />
     <Content Include="Views\Shared\CardTemplate.cshtml" />
+    <Content Include="Views\Shared\_HighlightCardPartial.cshtml" />
+    <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
+    <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
