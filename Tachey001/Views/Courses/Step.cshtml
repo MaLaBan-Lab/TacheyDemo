@@ -1,6 +1,34 @@
 ﻿@model Course
 @section topCSS{
     @Styles.Render("~/Assets/css/step.css")
+<style>
+    #drag-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        #drag-container > .dropzone {
+            width: 150px;
+            height: 150px;
+            background: #dae8fc;
+            padding: 10px;
+            border: 1px solid #6c8ebf;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+    #draggable {
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
+        text-align: center;
+        background: #f8cecc;
+        border: 1px solid #b85450;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+    </style>
 }
 
 @{
@@ -83,5 +111,45 @@
             .catch(error => {
                 console.error(error);
             });
+    </script>
+
+    <script>
+        let draggable = document.getElementById('draggable');
+
+        draggable.addEventListener('dragstart', (ev) => {
+            ev.dataTransfer.setData('text/plain', ev.target.id);
+            ev.target.style.opacity = "0.3";
+        });
+
+        draggable.addEventListener("dragend", (ev) => {
+            ev.target.style.opacity = "";
+        });
+
+        let dropzones = document.querySelectorAll('.dropzone');
+        dropzones.forEach((dropzone) => {
+
+            dropzone.addEventListener('dragenter', (ev) => {
+                ev.preventDefault();
+                dropzone.style.borderStyle = 'dashed';
+                return false;
+            });
+
+            dropzone.addEventListener('dragover', (ev) => {
+                ev.preventDefault();
+                return false;
+            });
+
+            dropzone.addEventListener('dragleave', (ev) => {
+                dropzone.style.borderStyle = 'solid';
+            });
+
+            dropzone.addEventListener('drop', (ev) => {
+                ev.preventDefault()
+                ev.target.style.borderStyle = 'solid';
+                const sourceId = ev.dataTransfer.getData('text/plain')
+                ev.target.appendChild(document.getElementById(sourceId))
+            })
+
+        });
     </script>
 }

@@ -55,8 +55,7 @@ namespace Tachey001.Models
 
         public int? CategoryID { get; set; }
 
-        [StringLength(50)]
-        public string CategoryDetailsID { get; set; }
+        public int? CategoryDetailsID { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? CreateDate { get; set; }

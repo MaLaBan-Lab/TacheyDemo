@@ -45,7 +45,6 @@ namespace Tachey001.Controllers
             ViewBag.Id = id;
             return View();
         }
-
         public ActionResult Step(int? id, string CourseId)
         {
             ViewBag.UserId = User.Identity.GetUserId();
@@ -142,8 +141,19 @@ namespace Tachey001.Controllers
             return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
         }
         [HttpPost]
-        public ActionResult Step5(string CourseId)
+        public ActionResult Step5(decimal OriginalPrice, decimal PreOrderPrice, int TotalMinTime, int CategoryDetailsID, string CourseId)
         {
+            var result = tacheyDb.Course.Find(CourseId);
+
+            var detail = tacheyDb.CategoryDetail.Find(CategoryDetailsID);
+
+            result.OriginalPrice = OriginalPrice;
+            result.PreOrderPrice = PreOrderPrice;
+            result.TotalMinTime = TotalMinTime;
+            result.CategoryID = detail.CategoryID;
+            result.CategoryDetailsID = CategoryDetailsID;
+
+            tacheyDb.SaveChanges();
 
             return RedirectToAction("Step", "Courses", new { id = 5, CourseId = CourseId });
         }

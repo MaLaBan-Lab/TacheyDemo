@@ -1,7 +1,18 @@
 ﻿@model Course
+@using Tachey001.Models
+@{
+    List<CourseCategory> categoryList = new List<CourseCategory>();
 
+    List<CategoryDetail> detailList = new List<CategoryDetail>();
 
-@using (Html.BeginForm("Step6", "Courses", new { CourseId = ViewBag.CourseId }))
+    using (TacheyContext context = new TacheyContext())
+    {
+        categoryList = context.CourseCategory.ToList();
+        detailList = context.CategoryDetail.ToList();
+    }
+}
+
+@using (Html.BeginForm("Step5", "Courses", new { CourseId = ViewBag.CourseId }))
 {
     @Html.AntiForgeryToken()
 
@@ -12,70 +23,58 @@
                     <div class="col-12 mb-4">
                         <label for="basic-url">定價（最低為 $100 元）</label>
                         <div class="input-group mb-2">
-                            <input type="text"
-                                   class="form-control"
-                                   id="basic-url"
-                                   aria-describedby="basic-addon3" />
+                            @*<input type="text"
+                                class="form-control"
+                                id="basic-url"
+                                aria-describedby="basic-addon3" />*@
+                            @Html.EditorFor(m => m.OriginalPrice, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
                     <div class="col-12 mb-4">
                         <label for="basic-url">預購價格（最低為 $50 元）</label>
                         <div class="input-group mb-2">
-                            <input type="text"
-                                   class="form-control"
-                                   id="basic-url"
-                                   aria-describedby="basic-addon3" />
+                            @*<input type="text"
+                                class="form-control"
+                                id="basic-url"
+                                aria-describedby="basic-addon3" />*@
+                            @Html.EditorFor(m => m.PreOrderPrice, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
                     <div class="col-12 mb-4">
-                        <label for="basic-url">開課門檻人數（最少為 30 人）</label>
-                        <div class="input-group mb-2">
-                            <input type="text"
-                                   class="form-control"
-                                   id="basic-url"
-                                   aria-describedby="basic-addon3" />
-                        </div>
-                        <div class="input-group mb-2">
-                            <input type="text"
-                                   class="form-control"
-                                   id="basic-url"
-                                   aria-describedby="basic-addon3"
-                                   readonly />
-                        </div>
-                        <label for="basic-url"
-                               class="text-black-50 fs-5 d-flex justify-content-between">
-                            計算公式：預購價 x 預購人數 x 0.5 分潤比例<a href=""
-                                                         class="text-black-50">>> 了解更多</a>
-                        </label>
+                        <label for="basic-url">選擇課程種類</label>
+                            @foreach (var item in categoryList)
+                            {
+                            <div class="col-12">
+                                @item.CategoryName :
+                                @foreach (var detail in detailList)
+                                {
+                                    if (item.CategoryID == detail.CategoryID)
+                                    {
+                                        @Html.RadioButtonFor(m => m.CategoryDetailsID, $"{detail.DetailID}")
+                                        @detail.DetailName
+                                    }
+                                }
+                                <hr />
+                            </div>
+                            }
                     </div>
                     <div class="col-12 mb-4">
-                        <label for="basic-url">
-                            備課天數（為募資成功後至正式開課前需要的天數，最多為 60
-                            天）
-                        </label>
+                        <label for="basic-url">選擇課程種類細項</label>
                         <div class="input-group mb-2">
-                            <input type="text"
-                                   class="form-control"
-                                   id="basic-url"
-                                   aria-describedby="basic-addon3" />
+                            @*<input type="text"
+                                class="form-control"
+                                id="basic-url"
+                                aria-describedby="basic-addon3" />*@
                         </div>
-                        <div class="input-group mb-2">
-                            <input type="text"
-                                   class="form-control"
-                                   id="basic-url"
-                                   aria-describedby="basic-addon3"
-                                   readonly />
-                        </div>
-                        <label for="basic-url"
-                               class="text-black-50 fs-5 d-flex justify-content-between">計算方式：今日 + 30 天募資預購期 + 備課天數 60 天</label>
                     </div>
                     <div class="col-12 mb-4">
                         <label for="basic-url">預計課程長度（以分鐘計算，最短 20 分鐘）</label>
                         <div class="input-group mb-2">
-                            <input type="text"
-                                   class="form-control"
-                                   id="basic-url"
-                                   aria-describedby="basic-addon3" />
+                            @*<input type="text"
+                                class="form-control"
+                                id="basic-url"
+                                aria-describedby="basic-addon3" />*@
+                            @Html.EditorFor(m => m.TotalMinTime, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
                 </div>
