@@ -205,6 +205,7 @@
     <Compile Include="Models\CourseBuyed.cs" />
     <Compile Include="Models\CourseCategory.cs" />
     <Compile Include="Models\CourseChapter.cs" />
+    <Compile Include="Models\CourseScore.cs" />
     <Compile Include="Models\CourseUnit.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\Homework.cs" />
