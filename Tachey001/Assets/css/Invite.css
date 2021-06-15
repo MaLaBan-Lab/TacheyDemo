@@ -4,7 +4,7 @@ body {
 }
 
 .hahow-green {
-    color: rgb(233 229 77);
+  color: rgb(0, 190, 164);
 }
 
 a.hahow-green:hover{
@@ -52,8 +52,7 @@ a.hahow-green:hover{
 }
 
 .border-hahow {
-    border-bottom: 4px solid #FFEB00;
-    
+  border-bottom: 4px solid rgb(0, 190, 164);
 }
 
 .col-cus {
