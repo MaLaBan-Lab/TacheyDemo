@@ -61,10 +61,6 @@ namespace Tachey001.Models
                 .Property(e => e.PreOrderPrice)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<Course>()
-                .Property(e => e.CategoryDetailsID)
-                .IsUnicode(false);
-
             modelBuilder.Entity<CourseUnit>()
                 .Property(e => e.ChapterID)
                 .IsUnicode(false);

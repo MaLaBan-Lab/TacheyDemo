@@ -1,0 +1,98 @@
+﻿@model OrderRecord
+
+
+
+<div class="container">
+    <div class="row px-3 ">
+        <div class="col-7 border-right-0 border">
+            <div class=" d-inline-block mr-3 record-color ">
+                <div class="record-text py-2">訂單成立:@Model.OrderDate</div>
+                <div class="record-text py-2">付款時間:@Model.PayDate</div>
+            </div>
+            <div class=" d-inline-block record-color ">
+                <div class="record-text py-2">付款方式:@Model.PayMethod</div>
+                <div class="record-text py-2">實付金額:<span class="record-orange">@Model.UnitPrice</span></div>
+            </div>
+        </div>
+        <div class="col-5 d-flex justify-content-end align-items-center record-text border-left-0 border">
+            <i class="fas fa-check record-green"></i>
+            <span>完成付款</span>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row px-3 ">
+        <div class="col-5 p-15 border-right-0 border py-2">
+            <a href="#">
+                <img src="https://hahow-production.imgix.net/5a4ef3f1fa1e3f001e8d7287?w=1000&auto=format&sat=0&s=dab5c809b60be6f13770b31e0ab86556"
+                     alt="" class="record-img mr-2">
+            </a>
+            <a href="#" class="record-link d-inline-block">
+                <span class="record-text">創業先修，你準備好了嗎？</span>
+            </a>
+        </div>
+        <div class="col-7 d-flex justify-content-end align-items-center record-text border-left-0 border">
+            <span>@Model.UnitPrice</span>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row px-3">
+        <div class="accordion" id="accordionExample"></div>
+        <div class="card w-100">
+            <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="wrap bg-orange w-100 border record-Collapse">
+                    <h6 class="p-15  w-100  m-0 pt-2">發票資訊</h6>
+                    <div class="invoice-wrap d-flex flex-wrap">
+                        <div class="col-lg-4 col-md-4 col-sm-12 record-color ">
+                            <div class="record-text py-2">發票號碼:@Model.InvoiceNum</div>
+                            <div class="record-text py-2">發票隨機碼:@Model.InvoiceRandomNum</div>
+                            <div class="record-text py-2">開立日期:@Model.InvoiceDate</div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 w-100 ">
+                            <div class="record-text py-2">發票類型:@Model.InvoiceType</div>
+                            <div class="record-text py-2">聯絡姓名:@Model.InvoiceName</div>
+                            <div class="record-text py-2">聯絡信箱:@Model.InvoiceEmail</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrap bg-orange w-100 border">
+                    <h6 class="p-15  w-100  m-0 py-2">課程明細</h6>
+                    <div class="wrap d-flex w-100 flex-wrap">
+                        <div class="col-lg-6 col-md-6 col-sm-12 fs-12">
+                            <span class="border-bottom w-100 d-block">課程名稱</span>
+                            <p class="py-1 record-color">創業先修，你準備好了嗎？ <br>└訂單編號 5aac73d51e4ee6001e961bb5</p>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 fs-12 mb-2">
+                            <span class="border-bottom w-100 d-block">購買方案</span>
+                            <span class="d-block py-1 record-color">課程售價</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 fs-12 mb-2">
+                            <span class="border-bottom w-100 d-block">售價</span>
+                            <span class="d-block py-1 record-color">NT$1800</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 fs-12 mb-2">
+                            <span class="border-bottom w-100 d-block">實付價格</span>
+                            <span class="d-block py-1 record-color"> NT$1800</span>
+                        </div>
+                        <div class="col-12 text-right fs-20">
+                            <span>實付金額:</span>
+                            <span>NT$1800</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <span class="record-arrow"><i class="fas fa-arrow-down"></i></span>
+                        <span class="record-detail">查看詳細</span>
+                    </button>
+                </h2>
+            </div>
+
+
+        </div>
+    </div>
+</div>
