@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
+using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
 {
@@ -36,7 +37,27 @@ namespace Tachey001.Controllers
 
         public ActionResult Orders()
         {
-            return View();
+            var currentId = User.Identity.GetUserId();
+            var OrderRecord = from O in tacheyDb.Order
+                             join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
+                             join invoice in tacheyDb.Invoice on O.InvoiceID equals invoice.InvoiceID
+                             where O.MemberID == currentId
+                             select new OrderRecord
+                             {
+                                 OrderDate =O.OrderDate,
+                                 PayDate=O.PayDate,
+                                 PayMethod=O.PayMethod,
+                                 UnitPrice=OD.UnitPrice,
+                                 InvoiceType=invoice.InvoiceType,
+                                 InvoiceName=invoice.InvoiceName,
+                                 InvoiceEmail=invoice.InvoiceEmail,
+                                 InvoiceDate=invoice.InvoiceDate,
+                                 InvoiceNum=invoice.InvoiceNum,
+                                 InvoiceRandomNum=invoice.InvoiceRandomNum
+                             };
+
+            
+            return View(OrderRecord);
         }
 
         public ActionResult Profile()

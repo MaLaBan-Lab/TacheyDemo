@@ -1,4 +1,6 @@
-﻿@Styles.Render("~/Assets/css/orders.css")
+﻿@model IEnumerable<Tachey001.ViewModel.OrderRecord>
+@Styles.Render("~/Assets/css/orders.css")
+@Styles.Render("~/Assets/css/record.css")
 @{
     ViewBag.Title = "Orders";
 }
@@ -42,15 +44,23 @@
         </div>
     </div>
 </div>
-<div class="container mb-5">
-    <div class="row px-3">
-        <div class="col-12 bg-white text-center py-5 text-black-20">
-            <div class="my-5">
-                <i class="fas fa-box-open fa-6x"></i>
-                <h6>哎呀，沒有<span id="emptyText">已完成訂單</span>喔～</h6>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_RecordCard",item);
+}
+
+
+
+@*<div class="container mb-5">
+        <div class="row px-3">
+            <div class="col-12 bg-white text-center py-5 text-black-20">
+                <div class="my-5">
+                    <i class="fas fa-box-open fa-6x"></i>
+                    <h6>哎呀，沒有<span id="emptyText">已完成訂單</span>喔～</h6>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 
 @Scripts.Render("~/Assets/js/orders.js")
