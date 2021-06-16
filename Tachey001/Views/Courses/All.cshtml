@@ -1,7 +1,7 @@
-﻿
+﻿@model List<Course>
 @{
     ViewBag.Title = "All";
-}
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml"; }
 
 @Styles.Render("~/Assets/css/all.css")
 @Styles.Render("~/Assets/css/card.css")
@@ -26,16 +26,16 @@
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop1"
                                     type="button"
-                                    class="btn dropdown-toggle"
+                                    class="btn dropdown-toggle text-white nav-link"
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false">
                                 所有課程
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" href="#">所有課程</a>
-                                <a class="dropdown-item" href="#">募資中</a>
-                                <a class="dropdown-item" href="#">已開課</a>
+                                <a class="dropdown-item text-white" href="#">所有課程</a>
+                                <a class="dropdown-item text-white" href="#">募資中</a>
+                                <a class="dropdown-item text-white" href="#">已開課</a>
                             </div>
                         </div>
                     </div>
@@ -46,17 +46,17 @@
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop1"
                                     type="button"
-                                    class="btn dropdown-toggle"
+                                    class="btn dropdown-toggle text-white nav-link"
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false">
                                 排序
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" href="#">最新(預設)</a>
-                                <a class="dropdown-item" href="#">最多人數</a>
-                                <a class="dropdown-item" href="#">最長課時</a>
-                                <a class="dropdown-item" href="#">最高評價</a>
+                                <a class="dropdown-item text-white" href="#">最新(預設)</a>
+                                <a class="dropdown-item text-white" href="#">最多人數</a>
+                                <a class="dropdown-item text-white" href="#">最長課時</a>
+                                <a class="dropdown-item text-white" href="#">最高評價</a>
                             </div>
                         </div>
                     </div>
@@ -71,9 +71,9 @@
         </div>
     </div>
     <div class="row mt-5">
-        @for (var i = 0; i < 30; i++)
+        @foreach (var item in Model)
         {
-            @Html.Partial("CardTemplate")
+            @Html.Partial("CardTemplate", item)
         }
     </div>
 </div>

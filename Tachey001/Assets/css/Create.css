@@ -1,4 +1,10 @@
 /* ========================= 共用 start ============================= */
+
+body {
+    background-image: url(https://i.imgur.com/QHRNmJr.jpg);
+}
+
+
 .step a,
 .step a:active,
 .step a:link,
@@ -52,17 +58,17 @@ h1 {
 .online {
   background-color: rgb(243, 243, 241);
 }
-.also_wrap .title::after,
-.good_teacher .title::after,
-.step .title::after,
-.online .title::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 4px;
-  background-color: rgb(46, 225, 179);
-  margin: 10px auto 30px;
-}
+    .also_wrap .title::after,
+    .good_teacher .title::after,
+    .step .title::after,
+    .online .title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: #FFEB00;
+        margin: 10px auto 30px;
+    }
 .card_wrap .card,
 .step .card .card-body {
   padding: 0;
@@ -187,10 +193,10 @@ h1 {
   display: inline-block;
   padding: 0 10px;
 }
-.step .content_wrap .num {
-  font-size: 90px;
-  color: rgba(0, 0, 0, 0.24);
-}
+    .step .content_wrap .num {
+        font-size: 90px;
+        color: rgb(61 231 41 / 18%);
+    }
 .step .content_wrap .num_title {
   font-size: 23px;
   margin: -15px 0 0 22px;
@@ -366,11 +372,11 @@ h1 {
     max-width: 300px;
     margin: 5% auto;
   }
-  .step .card:hover {
-    border: 3px solid rgb(46, 225, 179);
-    cursor: pointer;
-    transition: 0.5s;
-  }
+    .step .card:hover {
+        border: 3px solid rgb(225 183 46);
+        cursor: pointer;
+        transition: 0.5s;
+    }
   .step .card:hover .num {
     color: rgb(46, 225, 179);
     transition: 0.5s;
