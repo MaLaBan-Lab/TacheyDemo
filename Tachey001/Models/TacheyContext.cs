@@ -21,6 +21,7 @@ namespace Tachey001.Models
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<CourseBuyed> CourseBuyed { get; set; }
         public virtual DbSet<CourseCategory> CourseCategory { get; set; }
+        public virtual DbSet<CourseScore> CourseScore { get; set; }
         public virtual DbSet<CourseUnit> CourseUnit { get; set; }
         public virtual DbSet<Homework> Homework { get; set; }
         public virtual DbSet<Invoice> Invoice { get; set; }
@@ -60,10 +61,6 @@ namespace Tachey001.Models
             modelBuilder.Entity<Course>()
                 .Property(e => e.PreOrderPrice)
                 .HasPrecision(19, 4);
-
-            modelBuilder.Entity<Course>()
-                .Property(e => e.CategoryDetailsID)
-                .IsUnicode(false);
 
             modelBuilder.Entity<CourseUnit>()
                 .Property(e => e.ChapterID)

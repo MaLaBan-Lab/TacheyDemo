@@ -7,16 +7,13 @@ changeBtn.forEach((item) => {
 });
 
 function changeIndex(e) {
-  changeBtn.forEach((item) => {
-    if (item.classList.contains(e.target.id)) {
-      item.classList.add("change-btn-checked");
-      item.classList.remove("change-btn");
-      let emptyText = document.getElementById("emptyText");
-
-      emptyText.innerText = item.innerText;
-    } else {
-      item.classList.remove("change-btn-checked");
-      item.classList.add("change-btn");
-    }
+    changeBtn.forEach((item) => {
+        if (item.classList.contains(e.target.id)) {
+            item.classList.add("change-btn-checked");
+            item.classList.remove("change-btn");
+        } else {
+            item.classList.remove("change-btn-checked");
+            item.classList.add("change-btn");
+        }
   });
 }

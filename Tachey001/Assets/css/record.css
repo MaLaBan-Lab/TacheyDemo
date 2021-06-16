@@ -1,0 +1,51 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.record-color {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.record-orange {
+    color: rgb(250, 139, 0)
+}
+
+.record-green {
+    color: rgba(0, 190, 164)
+}
+
+.record-text {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.record-img {
+    width: 80px;
+    height: 50px;
+}
+
+.record-link {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+    .record-link:hover {
+        text-decoration: none;
+    }
+
+.p-15 {
+    padding: 0 15px;
+}
+
+.bg-orange {
+    background-color: rgb(255, 249, 225);
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}

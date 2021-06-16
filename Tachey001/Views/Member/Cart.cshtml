@@ -1,6 +1,7 @@
 ﻿@Styles.Render("~/Assets/css/HAHOWcart.css")
 @{
     ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
 <main class="content container-fluid">
@@ -45,7 +46,7 @@
             <!-- 左邊~ -->
             <div class="left-area">
                 <div class="cart-area marg-b-60">
-                    <h4 class="underline flex align-items-center justify-space-between m-3">
+                    <h4 class="text-white underline flex align-items-center justify-space-between m-3">
                         <span>
                             <span aria-hidden="true" class="fa fa-shopping-cart"></span>
                             <spanclass ="marg-l-10">購物車</spanclass>
@@ -57,7 +58,7 @@
                             <div class="text-center">
                                 <img alt="Empty shopping cart" class="marg-b-10"
                                      src="https://hahow.in/static/media/empty-box.e2bf3c3b.svg" style="width: auto;">
-                                <div class="marg-b-10">購物車是空的，來去逛逛？</div><a href="#">
+                                <div class="marg-b-10 text-white">購物車是空的，來去逛逛？</div><a href="#">
                                     <button class="sc-1a6j6ze-0 fBQVEd">@Html.ActionLink("探索課程", "All", "Courses", null, new { @class = "text-white text-decoration-none" })</button>
                                 </a>
                             </div>
