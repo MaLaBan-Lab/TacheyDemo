@@ -6,9 +6,9 @@
             cursor: pointer;
         }
 
-        #chapter i.fa-align-justify {
-            cursor: grab;
-        }
+            #chapter i.fa-align-justify {
+                cursor: grab;
+            }
     </style>
 }
 
@@ -98,16 +98,19 @@
         function enableDragSort(listClass) {
             const sortableLists = document.getElementsByClassName(listClass);
             Array.prototype.map.call(sortableLists, (list) => { enableDragList(list) });
+            sortUpdate()
         }
 
         function enableDragList(list) {
             Array.prototype.map.call(list.children, (item) => { enableDragItem(item) });
+            sortUpdate()
         }
 
         function enableDragItem(item) {
             item.setAttribute('draggable', true)
             item.ondrag = handleDrag;
             item.ondragend = handleDrop;
+            sortUpdate()
         }
 
         function handleDrag(item) {
@@ -123,6 +126,7 @@
                 swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
                 list.insertBefore(selectedItem, swapItem);
             }
+            sortUpdate()
         }
 
         function handleDrop(item) {
@@ -141,11 +145,12 @@
             newDiv.classList.add('border')
             newDiv.classList.add('my-1')
             newDiv.classList.add('py-2')
+            newDiv.classList.add('chapterBox')
             newDiv.innerHTML = `
         <h4>
           <i class="fas fa-align-justify mr-2"></i>
           <span class="chapterName">章節${count + 1}</span>
-          <input type="text"  class="w-75">
+          <input type="text" class="w-75 chapterInput" name="${count + 1}">
           <i class="far fa-window-close" onclick="deleteChapter()"></i>
         </h4>
         <hr>
@@ -157,7 +162,7 @@
           <h5 class="text-right">
             <i class="fas fa-align-justify mr-2"></i>
             <span>單元1</span>
-            <input type="text" class="w-50">
+            <input type="text" class="w-50" name="${count + 1}-1">
             <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
           </h5>
         </div>
@@ -170,6 +175,7 @@
 
         function newUnit() {
             var unit = event.target.offsetParent.lastElementChild
+            var targetCh = event.target.offsetParent.id
             var count = unit.childElementCount
 
             var h5 = document.createElement('h5')
@@ -177,7 +183,7 @@
             h5.innerHTML = `
         <i class="fas fa-align-justify mr-2"></i>
         <span>單元${count + 1}</span>
-        <input type="text" class="w-50">
+        <input type="text" class="w-50" name="${targetCh}-${count + 1}">
         <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
       `
             unit.appendChild(h5)
@@ -203,6 +209,8 @@
 
         function sortUpdate() {
             var chapterArr = document.querySelectorAll('.chapterName')
+            var chapterInput = document.querySelectorAll('.chapterInput')
+            var chapterBox = document.querySelectorAll('.chapterBox')
             var unitBox = document.querySelectorAll('.unitBox')
 
             chapterArr.forEach((item, index) => {
@@ -213,6 +221,17 @@
                 var unitArr = x.querySelectorAll('span')
                 unitArr.forEach((item, index) => {
                     item.innerText = `單元${index + 1}`
+                })
+            })
+
+            console.dir(chapterInput)
+            chapterInput.forEach((item, index) => {
+                item.name = (index + 1)
+            })
+
+            chapterBox.forEach((item, index) => {
+                item.querySelector('.unitBox').querySelectorAll('input').forEach((x, count) => {
+                    x.name = `${index + 1}-${count + 1}`
                 })
             })
         }

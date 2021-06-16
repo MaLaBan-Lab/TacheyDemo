@@ -510,6 +510,7 @@
     <Content Include="Views\Shared\_HighlightCardPartial.cshtml" />
     <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
+    <Content Include="Views\Courses\Step4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
