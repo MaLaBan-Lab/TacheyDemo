@@ -7,7 +7,6 @@ namespace Tachey001.ViewModel
 {
     public class OrderRecord
     {
-        public string OrderID { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime PayDate { get; set; }
         public string PayMethod { get; set; }
@@ -18,8 +17,5 @@ namespace Tachey001.ViewModel
         public DateTime? InvoiceDate { get; set; }
         public int? InvoiceNum { get; set; }
         public int? InvoiceRandomNum { get; set; }
-        public string TitlePageImageURL { get; set; }
-        public string CourseName { get; set; }
-        public string BuyMethod { get; set; }
     }
 }

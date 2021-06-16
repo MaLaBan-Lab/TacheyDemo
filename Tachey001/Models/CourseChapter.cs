@@ -10,11 +10,16 @@ namespace Tachey001.Models
     public partial class CourseChapter
     {
         [Key]
+        [Column(Order = 0)]
         public string CourseID { get; set; }
 
+        [Key]
+        [Column(Order = 1)]
         [StringLength(50)]
         public string ChapterID { get; set; }
 
+        [Key]
+        [Column(Order = 2)]
         [StringLength(200)]
         public string ChapterName { get; set; }
     }

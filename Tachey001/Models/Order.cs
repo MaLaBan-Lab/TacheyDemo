@@ -9,7 +9,8 @@ namespace Tachey001.Models
     [Table("Order")]
     public partial class Order
     {
-        public string OrderID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int OrderID { get; set; }
 
         [Required]
         [StringLength(128)]
