@@ -87,7 +87,7 @@ namespace Tachey001.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<CourseUnit>()
-                .Property(e => e.UnutID)
+                .Property(e => e.UnitID)
                 .IsUnicode(false);
         }
     }

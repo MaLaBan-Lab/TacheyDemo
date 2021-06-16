@@ -9,23 +9,23 @@ namespace Tachey001.Models
     [Table("CourseUnit")]
     public partial class CourseUnit
     {
+        [StringLength(128)]
+        public string CourseID { get; set; }
+
         [StringLength(50)]
         public string ChapterID { get; set; }
 
-        [Key]
         [StringLength(50)]
-        public string UnutID { get; set; }
+        public string UnitID { get; set; }
 
         [StringLength(200)]
         public string UnitName { get; set; }
 
+        [Key]
         [StringLength(4000)]
-        public string CourseURI { get; set; }
+        public string CourseURL { get; set; }
 
         [StringLength(4000)]
         public string PS { get; set; }
-
-        [StringLength(128)]
-        public string CourseID { get; set; }
     }
 }

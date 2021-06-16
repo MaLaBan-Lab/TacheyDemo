@@ -19,11 +19,13 @@
     string chapter = null;
     string title = null;
     string videourl = null;
+    string categoryName = null;
 
     using (TacheyContext context = new TacheyContext())
     {
         var getcourse = context.Course.FirstOrDefault(x => x.CourseID == "2");
         var getcourseunit = context.CourseUnit.FirstOrDefault(x => x.ChapterID == "第一章");
+        var getcategory = context.CourseCategory.FirstOrDefault(x => x.CategoryName == "程式");
 
         if (getcourse != null)
         {
@@ -34,7 +36,13 @@
         if (getcourseunit != null)
         {
             chapter = getcourseunit.ChapterID;
-            videourl = getcourseunit.CourseURI;
+            videourl = getcourseunit.CourseURL;
+        }
+
+        if (getcategory != null)
+        {
+            categoryName = getcategory.CategoryName;
+
         }
 
         context.SaveChanges();
@@ -48,8 +56,8 @@
         <!-- Breadcrumb 區塊 -->
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
-                <li class="breadcrumb-item text-white"><a href="#">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="#">程式</a></li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
+                <li class="breadcrumb-item text-white"><a href="#">@categoryName</a></li>
                 <li class="breadcrumb-item  text-white active" aria-current="page">程式語言</li>
             </ol>
         </nav>
@@ -124,12 +132,12 @@
                                     <div id="@chapters.ChapterID" class="collapse" aria-labelledby="headingOne"
                                          data-parent="#accordion">
                                         <div class="content">
-                                            <a href="@units.CourseURI" target="VideoIframe">
+                                            <a href="@units.CourseURL" target="VideoIframe">
                                                 <div class="list">
                                                     <div class="icon">
                                                         <i class="fa fa-lock" aria-hidden="true"></i>
                                                     </div>
-                                                    <div class="text">@units.UnutID - @units.UnitName</div>
+                                                    <div class="text">@units.UnitID - @units.UnitName</div>
                                                     <div class="time">00:06</div>
                                                 </div>
                                             </a>

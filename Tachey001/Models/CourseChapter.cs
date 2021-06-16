@@ -10,12 +10,13 @@ namespace Tachey001.Models
     public partial class CourseChapter
     {
         [Key]
+        [StringLength(200)]
+        public string ChapterName { get; set; }
+
+        [StringLength(128)]
         public string CourseID { get; set; }
 
         [StringLength(50)]
         public string ChapterID { get; set; }
-
-        [StringLength(200)]
-        public string ChapterName { get; set; }
     }
 }
