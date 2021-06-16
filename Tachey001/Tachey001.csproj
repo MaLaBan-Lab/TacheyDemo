@@ -224,6 +224,7 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CourseCardPartial.cs" />
     <Compile Include="ViewModel\OrderRecord.cs" />
   </ItemGroup>
   <ItemGroup>
