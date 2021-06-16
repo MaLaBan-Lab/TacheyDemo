@@ -41,9 +41,13 @@ namespace Tachey001.Controllers
             var OrderRecord = from O in tacheyDb.Order
                              join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
                              join invoice in tacheyDb.Invoice on O.InvoiceID equals invoice.InvoiceID
-                             where O.MemberID == currentId
+                             join Course in tacheyDb.Course on OD.CourseID equals Course.CourseID
+                             where currentId == O.MemberID
                              select new OrderRecord
                              {
+                                 OrderID = O.OrderID,
+                                 TitlePageImageURL = Course.TitlePageImageURL,
+                                 CourseName = OD.CourseName,
                                  OrderDate =O.OrderDate,
                                  PayDate=O.PayDate,
                                  PayMethod=O.PayMethod,
@@ -53,7 +57,8 @@ namespace Tachey001.Controllers
                                  InvoiceEmail=invoice.InvoiceEmail,
                                  InvoiceDate=invoice.InvoiceDate,
                                  InvoiceNum=invoice.InvoiceNum,
-                                 InvoiceRandomNum=invoice.InvoiceRandomNum
+                                 InvoiceRandomNum=invoice.InvoiceRandomNum,
+                                 BuyMethod = OD.BuyMethod
                              };
 
             
