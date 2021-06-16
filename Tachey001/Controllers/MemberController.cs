@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
+using System.Dynamic;
 
 namespace Tachey001.Controllers
 {
@@ -126,12 +127,206 @@ namespace Tachey001.Controllers
                 {
                     ViewBag.birthday = null;
                 }
-                
+
+                var selectList = new List<SelectListItem>()
+                {
+                    new SelectListItem {Text="text-1", Value="value-1" },
+                    new SelectListItem {Text="text-2", Value="value-2" },
+                    new SelectListItem {Text="text-3", Value="value-3" },
+                };
+
+                //預設選擇哪一筆
+                selectList.Where(q => q.Value == "value-2").First().Selected = true;
+
+                ViewBag.SelectList = selectList;
 
                 //context.SaveChanges();
             }
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult SettingIndex()
+        {
+            //int personId = person.PersonId;
+            //string name = person.Name;
+            //string gender = person.Gender;
+            //string city = person.City;
+
+            var UserId = User.Identity.GetUserId();
+
+            var result = _context.Member.Find(UserId);
+
+            //result.Title = Title;
+            //result.Description = Description;
+            //result.TitlePageImageURL = TitlePageImageURL;
+            result.Sex = ViewBag.SelectList;
+
+            _context.SaveChanges();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ProfileExpertise(string Expertise, string submitButton)
+        {
+            if (submitButton == "Send")
+            {
+                //int personId = person.PersonId;
+                //string name = person.Name;
+                //string gender = person.Gender;
+                //string city = person.City;
+
+                var UserId = User.Identity.GetUserId();
+
+                var result = _context.Member.Find(UserId);
+
+                //result.Title = Title;
+                //result.Description = Description;
+                //result.TitlePageImageURL = TitlePageImageURL;
+                result.Expertise = Expertise;
+
+                _context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Profile", "Member");
+        }
+
+        [HttpPost]
+        public ActionResult ProfileAbout(string About, string submitButton)
+        {
+            if (submitButton == "Send")
+            {
+                //int personId = person.PersonId;
+                //string name = person.Name;
+                //string gender = person.Gender;
+                //string city = person.City;
+
+                var UserId = User.Identity.GetUserId();
+
+                var result = _context.Member.Find(UserId);
+
+                //result.Title = Title;
+                //result.Description = Description;
+                //result.TitlePageImageURL = TitlePageImageURL;
+                result.About = About;
+
+                _context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Profile", "Member");
+        }
+
+        [HttpPost]
+        public ActionResult ProfileInterest(string Interest, string submitButton)
+        {
+            if (submitButton == "Send")
+            {
+                //int personId = person.PersonId;
+                //string name = person.Name;
+                //string gender = person.Gender;
+                //string city = person.City;
+
+                var UserId = User.Identity.GetUserId();
+
+                var result = _context.Member.Find(UserId);
+
+                //result.Title = Title;
+                //result.Description = Description;
+                //result.TitlePageImageURL = TitlePageImageURL;
+                result.InterestContent = Interest;
+
+                _context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Profile", "Member");
+        }
+
+        [HttpPost]
+        public ActionResult ProfileName(string Name, string submitButton)
+        {
+            if (submitButton == "Send")
+            {
+                //int personId = person.PersonId;
+                //string name = person.Name;
+                //string gender = person.Gender;
+                //string city = person.City;
+
+                var UserId = User.Identity.GetUserId();
+
+                var result = _context.Member.Find(UserId);
+
+                //result.Title = Title;
+                //result.Description = Description;
+                //result.TitlePageImageURL = TitlePageImageURL;
+                result.Name = Name;
+
+                _context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Profile", "Member");
+        }
+
+        [HttpPost]
+        public ActionResult ProfileIntro(string Introduction, string submitButton)
+        {
+            if (submitButton == "Send")
+            {
+                //int personId = person.PersonId;
+                //string name = person.Name;
+                //string gender = person.Gender;
+                //string city = person.City;
+
+                var UserId = User.Identity.GetUserId();
+
+                var result = _context.Member.Find(UserId);
+
+                //result.Title = Title;
+                //result.Description = Description;
+                //result.TitlePageImageURL = TitlePageImageURL;
+                result.Introduction = Introduction;
+
+                _context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Profile", "Member");
+        }
+
+        [HttpPost]
+        public ActionResult ProfileConnection(string Facebook, string Google, string YouTube, string Behance, string Pinterest, string Blog, string submitButton)
+        {
+            if (submitButton == "Send")
+            {
+                //int personId = person.PersonId;
+                //string name = person.Name;
+                //string gender = person.Gender;
+                //string city = person.City;
+
+                var UserId = User.Identity.GetUserId();
+
+                var result = _context.Member.Find(UserId); // not member
+
+                //result.Title = Title;
+                //result.Description = Description;
+                //result.TitlePageImageURL = TitlePageImageURL;
+                result.Introduction = Introduction;
+                result.Introduction = Introduction;
+                result.Introduction = Introduction;
+                result.Introduction = Introduction;
+                result.Introduction = Introduction;
+                result.Introduction = Introduction;
+
+                _context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Profile", "Member");
         }
 
         [HttpPost]
@@ -264,14 +459,18 @@ namespace Tachey001.Controllers
             ViewBag.courseFavorites = from p in _context.Owner where p.MemberID == UserId select p; // 收藏
             ViewBag.courseWork = from p in _context.Homework where p.MemberID == UserId select p; // 作品
 
+            ViewData["PersonalUrls"] = _context.PersonalUrl;
+            ViewData["Members"] = _context.Member;
+
 
             //var currentId = User.Identity.GetUserId();
 
             //ViewBag.UserPhoto = tacheyDb.Member.Find(currentId).Photo;
 
             //var courseList = tacheyDb.Course.Where(x => x.MemberID == currentId).Select(x => x).ToList();
+            //var courseList1 = tacheyDb.Course.Where(x => x.MemberID == currentId).Select(x => x).ToList();
 
-            //return View(courseList);
+            //return View(courseList, courseList1);
 
             return View();
         }
