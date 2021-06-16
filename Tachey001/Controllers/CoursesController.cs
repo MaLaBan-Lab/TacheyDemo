@@ -18,9 +18,12 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult All()
         {
-            ViewBag.UserId = User.Identity.GetUserId();
+            var UserId = User.Identity.GetUserId();
+            ViewBag.UserId = UserId;
 
-            return View();
+            var allCourse = tacheyDb.Course.ToList();
+
+            return View(allCourse);
         }
 
         [AllowAnonymous]
@@ -135,10 +138,26 @@ namespace Tachey001.Controllers
             return RedirectToAction("Step", "Courses", new { id = 3, CourseId = CourseId });
         }
         [HttpPost]
-        public ActionResult Step4(string CourseId)
+        public ActionResult Step4(FormCollection course, string CourseId)
         {
+            var chapter = tacheyDb.CourseChapter;
+            var unit = tacheyDb.CourseUnit;
 
-            return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
+            ViewBag.count = course.AllKeys;
+
+            return View();
+
+            //if(chapter.Any(x=>x.CourseID == CourseId))
+            //{
+            //    var chapterList = chapter.Where(x => x.CourseID == CourseId).Select(x => x);
+            //    var unitList = unit.Where(x => x.CourseID == CourseId).Select(x => x);
+            //}
+            //else
+            //{
+            //    var newChapter = new CourseChapter { CourseID = CourseId , ChapterID = }
+            //}
+
+            //return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
         }
         [HttpPost]
         public ActionResult Step5(decimal OriginalPrice, decimal PreOrderPrice, int TotalMinTime, int CategoryDetailsID, string CourseId)
