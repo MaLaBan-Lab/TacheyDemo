@@ -13,13 +13,13 @@ body {
 }
 
 .change-btn {
-  background-color: rgb(243, 243, 241);
-  color: #777;
-  border: 0px solid;
+    background-color: #170633;
+    color: #ccc;
+    border: .4px solid white;
 }
 
 .check-b:hover .change-btn {
-  color: rgb(250, 139, 0);
+  color: yellow;
 }
 
 .text-black-20 {
@@ -31,4 +31,8 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
+}
+
+.border-bottom-yellow {
+    border-bottom: .4px solid white;
 }
