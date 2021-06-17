@@ -27,7 +27,7 @@ a:hover {
 }
 
 /* 讓灰色消失 */
-
+body{color:white}
 .row {
     display: flex;
     margin-right: -15px;
@@ -41,6 +41,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #170633;
 }
 
 .heading {
@@ -50,14 +51,14 @@ a:hover {
     border-bottom: 1px solid rgb(204, 204, 204);
 }
 
-h1 {
+h2 {
     line-height: 1.5em;
     font-size: 40px;
-    color: rgba(0, 0, 0, 0.87);
+    color: white;
 }
 
 p {
-    color: #656565;
+    color: #e1e1e1;
     margin: 16px 0px;
     padding: 0px;
     display: block;
@@ -80,7 +81,7 @@ p {
 }
 
 .background-gray {
-    background-color: #ededed;
+    /*background-color: #ededed;*/
 }
 
 ul {
@@ -110,13 +111,13 @@ li {
 
     .footer-h3 {
         font-size: 16px;
-        color: #00bea4;
+        color: white;
     }
 
     .footer-content {
         font-size: 12px;
         text-decoration: none;
-        color: #000000;
+        color: white;
     }
 
     .footer-btn {
