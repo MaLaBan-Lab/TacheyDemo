@@ -21,7 +21,9 @@ namespace Tachey001.Models
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<CourseBuyed> CourseBuyed { get; set; }
         public virtual DbSet<CourseCategory> CourseCategory { get; set; }
+        public virtual DbSet<CourseChapter> CourseChapter { get; set; }
         public virtual DbSet<CourseScore> CourseScore { get; set; }
+        public virtual DbSet<CourseUnit> CourseUnit { get; set; }
         public virtual DbSet<Homework> Homework { get; set; }
         public virtual DbSet<Invoice> Invoice { get; set; }
         public virtual DbSet<Member> Member { get; set; }
@@ -33,8 +35,6 @@ namespace Tachey001.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<Answer> Answer { get; set; }
-        public virtual DbSet<CourseChapter> CourseChapter { get; set; }
-        public virtual DbSet<CourseUnit> CourseUnit { get; set; }
         public virtual DbSet<PersonalUrl> PersonalUrl { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -62,6 +62,10 @@ namespace Tachey001.Models
                 .Property(e => e.PreOrderPrice)
                 .HasPrecision(19, 4);
 
+            modelBuilder.Entity<CourseUnit>()
+                .Property(e => e.UnitID)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Order_Detail>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(19, 4);
@@ -77,18 +81,6 @@ namespace Tachey001.Models
             modelBuilder.Entity<Ticket>()
                 .Property(e => e.Discount)
                 .HasPrecision(1, 1);
-
-            modelBuilder.Entity<CourseChapter>()
-                .Property(e => e.ChapterID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CourseUnit>()
-                .Property(e => e.ChapterID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CourseUnit>()
-                .Property(e => e.UnitID)
-                .IsUnicode(false);
         }
     }
 }

@@ -9,11 +9,13 @@ namespace Tachey001.Models
     [Table("CourseUnit")]
     public partial class CourseUnit
     {
+        [Key]
+        public int TestUnitID { get; set; }
+
         [StringLength(128)]
         public string CourseID { get; set; }
 
-        [StringLength(50)]
-        public string ChapterID { get; set; }
+        public int? ChapterID { get; set; }
 
         [StringLength(50)]
         public string UnitID { get; set; }
@@ -21,7 +23,6 @@ namespace Tachey001.Models
         [StringLength(200)]
         public string UnitName { get; set; }
 
-        [Key]
         [StringLength(4000)]
         public string CourseURL { get; set; }
 

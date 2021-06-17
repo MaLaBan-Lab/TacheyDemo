@@ -9,13 +9,6 @@
     List<CourseChapter> coursechapter = new List<CourseChapter>();
     List<CourseUnit> courseunit = new List<CourseUnit>();
 
-    using (TacheyContext context = new TacheyContext())
-    {
-        coursechapter = context.CourseChapter.ToList();
-        courseunit = context.CourseUnit.ToList();
-    }
-}
-@{
     string chapter = null;
     string title = null;
     string videourl = null;
@@ -24,7 +17,7 @@
     using (TacheyContext context = new TacheyContext())
     {
         var getcourse = context.Course.FirstOrDefault(x => x.CourseID == "2");
-        var getcourseunit = context.CourseUnit.FirstOrDefault(x => x.ChapterID == "第一章");
+        var getcourseunit = context.CourseUnit.FirstOrDefault(x => x.ChapterID == 1);
         var getcategory = context.CourseCategory.FirstOrDefault(x => x.CategoryName == "程式");
 
         if (getcourse != null)
@@ -35,7 +28,7 @@
 
         if (getcourseunit != null)
         {
-            chapter = getcourseunit.ChapterID;
+            chapter = getcourseunit.ChapterID.ToString();
             videourl = getcourseunit.CourseURL;
         }
 
@@ -44,6 +37,9 @@
             categoryName = getcategory.CategoryName;
 
         }
+
+        coursechapter = context.CourseChapter.ToList();
+        courseunit = context.CourseUnit.ToList();
 
         context.SaveChanges();
     }
@@ -111,8 +107,8 @@
                         {
                             <div class="wrap">
                                 <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                        data-toggle="collapse" data-target="#@chapters.ChapterID" aria-expanded="true"
-                                        aria-controls="@chapters.ChapterID">
+                                        data-toggle="collapse" data-target="#toggle_@chapters.ChapterID" aria-expanded="true"
+                                        aria-controls="toggle_@chapters.ChapterID">
                                     <div class="lists">
                                         <div class="icon">
                                             <i class="fa fa-th-list" aria-hidden="true"></i>
@@ -129,7 +125,7 @@
                                 if (chapters.ChapterID == units.ChapterID)
                                 {
                                     <!-- 課程單元 -->
-                                    <div id="@chapters.ChapterID" class="collapse" aria-labelledby="headingOne"
+                                    <div id="toggle_@chapters.ChapterID" class="collapse" aria-labelledby="headingOne"
                                          data-parent="#accordion">
                                         <div class="content">
                                             <a href="@units.CourseURL" target="VideoIframe">
