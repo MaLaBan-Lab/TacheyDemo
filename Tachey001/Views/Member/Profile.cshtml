@@ -4,7 +4,7 @@
 @Styles.Render("~/Assets/css/card.css")
 
 @{
-    ViewBag.Title = "Profile"; Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+    ViewBag.Title = "Profile";
 }
 
 @{
@@ -87,7 +87,7 @@
                                                         <span>Facebook 個人頁面網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(p => p.Facebook, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.fbConnection, @placeholder = "https://www.facebook.com/yourAccountId" } })
+                                                                @*@Html.EditorFor(p => p.Facebook, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.fbConnection, @placeholder = "https://www.facebook.com/yourAccountId" } })*@
                                                                 @*<input placeholder="https://www.facebook.com/yourAccountId" class="input-element" data-type="facebook" value=@(ViewBag.fbConnection)>*@
                                                             </div>
                                                         </div>
@@ -96,7 +96,7 @@
                                                         <span>Google Plus 個人頁面網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.Google, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.googleConnection, @placeholder = "https://plus.google.com/yourAccountId/posts" } })
+                                                                @*@Html.EditorFor(m => m.Google, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.googleConnection, @placeholder = "https://plus.google.com/yourAccountId/posts" } })*@
                                                                 @*<input placeholder="https://plus.google.com/yourAccountId/posts" class="input-element" data-type="googlePlus" value=@(ViewBag.googleConnection)>*@
                                                             </div>
                                                         </div>
@@ -105,7 +105,7 @@
                                                         <span>YouTube 頻道</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.YouTube, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.ytConnection, @placeholder = "https://www.youtube.com/yourChannel" } })
+                                                                @*@Html.EditorFor(m => m.YouTube, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.ytConnection, @placeholder = "https://www.youtube.com/yourChannel" } })*@
                                                                 @*<input placeholder="https://www.youtube.com/yourChannel" class="input-element" data-type="youtube" value=@(ViewBag.ytConnection)>*@
                                                             </div>
                                                         </div>
@@ -114,7 +114,7 @@
                                                         <span>Behance 網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.Behance, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.behanceConnection, @placeholder = "https://www.behance.net/yourName" } })
+                                                                @*@Html.EditorFor(m => m.Behance, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.behanceConnection, @placeholder = "https://www.behance.net/yourName" } })*@
                                                                 @*<input placeholder="https://www.behance.net/yourName" class="input-element" data-type="behance" value=@(ViewBag.behanceConnection)>*@
                                                             </div>
                                                         </div>
@@ -123,7 +123,7 @@
                                                         <span>Pinterest 網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.Pinterest, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.pinterestConnection, @placeholder = "https://www.pinterest.com/yourName/" } })
+                                                                @*@Html.EditorFor(m => m.Pinterest, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.pinterestConnection, @placeholder = "https://www.pinterest.com/yourName/" } })*@
                                                                 @*<input placeholder="https://www.pinterest.com/yourName/" class="input-element" data-type="pinterest" value=@(ViewBag.pinterestConnection)>*@
                                                             </div>
                                                         </div>
@@ -132,7 +132,7 @@
                                                         <span>個人網站或部落格網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.Blog, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.blogConnection, @placeholder = "https://www.yourBlog.com/" } })
+                                                                @*@Html.EditorFor(m => m.Blog, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.blogConnection, @placeholder = "https://www.yourBlog.com/" } })*@
                                                                 @*<input placeholder="https://www.yourBlog.com/" class="input-element" data-type="website" value=@(ViewBag.blogConnection)>*@
                                                             </div>
                                                         </div>
@@ -373,9 +373,9 @@
                 <div class="course-card">
                     <div class="briefs-container row mt-1">
                         @*@for (var i = 0; i < 30; i++)
-                            {
-                                @Html.Partial("CardTemplate")
-                            }*@
+                        {
+                            @Html.Partial("CardTemplate")
+                        }*@
                     </div>
                 </div>
             </div>
