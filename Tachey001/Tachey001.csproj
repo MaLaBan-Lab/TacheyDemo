@@ -224,7 +224,9 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\OrderRecord.cs" />
+    <Compile Include="ViewModel\GroupOrderRecord.cs" />
+    <Compile Include="ViewModel\OrderRecordOther.cs" />
+    <Compile Include="ViewModel\OrderRecordSuccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\all.css" />
@@ -506,11 +508,12 @@
     <Content Include="Views\Shared\_LayoutCreate.cshtml" />
     <Content Include="Views\Home\CourseCard.cshtml" />
     <Content Include="Views\Shared\CardTemplate.cshtml" />
-    <Content Include="Views\Shared\_RecordCard.cshtml" />
+    <Content Include="Views\Shared\_RecordCardSuccess.cshtml" />
     <Content Include="Views\Shared\_HighlightCardPartial.cshtml" />
     <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
     <Content Include="Views\Courses\Step4.cshtml" />
+    <Content Include="Views\Shared\_RecordCardError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

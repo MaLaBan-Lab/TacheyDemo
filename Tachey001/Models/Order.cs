@@ -9,8 +9,7 @@ namespace Tachey001.Models
     [Table("Order")]
     public partial class Order
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int OrderID { get; set; }
+        public string OrderID { get; set; }
 
         [Required]
         [StringLength(128)]
@@ -25,7 +24,7 @@ namespace Tachey001.Models
         public string MemberID { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(128)]
         public string OrderStatus { get; set; }
 
         public DateTime OrderDate { get; set; }
@@ -34,6 +33,6 @@ namespace Tachey001.Models
         [StringLength(20)]
         public string PayMethod { get; set; }
 
-        public DateTime PayDate { get; set; }
+        public DateTime? PayDate { get; set; }
     }
 }

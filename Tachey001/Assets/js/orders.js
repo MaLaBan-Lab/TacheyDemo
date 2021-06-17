@@ -17,3 +17,15 @@ function changeIndex(e) {
         }
   });
 }
+
+
+let od_success = document.querySelector("#od-success");
+let od_pay = document.querySelector("#od-pay");
+let od_error = document.querySelector("#od-error");
+let od_record = document.querySelector("#od-record");
+
+
+od_success.addEventListener("click", function () {
+    
+})
+
