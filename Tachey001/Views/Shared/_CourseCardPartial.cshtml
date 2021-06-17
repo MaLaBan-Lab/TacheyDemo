@@ -1,4 +1,7 @@
-﻿<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+﻿@*回傳資料型別*@
+@model CourseCardPartial
+
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
         <div class="row no-gutters justify-content-center">
             <div class="col-12">
@@ -9,7 +12,7 @@
                         rounded-circle
                         bg-white
                       ">
-                        <img src="https://0.share.photo.xuite.net/donna900920/104fe81/12711717/639651164_m.jpg"
+                        <img src="@Model.Photo"
                              alt="" class="rounded-circle position-absolute center" id="photoImag" />
                     </div>
                 </div>
@@ -31,7 +34,7 @@
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
                 <h4 class="card-title text-justify font-weight-normal text-secondary">
-                    Java 工程師必備！Spring Boot 零基
+                    @Model.Title
                 </h4>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
@@ -61,7 +64,7 @@
                     <span class="couse-time-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-time">578</span>分鐘
+                    <span class="course-time">@Model.TotalMinTime</span>分鐘
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
@@ -69,10 +72,10 @@
                     <span class="course-people-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-people">260</span>人
+                    <span class="course-people">123</span>人
                 </span>
                 <span class="card-text hahow-dark-green classPrice">
-                    NT$<span>3,200</span>
+                    NT$<span>@Model.OriginalPrice</span>
                 </span>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">

@@ -57,6 +57,7 @@
 /* 基本共通設定 */
 body {
 	background-color: rgb(241, 239, 239);
+	color:white;
 }
 
 .display-none {
@@ -430,7 +431,7 @@ body {
   padding: 7.5px 20px;
   color: rgb(101, 101, 101);
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  white-space: initial;
+  /*white-space: initial;*/
 }
 
 .dropdown button:focus {
