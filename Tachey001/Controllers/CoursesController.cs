@@ -7,20 +7,31 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Tachey001.Models;
+using Tachey001.Service;
+using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
 {
     [Authorize]
     public class CoursesController : Controller
     {
-        private TacheyContext tacheyDb = new TacheyContext();
+        private TacheyContext tacheyDb;
+        //宣告CourseService
+        private CourseService _courseService;
+
+        //初始化CourseService
+        public CoursesController()
+        {
+            tacheyDb = new TacheyContext();
+            _courseService = new CourseService();
+        }
 
         [AllowAnonymous]
         public ActionResult All()
         {
-            ViewBag.UserId = User.Identity.GetUserId();
+            var result = _courseService.GetAllCourse();
 
-            return View();
+            return View(result);
         }
 
         [AllowAnonymous]
@@ -52,11 +63,15 @@ namespace Tachey001.Controllers
             ViewBag.Id = id;
             ViewBag.CourseId = CourseId;
 
-            var result = tacheyDb.Course.Find(CourseId);
+            var currentCourse = tacheyDb.Course.Find(CourseId);
+            var chapterList = tacheyDb.CourseChapter.Where(x => x.CourseID == CourseId).Select(x => x);
+            var unitList = tacheyDb.CourseUnit.Where(x => x.CourseID == CourseId).Select(x => x);
 
-            return View(result);
+            StepGroup stepGroup = new StepGroup { courseChapter = chapterList, courseUnit = unitList, course = currentCourse };
+
+            return View(stepGroup);
         }
-        public string GetRandomId(int Length)
+        private string GetRandomId(int Length)
         {
             string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
             int passwordLength = Length;
@@ -87,7 +102,7 @@ namespace Tachey001.Controllers
             var CourseId = GetRandomId(12);
             var currentUserId = User.Identity.GetUserId();
 
-            while(tacheyDb.Course.Find(CourseId) != null)
+            while (tacheyDb.Course.Find(CourseId) != null)
             {
                 CourseId = GetRandomId(12);
             }
@@ -111,10 +126,10 @@ namespace Tachey001.Controllers
         {
             var result = tacheyDb.Course.Find(CourseId);
 
-            result.Title = Title;
-            result.Description = Description;
-            result.TitlePageImageURL = TitlePageImageURL;
-            result.MarketingImageURL = MarketingImageURL;
+            result.Title = Title ?? "請輸入標題";
+            result.Description = Description ?? "請輸入標題";
+            result.TitlePageImageURL = TitlePageImageURL ?? "請輸入標題";
+            result.MarketingImageURL = MarketingImageURL ?? "請輸入標題";
 
             tacheyDb.SaveChanges();
 
@@ -135,8 +150,31 @@ namespace Tachey001.Controllers
             return RedirectToAction("Step", "Courses", new { id = 3, CourseId = CourseId });
         }
         [HttpPost]
-        public ActionResult Step4(string CourseId)
+        public ActionResult Step4(FormCollection course, string CourseId)
         {
+            var count = course.AllKeys.Count();
+
+            for (int i = 1; i < count; i++)
+            {
+                int chapterCount = 0;
+                var arr = course[$"{i}"].Split(',');
+                foreach (var item in arr)
+                {
+                    if (chapterCount == 0)
+                    {
+                        var newChapter = new CourseChapter { CourseID = CourseId, ChapterID = i, ChapterName = item };
+                        tacheyDb.CourseChapter.Add(newChapter);
+                    }
+                    else
+                    {
+                        var newUnit = new CourseUnit { CourseID = CourseId, ChapterID = i, UnitName = item, UnitID = $"{i}-{chapterCount}" };
+                        tacheyDb.CourseUnit.Add(newUnit);
+                    }
+                    chapterCount++;
+                }
+            };
+
+            tacheyDb.SaveChanges();
 
             return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
         }

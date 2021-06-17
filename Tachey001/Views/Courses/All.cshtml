@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Tachey001.ViewModel.Course.AllCourse>
 @{
     ViewBag.Title = "All";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml"; }
@@ -70,9 +70,9 @@
         </div>
     </div>
     <div class="row mt-5">
-        @for (var i = 0; i < 30; i++)
+        @foreach (var item in Model)
         {
-            @Html.Partial("CardTemplate")
+            @Html.Partial("CardTemplate", item)
         }
     </div>
 </div>
