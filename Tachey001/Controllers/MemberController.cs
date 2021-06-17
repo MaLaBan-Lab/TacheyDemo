@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
+using Tachey001.Service;
 using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
@@ -12,23 +13,24 @@ namespace Tachey001.Controllers
     [Authorize]
     public class MemberController : Controller
     {
-
-
-
         private TacheyContext tacheyDb;
-        public MemberController() { 
-               tacheyDb = new TacheyContext();
+        //宣告CourseService
+        private CourseService _courseService;
+
+        //初始化CourseService
+        public MemberController()
+        {
+            tacheyDb = new TacheyContext();
+            _courseService = new CourseService();
         }
         // GET: Member
         public ActionResult Console()
         {
             var currentId = User.Identity.GetUserId();
 
-            ViewBag.UserPhoto = tacheyDb.Member.Find(currentId).Photo;
+            var result = _courseService.GetMemberCreateCourse(currentId);
 
-            var courseList = tacheyDb.Course.Where(x => x.MemberID == currentId).Select(x => x).ToList();
-
-            return View(courseList);
+            return View(result);
         }
 
         public ActionResult Point()
