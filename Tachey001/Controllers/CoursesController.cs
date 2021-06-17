@@ -126,10 +126,10 @@ namespace Tachey001.Controllers
         {
             var result = tacheyDb.Course.Find(CourseId);
 
-            result.Title = Title;
-            result.Description = Description;
-            result.TitlePageImageURL = TitlePageImageURL;
-            result.MarketingImageURL = MarketingImageURL;
+            result.Title = Title ?? "請輸入標題";
+            result.Description = Description ?? "請輸入標題";
+            result.TitlePageImageURL = TitlePageImageURL ?? "請輸入標題";
+            result.MarketingImageURL = MarketingImageURL ?? "請輸入標題";
 
             tacheyDb.SaveChanges();
 
