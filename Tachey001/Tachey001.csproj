@@ -178,6 +178,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIController\CourseController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -224,9 +225,14 @@
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CourseRepository.cs" />
+    <Compile Include="Service\CourseService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CourseCardPartial.cs" />
+    <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\OrderRecord.cs" />
     <Compile Include="ViewModel\PersonalUrlView.cs" />
+    <Compile Include="ViewModel\StepGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\all.css" />
@@ -517,6 +523,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModel\Home\" />
+    <Folder Include="ViewModel\Member\" />
+    <Folder Include="ViewModel\Pay\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

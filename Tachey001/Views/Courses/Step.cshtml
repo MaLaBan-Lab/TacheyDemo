@@ -1,4 +1,4 @@
-﻿@model Course
+﻿@model Tachey001.ViewModel.StepGroup
 @section topCSS{
     @Styles.Render("~/Assets/css/step.css")
     <style>
@@ -76,9 +76,14 @@
         {
             @Html.Partial($"step/step_0", Model)
         }
-        else
+        else if (@ViewBag.Id == 3)
         {
             @Html.Partial($"step/step_{ViewBag.Id}", Model)
+            @Scripts.Render("~/Assets/js/step.js")
+        }
+        else
+        {
+            @Html.Partial($"step/step_{ViewBag.Id}", Model.course)
             @Scripts.Render("~/Assets/js/step.js")
         }
     </div>
@@ -147,26 +152,26 @@
             newDiv.classList.add('py-2')
             newDiv.classList.add('chapterBox')
             newDiv.innerHTML = `
-        <h4>
-          <i class="fas fa-align-justify mr-2"></i>
-          <span class="chapterName">章節${count + 1}</span>
-          <input type="text" class="w-75 chapterInput" name="${count + 1}">
-          <i class="far fa-window-close" onclick="deleteChapter()"></i>
-        </h4>
-        <hr>
-        <h5 class="text-right">
-          <span>-新增單元</span>
-          <i class="far fa-plus-square" onclick="newUnit()"></i>
-        </h5>
-        <div class="drag-sort-enable unitBox">
-          <h5 class="text-right">
-            <i class="fas fa-align-justify mr-2"></i>
-            <span>單元1</span>
-            <input type="text" class="w-50" name="${count + 1}-1">
-            <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
-          </h5>
-        </div>
-      `
+                <h4>
+                  <i class="fas fa-align-justify mr-2"></i>
+                  <span class="chapterName">章節${count + 1}</span>
+                  <input type="text" class="w-75 chapterInput" name="${count + 1}">
+                  <i class="far fa-window-close" onclick="deleteChapter()"></i>
+                </h4>
+                <hr>
+                <h5 class="text-right">
+                  <span>-新增單元</span>
+                  <i class="far fa-plus-square" onclick="newUnit()"></i>
+                </h5>
+                <div class="drag-sort-enable unitBox">
+                  <h5 class="text-right">
+                    <i class="fas fa-align-justify mr-2"></i>
+                    <span>單元1</span>
+                    <input type="text" class="w-50" name="${count + 1}-1">
+                    <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+                  </h5>
+                </div>
+              `
 
             chapter.appendChild(newDiv)
             enableDragSort('drag-sort-enable')
@@ -181,11 +186,11 @@
             var h5 = document.createElement('h5')
             h5.classList.add('text-right')
             h5.innerHTML = `
-        <i class="fas fa-align-justify mr-2"></i>
-        <span>單元${count + 1}</span>
-        <input type="text" class="w-50" name="${targetCh}-${count + 1}">
-        <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
-      `
+                <i class="fas fa-align-justify mr-2"></i>
+                <span>單元${count + 1}</span>
+                <input type="text" class="w-50" name="${count + 1}">
+                <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+              `
             unit.appendChild(h5)
             enableDragSort('drag-sort-enable')
             sortUpdate()
@@ -231,7 +236,7 @@
 
             chapterBox.forEach((item, index) => {
                 item.querySelector('.unitBox').querySelectorAll('input').forEach((x, count) => {
-                    x.name = `${index + 1}-${count + 1}`
+                    x.name = `${index + 1}`
                 })
             })
         }

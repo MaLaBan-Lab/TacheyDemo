@@ -3,19 +3,20 @@
 @Styles.Render("~/Assets/css/record.css")
 @{
     ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
 <div class="container mb-4 checked-btn">
     <div class="row justify-content-between">
         <div class="col-12 text-center my-5">
-            <h1><i class="fab fa-wpforms mx-3"></i>訂單紀錄</h1>
+            <h2 class="text-white"><i class="fab fa-wpforms mx-3"></i>訂單紀錄</h2>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-center py-3">
             <button type="button"
                     class="order shadow-sm w-100 py-2 d-flex flex-column align-items-center change-btn position-relative">
                 <div class="position-absolute btn-tape" id="order"></div>
                 <h2><i class="far fa-2x fa-check-circle"></i></h2>
-                <h6>已完成訂單</h6>
+                <h6 class="text-white">已完成訂單</h6>
             </button>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-center py-3">
@@ -23,7 +24,7 @@
                     class="pay change-btn shadow-sm w-100 py-2 d-flex flex-column align-items-center position-relative">
                 <div class="position-absolute btn-tape" id="pay"></div>
                 <h2><i class="far fa-2x fa-clock"></i></h2>
-                <h6>待付款訂單</h6>
+                <h6 class="text-white">待付款訂單</h6>
             </button>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-center py-3">
@@ -31,7 +32,7 @@
                     class="error change-btn shadow-sm w-100 py-2 d-flex flex-column align-items-center position-relative">
                 <div class="position-absolute btn-tape" id="error"></div>
                 <h2><i class="far fa-2x fa-times-circle"></i></h2>
-                <h6>失效訂單</h6>
+                <h6 class="text-white">失效訂單</h6>
             </button>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-center py-3">
@@ -39,7 +40,7 @@
                     class="record change-btn shadow-sm w-100 py-2 d-flex flex-column align-items-center position-relative">
                 <div class="position-absolute btn-tape" id="record"></div>
                 <h2><i class="far fa-2x fa-arrow-alt-circle-down"></i></h2>
-                <h6>稅換紀錄</h6>
+                <h6 class="text-white">稅換紀錄</h6>
             </button>
         </div>
     </div>
