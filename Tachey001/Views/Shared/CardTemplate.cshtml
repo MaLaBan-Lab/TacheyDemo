@@ -37,7 +37,7 @@
                     @Html.DisplayFor(m => m.Title)
                 </h4>
                 @Html.ActionLink("編輯", "Step", "Courses", new { id = 0, CourseId = Model.CourseID }, null)
-                @Html.ActionLink("刪除", "DeleteCourse", "Courses", new { id = Model.CourseID }, null)
+                @Html.ActionLink("刪除", "DeleteCourse", "Member", new { id = Model.CourseID }, null)
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
                 <span class="card-text text-black-50">
