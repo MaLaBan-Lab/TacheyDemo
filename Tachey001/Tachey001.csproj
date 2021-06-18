@@ -229,7 +229,6 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CourseCardPartial.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
-    <Compile Include="ViewModel\OrderRecord.cs" />
     <Compile Include="ViewModel\GroupOrderRecord.cs" />
     <Compile Include="ViewModel\OrderRecordOther.cs" />
     <Compile Include="ViewModel\OrderRecordSuccess.cs" />
