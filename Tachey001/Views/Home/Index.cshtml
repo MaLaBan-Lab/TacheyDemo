@@ -26,15 +26,15 @@
 
     }
 
-    TacheyContext _context = new TacheyContext();
-    var comment = from member in _context.Member join coursescore in _context.CourseScore on member.MemberID equals coursescore.MemberID select new { member.Name,member.Photo,coursescore.ToTachey };
+    //TacheyContext _context = new TacheyContext();
+    //var comment = from member in _context.Member join coursescore in _context.CourseScore on member.MemberID equals coursescore.MemberID select new { member.Name,member.Photo,coursescore.ToTachey };
 
-    var course = from _course in _context.Course
-                 join member in _context.Member on _course.MemberID equals member.MemberID
-                 select new CourseCardPartial { Photo = member.Photo, Title = _course.Title, TotalMinTime = _course.TotalMinTime, OriginalPrice = _course.OriginalPrice };
-    var highlightcourse = from _course in _context.Course select _course;
+    //var course = from _course in _context.Course
+    //             join member in _context.Member on _course.MemberID equals member.MemberID
+    //             select new CourseCardPartial { Photo = member.Photo, Title = _course.Title, TotalMinTime = _course.TotalMinTime, OriginalPrice = _course.OriginalPrice };
+    //var highlightcourse = from _course in _context.Course select _course;
 
-    //_context.Dispose();
+    ////_context.Dispose();
     }
 
 <!-- 第一塊 -->
