@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
-using Tachey001.Service;
+using Tachey001.Service.Course;
 using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
@@ -32,7 +32,19 @@ namespace Tachey001.Controllers
 
             return View(result);
         }
+        //刪除課程卡片
+        public ActionResult DeleteCourse(string id)
+        {
+            var result = tacheyDb.Course.Find(id);
 
+            tacheyDb.Course.Remove(result);
+
+            tacheyDb.SaveChanges();
+
+            tacheyDb.Dispose();
+
+            return RedirectToAction("Console", "Member");
+        }
         public ActionResult Point()
         {
             return View();

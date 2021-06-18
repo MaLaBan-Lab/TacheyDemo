@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tachey001.Repository;
+using Tachey001.Repository.Course;
 using Tachey001.ViewModel.Course;
 
-namespace Tachey001.Service
+namespace Tachey001.Service.Course
 {
     public class CourseService
     {
