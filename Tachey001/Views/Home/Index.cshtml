@@ -1,6 +1,5 @@
-﻿@model IEnumerable<Tachey001.ViewModel.CourseCardPartial>
-
-    
+﻿@*最大籃子的型別*@
+@model Tachey001.ViewModel.Card_highlight_Group
 @{
     int i = 0;
     ViewBag.Title = "Home Page";
@@ -257,18 +256,19 @@
         </div>
         <div class="col-9 ">
             <div class="owl-carousel    advertising-carousel">
-                
-                @foreach (var item in highlightcourse)
+
+                @*傳過來的大籃子到view都會變成變數Model,要找到裡面的碗都要寫Model.*@
+                @foreach (var item in Model.highlightViewModels)
                 {
-                    
+
                     if (i <= 1)
                     {
 
-                        @Html.Partial("_HighlightCardPartial",item)
+                        @Html.Partial("_HighlightCardPartial", item)
                         i++;
                     }
                     else
-                    { @Html.Partial("_HighlightCardPartial_3",item)}
+                    { @Html.Partial("_HighlightCardPartial_3", item)}
 
 
             }
@@ -295,7 +295,7 @@
     </div>
     <div class="row m-0 justify-content-center pb-4">
         <div class="col-lg-12 d-flex justify-content-center reading-8 flex-wrap p-0">
-            @foreach (var item in comment)
+            @foreach (var item in Model.commentViewModels)
             {
                 <div class="col-lg-4 p-0 ">
                     <div class="comment p-4">
@@ -314,7 +314,7 @@
 
 
 
-           
+
         </div>
     </div>
 </div>
@@ -334,11 +334,11 @@
     </div>
 
 
-    
+
     <div class="row">
-        @foreach (var item in course)
+        @foreach (var item in Model.courseCardViewModels)
         {
-            @Html.Partial("_CourseCardPartial",item)
+            @Html.Partial("_CourseCardPartial", item)
         }
     </div>
 </div>
@@ -356,9 +356,9 @@
     <div class="row">
         @*資料庫未完成*@
         @*@Html.Partial("_CourseCardPartial")
-        @Html.Partial("_CourseCardPartial")
-        @Html.Partial("_CourseCardPartial")
-        @Html.Partial("_CourseCardPartial")*@
+            @Html.Partial("_CourseCardPartial")
+            @Html.Partial("_CourseCardPartial")
+            @Html.Partial("_CourseCardPartial")*@
     </div>
 </div>
 <!-- 本週熱門課程 -->

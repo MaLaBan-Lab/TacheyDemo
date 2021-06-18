@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Tachey001.ViewModel
 {
-    public class CourseCardPartial
+    public class CourseCardViewModel
     {
         public string Title { get; set; }
         public string TitlePageImageURL { get; set; }
