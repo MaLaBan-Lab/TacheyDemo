@@ -8,12 +8,14 @@ namespace Tachey001.Repository
 {
     public class HomeRepository
     {
+        //初始化資料庫
         private TacheyContext _tacheyContext;
 
         public HomeRepository()
         {
             _tacheyContext = new TacheyContext();
         }
+        //做方法 拿要的資料表
         public IQueryable<Member> GetMembers()
         {
             var result = _tacheyContext.Member;
