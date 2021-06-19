@@ -16,7 +16,8 @@ namespace Tachey001.Service.Course
         {
             _courseRepository = new CourseRepository();
         }
-        public List<AllCourse> GetAllCourse()
+        //取得課程卡片所需資料欄位
+        public List<AllCourse> GetCourseData()
         {
             var course = _courseRepository.GetAllCourse();
             var member = _courseRepository.GetAllMember();
@@ -37,8 +38,8 @@ namespace Tachey001.Service.Course
 
             return result.ToList();
         }
-
-        public List<AllCourse> GetMemberCreateCourse(string MemberId)
+        //取得課程卡片所需資料欄位(多載+1)
+        public List<AllCourse> GetCourseData(string MemberId)
         {
             var course = _courseRepository.GetAllCourse();
             var member = _courseRepository.GetAllMember();

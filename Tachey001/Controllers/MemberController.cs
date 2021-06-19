@@ -28,7 +28,7 @@ namespace Tachey001.Controllers
         {
             var currentId = User.Identity.GetUserId();
 
-            var result = _courseService.GetMemberCreateCourse(currentId);
+            var result = _courseService.GetCourseData(currentId);
 
             return View(result);
         }

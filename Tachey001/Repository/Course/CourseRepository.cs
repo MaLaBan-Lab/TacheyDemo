@@ -29,5 +29,12 @@ namespace Tachey001.Repository.Course
 
             return result;
         }
+        //取得指定課程資料表
+        public Models.Course GetCurrentCourse(string currentId)
+        {
+            var result = _tacheyContext.Course.Find(currentId);
+
+            return result;
+        }
     }
 }

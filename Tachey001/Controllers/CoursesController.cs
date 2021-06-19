@@ -29,7 +29,7 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult All()
         {
-            var result = _courseService.GetAllCourse();
+            var result = _courseService.GetCourseData();
 
             return View(result);
         }
@@ -70,9 +70,15 @@ namespace Tachey001.Controllers
             var categoryList = tacheyDb.CourseCategory;
             var detailList = tacheyDb.CategoryDetail;
 
-            StepGroup stepGroup = new StepGroup { courseChapter = chapterList, courseUnit = unitList, course = currentCourse };
+            var result = new StepGroup 
+            {   courseChapter = chapterList, 
+                courseUnit = unitList, 
+                course = currentCourse, 
+                courseCategory = categoryList, 
+                categoryDetails = detailList 
+            };
 
-            return View(stepGroup);
+            return View(result);
         }
         //開課 POST
         [HttpPost]
@@ -104,7 +110,7 @@ namespace Tachey001.Controllers
                 result.CategoryID = detail.CategoryID;
                 result.CategoryDetailsID = course.CategoryDetailsID;
             }
-            else if(id == 5)
+            else if (id == 5)
             {
                 result.Introduction = group.course.Introduction;
             }
