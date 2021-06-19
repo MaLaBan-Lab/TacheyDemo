@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Tachey001.Models;
 
-namespace Tachey001.Repository
+namespace Tachey001.Repository.Home
 {
     public class HomeRepository
     {

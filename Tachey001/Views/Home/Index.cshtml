@@ -1,7 +1,6 @@
 ﻿@*最大籃子的型別*@
 @model Tachey001.ViewModel.Card_highlight_Group
-@{
-    int i = 0;
+@{var i = 0;
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
 
@@ -35,6 +34,7 @@
 
     ////_context.Dispose();
 }
+
 <!-- 第一塊 -->
 <div class="container-fuild">
     <div class="row  m-0 justify-content-center d-f-direction-c-r">
@@ -263,8 +263,7 @@
                     if (i <= 1)
                     {
 
-                        @Html.Partial("_HighlightCardPartial", item)
-                        i++;
+                        @Html.Partial("_HighlightCardPartial", item) i++;
                     }
                     else
                     { @Html.Partial("_HighlightCardPartial_3", item)}
@@ -307,8 +306,7 @@
                              alt="" class="comment-bot-img">
                         <a href="#" class="comment-a"><img src="@item.Photo" alt="" id="user-logo">@item.Name</a>
                     </div>
-                </div>
-            }
+                </div>      }
 
 
 
@@ -337,8 +335,7 @@
     <div class="row">
         @foreach (var item in Model.courseCardViewModels)
         {
-            @Html.Partial("_CourseCardPartial", item)
-        }
+            @Html.Partial("_CourseCardPartial", item)}
     </div>
 </div>
 <!-- 猜你想學 -->

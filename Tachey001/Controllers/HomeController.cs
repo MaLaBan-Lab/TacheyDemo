@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
-using Tachey001.Service;
+using Tachey001.Service.Home;
 using Tachey001.ViewModel;
+
 namespace Tachey001.Controllers
 {
     public class HomeController : Controller
@@ -32,7 +33,9 @@ namespace Tachey001.Controllers
             {
                 //跟他說要放甚麼 like select new
                 //也可以小括號用.的
-                highlightViewModels = gethighlightcourseviewmodel,commentViewModels=getcommentviewmodel,courseCardViewModels=getcoursecardviewmodels
+                highlightViewModels = gethighlightcourseviewmodel,
+                commentViewModels = getcommentviewmodel,
+                courseCardViewModels = getcoursecardviewmodels
             };
             //丟入view
             return View(result);
