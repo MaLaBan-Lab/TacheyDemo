@@ -61,5 +61,10 @@ namespace Tachey001.Service.Course
 
             return result.ToList();
         }
+        //刪除指定課程資料
+        public void DeleteCurrentIdCourseData(string id)
+        {
+            _courseRepository.DeleteCurrentIdCourseData(id);
+        }
     }
 }

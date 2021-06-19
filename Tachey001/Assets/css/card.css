@@ -97,7 +97,7 @@
   
   @media (min-width: 768px) {
     #cardTitle {
-        height: 82px;
+        height: 70px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

@@ -16,6 +16,7 @@ namespace Tachey001.Service.Home
         {
            _HomeRepository = new HomeRepository();
         }
+        //作方法篩選資料
         public List<CommentViewModel> GetCommentViewModel()
         {
             //select完成變成view model
@@ -33,7 +34,7 @@ namespace Tachey001.Service.Home
             var course = _HomeRepository.GetCourses();
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
-                         select new CourseCardViewModel{Photo= m.Photo, Title = c.Title, TotalMinTime = c.TotalMinTime, OriginalPrice = c.OriginalPrice };
+                         select new CourseCardViewModel{Photo= m.Photo, Title = c.Title, TotalMinTime = c.TotalMinTime, OriginalPrice = c.OriginalPrice, TitlePageImageURL =c.TitlePageImageURL};
             return result.ToList();
         }
         public List<HighlightCourseViewModel> GetHighlightCourseViewModels()
@@ -42,7 +43,7 @@ namespace Tachey001.Service.Home
             var result = from c in course select new
             HighlightCourseViewModel
             {
-                Title = c.Title, Introduction = c.Introduction, TotalMinTime = c.TotalMinTime, Description = c.Description
+                Title = c.Title, Introduction = c.Introduction, TotalMinTime = c.TotalMinTime, Description = c.Description ,TitlePageImageURL=c.TitlePageImageURL
             };
 
             return result.ToList();

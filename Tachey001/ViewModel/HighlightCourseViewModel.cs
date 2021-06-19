@@ -11,5 +11,6 @@ namespace Tachey001.ViewModel
         public string Introduction { get; set; }
         public int? TotalMinTime { get; set; }
         public string Description { get; set; }
+        public string TitlePageImageURL { get; set; }
     }
 }

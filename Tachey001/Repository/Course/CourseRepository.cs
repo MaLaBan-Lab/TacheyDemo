@@ -15,17 +15,10 @@ namespace Tachey001.Repository.Course
             _tacheyContext = new TacheyContext();
         }
 
-        // Read 讀取課程表
-        public IQueryable<Models.Course> GetAllCourse()
+        //Read 讀取課程表
+        public IEnumerable<Models.Course> GetAllCourse()
         {
             var result = _tacheyContext.Course;
-
-            return result;
-        }
-        // Read 讀取會員表
-        public IQueryable<Member> GetAllMember()
-        {
-            var result = _tacheyContext.Member;
 
             return result;
         }
@@ -35,6 +28,24 @@ namespace Tachey001.Repository.Course
             var result = _tacheyContext.Course.Find(currentId);
 
             return result;
+        }
+        //Read 讀取會員表
+        public IEnumerable<Member> GetAllMember()
+        {
+            var result = _tacheyContext.Member;
+
+            return result;
+        }
+        //Delete刪除指定課程資料
+        public void DeleteCurrentIdCourseData(string CourseId)
+        {
+            var result = GetCurrentCourse(CourseId);
+
+            _tacheyContext.Course.Remove(result);
+
+            _tacheyContext.SaveChanges();
+
+            _tacheyContext.Dispose();
         }
     }
 }
