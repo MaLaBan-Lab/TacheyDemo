@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
+using Tachey001.Service;
 using Tachey001.Service.Course;
 using Tachey001.ViewModel;
 
@@ -16,12 +17,14 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
+        private MemberService _memberService;
 
         //初始化CourseService
         public MemberController()
         {
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
+            _memberService = new MemberService();
         }
         // GET: Member
         public ActionResult Console()
@@ -91,7 +94,21 @@ namespace Tachey001.Controllers
 
         public ActionResult Cart()
         {
-            return View();
+            //抓到現在登入狀態的會員ID
+            var currentId = User.Identity.GetUserId();
+            var getcartcardviewmodels = _memberService.GetCartPartialViewModel(currentId);
+            var getcoursecardviewmodels = _memberService.GetCourseCardViewModels();
+            //資料是複數就要toloist,引用的型別是單數所以無法使用
+            //return View(getcoursecardviewmodels);
+            var result = new Cart_GroupViewModel
+            {
+                //跟他說要放甚麼 like select new
+                //也可以小括號用.的
+                cartpartialViewModels = getcartcardviewmodels,
+                courseCardViewModels = getcoursecardviewmodels
+            };
+            //丟入view
+            return View(result);
         }
     }
 }

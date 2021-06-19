@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Tachey001.Models;
+using Tachey001.Service;
 
 namespace Tachey001.Repository.Home
 {
@@ -32,5 +33,9 @@ namespace Tachey001.Repository.Home
             return result;
         }
 
+        public static implicit operator HomeRepository(MemberService v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

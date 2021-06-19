@@ -1,7 +1,18 @@
 ﻿@*回傳資料型別*@
 @model Tachey001.ViewModel.CourseCardViewModel
 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+@{
+    var col = 3;
+
+    if (HttpContext.Current.Request.RawUrl == "/Member/Cart")
+    {
+        col = 4;
+    }
+ 
+}
+
+
+<div class="col-xl-@col col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
         <div class="row no-gutters justify-content-center">
             <div class="col-12">
@@ -19,7 +30,7 @@
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
                 <img src="@Model.TitlePageImageURL"
-                     class="card-img-top" style="width:262px; height:164px"/>
+                     class="card-img-top" style="width:262px; height:164px" />
                 <div class="
                     position-absolute
                     bg-hahow-dark-green

@@ -1,4 +1,13 @@
-﻿@Styles.Render("~/Assets/css/HAHOWcart.css")
+﻿@*因為回傳的是複數所以要用List<>包起來*@
+@*@model List<Tachey001.ViewModel.CourseCardViewModel>*@
+
+
+
+
+@model Tachey001.ViewModel.Cart_GroupViewModel
+@Styles.Render("~/Assets/css/HAHOWcart.css")
+@Styles.Render("~/Assets/css/HAHOWcart-collection.css")
+
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
@@ -61,47 +70,18 @@
                         <span class="original-price txt-center">售價</span>
                         <span class="price txt-right">付款金額</span>
                     </div>
-                    @Html.Partial("_CartPartialCard");
-                    @Html.Partial("_CartPartialCard");
-                    @Html.Partial("_CartPartialCard");
-                    @*<div>
 
-                <section class="sc-1bv2ylx-0 gQwyiQ marg-t-20">
-                    <div class="top-container pad-tb-15 pad-rl-15">
-                        <div class="course-info flex flex-1">
-                            <a href="/courses/5ce99ccdea2d0500209afca2">
-                                <img class="cx4oas-0  course-cover-img marg-b-5 marg-r-15 loaded" src="https://images.api.hahow.in/images/5d2e87779cf9ea0021ea946d">
-                            </a>
-                            <div class="title-col">
-                                <span class="course-title">
-                                    <a href="/courses/5ce99ccdea2d0500209afca2" class="a-color">零基礎輕鬆學：流行鋼琴【即興伴奏】彈唱</a>
-                                </span>
 
-                            </div>
-                        </div>
-                        <div class="price-info flex-1">
-                            <div class="type-and-price-detail flex-2">
-                                <div class="type-col flex-2">已開課</div>
-                                <div class="price-detail-col flex-3">
-                                    <div class="price-diff-col">
-                                        <div class="price-text">
-                                            <span>NT$2,380</span>
-                                        </div>
-                                    </div>
-                                    <div class="discount-col"></div>
-                                </div>
+                
 
-                            </div>
-                            <div class="subtotal-col flex-1">
-                                <div>
-                                    <div class="subtotal-text">NT$2,380</div><div class="subtotal-original-text">約 NT$2,380</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>*@
+                    @foreach (var item in Model.cartpartialViewModels)
+                    {
+                        @Html.Partial("_CartPartialCard",item);
+                    }
+
+
+
+                    @*購物車是空的*@
                     @*<div class="pt-6rem">
             <div class="vertical-horizontal-center pad-tb-100">
                 <div class="text-center">
@@ -113,7 +93,30 @@
                 </div>
             </div>
         </div>*@
+                </div><!-- 我收藏的課程 -->
+                <div class=" cart-area bookmark-area marg-t-60 hidden-xs">
+                    <h4 class="underline m-3">
+                        <span aria-hidden="true" class="fa fa-bookmark"></span>
+                        <span class="marg-l-10">我收藏的課</span>
+                    </h4>
+                    <hr>
+                    <!-- <div class="pt-6rem card-flex"> -->
+                    <!-- 課程卡 -->
+                    <div class="container-md">
+                        <div class="row">
+                            
+
+                            @foreach (var item in Model.courseCardViewModels)
+                            {
+                                @Html.Partial("_CourseCardPartial", item)
+                            }
+                        </div>
+                    </div>
+
+
                 </div>
+
+
             </div>
 
 
