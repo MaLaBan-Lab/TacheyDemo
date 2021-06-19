@@ -7,8 +7,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Tachey001.Models;
-using Tachey001.Service;
-using Tachey001.ViewModel;
+using Tachey001.Service.Course;
+using Tachey001.ViewModel.Course;
 
 namespace Tachey001.Controllers
 {
@@ -29,7 +29,7 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult All()
         {
-            var result = _courseService.GetAllCourse();
+            var result = _courseService.GetCourseData();
 
             return View(result);
         }
@@ -56,6 +56,7 @@ namespace Tachey001.Controllers
             ViewBag.Id = id;
             return View();
         }
+        //開課 GET
         public ActionResult Step(int? id, string CourseId)
         {
             ViewBag.UserId = User.Identity.GetUserId();
@@ -66,11 +67,59 @@ namespace Tachey001.Controllers
             var currentCourse = tacheyDb.Course.Find(CourseId);
             var chapterList = tacheyDb.CourseChapter.Where(x => x.CourseID == CourseId).Select(x => x);
             var unitList = tacheyDb.CourseUnit.Where(x => x.CourseID == CourseId).Select(x => x);
+            var categoryList = tacheyDb.CourseCategory;
+            var detailList = tacheyDb.CategoryDetail;
 
-            StepGroup stepGroup = new StepGroup { courseChapter = chapterList, courseUnit = unitList, course = currentCourse };
+            var result = new StepGroup 
+            {   courseChapter = chapterList, 
+                courseUnit = unitList, 
+                course = currentCourse, 
+                courseCategory = categoryList, 
+                categoryDetails = detailList 
+            };
 
-            return View(stepGroup);
+            return View(result);
         }
+        //開課 POST
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Step(int? id, StepGroup group, Course course, string CourseId)
+        {
+            var result = tacheyDb.Course.Find(CourseId);
+            if (id == 1)
+            {
+                result.Title = group.course.Title;
+                result.Description = group.course.Description;
+                result.TitlePageImageURL = group.course.TitlePageImageURL;
+                result.MarketingImageURL = group.course.MarketingImageURL;
+            }
+            else if (id == 2)
+            {
+                result.Tool = group.course.Tool;
+                result.CourseLevel = group.course.CourseLevel;
+                result.Effect = group.course.Effect;
+                result.CoursePerson = group.course.CoursePerson;
+            }
+            else if (id == 4)
+            {
+                var detail = tacheyDb.CategoryDetail.Find(course.CategoryDetailsID);
+
+                result.OriginalPrice = course.OriginalPrice;
+                result.PreOrderPrice = course.PreOrderPrice;
+                result.TotalMinTime = course.TotalMinTime;
+                result.CategoryID = detail.CategoryID;
+                result.CategoryDetailsID = course.CategoryDetailsID;
+            }
+            else if (id == 5)
+            {
+                result.Introduction = group.course.Introduction;
+            }
+
+            tacheyDb.SaveChanges();
+
+            return RedirectToAction("Step", "Courses", new { id = (id + 1), CourseID = CourseId });
+        }
+        //取得自訂位數的亂數方法
         private string GetRandomId(int Length)
         {
             string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
@@ -82,22 +131,10 @@ namespace Tachey001.Controllers
             {
                 chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
             }
-
             return new string(chars);
         }
-        public ActionResult DeleteCourse(string id)
-        {
-            var result = tacheyDb.Course.Find(id);
-
-            tacheyDb.Course.Remove(result);
-
-            tacheyDb.SaveChanges();
-
-            tacheyDb.Dispose();
-
-            return RedirectToAction("Console", "Member");
-        }
-        public ActionResult Step0()
+        //創新課程
+        public ActionResult NewCourseStep()
         {
             var CourseId = GetRandomId(12);
             var currentUserId = User.Identity.GetUserId();
@@ -117,58 +154,53 @@ namespace Tachey001.Controllers
 
             return RedirectToAction("Step", "Courses", new { id = 0, CourseId = CourseId });
         }
-        public ActionResult Step1(string CourseId)
-        {
-            return RedirectToAction("Step", "Courses", new { id = 1, CourseId = CourseId });
-        }
+        //課程章節新增修改
         [HttpPost]
-        public ActionResult Step2(string Title, string Description, string TitlePageImageURL, string MarketingImageURL, string CourseId)
+        public ActionResult StepUnit(int? id, FormCollection course, string CourseId)
         {
-            var result = tacheyDb.Course.Find(CourseId);
+            var chResult = tacheyDb.CourseChapter.Where(x => x.CourseID == CourseId).Select(x => x).ToList();
+            var unResult = tacheyDb.CourseUnit.Where(x => x.CourseID == CourseId).Select(x => x).ToList();
 
-            result.Title = Title ?? "請輸入標題";
-            result.Description = Description ?? "請輸入標題";
-            result.TitlePageImageURL = TitlePageImageURL ?? "請輸入標題";
-            result.MarketingImageURL = MarketingImageURL ?? "請輸入標題";
+            tacheyDb.CourseChapter.RemoveRange(chResult);
+            tacheyDb.CourseUnit.RemoveRange(unResult);
 
-            tacheyDb.SaveChanges();
-
-            return RedirectToAction("Step", "Courses", new { id = 2, CourseId = CourseId });
-        }
-        [HttpPost]
-        public ActionResult Step3(string Tool, string CourseLevel, string Effect, string CoursePerson, string CourseId)
-        {
-            var result = tacheyDb.Course.Find(CourseId);
-
-            result.Tool = Tool;
-            result.CourseLevel = CourseLevel;
-            result.Effect = Effect;
-            result.CoursePerson = CoursePerson;
-
-            tacheyDb.SaveChanges();
-
-            return RedirectToAction("Step", "Courses", new { id = 3, CourseId = CourseId });
-        }
-        [HttpPost]
-        public ActionResult Step4(FormCollection course, string CourseId)
-        {
             var count = course.AllKeys.Count();
-
             for (int i = 1; i < count; i++)
             {
                 int chapterCount = 0;
                 var arr = course[$"{i}"].Split(',');
+
+                var newUnit = new CourseUnit();
+
                 foreach (var item in arr)
                 {
+                    var newChapter = new CourseChapter();
+
                     if (chapterCount == 0)
                     {
-                        var newChapter = new CourseChapter { CourseID = CourseId, ChapterID = i, ChapterName = item };
+                        newChapter.CourseID = CourseId;
+                        newChapter.ChapterID = i;
+                        newChapter.ChapterName = item;
                         tacheyDb.CourseChapter.Add(newChapter);
                     }
                     else
                     {
-                        var newUnit = new CourseUnit { CourseID = CourseId, ChapterID = i, UnitName = item, UnitID = $"{i}-{chapterCount}" };
+                        newUnit.CourseID = CourseId;
+                        newUnit.ChapterID = i;
+                        newUnit.UnitID = $"{i}-{chapterCount}";
+                        if (chapterCount % 2 == 0)
+                        {
+                            newUnit.UnitName = item;
+                        }
+                        else
+                        {
+                            newUnit.CourseURL = item;
+                        }
+                    }
+                    if (chapterCount % 2 == 0)
+                    {
                         tacheyDb.CourseUnit.Add(newUnit);
+                        newUnit = new CourseUnit();
                     }
                     chapterCount++;
                 }
@@ -176,41 +208,10 @@ namespace Tachey001.Controllers
 
             tacheyDb.SaveChanges();
 
-            return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
-        }
-        [HttpPost]
-        public ActionResult Step5(decimal OriginalPrice, decimal PreOrderPrice, int TotalMinTime, int CategoryDetailsID, string CourseId)
-        {
-            var result = tacheyDb.Course.Find(CourseId);
-
-            var detail = tacheyDb.CategoryDetail.Find(CategoryDetailsID);
-
-            result.OriginalPrice = OriginalPrice;
-            result.PreOrderPrice = PreOrderPrice;
-            result.TotalMinTime = TotalMinTime;
-            result.CategoryID = detail.CategoryID;
-            result.CategoryDetailsID = CategoryDetailsID;
-
-            tacheyDb.SaveChanges();
-
-            return RedirectToAction("Step", "Courses", new { id = 5, CourseId = CourseId });
-        }
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Step6(string Introduction, string CourseId)
-        {
-            var result = tacheyDb.Course.Find(CourseId);
-
-            result.Introduction = Introduction;
-
-            tacheyDb.SaveChanges();
-
-            return RedirectToAction("Step", "Courses", new { id = 6, CourseId = CourseId });
-        }
-        [HttpPost]
-        public ActionResult Step7(string CourseId)
-        {
-
+            if (id == 3)
+            {
+                return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
+            }
             return RedirectToAction("Step", "Courses", new { id = 7, CourseId = CourseId });
         }
         [HttpPost]

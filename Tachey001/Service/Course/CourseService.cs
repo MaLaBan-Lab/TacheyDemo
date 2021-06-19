@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tachey001.Repository;
+using Tachey001.Repository.Course;
 using Tachey001.ViewModel.Course;
 
-namespace Tachey001.Service
+namespace Tachey001.Service.Course
 {
     public class CourseService
     {
@@ -16,7 +16,8 @@ namespace Tachey001.Service
         {
             _courseRepository = new CourseRepository();
         }
-        public List<AllCourse> GetAllCourse()
+        //取得課程卡片所需資料欄位
+        public List<AllCourse> GetCourseData()
         {
             var course = _courseRepository.GetAllCourse();
             var member = _courseRepository.GetAllMember();
@@ -37,8 +38,8 @@ namespace Tachey001.Service
 
             return result.ToList();
         }
-
-        public List<AllCourse> GetMemberCreateCourse(string MemberId)
+        //取得課程卡片所需資料欄位(多載+1)
+        public List<AllCourse> GetCourseData(string MemberId)
         {
             var course = _courseRepository.GetAllCourse();
             var member = _courseRepository.GetAllMember();
@@ -59,6 +60,11 @@ namespace Tachey001.Service
                          };
 
             return result.ToList();
+        }
+        //刪除指定課程資料
+        public void DeleteCurrentIdCourseData(string id)
+        {
+            _courseRepository.DeleteCurrentIdCourseData(id);
         }
     }
 }

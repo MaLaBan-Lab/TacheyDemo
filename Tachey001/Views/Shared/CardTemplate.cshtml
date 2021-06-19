@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
                 <img src="@Model.TitlePageImageURL"
                      class="card-img-top" style="width:262px; height:164px"/>
                 <div class="
@@ -36,12 +36,10 @@
                     <i class="far fa-bookmark hahow-orange line-height-40"></i>
                 </div>
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
-                <h4 class="card-title text-justify font-weight-normal text-secondary">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
+                <h4 class="card-title text-justify font-weight-normal text-secondary" >
                     @Html.DisplayFor(m => m.Title)
                 </h4>
-                @Html.ActionLink("編輯", "Step", "Courses", new { id = 0, CourseId = Model.CourseID }, null)
-                @Html.ActionLink("刪除", "DeleteCourse", "Courses", new { id = Model.CourseID }, null)
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
                 <span class="card-text text-black-50">
@@ -80,9 +78,13 @@
                     </span>
                     <span class="course-people">0</span>人
                 </span>
-                <span class="card-text hahow-dark-green classPrice">
-                    NT$<span>@Html.DisplayFor(m => m.OriginalPrice)</span>
-                </span>
+                <div class="card-text hahow-dark-green classPrice">
+                    NT$<span>@Html.DisplayFor(m=>m.OriginalPrice)</span>
+                </div>
+                <div>
+                    @Html.ActionLink("編輯", "Step", "Courses", new { id = 0, CourseId = Model.CourseID }, null)
+                    @Html.ActionLink("刪除", "DeleteCourse", "Member", new { id = Model.CourseID }, null)
+                </div>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
                 <span class="backgroundBookmark-sm d-inline-block text-center mx-3">

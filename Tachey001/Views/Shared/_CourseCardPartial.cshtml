@@ -1,5 +1,5 @@
 ﻿@*回傳資料型別*@
-@model CourseCardPartial
+@model Tachey001.ViewModel.CourseCardViewModel
 
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
@@ -17,9 +17,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
-                <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
-                     class="card-img-top" />
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
+                <img src="@Model.TitlePageImageURL"
+                     class="card-img-top" style="width:262px; height:164px"/>
                 <div class="
                     position-absolute
                     bg-hahow-dark-green
@@ -32,7 +32,7 @@
                     <i class="far fa-bookmark hahow-orange line-height-40"></i>
                 </div>
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
                 <h4 class="card-title text-justify font-weight-normal text-secondary">
                     @Model.Title
                 </h4>
@@ -56,7 +56,7 @@
                             <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                     </span>
-                    (6)
+                    (0)
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
@@ -74,9 +74,9 @@
                     </span>
                     <span class="course-people">123</span>人
                 </span>
-                <span class="card-text hahow-dark-green classPrice">
+                <div class="card-text hahow-dark-green classPrice">
                     NT$<span>@Model.OriginalPrice</span>
-                </span>
+                </div>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
                 <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
