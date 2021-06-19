@@ -224,8 +224,10 @@
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\consoleRepository.cs" />
     <Compile Include="Repository\Course\CourseRepository.cs" />
     <Compile Include="Repository\Home\HomeRepository.cs" />
+    <Compile Include="Service\consoleService.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
     <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Startup.cs" />
