@@ -980,8 +980,23 @@ button,
 
 .interval {
 	position: relative;
-	height: 0px;
-	overflow: hidden;
+	/*overflow: hidden;*/
+}
+
+.toggle {
+	display: none;
+}
+
+.show, .btn-show {
+	display: block;
+}
+
+.show-inline {
+	display: inline-block;
+}
+
+.items-wrap {
+	background-color: rgb(255, 249, 225);
 }
 
 .kind-btn .confirm-btn {
@@ -1008,6 +1023,11 @@ button,
 }
 
 	.kind-btn:hover {
+		color: white;
+		background-image: linear-gradient(rgb(253, 191, 0), rgb(250, 139, 0));
+	}
+
+	.kind-selected {
 		color: white;
 		background-image: linear-gradient(rgb(253, 191, 0), rgb(250, 139, 0));
 	}
@@ -1087,7 +1107,7 @@ button[disabled], html input[disabled] {
 }
 
 /* 彈跳視窗-其他個人喜好 */
-.likes-btn, .jobs-btn {
+.likes-btn, .jobs-btn, .intervals-btn {
 	color: rgba(0, 0, 0, 0.65);
 	background-color: white;
 	opacity: 1;
@@ -1098,7 +1118,7 @@ button[disabled], html input[disabled] {
 	user-select: none;
 }
 
-.likes-btn-checked {
+.likes-btn-checked, .intervals-btn-checked {
 	padding: 2px 16px;
 	border-radius: 100px;
 	border: 1px solid rgb(204, 204, 204);
@@ -1140,7 +1160,7 @@ button[disabled], html input[disabled] {
 	overflow: unset;
 }
 
-.likes-btn:hover, .jobs-btn:hover, .student-dropdown .dropdown-toggle:hover {
+.likes-btn:hover, .jobs-btn:hover, .student-dropdown .dropdown-toggle:hover, .intervals-btn:hover {
 	color: rgb(250, 139, 0);
 }
 

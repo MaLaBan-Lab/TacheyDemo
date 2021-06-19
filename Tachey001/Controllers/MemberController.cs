@@ -9,18 +9,15 @@ using Microsoft.AspNet.Identity;
 using Tachey001.Models;
 using Tachey001.Service;
 using Tachey001.ViewModel;
+using System.Collections;
 
 namespace Tachey001.Controllers
 {
     [Authorize]
     public class MemberController : Controller
-    {
-        private TacheyContext tacheyDb = new TacheyContext();
+    { 
         private TacheyContext _context;
-        public MemberController()
-        {
-            _context = new TacheyContext();
-        }
+        
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
@@ -30,6 +27,7 @@ namespace Tachey001.Controllers
         {
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
+            _context = new TacheyContext();
         }
         // GET: Member
         public ActionResult Console()
@@ -156,6 +154,43 @@ namespace Tachey001.Controllers
                 };
 
                 ViewBag.likeList = likeList;
+
+                if (result.Interest != null)
+                {
+                    ViewBag.interestSp = result.Interest.Split('/');
+                }
+                else
+                {
+                    ViewBag.interestSp = new ArrayList();
+                }
+                //var interestList = new List<string>()
+                //{
+                //    "音樂", "語言", "攝影", "藝術", "設計", "人文", "行銷", "程式", "投資理財", "職場技能", "手作", "生活品味"
+                //};
+                //ViewBag.interestList = interestList;
+                
+                
+                var courseCategory = _context.CourseCategory.Select(x => x);
+                Dictionary<string, string> interestDic = new Dictionary<string, string>();
+                foreach (var group in courseCategory)
+                {
+                    interestDic.Add(group.CategoryID.ToString(), group.CategoryName);
+                }
+                ViewBag.interest = _context.CourseCategory.Select(x => x.CategoryName);
+
+                Dictionary<string, ArrayList> interestDicSub = new Dictionary<string, ArrayList>();
+                ArrayList interestArr = new ArrayList();
+                var groups = _context.CategoryDetail.GroupBy(x => x.CategoryID);
+                foreach (var group in groups)
+                {
+                    interestArr = new ArrayList();
+                    foreach (var detail in group)
+                    {
+                        interestArr.Add(detail.DetailName);
+                    }
+                    interestDicSub.Add(interestDic[group.Key.ToString()], interestArr);
+                }
+                ViewBag.interestDetil = interestDicSub;
 
 
                 var selectListYear = new List<SelectListItem>()
@@ -511,6 +546,34 @@ namespace Tachey001.Controllers
             var result = _context.Member.Find(UserId); // not member
 
             result.Like = clickedOption;
+            //result.Description = Description;
+            //result.TitlePageImageURL = TitlePageImageURL;
+            //result.Introduction = Introduction;
+            //result.Introduction = Introduction;
+            //result.Introduction = Introduction;
+            //result.Introduction = Introduction;
+            //result.Introduction = Introduction;
+            //result.Introduction = Introduction;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Setting", "Member");
+        }
+
+        [HttpPost]
+        public ActionResult SettingInterval(string clickedOption)
+        {
+
+            //int personId = person.PersonId;
+            //string name = person.Name;
+            //string gender = person.Gender;
+            //string city = person.City;
+
+            var UserId = User.Identity.GetUserId();
+
+            var result = _context.Member.Find(UserId); // not member
+
+            result.Interest = clickedOption;
             //result.Description = Description;
             //result.TitlePageImageURL = TitlePageImageURL;
             //result.Introduction = Introduction;
