@@ -224,12 +224,18 @@
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\CourseRepository.cs" />
-    <Compile Include="Service\CourseService.cs" />
+    <Compile Include="Repository\Course\CourseRepository.cs" />
+    <Compile Include="Repository\Home\HomeRepository.cs" />
+    <Compile Include="Service\Course\CourseService.cs" />
+    <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\Card_highlight_Group.cs" />
+    <Compile Include="ViewModel\CourseCardViewModel.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
+    <Compile Include="ViewModel\CommentViewModel.cs" />
+    <Compile Include="ViewModel\HighlightCourseViewModel.cs" />
     <Compile Include="ViewModel\OrderRecord.cs" />
-    <Compile Include="ViewModel\StepGroup.cs" />
+    <Compile Include="ViewModel\Course\StepGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\all.css" />
@@ -515,10 +521,13 @@
     <Content Include="Views\Shared\_HighlightCardPartial.cshtml" />
     <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
-    <Content Include="Views\Courses\Step4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Repository\Member\" />
+    <Folder Include="Repository\Pay\" />
+    <Folder Include="Service\Member\" />
+    <Folder Include="Service\Pay\" />
     <Folder Include="ViewModel\Home\" />
     <Folder Include="ViewModel\Member\" />
     <Folder Include="ViewModel\Pay\" />

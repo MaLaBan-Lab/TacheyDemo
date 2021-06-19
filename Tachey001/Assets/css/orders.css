@@ -12,7 +12,12 @@ body {
     color: white;
     border: 1px solid #ddd
 }
-
+.far{
+    color:white;
+}
+.fab{
+    color:white;
+}
 .change-btn {
     background-color: #170633;
     /*color: #777;*/
