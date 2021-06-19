@@ -7,6 +7,7 @@ namespace Tachey001.ViewModel
 {
     public class CourseCardViewModel
     {
+        
         public string Title { get; set; }
         public string TitlePageImageURL { get; set; }
         public string Tool { get; set; }
