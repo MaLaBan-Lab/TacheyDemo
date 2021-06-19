@@ -32,16 +32,10 @@ namespace Tachey001.Controllers
 
             return View(result);
         }
-        //刪除課程卡片
+        //刪除指定課程卡片
         public ActionResult DeleteCourse(string id)
         {
-            var result = tacheyDb.Course.Find(id);
-
-            tacheyDb.Course.Remove(result);
-
-            tacheyDb.SaveChanges();
-
-            tacheyDb.Dispose();
+            _courseService.DeleteCurrentIdCourseData(id);
 
             return RedirectToAction("Console", "Member");
         }
