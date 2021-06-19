@@ -30,6 +30,7 @@ namespace Tachey001.Controllers
 
             var result = _courseService.GetMemberCreateCourse(currentId);
 
+
             return View(result);
         }
 
