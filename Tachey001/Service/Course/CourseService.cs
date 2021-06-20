@@ -66,6 +66,27 @@ namespace Tachey001.Service.Course
         {
             _courseRepository.DeleteCurrentIdCourseData(id);
         }
+        //取得開課View渲染資料
+        public StepGroup GetStepGroup(string CourseId)
+        {
+            var currentCourse = _courseRepository.GetCurrentCourse(CourseId);
 
+            var chapterList = _courseRepository.GetCurrentCourseChapters(CourseId);
+            var unitList = _courseRepository.GetCourseUnits(CourseId);
+
+            var categoryList = _courseRepository.GetCourseCategory();
+            var detailList = _courseRepository.GetCategoryDetail();
+
+            var result = new StepGroup
+            {
+                course = currentCourse,
+                courseChapter = chapterList,
+                courseUnit = unitList,
+                courseCategory = categoryList,
+                categoryDetails = detailList
+            };
+
+            return result;
+        }
     }
 }

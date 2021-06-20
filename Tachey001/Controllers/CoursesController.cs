@@ -66,23 +66,7 @@ namespace Tachey001.Controllers
             //取得當前開課的課程ID
             ViewBag.CourseId = CourseId;
 
-            
-            var currentCourse = tacheyDb.Course.Find(CourseId);
-
-            var chapterList = tacheyDb.CourseChapter.Where(x => x.CourseID == CourseId).Select(x => x);
-            var unitList = tacheyDb.CourseUnit.Where(x => x.CourseID == CourseId).Select(x => x);
-
-            var categoryList = tacheyDb.CourseCategory;
-            var detailList = tacheyDb.CategoryDetail;
-
-            var result = new StepGroup 
-            {   
-                courseChapter = chapterList, 
-                courseUnit = unitList, 
-                course = currentCourse, 
-                courseCategory = categoryList, 
-                categoryDetails = detailList 
-            };
+            var result = _courseService.GetStepGroup(CourseId);
 
             return View(result);
         }
