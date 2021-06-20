@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Course>
+﻿@model List<Tachey001.ViewModel.Course.AllCourse>
 @{
     ViewBag.Title = "Console";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
@@ -26,10 +26,10 @@
         <div class="col-12 border-bottom my-4"></div>
     </div>
     <div class="row">
-        @foreach(var item in Model)
-            {
+        @foreach (var item in Model)
+        {
             @Html.Partial("CardTemplate", item)
-            }
+        }
     </div>
     <div class="row mt-5">
         <div class="col-12 p-0">

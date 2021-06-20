@@ -1,7 +1,7 @@
-﻿@model Course
+﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("Step6", "Courses", new { CourseId = ViewBag.CourseId }))
+@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
     @Html.AntiForgeryToken()
     <div class="container">
@@ -37,7 +37,7 @@
 
                         <!-- This container will become the editable. -->
                         @*<textarea name="content" id="editor"></textarea>*@
-                        @Html.TextAreaFor(m=>m.Introduction, new { @id = "editor", @class = "border"})
+                        @Html.TextAreaFor(m=>m.course.Introduction, new { @id = "editor", @class = "border"})
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-secondary btn-lg px-5">

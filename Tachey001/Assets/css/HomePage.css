@@ -145,7 +145,7 @@ body {
     /* 第二塊 */
     /* 延伸閱讀 */
 .reading {
-    background-color: #f3f3f1;
+    /*background-color: #f3f3f1;*/
     background-image: url(https://media.discordapp.net/attachments/845189336801476628/852422501098061844/image0.jpg);
     background-size: cover;
     padding-bottom: 5rem;
@@ -556,9 +556,10 @@ body {
 
         /* 第一塊 */
         /* 延伸閱讀 */
-        .reading-8 {
-            max-width: 100%;
-        }
+.reading-8 {
+    max-width: 100%;
+    background-color: #170633;
+}
 
         /* 延伸閱讀 */
         /* 第一塊輪盤 */
@@ -582,7 +583,9 @@ body {
         .comment-a {
             bottom: 0px;
         }
-
+            .comment-a:hover {
+                color: #fac227 !important;
+            }
         /* 好學生評論 */
         /* 課程精選 */
         

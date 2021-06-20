@@ -1,7 +1,7 @@
-﻿@model Course
+﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("Step4", "Courses", new { CourseId = ViewBag.CourseId }))
+@using (Html.BeginForm("StepUnit", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
     @Html.AntiForgeryToken()
 
@@ -12,27 +12,42 @@
                     <button type="button" class="btn btn-hahow-green btn-lg mb-3" onclick="newChapter()">新增章節</button>
                 </div>
                 <div class="drag-sort-enable row justify-content-center text-secondary" id="chapter">
-                    <div class="col-11 border my-1 py-2 chapterBox">
-                        <h4>
-                            <i class="fas fa-align-justify mr-2"></i>
-                            <span class="chapterName">章節1</span>
-                            <input type="text" class="w-75 chapterInput" name="1">
-                            <i class="far fa-window-close" onclick="deleteChapter()"></i>
-                        </h4>
-                        <hr>
-                        <h5 class="text-right">
-                            <span>-新增單元</span>
-                            <i class="far fa-plus-square" onclick="newUnit()"></i>
-                        </h5>
-                        <div class="drag-sort-enable unitBox">
-                            <h5 class="text-right">
+
+                    @foreach (var ch in Model.courseChapter)
+                    {
+                        <div class="col-11 border my-1 py-2 chapterBox">
+                            <h4>
                                 <i class="fas fa-align-justify mr-2"></i>
-                                <span>單元1</span>
-                                <input type="text" class="w-50" name="1-1">
-                                <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+                                <span class="chapterName">章節1</span>
+                                <input type="text" class="w-75 chapterInput" name="1" value="@ch.ChapterName">
+                                <i class="far fa-window-close" onclick="deleteChapter()"></i>
+                            </h4>
+                            <hr>
+                            <h5 class="text-right">
+                                <span>-新增單元</span>
+                                <i class="far fa-plus-square" onclick="newUnit()"></i>
                             </h5>
+                            <div class="drag-sort-enable unitBox">
+
+                                @foreach (var un in Model.courseUnit)
+                                {
+                                    if (ch.ChapterID == un.ChapterID)
+                                    {
+                                <h5 class="text-right">
+                                    <input type="text" class="invisible w-25" name="1" value="@un.CourseURL">
+                                    <i class="fas fa-align-justify mr-2"></i>
+                                    <span>單元1</span>
+                                    <input type="text" class="w-50" name="1" value="@un.UnitName">
+                                    <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+                                </h5>
+                                    }
+                                }
+
+                            </div>
                         </div>
-                    </div>
+                    }
+
+
                 </div>
                 <div class="row m-3">
                     <input type="submit" value="儲存，下一步" class="btn btn-outline-secondary btn-lg px-5" />

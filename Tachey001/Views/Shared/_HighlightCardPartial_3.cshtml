@@ -1,22 +1,20 @@
-﻿
+﻿@model Tachey001.ViewModel.HighlightCourseViewModel
 <div class="item">
     <div class="card  position-relative overflow-hidden" style="width: 100%; ">
-        <img src="https://hahow-production.imgix.net/5f4c73b1dccd653e568b9b9d?w=300&auto=format&sat=0&s=a843398efa5719f35494261461bf392a">
+        <img src="@Model.TitlePageImageURL">
         <div class="backgroundBookmark-me position-absolute text-center">
             <i class="far fa-bookmark hahow-orange line-height-40"></i>
         </div>
         <div class="card-body">
             <div class="card-h4-wrap">
-                <h4 class="card-h4">使用HTML，CSS開發一個網站</h4>
+                <h4 class="card-h4">@Model.Title</h4>
             </div>
             <div class="text-right card-RM">RM 443.30</div>
             <div class="card-divide"></div>
             <div class="card-content">
                 <div class="card-logo"></div>
                 <div class="card-Explan">
-                    早期的 HTML 代碼，將網頁中風格 (style) 相關的設定直接內嵌在 HTML
-                    標籤中，但這樣的做法很難維護網頁，而 CSS 的作用，就是將風格的部分抽離出來，放在獨立的設定檔中。透過修改 CSS
-                    命令稿，可以同時更動頁面上數個網頁元素的風格，使得網頁維護更容易。
+                   @Model.Introduction
                 </div>
             </div>
         </div>
@@ -29,7 +27,7 @@
         <h3>課程簡介</h3>
         <div>
             <i class="fas fa-hourglass-start"></i>
-            <span>課程3小時46分</span>
+            <span>@Model.TotalMinTime</span>
         </div>
         <div>
             <i class="fas fa-book"></i>
@@ -45,8 +43,7 @@
         </div>
         <h3 class="my-2">你可以學到的東西</h3>
         <p>
-            - 透過電繪的便利性，了解每一種場景透視法產生的原因，讓畫場景時透視更容易上手。123<br>
-            - 習得一點透視、兩點透視、三點透視、等角透視、魚眼透視⋯⋯以及各種好玩的透視練習法。
+           @Model.Description
         </p>
         <div class="d-flex justify-content-center card-txt-btn">
             <a href="#" class="w-100">
