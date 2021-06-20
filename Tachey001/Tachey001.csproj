@@ -220,6 +220,7 @@
     <Compile Include="Models\PersonalUrl.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
@@ -522,6 +523,7 @@
     <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
     <Content Include="Views\Shared\_CartPartialCard.cshtml" />
+    <Content Include="Views\Shared\CreateCardTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -47,7 +47,7 @@ namespace Tachey001.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Main(int? id)
+        public ActionResult Main(int? id, string CourseId)
         {
             if (id == null)
             {
@@ -56,22 +56,28 @@ namespace Tachey001.Controllers
             ViewBag.Id = id;
             return View();
         }
-        //開課 GET
+        //開課10步驟 GET
         public ActionResult Step(int? id, string CourseId)
         {
+            //取得當前登入會員ID
             ViewBag.UserId = User.Identity.GetUserId();
-
+            //取得當前開課步驟
             ViewBag.Id = id;
+            //取得當前開課的課程ID
             ViewBag.CourseId = CourseId;
 
+            
             var currentCourse = tacheyDb.Course.Find(CourseId);
+
             var chapterList = tacheyDb.CourseChapter.Where(x => x.CourseID == CourseId).Select(x => x);
             var unitList = tacheyDb.CourseUnit.Where(x => x.CourseID == CourseId).Select(x => x);
+
             var categoryList = tacheyDb.CourseCategory;
             var detailList = tacheyDb.CategoryDetail;
 
             var result = new StepGroup 
-            {   courseChapter = chapterList, 
+            {   
+                courseChapter = chapterList, 
                 courseUnit = unitList, 
                 course = currentCourse, 
                 courseCategory = categoryList, 
@@ -80,7 +86,7 @@ namespace Tachey001.Controllers
 
             return View(result);
         }
-        //開課 POST
+        //開課10步驟 POST
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Step(int? id, StepGroup group, Course course, string CourseId)
@@ -119,21 +125,7 @@ namespace Tachey001.Controllers
 
             return RedirectToAction("Step", "Courses", new { id = (id + 1), CourseID = CourseId });
         }
-        //取得自訂位數的亂數方法
-        private string GetRandomId(int Length)
-        {
-            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
-            int passwordLength = Length;
-            char[] chars = new char[passwordLength];
-            Random rd = new Random();
-
-            for (int i = 0; i < passwordLength; i++)
-            {
-                chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
-            }
-            return new string(chars);
-        }
-        //創新課程
+        //創新課程，加入課程ID
         public ActionResult NewCourseStep()
         {
             var CourseId = GetRandomId(12);
@@ -226,6 +218,7 @@ namespace Tachey001.Controllers
 
             return RedirectToAction("Step", "Courses", new { id = 9, CourseId = CourseId });
         }
+        //完成課程，送出審核
         public ActionResult StepFinish(string CourseId)
         {
             var result = tacheyDb.Course.Find(CourseId);
@@ -236,6 +229,20 @@ namespace Tachey001.Controllers
             tacheyDb.SaveChanges();
 
             return RedirectToAction("Console", "Member");
+        }
+        //取得自訂位數的亂數方法
+        private string GetRandomId(int Length)
+        {
+            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+            int passwordLength = Length;
+            char[] chars = new char[passwordLength];
+            Random rd = new Random();
+
+            for (int i = 0; i < passwordLength; i++)
+            {
+                chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
+            }
+            return new string(chars);
         }
     }
 }

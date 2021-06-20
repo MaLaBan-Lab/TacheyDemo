@@ -4,26 +4,6 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
 
-    if (User.Identity.GetUserId() != null)
-    {
-
-        using (TacheyContext context = new TacheyContext())
-        {
-            var result = context.Member.Find(User.Identity.GetUserId());
-            var email = User.Identity.GetUserName();
-
-            if (result == null)
-            {
-                Member member = new Member { MemberID = User.Identity.GetUserId(), Email = email };
-
-                context.Member.Add(member);
-
-                context.SaveChanges();
-            }
-        }
-
-    }
-
     //TacheyContext _context = new TacheyContext();
     //var comment = from member in _context.Member join coursescore in _context.CourseScore on member.MemberID equals coursescore.MemberID select new { member.Name,member.Photo,coursescore.ToTachey };
 
@@ -306,7 +286,7 @@
                              alt="" class="comment-bot-img">
                         <a href="#" class="comment-a"><img src="@item.Photo" alt="" id="user-logo">@item.Name</a>
                     </div>
-                </div>      }
+                </div>}
 
 
 
