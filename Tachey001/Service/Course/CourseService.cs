@@ -88,5 +88,34 @@ namespace Tachey001.Service.Course
 
             return result;
         }
+        public string NewCourseStep(string currentUserId)
+        {
+            //取得12位數亂碼課程ID
+            var CourseId = GetRandomId(12);
+
+            //檢查是否重複課程ID
+            while(_courseRepository.GetCurrentCourse(CourseId) != null)
+            {
+                CourseId = GetRandomId(12);
+            }
+
+            _courseRepository.CreateNewCourse(CourseId, currentUserId);
+
+            return CourseId;
+        }
+        //取得自訂位數的亂數方法
+        private string GetRandomId(int Length)
+        {
+            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+            int passwordLength = Length;
+            char[] chars = new char[passwordLength];
+            Random rd = new Random();
+
+            for (int i = 0; i < passwordLength; i++)
+            {
+                chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
+            }
+            return new string(chars);
+        }
     }
 }
