@@ -83,10 +83,6 @@
     line-height: 30px;
   }
   
-  .card:hover {
-    cursor: pointer;
-  }
-  
   .card-img-top {
     transition: 0.5s;
   }
@@ -94,10 +90,25 @@
   .fa-bookmark {
     transform: scale(1.2);
   }
-  
-  @media (min-width: 768px) {
+
+.card:hover .editBox {
+    visibility: visible !important;
+    background-color: black;
+    opacity: 0.9;
+    z-index: 5;
+}
+
+.editbox-edit:hover {
+    color: #FFEB00 !important;
+}
+
+.editbox-delete:hover {
+    color: #FFEB00 !important;
+}
+
+@media (min-width: 768px) {
     #cardTitle {
-        height: 70px;
+        height: 60px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

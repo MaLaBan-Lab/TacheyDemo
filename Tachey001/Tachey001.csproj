@@ -197,12 +197,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\AspNetRole.cs" />
     <Compile Include="Models\AspNetRoles.cs" />
-    <Compile Include="Models\AspNetUser.cs" />
-    <Compile Include="Models\AspNetUserClaim.cs" />
     <Compile Include="Models\AspNetUserClaims.cs" />
-    <Compile Include="Models\AspNetUserLogin.cs" />
     <Compile Include="Models\AspNetUserLogins.cs" />
     <Compile Include="Models\AspNetUsers.cs" />
     <Compile Include="Models\CategoryDetail.cs" />
@@ -224,7 +220,7 @@
     <Compile Include="Models\PersonalUrl.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Question.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
@@ -527,6 +523,7 @@
     <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
     <Content Include="Views\Shared\_CartPartialCard.cshtml" />
+    <Content Include="Views\Shared\CreateCardTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

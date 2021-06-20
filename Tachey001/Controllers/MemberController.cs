@@ -33,9 +33,9 @@ namespace Tachey001.Controllers
             return View(result);
         }
         //刪除指定課程卡片
-        public ActionResult DeleteCourse(string id)
+        public ActionResult DeleteCourse(int? id, string CourseId)
         {
-            _courseService.DeleteCurrentIdCourseData(id);
+            _courseService.DeleteCurrentIdCourseData(CourseId);
 
             return RedirectToAction("Console", "Member");
         }
@@ -59,8 +59,8 @@ namespace Tachey001.Controllers
                              select new OrderRecord
                              {
                                  OrderDate =O.OrderDate,
-                                 PayDate=O.PayDate,
-                                 PayMethod=O.PayMethod,
+                                 PayDate = O.PayDate,
+                                 PayMethod =O.PayMethod,
                                  UnitPrice=OD.UnitPrice,
                                  InvoiceType=invoice.InvoiceType,
                                  InvoiceName=invoice.InvoiceName,

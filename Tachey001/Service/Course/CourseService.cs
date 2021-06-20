@@ -16,7 +16,7 @@ namespace Tachey001.Service.Course
         {
             _courseRepository = new CourseRepository();
         }
-        //取得課程卡片所需資料欄位
+        //取得渲染課程卡片所需資料欄位
         public List<AllCourse> GetCourseData()
         {
             var course = _courseRepository.GetAllCourse();
@@ -38,7 +38,7 @@ namespace Tachey001.Service.Course
 
             return result.ToList();
         }
-        //取得課程卡片所需資料欄位(多載+1)
+        //取得會員所開課程的渲染課程卡片所需資料欄位(多載+1)
         public List<AllCourse> GetCourseData(string MemberId)
         {
             var course = _courseRepository.GetAllCourse();
@@ -66,5 +66,6 @@ namespace Tachey001.Service.Course
         {
             _courseRepository.DeleteCurrentIdCourseData(id);
         }
+
     }
 }
