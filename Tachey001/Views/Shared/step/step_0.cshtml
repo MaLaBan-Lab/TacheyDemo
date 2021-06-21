@@ -1,4 +1,4 @@
-﻿@model Course
+﻿@model Tachey001.ViewModel.Course.StepGroup
 <div class="container">
     <div class="row justify-content-center my-3">
         <div class="col-5 text-center text-muted text-mc">
@@ -82,9 +82,14 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-3 btn btn-hahow-green m-5 py-3">
-            @Html.ActionLink("開始編輯", "Step1", "Courses", new { CourseId = ViewBag.CourseId },new {@class = "text-decoration-none text-white w-100 h-100"})
+    @using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row justify-content-center">
+            <div class="col-3 btn btn-hahow-green m-5 p-0">
+                <button type="submit" class=" btn btn-hahow-green w-100 h-100">開始編輯</button>
+                @*@Html.ActionLink("點擊開課", "Step1", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }, new { @class = "text-decoration-none text-white w-100 h-100" })*@
+            </div>
         </div>
-    </div>
+    }
 </div>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Tachey001.Models;
 
-namespace Tachey001.Repository
+namespace Tachey001.Repository.Course
 {
     public class CourseRepository
     {
@@ -16,7 +16,7 @@ namespace Tachey001.Repository
         }
 
         // Read 讀取課程表
-        public IQueryable<Course> GetAllCourse()
+        public IQueryable<Models.Course> GetAllCourse()
         {
             var result = _tacheyContext.Course;
 
