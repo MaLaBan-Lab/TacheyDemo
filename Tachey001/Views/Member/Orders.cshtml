@@ -1,7 +1,7 @@
 ﻿@model Tachey001.ViewModel.GroupOrderRecord
 
 @Styles.Render("~/Assets/css/orders.css")
-@Styles.Render("~/Assets/css/record.css")
+
 @{
     ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
@@ -57,6 +57,13 @@
     foreach (var item in Model.Success)
     {
         @Html.Partial("_RecordCardSuccess", item);
+    }
+}
+else if (ViewBag.id == 2)
+{
+    foreach (var item in Model.Success)
+    {
+        @Html.Partial("_RecordCardWait", item);
     }
 }
 else if (ViewBag.id == 3)

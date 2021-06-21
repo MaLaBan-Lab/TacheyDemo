@@ -1,0 +1,126 @@
+﻿@model OrderRecordSuccess
+<div class="container">
+    <div class="row px-3 ">
+        <div class="col-7 border-right-0 border bg-white">
+            <div class=" d-inline-block mr-3 record-color ">
+                <div class="record-text py-2">購買時間:@Model.OrderDate</div>
+                <div class="record-text py-2">購買金額:<span class="record-orange">@Model.UnitPrice</span></div>
+            </div>
+            <div class=" d-inline-block record-color ">
+                <div class="record-text py-2">付款方式:@Model.PayMethod</div>
+                <div class="record-text py-2">訂單狀況:等待付款</div>
+            </div>
+        </div>
+        <div class="col-5 d-flex justify-content-end align-items-center record-text border-left-0 border bg-white">
+            <button class="cancel" onclick="location.href='@Url.Action("DeleteOrder", "Member",new { cancel = Model.OrderID})'">
+                取消訂單
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row px-3 ">
+        <div class="col-5 p-15 border-right-0 border py-2 bg-white">
+            <a href="#">
+                <img src="@Model.TitlePageImageURL"
+                     alt="" class="record-img mr-2">
+            </a>
+            <a href="#" class="record-link d-inline-block">
+                <span class="record-text">@Model.CourseName</span>
+            </a>
+        </div>
+        <div class="col-7 d-flex justify-content-end align-items-center record-text border-left-0 border bg-white">
+            <span class="record-orange">NT$@Model.UnitPrice</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container mb-5">
+    <div class="row px-3">
+        <div class="accordion" id="a@(Model.OrderID)"></div>
+        <div class="card w-100">
+            <div id="collapse@(Model.OrderID)" class="collapse " aria-labelledby="headingOne" data-parent="#a@(Model.OrderID)">
+
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-12 p-3 border bg-orange">
+                            <div class="bg-white">
+                                <div class="row justify-content-center">
+                                    <div class="col-6 text-right">
+                                        <span>銀行代碼</span>
+                                    </div>
+                                    <div class="col-6">
+                                        822 中國信託
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center py-2">
+                                    <div class="col-6 text-right">
+                                        <span>付款帳號</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span>9829-4810-9984-1369</span>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center py-2">
+                                    <div class="col-6 text-right">
+                                        <span>繳費金額</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span>@Model.UnitPrice</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="wrap bg-orange w-100 border record-Collapse">
+
+                    <div class="invoice-wrap d-flex flex-wrap">
+                        <div class="col-lg-6 col-md-6 col-sm-12 record-color ">
+                            <div class="record-text py-2 border-bottom">價格明細</div>
+                            <div class="record-text py-2 d-flex justify-content-between">
+                                <span>訂單金額</span>
+                                <span>Nt$@Model.UnitPrice</span>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 w-100 ">
+                            <div class="record-text py-2 border-bottom">發票資訊</div>
+                            <div class="record-text py-2 d-flex justify-content-between">
+                                <span>發票類型 &emsp;&emsp;&emsp;@Model.InvoiceType</span>
+
+                            </div>
+                            <div class="record-text py-2 d-flex justify-content-between">
+                                <span>聯絡姓名 &emsp;&emsp;&emsp;@Model.InvoiceName</span>
+
+                            </div>
+                            <div class="record-text py-2 d-flex justify-content-between">
+                                <span>聯絡信箱 &emsp;&emsp;&emsp;@Model.InvoiceEmail</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-center" type="button" data-toggle="collapse" data-target="#collapse@(Model.OrderID)" aria-expanded="true" aria-controls="collapseOne">
+                        <span class="record-arrow"><i class="fas fa-arrow-down"></i></span>
+                        <span class="record-detail">查看詳細</span>
+                    </button>
+                </h2>
+            </div>
+
+
+        </div>
+    </div>
+</div>

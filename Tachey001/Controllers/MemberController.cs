@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
 using Tachey001.Service.Course;
+using Tachey001.Service.Order;
 using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
@@ -16,12 +17,16 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
+        //宣告OrderService
+        private OrderService _orderService;
 
         //初始化CourseService
         public MemberController()
         {
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
+            //初始化
+            _orderService = new OrderService();
         }
         // GET: Member
         public ActionResult Console()
@@ -57,89 +62,58 @@ namespace Tachey001.Controllers
 
         public ActionResult Orders( int? type)
         {
-            var time = 1;
+           
+
             GroupOrderRecord AllTypeData = new GroupOrderRecord();
+            var currentId = User.Identity.GetUserId();
             if (type == null)
                 type = 1;
-            
+
             if (type == 1)
-            {
-
-                var currentId = User.Identity.GetUserId();
-                var OrderRecord = from O in tacheyDb.Order
-                                  join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
-                                  join invoice in tacheyDb.Invoice on O.InvoiceID equals invoice.InvoiceID
-                                  join Course in tacheyDb.Course on O.CourseID equals Course.CourseID
-                                  where O.MemberID == currentId && O.OrderStatus == "success"
-                                  select new OrderRecordSuccess
-                                  {
-                                      CourseName = OD.CourseName,
-                                      OrderID = O.OrderID,
-                                      TitlePageImageURL = Course.TitlePageImageURL,
-                                      OrderDate = O.OrderDate,
-                                      PayDate = O.PayDate,
-                                      PayMethod = O.PayMethod,
-                                      UnitPrice = OD.UnitPrice,
-                                      InvoiceType = invoice.InvoiceType,
-                                      InvoiceName = invoice.InvoiceName,
-                                      InvoiceEmail = invoice.InvoiceEmail,
-                                      InvoiceDate = invoice.InvoiceDate,
-                                      InvoiceNum = invoice.InvoiceNum,
-                                      InvoiceRandomNum = invoice.InvoiceRandomNum,
-                                      BuyMethod = OD.BuyMethod
-                                  };
-                foreach (var item in OrderRecord)
-                {
-                    time = time + time;
-                }
-
-                AllTypeData.Success = OrderRecord;
-                if (OrderRecord.FirstOrDefault() == null)
+            {   
+                var result = _orderService.GetOrderSuccess(currentId);
+                AllTypeData.Success = result;
+                if (result.FirstOrDefault() == null)
                     ViewBag.id = 0;
                 else
                     ViewBag.id = 1;
-                
                 return View(AllTypeData);
             }
+            else if (type == 2)
+            {
+                var result = _orderService.GetOrderWait(currentId);
+                AllTypeData.Success = result;
+                if (result.FirstOrDefault() == null)
+                    ViewBag.id = 0;
+                else
+                    ViewBag.id = 2;
+                return View(AllTypeData);
+            }
+
             else if (type == 3)
             {
-              
-                var currentId = User.Identity.GetUserId();
-                var OrderRecord = from O in tacheyDb.Order
-                                  join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
-                                 
-                                  join Course in tacheyDb.Course on O.CourseID equals Course.CourseID
-                                  where O.MemberID == currentId && O.OrderStatus == "error"
-                                  select new OrderRecordOther
-                                  {
-                                      CourseName = OD.CourseName,
-                                      OrderID = O.OrderID,
-                                      TitlePageImageURL = Course.TitlePageImageURL,
-                                      OrderDate = O.OrderDate,
-                                      PayDate = O.PayDate,
-                                      PayMethod = O.PayMethod,
-                                      UnitPrice = OD.UnitPrice,
-                                      BuyMethod = OD.BuyMethod
-                                  };
-
-                
-                AllTypeData.Other = OrderRecord;
-                if (OrderRecord.FirstOrDefault() == null)
+                var result = _orderService.GetOrderError(currentId);
+                AllTypeData.Other = result;
+                if (result.FirstOrDefault() == null)
                     ViewBag.id = 0;
                 else
                     ViewBag.id = 3;
 
                 return View(AllTypeData);
             }
-
-
-
-
             else
             {
                 ViewBag.id = 0;
                 return View();
             }
+        }
+
+        public ActionResult DeleteOrder(string cancel)
+        {
+            _orderService.DeleteInvoice(cancel);
+            _orderService.DeleteOrder(cancel);
+            _orderService.DeleteOrderDetail(cancel);
+            return RedirectToAction("Orders",new { type = 2});
         }
 
         public ActionResult Profile()

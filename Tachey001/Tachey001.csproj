@@ -220,21 +220,22 @@
     <Compile Include="Models\PersonalUrl.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Course\CourseRepository.cs" />
+    <Compile Include="Repository\Order\OrderRepository.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
+    <Compile Include="Service\Order\OrderService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CourseCardPartial.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
-    <Compile Include="ViewModel\OrderRecord.cs" />
     <Compile Include="ViewModel\Course\StepGroup.cs" />
     <Compile Include="ViewModel\GroupOrderRecord.cs" />
     <Compile Include="ViewModel\OrderRecordOther.cs" />
     <Compile Include="ViewModel\OrderRecordSuccess.cs" />
-    <Compile Include="ViewModel\StepGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\all.css" />
@@ -522,6 +523,7 @@
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
     <Content Include="Views\Courses\Step4.cshtml" />
     <Content Include="Views\Shared\_RecordCardError.cshtml" />
+    <Content Include="Views\Shared\_RecordCardWait.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
