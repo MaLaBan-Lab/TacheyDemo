@@ -8,6 +8,7 @@ namespace Tachey001.ViewModel.Member
     public class PointViewModel
     {
         public string MemberID { get; set; }
+        public int? Point { get; set; }
         public string PointName { get; set; }
         public int? PointNum { get; set; }
         public DateTime? GetTime { get; set; }

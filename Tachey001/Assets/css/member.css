@@ -882,6 +882,10 @@ h1 {
 		float: left;
 	}
 
+.reg-ddlist {
+	padding: 12px 20px;
+}
+
 .reg-ddlist .dropdown-toggle {
 	width: 340px;
 	min-width: 110px;
@@ -987,7 +991,7 @@ button,
 	display: none;
 }
 
-.show, .btn-show {
+.bshow, .btn-show {
 	display: block;
 }
 

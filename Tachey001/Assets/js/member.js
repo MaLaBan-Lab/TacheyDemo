@@ -63,14 +63,14 @@ $(".toggle-btn-interest-first").on('click', function () {
     interest_btn_ckeck();
     //$('.interval').toggleClass('selecionado', $(this).is(':visible'));
     //$(".interval").slideToggle(1000);
-    if (!$('.toggle-first').hasClass("show")) {
-        $('.toggle-first').slideToggle('fast').addClass("show");
+    if (!$('.toggle-first').hasClass("bshow")) {
+        $('.toggle-first').slideToggle('fast').addClass("bshow");
     }
-    if ($('.toggle-second').hasClass("show")) {
-        $('.toggle-second').slideToggle('fast').removeClass("show");
+    if ($('.toggle-second').hasClass("bshow")) {
+        $('.toggle-second').slideToggle('fast').removeClass("bshow");
     }
-    if ($('.toggle-third').hasClass("show")) {
-        $('.toggle-third').slideToggle('fast').removeClass("show");
+    if ($('.toggle-third').hasClass("bshow")) {
+        $('.toggle-third').slideToggle('fast').removeClass("bshow");
     }
     if ($("btn-show")) {
         Array.from(document.getElementsByClassName("btn-show")).forEach(
@@ -99,14 +99,14 @@ $(".toggle-btn-interest-second").on('click', function () {
     interest_btn_ckeck();
     //$('.interval').toggleClass('selecionado', $(this).is(':visible'));
     //$(".interval").slideToggle(1000);
-    if ($('.toggle-first').hasClass("show")) {
-        $('.toggle-first').slideToggle('fast').removeClass("show");
+    if ($('.toggle-first').hasClass("bshow")) {
+        $('.toggle-first').slideToggle('fast').removeClass("bshow");
     }
-    if (!$('.toggle-second').hasClass("show")) {
-        $('.toggle-second').slideToggle('fast').addClass("show");
+    if (!$('.toggle-second').hasClass("bshow")) {
+        $('.toggle-second').slideToggle('fast').addClass("bshow");
     }
-    if ($('.toggle-third').hasClass("show")) {
-        $('.toggle-third').slideToggle('fast').removeClass("show");
+    if ($('.toggle-third').hasClass("bshow")) {
+        $('.toggle-third').slideToggle('fast').removeClass("bshow");
     }
     
     if ($("btn-show")) {
@@ -130,14 +130,14 @@ $(".toggle-btn-interest-second").on('click', function () {
 
 $(".toggle-btn-interest-third").on('click', function () {
     interest_btn_ckeck();
-    if ($('.toggle-first').hasClass("show")) {
-        $('.toggle-first').slideToggle('fast').removeClass("show");
+    if ($('.toggle-first').hasClass("bshow")) {
+        $('.toggle-first').slideToggle('fast').removeClass("bshow");
     }
-    if ($('.toggle-second').hasClass("show")) {
-        $('.toggle-second').slideToggle('fast').removeClass("show");
+    if ($('.toggle-second').hasClass("bshow")) {
+        $('.toggle-second').slideToggle('fast').removeClass("bshow");
     }
-    if (!$('.toggle-third').hasClass("show")) {
-        $('.toggle-third').slideToggle('fast').addClass("show");
+    if (!$('.toggle-third').hasClass("bshow")) {
+        $('.toggle-third').slideToggle('fast').addClass("bshow");
     }
     //$('.interval').toggleClass('selecionado', $(this).is(':visible'));
     //$(".interval").slideToggle(1000);

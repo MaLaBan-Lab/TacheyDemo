@@ -237,6 +237,7 @@
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
     <Compile Include="ViewModel\HighlightCourseViewModel.cs" />
+    <Compile Include="ViewModel\Member\CourseViewModel.cs" />
     <Compile Include="ViewModel\Member\MemberGroup.cs" />
     <Compile Include="ViewModel\Member\MemberViewModel.cs" />
     <Compile Include="ViewModel\Member\PointViewModel.cs" />

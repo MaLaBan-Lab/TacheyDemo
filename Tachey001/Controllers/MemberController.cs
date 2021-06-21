@@ -54,13 +54,17 @@ namespace Tachey001.Controllers
 
             
             // var result = context.Member.Find(User.Identity.GetUserId());
-            var getmemberviewmodels = _memberService.GetMemberData(UserId);
+            var getpointviewmodels = _memberService.GetPointData(UserId);
+            var getgetpointviewmodels = _memberService.GetGetPoint(UserId);
+            var getusedpointviewmodels = _memberService.GetUsedPoint(UserId);
             var result = new MemberGroup
             {
-                memberViewModels = getmemberviewmodels,
+                pointViewModels = getpointviewmodels,
+                usedpointViewModels = getusedpointviewmodels,
+                getpointViewModels = getgetpointviewmodels,
             };
 
-            foreach (var item in result.memberViewModels)
+            foreach (var item in result.pointViewModels)
             {
                 if (item.Point == null)
                 {
@@ -71,10 +75,9 @@ namespace Tachey001.Controllers
                     ViewBag.totalPoint = item.Point;
                 }
             }
-            
 
-            ViewBag.pointHistoGet = from p in _context.Point where p.MemberID == UserId && p.Status == false select p; // 已獲得
-            ViewBag.pointHistoUsed = from p in _context.Point where p.MemberID == UserId && p.Status == true select p; // 已使用
+            ViewBag.pointHistoGet = getgetpointviewmodels; // 已獲得
+            ViewBag.pointHistoUsed = getusedpointviewmodels; // 已使用
 
             return View();
         }
@@ -206,27 +209,28 @@ namespace Tachey001.Controllers
                     new SelectListItem {Text="31", Value="31" },
                 };
 
+            var selectListArea = new List<SelectListItem>()
+                {
+                    new SelectListItem {Text="TW 台灣", Value="TW 台灣" },
+                    new SelectListItem {Text="HK 香港", Value="HK 香港" },
+                    new SelectListItem {Text="MY 馬來西亞", Value="MY 馬來西亞" },
+                    new SelectListItem {Text="US 美國", Value="US 美國" },
+                };
+
+            var selectListLang = new List<SelectListItem>()
+                {
+                    new SelectListItem {Text="繁體中文", Value="繁體中文" },
+                    new SelectListItem {Text="简体中文", Value="简体中文" },
+                };
 
             foreach (var item in result.memberViewModels)
             {
                 // 頭照
-                if (item.Photo != null)
-                {
-                    ViewBag.photoUrl = item.Photo;
-                }
-                else
-                {
-                    ViewBag.photoUrl = "/Assets/img/photo.png";
-                }
+                ViewBag.photoUrl = item.Photo;
+                
                 // 使用者姓名
-                if (item.Name != null)
-                {
-                    ViewBag.name = item.Name;
-                }
-                else
-                {
-                    ViewBag.name = "無名氏";
-                }
+                ViewBag.name = item.Name;
+                
                 // program bar
                 List<string> linek_lists = new List<string>();
 
@@ -322,13 +326,19 @@ namespace Tachey001.Controllers
                 ViewBag.SelectListYear = selectListYear;
                 ViewBag.SelectListMonth = selectListMonth;
                 ViewBag.SelectListDay = selectListDay;
+
+                // 所在地區 // 顯示語言
+                selectListArea.Where(q => q.Value == item.CountryRegion).First().Selected = true;
+                selectListLang.Where(q => q.Value == item.Language).First().Selected = true;
+                ViewBag.Lang = selectListLang;
+                ViewBag.Area = selectListArea;
             }
 
             return View(result);
         }
 
         [HttpPost]
-        public ActionResult SettingIndex(FormCollection frmcol, string Sex)
+        public ActionResult SettingIndex(FormCollection frmcol, MemberGroup m)
         {
             var year = frmcol["year"]; // get dropdownlist value
             var month = frmcol["month"]; // get dropdownlist value
@@ -339,7 +349,7 @@ namespace Tachey001.Controllers
             var result = _context.Member.Find(UserId);
 
             result.Birthday = Convert.ToDateTime(date + "/" + month + "/" + year);
-            result.Sex = Sex;
+            result.Sex = m.member.Sex;
 
             _context.SaveChanges();
 
@@ -347,7 +357,25 @@ namespace Tachey001.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfileExpertise(string Expertise, string submitButton)
+        public ActionResult SettingComm(FormCollection frmcol, MemberGroup m)
+        {
+            var area = frmcol["area"]; // get dropdownlist value
+            var lang = frmcol["lang"]; // get dropdownlist value
+
+            var UserId = User.Identity.GetUserId();
+
+            var result = _context.Member.Find(UserId);
+
+            result.CountryRegion = area;
+            result.Language = lang;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Setting", "Member");
+        }
+
+        [HttpPost]
+        public ActionResult ProfileExpertise(MemberGroup m, string submitButton)
         {
             if (submitButton == "Send")
             {
@@ -363,7 +391,7 @@ namespace Tachey001.Controllers
                 //result.Title = Title;
                 //result.Description = Description;
                 //result.TitlePageImageURL = TitlePageImageURL;
-                result.Expertise = Expertise;
+                result.Expertise = m.member.Expertise;
 
                 _context.SaveChanges();
 
@@ -373,7 +401,7 @@ namespace Tachey001.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfileAbout(string About, string submitButton)
+        public ActionResult ProfileAbout(MemberGroup m, string submitButton)
         {
             if (submitButton == "Send")
             {
@@ -389,7 +417,7 @@ namespace Tachey001.Controllers
                 //result.Title = Title;
                 //result.Description = Description;
                 //result.TitlePageImageURL = TitlePageImageURL;
-                result.About = About;
+                result.About = m.member.About;
 
                 _context.SaveChanges();
 
@@ -399,7 +427,7 @@ namespace Tachey001.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfileInterest(string Interest, string submitButton)
+        public ActionResult ProfileInterest(MemberGroup m, string submitButton)
         {
             if (submitButton == "Send")
             {
@@ -415,7 +443,7 @@ namespace Tachey001.Controllers
                 //result.Title = Title;
                 //result.Description = Description;
                 //result.TitlePageImageURL = TitlePageImageURL;
-                result.InterestContent = Interest;
+                result.InterestContent = m.member.Interest;
 
                 _context.SaveChanges();
 
@@ -425,7 +453,7 @@ namespace Tachey001.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfileName(string Name, string submitButton)
+        public ActionResult ProfileName(MemberGroup m, string submitButton)
         {
             if (submitButton == "Send")
             {
@@ -441,7 +469,7 @@ namespace Tachey001.Controllers
                 //result.Title = Title;
                 //result.Description = Description;
                 //result.TitlePageImageURL = TitlePageImageURL;
-                result.Name = Name;
+                result.Name = m.member.Name;
 
                 _context.SaveChanges();
 
@@ -451,7 +479,7 @@ namespace Tachey001.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfileIntro(string Introduction, string submitButton)
+        public ActionResult ProfileIntro(MemberGroup m, string submitButton)
         {
             if (submitButton == "Send")
             {
@@ -467,7 +495,7 @@ namespace Tachey001.Controllers
                 //result.Title = Title;
                 //result.Description = Description;
                 //result.TitlePageImageURL = TitlePageImageURL;
-                result.Introduction = Introduction;
+                result.Introduction = m.member.Introduction;
 
                 _context.SaveChanges();
 
@@ -477,7 +505,7 @@ namespace Tachey001.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfileConnection(string Facebook, string Google, string YouTube, string Behance, string Pinterest, string Blog, string submitButton)
+        public ActionResult ProfileConnection(MemberGroup m, string submitButton)
         {
             if (submitButton == "Send")
             {
@@ -488,17 +516,21 @@ namespace Tachey001.Controllers
 
                 var UserId = User.Identity.GetUserId();
 
-                var result = _context.Member.Find(UserId); // not member
-
+                //var result = _context.PersonalUrl.Find(UserId); // not member
+                var result = (from p in _context.PersonalUrl where p.MemberID == UserId select p).ToList();
                 //result.Title = Title;
                 //result.Description = Description;
                 //result.TitlePageImageURL = TitlePageImageURL;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
+                foreach (var item in result)
+                {
+                    item.FbUrl = m.member.FbUrl;
+                    item.GoogleUrl = m.member.GoogleUrl;
+                    item.YouTubeUrl = m.member.YouTubeUrl;
+                    item.BehanceUrl = m.member.BehanceUrl;
+                    item.PinterestUrl = m.member.PinterestUrl;
+                    item.BlogUrl = m.member.BlogUrl;
+                }
+                
 
                 _context.SaveChanges();
 
@@ -634,106 +666,110 @@ namespace Tachey001.Controllers
         public ActionResult Profile()
         {
             var UserId = User.Identity.GetUserId();
-
-            using (TacheyContext context = new TacheyContext())
+            var getmemberviewmodels = _memberService.GetMemberData(UserId);
+            var result = new MemberGroup
             {
-                var result = context.Member.Find(User.Identity.GetUserId());
+                memberViewModels = getmemberviewmodels,
+            };
 
-                if (result.Photo != null)
+            foreach (var item in result.memberViewModels)
+            {
+                if (item.Photo != null)
                 {
-                    ViewBag.photoUrl = result.Photo;
+                    ViewBag.photoUrl = item.Photo;
                 }
                 else
                 {
                     ViewBag.photoUrl = "/Assets/img/photo.png";
                 }
-                if (result.Theme != null)
+                if (item.Theme != null)
                 {
-                    ViewBag.theme = result.Theme;
+                    ViewBag.theme = item.Theme;
                 }
                 else
                 {
                     ViewBag.theme = "/Assets/img/cover-default.png";
                 }
-                if (result.Name != null)
+                if (item.Name != null)
                 {
-                    ViewBag.name = result.Name;
+                    ViewBag.name = item.Name;
                 }
                 else
                 {
                     ViewBag.name = "無名氏";
                 }
 
-                if (result.About != null)
+                if (item.About != null)
                 {
-                    ViewBag.about = result.About;
+                    ViewBag.about = item.About;
                 }
                 else
                 {
                     ViewBag.about = "簡單介紹一下自己吧！";
                 }
-                if (result.Expertise != null)
+                if (item.Expertise != null)
                 {
-                    ViewBag.expertise = result.Expertise;
+                    ViewBag.expertise = item.Expertise;
                 }
                 else
                 {
                     ViewBag.expertise = "有什麼擅長的事情嗎？";
                 }
-                if (result.InterestContent != null)
+                if (item.InterestContent != null)
                 {
-                    ViewBag.interestContent = result.InterestContent;
+                    ViewBag.interestContent = item.InterestContent;
                 }
                 else
                 {
                     ViewBag.interestContent = "平常喜歡做什麼呢？";
                 }
-                if (result.Introduction != null)
+                if (item.Introduction != null)
                 {
-                    ViewBag.introduction = result.Introduction;
+                    ViewBag.introduction = item.Introduction;
                 }
                 else
                 {
                     ViewBag.introduction = "編輯個人頁面，和大家分享更多精彩故事";
                 }
-                
+                ViewBag.fbConnection = item.FbUrl;
+                if (ViewBag.fbConnection == null)
+                {
+                    ViewBag.fbConnection = "";
+                }
+                ViewBag.googleConnection = item.GoogleUrl;
+                if (ViewBag.googleConnection == null)
+                {
+                    ViewBag.googleConnection = "";
+                }
+                ViewBag.ytConnection = item.YouTubeUrl;
+                if (ViewBag.ytConnection == null)
+                {
+                    ViewBag.ytConnection = "";
+                }
+                ViewBag.behanceConnection = item.BehanceUrl;
+                if (ViewBag.behanceConnection == null)
+                {
+                    ViewBag.behanceConnection = "";
+                }
+                ViewBag.pinterestConnection = item.PinterestUrl;
+                if (ViewBag.pinterestConnection == null)
+                {
+                    ViewBag.pinterestConnection = "";
+                }
+                ViewBag.blogConnection = item.BlogUrl;
+                if (ViewBag.blogConnection == null)
+                {
+                    ViewBag.blogConnection = "";
+                }
             }
+            
 
             ViewBag.giveCourseCount = from p in _context.Course where p.MemberID == UserId select p; // 已開設
             ViewBag.giveCourseCount = Enumerable.Count(ViewBag.giveCourseCount);
             ViewBag.takeCourseCount = from p in _context.CourseBuyed where p.MemberID == UserId select p; // 已參加
             ViewBag.takeCourseCount = Enumerable.Count(ViewBag.takeCourseCount);
 
-            ViewBag.fbConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.FbUrl;
-            if (Enumerable.Count(ViewBag.fbConnection) == 0)
-            {
-                ViewBag.fbConnection = "";
-            } 
-            ViewBag.googleConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.GoogleUrl;
-            if (Enumerable.Count(ViewBag.googleConnection) == 0)
-            {
-                ViewBag.googleConnection = "";
-            }
-            ViewBag.ytConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.YouTubeUrl;
-            if (Enumerable.Count(ViewBag.ytConnection) == 0)
-            {
-                ViewBag.ytConnection = "";
-            }
-            ViewBag.behanceConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.BehanceUrl;
-            if (Enumerable.Count(ViewBag.behanceConnection) == 0)
-            {
-                ViewBag.behanceConnection = "";
-            }
-            ViewBag.pinterestConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.PinterestUrl;
-            if (Enumerable.Count(ViewBag.pinterestConnection) == 0)
-            {
-                ViewBag.pinterestConnection = "";
-            }
-            ViewBag.blogConnection = from p in _context.PersonalUrl where p.MemberID == UserId select p.BlogUrl;
-            if (Enumerable.Count(ViewBag.blogConnection) == 0)
-            {
-                ViewBag.blogConnection = "";
-            }
+            
 
             // 課程var courseList = tacheyDb.Course.Where(x => x.MemberID == currentId).Select(x => x).ToList();
             ViewBag.courseGive = (from p in _context.Course where p.MemberID == UserId select p).ToList(); // 開課

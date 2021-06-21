@@ -76,6 +76,51 @@ namespace Tachey001.Service.Member
                          select new PointViewModel
                          {
                              MemberID = p.MemberID,
+                             Point = m.Point,
+                             PointName = p.PointName,
+                             PointNum = p.PointNum,
+                             GetTime = p.GetTime,
+                             Deadline = p.Deadline,
+                             Status = p.Status,
+                         };
+
+            return result.ToList();
+        }
+
+        public List<PointViewModel> GetGetPoint(string MemberId)
+        {
+            var member = _memberRepository.GetAllMember();
+            var point = _memberRepository.GetPoints();
+
+            var result = from m in member
+                         join p in point on m.MemberID equals p.MemberID
+                         where m.MemberID == MemberId && p.Status == false
+                         select new PointViewModel
+                         {
+                             MemberID = p.MemberID,
+                             Point = m.Point,
+                             PointName = p.PointName,
+                             PointNum = p.PointNum,
+                             GetTime = p.GetTime,
+                             Deadline = p.Deadline,
+                             Status = p.Status,
+                         };
+
+            return result.ToList();
+        }
+
+        public List<PointViewModel> GetUsedPoint(string MemberId)
+        {
+            var member = _memberRepository.GetAllMember();
+            var point = _memberRepository.GetPoints();
+
+            var result = from m in member
+                         join p in point on m.MemberID equals p.MemberID
+                         where m.MemberID == MemberId && p.Status == true
+                         select new PointViewModel
+                         {
+                             MemberID = p.MemberID,
+                             Point = m.Point,
                              PointName = p.PointName,
                              PointNum = p.PointNum,
                              GetTime = p.GetTime,

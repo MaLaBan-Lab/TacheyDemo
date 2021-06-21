@@ -10,5 +10,7 @@ namespace Tachey001.ViewModel.Member
         public MemberViewModel member { get; set; }
         public List<MemberViewModel> memberViewModels { get; set; }
         public List<PointViewModel> pointViewModels { get; set; }
+        public List<PointViewModel> usedpointViewModels { get; set; }
+        public List<PointViewModel> getpointViewModels { get; set; }
     }
 }

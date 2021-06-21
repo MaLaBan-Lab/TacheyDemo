@@ -1,4 +1,4 @@
-﻿@model Member
+﻿@model Tachey001.ViewModel.Member.MemberGroup
 @*@model PersonalUrl*@
 @Styles.Render("~/Assets/css/personal.css")
 @Styles.Render("~/Assets/css/card.css")
@@ -54,7 +54,7 @@
                                         <div class="username-input">
                                             <div class="input-wrapper flex relative">
                                                 <!-- db edit -->
-                                                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "input-element", @id = "name-input-textarea", @Value = ViewBag.name } })
+                                                @Html.EditorFor(m => m.member.Name, new { htmlAttributes = new { @class = "input-element", @id = "name-input-textarea", @Value = ViewBag.name } })
                                                 @*<input type="text" class="input-element" id="name-input-textarea" value=@(ViewBag.name)>*@
                                                 <!-- db edit -->
                                             </div>
@@ -87,7 +87,7 @@
                                                         <span>Facebook 個人頁面網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @*@Html.EditorFor(p => p.Facebook, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.fbConnection, @placeholder = "https://www.facebook.com/yourAccountId" } })*@
+                                                                @Html.EditorFor(p => p.member.FbUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.fbConnection, @placeholder = "https://www.facebook.com/yourAccountId" } })
                                                                 @*<input placeholder="https://www.facebook.com/yourAccountId" class="input-element" data-type="facebook" value=@(ViewBag.fbConnection)>*@
                                                             </div>
                                                         </div>
@@ -96,7 +96,7 @@
                                                         <span>Google Plus 個人頁面網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @*@Html.EditorFor(m => m.Google, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.googleConnection, @placeholder = "https://plus.google.com/yourAccountId/posts" } })*@
+                                                                @Html.EditorFor(m => m.member.GoogleUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.googleConnection, @placeholder = "https://plus.google.com/yourAccountId/posts" } })
                                                                 @*<input placeholder="https://plus.google.com/yourAccountId/posts" class="input-element" data-type="googlePlus" value=@(ViewBag.googleConnection)>*@
                                                             </div>
                                                         </div>
@@ -105,7 +105,7 @@
                                                         <span>YouTube 頻道</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @*@Html.EditorFor(m => m.YouTube, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.ytConnection, @placeholder = "https://www.youtube.com/yourChannel" } })*@
+                                                                @Html.EditorFor(m => m.member.YouTubeUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.ytConnection, @placeholder = "https://www.youtube.com/yourChannel" } })
                                                                 @*<input placeholder="https://www.youtube.com/yourChannel" class="input-element" data-type="youtube" value=@(ViewBag.ytConnection)>*@
                                                             </div>
                                                         </div>
@@ -114,7 +114,7 @@
                                                         <span>Behance 網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @*@Html.EditorFor(m => m.Behance, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.behanceConnection, @placeholder = "https://www.behance.net/yourName" } })*@
+                                                                @Html.EditorFor(m => m.member.BehanceUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.behanceConnection, @placeholder = "https://www.behance.net/yourName" } })
                                                                 @*<input placeholder="https://www.behance.net/yourName" class="input-element" data-type="behance" value=@(ViewBag.behanceConnection)>*@
                                                             </div>
                                                         </div>
@@ -123,7 +123,7 @@
                                                         <span>Pinterest 網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @*@Html.EditorFor(m => m.Pinterest, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.pinterestConnection, @placeholder = "https://www.pinterest.com/yourName/" } })*@
+                                                                @Html.EditorFor(m => m.member.PinterestUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.pinterestConnection, @placeholder = "https://www.pinterest.com/yourName/" } })
                                                                 @*<input placeholder="https://www.pinterest.com/yourName/" class="input-element" data-type="pinterest" value=@(ViewBag.pinterestConnection)>*@
                                                             </div>
                                                         </div>
@@ -132,7 +132,7 @@
                                                         <span>個人網站或部落格網址</span>
                                                         <div class="marg-b-15">
                                                             <div class="input-wrapper flex relative">
-                                                                @*@Html.EditorFor(m => m.Blog, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.blogConnection, @placeholder = "https://www.yourBlog.com/" } })*@
+                                                                @Html.EditorFor(m => m.member.BlogUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.blogConnection, @placeholder = "https://www.yourBlog.com/" } })
                                                                 @*<input placeholder="https://www.yourBlog.com/" class="input-element" data-type="website" value=@(ViewBag.blogConnection)>*@
                                                             </div>
                                                         </div>
@@ -176,7 +176,7 @@
                                     </div>
                                     <div id="intro-textarea" style="display: none;">
                                         <div class="marg-tb-10 textarea">
-                                            @Html.TextAreaFor(m => m.About, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @Value = ViewBag.about, @placeholder = "簡單介紹一下自己吧！" } })
+                                            @Html.TextAreaFor(m => m.member.About, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @Value = ViewBag.about, @placeholder = "簡單介紹一下自己吧！" } })
                                             @*<textarea class="textarea-content marg-tb-10 textarea" id="intro-textarea-content" placeholder="簡單介紹一下自己吧！" rows="2"></textarea>*@
                                         </div>
                                         <div class="txt-right">
@@ -203,7 +203,7 @@
                                     </div>
                                     <div id="expert-textarea" style="display: none;">
                                         <div class="marg-tb-10 textarea">
-                                            @Html.TextAreaFor(m => m.Expertise, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @Value = ViewBag.expertise, @placeholder = "有什麼擅長的事情嗎？" } })
+                                            @Html.TextAreaFor(m => m.member.Expertise, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @Value = ViewBag.expertise, @placeholder = "有什麼擅長的事情嗎？" } })
                                             @*<textarea class="textarea-content marg-tb-10 textarea" id="expert-textarea-content" placeholder="有什麼擅長的事情嗎？" rows="2"></textarea>*@
                                         </div>
                                         <div class="txt-right">
@@ -248,7 +248,7 @@
                                     </div>
                                     <div id="like-textarea" style="display: none;">
                                         <div class="marg-tb-10 textarea">
-                                            @Html.TextAreaFor(m => m.Interest, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @id = "like-textarea-content", @Value = ViewBag.interestContent, @placeholder = "平常喜歡做什麼呢？" } })
+                                            @Html.TextAreaFor(m => m.member.Interest, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @id = "like-textarea-content", @Value = ViewBag.interestContent, @placeholder = "平常喜歡做什麼呢？" } })
                                             @*<textarea class="textarea-content marg-tb-10 textarea" id="like-textarea-content" placeholder="平常喜歡做什麼呢？" rows="2"></textarea>*@
                                         </div>
                                         <div class="txt-right">
@@ -328,7 +328,7 @@
                                         <!-- This container will become the editable. -->
                                         <div id="editor" class="border">
                                             <!--db edit-->
-                                            @Html.TextAreaFor(m => m.Introduction, new { htmlAttributes = new { @Value = ViewBag.Introduction } })
+                                            @Html.TextAreaFor(m => m.member.Introduction, new { htmlAttributes = new { @Value = ViewBag.Introduction } })
                                             <!--db edit-->
                                         </div>
                                     </div>
@@ -373,9 +373,9 @@
                 <div class="course-card">
                     <div class="briefs-container row mt-1">
                         @*@for (var i = 0; i < 30; i++)
-                        {
-                            @Html.Partial("CardTemplate")
-                        }*@
+                            {
+                                @Html.Partial("CardTemplate")
+                            }*@
                     </div>
                 </div>
             </div>
