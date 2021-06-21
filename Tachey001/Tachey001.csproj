@@ -228,6 +228,7 @@
     <Compile Include="Repository\Course\CourseRepository.cs" />
     <Compile Include="Repository\Home\HomeRepository.cs" />
     <Compile Include="Repository\Order\OrderRepository.cs" />
+    <Compile Include="Repository\TacheyRepository.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
     <Compile Include="Service\Order\OrderService.cs" />
     <Compile Include="Startup.cs" />

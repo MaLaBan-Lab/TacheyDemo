@@ -220,16 +220,16 @@
 <div class="container">
     <div class="seletor">
         <div class="seletor-item" id="main">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1})">課程簡介</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = ViewBag.CourseId})">課程簡介</a>
         </div>
         <div class="seletor-item" id="feedbacks">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2})">課程評價</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = ViewBag.CourseId})">課程評價</a>
         </div>
         <div class="seletor-item" id="discussions">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3})">問題討論</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = ViewBag.CourseId})">問題討論</a>
         </div>
         <div class="seletor-item" id="assignments">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4})">作業成果</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = ViewBag.CourseId})">作業成果</a>
         </div>
     </div>
 </div>

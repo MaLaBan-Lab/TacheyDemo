@@ -49,11 +49,15 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
         {
+
             if (id == null)
             {
                 id = 1;
             }
+
             ViewBag.Id = id;
+            ViewBag.CourseId = CourseId;
+
             return View();
         }
         //開課10步驟 GET
@@ -112,23 +116,14 @@ namespace Tachey001.Controllers
         //創新課程，加入課程ID
         public ActionResult NewCourseStep()
         {
-            var CourseId = GetRandomId(12);
+            //取得當前會員ID
             var currentUserId = User.Identity.GetUserId();
 
-            while (tacheyDb.Course.Find(CourseId) != null)
-            {
-                CourseId = GetRandomId(12);
-            }
+            //創建課程，並回傳課程ID
+           var returnCourseId = _courseService.NewCourseStep(currentUserId);
 
-            Course newCourse = new Course { CourseID = CourseId, MemberID = currentUserId };
-
-            tacheyDb.Course.Add(newCourse);
-
-            tacheyDb.SaveChanges();
-
-            tacheyDb.Dispose();
-
-            return RedirectToAction("Step", "Courses", new { id = 0, CourseId = CourseId });
+            //導向開課步驟，並傳入課程ID路由
+            return RedirectToAction("Step", "Courses", new { id = 0, CourseId = returnCourseId });
         }
         //課程章節新增修改
         [HttpPost]
@@ -146,7 +141,10 @@ namespace Tachey001.Controllers
                 int chapterCount = 0;
                 var arr = course[$"{i}"].Split(',');
 
-                var newUnit = new CourseUnit();
+                var newUnit = new CourseUnit()
+                {
+                    CourseID = CourseId
+                };
 
                 foreach (var item in arr)
                 {
@@ -161,7 +159,6 @@ namespace Tachey001.Controllers
                     }
                     else
                     {
-                        newUnit.CourseID = CourseId;
                         newUnit.ChapterID = i;
                         newUnit.UnitID = $"{i}-{chapterCount}";
                         if (chapterCount % 2 == 0)
@@ -173,7 +170,7 @@ namespace Tachey001.Controllers
                             newUnit.CourseURL = item;
                         }
                     }
-                    if (chapterCount % 2 == 0)
+                    if (chapterCount !=0 && chapterCount % 2 == 0)
                     {
                         tacheyDb.CourseUnit.Add(newUnit);
                         newUnit = new CourseUnit();
@@ -181,8 +178,9 @@ namespace Tachey001.Controllers
                     chapterCount++;
                 }
             };
-
             tacheyDb.SaveChanges();
+
+            //tacheyDb.SaveChanges();
 
             if (id == 3)
             {
@@ -213,20 +211,6 @@ namespace Tachey001.Controllers
             tacheyDb.SaveChanges();
 
             return RedirectToAction("Console", "Member");
-        }
-        //取得自訂位數的亂數方法
-        private string GetRandomId(int Length)
-        {
-            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
-            int passwordLength = Length;
-            char[] chars = new char[passwordLength];
-            Random rd = new Random();
-
-            for (int i = 0; i < passwordLength; i++)
-            {
-                chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
-            }
-            return new string(chars);
         }
     }
 }
