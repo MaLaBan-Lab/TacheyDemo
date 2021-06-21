@@ -66,34 +66,27 @@ namespace Tachey001.Service.Course
         {
             _courseRepository.DeleteCurrentIdCourseData(id);
         }
-
-        //取得課程影片所需欄位
-        public List<Main_Video> GetCourseVideoData(string CourseId)
+        //取得開課View渲染資料
+        public StepGroup GetStepGroup(string CourseId)
         {
-            var course = _courseRepository.GetAllCourse();
-            var category = _courseRepository.GetCourseCategory();
-            var chapter = _courseRepository.GetCurrentCourseChapters(CourseId);
-            var unit = _courseRepository.GetCourseUnits(CourseId);
+            var currentCourse = _courseRepository.GetCurrentCourse(CourseId);
 
-            var result = from c in course
-                         join ca in category on c.CategoryID equals ca.CategoryID
-                         join ch in chapter on c.CourseID equals ch.CourseID
-                         join u in unit on ch.CourseID equals u.CourseID
-                         where c.CourseID == CourseId
-                         select new Main_Video
-                         {
-                             CourseID = c.CourseID,
-                             CategoryID = c.CategoryID,
-                             CategoryName = ca.CategoryName,
-                             ChapterID = ch.ChapterID,
-                             ChapterName = ch.ChapterName,
-                             UnitID = u.UnitID,
-                             UnitName = u.UnitName,
-                             UnitUrl = u.CourseURL
-                         };
+            var chapterList = _courseRepository.GetCurrentCourseChapters(CourseId);
+            var unitList = _courseRepository.GetCourseUnits(CourseId);
 
-           
-            return result.ToList();
+            var categoryList = _courseRepository.GetCourseCategory();
+            var detailList = _courseRepository.GetCategoryDetail();
+
+            var result = new StepGroup
+            {
+                course = currentCourse,
+                courseChapter = chapterList,
+                courseUnit = unitList,
+                courseCategory = categoryList,
+                categoryDetails = detailList
+            };
+
+            return result;
         }
     }
 }
