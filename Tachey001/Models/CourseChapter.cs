@@ -10,14 +10,15 @@ namespace Tachey001.Models
     public partial class CourseChapter
     {
         [Key]
-        public int TestChapterID { get; set; }
+        [Column(Order = 0)]
+        public string CourseID { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ChapterID { get; set; }
 
         [StringLength(200)]
         public string ChapterName { get; set; }
-
-        [StringLength(200)]
-        public string CourseID { get; set; }
-
-        public int? ChapterID { get; set; }
     }
 }

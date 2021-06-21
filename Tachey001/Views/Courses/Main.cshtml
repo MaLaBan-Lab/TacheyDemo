@@ -1,49 +1,62 @@
-﻿@section topCSS{
+﻿@model List<Tachey001.ViewModel.Course.Main_Video>
+
+@section topCSS{
     @Styles.Render("~/Assets/css/discussions.css")
 }
 @{
     ViewBag.Title = "Tachey";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+
+    //var categoryName = Model.CategoryName;
+    //var title = Model.UnitName;
+    //var videourl = Model.UnitUrl;
+    //var chapter = Model.ChapterName;
+
+    //foreach (var item in Model)
+    //{
+    //    var test = item.CourseID;
+    //    var test2 = item.ChapterID;
+    //}
 }
-@{
-    List<CourseChapter> coursechapter = new List<CourseChapter>();
-    List<CourseUnit> courseunit = new List<CourseUnit>();
+@*@{
+        List<CourseChapter> coursechapter = new List<CourseChapter>();
+        List<CourseUnit> courseunit = new List<CourseUnit>();
 
-    string chapter = null;
-    string title = null;
-    string videourl = null;
-    string categoryName = null;
+        string chapter = null;
+        string title = null;
+        string videourl = null;
+        string categoryName = null;
 
-    using (TacheyContext context = new TacheyContext())
-    {
-        var getcourse = context.Course.FirstOrDefault(x => x.CourseID == "2");
-        var getcourseunit = context.CourseUnit.FirstOrDefault(x => x.ChapterID == 1);
-        var getcategory = context.CourseCategory.FirstOrDefault(x => x.CategoryName == "程式");
-
-        if (getcourse != null)
+        using (TacheyContext context = new TacheyContext())
         {
+            var getcourse = context.Course.FirstOrDefault(x => x.CourseID == "2");
+            var getcourseunit = context.CourseUnit.FirstOrDefault(x => x.ChapterID == 1);
+            var getcategory = context.CourseCategory.FirstOrDefault(x => x.CategoryName == "程式");
 
-            title = getcourse.Title;
+            if (getcourse != null)
+            {
+
+                title = getcourse.Title;
+            }
+
+            if (getcourseunit != null)
+            {
+                chapter = getcourseunit.ChapterID.ToString();
+                videourl = getcourseunit.CourseURL;
+            }
+
+            if (getcategory != null)
+            {
+                categoryName = getcategory.CategoryName;
+
+            }
+
+            coursechapter = context.CourseChapter.ToList();
+            courseunit = context.CourseUnit.ToList();
+
+            context.SaveChanges();
         }
-
-        if (getcourseunit != null)
-        {
-            chapter = getcourseunit.ChapterID.ToString();
-            videourl = getcourseunit.CourseURL;
-        }
-
-        if (getcategory != null)
-        {
-            categoryName = getcategory.CategoryName;
-
-        }
-
-        coursechapter = context.CourseChapter.ToList();
-        courseunit = context.CourseUnit.ToList();
-
-        context.SaveChanges();
-    }
-}
+    }*@
 
 <h1>Hahow 線上課程</h1>
 <!-- 課程影片區 -->
@@ -53,12 +66,12 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="#">@categoryName</a></li>
+                <li class="breadcrumb-item text-white"><a href="#"></a></li>
                 <li class="breadcrumb-item  text-white active" aria-current="page">程式語言</li>
             </ol>
         </nav>
         <!-- title 區塊 -->
-        <h2 class="title text-center">@title</h2>
+        <h2 class="title text-center"></h2>
 
         <!-- 主要內容 -->
         <div class="main_wrap col-12">
@@ -67,7 +80,7 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe name="VideoIframe" width="100%" height="100%" src="@videourl"
+                <iframe name="VideoIframe" width="100%" height="100%" src=""
                         title="video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -103,7 +116,7 @@
 
                     <!-- 課程章節 -->
                     <div class="accordion" id="accordion">
-                        @foreach (var chapters in coursechapter)
+                        @foreach (var chapters in Model)
                         {
                             <div class="wrap">
                                 <button class="btn_control btn btn-link btn-block text-left" type="button"
@@ -120,7 +133,7 @@
                                     </div>
                                 </button>
                             </div>
-                            foreach (var units in courseunit)
+                            foreach (var units in Model)
                             {
                                 if (chapters.ChapterID == units.ChapterID)
                                 {
@@ -128,7 +141,7 @@
                                     <div id="toggle_@chapters.ChapterID" class="collapse" aria-labelledby="headingOne"
                                          data-parent="#accordion">
                                         <div class="content">
-                                            <a href="@units.CourseURL" target="VideoIframe">
+                                            <a href="@units.UnitUrl" target="VideoIframe">
                                                 <div class="list">
                                                     <div class="icon">
                                                         <i class="fa fa-lock" aria-hidden="true"></i>
@@ -147,51 +160,51 @@
 
                         <!-- 課程章節 -->
                         <!--<div class="wrap">
-            <button class="btn_control btn btn-link btn-block text-left" type="button"
-                    data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-                    aria-controls="collapseTwo">
-                <div class="list">
-                    <div class="icon">
-                        <i class="fa fa-th-list" aria-hidden="true"></i>
-                    </div>
-                    <div class="text">第二章</div>
-                    <div class="arrow">
-                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </button>
-        </div>-->
+                            <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                    data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                                    aria-controls="collapseTwo">
+                                <div class="list">
+                                    <div class="icon">
+                                        <i class="fa fa-th-list" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="text">第二章</div>
+                                    <div class="arrow">
+                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>-->
                         <!-- 課程單元 -->
                         <!--<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-             data-parent="#accordion">
-            <div class="content">
-                <div class="list">
-                    <div class="icon">
-                        <i class="fa fa-lock" aria-hidden="true"></i>
-                    </div>
-                    <div class="text">單元1 - 前言</div>
-                    <div class="time">00:06</div>
-                </div>
-            </div>
-            <div class="content">
-                <div class="list">
-                    <div class="icon">
-                        <i class="fa fa-lock" aria-hidden="true"></i>
-                    </div>
-                    <div class="text">單元2 - 如何加入線上討論區</div>
-                    <div class="time">00:06</div>
-                </div>
-            </div>
-            <div class="content">
-                <div class="list">
-                    <div class="icon">
-                        <i class="fa fa-lock" aria-hidden="true"></i>
-                    </div>
-                    <div class="text">單元3 - 程式語言的差別</div>
-                    <div class="time">00:06</div>
-                </div>
-            </div>
-        </div>-->
+                             data-parent="#accordion">
+                            <div class="content">
+                                <div class="list">
+                                    <div class="icon">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="text">單元1 - 前言</div>
+                                    <div class="time">00:06</div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="list">
+                                    <div class="icon">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="text">單元2 - 如何加入線上討論區</div>
+                                    <div class="time">00:06</div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="list">
+                                    <div class="icon">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="text">單元3 - 程式語言的差別</div>
+                                    <div class="time">00:06</div>
+                                </div>
+                            </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

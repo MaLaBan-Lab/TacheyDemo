@@ -54,7 +54,12 @@ namespace Tachey001.Controllers
                 id = 1;
             }
             ViewBag.Id = id;
-            return View();
+            var result = _courseService.GetCourseVideoData(CourseId);
+
+            //if (result.FirstOrDefault() == null)
+            //    return RedirectToAction("Index", "Home");
+
+            return View(result);
         }
         //開課10步驟 GET
         public ActionResult Step(int? id, string CourseId)
