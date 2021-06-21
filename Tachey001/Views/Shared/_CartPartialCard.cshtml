@@ -59,7 +59,7 @@
                     <span class="marg-l-5">移至收藏</span>
                 </div>
                 <div class="func-btn marg-l-30">
-                    <span aria-hidden="true" class="fa fa-trash"></span><span class="marg-l-5">刪除</span>
+                    <span aria-hidden="true" class="fa fa-trash"></span><span class="marg-l-5">@Html.ActionLink("刪除", "DeleteRowCarts", "Member", new { CourseId = Model.CourseID ,MemberId= ViewBag.MemberId }, null)</span>
                 </div>
             </div>
         </div>

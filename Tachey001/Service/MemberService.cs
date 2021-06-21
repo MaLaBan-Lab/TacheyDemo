@@ -27,7 +27,7 @@ namespace Tachey001.Service
             var result = from c in course join s in shoppingcart on c.CourseID equals s.CourseID
                          //shoppingCartID=MemberController的Cart裡抓到的會員ID
                          where s.MemberID == memberId
-                         select new CartPartialCardViewModel { Title = c.Title, TitlePageImageURL = c.TitlePageImageURL, CreateVerify = c.CreateVerify, OriginalPrice = c.OriginalPrice };
+                         select new CartPartialCardViewModel { Title = c.Title, TitlePageImageURL = c.TitlePageImageURL, CreateVerify = c.CreateVerify, OriginalPrice = c.OriginalPrice ,CourseID=s.CourseID };
             return result.ToList();
         }
 
@@ -40,6 +40,6 @@ namespace Tachey001.Service
                          select new CourseCardViewModel { Photo = m.Photo, Title = c.Title, TotalMinTime = c.TotalMinTime, OriginalPrice = c.OriginalPrice, TitlePageImageURL = c.TitlePageImageURL };
             return result.ToList();
         }
-
+       
     }
 }

@@ -8,6 +8,7 @@ using Tachey001.Models;
 using Tachey001.Service;
 using Tachey001.Service.Course;
 using Tachey001.ViewModel;
+using Tachey001.Repository;
 
 namespace Tachey001.Controllers
 {
@@ -18,6 +19,7 @@ namespace Tachey001.Controllers
         //宣告CourseService
         private CourseService _courseService;
         private MemberService _memberService;
+        private MemberRepository _memberRepository;
 
         //初始化CourseService
         public MemberController()
@@ -25,6 +27,7 @@ namespace Tachey001.Controllers
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
             _memberService = new MemberService();
+            _memberRepository = new MemberRepository();
         }
         // GET: Member
         public ActionResult Console()
@@ -54,27 +57,27 @@ namespace Tachey001.Controllers
 
         public ActionResult Orders()
         {
-            var currentId = User.Identity.GetUserId();
-            var OrderRecord = from O in tacheyDb.Order
-                             join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
-                             join invoice in tacheyDb.Invoice on O.InvoiceID equals invoice.InvoiceID
-                             where O.MemberID == currentId
-                             select new OrderRecord
-                             {
-                                 OrderDate =O.OrderDate,
-                                 PayDate=O.PayDate,
-                                 PayMethod=O.PayMethod,
-                                 UnitPrice=OD.UnitPrice,
-                                 InvoiceType=invoice.InvoiceType,
-                                 InvoiceName=invoice.InvoiceName,
-                                 InvoiceEmail=invoice.InvoiceEmail,
-                                 InvoiceDate=invoice.InvoiceDate,
-                                 InvoiceNum=invoice.InvoiceNum,
-                                 InvoiceRandomNum=invoice.InvoiceRandomNum
-                             };
+        //    var currentId = User.Identity.GetUserId();
+        //    var OrderRecord = from O in tacheyDb.Order
+        //                     join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
+        //                     join invoice in tacheyDb.Invoice on O.OrderID equals invoice.OrderID
+        //                     where O.MemberID == currentId
+        //                     select new OrderRecord
+        //                     {
+        //                         OrderDate =O.OrderDate,
+        //                         PayDate=O.PayDate,
+        //                         PayMethod=O.PayMethod,
+        //                         UnitPrice=OD.UnitPrice,
+        //                         InvoiceType=invoice.InvoiceType,
+        //                         InvoiceName=invoice.InvoiceName,
+        //                         InvoiceEmail=invoice.InvoiceEmail,
+        //                         InvoiceDate=invoice.InvoiceDate,
+        //                         InvoiceNum=invoice.InvoiceNum,
+        //                         InvoiceRandomNum=invoice.InvoiceRandomNum
+        //                     };
 
             
-            return View(OrderRecord);
+            return View();
         }
 
         public ActionResult Profile()
@@ -96,6 +99,7 @@ namespace Tachey001.Controllers
         {
             //抓到現在登入狀態的會員ID
             var currentId = User.Identity.GetUserId();
+            ViewBag.MemberId = currentId;
             var getcartcardviewmodels = _memberService.GetCartPartialViewModel(currentId);
             var getcoursecardviewmodels = _memberService.GetCourseCardViewModels();
             //資料是複數就要toloist,引用的型別是單數所以無法使用
@@ -109,6 +113,20 @@ namespace Tachey001.Controllers
             };
             //丟入view
             return View(result);
+        }
+        //刪除購物車卡片
+        public ActionResult DeleteRowCarts(string CourseId,string MemberId)
+        {
+            try
+            {
+            _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
+                return RedirectToAction("Cart", "Member");
+
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Cart", "Member");
+            }
         }
     }
 }

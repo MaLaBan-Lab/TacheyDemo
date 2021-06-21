@@ -17,8 +17,6 @@ namespace Tachey001.Models
 
         public int TicketID { get; set; }
 
-        public int InvoiceID { get; set; }
-
         [Required]
         [StringLength(128)]
         public string MemberID { get; set; }

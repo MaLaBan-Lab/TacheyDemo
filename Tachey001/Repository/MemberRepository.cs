@@ -25,13 +25,18 @@ namespace Tachey001.Repository
             var result = _tacheyContext.ShoppingCart;
             return result;
         }
+        
+        
+        //Delete刪除指定課程資料
+        public void DeleteCurrentIdRowCart(string outsideCourseId ,string outsideMemberId)
+        {
+            var search = _tacheyContext.ShoppingCart.FirstOrDefault(x =>x.MemberID== outsideMemberId && x.CourseID== outsideCourseId);
 
+            _tacheyContext.ShoppingCart.Remove(search);
+            _tacheyContext.SaveChanges();
+            _tacheyContext.Dispose();
 
-
-
-
-
-
+        }
 
     }
 
