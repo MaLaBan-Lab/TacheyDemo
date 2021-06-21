@@ -230,6 +230,7 @@
     <Compile Include="Repository\Order\OrderRepository.cs" />
     <Compile Include="Repository\TacheyRepository.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
+    <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Service\Order\OrderService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
@@ -237,7 +238,6 @@
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
     <Compile Include="ViewModel\HighlightCourseViewModel.cs" />
-    <Compile Include="ViewModel\OrderRecord.cs" />
     <Compile Include="ViewModel\Course\StepGroup.cs" />
     <Compile Include="ViewModel\GroupOrderRecord.cs" />
     <Compile Include="ViewModel\OrderRecordOther.cs" />
