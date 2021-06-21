@@ -23,18 +23,18 @@ namespace Tachey001.Service.Course
             var member = _courseRepository.GetAllMember();
 
             var result = from c in course
-                              join m in member on c.MemberID equals m.MemberID
-                              select new AllCourse
-                              {
-                                  CourseID = c.CourseID,
-                                  Title = c.Title,
-                                  Description = c.Description,
-                                  TitlePageImageURL = c.TitlePageImageURL,
-                                  OriginalPrice = c.OriginalPrice,
-                                  TotalMinTime = c.TotalMinTime,
-                                  MemberID = m.MemberID,
-                                  Photo = m.Photo
-                              };
+                         join m in member on c.MemberID equals m.MemberID
+                         select new AllCourse
+                         {
+                             CourseID = c.CourseID,
+                             Title = c.Title,
+                             Description = c.Description,
+                             TitlePageImageURL = c.TitlePageImageURL,
+                             OriginalPrice = c.OriginalPrice,
+                             TotalMinTime = c.TotalMinTime,
+                             MemberID = m.MemberID,
+                             Photo = m.Photo
+                         };
 
             return result.ToList();
         }
@@ -87,6 +87,35 @@ namespace Tachey001.Service.Course
             };
 
             return result;
+        }
+
+        //取得課程影片所需欄位
+        public List<Main_Video> GetCourseVideoData(string CourseId)
+        {
+            var course = _courseRepository.GetAllCourse();
+            var category = _courseRepository.GetCourseCategory();
+            var chapter = _courseRepository.GetCurrentCourseChapters(CourseId);
+            var unit = _courseRepository.GetCourseUnits(CourseId);
+
+            var result = from c in course
+                         join ca in category on c.CategoryID equals ca.CategoryID
+                         join ch in chapter on c.CourseID equals ch.CourseID
+                         join u in unit on ch.CourseID equals u.CourseID
+                         where c.CourseID == CourseId
+                         select new Main_Video
+                         {
+                             CourseID = c.CourseID,
+                             CategoryID = c.CategoryID,
+                             CategoryName = ca.CategoryName,
+                             ChapterID = ch.ChapterID,
+                             ChapterName = ch.ChapterName,
+                             UnitID = u.UnitID,
+                             UnitName = u.UnitName,
+                             UnitUrl = u.CourseURL
+                         };
+
+
+            return result.ToList();
         }
     }
 }
