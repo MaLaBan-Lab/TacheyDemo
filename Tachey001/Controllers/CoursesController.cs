@@ -54,11 +54,13 @@ namespace Tachey001.Controllers
                 id = 1;
             }
             ViewBag.Id = id;
+
+
             var result = _courseService.GetCourseVideoData(CourseId);
 
-            //if (result.FirstOrDefault() == null)
-            //    return RedirectToAction("Index", "Home");
-
+        //if (result.FirstOrDefault() == null)
+        //    return RedirectToAction("Index", "Home");
+        //https://localhost:44394/Courses/Main?CourseId=%222abcdfghhh%22
             return View(result);
         }
         //開課10步驟 GET
@@ -178,7 +180,7 @@ namespace Tachey001.Controllers
                             newUnit.CourseURL = item;
                         }
                     }
-                    if (chapterCount % 2 == 0)
+                    if (chapterCount != 0 && chapterCount % 2 == 0)
                     {
                         tacheyDb.CourseUnit.Add(newUnit);
                         newUnit = new CourseUnit();

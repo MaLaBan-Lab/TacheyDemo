@@ -94,8 +94,8 @@ namespace Tachey001.Service.Course
         {
             var course = _courseRepository.GetAllCourse();
             var category = _courseRepository.GetCourseCategory();
-            var chapter = _courseRepository.GetCurrentCourseChapters(CourseId);
-            var unit = _courseRepository.GetCourseUnits(CourseId);
+            var chapter = _courseRepository.GetCurrentCourseChapters();
+            var unit = _courseRepository.GetCourseUnits();
 
             var result = from c in course
                          join ca in category on c.CategoryID equals ca.CategoryID

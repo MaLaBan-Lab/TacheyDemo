@@ -27,6 +27,20 @@ namespace Tachey001.Repository.Course
 
             return result;
         }
+        //Read 取得當前課程章節
+        public IEnumerable<CourseChapter> GetCurrentCourseChapters()
+        {
+            var result = _tacheyContext.CourseChapter;
+
+            return result;
+        }
+        //Read 取得當前課程單元
+        public IEnumerable<CourseUnit> GetCourseUnits()
+        {
+            var result = _tacheyContext.CourseUnit;
+
+            return result;
+        }
         //Read 取得課程種類
         public IEnumerable<CourseCategory> GetCourseCategory()
         {
