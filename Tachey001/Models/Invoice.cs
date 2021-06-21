@@ -9,24 +9,25 @@ namespace Tachey001.Models
     [Table("Invoice")]
     public partial class Invoice
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int InvoiceID { get; set; }
+        [Key]
+        public string OrderID { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string InvoiceType { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string InvoiceName { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string InvoiceEmail { get; set; }
 
         public DateTime? InvoiceDate { get; set; }
 
-        public int? InvoiceNum { get; set; }
+        [StringLength(50)]
+        public string InvoiceNum { get; set; }
 
         public int? InvoiceRandomNum { get; set; }
     }
