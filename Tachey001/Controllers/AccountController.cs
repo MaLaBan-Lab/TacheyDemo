@@ -171,7 +171,7 @@ namespace Tachey001.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", "請按一下此連結確認您的帳戶 <a href=\"" + callbackUrl + "\">這裏</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("RegisterTacheyMember", "Account");
                 }
                 AddErrors(result);
             }
@@ -179,7 +179,22 @@ namespace Tachey001.Controllers
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
             return View(model);
         }
+        //註冊Tachey會員資料表
+        public ActionResult RegisterTacheyMember()
+        {
+            using (TacheyContext context = new TacheyContext())
+            {
+                var email = User.Identity.GetUserName();
 
+                Member member = new Member { MemberID = User.Identity.GetUserId(), Email = email };
+
+                context.Member.Add(member);
+
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
