@@ -16,7 +16,8 @@ namespace Tachey001.Service.Course
         {
             _courseRepository = new CourseRepository();
         }
-        public List<AllCourse> GetAllCourse()
+        //取得渲染課程卡片所需資料欄位
+        public List<AllCourse> GetCourseData()
         {
             var course = _courseRepository.GetAllCourse();
             var member = _courseRepository.GetAllMember();
@@ -37,8 +38,8 @@ namespace Tachey001.Service.Course
 
             return result.ToList();
         }
-
-        public List<AllCourse> GetMemberCreateCourse(string MemberId)
+        //取得會員所開課程的渲染課程卡片所需資料欄位(多載+1)
+        public List<AllCourse> GetCourseData(string MemberId)
         {
             var course = _courseRepository.GetAllCourse();
             var member = _courseRepository.GetAllMember();
@@ -59,6 +60,33 @@ namespace Tachey001.Service.Course
                          };
 
             return result.ToList();
+        }
+        //刪除指定課程資料
+        public void DeleteCurrentIdCourseData(string id)
+        {
+            _courseRepository.DeleteCurrentIdCourseData(id);
+        }
+        //取得開課View渲染資料
+        public StepGroup GetStepGroup(string CourseId)
+        {
+            var currentCourse = _courseRepository.GetCurrentCourse(CourseId);
+
+            var chapterList = _courseRepository.GetCurrentCourseChapters(CourseId);
+            var unitList = _courseRepository.GetCourseUnits(CourseId);
+
+            var categoryList = _courseRepository.GetCourseCategory();
+            var detailList = _courseRepository.GetCategoryDetail();
+
+            var result = new StepGroup
+            {
+                course = currentCourse,
+                courseChapter = chapterList,
+                courseUnit = unitList,
+                courseCategory = categoryList,
+                categoryDetails = detailList
+            };
+
+            return result;
         }
     }
 }

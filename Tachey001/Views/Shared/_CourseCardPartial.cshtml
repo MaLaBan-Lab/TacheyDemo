@@ -1,5 +1,16 @@
 ﻿@*回傳資料型別*@
-@model CourseCardPartial
+@model　Tachey001.ViewModel.CourseCardViewModel
+
+@{ var photoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
+                var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
+                if (Model.TitlePageImageURL != null)
+                {
+                    titleUrl = Model.TitlePageImageURL;
+                }
+                if (Model.Photo != null)
+                {
+                    photoUrl = Model.Photo;
+                } }
 
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
@@ -12,27 +23,29 @@
                         rounded-circle
                         bg-white
                       ">
-                        <img src="@Model.Photo"
+                        <img src="@photoUrl"
                              alt="" class="rounded-circle position-absolute center" id="photoImag" />
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2">
-                <img src="https://images.api.hahow.in/images/5f4c73b1dccd653e568b9b9d?width=300"
-                     class="card-img-top" />
-                <div class="
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
+                <a href="@Url.Action("Main", "Courses", new { CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
+                    <img src="@titleUrl"
+                         class="card-img-top" style="width:262px; height:164px" />
+                    <div class="
                     position-absolute
                     bg-hahow-dark-green
                     text-center text-white
                     backgroundTape
                   ">
-                    上課囉
-                </div>
-                <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                </div>
+                        上課囉
+                    </div>
+                    <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                        <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                    </div>
+                </a>
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
                 <h4 class="card-title text-justify font-weight-normal text-secondary">
                     @Model.Title
                 </h4>
@@ -56,7 +69,7 @@
                             <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                     </span>
-                    (6)
+                    (0)
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
@@ -72,11 +85,11 @@
                     <span class="course-people-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-people">123</span>人
+                    <span class="course-people">0</span>人
                 </span>
-                <span class="card-text hahow-dark-green classPrice">
-                    NT$<span>@Model.OriginalPrice</span>
-                </span>
+                <div class="card-text hahow-dark-green classPrice">
+                    <span>@Model.OriginalPrice.ToString("C0")</span>
+                </div>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
                 <span class="backgroundBookmark-sm d-inline-block text-center mx-3">

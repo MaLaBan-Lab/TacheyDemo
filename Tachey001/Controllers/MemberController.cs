@@ -33,20 +33,14 @@ namespace Tachey001.Controllers
         {
             var currentId = User.Identity.GetUserId();
 
-            var result = _courseService.GetMemberCreateCourse(currentId);
+            var result = _courseService.GetCourseData(currentId);
 
             return View(result);
         }
-        //刪除課程卡片
-        public ActionResult DeleteCourse(string id)
+        //刪除指定課程卡片
+        public ActionResult DeleteCourse(int? id, string CourseId)
         {
-            var result = tacheyDb.Course.Find(id);
-
-            tacheyDb.Course.Remove(result);
-
-            tacheyDb.SaveChanges();
-
-            tacheyDb.Dispose();
+            _courseService.DeleteCurrentIdCourseData(CourseId);
 
             return RedirectToAction("Console", "Member");
         }

@@ -226,12 +226,17 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Course\CourseRepository.cs" />
+    <Compile Include="Repository\Home\HomeRepository.cs" />
     <Compile Include="Repository\Order\OrderRepository.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
     <Compile Include="Service\Order\OrderService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\CourseCardPartial.cs" />
+    <Compile Include="ViewModel\Card_highlight_Group.cs" />
+    <Compile Include="ViewModel\CourseCardViewModel.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
+    <Compile Include="ViewModel\CommentViewModel.cs" />
+    <Compile Include="ViewModel\HighlightCourseViewModel.cs" />
+    <Compile Include="ViewModel\OrderRecord.cs" />
     <Compile Include="ViewModel\Course\StepGroup.cs" />
     <Compile Include="ViewModel\GroupOrderRecord.cs" />
     <Compile Include="ViewModel\OrderRecordOther.cs" />
@@ -524,13 +529,13 @@
     <Content Include="Views\Courses\Step4.cshtml" />
     <Content Include="Views\Shared\_RecordCardError.cshtml" />
     <Content Include="Views\Shared\_RecordCardWait.cshtml" />
+    <Content Include="Views\Shared\_CartPartialCard.cshtml" />
+    <Content Include="Views\Shared\CreateCardTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repository\Home\" />
     <Folder Include="Repository\Member\" />
     <Folder Include="Repository\Pay\" />
-    <Folder Include="Service\Home\" />
     <Folder Include="Service\Member\" />
     <Folder Include="Service\Pay\" />
     <Folder Include="ViewModel\Home\" />
