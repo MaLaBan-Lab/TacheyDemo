@@ -1,7 +1,7 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("StepUnit", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
     @Html.AntiForgeryToken()
 
@@ -31,11 +31,12 @@
                                 {
                                     if (ch.ChapterID == un.ChapterID)
                                     {
-                                        <h5 class="">
-                                            <span>單元1</span> 影片 :
-                                            <input type="text" class="w-50" name="1" value="@un.CourseURL">
-                                            <input type="text" class="invisible w-25" name="1" value="@un.UnitName">
-                                        </h5>
+                                <h5 class="">
+                                    <span>單元1</span> : @un.UnitName<br />
+                                    影片網址 : <input type="text" class="w-50" name="1" value="@un.CourseURL">
+                                    <input type="text" class="invisible w-25" name="1" value="@un.UnitName">
+                                </h5>
+                                        <hr> 
                                     }
                                 }
 

@@ -73,6 +73,16 @@ namespace Tachey001.Repository.Course
 
             _tacheyContext.Dispose();
         }
+        //Create 創建課程Entity
+        public void CreateNewCourse(string CourseId, string MemberId)
+        {
+            var result = new Models.Course { CourseID = CourseId, MemberID = MemberId };
 
+            _tacheyContext.Course.Add(result);
+
+            _tacheyContext.SaveChanges();
+
+            _tacheyContext.Dispose();
+        }
     }
 }
