@@ -15,7 +15,6 @@ namespace Tachey001.Service.Course
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
         private CourseRepository _courseRepository;
-        private object _courseService;
 
         //初始化資料庫邏輯
         public CourseService()
@@ -100,42 +99,34 @@ namespace Tachey001.Service.Course
 
             return result;
         }
-
         //取得課程影片所需欄位
-        public List<Main_Video> GetCourseVideoData(string CourseId)
+        public Main_Video GetCourseVideoData(string CourseId)
         {
-            var course = _courseRepository.GetAllCourse();
-            var category = _courseRepository.GetCourseCategory();
-            var chapter = _courseRepository.GetCurrentCourseChapters(CourseId);
-            var unit = _courseRepository.GetCourseUnits(CourseId);
+            var course = _tacheyRepository.Get<Models.Course>(x=>x.CourseID==CourseId);
 
-            var result = from c in course
-                         join ca in category on c.CategoryID equals ca.CategoryID
-                         join ch in chapter on c.CourseID equals ch.CourseID
-                         join u in unit on ch.CourseID equals u.CourseID
-                         where c.CourseID == CourseId 
-                         select  new Main_Video
+            var category = _tacheyRepository.GetAll<CourseCategory>().FirstOrDefault(x => x.CategoryID == course.CategoryID);
+            var detail = _tacheyRepository.GetAll<CategoryDetail>().FirstOrDefault(x => x.DetailID == course.CategoryDetailsID);
+
+            var chapter = _tacheyRepository.GetAll<CourseChapter>(x=>x.CourseID == CourseId);
+            var unit = _tacheyRepository.GetAll<CourseUnit>(x=>x.CourseID==CourseId);
+
+            var result = new Main_Video
                          {
-                             CourseID = c.CourseID,
-                             CourseTitle = c.Title,
-                             CategoryID = c.CategoryID,
-                             CategoryName = ca.CategoryName,
-                             ChapterID = ch.ChapterID,
-                             ChapterName = ch.ChapterName,
-                             UnitID = u.UnitID,
-                             UnitName = u.UnitName,
-                             linkID = u.linkID,
-                             UnitUrl = u.CourseURL
+                             CourseID = course.CourseID,
+                             CourseTitle = course.Title,
+                             CategoryName = category.CategoryName,
+                             DetailName = detail.DetailName,
+                             courseChapters = chapter,
+                             courseUnits = unit
                          };
 
-            return result.ToList();
+            return result;
         }
         //開新課程
         public string NewCourseStep(string currentUserId)
         {
             //取得12位數亂碼課程ID
             var CourseId = GetRandomId(12);
-            //string CourseId = new Random(Guid.NewGuid().GetHashCode()).ToString();
 
             //檢查是否重複課程ID
             while (_tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId) != null)
@@ -151,6 +142,7 @@ namespace Tachey001.Service.Course
 
             return CourseId;
         }
+        // 更新開課步驟
         public void UpdateStep(int? id, StepGroup group, FormCollection formCollection, string CourseId)
         {
             var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);

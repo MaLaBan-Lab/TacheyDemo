@@ -235,6 +235,7 @@
     <Compile Include="ViewModel\CourseCardViewModel.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
+    <Compile Include="ViewModel\Course\MainGroup.cs" />
     <Compile Include="ViewModel\Course\Main_Video.cs" />
     <Compile Include="ViewModel\HighlightCourseViewModel.cs" />
     <Compile Include="ViewModel\OrderRecord.cs" />

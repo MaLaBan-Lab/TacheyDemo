@@ -1,4 +1,4 @@
-﻿@model List<Tachey001.ViewModel.Course.Main_Video>
+﻿@model Tachey001.ViewModel.Course.MainGroup
 
 @section topCSS{
     @Styles.Render("~/Assets/css/discussions.css")
@@ -6,8 +6,6 @@
 @{
     ViewBag.Title = "Tachey";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
-
-
 }
 
 
@@ -19,12 +17,12 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="#">@ViewBag.CategoryName</a></li>
-                <li class="breadcrumb-item  text-white active" aria-current="page">程式語言</li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("Group","Courses")">@Model.Main_Video.CategoryName</a></li>
+                <li class="breadcrumb-item  text-white active" aria-current="page">@Model.Main_Video.DetailName</li>
             </ol>
         </nav>
         <!-- title 區塊 -->
-        <h2 class="title text-center">@ViewBag.CourseTitle</h2>
+        <h2 class="title text-center">@Model.Main_Video.CourseTitle</h2>
 
         <!-- 主要內容 -->
         <div class="main_wrap col-12">
@@ -42,7 +40,7 @@
             <div class="menu_wrap col-12 col-sm-12 col-lg-4">
                 <div class="title col-12">
                     <div class="col-10 p-0">
-                        <p>10 個章節，89 段單元、6 項作業，共 2230 分鐘</p>
+                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元、6 項作業，共 2230 分鐘</p>
                         <div>
                             <span>當前單元</span>
                             <a href="@ViewBag.TryVedio" target="VideoIframe">
@@ -72,17 +70,17 @@
 
                     <!-- 課程章節 -->
                     <div class="accordion" id="accordion">
-                        @{foreach (var source in Model.GroupBy(x => x.ChapterID))
+                        @{foreach (var ch in Model.Main_Video.courseChapters)
                             {
                                 <div class="wrap">
                                     <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#toggle_@source.Key" aria-expanded="true"
-                                            aria-controls="toggle_@source.Key">
+                                            data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                            aria-controls="toggle_@ch.ChapterID">
                                         <div class="lists">
                                             <div class="icon">
                                                 <i class="fa fa-th-list" aria-hidden="true"></i>
                                             </div>
-                                            <div class="text">第 @source.Key 章 </div>
+                                            <div class="text">第@(ch.ChapterID)章 </div>
                                             <div class="arrow">
                                                 <i class="fa fa-chevron-up" aria-hidden="true"></i>
                                             </div>
@@ -90,27 +88,23 @@
                                     </button>
                                 </div>
                                 <!-- 課程單元 -->
-                                <div id="toggle_@source.Key" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    @foreach (var test in source.GroupBy(x => x.linkID))
+                                <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    @foreach (var un in Model.Main_Video.courseUnits)
                                     {
-                                        if (source.Key == test.Key)
+                                        if (ch.ChapterID == un.ChapterID)
                                         {
-                                            foreach (var item in test)
-                                            {
-                                                <div class="content">
-                                                    <a href="@item.UnitUrl" target="VideoIframe">
-                                                        <div class="list">
-                                                            <div class="icon">
-                                                                <i class="fa fa-lock" aria-hidden="true"></i>
-                                                            </div>
-                                                            <div class="text">@item.UnitID - @item.UnitName</div>
-                                                            <div class="time">00:06</div>
+                                            <div class="content">
+                                                <a href="@un.CourseURL" target="VideoIframe">
+                                                    <div class="list">
+                                                        <div class="icon">
+                                                            <i class="fa fa-lock" aria-hidden="true"></i>
                                                         </div>
-                                                    </a>
-                                                </div>
-                                            }
+                                                        <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                        <div class="time">00:06</div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         }
-                                        else { }
                                     }
                                 </div>
                             }
@@ -1901,7 +1895,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>

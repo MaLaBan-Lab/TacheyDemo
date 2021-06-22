@@ -28,7 +28,5 @@ namespace Tachey001.Models
 
         [StringLength(4000)]
         public string PS { get; set; }
-
-        public int? linkID { get; set; }
     }
 }

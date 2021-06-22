@@ -49,19 +49,22 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
         {
-
             if (id == null)
             {
                 id = 1;
             }
-
             ViewBag.Id = id;
 
-            var result = _courseService.GetCourseVideoData(CourseId);
+            var video = _courseService.GetCourseVideoData(CourseId);
 
-            ViewBag.CourseTitle = result.Find(x => x.CourseID == CourseId).CourseTitle;
-            ViewBag.CategoryName = result.Find(x => x.CourseID == CourseId).CategoryName;
-            ViewBag.TryVedio = result.FirstOrDefault(x => x.CourseID == CourseId).UnitUrl;
+            var result = new MainGroup()
+            {
+                Main_Video = video
+            };
+
+            //ViewBag.CourseTitle = result.Find(x => x.CourseID == CourseId).CourseTitle;
+            //ViewBag.CategoryName = result.Find(x => x.CourseID == CourseId).CategoryName;
+            //ViewBag.TryVedio = result.FirstOrDefault(x => x.CourseID == CourseId).UnitUrl;
 
             return View(result);
         }
@@ -95,7 +98,7 @@ namespace Tachey001.Controllers
             var currentUserId = User.Identity.GetUserId();
 
             //創建課程，並回傳課程ID
-           var returnCourseId = _courseService.NewCourseStep(currentUserId);
+            var returnCourseId = _courseService.NewCourseStep(currentUserId);
 
             //導向開課步驟，並傳入課程ID路由
             return RedirectToAction("Step", "Courses", new { id = 0, CourseId = returnCourseId });
@@ -103,13 +106,11 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult Step8(string CourseId)
         {
-
             return RedirectToAction("Step", "Courses", new { id = 8, CourseId = CourseId });
         }
         [HttpPost]
         public ActionResult Step9(string CourseId)
         {
-
             return RedirectToAction("Step", "Courses", new { id = 9, CourseId = CourseId });
         }
         //完成課程，送出審核
