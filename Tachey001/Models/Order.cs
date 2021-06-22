@@ -11,28 +11,19 @@ namespace Tachey001.Models
     {
         public string OrderID { get; set; }
 
-        [Required]
-        [StringLength(128)]
-        public string CourseID { get; set; }
+        public int? TicketID { get; set; }
 
-        public int TicketID { get; set; }
-
-        public int InvoiceID { get; set; }
-
-        [Required]
         [StringLength(128)]
         public string MemberID { get; set; }
 
-        [Required]
-        [StringLength(20)]
+        [StringLength(128)]
         public string OrderStatus { get; set; }
 
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
-        [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string PayMethod { get; set; }
 
-        public DateTime PayDate { get; set; }
+        public DateTime? PayDate { get; set; }
     }
 }

@@ -220,6 +220,7 @@
     <Compile Include="Models\PersonalUrl.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Repository\consoleRepository.cs" />
     <Compile Include="Repository\Course\CourseRepository.cs" />
     <Compile Include="Repository\Home\HomeRepository.cs" />
+    <Compile Include="Repository\TacheyRepository.cs" />
     <Compile Include="Service\consoleService.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
     <Compile Include="Service\Home\HomeService.cs" />
@@ -237,6 +239,7 @@
     <Compile Include="ViewModel\CourseCardViewModel.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
+    <Compile Include="ViewModel\Course\Main_Video.cs" />
     <Compile Include="ViewModel\HighlightCourseViewModel.cs" />
     <Compile Include="ViewModel\OrderRecord.cs" />
     <Compile Include="ViewModel\Course\StepGroup.cs" />
@@ -526,6 +529,7 @@
     <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
     <Content Include="Views\Shared\_CartPartialCard.cshtml" />
+    <Content Include="Views\Shared\CreateCardTemplate.cshtml" />
     <Content Include="Views\Shared\step\testView.cshtml" />
   </ItemGroup>
   <ItemGroup>

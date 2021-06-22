@@ -36,7 +36,7 @@ namespace Tachey001.Models
         public string CoursePerson { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? OriginalPrice { get; set; }
+        public decimal OriginalPrice { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? PreOrderPrice { get; set; }

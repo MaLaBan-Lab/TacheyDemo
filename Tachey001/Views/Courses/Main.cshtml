@@ -1,5 +1,4 @@
-﻿
-
+﻿@model List<Tachey001.ViewModel.Course.Main_Video>
 
 @section topCSS{
     @Styles.Render("~/Assets/css/discussions.css")
@@ -7,7 +6,10 @@
 @{
     ViewBag.Title = "Tachey";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+
+
 }
+
 
 <h1>Hahow 線上課程</h1>
 <!-- 課程影片區 -->
@@ -16,13 +18,13 @@
         <!-- Breadcrumb 區塊 -->
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
-                <li class="breadcrumb-item text-white"><a href="#">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="#">程式</a></li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
+                <li class="breadcrumb-item text-white"><a href="#">@ViewBag.CategoryName</a></li>
                 <li class="breadcrumb-item  text-white active" aria-current="page">程式語言</li>
             </ol>
         </nav>
         <!-- title 區塊 -->
-        <h2 class="title text-center">MVC 進階課程：觀念、語法、專案</h2>
+        <h2 class="title text-center">@ViewBag.CourseTitle</h2>
 
         <!-- 主要內容 -->
         <div class="main_wrap col-12">
@@ -31,8 +33,8 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe width="100%" height="100%" src="https://drive.google.com/file/d/1o4e8Ooy1a-UpnBsCZPugNmBQ-1BHfCPH/preview"
-                        title="YouTube video player" frameborder="0"
+                <iframe name="VideoIframe" width="100%" height="100%" src="@ViewBag.TryVedio"
+                        title="video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
@@ -43,7 +45,9 @@
                         <p>10 個章節，89 段單元、6 項作業，共 2230 分鐘</p>
                         <div>
                             <span>當前單元</span>
-                            <span>試看</span>
+                            <a href="@ViewBag.TryVedio" target="VideoIframe">
+                                <span>試看</span>
+                            </a>
                         </div>
                     </div>
                     <div class="close_button col-2">
@@ -55,114 +59,62 @@
 
                 <div class="class_content">
                     <div class="wrap col-12">
-                        <div class="list active">
-                            <div class="icon">
-                                <i class="fa fa-play" aria-hidden="true"></i>
+                        <a href="@ViewBag.TryVedio" target="VideoIframe">
+                            <div class="list active">
+                                <div class="icon">
+                                    <i class="fa fa-play" aria-hidden="true"></i>
+                                </div>
+                                <div class="title">課程介紹</div>
+                                <div class="time">02:28</div>
                             </div>
-                            <div class="title">課程介紹</div>
-                            <div class="time">02:28</div>
-                        </div>
-
+                        </a>
                     </div>
 
                     <!-- 課程章節 -->
                     <div class="accordion" id="accordion">
-                        <div class="wrap">
-                            <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                    aria-controls="collapseOne">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-th-list" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">第一章</div>
-                                    <div class="arrow">
-                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                    </div>
+                        @{foreach (var source in Model.GroupBy(x => x.ChapterID))
+                            {
+                                <div class="wrap">
+                                    <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                            data-toggle="collapse" data-target="#toggle_@source.Key" aria-expanded="true"
+                                            aria-controls="toggle_@source.Key">
+                                        <div class="lists">
+                                            <div class="icon">
+                                                <i class="fa fa-th-list" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="text">第 @source.Key 章 </div>
+                                            <div class="arrow">
+                                                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </button>
                                 </div>
-                            </button>
-                        </div>
-
-                        <!-- 課程單元 -->
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                             data-parent="#accordion">
-                            <div class="content">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">單元1 - 前言</div>
-                                    <div class="time">00:06</div>
+                                <!-- 課程單元 -->
+                                <div id="toggle_@source.Key" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    @foreach (var test in source.GroupBy(x => x.linkID))
+                                    {
+                                        if (source.Key == test.Key)
+                                        {
+                                            foreach (var item in test)
+                                            {
+                                                <div class="content">
+                                                    <a href="@item.UnitUrl" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">@item.UnitID - @item.UnitName</div>
+                                                            <div class="time">00:06</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                        else { }
+                                    }
                                 </div>
-                            </div>
-                            <div class="content">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">單元2 - 如何加入線上討論區</div>
-                                    <div class="time">00:06</div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">單元3 - 程式語言的差別</div>
-                                    <div class="time">00:06</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 課程章節 -->
-                        <div class="wrap">
-                            <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                    data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-                                    aria-controls="collapseTwo">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-th-list" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">第二章</div>
-                                    <div class="arrow">
-                                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-
-                        <!-- 課程單元 -->
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                             data-parent="#accordion">
-                            <div class="content">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">單元1 - 前言</div>
-                                    <div class="time">00:06</div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">單元2 - 如何加入線上討論區</div>
-                                    <div class="time">00:06</div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="list">
-                                    <div class="icon">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="text">單元3 - 程式語言的差別</div>
-                                    <div class="time">00:06</div>
-                                </div>
-                            </div>
-                        </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -203,10 +155,10 @@
         </div>
 
         <div class="buy_wrap col-12 col-md-4 col-lg-4">
-             <div class="collect">
+            <div class="collect">
                 <i class="fa fa-bookmark" aria-hidden="true"></i>
                 <span>收藏</span>
-            </div> 
+            </div>
             <div class="btn_wrap">
                 <button class="btn btn-success">馬上購買</button>
                 <button class="btn btn-outline-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
@@ -220,16 +172,16 @@
 <div class="container">
     <div class="seletor">
         <div class="seletor-item" id="main">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1})">課程簡介</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = ViewBag.CourseId})">課程簡介</a>
         </div>
         <div class="seletor-item" id="feedbacks">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2})">課程評價</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = ViewBag.CourseId})">課程評價</a>
         </div>
         <div class="seletor-item" id="discussions">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3})">問題討論</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = ViewBag.CourseId})">問題討論</a>
         </div>
         <div class="seletor-item" id="assignments">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4})">作業成果</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = ViewBag.CourseId})">作業成果</a>
         </div>
     </div>
 </div>

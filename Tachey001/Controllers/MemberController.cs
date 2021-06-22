@@ -37,9 +37,9 @@ namespace Tachey001.Controllers
             return View(result);
         }
         //刪除指定課程卡片
-        public ActionResult DeleteCourse(string id)
+        public ActionResult DeleteCourse(int? id, string CourseId)
         {
-            _consoleService.DeleteCurrentIdCourseData(id);
+            _courseService.DeleteCurrentIdCourseData(CourseId);
 
             return RedirectToAction("Console", "Member");
         }
@@ -55,27 +55,28 @@ namespace Tachey001.Controllers
 
         public ActionResult Orders()
         {
-            var currentId = User.Identity.GetUserId();
-            var OrderRecord = from O in tacheyDb.Order
-                             join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
-                             join invoice in tacheyDb.Invoice on O.InvoiceID equals invoice.InvoiceID
-                             where O.MemberID == currentId
-                             select new OrderRecord
-                             {
-                                 OrderDate =O.OrderDate,
-                                 PayDate=O.PayDate,
-                                 PayMethod=O.PayMethod,
-                                 UnitPrice=OD.UnitPrice,
-                                 InvoiceType=invoice.InvoiceType,
-                                 InvoiceName=invoice.InvoiceName,
-                                 InvoiceEmail=invoice.InvoiceEmail,
-                                 InvoiceDate=invoice.InvoiceDate,
-                                 InvoiceNum=invoice.InvoiceNum,
-                                 InvoiceRandomNum=invoice.InvoiceRandomNum
-                             };
+            //var currentId = User.Identity.GetUserId();
+            //var OrderRecord = from O in tacheyDb.Order
+            //                 join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
+            //                 join invoice in tacheyDb.Invoice on O.InvoiceID equals invoice.InvoiceID
+            //                 where O.MemberID == currentId
+            //                 select new OrderRecord
+            //                 {
+            //                     OrderDate =O.OrderDate,
+            //                     PayDate = O.PayDate,
+            //                     PayMethod =O.PayMethod,
+            //                     UnitPrice=OD.UnitPrice,
+            //                     InvoiceType=invoice.InvoiceType,
+            //                     InvoiceName=invoice.InvoiceName,
+            //                     InvoiceEmail=invoice.InvoiceEmail,
+            //                     InvoiceDate=invoice.InvoiceDate,
+            //                     InvoiceNum=invoice.InvoiceNum,
+            //                     InvoiceRandomNum=invoice.InvoiceRandomNum
+            //                 };
 
             
-            return View(OrderRecord);
+            //return View(OrderRecord);
+            return View();
         }
 
         public ActionResult Profile()
