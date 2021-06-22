@@ -379,18 +379,10 @@ namespace Tachey001.Controllers
         {
             if (submitButton == "Send")
             {
-                //int personId = person.PersonId;
-                //string name = person.Name;
-                //string gender = person.Gender;
-                //string city = person.City;
-
                 var UserId = User.Identity.GetUserId();
 
                 var result = _context.Member.Find(UserId);
 
-                //result.Title = Title;
-                //result.Description = Description;
-                //result.TitlePageImageURL = TitlePageImageURL;
                 result.Expertise = m.member.Expertise;
 
                 _context.SaveChanges();
@@ -405,18 +397,10 @@ namespace Tachey001.Controllers
         {
             if (submitButton == "Send")
             {
-                //int personId = person.PersonId;
-                //string name = person.Name;
-                //string gender = person.Gender;
-                //string city = person.City;
-
                 var UserId = User.Identity.GetUserId();
 
                 var result = _context.Member.Find(UserId);
 
-                //result.Title = Title;
-                //result.Description = Description;
-                //result.TitlePageImageURL = TitlePageImageURL;
                 result.About = m.member.About;
 
                 _context.SaveChanges();
@@ -431,18 +415,10 @@ namespace Tachey001.Controllers
         {
             if (submitButton == "Send")
             {
-                //int personId = person.PersonId;
-                //string name = person.Name;
-                //string gender = person.Gender;
-                //string city = person.City;
-
                 var UserId = User.Identity.GetUserId();
 
                 var result = _context.Member.Find(UserId);
 
-                //result.Title = Title;
-                //result.Description = Description;
-                //result.TitlePageImageURL = TitlePageImageURL;
                 result.InterestContent = m.member.Interest;
 
                 _context.SaveChanges();
@@ -457,18 +433,10 @@ namespace Tachey001.Controllers
         {
             if (submitButton == "Send")
             {
-                //int personId = person.PersonId;
-                //string name = person.Name;
-                //string gender = person.Gender;
-                //string city = person.City;
-
                 var UserId = User.Identity.GetUserId();
 
                 var result = _context.Member.Find(UserId);
 
-                //result.Title = Title;
-                //result.Description = Description;
-                //result.TitlePageImageURL = TitlePageImageURL;
                 result.Name = m.member.Name;
 
                 _context.SaveChanges();
@@ -483,18 +451,10 @@ namespace Tachey001.Controllers
         {
             if (submitButton == "Send")
             {
-                //int personId = person.PersonId;
-                //string name = person.Name;
-                //string gender = person.Gender;
-                //string city = person.City;
-
                 var UserId = User.Identity.GetUserId();
 
                 var result = _context.Member.Find(UserId);
 
-                //result.Title = Title;
-                //result.Description = Description;
-                //result.TitlePageImageURL = TitlePageImageURL;
                 result.Introduction = m.member.Introduction;
 
                 _context.SaveChanges();
@@ -509,18 +469,11 @@ namespace Tachey001.Controllers
         {
             if (submitButton == "Send")
             {
-                //int personId = person.PersonId;
-                //string name = person.Name;
-                //string gender = person.Gender;
-                //string city = person.City;
-
                 var UserId = User.Identity.GetUserId();
 
                 //var result = _context.PersonalUrl.Find(UserId); // not member
                 var result = (from p in _context.PersonalUrl where p.MemberID == UserId select p).ToList();
-                //result.Title = Title;
-                //result.Description = Description;
-                //result.TitlePageImageURL = TitlePageImageURL;
+                
                 foreach (var item in result)
                 {
                     item.FbUrl = m.member.FbUrl;
@@ -542,25 +495,11 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult SettingJob(string clickedOption)
         {
-            
-                //int personId = person.PersonId;
-                //string name = person.Name;
-                //string gender = person.Gender;
-                //string city = person.City;
+            var UserId = User.Identity.GetUserId();
 
-                var UserId = User.Identity.GetUserId();
+            var result = _context.Member.Find(UserId); // not member
 
-                var result = _context.Member.Find(UserId); // not member
-
-                result.Profession = clickedOption;
-                //result.Description = Description;
-                //result.TitlePageImageURL = TitlePageImageURL;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
-                //result.Introduction = Introduction;
+            result.Profession = clickedOption;
 
             _context.SaveChanges();
 
@@ -570,25 +509,11 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult SettingLike(string clickedOption)
         {
-
-            //int personId = person.PersonId;
-            //string name = person.Name;
-            //string gender = person.Gender;
-            //string city = person.City;
-
             var UserId = User.Identity.GetUserId();
 
             var result = _context.Member.Find(UserId); // not member
 
             result.Like = clickedOption;
-            //result.Description = Description;
-            //result.TitlePageImageURL = TitlePageImageURL;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
 
             _context.SaveChanges();
 
@@ -598,25 +523,11 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult SettingInterval(string clickedOption)
         {
-
-            //int personId = person.PersonId;
-            //string name = person.Name;
-            //string gender = person.Gender;
-            //string city = person.City;
-
             var UserId = User.Identity.GetUserId();
 
             var result = _context.Member.Find(UserId); // not member
 
             result.Interest = clickedOption;
-            //result.Description = Description;
-            //result.TitlePageImageURL = TitlePageImageURL;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
-            //result.Introduction = Introduction;
 
             _context.SaveChanges();
 
@@ -697,7 +608,7 @@ namespace Tachey001.Controllers
                 }
                 else
                 {
-                    ViewBag.name = "無名氏";
+                    ViewBag.name = "";
                 }
 
                 if (item.About != null)
