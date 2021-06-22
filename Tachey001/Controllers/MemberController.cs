@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
+using Tachey001.Service;
 using Tachey001.Service.Course;
 using Tachey001.ViewModel;
 
@@ -15,20 +16,22 @@ namespace Tachey001.Controllers
     {
         private TacheyContext tacheyDb;
         //宣告CourseService
-        private CourseService _courseService;
+        private consoleService _consoleService;
+        //private CourseService _courseService;
 
         //初始化CourseService
         public MemberController()
         {
             tacheyDb = new TacheyContext();
-            _courseService = new CourseService();
+            _consoleService = new consoleService();
         }
         // GET: Member
         public ActionResult Console()
         {
             var currentId = User.Identity.GetUserId();
 
-            var result = _courseService.GetCourseData(currentId);
+            var result = _consoleService.GetConsoleData(currentId);
+            //var result = _courseService.GetCourseData(currentId);
 
 
             return View(result);
@@ -36,7 +39,7 @@ namespace Tachey001.Controllers
         //刪除指定課程卡片
         public ActionResult DeleteCourse(string id)
         {
-            _courseService.DeleteCurrentIdCourseData(id);
+            _consoleService.DeleteCurrentIdCourseData(id);
 
             return RedirectToAction("Console", "Member");
         }

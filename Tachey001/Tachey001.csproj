@@ -232,6 +232,8 @@
     <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
+    <Compile Include="ViewModel\consoleallViewModel.cs" />
+    <Compile Include="ViewModel\consoleViewModel.cs" />
     <Compile Include="ViewModel\CourseCardViewModel.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
@@ -524,6 +526,7 @@
     <Content Include="Views\Shared\_HighlightCardPartial_3.cshtml" />
     <Content Include="Views\Shared\_CourseCardPartial.cshtml" />
     <Content Include="Views\Shared\_CartPartialCard.cshtml" />
+    <Content Include="Views\Shared\step\testView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

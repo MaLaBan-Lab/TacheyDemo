@@ -36,5 +36,16 @@ namespace Tachey001.Repository
 
             return result;
         }
+        //Delete刪除指定課程資料
+        public void DeleteCurrentIdCourseData(string CourseId)
+        {
+            var result = GetCurrentCourse(CourseId);
+
+            _tacheyContext.Course.Remove(result);
+
+            _tacheyContext.SaveChanges();
+
+            _tacheyContext.Dispose();
+        }
     }
 }
