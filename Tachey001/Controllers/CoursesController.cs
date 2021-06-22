@@ -77,39 +77,9 @@ namespace Tachey001.Controllers
         //開課10步驟 POST
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Step(int? id, StepGroup group, Course course, string CourseId)
+        public ActionResult Step(int? id, StepGroup group, FormCollection formCollection, string CourseId)
         {
-            var result = tacheyDb.Course.Find(CourseId);
-            if (id == 1)
-            {
-                result.Title = group.course.Title;
-                result.Description = group.course.Description;
-                result.TitlePageImageURL = group.course.TitlePageImageURL;
-                result.MarketingImageURL = group.course.MarketingImageURL;
-            }
-            else if (id == 2)
-            {
-                result.Tool = group.course.Tool;
-                result.CourseLevel = group.course.CourseLevel;
-                result.Effect = group.course.Effect;
-                result.CoursePerson = group.course.CoursePerson;
-            }
-            else if (id == 4)
-            {
-                var detail = tacheyDb.CategoryDetail.Find(course.CategoryDetailsID);
-
-                result.OriginalPrice = course.OriginalPrice;
-                result.PreOrderPrice = course.PreOrderPrice;
-                result.TotalMinTime = course.TotalMinTime;
-                result.CategoryID = detail.CategoryID;
-                result.CategoryDetailsID = course.CategoryDetailsID;
-            }
-            else if (id == 5)
-            {
-                result.Introduction = group.course.Introduction;
-            }
-
-            tacheyDb.SaveChanges();
+            _courseService.UpdateStep(id, group, formCollection, CourseId);
 
             return RedirectToAction("Step", "Courses", new { id = (id + 1), CourseID = CourseId });
         }
@@ -124,69 +94,6 @@ namespace Tachey001.Controllers
 
             //導向開課步驟，並傳入課程ID路由
             return RedirectToAction("Step", "Courses", new { id = 0, CourseId = returnCourseId });
-        }
-        //課程章節新增修改
-        [HttpPost]
-        public ActionResult StepUnit(int? id, FormCollection course, string CourseId)
-        {
-            var chResult = tacheyDb.CourseChapter.Where(x => x.CourseID == CourseId).Select(x => x).ToList();
-            var unResult = tacheyDb.CourseUnit.Where(x => x.CourseID == CourseId).Select(x => x).ToList();
-
-            tacheyDb.CourseChapter.RemoveRange(chResult);
-            tacheyDb.CourseUnit.RemoveRange(unResult);
-
-            var count = course.AllKeys.Count();
-            for (int i = 1; i < count; i++)
-            {
-                int chapterCount = 0;
-                var arr = course[$"{i}"].Split(',');
-
-                var newUnit = new CourseUnit()
-                {
-                    CourseID = CourseId
-                };
-
-                foreach (var item in arr)
-                {
-                    var newChapter = new CourseChapter();
-
-                    if (chapterCount == 0)
-                    {
-                        newChapter.CourseID = CourseId;
-                        newChapter.ChapterID = i;
-                        newChapter.ChapterName = item;
-                        tacheyDb.CourseChapter.Add(newChapter);
-                    }
-                    else
-                    {
-                        newUnit.ChapterID = i;
-                        newUnit.UnitID = $"{i}-{chapterCount}";
-                        if (chapterCount % 2 == 0)
-                        {
-                            newUnit.UnitName = item;
-                        }
-                        else
-                        {
-                            newUnit.CourseURL = item;
-                        }
-                    }
-                    if (chapterCount !=0 && chapterCount % 2 == 0)
-                    {
-                        tacheyDb.CourseUnit.Add(newUnit);
-                        newUnit = new CourseUnit();
-                    }
-                    chapterCount++;
-                }
-            };
-            tacheyDb.SaveChanges();
-
-            //tacheyDb.SaveChanges();
-
-            if (id == 3)
-            {
-                return RedirectToAction("Step", "Courses", new { id = 4, CourseId = CourseId });
-            }
-            return RedirectToAction("Step", "Courses", new { id = 7, CourseId = CourseId });
         }
         [HttpPost]
         public ActionResult Step8(string CourseId)
