@@ -33,7 +33,7 @@ namespace Tachey001.Service.Order
             var result = from O in order
                               join OD in order_detail on O.OrderID equals OD.OrderID
                               join _invoice in invoice on O.OrderID equals _invoice.OrderID
-                              join _course in course on O.CourseID equals _course.CourseID
+                              join _course in course on OD.CourseID equals _course.CourseID
                               where O.MemberID == currentID && O.OrderStatus == "success"
                               select new OrderRecordSuccess
                               {
@@ -68,7 +68,7 @@ namespace Tachey001.Service.Order
             var result = from O in order
                          join OD in order_detail on O.OrderID equals OD.OrderID
                          join _invoice in invoice on O.OrderID equals _invoice.OrderID
-                         join _course in course on O.CourseID equals _course.CourseID
+                         join _course in course on OD.CourseID equals _course.CourseID
                          where O.MemberID == currentID && O.OrderStatus == "wait"
                          select new OrderRecordSuccess
                          {
@@ -98,7 +98,7 @@ namespace Tachey001.Service.Order
             var course = _orderRepository.GetAlLCourse();
             var result = from O in order
                          join OD in order_detail on O.OrderID equals OD.OrderID
-                         join _course in course on O.CourseID equals _course.CourseID
+                         join _course in course on OD.CourseID equals _course.CourseID
                          where O.MemberID == currentID && O.OrderStatus == "error"
                          select new OrderRecordOther
                          {
