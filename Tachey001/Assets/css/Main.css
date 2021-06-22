@@ -108,7 +108,7 @@ body {
 .menu_wrap .title > div > div {
   margin-top: 10px;
 }
-.menu_wrap .title > div > div > span {
+.menu_wrap .title > div > div  span {
   display: inline-block;
   margin-left: 10px;
   border-radius: 100px;
@@ -127,6 +127,8 @@ body {
 }
 .menu_wrap .title span:last-child {
   background-color: white;
+  color: black;
+
 }
 .menu_wrap .title .close_button {
   display: flex;

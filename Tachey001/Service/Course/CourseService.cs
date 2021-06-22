@@ -94,26 +94,27 @@ namespace Tachey001.Service.Course
         {
             var course = _courseRepository.GetAllCourse();
             var category = _courseRepository.GetCourseCategory();
-            var chapter = _courseRepository.GetCurrentCourseChapters();
-            var unit = _courseRepository.GetCourseUnits();
+            var chapter = _courseRepository.GetCurrentCourseChapters(CourseId);
+            var unit = _courseRepository.GetCourseUnits(CourseId);
 
             var result = from c in course
                          join ca in category on c.CategoryID equals ca.CategoryID
                          join ch in chapter on c.CourseID equals ch.CourseID
                          join u in unit on ch.CourseID equals u.CourseID
-                         where c.CourseID == CourseId
-                         select new Main_Video
+                         where c.CourseID == CourseId 
+                         select  new Main_Video
                          {
                              CourseID = c.CourseID,
+                             CourseTitle = c.Title,
                              CategoryID = c.CategoryID,
                              CategoryName = ca.CategoryName,
                              ChapterID = ch.ChapterID,
                              ChapterName = ch.ChapterName,
                              UnitID = u.UnitID,
                              UnitName = u.UnitName,
+                             linkID = u.linkID,
                              UnitUrl = u.CourseURL
                          };
-
 
             return result.ToList();
         }
