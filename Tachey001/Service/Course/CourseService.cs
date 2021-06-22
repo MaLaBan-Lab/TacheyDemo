@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Repository;
+using Tachey001.Repository.Course;
 using Tachey001.ViewModel.Course;
 
 namespace Tachey001.Service.Course
@@ -13,12 +14,14 @@ namespace Tachey001.Service.Course
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
+        private CourseRepository _courseRepository;
         private object _courseService;
 
         //初始化資料庫邏輯
         public CourseService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
+            _courseRepository = new CourseRepository();
         }
         //取得渲染課程卡片所需資料欄位
         public List<AllCourse> GetCourseData()
