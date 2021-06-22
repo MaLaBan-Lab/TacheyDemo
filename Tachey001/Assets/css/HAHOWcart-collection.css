@@ -15,7 +15,45 @@ body {
     width: 55vw;
     /* height: 75vh; */
 }
-
+/*button*/
+.marg-t-60 {
+    margin-top: 60px;
+}
+.line {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.flex-1 {
+    flex: 1 1 0%;
+}
+.load-more-bookmark button {
+    margin-left: 20px;
+    margin-right: 20px;
+    color: rgb(250, 139, 0);
+    border-color: rgb(250, 139, 0);
+}
+.iPSzms {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid rgba(0, 0, 0, 0.43);
+    white-space: nowrap;
+    user-select: none;
+    font-weight: 400;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.65);
+    padding: 5px 40px;
+    font-size: 20px;
+    border-radius: 3px;
+    min-width: 260px;
+    line-height: 1.8em;
+}
+.hfxheR .line {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+/*button*/
 .main-container {
     display: flex;
     width: 100%;
