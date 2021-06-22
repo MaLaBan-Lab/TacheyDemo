@@ -102,6 +102,7 @@ namespace Tachey001.Service.Course
         {
             //取得12位數亂碼課程ID
             var CourseId = GetRandomId(12);
+            //string CourseId = new Random(Guid.NewGuid().GetHashCode()).ToString();
 
             //檢查是否重複課程ID
             while (_tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId) != null)
