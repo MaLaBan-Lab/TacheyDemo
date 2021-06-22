@@ -18,4 +18,15 @@ window.onload = function () {
         menu.style.display = "none";
         body.style.overflow = "auto"
     })
+
+
+
+    let btnunit = document.querySelectorAll('.menu_wrap .list');
+    btnunit.forEach(function (btn) {
+        btn.addEventListener('click', () => {
+            btnunit.forEach(x => x.classList.remove('active'));
+            btn.classList.add('active');
+        });
+
+    });
 }

@@ -56,9 +56,14 @@ namespace Tachey001.Controllers
             }
 
             ViewBag.Id = id;
-            ViewBag.CourseId = CourseId;
 
-            return View();
+            var result = _courseService.GetCourseVideoData(CourseId);
+
+            ViewBag.CourseTitle = result.Find(x => x.CourseID == CourseId).CourseTitle;
+            ViewBag.CategoryName = result.Find(x => x.CourseID == CourseId).CategoryName;
+            ViewBag.TryVedio = result.FirstOrDefault(x => x.CourseID == CourseId).UnitUrl;
+
+            return View(result);
         }
         //開課10步驟 GET
         public ActionResult Step(int? id, string CourseId)

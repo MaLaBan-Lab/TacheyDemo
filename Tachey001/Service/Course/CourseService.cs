@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Repository;
+using Tachey001.Repository.Course;
 using Tachey001.ViewModel.Course;
 
 namespace Tachey001.Service.Course
@@ -13,12 +14,14 @@ namespace Tachey001.Service.Course
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
+        private CourseRepository _courseRepository;
         private object _courseService;
 
         //初始化資料庫邏輯
         public CourseService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
+            _courseRepository = new CourseRepository();
         }
         //取得渲染課程卡片所需資料欄位
         public List<AllCourse> GetCourseData()
@@ -96,6 +99,36 @@ namespace Tachey001.Service.Course
             };
 
             return result;
+        }
+
+        //取得課程影片所需欄位
+        public List<Main_Video> GetCourseVideoData(string CourseId)
+        {
+            var course = _courseRepository.GetAllCourse();
+            var category = _courseRepository.GetCourseCategory();
+            var chapter = _courseRepository.GetCurrentCourseChapters(CourseId);
+            var unit = _courseRepository.GetCourseUnits(CourseId);
+
+            var result = from c in course
+                         join ca in category on c.CategoryID equals ca.CategoryID
+                         join ch in chapter on c.CourseID equals ch.CourseID
+                         join u in unit on ch.CourseID equals u.CourseID
+                         where c.CourseID == CourseId 
+                         select  new Main_Video
+                         {
+                             CourseID = c.CourseID,
+                             CourseTitle = c.Title,
+                             CategoryID = c.CategoryID,
+                             CategoryName = ca.CategoryName,
+                             ChapterID = ch.ChapterID,
+                             ChapterName = ch.ChapterName,
+                             UnitID = u.UnitID,
+                             UnitName = u.UnitName,
+                             linkID = u.linkID,
+                             UnitUrl = u.CourseURL
+                         };
+
+            return result.ToList();
         }
         //開新課程
         public string NewCourseStep(string currentUserId)
