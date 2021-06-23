@@ -34,7 +34,7 @@ namespace Tachey001.Service.Home
             var course = _HomeRepository.GetCourses();
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
-                         select new CourseCardViewModel{Photo= m.Photo, Title = c.Title, TotalMinTime = c.TotalMinTime, OriginalPrice = c.OriginalPrice, TitlePageImageURL =c.TitlePageImageURL};
+                         select new CourseCardViewModel{CourseID = c.CourseID ,Photo= m.Photo, Title = c.Title, TotalMinTime = c.TotalMinTime, OriginalPrice = c.OriginalPrice, TitlePageImageURL =c.TitlePageImageURL};
             return result.ToList();
         }
         public List<HighlightCourseViewModel> GetHighlightCourseViewModels()
