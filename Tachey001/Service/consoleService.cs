@@ -17,14 +17,24 @@ namespace Tachey001.Service
             _consoleRepository = new consoleRepository();
         }
 
-        public List<consoleViewModel> GetConsoleData(string MemberId)
+        public List<consoleViewModel> GetConsoleData(string currutId)
         {
             var course = _consoleRepository.GetAllCourse();
             var member = _consoleRepository.GetAllMember();
+            var coursescore = _consoleRepository.GetCourseScore();
+            var owner = _consoleRepository.GetOwer();
 
-            var result = from c in course
-                         join m in member on c.MemberID equals m.MemberID
-                         where c.MemberID == MemberId
+            var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
+            {
+                id = z.Key,
+                score = z.Average(x => x.Score)
+            });
+
+
+            var result = from o in owner
+                         join m in member on o.MemberID equals m.MemberID
+                         join c in course on o.CourseID equals c.CourseID
+                         where o.MemberID == currutId
                          select new consoleViewModel
                          {
                              CourseID = c.CourseID,
@@ -35,7 +45,19 @@ namespace Tachey001.Service
                              TotalMinTime = c.TotalMinTime,
                              MemberID = m.MemberID,
                              Photo = m.Photo
+                             
                          };
+
+            foreach (var item in result)
+            {
+                foreach(var score in advscore)
+                {
+                    if(item.CourseID==score.id)
+                    {
+                        item.AvgScore = Convert.ToInt32(score.score);
+                    }
+                }
+            }
 
             return result.ToList();
         }

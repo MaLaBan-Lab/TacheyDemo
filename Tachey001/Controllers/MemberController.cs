@@ -17,21 +17,29 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private consoleService _consoleService;
-        //private CourseService _courseService;
+        private CourseService _courseService;
 
         //初始化CourseService
         public MemberController()
         {
             tacheyDb = new TacheyContext();
             _consoleService = new consoleService();
+            _courseService = new CourseService();
         }
         // GET: Member
         public ActionResult Console()
         {
             var currentId = User.Identity.GetUserId();
 
-            var result = _consoleService.GetConsoleData(currentId);
-            //var result = _courseService.GetCourseData(currentId);
+            var ConsoleViews = _consoleService.GetConsoleData(currentId);
+            var AllCourses = _courseService.GetCourseData(currentId);
+
+            var result = new consoleallViewModel
+            {
+                consoleViews = ConsoleViews,
+                allCourses = AllCourses
+
+            };
 
 
             return View(result);

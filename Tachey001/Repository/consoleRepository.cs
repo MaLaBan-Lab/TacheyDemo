@@ -29,6 +29,20 @@ namespace Tachey001.Repository
 
             return result;
         }
+        // Read 讀取評價表
+        public IQueryable<CourseScore> GetCourseScore()
+        {
+            var result = _tacheyContext.CourseScore;
+
+            return result;
+        }
+        // Read 讀取會員表
+        public IQueryable<Owner> GetOwer()
+        {
+            var result = _tacheyContext.Owner;
+
+            return result;
+        }
         //取得指定課程資料表
         public Models.Course GetCurrentCourse(string currentId)
         {
