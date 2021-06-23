@@ -56,8 +56,6 @@ namespace Tachey001.Controllers
 
         public ActionResult Orders( int? type)
         {
-           
-
             GroupOrderRecord AllTypeData = new GroupOrderRecord();
             var currentId = User.Identity.GetUserId();
             if (type == null)
