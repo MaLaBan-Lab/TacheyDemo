@@ -1,16 +1,4 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
-@using Tachey001.Models
-@{
-    List<CourseCategory> categoryList = new List<CourseCategory>();
-
-    List<CategoryDetail> detailList = new List<CategoryDetail>();
-
-    using (TacheyContext context = new TacheyContext())
-    {
-        categoryList = context.CourseCategory.ToList();
-        detailList = context.CategoryDetail.ToList();
-    }
-}
 
 @using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
@@ -42,11 +30,11 @@
                     </div>
                     <div class="col-12 mb-4">
                         <label for="basic-url">選擇課程種類</label>
-                            @foreach (var item in categoryList)
-                            {
+                        @foreach (var item in Model.courseCategory)
+                        {
                             <div class="col-12">
                                 @item.CategoryName :
-                                @foreach (var detail in detailList)
+                                @foreach (var detail in Model.categoryDetails)
                                 {
                                     if (item.CategoryID == detail.CategoryID)
                                     {
@@ -56,16 +44,16 @@
                                 }
                                 <hr />
                             </div>
-                            }
+                        }
                     </div>
                     <!--<div class="col-12 mb-4">
                         <label for="basic-url">選擇課程種類細項</label>
                         <div class="input-group mb-2">-->
-                            @*<input type="text"
-                                class="form-control"
-                                id="basic-url"
-                                aria-describedby="basic-addon3" />*@
-                        <!--</div>
+                    @*<input type="text"
+                        class="form-control"
+                        id="basic-url"
+                        aria-describedby="basic-addon3" />*@
+                    <!--</div>
                     </div>-->
                     <div class="col-12 mb-4">
                         <label for="basic-url">預計課程長度（以分鐘計算，最短 20 分鐘）</label>

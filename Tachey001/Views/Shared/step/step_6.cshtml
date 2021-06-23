@@ -1,7 +1,7 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("StepUnit", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
     @Html.AntiForgeryToken()
 
