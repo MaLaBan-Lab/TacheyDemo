@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
+using Tachey001.Service;
 using Tachey001.Service.Course;
 using Tachey001.Service.Order;
 using Tachey001.ViewModel;
@@ -23,6 +24,7 @@ namespace Tachey001.Controllers
         private MemberService _memberService;
         private TacheyContext tacheyDb;
         //宣告CourseService
+        private consoleService _consoleService;
         private CourseService _courseService;
         //宣告OrderService
         private OrderService _orderService;
@@ -31,6 +33,7 @@ namespace Tachey001.Controllers
         public MemberController()
         {
             tacheyDb = new TacheyContext();
+            _consoleService = new consoleService();
             _courseService = new CourseService();
             _context = new TacheyContext();
             _memberService = new MemberService();
@@ -42,7 +45,16 @@ namespace Tachey001.Controllers
         {
             var currentId = User.Identity.GetUserId();
 
-            var result = _courseService.GetCourseData(currentId);
+            var ConsoleViews = _consoleService.GetConsoleData(currentId);
+            var AllCourses = _courseService.GetCourseData(currentId);
+
+            var result = new consoleallViewModel
+            {
+                consoleViews = ConsoleViews,
+                allCourses = AllCourses
+
+            };
+
 
             return View(result);
         }
