@@ -23,10 +23,10 @@ namespace Tachey001.Service.Home
             var member = _HomeRepository.GetMembers();
             var coursescore = _HomeRepository.GetCourseScores();
             var result = from m in member
-                         join c in coursescore on m.MemberID equals c.MemberID
+                         join c in coursescore on m.MemberID equals c.MemberID 
                          select new CommentViewModel { Name = m.Name, Photo = m.Photo, ToTachey = c.ToTachey };
             //要建view model接資料
-            return result.ToList();
+            return result.Take(3).ToList();
         }
         public List<CourseCardViewModel> GetCourseCardViewModels()
         {
