@@ -190,7 +190,7 @@
             crossorigin="anonymous"></script>
     @Scripts.Render("~/Assets/js/owl.carousel.min.js")
     @Scripts.Render("~/Assets/js/nav.js")
-
+    @RenderSection("endJS", required: false)
 
     @*@Scripts.Render("~/bundles/modernizr")*@
     <script>
@@ -287,7 +287,7 @@
             });
             document.querySelector('.center>.item-video>iframe').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')
         }
-                            // 影片
+                                // 影片
 
     </script>
     @RenderSection("scripts", required: false)

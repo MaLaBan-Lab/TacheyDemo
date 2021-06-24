@@ -40,12 +40,13 @@
                   ">
                         上課囉
                     </div>
-                    <a href="@Url.Action("Owner","Member", new { MemberId = ViewBag.UserId, CourseId = Model.CourseID})">
-                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                        </div>
+                    <a href="">
+
                     </a>
                 </a>
+                <div class="backgroundBookmark backgroundBookmarkChecked position-absolute text-center" id="bookmarkCheck">
+                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                </div>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
                 <h4 class="card-title text-justify font-weight-normal text-secondary">
@@ -102,3 +103,4 @@
         <div class="card-bottom bg-hahow-dark-green"></div>
     </div>
 </div>
+
