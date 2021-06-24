@@ -242,7 +242,7 @@ namespace Tachey001.Service.Course
         public List<ScoreCard> GetAllScore(string CourseId)
         {
             var score = _tacheyRepository.GetAll<CourseScore>(x=>x.CourseID == CourseId);
-            var member = _tacheyRepository.GetAll<Member>();
+            var member = _tacheyRepository.GetAll<Models.Member>();
 
             var result = from s in score
                          join m in member on s.MemberID equals m.MemberID
