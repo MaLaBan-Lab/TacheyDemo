@@ -165,8 +165,6 @@ namespace Tachey001.Service.Member
 
             return result.ToList();
         }
-
-        
         public void UpdateMemberData(string id)
         {
             var result = _tacheyRepository.Get<Models.Member>(x => x.MemberID == id);
@@ -174,6 +172,21 @@ namespace Tachey001.Service.Member
             // _tacheyRepository.Delete(result);
             result.Sex = id;
 
+            _tacheyRepository.SaveChanges();
+        }
+        //判斷是否收藏
+        public void CreateOwner(string MemberId, string CourseId)
+        {
+            var ToF = _tacheyRepository.Get<Owner>(x => x.MemberID == MemberId && x.CourseID == CourseId);
+            if(ToF == null)
+            {
+                var result = new Owner { MemberID = MemberId, CourseID = CourseId };
+                _tacheyRepository.Create(result);
+            }
+            else
+            {
+                _tacheyRepository.Delete(ToF);
+            }
             _tacheyRepository.SaveChanges();
         }
 

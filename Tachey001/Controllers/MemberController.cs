@@ -774,8 +774,7 @@ namespace Tachey001.Controllers
         //收藏功能
         public void Owner(string MemberId, string CourseID)
         {
-
-            
+            _memberService.CreateOwner(MemberId, CourseID);
         }
     }
 }

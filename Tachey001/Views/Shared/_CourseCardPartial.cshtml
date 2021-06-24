@@ -2,15 +2,15 @@
 @model　Tachey001.ViewModel.CourseCardViewModel
 
 @{ var photoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
-                var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
-                if (Model.TitlePageImageURL != null)
-                {
-                    titleUrl = Model.TitlePageImageURL;
-                }
-                if (Model.Photo != null)
-                {
-                    photoUrl = Model.Photo;
-                } }
+    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
+    if (Model.TitlePageImageURL != null)
+    {
+        titleUrl = Model.TitlePageImageURL;
+    }
+    if (Model.Photo != null)
+    {
+        photoUrl = Model.Photo;
+    } }
 
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
@@ -40,13 +40,30 @@
                   ">
                         上課囉
                     </div>
-                    <a href="">
-
-                    </a>
                 </a>
-                <div class="backgroundBookmark backgroundBookmarkChecked position-absolute text-center" id="bookmarkCheck">
-                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                </div>
+                @if (Request.IsAuthenticated)
+                {
+                    if (Model.favorite)
+                    {
+                        <div class="backgroundBookmark backgroundBookmarkChecked position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")" class="text-decoration-none p-0 w-100 h-100">
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </a>
+                }
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
                 <h4 class="card-title text-justify font-weight-normal text-secondary">
