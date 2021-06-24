@@ -9,21 +9,19 @@ namespace Tachey001.Models
     public partial class Order_Detail
     {
         [Key]
+        [Column(Order = 0)]
         public string OrderID { get; set; }
 
-        [Required]
-        [StringLength(128)]
+        [Key]
+        [Column(Order = 1)]
         public string CourseID { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
-        [Required]
-        [StringLength(200)]
+        [StringLength(128)]
         public string CourseName { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [StringLength(128)]
         public string BuyMethod { get; set; }
     }
 }

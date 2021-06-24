@@ -1,9 +1,15 @@
 ﻿@model Tachey001.ViewModel.Course.AllCourse
 
+    @*@if(HttpContext.Current.Request.RawUrl == "/Member/Profile")
+    {
+        @col = 4;
+    }*@
 
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+
     <div class="card my-5">
         <div class="row no-gutters justify-content-center">
+
             <div class="col-12">
                 <div class="card-title-image position-relative">
                     <div class="
@@ -13,27 +19,30 @@
                         bg-white
                       ">
                         <img src="@Model.Photo"
-                             alt="" class="rounded-circle position-absolute center" id="photoImag"/>
+                             alt="" class="rounded-circle position-absolute center" id="photoImag" />
                     </div>
                 </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
-                <img src="@Model.TitlePageImageURL"
-                     class="card-img-top" style="width:262px; height:164px"/>
-                <div class="
+                <a href="@Url.Action("Main", "Courses", new { id = 1,CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
+                    <img src="@Model.TitlePageImageURL"
+                         class="card-img-top" style="width:262px; height:164px" />
+                    <div class="
                     position-absolute
                     bg-hahow-dark-green
                     text-center text-white
                     backgroundTape
                   ">
-                    上課囉
-                </div>
-                <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                </div>
+                        上課囉
+                    </div>
+                    <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                        <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                    </div>
+                </a>
             </div>
+
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
-                <h4 class="card-title text-justify font-weight-normal text-secondary" >
+                <h4 class="card-title text-justify font-weight-normal text-secondary">
                     @Html.DisplayFor(m => m.Title)
                 </h4>
             </div>
@@ -64,7 +73,7 @@
                     <span class="couse-time-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-time">@Html.DisplayFor(m=>m.TotalMinTime)</span>分鐘
+                    <span class="course-time">@Html.DisplayFor(m => m.TotalMinTime)</span>分鐘
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
@@ -75,11 +84,7 @@
                     <span class="course-people">0</span>人
                 </span>
                 <div class="card-text hahow-dark-green classPrice">
-                    NT$<span>@Html.DisplayFor(m=>m.OriginalPrice)</span>
-                </div>
-                <div>
-                    @Html.ActionLink("編輯", "Step", "Courses", new { id = 0, CourseId = Model.CourseID }, null)
-                    @Html.ActionLink("刪除", "DeleteCourse", "Member", new { id = Model.CourseID }, null)
+                    <span>@Model.OriginalPrice.ToString("C0")</span>
                 </div>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">

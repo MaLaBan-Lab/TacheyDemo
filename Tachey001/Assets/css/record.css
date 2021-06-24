@@ -49,3 +49,11 @@
 .fs-20 {
     font-size: 20px;
 }
+.cancel{
+    background-color:orange;
+    border-color:orange;
+    height:30px;
+}
+.p-discount {
+    padding:25px 0px;
+}

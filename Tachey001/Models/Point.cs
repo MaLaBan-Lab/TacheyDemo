@@ -22,8 +22,10 @@ namespace Tachey001.Models
 
         public int PointNum { get; set; }
 
+        [DisplayFormat(DataFormatString = " {0:yyyy/MM/dd} ")]
         public DateTime GetTime { get; set; }
 
+        [DisplayFormat(DataFormatString = " {0:yyyy/MM/dd} ")]
         public DateTime Deadline { get; set; }
 
         public bool Status { get; set; }

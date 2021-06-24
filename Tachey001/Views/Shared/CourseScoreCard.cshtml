@@ -1,0 +1,169 @@
+﻿@model Tachey001.ViewModel.Course.ScoreCard
+
+<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
+    <div class="card border-0 score-content">
+        <div class="row no-gutters">
+            <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
+                <div class="row px-3 mt-3">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
+                        <div class="photo-Img bg-white position-relative mb-2">
+                            <img src="@Model.Photo"
+                                 alt=""
+                                 class="photoImg position-absolute center" />
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
+                        <div class="card-text text-white text-justify">
+                            @Html.DisplayFor(m=>m.Name)
+                        </div>
+                        <div class="card-text text-white">
+                            @Html.DisplayFor(m => m.ScoreDate)
+                        </div>
+                        <span class="star-show star-in">
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 0)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 1)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 2)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 3)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 4)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+                            </i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span class="star-show star-out">
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 0)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 1)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 2)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 3)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
+                            </i>
+                            <i class="fas fa-star star-gray position-relative">
+                                @if (Model.Score > 4)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+                            </i>
+                        </span>
+                    </h5>
+                    <h3 class="card-title">@Html.DisplayFor(m => m.Title)</h3>
+                    <p class="card-text text-white text-justify">
+                        @Html.DisplayFor(m => m.ScoreContent)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

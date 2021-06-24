@@ -171,7 +171,7 @@ namespace Tachey001.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", "請按一下此連結確認您的帳戶 <a href=\"" + callbackUrl + "\">這裏</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("RegisterTacheyMember", "Account");
                 }
                 AddErrors(result);
             }
@@ -179,7 +179,30 @@ namespace Tachey001.Controllers
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
             return View(model);
         }
+        //註冊Tachey會員資料表
+        public ActionResult RegisterTacheyMember()
+        {
+            using (TacheyContext context = new TacheyContext())
+            {
+                var email = User.Identity.GetUserName();
 
+                PersonalUrl personalUrl = new PersonalUrl { MemberID = User.Identity.GetUserId() };
+                Member member = new Member { 
+                    MemberID = User.Identity.GetUserId(), 
+                    Email = email,Name="匿名", 
+                    JoinTime = DateTime.Now,
+                    Photo= "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM" ,
+                    About="嗨 ~"
+                };
+
+                context.Member.Add(member);
+                context.PersonalUrl.Add(personalUrl);
+
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
