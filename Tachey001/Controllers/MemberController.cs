@@ -90,7 +90,9 @@ namespace Tachey001.Controllers
         public ActionResult Setting()
         {
             var UserId = User.Identity.GetUserId();
-            var getmemberviewmodels = _memberService.GetMemberData(UserId);
+            var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
+            //var getCourseItem = _memberService.GetCourseItem();
+
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,
@@ -298,6 +300,7 @@ namespace Tachey001.Controllers
                 {
                     ViewBag.interestSp = new ArrayList();
                 }
+
                 // all 選項 - 主選項
                 var courseCategory = _context.CourseCategory.Select(x => x);
                 Dictionary<string, string> interestDic = new Dictionary<string, string>();
@@ -611,7 +614,7 @@ namespace Tachey001.Controllers
         public ActionResult Profile()
         {
             var UserId = User.Identity.GetUserId();
-            var getmemberviewmodels = _memberService.GetMemberData(UserId);
+            var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,

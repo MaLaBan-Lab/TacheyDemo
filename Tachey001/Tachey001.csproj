@@ -247,7 +247,6 @@
     <Compile Include="ViewModel\Member\MemberGroup.cs" />
     <Compile Include="ViewModel\Member\MemberViewModel.cs" />
     <Compile Include="ViewModel\Member\PointViewModel.cs" />
-    <Compile Include="ViewModel\OrderRecord.cs" />
     <Compile Include="ViewModel\Course\StepGroup.cs" />
     <Compile Include="ViewModel\GroupOrderRecord.cs" />
     <Compile Include="ViewModel\OrderRecordOther.cs" />
