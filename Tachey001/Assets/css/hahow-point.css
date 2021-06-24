@@ -769,7 +769,7 @@ p {
 
 @media (min-width: 767px) {
 		.dynamic-block .date {
-				min-width: 12rem;
+				min-width: 8rem;
 		}
 }
 

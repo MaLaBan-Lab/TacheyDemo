@@ -49,19 +49,25 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
         {
+            var MemberId = User.Identity.GetUserId();
+
+            var YnN = _courseService.Scored(MemberId, CourseId);
+            var video = _courseService.GetCourseVideoData(CourseId);
+            var allScore = _courseService.GetAllScore(CourseId);
 
             if (id == null)
             {
                 id = 1;
             }
-
             ViewBag.Id = id;
+            ViewBag.YnN = YnN;
 
-            var result = _courseService.GetCourseVideoData(CourseId);
-
-            ViewBag.CourseTitle = result.Find(x => x.CourseID == CourseId).CourseTitle;
-            ViewBag.CategoryName = result.Find(x => x.CourseID == CourseId).CategoryName;
-            ViewBag.TryVedio = result.FirstOrDefault(x => x.CourseID == CourseId).UnitUrl;
+            var result = new MainGroup()
+            {
+                Main_Video = video,
+                GetCourseScore = allScore,
+                PostCourseScore = new CourseScore()
+            };
 
             return View(result);
         }
@@ -95,7 +101,7 @@ namespace Tachey001.Controllers
             var currentUserId = User.Identity.GetUserId();
 
             //創建課程，並回傳課程ID
-           var returnCourseId = _courseService.NewCourseStep(currentUserId);
+            var returnCourseId = _courseService.NewCourseStep(currentUserId);
 
             //導向開課步驟，並傳入課程ID路由
             return RedirectToAction("Step", "Courses", new { id = 0, CourseId = returnCourseId });
@@ -103,13 +109,11 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult Step8(string CourseId)
         {
-
             return RedirectToAction("Step", "Courses", new { id = 8, CourseId = CourseId });
         }
         [HttpPost]
         public ActionResult Step9(string CourseId)
         {
-
             return RedirectToAction("Step", "Courses", new { id = 9, CourseId = CourseId });
         }
         //完成課程，送出審核
@@ -123,6 +127,16 @@ namespace Tachey001.Controllers
             tacheyDb.SaveChanges();
 
             return RedirectToAction("Console", "Member");
+        }
+        //課程評價 POST
+        [HttpPost]
+        public ActionResult CreateScore(MainGroup courseScore, string CourseId)
+        {
+            var MemberID = User.Identity.GetUserId();
+
+            _courseService.CreateScore(courseScore.PostCourseScore, CourseId, MemberID);
+
+            return RedirectToAction("Main", "Courses", new { id = 2, CourseId = CourseId });
         }
     }
 }

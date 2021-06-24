@@ -15,7 +15,6 @@ namespace Tachey001.Service.Course
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
         private CourseRepository _courseRepository;
-        private object _courseService;
 
         //初始化資料庫邏輯
         public CourseService()
@@ -27,7 +26,7 @@ namespace Tachey001.Service.Course
         public List<AllCourse> GetCourseData()
         {
             var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Member>();
+            var member = _tacheyRepository.GetAll<Models.Member>();
 
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
@@ -49,7 +48,7 @@ namespace Tachey001.Service.Course
         public List<AllCourse> GetCourseData(string MemberId)
         {
             var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Member>(x => x.MemberID == MemberId);
+            var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
 
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
@@ -100,42 +99,34 @@ namespace Tachey001.Service.Course
 
             return result;
         }
-
         //取得課程影片所需欄位
-        public List<Main_Video> GetCourseVideoData(string CourseId)
+        public Main_Video GetCourseVideoData(string CourseId)
         {
-            var course = _courseRepository.GetAllCourse();
-            var category = _courseRepository.GetCourseCategory();
-            var chapter = _courseRepository.GetCurrentCourseChapters(CourseId);
-            var unit = _courseRepository.GetCourseUnits(CourseId);
+            var course = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
 
-            var result = from c in course
-                         join ca in category on c.CategoryID equals ca.CategoryID
-                         join ch in chapter on c.CourseID equals ch.CourseID
-                         join u in unit on ch.CourseID equals u.CourseID
-                         where c.CourseID == CourseId 
-                         select  new Main_Video
-                         {
-                             CourseID = c.CourseID,
-                             CourseTitle = c.Title,
-                             CategoryID = c.CategoryID,
-                             CategoryName = ca.CategoryName,
-                             ChapterID = ch.ChapterID,
-                             ChapterName = ch.ChapterName,
-                             UnitID = u.UnitID,
-                             UnitName = u.UnitName,
-                             linkID = u.linkID,
-                             UnitUrl = u.CourseURL
-                         };
+            var category = _tacheyRepository.GetAll<CourseCategory>().FirstOrDefault(x => x.CategoryID == course.CategoryID);
+            var detail = _tacheyRepository.GetAll<CategoryDetail>().FirstOrDefault(x => x.DetailID == course.CategoryDetailsID);
 
-            return result.ToList();
+            var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId);
+            var unit = _tacheyRepository.GetAll<CourseUnit>(x => x.CourseID == CourseId);
+
+            var result = new Main_Video
+            {
+                CourseID = course.CourseID,
+                CourseTitle = course.Title,
+                CategoryName = category.CategoryName,
+                DetailName = detail.DetailName,
+                courseChapters = chapter,
+                courseUnits = unit
+            };
+
+            return result;
         }
         //開新課程
         public string NewCourseStep(string currentUserId)
         {
             //取得12位數亂碼課程ID
             var CourseId = GetRandomId(12);
-            //string CourseId = new Random(Guid.NewGuid().GetHashCode()).ToString();
 
             //檢查是否重複課程ID
             while (_tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId) != null)
@@ -151,6 +142,7 @@ namespace Tachey001.Service.Course
 
             return CourseId;
         }
+        // 更新開課步驟
         public void UpdateStep(int? id, StepGroup group, FormCollection formCollection, string CourseId)
         {
             var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
@@ -245,6 +237,49 @@ namespace Tachey001.Service.Course
                     chapterCount++;
                 }
             };
+        }
+        //取得當前課程評價
+        public List<ScoreCard> GetAllScore(string CourseId)
+        {
+            var score = _tacheyRepository.GetAll<CourseScore>(x=>x.CourseID == CourseId);
+            var member = _tacheyRepository.GetAll<Models.Member>();
+
+            var result = from s in score
+                         join m in member on s.MemberID equals m.MemberID
+                         select new ScoreCard
+                         {
+                             Name = m.Name,
+                             Photo = m.Photo,
+                             Score = s.Score,
+                             Title = s.Title,
+                             ScoreContent = s.ScoreContent,
+                             ScoreDate = s.ScoreDate
+                         };
+
+            return result.ToList();
+        }
+        //判斷是否評價過
+        public bool Scored(string MemberId, string CourseId)
+        {
+            return _tacheyRepository.Get<CourseScore>(x => x.MemberID == MemberId && x.CourseID == CourseId) == null ? true : false;
+        }
+        //Create創建課程評價
+        public void CreateScore(CourseScore courseScore, string CourseId, string MemberId)
+        {
+            var result = new CourseScore()
+            {
+                CourseID = CourseId,
+                MemberID = MemberId,
+                Score = courseScore.Score,
+                Title = courseScore.Title,
+                ScoreContent = courseScore.ScoreContent,
+                ToTeacher = courseScore.ToTeacher,
+                ToTachey = courseScore.ToTachey,
+                ScoreDate = DateTime.Now
+            };
+
+            _tacheyRepository.Create(result);
+            _tacheyRepository.SaveChanges();
         }
         //取得自訂位數的亂數方法
         private string GetRandomId(int Length)

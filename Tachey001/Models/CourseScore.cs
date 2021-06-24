@@ -9,10 +9,12 @@ namespace Tachey001.Models
     [Table("CourseScore")]
     public partial class CourseScore
     {
-        [StringLength(128)]
+        [Key]
+        [Column(Order = 0)]
         public string CourseID { get; set; }
 
-        [StringLength(128)]
+        [Key]
+        [Column(Order = 1)]
         public string MemberID { get; set; }
 
         public int? Score { get; set; }
@@ -31,8 +33,5 @@ namespace Tachey001.Models
 
         [Column(TypeName = "date")]
         public DateTime? ScoreDate { get; set; }
-
-        [Key]
-        public int ScoreId { get; set; }
     }
 }

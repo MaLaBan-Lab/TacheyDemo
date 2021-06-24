@@ -10,14 +10,9 @@ namespace Tachey001.ViewModel.Course
     {
         public string CourseID { get; set; }
         public string CourseTitle { get; set; }
-        public int? CategoryID { get; set; }
         public string CategoryName { get; set; }
-        public int? ChapterID { get; set; }
-        public int? linkID { get; set; }
-        public string ChapterName { get; set; }
-        public string UnitID { get; set; }
-        public string UnitName { get; set; }
-        public string UnitUrl { get; set; }
-
+        public string DetailName { get; set; }
+        public IEnumerable<CourseChapter> courseChapters { get; set; }
+        public IEnumerable<CourseUnit> courseUnits { get; set; }
     }
 }

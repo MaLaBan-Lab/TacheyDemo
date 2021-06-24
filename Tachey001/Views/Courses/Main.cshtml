@@ -1,4 +1,4 @@
-﻿@model List<Tachey001.ViewModel.Course.Main_Video>
+﻿@model Tachey001.ViewModel.Course.MainGroup
 
 @section topCSS{
     @Styles.Render("~/Assets/css/discussions.css")
@@ -6,8 +6,6 @@
 @{
     ViewBag.Title = "Tachey";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
-
-
 }
 
 
@@ -19,12 +17,12 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="#">@ViewBag.CategoryName</a></li>
-                <li class="breadcrumb-item  text-white active" aria-current="page">程式語言</li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("Group","Courses")">@Model.Main_Video.CategoryName</a></li>
+                <li class="breadcrumb-item  text-white active" aria-current="page">@Model.Main_Video.DetailName</li>
             </ol>
         </nav>
         <!-- title 區塊 -->
-        <h2 class="title text-center">@ViewBag.CourseTitle</h2>
+        <h2 class="title text-center">@Model.Main_Video.CourseTitle</h2>
 
         <!-- 主要內容 -->
         <div class="main_wrap col-12">
@@ -42,7 +40,7 @@
             <div class="menu_wrap col-12 col-sm-12 col-lg-4">
                 <div class="title col-12">
                     <div class="col-10 p-0">
-                        <p>10 個章節，89 段單元、6 項作業，共 2230 分鐘</p>
+                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元、6 項作業，共 2230 分鐘</p>
                         <div>
                             <span>當前單元</span>
                             <a href="@ViewBag.TryVedio" target="VideoIframe">
@@ -72,17 +70,17 @@
 
                     <!-- 課程章節 -->
                     <div class="accordion" id="accordion">
-                        @{foreach (var source in Model.GroupBy(x => x.ChapterID))
+                        @{foreach (var ch in Model.Main_Video.courseChapters)
                             {
                                 <div class="wrap">
                                     <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#toggle_@source.Key" aria-expanded="true"
-                                            aria-controls="toggle_@source.Key">
+                                            data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                            aria-controls="toggle_@ch.ChapterID">
                                         <div class="lists">
                                             <div class="icon">
                                                 <i class="fa fa-th-list" aria-hidden="true"></i>
                                             </div>
-                                            <div class="text">第 @source.Key 章 </div>
+                                            <div class="text">第@(ch.ChapterID)章 </div>
                                             <div class="arrow">
                                                 <i class="fa fa-chevron-up" aria-hidden="true"></i>
                                             </div>
@@ -90,27 +88,23 @@
                                     </button>
                                 </div>
                                 <!-- 課程單元 -->
-                                <div id="toggle_@source.Key" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    @foreach (var test in source.GroupBy(x => x.linkID))
+                                <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    @foreach (var un in Model.Main_Video.courseUnits)
                                     {
-                                        if (source.Key == test.Key)
+                                        if (ch.ChapterID == un.ChapterID)
                                         {
-                                            foreach (var item in test)
-                                            {
-                                                <div class="content">
-                                                    <a href="@item.UnitUrl" target="VideoIframe">
-                                                        <div class="list">
-                                                            <div class="icon">
-                                                                <i class="fa fa-lock" aria-hidden="true"></i>
-                                                            </div>
-                                                            <div class="text">@item.UnitID - @item.UnitName</div>
-                                                            <div class="time">00:06</div>
+                                            <div class="content">
+                                                <a href="@un.CourseURL" target="VideoIframe">
+                                                    <div class="list">
+                                                        <div class="icon">
+                                                            <i class="fa fa-lock" aria-hidden="true"></i>
                                                         </div>
-                                                    </a>
-                                                </div>
-                                            }
+                                                        <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                        <div class="time">00:06</div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         }
-                                        else { }
                                     }
                                 </div>
                             }
@@ -172,16 +166,16 @@
 <div class="container">
     <div class="seletor">
         <div class="seletor-item" id="main">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = ViewBag.CourseId})">課程簡介</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.CourseID})">課程簡介</a>
         </div>
         <div class="seletor-item" id="feedbacks">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = ViewBag.CourseId})">課程評價</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.CourseID})">課程評價</a>
         </div>
         <div class="seletor-item" id="discussions">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = ViewBag.CourseId})">問題討論</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.CourseID})">問題討論</a>
         </div>
         <div class="seletor-item" id="assignments">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = ViewBag.CourseId})">作業成果</a>
+            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.CourseID})">作業成果</a>
         </div>
     </div>
 </div>
@@ -391,53 +385,53 @@
             </div>
         </div>
 
-        <div class="score-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8 p-0 border-bottom mt-5 ">
-                        <h4>購課前回答</h4>
+        @*<div class="score-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8 p-0 border-bottom mt-5 ">
+                            <h4>購課前回答</h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8 p-0 my-4">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+                                <form class="form-inline my-2 my-lg-0 w-75">
+                                    <input class="form-control mr-sm-2 w-100 rounded-pill"
+                                           type="search"
+                                           placeholder="搜尋看看~你的問題可能已經有人問過囉 !" />
+                                </form>
+
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle"
+                                               href="#"
+                                               id="navbarDropdown"
+                                               role="button"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false">
+                                                日期最新
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="#">日期最新</a>
+                                                <a class="dropdown-item" href="#">日期最舊</a>
+                                                <a class="dropdown-item" href="#">愛心數</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-outline-secondary my-2 my-sm-0 rounded-pill" type="submit">我的留言</button>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-8 p-0 my-4">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
-                            <form class="form-inline my-2 my-lg-0 w-75">
-                                <input class="form-control mr-sm-2 w-100 rounded-pill"
-                                       type="search"
-                                       placeholder="搜尋看看~你的問題可能已經有人問過囉 !" />
-                            </form>
-
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle"
-                                           href="#"
-                                           id="navbarDropdown"
-                                           role="button"
-                                           data-toggle="dropdown"
-                                           aria-haspopup="true"
-                                           aria-expanded="false">
-                                            日期最新
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">日期最新</a>
-                                            <a class="dropdown-item" href="#">日期最舊</a>
-                                            <a class="dropdown-item" href="#">愛心數</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="btn btn-outline-secondary my-2 my-sm-0 rounded-pill" type="submit">我的留言</button>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                </div>
-            </div>
-        </div>
+            </div>*@
 
         <div class="container">
             <div class="row my-5">
@@ -465,16 +459,92 @@ else if (ViewBag.Id == 2)
         <div class="row book-mark-box">
             <div class="col-12 my-4 book-mark px-5">
                 <div class="text-center">
-                    <h6 class="mt-5 text-secondary">還在猶豫？不如先收藏起來吧！</h6>
-                    <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3">
-                        <div class="text-scale-12">
-                            <i class="fas fa-bookmark mr-1"></i>
-                            加入書籤
-                        </div>
-                    </button>
+                    <h6 class="mt-5 text-white">和大家分享完成課程的心得吧！</h6>
+                    <!-- Button trigger modal -->
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (ViewBag.YnN)
+                        {
+                            <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" data-toggle="modal" data-target="#exampleModal">
+                                <div class="text-scale-12">
+                                    <i class="far fa-star"></i>
+                                    課程評價
+                                </div>
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" disabled>
+                                <div class="text-scale-12">
+                                    <i class="far fa-star"></i>
+                                    已評價過
+                                </div>
+                            </button>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-outline-hahow w-100 my-4 py-3 text-decoration-none">
+                            <div class="text-scale-12">
+                                <i class="fas fa-user"></i>
+                                登入後評價
+                            </div>
+                        </a>
+                    }
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        @*課程評價表單*@
+        @using (Html.BeginForm("CreateScore", "Courses", new { CourseId = Model.Main_Video.CourseID }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content modal-tachey-box">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">為這堂課，打個分數吧~</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="text-white">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-black">
+                            <h3>分數</h3>
+                            @*<span class="star-show choiceStar">
+                                <i class="fas fa-star star-gray position-relative">
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                </i>
+                            </span>*@
+                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1") 1分
+                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2") 2分
+                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3") 3分
+                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "4") 4分
+                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "5") 5分
+                            <h3>標題</h3>
+                            @Html.TextBoxFor(m => m.PostCourseScore.Title, null, new { @class = "w-100" })
+                            <h3>內容</h3>
+                            @Html.TextAreaFor(m => m.PostCourseScore.ScoreContent, new { @class = "w-100" })
+                            <h3>給老師</h3>
+                            @Html.TextAreaFor(m => m.PostCourseScore.ToTeacher, new { @class = "w-100" })
+                            <h3>給Tachey</h3>
+                            @Html.TextAreaFor(m => m.PostCourseScore.ToTachey, new { @class = "w-100" })
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                            <button type="submit" class="btn btn-primary">送出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
 
         <div class="row justify-content-between mt-5 score-box-content">
             <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
@@ -537,1060 +607,56 @@ else if (ViewBag.Id == 2)
         </div>
 
         <div class="row">
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                            fas
-                            fa-star
-                            star-yellow
-                            position-absolute
-                            star-display
-                          "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
+            @if (Model.GetCourseScore.Count == 0)
+            {
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
+                    <div class="card border-0 score-content">
+                        <div class="row no-gutters">
+                            <div class="col-12">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">
+                                        <span class="star-show star-out">
+                                            <i class="fas fa-star star-gray position-relative">
+                                            </i>
+                                            <i class="fas fa-star star-gray position-relative">
+                                            </i>
+                                            <i class="fas fa-star star-gray position-relative">
+                                            </i>
+                                            <i class="fas fa-star star-gray position-relative">
+                                            </i>
+                                            <i class="fas fa-star star-gray position-relative">
+                                            </i>
+                                        </span>
+                                    </h5>
+                                    <h2 class="card-title text-secondary text-center">無任何評價</h2>
+                                    <p class="card-text text-white text-justify">
+                                    </p>
                                 </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                foreach (var item in Model.GetCourseScore)
+                {
+                    @Html.Partial("CourseScoreCard", item);
+                }
+            }
 
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2">
-                <div class="card border-0 score-content">
-                    <div class="row no-gutters">
-                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 col-12">
-                            <div class="row px-3 mt-3">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2">
-                                    <div class="photo-Img bg-white position-relative mb-2">
-                                        <img src="https://3.bp.blogspot.com/-rJ3Gz54MYr0/VvfYhW0qjEI/AAAAAAAAHCg/2wntX496F1c0jniU_2fKdhz86aOBVOOMQ/s1600/201301290547.png"
-                                             alt=""
-                                             class="photoImg position-absolute center" />
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-9 col-9">
-                                    <div class="card-text text-secondary text-justify">
-                                        東區區
-                                    </div>
-                                    <div class="card-text text-black-50 text-justify">
-                                        2021.05.15
-                                    </div>
-                                    <span class="star-show star-in">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <span class="star-show star-out">
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                        <i class="fas fa-star star-gray position-relative">
-                                            <i class="
-                              fas
-                              fa-star
-                              star-yellow
-                              position-absolute
-                              star-display
-                            "></i>
-                                        </i>
-                                    </span>
-                                </h5>
-                                <h5 class="card-title">教導 python 最棒的課程</h5>
-                                <p class="card-text text-secondary text-justify">
-                                    從零基礎銜接老師的基礎課，內容涵蓋幾乎 python
-                                    最常用到的相關應用，其中關於寫程式或專案的觀念相信是一般課程很難學習到的經驗，一路上課並完成所有作業收穫非常多，也有能力自主學習其他進階應用，非常推薦
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
+
+    @section endJS{
+        <script>
+
+
+
+        </script>
+    }
 }
 else if (ViewBag.Id == 3)
 {
@@ -1679,7 +745,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1710,7 +776,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1741,39 +807,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
-                                    </a>
-                                </div>
-                                <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
-                                <div class="flex">
-                                    <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
-                                    <span class="resolve-state text-sm">解決中</span>
-                                </div>
-                                <div class="info text-sm">
-                                    <!-- js edit -->
-                                    <a class="username" target="_self" href="/">yenshuol</a>．
-                                    <!-- js edit -->
-                                    <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
-                                        <span>19 天前</span>
-                                    </a>
-                                    <!-- js edit -->
-                                    <div class="likes-btn">
-                                        <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
-                                        <span>0</span>
-                                    </div>
-                                    <!-- js edit -->
-                                    <span class="pseudo-btn">
-                                        <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
-                                        <span>0</span>
-                                    </span>
-                                </div>
-                            </div>
-
-
-                            <div class="discussion">
-                                <div class="image-border profile-image profile-image-md discussion-profile" size="70">
-                                    <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1805,7 +839,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1837,7 +871,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1869,7 +903,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1901,7 +935,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1933,7 +967,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1965,7 +999,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -1997,7 +1031,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -2029,7 +1063,7 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -2061,7 +1095,39 @@ else if (ViewBag.Id == 3)
                             <div class="discussion">
                                 <div class="image-border profile-image profile-image-md discussion-profile" size="70">
                                     <a class="" href="/">
-                                        <img src="/Assets/img/member/photo.png" width="">
+                                        <img src="/Assets/img/member/photo.png">
+                                    </a>
+                                </div>
+                                <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
+                                <div class="flex">
+                                    <span class="title txt-bold flex-1">調整自我的心態，為未來做好準備。</span>
+                                    <span class="resolve-state text-sm">解決中</span>
+                                </div>
+                                <div class="info text-sm">
+                                    <!-- js edit -->
+                                    <a class="username" target="_self" href="/">yenshuol</a>．
+                                    <!-- js edit -->
+                                    <a href="/courses/6030c9cd99e14cc2401e66b9/discussions/608f493a2fef97b9c6aac2ff">
+                                        <span>19 天前</span>
+                                    </a>
+                                    <!-- js edit -->
+                                    <div class="likes-btn">
+                                        <span theme="white" aria-hidden="true" class="fa fa-heart-o"></span>
+                                        <span>0</span>
+                                    </div>
+                                    <!-- js edit -->
+                                    <span class="pseudo-btn">
+                                        <span aria-hidden="true" class="fa fa-comment-o fa-fw"></span>
+                                        <span>0</span>
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="discussion">
+                                <div class="image-border profile-image profile-image-md discussion-profile" size="70">
+                                    <a class="" href="/">
+                                        <img src="/Assets/img/member/photo.png">
                                     </a>
                                 </div>
                                 <span class="unit pseudo-btn pad-t-5">第 1 章，第 1 單元</span>
@@ -2141,7 +1207,7 @@ else if (ViewBag.Id == 4)
                                         <div class="profile-wrap pad-b-20 block">
                                             <div class="profile-image absolute">
                                                 <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                                    <img src="/Assets/img/member/photo.png" class="header-image">
                                                 </a>
                                             </div>
                                             <a href="#">
@@ -2168,7 +1234,7 @@ else if (ViewBag.Id == 4)
                                         <div class="profile-wrap pad-b-20 block">
                                             <div class="profile-image absolute">
                                                 <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                                    <img src="/Assets/img/member/photo.png" class="header-image">
                                                 </a>
                                             </div>
                                             <a href="#">
@@ -2195,7 +1261,7 @@ else if (ViewBag.Id == 4)
                                         <div class="profile-wrap pad-b-20 block">
                                             <div class="profile-image absolute">
                                                 <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                                    <img src="/Assets/img/member/photo.png" class="header-image">
                                                 </a>
                                             </div>
                                             <a href="#">
@@ -2222,7 +1288,7 @@ else if (ViewBag.Id == 4)
                                         <div class="profile-wrap pad-b-20 block">
                                             <div class="profile-image absolute">
                                                 <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                                    <img src="/Assets/img/member/photo.png" class="header-image">
                                                 </a>
                                             </div>
                                             <a href="#">
@@ -2249,7 +1315,7 @@ else if (ViewBag.Id == 4)
                                         <div class="profile-wrap pad-b-20 block">
                                             <div class="profile-image absolute">
                                                 <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                                    <img src="/Assets/img/member/photo.png" class="header-image">
                                                 </a>
                                             </div>
                                             <a href="#">
@@ -2276,7 +1342,7 @@ else if (ViewBag.Id == 4)
                                         <div class="profile-wrap pad-b-20 block">
                                             <div class="profile-image absolute">
                                                 <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" width="" class="header-image">
+                                                    <img src="/Assets/img/member/photo.png" class="header-image">
                                                 </a>
                                             </div>
                                             <a href="#">
