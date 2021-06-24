@@ -26,7 +26,7 @@ namespace Tachey001.Service.Course
         public List<AllCourse> GetCourseData()
         {
             var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Member>();
+            var member = _tacheyRepository.GetAll<Models.Member>();
 
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
@@ -48,7 +48,7 @@ namespace Tachey001.Service.Course
         public List<AllCourse> GetCourseData(string MemberId)
         {
             var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Member>(x => x.MemberID == MemberId);
+            var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
 
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
