@@ -37,7 +37,7 @@ namespace Tachey001.Service.Home
             var member = _tacheyRepository.GetAll<Models.Member>();
             var course = _tacheyRepository.GetAll<Models.Course>();
 
-            var result = from c in course
+            var all = from c in course
                          join m in member on c.MemberID equals m.MemberID
                          select new CourseCardViewModel
                          {
@@ -50,9 +50,11 @@ namespace Tachey001.Service.Home
                              favorite = false
                          };
 
+            var result = all.ToList();
+
             var owner = _tacheyRepository.GetAll<Owner>(x => x.MemberID == MemberId);
 
-            if(owner.Count() != 0)
+            if (owner.Count() != 0)
             {
                 foreach (var o in owner)
                 {
@@ -66,7 +68,7 @@ namespace Tachey001.Service.Home
                 }
             }
 
-            return result.ToList();
+            return result;
         }
         public List<HighlightCourseViewModel> GetHighlightCourseViewModels()
         {
