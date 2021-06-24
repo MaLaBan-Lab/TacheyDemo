@@ -6,56 +6,38 @@ using Tachey001.Models;
 
 namespace Tachey001.Repository
 {
+
     public class MemberRepository
     {
-        private TacheyContext _context;
-
+        //初始化資料庫
+        private TacheyContext _tacheyContext;
         public MemberRepository()
         {
-            _context = new TacheyContext();
+            _tacheyContext = new TacheyContext();
         }
-
-        public IEnumerable<Member> GetAllMember()
+        public IQueryable<Models.Course> GetCourses()
         {
-            var result = _context.Member;
-
+            var result = _tacheyContext.Course;
             return result;
         }
-        
-        public Member GetCurrentMember(string currentId)
+        public IQueryable<ShoppingCart> GetShoppingCarts()
         {
-            var result = _context.Member.Find(currentId);
-
+            var result = _tacheyContext.ShoppingCart;
             return result;
         }
 
-        public IQueryable<PersonalUrl> GetPersonalUrls()
-        {
-            var result = _context.PersonalUrl;
 
-            return result;
+        //Delete刪除指定課程資料
+        public void DeleteCurrentIdRowCart(string outsideCourseId, string outsideMemberId)
+        {
+            var search = _tacheyContext.ShoppingCart.FirstOrDefault(x => x.MemberID == outsideMemberId && x.CourseID == outsideCourseId);
+
+            _tacheyContext.ShoppingCart.Remove(search);
+            _tacheyContext.SaveChanges();
+            _tacheyContext.Dispose();
+
         }
 
-        public PersonalUrl GetCurrentPersonalUrl(string currentId)
-        {
-            var result = _context.PersonalUrl.Find(currentId);
-
-            return result;
-        }
-
-        public IQueryable<Point> GetPoints()
-        {
-            var result = _context.Point;
-
-            return result;
-        }
-
-        public Point GetCurrentPoint(string currentId)
-        {
-            var result = _context.Point.Find(currentId);
-
-            return result;
-        }
     }
 
 }

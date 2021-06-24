@@ -235,13 +235,11 @@
     <Compile Include="Repository\Order\OrderRepository.cs" />
     <Compile Include="Repository\TacheyRepository.cs" />
     <Compile Include="Repository\Member\MemberRepository.cs" />
-    <Compile Include="Repository\MemberRepository.cs" />
     <Compile Include="Service\CheckoutService.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
     <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
     <Compile Include="Service\Order\OrderService.cs" />
-    <Compile Include="Service\MemberService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
     <Compile Include="ViewModel\Cart_GroupViewModel.cs" />

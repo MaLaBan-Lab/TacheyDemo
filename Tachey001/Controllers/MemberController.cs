@@ -22,7 +22,7 @@ namespace Tachey001.Controllers
     public class MemberController : Controller
     { 
         private TacheyContext _context;
-        private MemberService _memberService;
+       
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
@@ -37,7 +37,7 @@ namespace Tachey001.Controllers
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
             _context = new TacheyContext();
-            _memberService = new MemberService();
+           
             //初始化
             _orderService = new OrderService();
             _memberService = new MemberService();
