@@ -381,3 +381,24 @@
 
 </div>
 <!-- 延伸閱讀 -->
+
+@section endJS{
+    <script>
+
+        $(".bookmarkCheck").on('click', function () {
+
+            if ($(this).hasClass("backgroundBookmarkChecked")) {
+                $(this).removeClass("backgroundBookmarkChecked")
+                $(this).addClass("backgroundBookmarkMove")
+            } else {
+                $(this).addClass("backgroundBookmarkChecked")
+                $(this).removeClass("backgroundBookmarkMove")
+            }
+
+            var url = "/Member/Owner?MemberId=" + $(this).get(0).dataset.memberid + "&CourseId=" + $(this).get(0).dataset.courseid
+
+            $.get(url)
+        })
+
+    </script>
+    }

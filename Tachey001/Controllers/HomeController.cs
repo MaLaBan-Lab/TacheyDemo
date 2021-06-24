@@ -21,9 +21,11 @@ namespace Tachey001.Controllers
         }
         public ActionResult Index()
         {
+            var MemberId = User.Identity.GetUserId();
+            ViewBag.UserId = MemberId;
             //var用碗去接我要的東西
             var getcommentviewmodel = _homeService.GetCommentViewModel();
-            var getcoursecardviewmodels = _homeService.GetCourseCardViewModels();
+            var getcoursecardviewmodels = _homeService.GetCourseCardViewModels(MemberId);
             var gethighlightcourseviewmodel = _homeService.GetHighlightCourseViewModels();
             //再創一個group viewmodel包裝傳回view  <-規則
             //var result 最大包的

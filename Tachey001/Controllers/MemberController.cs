@@ -106,5 +106,10 @@ namespace Tachey001.Controllers
         {
             return View();
         }
+        //收藏功能
+        public void Owner(string MemberId, string CourseID)
+        {
+            _memberService.CreateOwner(MemberId, CourseID);
+        }
     }
 }

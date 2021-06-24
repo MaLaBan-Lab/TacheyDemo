@@ -15,5 +15,6 @@ namespace Tachey001.ViewModel
         public int? TotalMinTime { get; set; }
         public string MemberID { get; set; }
         public string Photo { get; set; }
+        public bool favorite { get; set; }
     }
 }
