@@ -127,5 +127,11 @@ namespace Tachey001.Controllers
         {
             return View();
         }
+        //收藏功能
+        public ActionResult Owner(string MemberId, string CourseID)
+        {
+
+            return RedirectToAction("Console", "Member");
+        }
     }
 }

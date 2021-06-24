@@ -102,23 +102,23 @@ namespace Tachey001.Service.Course
         //取得課程影片所需欄位
         public Main_Video GetCourseVideoData(string CourseId)
         {
-            var course = _tacheyRepository.Get<Models.Course>(x=>x.CourseID==CourseId);
+            var course = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
 
             var category = _tacheyRepository.GetAll<CourseCategory>().FirstOrDefault(x => x.CategoryID == course.CategoryID);
             var detail = _tacheyRepository.GetAll<CategoryDetail>().FirstOrDefault(x => x.DetailID == course.CategoryDetailsID);
 
-            var chapter = _tacheyRepository.GetAll<CourseChapter>(x=>x.CourseID == CourseId);
-            var unit = _tacheyRepository.GetAll<CourseUnit>(x=>x.CourseID==CourseId);
+            var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId);
+            var unit = _tacheyRepository.GetAll<CourseUnit>(x => x.CourseID == CourseId);
 
             var result = new Main_Video
-                         {
-                             CourseID = course.CourseID,
-                             CourseTitle = course.Title,
-                             CategoryName = category.CategoryName,
-                             DetailName = detail.DetailName,
-                             courseChapters = chapter,
-                             courseUnits = unit
-                         };
+            {
+                CourseID = course.CourseID,
+                CourseTitle = course.Title,
+                CategoryName = category.CategoryName,
+                DetailName = detail.DetailName,
+                courseChapters = chapter,
+                courseUnits = unit
+            };
 
             return result;
         }
@@ -237,6 +237,49 @@ namespace Tachey001.Service.Course
                     chapterCount++;
                 }
             };
+        }
+        //取得當前課程評價
+        public List<ScoreCard> GetAllScore(string CourseId)
+        {
+            var score = _tacheyRepository.GetAll<CourseScore>(x=>x.CourseID == CourseId);
+            var member = _tacheyRepository.GetAll<Member>();
+
+            var result = from s in score
+                         join m in member on s.MemberID equals m.MemberID
+                         select new ScoreCard
+                         {
+                             Name = m.Name,
+                             Photo = m.Photo,
+                             Score = s.Score,
+                             Title = s.Title,
+                             ScoreContent = s.ScoreContent,
+                             ScoreDate = s.ScoreDate
+                         };
+
+            return result.ToList();
+        }
+        //判斷是否評價過
+        public bool Scored(string MemberId, string CourseId)
+        {
+            return _tacheyRepository.Get<CourseScore>(x => x.MemberID == MemberId && x.CourseID == CourseId) == null ? true : false;
+        }
+        //Create創建課程評價
+        public void CreateScore(CourseScore courseScore, string CourseId, string MemberId)
+        {
+            var result = new CourseScore()
+            {
+                CourseID = CourseId,
+                MemberID = MemberId,
+                Score = courseScore.Score,
+                Title = courseScore.Title,
+                ScoreContent = courseScore.ScoreContent,
+                ToTeacher = courseScore.ToTeacher,
+                ToTachey = courseScore.ToTachey,
+                ScoreDate = DateTime.Now
+            };
+
+            _tacheyRepository.Create(result);
+            _tacheyRepository.SaveChanges();
         }
         //取得自訂位數的亂數方法
         private string GetRandomId(int Length)

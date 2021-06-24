@@ -3,8 +3,8 @@
 }
 
 .star-yellow {
-  color: #ffae00;
-  left: 0;
+    color: #FFEB00;
+    left: 0;
 }
 
 .text-scale-12 {
@@ -12,13 +12,13 @@
 }
 
 .btn-outline-hahow {
-  border: 1px solid #777;
-  color: #777
+    border: 1px solid white;
+    color: white
 }
 
-.btn-outline-hahow:hover {
-  color: rgb(250, 139, 0);
-}
+    .btn-outline-hahow:hover {
+        color: #FFEB00;
+    }
 
 .book-mark {
   border: 3px solid #eee;
@@ -52,11 +52,24 @@
     margin: auto;
   }
 
-.score-content{
-    background-color: rgb(244, 247, 247);
+.score-content {
+    background-color: rgba(0,0,0,0);
+    border: 3px solid;
 }
 
-@media (min-width: 992px){
+.modal-tachey-box{
+    background-color:gray !important;
+}
+
+.choiceStar:hover i{
+    color: #FFEB00;
+}
+
+.choiceStar i:hover ~ i {
+    color: rgb(202, 202, 202);
+}
+
+@media (min-width: 992px) {
     .book-mark-box{
         position: absolute;
         right: 0;

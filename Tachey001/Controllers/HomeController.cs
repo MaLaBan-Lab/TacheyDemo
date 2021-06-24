@@ -21,6 +21,7 @@ namespace Tachey001.Controllers
         }
         public ActionResult Index()
         {
+            ViewBag.UserId = User.Identity.GetUserId();
             //var用碗去接我要的東西
             var getcommentviewmodel = _homeService.GetCommentViewModel();
             var getcoursecardviewmodels = _homeService.GetCourseCardViewModels();

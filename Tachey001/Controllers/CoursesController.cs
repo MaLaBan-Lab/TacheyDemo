@@ -49,17 +49,24 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
         {
+            var MemberId = User.Identity.GetUserId();
+
+            var YnN = _courseService.Scored(MemberId, CourseId);
+            var video = _courseService.GetCourseVideoData(CourseId);
+            var allScore = _courseService.GetAllScore(CourseId);
+
             if (id == null)
             {
                 id = 1;
             }
             ViewBag.Id = id;
-
-            var video = _courseService.GetCourseVideoData(CourseId);
+            ViewBag.YnN = YnN;
 
             var result = new MainGroup()
             {
-                Main_Video = video
+                Main_Video = video,
+                GetCourseScore = allScore,
+                PostCourseScore = new CourseScore()
             };
 
             return View(result);
@@ -120,6 +127,16 @@ namespace Tachey001.Controllers
             tacheyDb.SaveChanges();
 
             return RedirectToAction("Console", "Member");
+        }
+        //課程評價 POST
+        [HttpPost]
+        public ActionResult CreateScore(MainGroup courseScore, string CourseId)
+        {
+            var MemberID = User.Identity.GetUserId();
+
+            _courseService.CreateScore(courseScore.PostCourseScore, CourseId, MemberID);
+
+            return RedirectToAction("Main", "Courses", new { id = 2, CourseId = CourseId });
         }
     }
 }
