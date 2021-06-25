@@ -100,6 +100,13 @@
     transform: scale(1.2);
 }
 
+.cartBox {
+    visibility: visible !important;
+    background-color: black;
+    opacity: 0.9;
+    z-index: 5;
+}
+
 .card:hover .editBox {
     visibility: visible !important;
     background-color: black;
@@ -114,8 +121,17 @@
 .editbox-delete:hover {
     color: #FFEB00 !important;
 }
-
+#cartcardTitle {
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
 @media (min-width: 768px) {
+    
+
     #cardTitle {
         height: 60px;
         overflow: hidden;

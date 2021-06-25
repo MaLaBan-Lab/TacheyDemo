@@ -179,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIController\CourseController.cs" />
+    <Compile Include="APIController\MemberController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -556,6 +557,7 @@
     <Content Include="Views\Shared\CreateCardTemplate.cshtml" />
     <Content Include="Views\Shared\CourseScoreCard.cshtml" />
     <Content Include="Views\Shared\step\testView.cshtml" />
+    <Content Include="Views\Shared\CartCourseTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

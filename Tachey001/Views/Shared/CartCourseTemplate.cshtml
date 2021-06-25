@@ -1,0 +1,159 @@
+﻿@*回傳資料型別*@
+@model　Tachey001.ViewModel.CourseCardViewModel
+
+@*如果沒用頭像會給預設頭像*@
+@{ var photoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
+    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
+    if (Model.TitlePageImageURL != null)
+    {
+        titleUrl = Model.TitlePageImageURL;
+    }
+    if (Model.Photo != null)
+    {
+        photoUrl = Model.Photo;
+    } }
+
+
+
+
+<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+    <div class="card my-5">
+        <div class="row no-gutters justify-content-center">
+            <div class="cartBox position-absolute h-100 w-100 d-flex flex-column justify-content-around">
+                <div>
+                    <h2 class="text-center">
+                        <a href="@Url.Action("Step", "Courses", new { id = 0, CourseId = Model.CourseID })">加入購物車</a>
+                    </h2>
+                </div>
+                <div>
+                    <h2 class="text-center">
+                        <a href="@Url.Action("Step", "Courses", new { id = 0, CourseId = Model.CourseID })">看課程介紹</a>
+                    </h2>
+                </div>
+                <div>
+                    <h2 class="text-center">
+                        <a href="@Url.Action("Step", "Courses", new { id = 0, CourseId = Model.CourseID })">取消收藏</a>
+                    </h2>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card-title-image position-relative">
+                    <div class="
+                        backgroundPhoto
+                        position-absolute
+                        rounded-circle
+                        bg-white
+                      ">
+                        <img src="@photoUrl"
+                             alt="" class="rounded-circle position-absolute center" id="photoImag" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
+                <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
+                    <img src="@titleUrl"
+                         class="card-img-top" style="width:262px; height:164px" />
+                    <div class="
+                    position-absolute
+                    bg-hahow-dark-green
+                    text-center text-white
+                    backgroundTape
+                  ">
+                        上課囉
+                    </div>
+                </a>
+                @if (Request.IsAuthenticated)
+                {
+                    if (Model.favorite)
+                    {
+                        <div class="backgroundBookmark backgroundBookmarkChecked position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")" class="text-decoration-none p-0 w-100 h-100">
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </a>
+                }
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cartcardTitle">
+                <h4 class="card-title text-justify font-weight-normal text-secondary">
+                    @Model.Title
+                </h4>
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+                <span class="card-text text-black-50">
+                    <span class="star-show">
+                        <i class="fas fa-star star-gray position-relative">
+                            @if (Model.AvgScore > 0)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
+                        </i>
+                        <i class="fas fa-star star-gray position-relative">
+                            @if (Model.AvgScore > 1)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
+                        </i>
+                        <i class="fas fa-star star-gray position-relative">
+                            @if (Model.AvgScore > 2)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
+                        </i>
+                        <i class="fas fa-star star-gray position-relative">
+                            @if (Model.AvgScore > 3)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
+                        </i>
+                        <i class="fas fa-star star-gray position-relative">
+                            @if (Model.AvgScore > 4)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
+                        </i>
+                    </span>
+                    (0)
+                </span>
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
+                <span class="card-text text-black-50">
+                    <span class="couse-time-before">
+                        <i class="far fa-clock"></i>
+                    </span>
+                    <span class="course-time">@Model.TotalMinTime</span>分鐘
+                </span>
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+                <span class="card-text text-black-50 mr-4">
+                    <span class="course-people-before">
+                        <i class="far fa-clock"></i>
+                    </span>
+                    <span class="course-people">0</span>人
+                </span>
+                <div class="card-text hahow-dark-green classPrice">
+                    <span>@Model.OriginalPrice.ToString("C0")</span>
+                </div>
+            </div>
+            <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
+                <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                    <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                </span>
+            </div>
+        </div>
+        <div class="card-bottom bg-hahow-dark-green"></div>
+    </div>
+</div>
+
