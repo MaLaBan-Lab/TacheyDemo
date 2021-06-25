@@ -60,8 +60,9 @@ namespace Tachey001.Controllers
             
             // var result = context.Member.Find(User.Identity.GetUserId());
             var getpointviewmodels = _memberService.GetPointData(UserId);
-            var getgetpointviewmodels = _memberService.GetGetPoint(UserId);
-            var getusedpointviewmodels = _memberService.GetUsedPoint(UserId);
+            var getgetpointviewmodels = _memberService.GetPartialPoint(UserId, true);
+            var getusedpointviewmodels = _memberService.GetPartialPoint(UserId, false);
+
             var result = new MemberGroup
             {
                 pointViewModels = getpointviewmodels,
@@ -69,22 +70,22 @@ namespace Tachey001.Controllers
                 getpointViewModels = getgetpointviewmodels,
             };
 
-            foreach (var item in result.pointViewModels)
-            {
-                if (item.Point == null)
-                {
-                    ViewBag.totalPoint = 0;
-                }
-                else
-                {
-                    ViewBag.totalPoint = item.Point;
-                }
-            }
+            //foreach (var item in result.pointViewModels)
+            //{
+            //    if (item.Point == null)
+            //    {
+            //        ViewBag.totalPoint = 0;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.totalPoint = item.Point;
+            //    }
+            //}
 
-            ViewBag.pointHistoGet = getgetpointviewmodels; // 已獲得
-            ViewBag.pointHistoUsed = getusedpointviewmodels; // 已使用
+            //ViewBag.pointHistoGet = getgetpointviewmodels; // 已獲得
+            //ViewBag.pointHistoUsed = getusedpointviewmodels; // 已使用
 
-            return View();
+            return View(result);
         }
 
         public ActionResult Setting()
@@ -92,10 +93,12 @@ namespace Tachey001.Controllers
             var UserId = User.Identity.GetUserId();
             var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
             //var getCourseItem = _memberService.GetCourseItem();
+            var getcourseviewmodels = _memberService.GetCourseData();
 
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,
+                courseViewModels = getcourseviewmodels,
             };
 
             // 職業行業選項
@@ -232,83 +235,59 @@ namespace Tachey001.Controllers
 
             foreach (var item in result.memberViewModels)
             {
-                // 頭照
-                ViewBag.photoUrl = item.Photo;
-                
-                // 使用者姓名
-                ViewBag.name = item.Name;
-                
-                // program bar
-                List<string> linek_lists = new List<string>();
+                //// 頭照
+                //ViewBag.photoUrl = item.Photo;
 
-                if (item.Sex == null || item.Birthday == null)
-                {
-                    linek_lists.Add("性別生日");
-                }
-                if (item.Profession == null)
-                {
-                    linek_lists.Add("職業行業");
-                }
-                if (item.Interest == null)
-                {
-                    linek_lists.Add("個人興趣");
-                }
-                if (item.Like == null)
-                {
-                    linek_lists.Add("個人喜好");
-                }
-                if (item.CountryRegion == null)
-                {
-                    linek_lists.Add("所在地區");
-                }
-                //if (result.EmailStatus == null)
-                //{
-                //    linek_lists.Add("信箱驗證");
-                //}
-                ViewBag.link = linek_lists;
+                //// 使用者姓名
+                //ViewBag.name = item.Name;
+
                 // 電子信箱
-                ViewBag.email = item.Email;
-                ViewBag.emailStatus = item.EmailStatus;
-                // 性別
-                ViewBag.sex = item.Sex;
+                //ViewBag.email = item.Email;
+                //ViewBag.emailStatus = item.EmailStatus;
+                //// 性別
+                //ViewBag.sex = item.Sex;
                 // 職業行業
-                if (item.Profession != null) // 已選
-                {
-                    ViewBag.profession = item.Profession.Split('/');
-                }
-                else
-                {
-                    ViewBag.profession = item.Profession;
-                }
+                //if (item.Profession != null) // 已選
+                //{
+                //    ViewBag.profession = ;
+                //}
+                //else
+                //{
+                //    ViewBag.profession = item.Profession;
+                //}
                 ViewBag.jobList = jobList; // all 選項
-                // 其他個人喜好
-                if (item.Like != null) // 已選
-                {
-                    ViewBag.like = item.Like.Split('/');
-                }
-                else
-                {
-                    ViewBag.like = item.Like;
-                }
+                //// 其他個人喜好
+                //if (item.Like != null) // 已選
+                //{
+                //    ViewBag.like = item.Like.Split('/');
+                //}
+                //else
+                //{
+                //    ViewBag.like = item.Like;
+                //}
                 ViewBag.likeList = likeList; // all 選項
-                // 個人興趣
-                if (item.Interest != null) // 已選
-                {
-                    ViewBag.interestSp = item.Interest.Split('/');
-                }
-                else
-                {
-                    ViewBag.interestSp = new ArrayList();
-                }
+                //// 個人興趣
+                //if (item.Interest != null) // 已選
+                //{
+                //    ViewBag.interestSp = item.Interest;
+                //}
+                //else
+                //{
+                //    ViewBag.interestSp = new ArrayList();
+                //}
 
                 // all 選項 - 主選項
+                //foreach (var i in result.courseViewModels)
+                //{
+                //    i.DetailName
+                //}
                 var courseCategory = _context.CourseCategory.Select(x => x);
                 Dictionary<string, string> interestDic = new Dictionary<string, string>();
                 foreach (var group in courseCategory)
                 {
                     interestDic.Add(group.CategoryID.ToString(), group.CategoryName);
                 }
-                ViewBag.interest = _context.CourseCategory.Select(x => x.CategoryName);
+                //ViewBag.interest = _context.CourseCategory.Select(x => x.CategoryName);
                 // all 選項 - 子選項
                 Dictionary<string, ArrayList> interestDicSub = new Dictionary<string, ArrayList>();
                 ArrayList interestArr = new ArrayList();
@@ -323,24 +302,29 @@ namespace Tachey001.Controllers
                     interestDicSub.Add(interestDic[group.Key.ToString()], interestArr);
                 }
                 ViewBag.interestDetil = interestDicSub;
-                // 生日
-                if (item.Birthday != null)
-                {
-                    DateTime date = DateTime.Parse(item.Birthday.ToString());
-                    selectListYear.Where(q => q.Value == date.ToString().Split('/')[0]).First().Selected = true;
-                    selectListMonth.Where(q => q.Value == date.ToString().Split('/')[1]).First().Selected = true;
-                    selectListDay.Where(q => q.Value == date.ToString().Split('/')[2].Split(' ')[0]).First().Selected = true;
-                }
-                ViewBag.SelectListYear = selectListYear;
-                ViewBag.SelectListMonth = selectListMonth;
-                ViewBag.SelectListDay = selectListDay;
+                ViewBag.ListYear = selectListYear;
+                ViewBag.ListMonth = selectListMonth;
+                ViewBag.ListDay = selectListDay;
+
 
                 // 所在地區 // 顯示語言
-                selectListArea.Where(q => q.Value == item.CountryRegion).First().Selected = true;
-                selectListLang.Where(q => q.Value == item.Language).First().Selected = true;
+                //selectListArea.Where(q => q.Value == item.CountryRegion).First().Selected = true;
+                //selectListLang.Where(q => q.Value == item.Language).First().Selected = true;
                 ViewBag.Lang = selectListLang;
                 ViewBag.Area = selectListArea;
             }
+
+            // 生日
+            //if (result.member.Birthday != null)
+            //{
+            //    DateTime date = DateTime.Parse(result.member.Birthday.ToString());
+            //    selectListYear.Where(q => q.Value == date.ToString().Split('/')[0]).First().Selected = true;
+            //    selectListMonth.Where(q => q.Value == date.ToString().Split('/')[1]).First().Selected = true;
+            //    selectListDay.Where(q => q.Value == date.ToString().Split('/')[2].Split(' ')[0]).First().Selected = true;
+            //}
+            //ViewBag.SelectListYear = selectListYear;
+            //ViewBag.SelectListMonth = selectListMonth;
+            //ViewBag.SelectListDay = selectListDay;
 
             return View(result);
         }
@@ -427,7 +411,7 @@ namespace Tachey001.Controllers
 
                 var result = _context.Member.Find(UserId);
 
-                result.InterestContent = m.member.Interest;
+                result.InterestContent = m.member.Interest.ToString();
 
                 _context.SaveChanges();
 
@@ -620,96 +604,96 @@ namespace Tachey001.Controllers
                 memberViewModels = getmemberviewmodels,
             };
 
-            foreach (var item in result.memberViewModels)
-            {
-                if (item.Photo != null)
-                {
-                    ViewBag.photoUrl = item.Photo;
-                }
-                else
-                {
-                    ViewBag.photoUrl = "/Assets/img/photo.png";
-                }
-                if (item.Theme != null)
-                {
-                    ViewBag.theme = item.Theme;
-                }
-                else
-                {
-                    ViewBag.theme = "/Assets/img/cover-default.png";
-                }
-                if (item.Name != null)
-                {
-                    ViewBag.name = item.Name;
-                }
-                else
-                {
-                    ViewBag.name = "";
-                }
+            //foreach (var item in result.memberViewModels)
+            //{
+            //    if (item.Photo != null)
+            //    {
+            //        ViewBag.photoUrl = item.Photo;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.photoUrl = "/Assets/img/photo.png";
+            //    }
+            //    if (item.Theme != null)
+            //    {
+            //        ViewBag.theme = item.Theme;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.theme = "/Assets/img/cover-default.png";
+            //    }
+            //    if (item.Name != null)
+            //    {
+            //        ViewBag.name = item.Name;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.name = "";
+            //    }
 
-                if (item.About != null)
-                {
-                    ViewBag.about = item.About;
-                }
-                else
-                {
-                    ViewBag.about = "簡單介紹一下自己吧！";
-                }
-                if (item.Expertise != null)
-                {
-                    ViewBag.expertise = item.Expertise;
-                }
-                else
-                {
-                    ViewBag.expertise = "有什麼擅長的事情嗎？";
-                }
-                if (item.InterestContent != null)
-                {
-                    ViewBag.interestContent = item.InterestContent;
-                }
-                else
-                {
-                    ViewBag.interestContent = "平常喜歡做什麼呢？";
-                }
-                if (item.Introduction != null)
-                {
-                    ViewBag.introduction = item.Introduction;
-                }
-                else
-                {
-                    ViewBag.introduction = "編輯個人頁面，和大家分享更多精彩故事";
-                }
-                ViewBag.fbConnection = item.FbUrl;
-                if (ViewBag.fbConnection == null)
-                {
-                    ViewBag.fbConnection = "";
-                }
-                ViewBag.googleConnection = item.GoogleUrl;
-                if (ViewBag.googleConnection == null)
-                {
-                    ViewBag.googleConnection = "";
-                }
-                ViewBag.ytConnection = item.YouTubeUrl;
-                if (ViewBag.ytConnection == null)
-                {
-                    ViewBag.ytConnection = "";
-                }
-                ViewBag.behanceConnection = item.BehanceUrl;
-                if (ViewBag.behanceConnection == null)
-                {
-                    ViewBag.behanceConnection = "";
-                }
-                ViewBag.pinterestConnection = item.PinterestUrl;
-                if (ViewBag.pinterestConnection == null)
-                {
-                    ViewBag.pinterestConnection = "";
-                }
-                ViewBag.blogConnection = item.BlogUrl;
-                if (ViewBag.blogConnection == null)
-                {
-                    ViewBag.blogConnection = "";
-                }
-            }
+            //    if (item.About != null)
+            //    {
+            //        ViewBag.about = item.About;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.about = "簡單介紹一下自己吧！";
+            //    }
+            //    if (item.Expertise != null)
+            //    {
+            //        ViewBag.expertise = item.Expertise;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.expertise = "有什麼擅長的事情嗎？";
+            //    }
+            //    if (item.InterestContent != null)
+            //    {
+            //        ViewBag.interestContent = item.InterestContent;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.interestContent = "平常喜歡做什麼呢？";
+            //    }
+            //    if (item.Introduction != null)
+            //    {
+            //        ViewBag.introduction = item.Introduction;
+            //    }
+            //    else
+            //    {
+            //        ViewBag.introduction = "編輯個人頁面，和大家分享更多精彩故事";
+            //    }
+            //    ViewBag.fbConnection = item.FbUrl;
+            //    if (ViewBag.fbConnection == null)
+            //    {
+            //        ViewBag.fbConnection = "";
+            //    }
+            //    ViewBag.googleConnection = item.GoogleUrl;
+            //    if (ViewBag.googleConnection == null)
+            //    {
+            //        ViewBag.googleConnection = "";
+            //    }
+            //    ViewBag.ytConnection = item.YouTubeUrl;
+            //    if (ViewBag.ytConnection == null)
+            //    {
+            //        ViewBag.ytConnection = "";
+            //    }
+            //    ViewBag.behanceConnection = item.BehanceUrl;
+            //    if (ViewBag.behanceConnection == null)
+            //    {
+            //        ViewBag.behanceConnection = "";
+            //    }
+            //    ViewBag.pinterestConnection = item.PinterestUrl;
+            //    if (ViewBag.pinterestConnection == null)
+            //    {
+            //        ViewBag.pinterestConnection = "";
+            //    }
+            //    ViewBag.blogConnection = item.BlogUrl;
+            //    if (ViewBag.blogConnection == null)
+            //    {
+            //        ViewBag.blogConnection = "";
+            //    }
+            //}
             
 
             ViewBag.giveCourseCount = from p in _context.Course where p.MemberID == UserId select p; // 已開設
@@ -725,8 +709,8 @@ namespace Tachey001.Controllers
             ViewBag.courseFavorites = from p in _context.Owner where p.MemberID == UserId select p; // 收藏
             ViewBag.courseWork = from p in _context.Homework where p.MemberID == UserId select p; // 作品
 
-            ViewData["PersonalUrls"] = _context.PersonalUrl;
-            ViewData["Members"] = _context.Member;
+            //ViewData["PersonalUrls"] = _context.PersonalUrl;
+            //ViewData["Members"] = _context.Member;
 
 
             //var currentId = User.Identity.GetUserId();
@@ -754,7 +738,7 @@ namespace Tachey001.Controllers
 
             ViewBag.UserPhoto = tacheyDb.Member.Find(UserId).Photo;
 
-            return View();
+            return View(result);
         }
 
         public ActionResult Coupons()

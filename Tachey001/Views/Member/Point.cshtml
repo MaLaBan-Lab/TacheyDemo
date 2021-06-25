@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Tachey001.Models.Point>
+﻿@model Tachey001.ViewModel.Member.MemberGroup
 @Styles.Render("~/Assets/js/slick/slick.css")
 @Styles.Render("~/Assets/js/slick/slick-theme.css")
 @Styles.Render("~/Assets/css/hahow-point.css")
@@ -25,11 +25,34 @@
                     <div class="hp-summery-card-body text-center">
                         <div>目前擁有</div>
                         <div class="marg-t-10">
-                            <strong>@(ViewBag.totalPoint)</strong><small> HP</small>
+                            @if (Model.pointViewModels.Count == 0)
+                            {
+                                <strong>0</strong>
+                            }
+                            else
+                            {
+                                foreach (var item in Model.pointViewModels)
+                                {
+                                    <strong>@(item.Point)</strong>
+                                    break;
+                                }
+                            }
+                            <small> HP</small>
                         </div>
                         <div>
                             <span>
-                                <span class="">= NT$ @(ViewBag.totalPoint/100)</span>&nbsp;
+                                @if (Model.pointViewModels.Count == 0)
+                                {
+                                    <span class="">= NT$ 0</span>
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.pointViewModels)
+                                    {
+                                        <span class="">= NT$ @(item.Point / 100)</span>
+                                        break;
+                                    }
+                                }
                                 <span class="">
                                     <span data-tip="true" data-for="tooltip-兌換比率為 100 : 1" aria-hidden="true" class="fas fa-question-circle" currentitem="false"></span>
                                     <!-- 彈跳提示 -->
@@ -400,21 +423,21 @@
                         <span class="tab" role="tab" tabindex="0" id="used-point">已用點數</span>
                     </div>
                     <!-- 已獲點數 -->
-                    @if (Enumerable.Count(ViewBag.pointHistoGet) == 0)
+                    @if (Enumerable.Count(Model.getpointViewModels) == 0)
                     {
-                        <div class="no-stuff text-center vertical-horizontal-center fade out">
+                        <div class="no-stuff text-center vertical-horizontal-center get-point fade out">
                             <div class="pad-tb-30">
                                 <img alt="No POSITIVE Hahow Point History"
                                      src="https://hahow.in/static/media/icon-empty.39f7f2df.svg">
-                                <p>目前沒有已獲得的點數</p>
+                                <p>目前沒有已用的點數</p>
                             </div>
                         </div>
                     }
                     else
                     {
-                        foreach (var item in ViewBag.pointHistoGet)
+                        foreach (var item in Model.getpointViewModels)
                         {
-                            <div class="dynamic-block table-row marg-rl-20 pad-tb-10">
+                            <div class="dynamic-block table-row marg-rl-20 pad-tb-10 get-point fade out">
                                 <div class="date">@item.GetTime.ToString("yyyy/MM/dd")</div>
                                 <div class="text">
                                     <div class="title">@item.PointName</div>
@@ -431,9 +454,9 @@
                     }
 
                     <!-- 已用點數 -->
-                    @if (Enumerable.Count(ViewBag.pointHistoUsed) == 0)
+                    @if (Enumerable.Count(Model.usedpointViewModels) == 0)
                     {
-                        <div class="no-stuff text-center vertical-horizontal-center fade out">
+                        <div class="no-stuff text-center vertical-horizontal-center used-point">
                             <div class="pad-tb-30">
                                 <img alt="No POSITIVE Hahow Point History"
                                      src="https://hahow.in/static/media/icon-empty.39f7f2df.svg">
@@ -443,9 +466,9 @@
                     }
                     else
                     {
-                        foreach (var item in ViewBag.pointHistoUsed)
+                        foreach (var item in Model.usedpointViewModels)
                         {
-                            <div class="dynamic-block table-row marg-rl-20 pad-tb-10">
+                            <div class="dynamic-block table-row marg-rl-20 pad-tb-10 used-point">
                                 <div class="date">@item.GetTime.ToString("yyyy/MM/dd")</div>
                                 <div class="text">
                                     <div class="title">@item.PointName</div>

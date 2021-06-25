@@ -9,8 +9,8 @@
 
 @{
 
-    IEnumerable<PersonalUrl> personalUrls = ViewData["PersonalUrls"] as IEnumerable<PersonalUrl>;
-    IEnumerable<Member> members = ViewData["Members"] as IEnumerable<Member>;
+//IEnumerable<PersonalUrl> personalUrls = ViewData["PersonalUrls"] as IEnumerable<PersonalUrl>;
+//IEnumerable<Member> members = ViewData["Members"] as IEnumerable<Member>;
 }
 
 <div class="container">
@@ -27,7 +27,10 @@
                             <div class="profile-image-wrapper marg-b-25">
                                 <div class="user-img-block profile-image profile-image-xlg " size="170">
                                     <a class="no-pointer" href="/">
-                                        <img src=@(ViewBag.photoUrl) width="" class="user-img">
+                                        @foreach (var item in Model.memberViewModels)
+                                        {
+                                            <img src=@(item.Photo) width="" class="user-img">
+                                        }
                                     </a>
                                 </div>
                                 <div class="upload-btn">
@@ -41,7 +44,10 @@
                             </div>
                             <div class="username editable">
                                 <h3>
-                                    @(ViewBag.name)
+                                    @foreach (var item in Model.memberViewModels)
+                                    {
+                                        @(item.Name)
+                                    }
                                     <span class="pan edit-icon" id="name-textarea-pen">
                                         <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                     </span>
@@ -168,7 +174,10 @@
                                     <h6 class="marg-b-0"><b>關於我</b></h6>
                                     <div class="about-content editable about-content-intro">
                                         <span style="display: flex;">
-                                            <p id="intro-p">@(ViewBag.about)</p>
+                                            @foreach (var item in Model.memberViewModels)
+                                            {
+                                                <p id="intro-p">@(item.About)</p>
+                                            }
                                             <span class="pan marg-l-10" id="intro-textarea-pen">
                                                 <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                             </span>
@@ -195,7 +204,11 @@
                                     <h6 class="marg-b-0"><b>自己的專長</b></h6>
                                     <div class="about-content editable about-content-expert">
                                         <span style="display: flex;">
-                                            <p id="expert-p">@(ViewBag.expertise)</p>
+                                            @foreach (var item in Model.memberViewModels)
+                                            {
+                                                <p id="expert-p">@(item.Expertise)</p>
+                                            }
+
                                             <span class="pan marg-l-10" id="expert-textarea-pen">
                                                 <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                             </span>
@@ -240,7 +253,11 @@
                                     <h6 class="marg-b-0"><b>感興趣的事物</b></h6>
                                     <div class="about-content editable about-content-like">
                                         <span style="display: flex;">
-                                            <p id="like-p">@(ViewBag.interestContent)</p>
+                                            @foreach (var item in Model.memberViewModels)
+                                            {
+                                                <p id="like-p">@(item.Interest)</p>
+                                            }
+
                                             <span class="pan marg-l-10" id="like-textarea-pen">
                                                 <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                             </span>
@@ -297,7 +314,11 @@
                     <div class="ta-l">
                         <div class="relative pad-rl-0">
                             <div class="cover-image">
-                                <img alt="icon" class="" src=@(ViewBag.theme)>
+                                @foreach (var item in Model.memberViewModels)
+                                {
+                                    <img alt="icon" class="" src=@(item.Theme)>
+                                }
+
                             </div>
                             <div class="upload-btn">
                                 <input accept=".jpg,.png" id="file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@>
@@ -313,7 +334,11 @@
                                 <div class="tab-block underline marg-b-5" id="text-textarea-pen">
                                     <span contenttext="編輯" aria-hidden="true" class="fas fa-pencil-alt pp-edit pull-right pad-tb-15"></span>
                                 </div>
-                                <p>@(ViewBag.introduction)</p>
+                                @foreach (var item in Model.memberViewModels)
+                                {
+                                    <p>@(item.Introduction)</p>
+                                }
+
                             </div>
                             <!--編輯框-->
                             @using (Html.BeginForm("ProfileIntro", "Member", FormMethod.Post))
