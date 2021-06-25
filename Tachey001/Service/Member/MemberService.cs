@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Repository;
+using Tachey001.ViewModel.Course;
 using Tachey001.Repository.Home;
 using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
@@ -26,14 +28,11 @@ namespace Tachey001.Service.Member
             _MemberRepository = new MemberRepository();
         }
 
-        public List<MemberViewModel> GetAllMemberData(string MemberId)
+        public MemberViewModel GetMemberData(string MemberId)
         {
             var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
-            var personurl = _tacheyRepository.GetAll<Models.PersonalUrl>(x => x.MemberID == MemberId);
 
             var result = from m in member
-                         join u in personurl on m.MemberID equals u.MemberID
-                         where m.MemberID == MemberId
                          select new MemberViewModel
                          {
                              MemberID = m.MemberID,
@@ -50,6 +49,9 @@ namespace Tachey001.Service.Member
                              PostalCode = m.PostalCode,
                              PhoneNumber = m.PhoneNumber,
                              Birthday = m.Birthday,
+                             Year = m.Birthday.Value.Year.ToString(),
+                             Month = m.Birthday.Value.Month.ToString(),
+                             Day = m.Birthday.Value.Day.ToString(),
                              Interest = m.Interest,
                              Like = m.Like,
                              Expertise = m.Expertise,
@@ -64,18 +66,82 @@ namespace Tachey001.Service.Member
                              Facebook = m.Facebook,
                              Line = m.Line,
                              Google = m.Google,
-                             FbUrl = u.FbUrl,
-                             GoogleUrl = u.GoogleUrl,
-                             YouTubeUrl = u.YouTubeUrl,
-                             BehanceUrl = u.BehanceUrl,
-                             PinterestUrl = u.PinterestUrl,
-                             BlogUrl = u.BlogUrl
                          };
+
+
+
+            return (MemberViewModel)result;
+        }
+
+        public List<MemberViewModel> GetAllMemberData(string MemberId)
+        {
+            var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
+            var personurl = _tacheyRepository.GetAll<Models.PersonalUrl>(x => x.MemberID == MemberId);
+
+            var result = from m in member
+                         join u in personurl on m.MemberID equals u.MemberID into gj
+                         from subpet in gj.DefaultIfEmpty()
+                         select new MemberViewModel
+                         {
+                             MemberID = m.MemberID,
+                             Account = m.Account,
+                             Password = m.Password,
+                             Name = m.Name,
+                             Email = m.Email,
+                             EmailStatus = m.EmailStatus,
+                             JoinTime = m.JoinTime,
+                             Sex = m.Sex,
+                             CountryRegion = m.CountryRegion,
+                             City = m.City,
+                             Address = m.Address,
+                             PostalCode = m.PostalCode,
+                             PhoneNumber = m.PhoneNumber,
+                             Birthday = m.Birthday,
+                             Year = m.Birthday.Value.Year.ToString(),
+                             Month = m.Birthday.Value.Month.ToString(),
+                             Day = m.Birthday.Value.Day.ToString(),
+                             Interest = m.Interest,
+                             Like = m.Like,
+                             Expertise = m.Expertise,
+                             About = m.About,
+                             InterestContent = m.InterestContent,
+                             Language = m.Language,
+                             Photo = m.Photo,
+                             Introduction = m.Introduction,
+                             Theme = m.Theme,
+                             Profession = m.Profession,
+                             Point = m.Point,
+                             Facebook = m.Facebook,
+                             Line = m.Line,
+                             Google = m.Google,
+                             FbUrl = subpet.FbUrl,
+                             GoogleUrl = subpet.GoogleUrl,
+                             YouTubeUrl = subpet.YouTubeUrl,
+                             BehanceUrl = subpet.BehanceUrl,
+                             PinterestUrl = subpet.PinterestUrl,
+                             BlogUrl = subpet.BlogUrl
+                         };
+
+            
 
             return result.ToList();
         }
 
-        public List<PointViewModel> GetPointData(string MemberId)
+        public StepGroup GetCourseData()
+        {
+            var category = _tacheyRepository.GetAll<CourseCategory>();
+            var detail = _tacheyRepository.GetAll<CategoryDetail>();
+
+            var result = new StepGroup
+                         {
+                             courseCategory = category,
+                             categoryDetails = detail,
+                         };
+
+            return result;
+        }
+
+            public List<PointViewModel> GetPointData(string MemberId)
         {
             var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
             var point = _tacheyRepository.GetAll<Models.Point>(x => x.MemberID == MemberId);
@@ -99,7 +165,7 @@ namespace Tachey001.Service.Member
             return result.ToList();
         }
 
-        public List<PointViewModel> GetGetPoint(string MemberId)
+        public List<PointViewModel> GetPartialPoint(string MemberId, bool tf)
         {
             var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
             var point = _tacheyRepository.GetAll<Models.Point>(x => x.MemberID == MemberId);
@@ -108,31 +174,7 @@ namespace Tachey001.Service.Member
 
             var result = from m in member
                          join p in point on m.MemberID equals p.MemberID
-                         where m.MemberID == MemberId && p.Status == false
-                         select new PointViewModel
-                         {
-                             MemberID = p.MemberID,
-                             Point = m.Point,
-                             PointName = p.PointName,
-                             PointNum = p.PointNum,
-                             GetTime = p.GetTime,
-                             Deadline = p.Deadline,
-                             Status = p.Status,
-                         };
-
-            return result.ToList();
-        }
-
-        public List<PointViewModel> GetUsedPoint(string MemberId)
-        {
-            var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
-            var point = _tacheyRepository.GetAll<Models.Point>(x => x.MemberID == MemberId);
-            //var member = _memberRepository.GetAllMember();
-            //var point = _memberRepository.GetPoints();
-
-            var result = from m in member
-                         join p in point on m.MemberID equals p.MemberID
-                         where m.MemberID == MemberId && p.Status == true
+                         where m.MemberID == MemberId && p.Status == tf
                          select new PointViewModel
                          {
                              MemberID = p.MemberID,
