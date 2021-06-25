@@ -23,6 +23,51 @@ namespace Tachey001.Service.Member
             _memberRepository = new MemberRepository();
         }
 
+        public MemberViewModel GetMemberData(string MemberId)
+        {
+            var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);
+
+            var result = from m in member
+                         select new MemberViewModel
+                         {
+                             MemberID = m.MemberID,
+                             Account = m.Account,
+                             Password = m.Password,
+                             Name = m.Name,
+                             Email = m.Email,
+                             EmailStatus = m.EmailStatus,
+                             JoinTime = m.JoinTime,
+                             Sex = m.Sex,
+                             CountryRegion = m.CountryRegion,
+                             City = m.City,
+                             Address = m.Address,
+                             PostalCode = m.PostalCode,
+                             PhoneNumber = m.PhoneNumber,
+                             Birthday = m.Birthday,
+                             Year = m.Birthday.Value.Year.ToString(),
+                             Month = m.Birthday.Value.Month.ToString(),
+                             Day = m.Birthday.Value.Day.ToString(),
+                             Interest = m.Interest,
+                             Like = m.Like,
+                             Expertise = m.Expertise,
+                             About = m.About,
+                             InterestContent = m.InterestContent,
+                             Language = m.Language,
+                             Photo = m.Photo,
+                             Introduction = m.Introduction,
+                             Theme = m.Theme,
+                             Profession = m.Profession,
+                             Point = m.Point,
+                             Facebook = m.Facebook,
+                             Line = m.Line,
+                             Google = m.Google,
+                         };
+
+
+
+            return (MemberViewModel)result;
+        }
+
         public List<MemberViewModel> GetAllMemberData(string MemberId)
         {
             var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);

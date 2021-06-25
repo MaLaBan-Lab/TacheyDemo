@@ -89,60 +89,65 @@
                                             <h4 class="styles-overlay-title pad-tb-15 text-center">社群網站連結</h4>
                                             <div overflow="hidden" class="">
                                                 <div>
-                                                    <div>
-                                                        <span>Facebook 個人頁面網址</span>
-                                                        <div class="marg-b-15">
-                                                            <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(p => p.member.FbUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.fbConnection, @placeholder = "https://www.facebook.com/yourAccountId" } })
-                                                                @*<input placeholder="https://www.facebook.com/yourAccountId" class="input-element" data-type="facebook" value=@(ViewBag.fbConnection)>*@
+                                                    @foreach (var item in Model.memberViewModels)
+                                                    {
+                                                        @Html.HiddenFor(m => item)
+                                                        <div>
+                                                            <span>Facebook 個人頁面網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => m.member.FbUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.fbConnection, @placeholder = "https://www.facebook.com/yourAccountId" } })
+                                                                    @*<input placeholder="https://www.facebook.com/yourAccountId" class="input-element" data-type="facebook" value=@(ViewBag.fbConnection)>*@
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        <span>Google Plus 個人頁面網址</span>
-                                                        <div class="marg-b-15">
-                                                            <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.member.GoogleUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.googleConnection, @placeholder = "https://plus.google.com/yourAccountId/posts" } })
-                                                                @*<input placeholder="https://plus.google.com/yourAccountId/posts" class="input-element" data-type="googlePlus" value=@(ViewBag.googleConnection)>*@
+                                                        <div>
+                                                            <span>Google Plus 個人頁面網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.GoogleUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.googleConnection, @placeholder = "https://plus.google.com/yourAccountId/posts" } })
+                                                                    @*<input placeholder="https://plus.google.com/yourAccountId/posts" class="input-element" data-type="googlePlus" value=@(ViewBag.googleConnection)>*@
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        <span>YouTube 頻道</span>
-                                                        <div class="marg-b-15">
-                                                            <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.member.YouTubeUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.ytConnection, @placeholder = "https://www.youtube.com/yourChannel" } })
-                                                                @*<input placeholder="https://www.youtube.com/yourChannel" class="input-element" data-type="youtube" value=@(ViewBag.ytConnection)>*@
+                                                        <div>
+                                                            <span>YouTube 頻道</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.YouTubeUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.ytConnection, @placeholder = "https://www.youtube.com/yourChannel" } })
+                                                                    @*<input placeholder="https://www.youtube.com/yourChannel" class="input-element" data-type="youtube" value=@(ViewBag.ytConnection)>*@
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        <span>Behance 網址</span>
-                                                        <div class="marg-b-15">
-                                                            <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.member.BehanceUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.behanceConnection, @placeholder = "https://www.behance.net/yourName" } })
-                                                                @*<input placeholder="https://www.behance.net/yourName" class="input-element" data-type="behance" value=@(ViewBag.behanceConnection)>*@
+                                                        <div>
+                                                            <span>Behance 網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.BehanceUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.behanceConnection, @placeholder = "https://www.behance.net/yourName" } })
+                                                                    @*<input placeholder="https://www.behance.net/yourName" class="input-element" data-type="behance" value=@(ViewBag.behanceConnection)>*@
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        <span>Pinterest 網址</span>
-                                                        <div class="marg-b-15">
-                                                            <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.member.PinterestUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.pinterestConnection, @placeholder = "https://www.pinterest.com/yourName/" } })
-                                                                @*<input placeholder="https://www.pinterest.com/yourName/" class="input-element" data-type="pinterest" value=@(ViewBag.pinterestConnection)>*@
+                                                        <div>
+                                                            <span>Pinterest 網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.PinterestUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.pinterestConnection, @placeholder = "https://www.pinterest.com/yourName/" } })
+                                                                    @*<input placeholder="https://www.pinterest.com/yourName/" class="input-element" data-type="pinterest" value=@(ViewBag.pinterestConnection)>*@
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        <span>個人網站或部落格網址</span>
-                                                        <div class="marg-b-15">
-                                                            <div class="input-wrapper flex relative">
-                                                                @Html.EditorFor(m => m.member.BlogUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.blogConnection, @placeholder = "https://www.yourBlog.com/" } })
-                                                                @*<input placeholder="https://www.yourBlog.com/" class="input-element" data-type="website" value=@(ViewBag.blogConnection)>*@
+                                                        <div>
+                                                            <span>個人網站或部落格網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.BlogUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.blogConnection, @placeholder = "https://www.yourBlog.com/" } })
+                                                                    @*<input placeholder="https://www.yourBlog.com/" class="input-element" data-type="website" value=@(ViewBag.blogConnection)>*@
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    }
+
                                                 </div>
                                                 <div class="txt-right">
                                                     <button class="cancel-btn marg-r-5 style-cancel-btn" name="submitButton" value="Cancel">取消</button>
@@ -255,7 +260,7 @@
                                         <span style="display: flex;">
                                             @foreach (var item in Model.memberViewModels)
                                             {
-                                                <p id="like-p">@(item.Interest)</p>
+                                                <p id="like-p">@(item.InterestContent)</p>
                                             }
 
                                             <span class="pan marg-l-10" id="like-textarea-pen">
