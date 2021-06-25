@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Repository;
+using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
 
 namespace Tachey001.Service.Member
@@ -173,6 +174,53 @@ namespace Tachey001.Service.Member
             result.Sex = id;
 
             _tacheyRepository.SaveChanges();
+        }
+        //取得收藏的課
+        public List<consoleViewModel> GetConsoleData(string currutId)
+        {
+            var course = _tacheyRepository.GetAll<Models.Course>();
+            var member = _tacheyRepository.GetAll<Models.Member>();
+            var coursescore = _tacheyRepository.GetAll<CourseScore>();
+            var owner = _tacheyRepository.GetAll<Owner>();
+
+            var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
+            {
+                id = z.Key,
+                score = z.Average(x => x.Score)
+            });
+
+            var all = from o in owner
+                         join m in member on o.MemberID equals m.MemberID
+                         join c in course on o.CourseID equals c.CourseID
+                         where o.MemberID == currutId
+                         select new consoleViewModel
+                         {
+                             CourseID = c.CourseID,
+                             Title = c.Title,
+                             Description = c.Description,
+                             TitlePageImageURL = c.TitlePageImageURL,
+                             OriginalPrice = c.OriginalPrice,
+                             TotalMinTime = c.TotalMinTime,
+                             MemberID = m.MemberID,
+                             Photo = m.Photo,
+                             AvgScore = 0,
+                             favorite = true
+                         };
+
+            var result = all.ToList();
+
+            foreach (var item in result)
+            {
+                foreach (var score in advscore)
+                {
+                    if (item.CourseID == score.id)
+                    {
+                        item.AvgScore = Convert.ToInt32(score.score);
+                    }
+                }
+            }
+
+            return result;
         }
         //判斷是否收藏
         public void CreateOwner(string MemberId, string CourseId)

@@ -44,8 +44,9 @@ namespace Tachey001.Controllers
         public ActionResult Console()
         {
             var currentId = User.Identity.GetUserId();
+            ViewBag.UserId = currentId;
 
-            var ConsoleViews = _consoleService.GetConsoleData(currentId);
+            var ConsoleViews = _memberService.GetConsoleData(currentId);
             var AllCourses = _courseService.GetCourseData(currentId);
 
             var result = new consoleallViewModel
