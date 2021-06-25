@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Tachey001.ViewModel.Course;
 
 namespace Tachey001.ViewModel
 {
-    public class CourseCardViewModel
+    public class consoleViewModel
     {
         public string CourseID { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public string TitlePageImageURL { get; set; }
-        public string Tool { get; set; }
         public decimal OriginalPrice { get; set; }
         public int? TotalMinTime { get; set; }
         public string MemberID { get; set; }

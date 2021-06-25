@@ -25,6 +25,7 @@ namespace Tachey001.Controllers
        
         private TacheyContext tacheyDb;
         //宣告CourseService
+        private consoleService _consoleService;
         private CourseService _courseService;
         //宣告OrderService
         private OrderService _orderService;
@@ -35,6 +36,7 @@ namespace Tachey001.Controllers
         public MemberController()
         {
             tacheyDb = new TacheyContext();
+            _consoleService = new consoleService();
             _courseService = new CourseService();
             _context = new TacheyContext();
            
@@ -47,8 +49,18 @@ namespace Tachey001.Controllers
         public ActionResult Console()
         {
             var currentId = User.Identity.GetUserId();
+            ViewBag.UserId = currentId;
 
-            var result = _courseService.GetCourseData(currentId);
+            var ConsoleViews = _memberService.GetConsoleData(currentId);
+            var AllCourses = _courseService.GetCourseData(currentId);
+
+            var result = new consoleallViewModel
+            {
+                consoleViews = ConsoleViews,
+                allCourses = AllCourses
+
+            };
+
 
             return View(result);
         }
@@ -827,10 +839,9 @@ namespace Tachey001.Controllers
             }
         }
         //收藏功能
-        public ActionResult Owner(string MemberId, string CourseID)
+        public void Owner(string MemberId, string CourseID)
         {
-
-            return RedirectToAction("Console", "Member");
+            _memberService.CreateOwner(MemberId, CourseID);
         }
     }
 }

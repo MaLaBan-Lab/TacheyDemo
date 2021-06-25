@@ -190,7 +190,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Controllers\MembersContext.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\StepController.cs" />
     <Compile Include="Global.asax.cs">
@@ -229,6 +228,7 @@
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\consoleRepository.cs" />
     <Compile Include="Repository\CheckoutRepository.cs" />
     <Compile Include="Repository\Course\CourseRepository.cs" />
     <Compile Include="Repository\Home\HomeRepository.cs" />
@@ -236,12 +236,15 @@
     <Compile Include="Repository\TacheyRepository.cs" />
     <Compile Include="Repository\Member\MemberRepository.cs" />
     <Compile Include="Service\CheckoutService.cs" />
+    <Compile Include="Service\consoleService.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
     <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
     <Compile Include="Service\Order\OrderService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
+    <Compile Include="ViewModel\consoleallViewModel.cs" />
+    <Compile Include="ViewModel\consoleViewModel.cs" />
     <Compile Include="ViewModel\Cart_GroupViewModel.cs" />
     <Compile Include="ViewModel\CheckoutViewModel.cs" />
     <Compile Include="ViewModel\CourseCardViewModel.cs" />
@@ -552,6 +555,7 @@
     <Content Include="Views\Shared\_CartPartialCard.cshtml" />
     <Content Include="Views\Shared\CreateCardTemplate.cshtml" />
     <Content Include="Views\Shared\CourseScoreCard.cshtml" />
+    <Content Include="Views\Shared\step\testView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

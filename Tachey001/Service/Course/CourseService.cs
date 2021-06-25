@@ -105,6 +105,7 @@ namespace Tachey001.Service.Course
             var course = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
 
             var category = _tacheyRepository.GetAll<CourseCategory>().FirstOrDefault(x => x.CategoryID == course.CategoryID);
+
             var detail = _tacheyRepository.GetAll<CategoryDetail>().FirstOrDefault(x => x.DetailID == course.CategoryDetailsID);
 
             var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId);
@@ -134,7 +135,14 @@ namespace Tachey001.Service.Course
                 CourseId = GetRandomId(12);
             }
 
-            var result = new Models.Course { CourseID = CourseId, MemberID = currentUserId };
+            var result = new Models.Course 
+            { 
+                CourseID = CourseId, 
+                MemberID = currentUserId, 
+                CategoryID = 1, 
+                CategoryDetailsID = 10001,
+                Title = "無標題"
+            };
 
             _tacheyRepository.Create(result);
 

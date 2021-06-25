@@ -1,29 +1,9 @@
-﻿@model Tachey001.ViewModel.Course.AllCourse
+﻿@model Tachey001.ViewModel.consoleViewModel
 
-@{ 
-    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
-    if(Model.TitlePageImageURL != null)
-    {
-        titleUrl = Model.TitlePageImageURL;
-            }
-}
 
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-
     <div class="card my-5">
         <div class="row no-gutters justify-content-center">
-            <div class="position-absolute w-100 h-100 editBox invisible d-flex flex-column justify-content-around">
-                <div class="">
-                    <h2 class="text-center">
-                        <a href="@Url.Action("Step", "Courses", new { id = 0, CourseId = Model.CourseID })" class="text-decoration-none editbox-edit text-white my-3"><i class="fas fa-edit"></i>編輯</a>
-                    </h2>
-                </div>
-                <div>
-                    <h2 class="text-center">
-                        <a href="@Url.Action("DeleteCourse", "Member", new { id = 0, CourseId = Model.CourseID })" class="text-decoration-none editbox-delete text-white"><i class="fas fa-trash-alt mr-1"></i>刪除</a>
-                    </h2>
-                </div>
-            </div>
             <div class="col-12">
                 <div class="card-title-image position-relative">
                     <div class="
@@ -38,23 +18,20 @@
                 </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
-                <a href="@Url.Action("Main", "Courses", new { CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
-                    <img src="@titleUrl"
-                         class="card-img-top" style="width:262px; height:164px" />
-                    <div class="
+                <img src="@Model.TitlePageImageURL"
+                     class="card-img-top" style="width:262px; height:164px" />
+                <div class="
                     position-absolute
                     bg-hahow-dark-green
                     text-center text-white
                     backgroundTape
                   ">
-                        草稿
-                    </div>
-                    <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                        <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                    </div>
-                </a>
+                    上課囉
+                </div>
+                <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                </div>
             </div>
-
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
                 <h4 class="card-title text-justify font-weight-normal text-secondary">
                     @Html.DisplayFor(m => m.Title)
@@ -64,19 +41,19 @@
                 <span class="card-text text-black-50">
                     <span class="star-show">
                         <i class="fas fa-star star-gray position-relative">
-                            @*<i class="fas fa-star star-yellow position-absolute star-display"></i>*@
+                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            @*<i class="fas fa-star star-yellow position-absolute star-display"></i>*@
+                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            @*<i class="fas fa-star star-yellow position-absolute star-display"></i>*@
+                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            @*<i class="fas fa-star star-yellow position-absolute star-display"></i>*@
+                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            @*<i class="fas fa-star star-yellow position-absolute star-display"></i>*@
+                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
                         </i>
                     </span>
                     (0)
@@ -98,7 +75,11 @@
                     <span class="course-people">0</span>人
                 </span>
                 <div class="card-text hahow-dark-green classPrice">
-                    <span>@Model.OriginalPrice.ToString("C0")</span>
+                    NT$<span>@Html.DisplayFor(m => m.OriginalPrice)</span>
+                </div>
+                <div>
+                    @Html.ActionLink("編輯", "Step", "Courses", new { id = 0, CourseId = Model.CourseID }, null)
+                    @Html.ActionLink("刪除", "DeleteCourse", "Member", new { id = Model.CourseID }, null)
                 </div>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
@@ -110,3 +91,4 @@
         <div class="card-bottom bg-hahow-dark-green"></div>
     </div>
 </div>
+
