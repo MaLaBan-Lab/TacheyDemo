@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Repository;
-using Tachey001.ViewModel.Course;
 using Tachey001.Repository.Home;
 using Tachey001.ViewModel;
+using Tachey001.ViewModel.Course;
 using Tachey001.ViewModel.Member;
 
 namespace Tachey001.Service.Member
