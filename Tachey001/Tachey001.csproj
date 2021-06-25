@@ -223,17 +223,20 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\sysdac_history_internal.cs" />
     <Compile Include="Models\sysdac_instances_internal.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\TacheyContext.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\consoleRepository.cs" />
+    <Compile Include="Repository\CheckoutRepository.cs" />
     <Compile Include="Repository\Course\CourseRepository.cs" />
     <Compile Include="Repository\Home\HomeRepository.cs" />
     <Compile Include="Repository\Order\OrderRepository.cs" />
     <Compile Include="Repository\TacheyRepository.cs" />
     <Compile Include="Repository\Member\MemberRepository.cs" />
     <Compile Include="Service\consoleService.cs" />
+    <Compile Include="Service\CheckoutService.cs" />
     <Compile Include="Service\Course\CourseService.cs" />
     <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
@@ -242,6 +245,8 @@
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
     <Compile Include="ViewModel\consoleallViewModel.cs" />
     <Compile Include="ViewModel\consoleViewModel.cs" />
+    <Compile Include="ViewModel\Cart_GroupViewModel.cs" />
+    <Compile Include="ViewModel\CheckoutViewModel.cs" />
     <Compile Include="ViewModel\CourseCardViewModel.cs" />
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
@@ -257,6 +262,7 @@
     <Compile Include="ViewModel\GroupOrderRecord.cs" />
     <Compile Include="ViewModel\OrderRecordOther.cs" />
     <Compile Include="ViewModel\OrderRecordSuccess.cs" />
+    <Compile Include="ViewModel\CartPartialCardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\all.css" />
@@ -268,6 +274,7 @@
     <Content Include="Assets\css\discussions.css" />
     <Content Include="Assets\css\group.css" />
     <Content Include="Assets\css\hahow-point.css" />
+    <Content Include="Assets\css\HAHOWcart-collection.css" />
     <Content Include="Assets\css\HomePage.css" />
     <Content Include="Assets\css\HAHOWcart.css" />
     <Content Include="Assets\css\HAHOWcheckout.css" />

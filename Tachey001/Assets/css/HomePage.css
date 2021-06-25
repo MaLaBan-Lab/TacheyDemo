@@ -236,7 +236,7 @@ body {
     }
 
 .comment-p {
-    background-color: #12072F;
+    /*background-color: #12072F;*/
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -268,15 +268,13 @@ body {
         color: #00bea4;
     }
 
-    /* 好學生評論 */
-    /* 貓頭鷹 */
-    .item {
-
-        height: 100%;
-        width: 100%;
-        position: relative;
-
-    }
+/* 好學生評論 */
+/* 貓頭鷹 */
+.item {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
 
     .owl-carousel .owl-item,
     .owl-carousel .owl-wrapper {
@@ -555,7 +553,8 @@ body {
         /* 延伸閱讀 */
 .reading-8 {
     max-width: 100%;
-    background-color: #170633;
+    background-color: #423a51;
+ 
 }
 
         /* 延伸閱讀 */

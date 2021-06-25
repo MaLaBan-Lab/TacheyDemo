@@ -1,6 +1,10 @@
-﻿@Styles.Render("~/Assets/css/HAHOWcheckout.css")
+﻿
+@*記得單複數*@
+@model Tachey001.ViewModel.CheckoutViewModel
+@Styles.Render("~/Assets/css/HAHOWcheckout.css")
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
 
@@ -67,7 +71,7 @@
                     <div>
                         <div class="sc-3vzzj9-4 fbVttR input-wrapper flex">
                             <input id="customerName"
-                                   placeholder="請填入真實姓名" class="sc-3vzzj9-3 fgjnMp input-element" value="">
+                                   placeholder="請填入真實姓名" class="sc-3vzzj9-3 fgjnMp input-element" value="@Model.InvoiceName ">
                         </div>
                     </div>
                 </div>
@@ -80,7 +84,7 @@
                         <div class="sc-3vzzj9-4 fbVttR input-wrapper flex">
                             <input id="customerEmail"
                                    placeholder="請填入電子信箱" type="email" class="sc-3vzzj9-3 fgjnMp input-element"
-                                   value="h2el2378@yahoo.com.tw">
+                                   value=@Model.InvoiceEmail>
                         </div>
                     </div>
                 </div>
@@ -91,7 +95,7 @@
             <div class="form-block">
                 <!-- 發票類型 -->
                 <div class="half-width-field">
-                    <label class="marg-r-10" for="invoiceType">發票類型</label>
+                    <label class="marg-r-10" for="invoiceType">@Model.InvoiceType</label>
                     <span class="text-error">如需開立統編，請選擇統編發票</span>
                     <div class=" dpIEcd" height="40px" width="100%">
                         <div class="dropdown btn-group-vertical btn-block w-100">
