@@ -304,6 +304,7 @@
         {
             @Html.Partial("_CourseCardPartial", item)}
     </div>
+
 </div>
 <!-- 猜你想學 -->
 <!-- 本週熱門課程 -->
@@ -377,13 +378,17 @@
 
 @section endJS{
     <script>
+        $('.ToastBtn').on('click', function () {
+            $(`#toast-${$(this).get(0).dataset.courseid}`).toast('show')
+        })
 
         $(".bookmarkCheck").on('click', function () {
-
             if ($(this).hasClass("backgroundBookmarkChecked")) {
+                $(`#text-${$(this).get(0).dataset.courseid}`).text("取消收藏")
                 $(this).removeClass("backgroundBookmarkChecked")
                 $(this).addClass("backgroundBookmarkMove")
             } else {
+                $(`#text-${$(this).get(0).dataset.courseid}`).text("加入收藏")
                 $(this).addClass("backgroundBookmarkChecked")
                 $(this).removeClass("backgroundBookmarkMove")
             }
