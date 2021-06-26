@@ -598,7 +598,7 @@ namespace Tachey001.Controllers
             var currentId = User.Identity.GetUserId();
             ViewBag.MemberId = currentId;
             var getcartcardviewmodels = _memberService.GetCartPartialViewModel(currentId);
-            var getcoursecardviewmodels = _memberService.GetCourseCardViewModels();
+            var getcoursecardviewmodels = _memberService.GetConsoleData(currentId);
             //資料是複數就要toloist,引用的型別是單數所以無法使用
             //return View(getcoursecardviewmodels);
             var result = new Cart_GroupViewModel
@@ -611,24 +611,46 @@ namespace Tachey001.Controllers
             //丟入view
             return View(result);
         }
+        //收藏功能
+        public void Owner(string MemberId, string CourseID)
+        {
+            _memberService.CreateOwner(MemberId, CourseID);
+        }
+        //取消收藏
+        public ActionResult DelOwner(string MemberId, string CourseID)
+        {
+            _memberService.CreateOwner(MemberId, CourseID);
+
+            return RedirectToAction("Cart", "Member");
+        }
+        //加入購物車
+        public ActionResult AddCart(string MemberId, string CourseID)
+        {
+            _memberService.CreateCart(MemberId, CourseID);
+            _memberService.CreateOwner(MemberId, CourseID);
+
+            return RedirectToAction("Cart", "Member");
+        }
+        //購物車卡片移至收藏
+        public ActionResult MoveRowCartsToOwner(string CourseId, string MemberId)
+        {
+            _memberService.CreateCart(MemberId, CourseId);
+            _memberService.CreateOwner(MemberId, CourseId);
+
+            return RedirectToAction("Cart", "Member");
+        }
         //刪除購物車卡片
-        public ActionResult DeleteRowCarts(string CourseId,string MemberId)
+        public ActionResult DeleteRowCarts(string CourseId, string MemberId)
         {
             try
             {
-            _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
+                _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
                 return RedirectToAction("Cart", "Member");
-
             }
             catch (Exception e)
             {
                 return RedirectToAction("Cart", "Member");
             }
-        }
-        //收藏功能
-        public void Owner(string MemberId, string CourseID)
-        {
-            _memberService.CreateOwner(MemberId, CourseID);
         }
     }
 }

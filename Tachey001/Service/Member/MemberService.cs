@@ -283,6 +283,21 @@ namespace Tachey001.Service.Member
             }
             _tacheyRepository.SaveChanges();
         }
+        //判斷是否加入購物車
+        public void CreateCart(string MemberId, string CourseId)
+        {
+            var ToF = _tacheyRepository.Get<ShoppingCart>(x => x.MemberID == MemberId && x.CourseID == CourseId);
+            if (ToF == null)
+            {
+                var result = new ShoppingCart { MemberID = MemberId, CourseID = CourseId };
+                _tacheyRepository.Create(result);
+            }
+            else
+            {
+                _tacheyRepository.Delete(ToF);
+            }
+            _tacheyRepository.SaveChanges();
+        }
         public List<CartPartialCardViewModel> GetCartPartialViewModel(string memberId)
         {
 
