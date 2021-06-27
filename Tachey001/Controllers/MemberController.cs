@@ -599,6 +599,7 @@ namespace Tachey001.Controllers
             ViewBag.MemberId = currentId;
             var getcartcardviewmodels = _memberService.GetCartPartialViewModel(currentId);
             var getcoursecardviewmodels = _memberService.GetConsoleData(currentId);
+            var getcaltotal = _memberService.Caltotal(currentId);
             //資料是複數就要toloist,引用的型別是單數所以無法使用
             //return View(getcoursecardviewmodels);
             var result = new Cart_GroupViewModel
@@ -606,7 +607,8 @@ namespace Tachey001.Controllers
                 //跟他說要放甚麼 like select new
                 //也可以小括號用.的
                 cartpartialViewModels = getcartcardviewmodels,
-                courseCardViewModels = getcoursecardviewmodels
+                courseCardViewModels = getcoursecardviewmodels,
+                total = getcaltotal
             };
             //丟入view
             return View(result);
