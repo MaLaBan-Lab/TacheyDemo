@@ -7,7 +7,7 @@
 @model Tachey001.ViewModel.Cart_GroupViewModel
 @Styles.Render("~/Assets/css/HAHOWcart.css")
 @Styles.Render("~/Assets/css/HAHOWcart-collection.css")
-
+@Styles.Render("~/Assets/css/card.css")
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
@@ -108,7 +108,7 @@
 
                             @foreach (var item in Model.courseCardViewModels)
                             {
-                                @Html.Partial("_CourseCardPartial", item)
+                                @Html.Partial("CartCourseTemplate", item)
                             }
                         </div>
                     </div>
@@ -117,10 +117,10 @@
                 </div>
                 @*載入更多*@
                 @*<div class="load-more-bookmark flex align-items-center marg-t-60">
-                    <div class="line flex-1"></div>
-                    <button class="sc-1a6j6ze-0 iPSzms">載入更多</button>
-                    <div class="line flex-1"></div>
-                </div>*@
+                        <div class="line flex-1"></div>
+                        <button class="sc-1a6j6ze-0 iPSzms">載入更多</button>
+                        <div class="line flex-1"></div>
+                    </div>*@
 
             </div>
 

@@ -289,6 +289,109 @@ namespace Tachey001.Service.Course
             _tacheyRepository.Create(result);
             _tacheyRepository.SaveChanges();
         }
+        //取得當前課程發問
+        public List<QuestionCard> GetAllQuestions(string MemberId, string CourseId)
+        {
+            var currentMember = new Models.Member { Name = "匿名", Photo = "https://pbs.twimg.com/profile_images/1391260770864967680/ZqdvCZM7_400x400.jpg" };
+            if (MemberId != null)
+            {
+                currentMember = _tacheyRepository.Get<Models.Member>(x => x.MemberID == MemberId);
+            }
+            var ques = _tacheyRepository.GetAll<Question>(x => x.CourseID == CourseId);
+            var ans = _tacheyRepository.GetAll<Answer>(x => x.CourseID == CourseId);
+            var member = _tacheyRepository.GetAll<Models.Member>();
+            var AnsAmount = from all in ans
+                            group all by all.QuestionID into g
+                            select new { id = g.Key, amount = g.Count() };
+
+            var allLike = _tacheyRepository.GetAll<QuestionLike>(x => x.CourseID == CourseId);
+            var countLike = from all in allLike
+                            group all by all.CourseID into g
+                            select new { ID = g.Key, Count = g.Count() };
+
+            var allA = from a in ans
+                       join q in ques on a.QuestionID equals q.QuestionID
+                       join m in member on a.MemberID equals m.MemberID
+                       select new AnswerCard
+                       {
+                           CourseID = a.CourseID,
+                           QuestionID = a.QuestionID,
+                           Name = m.Name,
+                           Photo = m.Photo,
+                           AnswerContent = a.AnswerContent,
+                           AnswerDate = a.AnswerDate,
+                           LikeAmount = 0
+                       };
+            var allQ = from q in ques
+                       join m in member on q.MemberID equals m.MemberID
+                       select new QuestionCard
+                       {
+                           CourseID = q.CourseID,
+                           QuestionID = q.QuestionID,
+                           Name = m.Name,
+                           Photo = m.Photo,
+                           CurrentName = currentMember.Name,
+                           CurrentPhoto = currentMember.Photo,
+                           QuestionContent = q.QuestionContent,
+                           QuestionDate = q.QuestionDate,
+                           LikeAmount = 0,
+                           AnsAmount = 0
+                         };
+            var result = allQ.ToList();
+            var allAList = allA.ToList();
+
+            foreach (var Q in result)
+            {
+                foreach (var all in AnsAmount)
+                {
+                    if(all.id == Q.QuestionID)
+                    {
+                        Q.AnsAmount = all.amount;
+                    }
+                }
+                var list = new List<AnswerCard>();
+                foreach (var A in allAList)
+                {
+                    if(Q.QuestionID == A.QuestionID)
+                    {
+                        list.Add(A);
+                    }
+                }
+                Q.GetAnswerCards = list;
+            }
+
+            return result;
+        }
+        //Create創建課程發問
+        public void CreateQuestion(Question question, string CourseId, string MemberId)
+        {
+            var result = new Question()
+            {
+                CourseID = CourseId,
+                MemberID = MemberId,
+                QuestionContent = question.QuestionContent,
+                QuestionDate = DateTime.Now
+            };
+
+            _tacheyRepository.Create(result);
+            _tacheyRepository.SaveChanges();
+        }
+        //Create創建課程回答
+        public void CreateAnswer(QuestionCard questionCard, string CourseId, int QuestionId, string MemberId)
+        {
+
+            var result = new Answer()
+            {
+                CourseID = CourseId,
+                QuestionID = QuestionId,
+                MemberID = MemberId,
+                AnswerContent = questionCard.PostAnswer.AnswerContent,
+                AnswerDate = DateTime.Now
+            };
+
+            _tacheyRepository.Create(result);
+            _tacheyRepository.SaveChanges();
+        }
         //取得自訂位數的亂數方法
         private string GetRandomId(int Length)
         {

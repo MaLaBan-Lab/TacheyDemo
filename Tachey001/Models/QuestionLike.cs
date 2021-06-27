@@ -6,15 +6,20 @@ namespace Tachey001.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ShoppingCart")]
-    public partial class ShoppingCart
+    [Table("QuestionLike")]
+    public partial class QuestionLike
     {
         [Key]
         [Column(Order = 0)]
-        public string MemberID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int QuestionID { get; set; }
 
         [Key]
         [Column(Order = 1)]
         public string CourseID { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        public string MemberID { get; set; }
     }
 }

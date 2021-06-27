@@ -9,27 +9,21 @@ namespace Tachey001.Models
     [Table("Answer")]
     public partial class Answer
     {
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int AnswerID { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        public string CourseID { get; set; }
+
         public int QuestionID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        [StringLength(128)]
         public string MemberID { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
         [StringLength(4000)]
-        public string QuestionContent { get; set; }
+        public string AnswerContent { get; set; }
 
-        [Key]
-        [Column(Order = 3, TypeName = "date")]
-        public DateTime QuestionDate { get; set; }
-
-        [Key]
-        [Column(Order = 4)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Likes { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? AnswerDate { get; set; }
     }
 }

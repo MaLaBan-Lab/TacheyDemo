@@ -4,6 +4,15 @@
     list-style: none;
 }
 
+.btn-outline-hahow {
+    border: 1px solid white;
+    color: white
+}
+
+    .btn-outline-hahow:hover {
+        color: #FFEB00;
+    }
+
 .record-color {
     color: rgba(0, 0, 0, 0.65);
 }
@@ -49,11 +58,13 @@
 .fs-20 {
     font-size: 20px;
 }
-.cancel{
-    background-color:orange;
-    border-color:orange;
-    height:30px;
+
+.cancel {
+    background-color: orange;
+    border-color: orange;
+    height: 30px;
 }
+
 .p-discount {
-    padding:25px 0px;
+    padding: 25px 0px;
 }

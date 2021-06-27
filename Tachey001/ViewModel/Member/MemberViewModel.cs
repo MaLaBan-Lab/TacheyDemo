@@ -21,6 +21,9 @@ namespace Tachey001.ViewModel.Member
         public int? PostalCode { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime? Birthday { get; set; }
+        public string Year { get; set; }
+        public string Month { get; set; }
+        public string Day { get; set; }
         public string Interest { get; set; }
         public string Like { get; set; }
         public string Expertise { get; set; }
