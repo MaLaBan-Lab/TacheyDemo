@@ -45,7 +45,7 @@ namespace Tachey001.Controllers
         {
             return View();
         }
-
+        //課程影片頁面
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
         {
@@ -54,6 +54,7 @@ namespace Tachey001.Controllers
             var YnN = _courseService.Scored(MemberId, CourseId);
             var video = _courseService.GetCourseVideoData(CourseId);
             var allScore = _courseService.GetAllScore(CourseId);
+            var allQuestion = _courseService.GetAllQuestions(MemberId, CourseId);
 
             if (id == null)
             {
@@ -66,7 +67,9 @@ namespace Tachey001.Controllers
             {
                 Main_Video = video,
                 GetCourseScore = allScore,
-                PostCourseScore = new CourseScore()
+                GetQuestions = allQuestion,
+                PostCourseScore = new CourseScore(),
+                PostCourseQuestion = new Question()
             };
 
             return View(result);
@@ -137,6 +140,26 @@ namespace Tachey001.Controllers
             _courseService.CreateScore(courseScore.PostCourseScore, CourseId, MemberID);
 
             return RedirectToAction("Main", "Courses", new { id = 2, CourseId = CourseId });
+        }
+        [HttpPost]
+        //課程發問 POST
+        public ActionResult CreateQuestion(MainGroup mainGroup, string CourseId)
+        {
+            var MemberID = User.Identity.GetUserId();
+
+            _courseService.CreateQuestion(mainGroup.PostCourseQuestion, CourseId, MemberID);
+
+            return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
+        }
+        [HttpPost]
+        //課程發問 回答 POST
+        public ActionResult CreateAnswer(QuestionCard questionCard, string CourseId, int QuestionId)
+        {
+            var MemberID = User.Identity.GetUserId();
+
+            _courseService.CreateAnswer(questionCard, CourseId, QuestionId, MemberID);
+
+            return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
         }
     }
 }

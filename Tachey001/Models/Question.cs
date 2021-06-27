@@ -9,34 +9,18 @@ namespace Tachey001.Models
     [Table("Question")]
     public partial class Question
     {
-        public bool? BeforeAfter { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int QuestionID { get; set; }
 
-        [Required]
-        [StringLength(128)]
-        public string MemberID { get; set; }
-
-        [Required]
         [StringLength(128)]
         public string CourseID { get; set; }
 
-        [StringLength(50)]
-        public string ChapterID { get; set; }
+        [StringLength(128)]
+        public string MemberID { get; set; }
 
-        [StringLength(50)]
-        public string UnitID { get; set; }
-
-        public bool Done { get; set; }
-
-        public int Likes { get; set; }
-
-        [Required]
         [StringLength(4000)]
         public string QuestionContent { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime QuestionDate { get; set; }
+        public DateTime? QuestionDate { get; set; }
     }
 }

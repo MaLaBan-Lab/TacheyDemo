@@ -5,7 +5,6 @@
 }
 
 @Styles.Render("~/Assets/css/console.css")
-@Styles.Render("~/Assets/css/card.css")
 @Styles.Render("~/Assets/css/nav.css")
 @Styles.Render("~/Assets/css/navbar-blue.css")
 <div class="container">
@@ -39,9 +38,9 @@
     </div>
     <div class="row">
         @*@foreach (var item in Model.consoleViews)
-        {
-            @Html.Partial("CardTemplate", item)
-        }*@
+            {
+                @Html.Partial("CardTemplate", item)
+            }*@
     </div>
     <div class="row mt-5">
         <div class="col-12 p-0">
@@ -56,3 +55,28 @@
         }
     </div>
 </div>
+
+@section endJS{
+    <script>
+        $('.ToastBtn').on('click', function () {
+            $(`#toast-${$(this).get(0).dataset.courseid}`).toast('show')
+        })
+
+        $(".bookmarkCheck").on('click', function () {
+            if ($(this).hasClass("backgroundBookmarkChecked")) {
+                $(`#text-${$(this).get(0).dataset.courseid}`).text("取消收藏")
+                $(this).removeClass("backgroundBookmarkChecked")
+                $(this).addClass("backgroundBookmarkMove")
+            } else {
+                $(`#text-${$(this).get(0).dataset.courseid}`).text("加入收藏")
+                $(this).addClass("backgroundBookmarkChecked")
+                $(this).removeClass("backgroundBookmarkMove")
+            }
+
+            var url = "/Member/Owner?MemberId=" + $(this).get(0).dataset.memberid + "&CourseId=" + $(this).get(0).dataset.courseid
+
+            $.get(url)
+        })
+
+    </script>
+}

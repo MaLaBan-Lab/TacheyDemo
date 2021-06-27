@@ -14,12 +14,12 @@ $jq(document).on('ready', function () {
 $("#used-point").on('click', function(){
 		$("#used-point").addClass("active-tab");
 		$("#get-point").removeClass("active-tab");
-		$(".dynamic-block").addClass("fade out");
-		$(".no-stuff").removeClass("fade out");
+		$(".used-point").addClass("fade out");
+		$(".get-point").removeClass("fade out");
 });
 $("#get-point").on('click', function(){
 		$("#get-point").addClass("active-tab");
 		$("#used-point").removeClass("active-tab");
-		$(".no-stuff").addClass("fade out");
-		$(".dynamic-block").removeClass("fade out");
+		$(".get-point").addClass("fade out");
+		$(".used-point").removeClass("fade out");
 });

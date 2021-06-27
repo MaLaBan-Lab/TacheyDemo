@@ -1,18 +1,35 @@
-﻿@model Tachey001.ViewModel.consoleViewModel
+﻿@*回傳資料型別*@
+@model　Tachey001.ViewModel.consoleViewModel
 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+@*如果沒用頭像會給預設頭像*@
+@{ var photoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
+    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
+    if (Model.TitlePageImageURL != null)
+    {
+        titleUrl = Model.TitlePageImageURL;
+    }
+    if (Model.Photo != null)
+    {
+        photoUrl = Model.Photo;
+    } }
+
+
+
+
+<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
-        <div class="position-absolute bottom-0 right-0 p-3 rounded-pill" style="z-index: 50; right:0; top:0;">
-            <div class="toast hide"
-                 id="toast-@Model.CourseID"
-                 role="alert"
-                 data-delay="1000">
-                <div class="toast-body">
-                    <h2 class="" id="text-@Model.CourseID" style="color:black !important;"></h2>
-                </div>
-            </div>
-        </div>
         <div class="row no-gutters justify-content-center">
+            <div class="cartBox position-absolute h-100 w-100 invisible d-flex flex-column justify-content-around align-items-center">
+                <h3 class="">
+                    <a href="@Url.Action("AddCart", "Member", new { MemberId = Model.MemberID, CourseId = Model.CourseID })" class="text-decoration-none cartBox-add text-white">加入購物車</a>
+                </h3>
+                <h3 class="">
+                    <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID })" class="text-decoration-none cartBox-intro text-white">看課程介紹</a>
+                </h3>
+                <h3 class="">
+                    <a href="@Url.Action("DelOwner", "Member", new { MemberId = Model.MemberID, CourseId = Model.CourseID })" class="text-decoration-none cartBox-del text-white">取消收藏</a>
+                </h3>
+            </div>
             <div class="col-12">
                 <div class="card-title-image position-relative">
                     <div class="
@@ -21,15 +38,15 @@
                         rounded-circle
                         bg-white
                       ">
-                        <img src="@Model.Photo"
+                        <img src="@photoUrl"
                              alt="" class="rounded-circle position-absolute center" id="photoImag" />
                     </div>
                 </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
-                <a href="@Url.Action("Main", "Courses", new { id = 1,CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
-                    <img src="@Model.TitlePageImageURL"
-                         class="card-img-top" style="width:262px; height:164px" />
+                <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
+                    <img src="@titleUrl"
+                         class="card-img-top" style="width:242px; height:124px" />
                     <div class="
                     position-absolute
                     bg-hahow-dark-green
@@ -63,9 +80,9 @@
                     </a>
                 }
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify cardTitle">
-                <h4 class="card-title text-justify font-weight-normal text-secondary">
-                    @Html.DisplayFor(m => m.Title)
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 cardTitle">
+                <h4 class="card-title font-weight-normal text-secondary">
+                    @Model.Title
                 </h4>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
@@ -110,7 +127,7 @@
                     <span class="couse-time-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-time">@Html.DisplayFor(m => m.TotalMinTime)</span>分鐘
+                    <span class="course-time">@Model.TotalMinTime</span>分鐘
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
@@ -133,3 +150,4 @@
         <div class="card-bottom bg-hahow-dark-green"></div>
     </div>
 </div>
+
