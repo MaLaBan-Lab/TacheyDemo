@@ -73,15 +73,6 @@ namespace Tachey001.Models
                 .Property(e => e.UnitPrice)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Question>()
-                .Property(e => e.ChapterID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Question>()
-                .Property(e => e.UnitID)
-                .IsUnicode(false);
-                .HasPrecision(18, 0);
-
             modelBuilder.Entity<Ticket>()
                 .Property(e => e.Discount)
                 .HasPrecision(1, 1);
