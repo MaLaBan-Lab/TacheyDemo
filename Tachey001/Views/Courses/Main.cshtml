@@ -124,21 +124,21 @@
         <div class="sign_wrap col-12 col-md-5 col-lg-5">
             <div class="inline-block">
                 <div class="item">
-                    <img src="https://hahow.in/static/media/peoples.ae17c771.svg" alt="">
+                    <i class="fas fa-users text-white fa-4x"></i>
                     <p>297 位同學</p>
                 </div>
                 <div class="item">
-                    <img src="https://hahow.in/static/media/comment.9a42ee31.svg" alt="">
+                    <i class="far fa-comment-dots fa-4x"></i>
                     <p>問題討論</p>
                 </div>
             </div>
             <div class="inline-block">
                 <div class="item">
-                    <img src="https://hahow.in/static/media/clock.34f482fc.svg" alt="">
+                    <i class="far fa-clock fa-4x"></i>
                     <p>2,230 分鐘</p>
                 </div>
                 <div class="item">
-                    <img src="https://hahow.in/static/media/homework.94b2405f.svg" alt="">
+                    <i class="far fa-file-alt fa-4x"></i>
                     <p>作業批改</p>
                 </div>
             </div>
@@ -152,11 +152,11 @@
         <div class="buy_wrap col-12 col-md-4 col-lg-4">
             <div class="collect">
                 <i class="fa fa-bookmark" aria-hidden="true"></i>
-                <span>收藏</span>
+                <span>心動嗎~</span>
             </div>
             <div class="btn_wrap">
-                <button class="btn btn-success">馬上購買</button>
-                <button class="btn btn-outline-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                <button class="btn btn-outline-hahow">加入購物車</button>
+                @*<button class="btn btn-outline-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>*@
             </div>
         </div>
     </div>
@@ -166,18 +166,59 @@
 <!-- seletor -->
 <div class="container">
     <div class="seletor mb-5">
-        <div class="seletor-item" id="main">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.CourseID})">課程簡介</a>
-        </div>
-        <div class="seletor-item" id="feedbacks">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.CourseID})">課程評價</a>
-        </div>
-        <div class="seletor-item" id="discussions">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.CourseID})">問題討論</a>
-        </div>
-        <div class="seletor-item" id="assignments">
-            <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.CourseID})">作業成果</a>
-        </div>
+        @if (ViewBag.Id == 1)
+        {
+            <div class="seletor-item seletor-ckecked" id="main">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.CourseID})">課程簡介</a>
+            </div>
+        }
+        else
+        {
+            <div class="seletor-item" id="main">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.CourseID})">課程簡介</a>
+            </div>
+        }
+
+        @if (ViewBag.Id == 2)
+        {
+            <div class="seletor-item seletor-ckecked" id="feedbacks">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.CourseID})">課程評價</a>
+            </div>
+        }
+        else
+        {
+            <div class="seletor-item" id="feedbacks">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.CourseID})">課程評價</a>
+            </div>
+        }
+
+        @if (ViewBag.Id == 3)
+        {
+            <div class="seletor-item seletor-ckecked" id="discussions">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.CourseID})">問題討論</a>
+            </div>
+        }
+        else
+        {
+            <div class="seletor-item" id="discussions">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.CourseID})">問題討論</a>
+            </div>
+        }
+
+        @if (ViewBag.Id == 4)
+        {
+            <div class="seletor-item seletor-ckecked" id="assignments">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.CourseID})">作業成果</a>
+            </div>
+        }
+        else
+        {
+            <div class="seletor-item" id="assignments">
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.CourseID})">作業成果</a>
+            </div>
+        }
+
+
     </div>
 </div>
 
@@ -675,12 +716,24 @@ else if (ViewBag.Id == 3)
                     <div class="white-wrap side-card  pad-b-30 border">
                         <h4 class="heading text-center">參與討論，讓學習更精彩</h4>
                         <div class="pad-rl-25 text-left">
-                            <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3 border" data-toggle="modal" data-target="#exampleModal">
-                                <div>
-                                    <i class="far fa-comment mr-1"></i>
-                                    <span>發表留言</span>
-                                </div>
-                            </button>
+                            @if (Request.IsAuthenticated)
+                            {
+                                <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3 border" data-toggle="modal" data-target="#exampleModal">
+                                    <div>
+                                        <i class="far fa-comment mr-1"></i>
+                                        <span>發表留言</span>
+                                    </div>
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Login", "Account")" class="btn btn-outline-hahow w-100 my-4 py-3 border text-decoration-none">
+                                    <div>
+                                        <span>登入後留言</span>
+                                    </div>
+                                </a>
+                            }
+
                         </div>
                     </div>
                 </div>

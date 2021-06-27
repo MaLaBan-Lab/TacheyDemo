@@ -292,7 +292,11 @@ namespace Tachey001.Service.Course
         //取得當前課程發問
         public List<QuestionCard> GetAllQuestions(string MemberId, string CourseId)
         {
-            var currentMember = _tacheyRepository.Get<Models.Member>(x => x.MemberID == MemberId);
+            var currentMember = new Models.Member { Name = "匿名", Photo = "https://pbs.twimg.com/profile_images/1391260770864967680/ZqdvCZM7_400x400.jpg" };
+            if (MemberId != null)
+            {
+                currentMember = _tacheyRepository.Get<Models.Member>(x => x.MemberID == MemberId);
+            }
             var ques = _tacheyRepository.GetAll<Question>(x => x.CourseID == CourseId);
             var ans = _tacheyRepository.GetAll<Answer>(x => x.CourseID == CourseId);
             var member = _tacheyRepository.GetAll<Models.Member>();

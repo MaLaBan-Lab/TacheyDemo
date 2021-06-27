@@ -3,12 +3,12 @@
 }
 
 .btn-outline-hahow {
-  border: 1px solid #777;
-  color: #777;
+    border: 1px solid white;
+    color: white
 }
 
 .btn-outline-hahow:hover {
-  color: rgb(250, 139, 0);
+    color: #FFEB00;
 }
 
 .book-mark {

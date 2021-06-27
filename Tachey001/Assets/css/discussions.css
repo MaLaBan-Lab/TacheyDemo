@@ -673,6 +673,11 @@ body {
 		border-bottom: 6px solid #FFEB00;
 	}
 
+.seletor-ckecked > a {
+	color: #FFEB00;
+	border-bottom: 6px solid #FFEB00;
+}
+
 a {
   cursor: pointer;
   color: white;
