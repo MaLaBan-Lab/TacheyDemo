@@ -69,7 +69,7 @@ namespace Tachey001.Models
 
             modelBuilder.Entity<Order_Detail>()
                 .Property(e => e.UnitPrice)
-                .HasPrecision(19, 4);
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Question>()
                 .Property(e => e.ChapterID)

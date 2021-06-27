@@ -11,7 +11,7 @@ namespace Tachey001.ViewModel
         public DateTime? OrderDate { get; set; }
         public DateTime? PayDate { get; set; }
         public string PayMethod { get; set; }
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
         public string InvoiceType { get; set; }
         public string InvoiceName { get; set; }
         public string InvoiceEmail { get; set; }

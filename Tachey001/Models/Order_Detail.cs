@@ -16,15 +16,12 @@ namespace Tachey001.Models
         [Column(Order = 1)]
         public string CourseID { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
-        [Required]
-        [StringLength(200)]
+        [StringLength(128)]
         public string CourseName { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [StringLength(128)]
         public string BuyMethod { get; set; }
     }
 }
