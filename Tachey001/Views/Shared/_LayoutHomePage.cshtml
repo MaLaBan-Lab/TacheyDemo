@@ -191,7 +191,6 @@
     @Scripts.Render("~/Assets/js/owl.carousel.min.js")
     @Scripts.Render("~/Assets/js/nav.js")
 
-
     @*@Scripts.Render("~/bundles/modernizr")*@
     <script>
         //輪盤
@@ -287,9 +286,10 @@
             });
             document.querySelector('.center>.item-video>iframe').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')
         }
-                            // 影片
+                                    // 影片
 
     </script>
     @RenderSection("scripts", required: false)
+    @RenderSection("endJS", required: false)
 </body>
 </html>

@@ -1,11 +1,18 @@
-﻿@model Tachey001.ViewModel.Course.AllCourse
-
+﻿@model Tachey001.ViewModel.consoleViewModel
 
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-
     <div class="card my-5">
+        <div class="position-absolute bottom-0 right-0 p-3 rounded-pill" style="z-index: 50; right:0; top:0;">
+            <div class="toast hide"
+                 id="toast-@Model.CourseID"
+                 role="alert"
+                 data-delay="1000">
+                <div class="toast-body">
+                    <h2 class="" id="text-@Model.CourseID" style="color:black !important;"></h2>
+                </div>
+            </div>
+        </div>
         <div class="row no-gutters justify-content-center">
-
             <div class="col-12">
                 <div class="card-title-image position-relative">
                     <div class="
@@ -31,13 +38,32 @@
                   ">
                         上課囉
                     </div>
-                    <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                        <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                    </div>
                 </a>
+                @if (Request.IsAuthenticated)
+                {
+                    if (Model.favorite)
+                    {
+                        <div class="backgroundBookmark backgroundBookmarkChecked position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")" class="text-decoration-none p-0 w-100 h-100">
+                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                        </div>
+                    </a>
+                }
             </div>
-
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify" id="cardTitle">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify cardTitle">
                 <h4 class="card-title text-justify font-weight-normal text-secondary">
                     @Html.DisplayFor(m => m.Title)
                 </h4>
@@ -46,19 +72,34 @@
                 <span class="card-text text-black-50">
                     <span class="star-show">
                         <i class="fas fa-star star-gray position-relative">
-                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            @if (Model.AvgScore > 0)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            @if (Model.AvgScore > 1)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            @if (Model.AvgScore > 2)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            @if (Model.AvgScore > 3)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
                         </i>
                         <i class="fas fa-star star-gray position-relative">
-                            <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            @if (Model.AvgScore > 4)
+                            {
+                                <i class="fas fa-star star-yellow position-absolute star-display"></i>
+                            }
                         </i>
                     </span>
                     (0)

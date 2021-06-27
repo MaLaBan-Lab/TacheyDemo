@@ -186,9 +186,17 @@ namespace Tachey001.Controllers
             {
                 var email = User.Identity.GetUserName();
 
-                Member member = new Member { MemberID = User.Identity.GetUserId(), Email = email };
+                PersonalUrl personalUrl = new PersonalUrl { MemberID = User.Identity.GetUserId() };
+                Member member = new Member { 
+                    MemberID = User.Identity.GetUserId(), 
+                    Email = email,Name="匿名", 
+                    JoinTime = DateTime.Now,
+                    Photo= "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM" ,
+                    About="嗨 ~"
+                };
 
                 context.Member.Add(member);
+                context.PersonalUrl.Add(personalUrl);
 
                 context.SaveChanges();
             }

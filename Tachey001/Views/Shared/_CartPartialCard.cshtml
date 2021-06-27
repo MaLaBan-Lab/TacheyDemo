@@ -1,32 +1,43 @@
 ﻿
-
+@model Tachey001.ViewModel.CartPartialCardViewModel
 <div>
     @*<div class="purchase-plans-header flex marg-t-20">
-        <span class="course-name w-25">課程名稱</span>
-        <span class="course-status txt-center">課程狀態</span>
-        <span class="original-price txt-center">售價</span>
-        <span class="price txt-right">付款金額</span>
-    </div>*@
+            <span class="course-name w-25">課程名稱</span>
+            <span class="course-status txt-center">課程狀態</span>
+            <span class="original-price txt-center">售價</span>
+            <span class="price txt-right">付款金額</span>
+        </div>*@
     <section class="sc-1bv2ylx-0 gQwyiQ marg-t-20">
-        <div class="top-container pad-tb-15 pad-rl-15">
+        <div class="top-container pad-tb-15 pad-rl-15 border">
             <div class="course-info flex flex-1">
-                <a href="/courses/5ce99ccdea2d0500209afca2">
-                    <img class="cx4oas-0  course-cover-img marg-b-5 marg-r-15 loaded" src="https://images.api.hahow.in/images/5d2e87779cf9ea0021ea946d">
+                <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})">
+                    <img class="cx4oas-0  course-cover-img marg-b-5 marg-r-15 loaded" src="@Model.TitlePageImageURL">
                 </a>
                 <div class="title-col">
                     <span class="course-title">
-                        <a href="/courses/5ce99ccdea2d0500209afca2" class="a-color">零基礎輕鬆學：流行鋼琴【即興伴奏】彈唱</a>
+                        <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})" class="a-color text-decoration-none">@Model.Title</a>
                     </span>
 
                 </div>
             </div>
             <div class="price-info flex-1">
                 <div class="type-and-price-detail flex-2">
-                    <div class="type-col flex-2">已開課</div>
+                    @if (Model.CreateVerify == true)
+                    {
+                        <div class="type-col flex-2">
+                            已開課
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="type-col flex-2">
+                            未開課
+                        </div>
+                    }
                     <div class="price-detail-col flex-3">
                         <div class="price-diff-col">
                             <div class="price-text">
-                                <span>NT$2,380</span>
+                                <span>@Model.OriginalPrice.ToString("C0")</span>
                             </div>
                         </div>
                         <div class="discount-col"></div>
@@ -35,20 +46,21 @@
                 </div>
                 <div class="subtotal-col flex-1">
                     <div>
-                        <div class="subtotal-text">NT$2,380</div><div class="subtotal-original-text">約 NT$2,380</div>
+                        <div class="subtotal-text">@Model.OriginalPrice.ToString("C0")</div><div class="subtotal-text">約 @Model.OriginalPrice.ToString("C0")</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="bottom-area  pad-r-20 ">
+        <div class="bottom-area  pad-r-20 border">
             <div class="btns-area flex">
                 <div class="undefined func-btn">
-                    <span aria-hidden="true" class="fa fa-bookmark"></span>
-                    <span class="marg-l-5">移至收藏</span>
+                    <span class="fa fa-bookmark"></span>
+                    <span class="marg-l-5">@Html.ActionLink("移至收藏", "MoveRowCartsToOwner", "Member", new { CourseId = Model.CourseID ,MemberId= ViewBag.MemberId }, new { @class = "text-decoration-none text-white"})</span>
                 </div>
                 <div class="func-btn marg-l-30">
-                    <span aria-hidden="true" class="fa fa-trash"></span><span class="marg-l-5">刪除</span>
+                    <span class="fa fa-trash"></span>
+                    <span class="marg-l-5">@Html.ActionLink("刪除", "DeleteRowCarts", "Member", new { CourseId = Model.CourseID ,MemberId= ViewBag.MemberId }, new { @class = "text-decoration-none text-white"})</span>
                 </div>
             </div>
         </div>

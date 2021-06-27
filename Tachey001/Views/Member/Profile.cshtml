@@ -1,9 +1,17 @@
-﻿@Styles.Render("~/Assets/css/personal.css")
+﻿@model Tachey001.ViewModel.Member.MemberGroup
+@*@model PersonalUrl*@
+@Styles.Render("~/Assets/css/personal.css")
+@Styles.Render("~/Assets/css/card.css")
 
 @{
-    ViewBag.Title = "Profile"; Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+    ViewBag.Title = "Profile";
 }
 
+@{
+
+//IEnumerable<PersonalUrl> personalUrls = ViewData["PersonalUrls"] as IEnumerable<PersonalUrl>;
+//IEnumerable<Member> members = ViewData["Members"] as IEnumerable<Member>;
+}
 
 <div class="container">
 
@@ -19,83 +27,261 @@
                             <div class="profile-image-wrapper marg-b-25">
                                 <div class="user-img-block profile-image profile-image-xlg " size="170">
                                     <a class="no-pointer" href="/">
-                                        <!-- js edit -->
-                                        <img src="/Assets/img/dd.jpg" width="" class="user-img">
-                                        <!-- js edit -->
+                                        @foreach (var item in Model.memberViewModels)
+                                        {
+                                            <img src=@(item.Photo) width="" class="user-img">
+                                        }
                                     </a>
                                 </div>
                                 <div class="upload-btn">
-                                    <!-- <input accept="" type="file" class="sc-1e89eo2-7 gzJgBZ"> -->
+                                    <input accept=".jpg,.png" id="photo_file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@>
                                     <div class="click-container">
-                                        <button class="cancel-btn" height="50px" width="50px">
-                                            <span aria-hidden="true" class="fa fa-times"></span>
+                                        <button class="cancel-btn-photo" height="50px" width="50px">
+                                            <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                             <div class="username editable">
-                                <!-- js edit -->
                                 <h3>
-                                    底迪
-                                    <span class="pan edit-icon">
-                                        <span aria-hidden="true" class="fa fa-pencil"></span>
+                                    @foreach (var item in Model.memberViewModels)
+                                    {
+                                        @(item.Name)
+                                    }
+                                    <span class="pan edit-icon" id="name-textarea-pen">
+                                        <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                     </span>
                                 </h3>
-                                <!-- js edit -->
+                                @using (Html.BeginForm("ProfileName", "Member", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="username-input-block" style="display: none;">
+                                        <div class="username-input">
+                                            <div class="input-wrapper flex relative">
+                                                <!-- db edit -->
+                                                @Html.EditorFor(m => m.member.Name, new { htmlAttributes = new { @class = "input-element", @id = "name-input-textarea", @Value = ViewBag.name } })
+                                                @*<input type="text" class="input-element" id="name-input-textarea" value=@(ViewBag.name)>*@
+                                                <!-- db edit -->
+                                            </div>
+                                        </div>
+                                        <div class="txt-center marg-tb-10">
+                                            <button class="name-style name-cancel marg-r-5" name="submitButton" value="Cancel">取消</button>
+                                            <button class="name-style name-submit marg-l-5" name="submitButton" value="Send">確定</button>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                             <div class="links editable">
                                 我的網站連結
-                                <span class="pan links-edit-icon">
-                                    <span aria-hidden="true" class="fa fa-pencil"></span>
+                                <span class="pan links-edit-icon" id="website-textarea-pen">
+                                    <span aria-hidden="true" class="fas fa-pencil-alt"></span>
                                 </span>
                             </div>
+                            <!--彈跳視窗-->
+                            @using (Html.BeginForm("ProfileConnection", "Member", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div>
+                                    <div class="styles-overlay" style="z-index: 10130; align-items: unset; padding: 50px 15px 15vh; display: none;">
+                                        <div class="styles-modal">
+                                            <h4 class="styles-overlay-title pad-tb-15 text-center">社群網站連結</h4>
+                                            <div overflow="hidden" class="">
+                                                <div>
+                                                    @foreach (var item in Model.memberViewModels)
+                                                    {
+                                                        @Html.HiddenFor(m => item)
+                                                        <div>
+                                                            <span>Facebook 個人頁面網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => m.member.FbUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.fbConnection, @placeholder = "https://www.facebook.com/yourAccountId" } })
+                                                                    @*<input placeholder="https://www.facebook.com/yourAccountId" class="input-element" data-type="facebook" value=@(ViewBag.fbConnection)>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span>Google Plus 個人頁面網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.GoogleUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.googleConnection, @placeholder = "https://plus.google.com/yourAccountId/posts" } })
+                                                                    @*<input placeholder="https://plus.google.com/yourAccountId/posts" class="input-element" data-type="googlePlus" value=@(ViewBag.googleConnection)>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span>YouTube 頻道</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.YouTubeUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.ytConnection, @placeholder = "https://www.youtube.com/yourChannel" } })
+                                                                    @*<input placeholder="https://www.youtube.com/yourChannel" class="input-element" data-type="youtube" value=@(ViewBag.ytConnection)>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span>Behance 網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.BehanceUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.behanceConnection, @placeholder = "https://www.behance.net/yourName" } })
+                                                                    @*<input placeholder="https://www.behance.net/yourName" class="input-element" data-type="behance" value=@(ViewBag.behanceConnection)>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span>Pinterest 網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.PinterestUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.pinterestConnection, @placeholder = "https://www.pinterest.com/yourName/" } })
+                                                                    @*<input placeholder="https://www.pinterest.com/yourName/" class="input-element" data-type="pinterest" value=@(ViewBag.pinterestConnection)>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span>個人網站或部落格網址</span>
+                                                            <div class="marg-b-15">
+                                                                <div class="input-wrapper flex relative">
+                                                                    @Html.EditorFor(m => item.BlogUrl, new { htmlAttributes = new { @class = "input-element", @Value = ViewBag.blogConnection, @placeholder = "https://www.yourBlog.com/" } })
+                                                                    @*<input placeholder="https://www.yourBlog.com/" class="input-element" data-type="website" value=@(ViewBag.blogConnection)>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <div class="txt-right">
+                                                    <button class="cancel-btn marg-r-5 style-cancel-btn" name="submitButton" value="Cancel">取消</button>
+                                                    <button class="submit-btn marg-l-5 style-submit-btn" name="submitButton" value="Send">確定</button>
+                                                </div>
+                                                <button class="styles-close-button">
+                                                    <span aria-hidden="true" class="fas fa-times"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <!--彈跳視窗-->
+
                         </div>
                         <div class="course">
-                            <div><span class="txt-small">已參加</span><!-- js edit --><span class="hightlight">0 堂課</span><!-- js edit --></div>
-                            <div><span class="txt-small">已開設</span><!-- js edit --><span class="hightlight">0 堂課</span><!-- js edit --></div>
+                            <div><span class="txt-small">已參加</span><span class="hightlight">@(ViewBag.takeCourseCount) 堂課</span></div>
+                            <div><span class="txt-small">已開設</span><span class="hightlight">@(ViewBag.giveCourseCount) 堂課</span></div>
                         </div>
+
                         <!-- 關於我 -->
-                        <div class="user-info-edit pad-rl-30">
-                            <div class="info editable">
-                                <h6 class="marg-b-0"><b>關於我</b></h6>
-                                <div class="about-content editable">
-                                    <!-- js edit -->
-                                    <span>
-                                        簡單介紹一下自己吧！
-                                        <span class="pan marg-l-10">
-                                            <span aria-hidden="true" class="fa fa-pencil"></span>
+                        <div class="user-info-edit pad-rl-30 mt-3">
+                            @using (Html.BeginForm("ProfileAbout", "Member", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="info editable">
+                                    <h6 class="marg-b-0"><b>關於我</b></h6>
+                                    <div class="about-content editable about-content-intro">
+                                        <span style="display: flex;">
+                                            @foreach (var item in Model.memberViewModels)
+                                            {
+                                                <p id="intro-p">@(item.About)</p>
+                                            }
+                                            <span class="pan marg-l-10" id="intro-textarea-pen">
+                                                <span aria-hidden="true" class="fas fa-pencil-alt"></span>
+                                            </span>
                                         </span>
-                                    </span>
-                                    <!-- js edit -->
+                                    </div>
+                                    <div id="intro-textarea" style="display: none;">
+                                        <div class="marg-tb-10 textarea">
+                                            @Html.TextAreaFor(m => m.member.About, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @Value = ViewBag.about, @placeholder = "簡單介紹一下自己吧！" } })
+                                            @*<textarea class="textarea-content marg-tb-10 textarea" id="intro-textarea-content" placeholder="簡單介紹一下自己吧！" rows="2"></textarea>*@
+                                        </div>
+                                        <div class="txt-right">
+                                            <button class="cancel-btn textarea-cancel-btn marg-r-5" name="submitButton" value="Cancel">取消</button>
+                                            <button class="submit-btn textarea-submit-btn marg-l-5" name="submitButton" value="Send">確定</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="info editable">
-                                <h6 class="marg-b-0"><b>自己的專長</b></h6>
-                                <div class="about-content editable">
-                                    <!-- js edit -->
-                                    <span>
-                                        有什麼擅長的事情嗎？
-                                        <span class="pan marg-l-10">
-                                            <span aria-hidden="true" class="fa fa-pencil"></span>
+                            }
+
+                            @using (Html.BeginForm("ProfileExpertise", "Member", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="info editable">
+                                    <h6 class="marg-b-0"><b>自己的專長</b></h6>
+                                    <div class="about-content editable about-content-expert">
+                                        <span style="display: flex;">
+                                            @foreach (var item in Model.memberViewModels)
+                                            {
+                                                <p id="expert-p">@(item.Expertise)</p>
+                                            }
+
+                                            <span class="pan marg-l-10" id="expert-textarea-pen">
+                                                <span aria-hidden="true" class="fas fa-pencil-alt"></span>
+                                            </span>
                                         </span>
-                                    </span>
-                                    <!-- js edit -->
+                                    </div>
+                                    <div id="expert-textarea" style="display: none;">
+                                        <div class="marg-tb-10 textarea">
+                                            @Html.TextAreaFor(m => m.member.Expertise, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @Value = ViewBag.expertise, @placeholder = "有什麼擅長的事情嗎？" } })
+                                            @*<textarea class="textarea-content marg-tb-10 textarea" id="expert-textarea-content" placeholder="有什麼擅長的事情嗎？" rows="2"></textarea>*@
+                                        </div>
+                                        <div class="txt-right">
+                                            @*<input type="submit" value="儲存，下一步" class="btn btn-outline-secondary btn-lg px-5" />*@
+                                            <button class="cancel-btn textarea-cancel-btn marg-r-5" name="submitButton" value="Cancel">取消</button>
+                                            <button class="submit-btn textarea-submit-btn marg-l-5" name="submitButton" value="Send">確定</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="info editable">
-                                <h6 class="marg-b-0"><b>感興趣的事物</b></h6>
-                                <div class="about-content editable">
-                                    <!-- js edit -->
-                                    <span>
-                                        平常喜歡做什麼呢？
-                                        <span class="pan marg-l-10">
-                                            <span aria-hidden="true" class="fa fa-pencil"></span>
+                            }
+
+                            @*.caoJBn {
+                                width: 100%;
+                                margin-bottom: 10px;
+                                min-height: 42px;
+                                color: white;
+                                background-color: rgb(0, 190, 164);
+                                font-weight: 600;
+                                line-height: 1.75;
+                                border-radius: 6px;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px;
+                                padding: 0px 20px;
+                                display: flex;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                }*@
+
+                            @*<div class="sc-19hrkds-1 caoJBn"><div class="toaster-icon pad-tb-15 pad-r-20 marg-r-20"><span aria-hidden="true" class="fa fa-check-circle"></span></div>更新成功</div>*@
+
+                            @using (Html.BeginForm("ProfileInterest", "Member", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="info editable">
+                                    <h6 class="marg-b-0"><b>感興趣的事物</b></h6>
+                                    <div class="about-content editable about-content-like">
+                                        <span style="display: flex;">
+                                            @foreach (var item in Model.memberViewModels)
+                                            {
+                                                <p id="like-p">@(item.InterestContent)</p>
+                                            }
+
+                                            <span class="pan marg-l-10" id="like-textarea-pen">
+                                                <span aria-hidden="true" class="fas fa-pencil-alt"></span>
+                                            </span>
                                         </span>
-                                    </span>
-                                    <!-- js edit -->
+                                    </div>
+                                    <div id="like-textarea" style="display: none;">
+                                        <div class="marg-tb-10 textarea">
+                                            @Html.TextAreaFor(m => m.member.Interest, new { htmlAttributes = new { @class = "textarea-content marg-tb-10 textarea", @id = "like-textarea-content", @Value = ViewBag.interestContent, @placeholder = "平常喜歡做什麼呢？" } })
+                                            @*<textarea class="textarea-content marg-tb-10 textarea" id="like-textarea-content" placeholder="平常喜歡做什麼呢？" rows="2"></textarea>*@
+                                        </div>
+                                        <div class="txt-right">
+                                            <button class="cancel-btn textarea-cancel-btn marg-r-5" name="submitButton" value="Cancel">取消</button>
+                                            <button class="submit-btn textarea-submit-btn marg-l-5" name="submitButton" value="Send">確定</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -126,33 +312,63 @@
         </div>
 
         <!-- 右邊資訊填寫 -->
-        <div class="col-xl">
+        <div class="col-xl-9">
             <!-- 個人頁面 -->
             <section class="marg-b-30">
                 <div class="personal-page pad-rl-0">
                     <div class="ta-l">
                         <div class="relative pad-rl-0">
-                            <!-- js edit -->
                             <div class="cover-image">
-                                <img alt="icon"
-                                     class=""
-                                     src="/Assets/img/member/cover-default.png">
+                                @foreach (var item in Model.memberViewModels)
+                                {
+                                    <img alt="icon" class="" src=@(item.Theme)>
+                                }
+
                             </div>
-                            <!-- js edit -->
                             <div class="upload-btn">
-                                <!-- <input accept="" type="file" class="sc-1e89eo2-7 gzJgBZ"> -->
+                                <input accept=".jpg,.png" id="file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@>
                                 <div class="click-container">
-                                    <button class="update-btn" height="50px" width="50px">
-                                        <span aria-hidden="true" class="fa fa-cloud-upload"></span>
+                                    <button class="update-btn" height="50px" width="50px" onclick="file.click()">
+                                        <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div class="marg-rl-25 pad-b-5">
-                            <div class="tab-block underline marg-b-5">
-                                <span contenttext="編輯" aria-hidden="true" class="fa fa-pencil pp-edit pull-right pad-tb-15"></span>
+                            <div class="text-context">
+                                <div class="tab-block underline marg-b-5" id="text-textarea-pen">
+                                    <span contenttext="編輯" aria-hidden="true" class="fas fa-pencil-alt pp-edit pull-right pad-tb-15"></span>
+                                </div>
+                                @foreach (var item in Model.memberViewModels)
+                                {
+                                    <p>@(item.Introduction)</p>
+                                }
+
                             </div>
-                            <p>編輯個人頁面，和大家分享更多精彩故事</p>
+                            <!--編輯框-->
+                            @using (Html.BeginForm("ProfileIntro", "Member", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="row text-secondary mt-4" style="display:none;">
+                                    <div class="col-xl mb-5">
+                                        <!-- The toolbar will be rendered in this container. -->
+                                        <div id="toolbar-container"></div>
+
+                                        <!-- This container will become the editable. -->
+                                        <div id="editor" class="border">
+                                            <!--db edit-->
+                                            @Html.TextAreaFor(m => m.member.Introduction, new { htmlAttributes = new { @Value = ViewBag.Introduction } })
+                                            <!--db edit-->
+                                        </div>
+                                    </div>
+                                    <div class="txt-right">
+                                        <button class="cancel-btn text-cancel-btn marg-r-5" name="submitButton" value="Cancel">取消</button>
+                                        <button class="submit-btn text-submit-btn marg-l-5" name="submitButton" value="Send">確定</button>
+                                    </div>
+                                </div>
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -163,9 +379,17 @@
                 <div class="course-overview underline">
                     <h4>我開的課</h4><span class="spacer"></span><input type="checkbox" checked="">公開我開的課
                 </div>
+                <!-- 課程卡 -->
                 <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
+                    <div class="briefs-container row mt-1">
+                        @*@{
+
+                                ViewBag.ParentViewBag = ViewBag;
+                            }*@
+                        @*@for (var i = 0; i < 30; i++)
+                            {
+                                @Html.Partial("CardTemplate")
+                            }*@
                     </div>
                 </div>
             </div>
@@ -175,9 +399,13 @@
                 <div class="course-overview underline">
                     <h4>我修的課</h4><span class="spacer"></span><input type="checkbox" checked="">公開我修的課
                 </div>
+                <!-- 課程卡 -->
                 <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
+                    <div class="briefs-container row mt-1">
+                        @*@for (var i = 0; i < 30; i++)
+                            {
+                                @Html.Partial("CardTemplate")
+                            }*@
                     </div>
                 </div>
             </div>
@@ -187,77 +415,100 @@
                 <div class="course-overview underline">
                     <h4>我收藏的課</h4><span class="spacer"></span><input type="checkbox" checked="">公開我收藏的課
                 </div>
+                <!-- 課程卡 -->
                 <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
+                    <div class="briefs-container row mt-1">
+                        @*@for (var i = 0; i < 30; i++)
+                            {
+                                @Html.Partial("CardTemplate")
+                            }*@
                     </div>
                 </div>
             </div>
 
             <!-- 我購買的文章 -->
-            <div class="marg-b-30">
-                <div class="course-overview underline">
-                    <h4>我購買的文章</h4><span class="spacer"></span><input type="checkbox" checked="">公開我購買的文章
-                </div>
-                <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
+            @*<div class="marg-b-30">
+                    <div class="course-overview underline">
+                        <h4>我購買的文章</h4><span class="spacer"></span><input type="checkbox" checked="">公開我購買的文章
                     </div>
-                </div>
-            </div>
+                    <div class="course-card">
+                        <div class="briefs-container row mt-1">
+                            @for (var i = 0; i < 30; i++)
+                            {
+                                @Html.Partial("CardTemplate")
+                            }
+                        </div>
+                    </div>
+                </div>*@
 
             <!-- 我收藏的文章 -->
-            <div class="marg-b-30">
+            <!--<div class="marg-b-30">
                 <div class="course-overview underline">
                     <h4>我收藏的文章</h4><span class="spacer"></span><input type="checkbox" checked="">公開我收藏的文章
                 </div>
                 <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
-                    </div>
+                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">-->
+            <!-- 課程卡 -->
+            <!--</div>
                 </div>
-            </div>
-
+            </div>-->
             <!-- 我的課程作品 -->
             <div class="marg-b-30">
                 <div class="course-overview underline">
                     <h4>我的課程作品</h4><span class="spacer"></span><input type="checkbox" checked="">公開我的課程作品
                 </div>
+                <!-- 課程卡 -->
                 <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
+                    <div class="briefs-container row mt-1">
+                        @*@for (var i = 0; i < 30; i++)
+                            {
+                                @Html.Partial("CardTemplate")
+                            }*@
                     </div>
                 </div>
             </div>
 
             <!-- 我的願望 -->
-            <div class="marg-b-30">
+            <!--<div class="marg-b-30">
                 <div class="course-overview underline">
                     <h4>我的願望</h4><span class="spacer"></span><input type="checkbox" checked="">公開我的願望
                 </div>
                 <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
-                    </div>
+                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">-->
+            <!-- 課程卡 -->
+            <!--</div>
                 </div>
-            </div>
-
+            </div>-->
             <!-- 我收藏的願望 -->
-            <div class="marg-b-30">
+            <!--<div class="marg-b-30">
                 <div class="course-overview underline">
                     <h4>我收藏的願望</h4><span class="spacer"></span><input type="checkbox" checked="">公開我收藏的願望
                 </div>
                 <div class="course-card">
-                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">
-                        <!-- 課程卡 -->
-                    </div>
+                    <div class="briefs-container brief-col-lg-3 brief-col-md-2 brief-col-sm-2 brief-col-xs-1">-->
+            <!-- 課程卡 -->
+            <!--</div>
                 </div>
-            </div>
-
+            </div>-->
 
 
         </div>
     </div>
 </div>
 
+@Scripts.Render("~/Assets/js/personal.js")
+@section endJS{
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
+    <script>
+        DecoupledEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                const toolbarContainer = document.querySelector('#toolbar-container');
 
+                toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

@@ -1,0 +1,51 @@
+﻿@model Tachey001.ViewModel.Course.QuestionCard
+
+<div class="media border p-3" id="ques-@Model.QuestionID">
+    <img src="@Model.Photo"
+         class="mr-3 rounded-circle"
+         style="width: 55px; height: 55px;" />
+    <div class="media-body">
+        <h5 class="mt-0">@Model.Name</h5>
+        <p>
+            @Model.QuestionContent
+        </p>
+        <p>
+            <span class="">@Model.QuestionDate</span><button class="btn">
+                <i class="far fa-heart text-white"></i>
+            </button><span class="">@Model.LikeAmount</span><button class="btn"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapse-@Model.QuestionID">
+                <i class="far fa-comment text-white"></i>
+            </button><span class="">@Model.AnsAmount</span>
+        </p>
+
+        <div id="collapse-@Model.QuestionID" class="collapse" data-parent="#ques-@Model.QuestionID">
+
+            @foreach (var ans in Model.GetAnswerCards)
+            {
+                @Html.Partial("_AnswerPartial", ans);
+            }
+
+            @*送出回答*@
+            @using (Html.BeginForm("CreateAnswer", "Courses", new { CourseId = Model.CourseID, QuestionId = Model.QuestionID }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="media mt-3">
+                    <img src="@Model.CurrentPhoto"
+                         class="mr-3 rounded-circle"
+                         style="width: 55px; height: 55px;" />
+                    <div class="media-body">
+                        <h5 class="mt-0">@Model.CurrentName</h5>
+                        <p class="pr-4">
+                            @Html.TextAreaFor(x=>x.PostAnswer.AnswerContent, 4, 80, new { @class = "w-100"})
+                        </p>
+                        <p class="text-right pr-4">
+                            <button class="btn" type="submit"><i class="fas fa-edit text-white"></i></button>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

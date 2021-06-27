@@ -1,0 +1,18 @@
+﻿@model Tachey001.ViewModel.Course.AnswerCard
+
+<div class="media mt-3">
+    <img src="@Model.Photo"
+         class="mr-3 rounded-circle"
+         style="width: 55px; height: 55px;" />
+    <div class="media-body">
+        <h5 class="mt-0">@Model.Name</h5>
+        <p>
+            @Model.AnswerContent
+        </p>
+        <p>
+            <span class="">@Model.AnswerDate</span><button class="btn">
+                <i class="far fa-heart text-white"></i>
+            </button><span class="">@Model.LikeAmount</span>
+        </p>
+    </div>
+</div>
