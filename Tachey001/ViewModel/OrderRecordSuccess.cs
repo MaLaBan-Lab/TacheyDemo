@@ -7,6 +7,7 @@ namespace Tachey001.ViewModel
 {
     public class OrderRecordSuccess
     {
+        
         public string OrderID { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? PayDate { get; set; }

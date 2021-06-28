@@ -17,6 +17,6 @@ namespace Tachey001.ViewModel
         public string MemberID { get; set; }
         public string Photo { get; set; }
         public int AvgScore { get; set; }
-        public Boolean Favorites { get; set; }
+        public bool favorite { get; set; }
     }
 }

@@ -9,11 +9,12 @@ namespace Tachey001.Models
     [Table("Owner")]
     public partial class Owner
     {
-        [Required]
-        [StringLength(128)]
+        [Key]
+        [Column(Order = 0)]
         public string MemberID { get; set; }
 
         [Key]
+        [Column(Order = 1)]
         public string CourseID { get; set; }
     }
 }

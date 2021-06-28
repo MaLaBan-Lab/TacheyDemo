@@ -3,7 +3,7 @@
 }
 
 .star-yellow {
-    color: #ffae00;
+    color: rgb(233 229 77);
     left: 0;
 }
 
@@ -100,6 +100,25 @@
     transform: scale(1.2);
 }
 
+.card:hover .cartBox {
+    visibility: visible !important;
+    background-color: black;
+    opacity: 0.9;
+    z-index: 5;
+}
+
+.cartBox-add:hover {
+    color: #FFEB00 !important;
+}
+
+.cartBox-intro:hover {
+    color: #FFEB00 !important;
+}
+
+.cartBox-del:hover {
+    color: #FFEB00 !important;
+}
+
 .card:hover .editBox {
     visibility: visible !important;
     background-color: black;
@@ -116,7 +135,7 @@
 }
 
 @media (min-width: 768px) {
-    #cardTitle {
+    .cardTitle {
         height: 60px;
         overflow: hidden;
         text-overflow: ellipsis;

@@ -27,15 +27,23 @@ namespace Tachey001.Service.Home
             var member = _HomeRepository.GetMembers();
             var coursescore = _HomeRepository.GetCourseScores();
             var result = from m in member
-                         join c in coursescore on m.MemberID equals c.MemberID
+                         join c in coursescore on m.MemberID equals c.MemberID 
                          select new CommentViewModel { Name = m.Name, Photo = m.Photo, ToTachey = c.ToTachey };
             //要建view model接資料
-            return result.ToList();
+            return result.Take(3).ToList();
         }
         public List<CourseCardViewModel> GetCourseCardViewModels(string MemberId)
         {
             var member = _tacheyRepository.GetAll<Models.Member>();
             var course = _tacheyRepository.GetAll<Models.Course>();
+            var coursescore = _tacheyRepository.GetAll<CourseScore>();
+            var owner = _tacheyRepository.GetAll<Owner>(x => x.MemberID == MemberId);
+
+            var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
+            {
+                id = z.Key,
+                score = z.Average(x => x.Score)
+            });
 
             var all = from c in course
                          join m in member on c.MemberID equals m.MemberID
@@ -47,12 +55,22 @@ namespace Tachey001.Service.Home
                              TotalMinTime = c.TotalMinTime,
                              OriginalPrice = c.OriginalPrice,
                              TitlePageImageURL = c.TitlePageImageURL,
+                             AvgScore = 0,
                              favorite = false
                          };
 
             var result = all.ToList();
 
-            var owner = _tacheyRepository.GetAll<Owner>(x => x.MemberID == MemberId);
+            foreach (var item in result)
+            {
+                foreach (var score in advscore)
+                {
+                    if (item.CourseID == score.id)
+                    {
+                        item.AvgScore = Convert.ToInt32(score.score);
+                    }
+                }
+            }
 
             if (owner.Count() != 0)
             {
@@ -74,8 +92,7 @@ namespace Tachey001.Service.Home
         {
             var course = _HomeRepository.GetCourses();
             var result = from c in course
-                         select new
-HighlightCourseViewModel
+                         select new HighlightCourseViewModel
                          {
                              Title = c.Title,
                              Introduction = c.Introduction,

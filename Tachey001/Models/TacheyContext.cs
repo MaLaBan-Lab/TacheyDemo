@@ -13,6 +13,8 @@ namespace Tachey001.Models
         }
 
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<Answer> Answer { get; set; }
+        public virtual DbSet<AnswerLike> AnswerLike { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
@@ -32,10 +34,10 @@ namespace Tachey001.Models
         public virtual DbSet<Owner> Owner { get; set; }
         public virtual DbSet<Point> Point { get; set; }
         public virtual DbSet<Question> Question { get; set; }
+        public virtual DbSet<QuestionLike> QuestionLike { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
-        public virtual DbSet<Answer> Answer { get; set; }
         public virtual DbSet<PersonalUrl> PersonalUrl { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -70,14 +72,6 @@ namespace Tachey001.Models
             modelBuilder.Entity<Order_Detail>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Question>()
-                .Property(e => e.ChapterID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Question>()
-                .Property(e => e.UnitID)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Ticket>()
                 .Property(e => e.Discount)
