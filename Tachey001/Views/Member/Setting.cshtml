@@ -1,6 +1,7 @@
 ﻿@*@model Tachey001.Models.Member*@
 @model Tachey001.ViewModel.Member.MemberGroup
 @Styles.Render("~/Assets/css/member.css")
+@Styles.Render("~/Assets/css/choice.css")
 @{
     ViewBag.Title = "Setting";
 }
@@ -340,39 +341,39 @@
                         @foreach (var item in Model.memberViewModels)
                         {
 
-                        
+
                             <div class="flex">
                                 <div class="email-input">
                                     <div class="flex">
                                         <input placeholder="信箱" type="email" class="mail-input" value=@(item.Email)>
                                         @*@using (Html.BeginForm("Email", "Member", new { CourseId = ViewBag.MemberId }))
-                        {
-                            @Html.AntiForgeryToken()
+                                            {
+                                                @Html.AntiForgeryToken()
 
-                            @Html.EditorFor(m => m.Tool, new { htmlAttributes = new { @class = "mail-input" } })
-                                                    }*@
+                                                @Html.EditorFor(m => m.Tool, new { htmlAttributes = new { @class = "mail-input" } })
+                                                                        }*@
                                     </div>
                                 </div>
-                                
-                                    @if (item.EmailStatus == null || item.EmailStatus == false)
-                                    {
-                                        <button class="verification-btn">
-                                            <div>
-                                                <span aria-hidden="true" class="fas fa-envelope"></span>&nbsp;驗證&nbsp;
-                                            </div>
-                                        </button>
-                                    }
-                                    else
-                                    {
-                                        <button disabled class="verification-btn-disable">
-                                            &nbsp;已驗證&nbsp;
-                                        </button>
-                                    }
-                                
-                                
+
+                                @if (item.EmailStatus == null || item.EmailStatus == false)
+                                {
+                                    <button class="verification-btn">
+                                        <div>
+                                            <span aria-hidden="true" class="fas fa-envelope"></span>&nbsp;驗證&nbsp;
+                                        </div>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button disabled class="verification-btn-disable">
+                                        &nbsp;已驗證&nbsp;
+                                    </button>
+                                }
+
+
                             </div>
-                            }
-                        </form>
+                        }
+                    </form>
                 </div>
             </div>
 
@@ -406,7 +407,7 @@
                                             </div>
                                         }
                                     }
-                                   
+
                                 </div>
                                 <!-- 生日 -->
                                 <div class="marg-t-15 birthday-wrap clearfix">
@@ -429,7 +430,7 @@
                                             @Html.DropDownList("date", (IEnumerable<SelectListItem>)ViewBag.ListDay, i.Day, new { @name = "date", @class = "bday-day" })
                                         }
 
-                                        
+
                                         <span class="marg-rl-5">日</span>
                                     </div>
                                 </div>
@@ -503,7 +504,7 @@
 
 
                                         }
-                                       
+
                                         <div class="text-center marg-t-50 confirm">
                                             <button disabled=""
                                                     class="confirm-btn">
@@ -528,21 +529,21 @@
 
                     @using (Html.BeginForm("SettingComm", "Member", FormMethod.Post))
                     {
-                <div class="marg-t-30">
-                    <label> 所在地區 </label>
-                    @foreach (var i in Model.memberViewModels)
-                    {
-                        @Html.DropDownList("area", (IEnumerable<SelectListItem>)ViewBag.SelectListArea, i.CountryRegion, new { @name = "area", @class = "reg-ddlist text-left" })
-                    }
-                </div>
+                        <div class="marg-t-30">
+                            <label> 所在地區 </label>
+                            @foreach (var i in Model.memberViewModels)
+                            {
+                                @Html.DropDownList("area", (IEnumerable<SelectListItem>)ViewBag.SelectListArea, i.CountryRegion, new { @name = "area", @class = "reg-ddlist text-left" })
+                            }
+                        </div>
 
-                <div class="marg-t-20">
-                    <label> 顯示語言 </label>
-                    @foreach (var i in Model.memberViewModels)
-                    {
-                        @Html.DropDownList("lang", (IEnumerable<SelectListItem>)ViewBag.SelectListLang, i.Language, new { @name = "lang", @class = "reg-ddlist text-left" })
-                    }
-                </div>
+                        <div class="marg-t-20">
+                            <label> 顯示語言 </label>
+                            @foreach (var i in Model.memberViewModels)
+                            {
+                                @Html.DropDownList("lang", (IEnumerable<SelectListItem>)ViewBag.SelectListLang, i.Language, new { @name = "lang", @class = "reg-ddlist text-left" })
+                            }
+                        </div>
                         <div class="marg-t-30">
 
                             <button class="close-click-btn save-basic-info-btn">儲存</button>
@@ -565,221 +566,222 @@
             <!-- 興趣與喜好 -->
             <div class="border-setting likes-area" id="likes-area">
                 <div class="ta-l">
-                    <p>你的興趣與喜好是什麼呢！？我們將根據以下資訊，提供生日優惠禮以及更加適合你的課程推薦。</p>
-                    <label class="marg-t-30" id="user-detail-interests-tags">個人興趣（多選）</label>
+                    <!--<p>你的興趣與喜好是什麼呢！？我們將根據以下資訊，提供生日優惠禮以及更加適合你的課程推薦。</p>
+                    <label class="marg-t-30" id="user-detail-interests-tags">個人興趣（多選）</label>-->
                     <!-- <div class="relative inline-block">
-                            <div class="mask pseudo-btn absolute"></div>
-                    </div> -->
-                    <button class="oval-btn-plus-text oval-btn" id="user-interest-btn">+</button>
+            <div class="mask pseudo-btn absolute"></div>
+    </div> -->
+                    <!--<button class="oval-btn-plus-text oval-btn" id="user-interest-btn">+</button>-->
                     <!-- 彈跳視窗-我的興趣 -->
-                    <div>
-                        <div class="overlay-interest" style=" display: none;">
-                            <div class="overlay-interest-modal">
-                                <h4 class="overlay-interest-h4 pad-tb-15 text-center">
-                                    我的興趣（多選）
-                                </h4>
-                                <div overflow="unset"
-                                     class="overlay-interest-block">
-                                    <div class="overlay-interest-size flex-column relative">
-                                        <div class="selected-items-bar">
-                                            <span class="description inline-block text-bold marg-t-10 marg-b-20">已選興趣：</span>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div>
-                                                <!-- first row -->
-                                                <div class="categories-wrap flex ">
-                                                    @{int count = 0;}
-                                                    @foreach (var i in Model.courseViewModels.courseCategory)
-                                                    {
+                    <!--<div>
+    <div class="overlay-interest" style=" display: none;">
+        <div class="overlay-interest-modal">
+            <h4 class="overlay-interest-h4 pad-tb-15 text-center">
+                我的興趣（多選）
+            </h4>
+            <div overflow="unset"
+                 class="overlay-interest-block">
+                <div class="overlay-interest-size flex-column relative">
+                    <div class="selected-items-bar">
+                        <span class="description inline-block text-bold marg-t-10 marg-b-20">已選興趣：</span>
+                    </div>
+                    <div class="flex-1">
+                        <div>-->
+                    <!-- first row -->
+                    <!--<div class="categories-wrap flex ">
+            @*@{int count = 0;}
+            @foreach (var i in Model.courseViewModels.courseCategory)
+            {
 
-                                                        if (count >= 4)
-                                                        {
-                                                            break;
-                                                        }
-                                                        <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
-                                                            <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
-                                                            <span class="block">@i.CategoryName</span>
-                                                        </div>
-                                                        count++;
-                                                    }
+                if (count >= 4)
+                {
+                    break;
+                }
+                <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
+                    <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                    <span class="block">@i.CategoryName</span>
+                </div>
+                count++;
+            }*@
 
-                                                </div>
-                                                <div class="interval toggle toggle-first">
-                                                    <div class="items-wrap text-center pad-tb-20 pad-rl-30">
-                                                        
-                                                        @{count = 0;}
-                                                        @foreach (var i in ViewBag.interestDetil)
-                                                        {
-                                                            if (count < 4)
-                                                            {
-                                                                <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
-                                                                foreach (var j in i.Value)
-                                                                {
-                                                                    foreach (var k in Model.memberViewModels)
-                                                                    {
-                                                                        if (k.Interest != null)
-                                                                        {
-                                                                            if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
-                                                                            {
-                                                                                <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                            }
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                        }
-                                                                    }
+        </div>
+        <div class="interval toggle toggle-first">
+            <div class="items-wrap text-center pad-tb-20 pad-rl-30">
 
-                                                                }
-                                                            }
-                                                            count++;
+                @*@{count = 0;}
+                @foreach (var i in ViewBag.interestDetil)
+                {
+                    if (count < 4)
+                    {
+                        <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                        foreach (var j in i.Value)
+                        {
+                            foreach (var k in Model.memberViewModels)
+                            {
+                                if (k.Interest != null)
+                                {
+                                    if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
+                                    {
+                                        <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                }
+                            }
 
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <!-- second row -->
-                                                <div class="categories-wrap flex ">
-                                                    @{count = 0;}
-                                                    @foreach (var i in Model.courseViewModels.courseCategory)
-                                                    {
-                                                        if (count > 3 && count <= 7)
-                                                        {
-                                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
-                                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
-                                                                <span class="block">@i.CategoryName</span>
-                                                            </div>
-                                                        }
-                                                        count++;
-                                                    }
+                        }
+                    }
+                    count++;
 
-                                                </div>
-                                                <div class="interval toggle toggle-second">
-                                                    <div class="items-wrap text-center pad-tb-20 pad-rl-30">
-                                                        @{count = 0;}
-                                                        @foreach (var i in ViewBag.interestDetil)
-                                                        {
-                                                            if (count > 3 && count <= 7)
-                                                            {
-                                                                <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
-                                                                foreach (var j in i.Value)
-                                                                {
-                                                                    foreach (var k in Model.memberViewModels)
-                                                                    {
-                                                                        if (k.Interest != null)
-                                                                        {
-                                                                            if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
-                                                                            {
-                                                                                <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                            }
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                        }
-                                                                    }
+                }*@
+            </div>
+        </div>-->
+                    <!-- second row -->
+                    <!--<div class="categories-wrap flex ">
+        @*@{count = 0;}
+        @foreach (var i in Model.courseViewModels.courseCategory)
+        {
+            if (count > 3 && count <= 7)
+            {
+                <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
+                    <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                    <span class="block">@i.CategoryName</span>
+                </div>
+            }
+            count++;
+        }*@
 
-                                                                }
-                                                            }
-                                                            count++;
+    </div>
+    <div class="interval toggle toggle-second">
+        <div class="items-wrap text-center pad-tb-20 pad-rl-30">
+            @*@{count = 0;}
+            @foreach (var i in ViewBag.interestDetil)
+            {
+                if (count > 3 && count <= 7)
+                {
+                    <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                    foreach (var j in i.Value)
+                    {
+                        foreach (var k in Model.memberViewModels)
+                        {
+                            if (k.Interest != null)
+                            {
+                                if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
+                                {
+                                    <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                }
+                                else
+                                {
+                                    <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                }
+                            }
+                            else
+                            {
+                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                            }
+                        }
 
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <!-- third row -->
-                                                <div class="categories-wrap flex ">
-                                                    @{count = 0;}
-                                                    @foreach (var i in Model.courseViewModels.courseCategory)
-                                                    {
+                    }
+                }
+                count++;
 
-                                                        if (count > 7)
-                                                        {
-                                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
-                                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
-                                                                <span class="block">@i.CategoryName</span>
-                                                            </div>
-                                                        }
+            }*@
+        </div>
+    </div>-->
+                    <!-- third row -->
+                    <!--<div class="categories-wrap flex ">
+                                    @*@{count = 0;}
+                                    @foreach (var i in Model.courseViewModels.courseCategory)
+                                    {
 
-                                                        count++;
-                                                    }
-                                                </div>
-                                                <div class="interval toggle toggle-third">
-                                                    <div class="items-wrap text-center pad-tb-20 pad-rl-30">
-                                                        @{count = 0;}
-                                                        @foreach (var i in ViewBag.interestDetil)
-                                                        {
-                                                            if (count > 7)
-                                                            {
-                                                                <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
-                                                                foreach (var j in i.Value)
-                                                                {
-                                                                    foreach (var k in Model.memberViewModels)
-                                                                    {
-                                                                        if (k.Interest != null)
-                                                                        {
-                                                                            if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
-                                                                            {
-                                                                                <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                            }
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                                        }
-                                                                    }
-
-
-                                                                }
-                                                            }
-                                                            count++;
-
-                                                        }
-                                                    </div>
-                                                </div>
-
-
-
+                                        if (count > 7)
+                                        {
+                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
+                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                                <span class="block">@i.CategoryName</span>
                                             </div>
+                                        }
+
+                                        count++;
+                                    }
+                                </div>
+                                <div class="interval toggle toggle-third">
+                                    <div class="items-wrap text-center pad-tb-20 pad-rl-30">
+                                        @{count = 0;}
+                                        @foreach (var i in ViewBag.interestDetil)
+                                        {
+                                            if (count > 7)
+                                            {
+                                                <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                                                foreach (var j in i.Value)
+                                                {
+                                                    foreach (var k in Model.memberViewModels)
+                                                    {
+                                                        if (k.Interest != null)
+                                                        {
+                                                            if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
+                                                            {
+                                                                <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                        }
+                                                    }
 
 
-                                        </div>
-                                        <div class="confirm marg-t-30">
-                                            <button disabled=""
-                                                    class="confirm-btn">
-                                                確認
-                                            </button>
-                                        </div>
+                                                }
+                                            }
+                                            count++;
+
+                                        }*@
                                     </div>
-                                </div><button class="close-button">
-                                    <svg class=""
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         width="25" height="25"
-                                         viewBox="0 0 36 36"
-                                         style="top: 9px; right: 9px; fill: rgba(0, 0, 0, 0.65); z-index: 2;">
-                                        <path d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z">
-                                        </path>
-                                    </svg>
-                                </button>
+                                </div>
+
+
+
                             </div>
+
+
+                        </div>
+                        <div class="confirm marg-t-30">
+                            <button disabled=""
+                                    class="confirm-btn">
+                                確認
+                            </button>
                         </div>
                     </div>
+                </div><button class="close-button">
+                    <svg class=""
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="25" height="25"
+                         viewBox="0 0 36 36"
+                         style="top: 9px; right: 9px; fill: rgba(0, 0, 0, 0.65); z-index: 2;">
+                        <path d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>-->
+                    @Html.Partial("_ChoiceCardPartial")
                     <!-- 彈跳視窗-我的興趣 -->
 
                     <label class="marg-t-30" id="user-detail-recreations">其他個人喜好（多選）</label>
                     <!-- <div class="relative inline-block">
-                            <div class="mask pseudo-btn absolute"></div>
-                    </div> -->
+            <div class="mask pseudo-btn absolute"></div>
+    </div> -->
                     <button class="oval-btn-plus-text oval-btn" id="user-like-btn">+</button>
                     <!-- 彈跳視窗-其他個人喜好 -->
                     <div>
@@ -848,29 +850,29 @@
                         </a>。
                     </p>
                 </div>
-            </div>
+                </div>
 
-            <!-- 轉移課程 -->
-            <div class="border-setting transfer-course">
-                <div class="ta-l">
-                    <p class="inline-block">
-                        申請轉移課程｜欲申請轉移請先閱讀
-                        <a class="link-primary text-bold text-underline marg-l-10"
-                           href="https://goo.gl/PRNcYR" rel="noopener noreferrer"
-                           target="_blank">操作方式</a>
-                    </p>
-                    <div>
-                        <a class="link-gray text-bold text-underline marg-r-25"
-                           href="https://goo.gl/PRNcYR" rel="noopener noreferrer"
-                           target="_blank">填表申請</a>
+                <!-- 轉移課程 -->
+                <div class="border-setting transfer-course">
+                    <div class="ta-l">
+                        <p class="inline-block">
+                            申請轉移課程｜欲申請轉移請先閱讀
+                            <a class="link-primary text-bold text-underline marg-l-10"
+                               href="https://goo.gl/PRNcYR" rel="noopener noreferrer"
+                               target="_blank">操作方式</a>
+                        </p>
+                        <div>
+                            <a class="link-gray text-bold text-underline marg-r-25"
+                               href="https://goo.gl/PRNcYR" rel="noopener noreferrer"
+                               target="_blank">填表申請</a>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
     </div>
-</div>
 
-@Scripts.Render("~/Assets/js/member.js")
-
+    @Scripts.Render("~/Assets/js/member.js")
+    @Scripts.Render("~/Assets/js/choice.js")
