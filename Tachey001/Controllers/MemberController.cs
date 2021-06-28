@@ -642,15 +642,9 @@ namespace Tachey001.Controllers
         //刪除購物車卡片
         public ActionResult DeleteRowCarts(string CourseId, string MemberId)
         {
-            try
-            {
-                _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
-                return RedirectToAction("Cart", "Member");
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Cart", "Member");
-            }
+            _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
+
+            return RedirectToAction("Cart", "Member");
         }
     }
 }

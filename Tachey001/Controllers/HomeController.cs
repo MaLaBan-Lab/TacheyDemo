@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -58,6 +59,17 @@ namespace Tachey001.Controllers
         public ActionResult CourseCard()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult CourseCard(HttpPostedFileBase file)
+        {
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/FileUploads"), fileName);
+                file.SaveAs(path);
+            }
+            return RedirectToAction("CourseCard");
         }
     }
 }

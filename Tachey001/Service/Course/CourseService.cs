@@ -227,20 +227,20 @@ namespace Tachey001.Service.Course
                     else
                     {
                         newUnit.ChapterID = i;
-                        newUnit.UnitID = $"{i}-{chapterCount}";
                         if (chapterCount % 2 == 0)
                         {
                             newUnit.UnitName = item;
                         }
                         else
                         {
+                            newUnit.UnitID = $"{i}-{(chapterCount+1)/2}";
                             newUnit.CourseURL = item;
                         }
                     }
                     if (chapterCount != 0 && chapterCount % 2 == 0)
                     {
                         _tacheyRepository.Create(newUnit);
-                        newUnit = new CourseUnit();
+                        newUnit = new CourseUnit() { CourseID = CourseId };
                     }
                     chapterCount++;
                 }
