@@ -6,4 +6,52 @@
 <h2>CourseCard測試</h2>
 
 
-<iframe allowtransparency="false" height="600" src="https://drive.google.com/embeddedfolderview?authuser=0&amp;hl=zh_TW&amp;id=1Qot3d_YES9ZIjUvkJGYI6SP95DWL6pnS#grid" width="100%"></iframe>
+<input type="file" id="input" value="" />
+<div id="fileUrl"></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    (function ($) {
+        var appUrl =
+            "https://script.google.com/macros/s/AKfycbyVZ4zAwMC2YG6y-DW-H_40Dz502tETW1iXOCX3U4LysFNnQ2oVUTEyYerdkI8Lg5U0/exec", // 網路應用程式網址
+            file,
+            fileReader;
+        $("#input").change(function () {
+            file = this.files[0];
+            if (file) {
+                fileReader = new FileReader();
+                fileReader.onload = getFileInfo;
+                fileReader.readAsDataURL(file);
+            }
+        });
+        function getFileInfo(evt) {
+            var fileName = file.name,
+                fileType = file.type,
+                dataUrl = evt.target.result,
+                base64Data = dataUrl.split(",")[1];
+            uploadFile(fileName, fileType, base64Data);
+        }
+        function uploadFile(fileName, fileType, base64Data) {
+            $.ajax({
+                type: "get",
+                crossDomain: true,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                },
+                data: {
+                    fileName: fileName,
+                    fileType: fileType,
+                    base64Data: base64Data,
+                },
+                url: appUrl,
+                success: function (fileUrl) {
+                    // 成功時回傳檔案網址
+                    $("#fileUrl").html(fileUrl);
+                },
+                error: function (e) {
+                    console.log(JSON.stringify(e));
+                },
+            });
+        }
+    })(jQuery);
+</script>
