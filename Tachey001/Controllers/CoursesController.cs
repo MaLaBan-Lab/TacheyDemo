@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Tachey001.Models;
+using Tachey001.Service;
 using Tachey001.Service.Course;
 using Tachey001.ViewModel.Course;
 
@@ -18,26 +19,47 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
+        private consoleService _consoleService;
+        
 
         //初始化CourseService
         public CoursesController()
         {
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
+            _consoleService = new consoleService();
         }
+
 
         [AllowAnonymous]
         public ActionResult All()
         {
-            var result = _courseService.GetCourseData();
+            var result = _consoleService.GetConsoleData();
 
             return View(result);
         }
 
         [AllowAnonymous]
-        public ActionResult Group()
+        public ActionResult Group(int? categoryid, int? detailid)
         {
-            return View();
+
+            if (categoryid != null)
+            {
+                var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
+                ViewBag.categoryname = cname.CategoryName;
+                ViewBag.detailname = "所有" + cname.CategoryName;
+
+            }
+
+            if (detailid != null)
+            {
+                var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
+                ViewBag.detailname = dname.DetailName;
+                ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
+            }
+
+            var result = _consoleService.GetGroupData(categoryid,detailid);
+            return View(result);
         }
 
         [AllowAnonymous]

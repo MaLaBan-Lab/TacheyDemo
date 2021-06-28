@@ -1,6 +1,7 @@
-﻿
+﻿@model List<Tachey001.ViewModel.consoleViewModel>
 @{
-    ViewBag.Title = "音樂類"; Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    //ViewBag.Title = "音樂類";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
 }
 
 @Styles.Render("~/Assets/css/group.css")
@@ -11,8 +12,8 @@
         <div class="col-6">
             <nav class="bg-white p-0">
                 <ol class="breadcrumb  px-0 bg-color-160633">
-                    <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">攝影</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">所有影集</li>
+                    <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">@ViewBag.categoryname </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.detailname</li>
                 </ol>
             </nav>
             <h1 class="text-hahow-green mb-4">
@@ -30,9 +31,9 @@
 
 <div class="container">
     <div class="row">
-        @for (var i = 0; i < 30; i++)
-        {
-            @Html.Partial("CardTemplate")
-        }
+        @foreach (var item in Model)
+            {
+                @Html.Partial("CardTemplate",item)
+            }
     </div>
 </div>
