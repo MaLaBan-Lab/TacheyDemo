@@ -32,7 +32,7 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe name="VideoIframe" width="100%" height="100%" src="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)"
+                <iframe name="VideoIframe" width="100%" height="100%" src="@ViewBag.TryVedio"
                         title="video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -44,7 +44,7 @@
                         <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元、6 項作業，共 2230 分鐘</p>
                         <div>
                             <span>當前單元</span>
-                            <a href="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)" target="VideoIframe">
+                            <a href="" target="VideoIframe">
                                 <span>試看</span>
                             </a>
                         </div>
@@ -58,7 +58,7 @@
 
                 <div class="class_content">
                     <div class="wrap col-12">
-                        <a href="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)" target="VideoIframe">
+                        <a href="@ViewBag.TryVedio" target="VideoIframe">
                             <div class="list active">
                                 <div class="icon">
                                     <i class="fa fa-play" aria-hidden="true"></i>
@@ -831,62 +831,62 @@ else if (ViewBag.Id == 3)
                             }
 
                             @*<div class="media border p-3" id="acc3">
-                                <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
-                                     class="mr-3 rounded-circle"
-                                     style="width: 55px; height: 55px;" />
-                                <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5>
-                                    <p>
-                                        Standingls are kinda heavy. Heavy is the head that wears the
-                                        crown.
-                                    </p>
-                                    <p>
-                                        <span class="">3天前</span><button class="btn">
-                                            <i class="far fa-heart text-white"></i>
-                                        </button><span class="">0</span><button class="btn"
-                                                                                type="button"
-                                                                                data-toggle="collapse"
-                                                                                data-target="#collapse-three">
-                                            <i class="far fa-comment text-white"></i>
-                                        </button><span class="">0</span>
-                                    </p>
+                                    <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
+                                         class="mr-3 rounded-circle"
+                                         style="width: 55px; height: 55px;" />
+                                    <div class="media-body">
+                                        <h5 class="mt-0">Media heading</h5>
+                                        <p>
+                                            Standingls are kinda heavy. Heavy is the head that wears the
+                                            crown.
+                                        </p>
+                                        <p>
+                                            <span class="">3天前</span><button class="btn">
+                                                <i class="far fa-heart text-white"></i>
+                                            </button><span class="">0</span><button class="btn"
+                                                                                    type="button"
+                                                                                    data-toggle="collapse"
+                                                                                    data-target="#collapse-three">
+                                                <i class="far fa-comment text-white"></i>
+                                            </button><span class="">0</span>
+                                        </p>
 
-                                    <div id="collapse-three" class="collapse" data-parent="#acc3">
-                                        <div class="media mt-3">
-                                            <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
-                                                 class="mr-3 rounded-circle"
-                                                 style="width: 55px; height: 55px;" />
-                                            <div class="media-body">
-                                                <h5 class="mt-0">Media heading</h5>
-                                                <p>
-                                                    Standingls are kinda heavy. Heavy is the head that wears the crown. Standingls are kinda heavy. Heavy is the head that wears the crown.
-                                                </p>
-                                                <p>
-                                                    <span class="">3天前</span><button class="btn">
-                                                        <i class="far fa-heart text-white"></i>
-                                                    </button><span class="">0</span>
-                                                </p>
+                                        <div id="collapse-three" class="collapse" data-parent="#acc3">
+                                            <div class="media mt-3">
+                                                <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
+                                                     class="mr-3 rounded-circle"
+                                                     style="width: 55px; height: 55px;" />
+                                                <div class="media-body">
+                                                    <h5 class="mt-0">Media heading</h5>
+                                                    <p>
+                                                        Standingls are kinda heavy. Heavy is the head that wears the crown. Standingls are kinda heavy. Heavy is the head that wears the crown.
+                                                    </p>
+                                                    <p>
+                                                        <span class="">3天前</span><button class="btn">
+                                                            <i class="far fa-heart text-white"></i>
+                                                        </button><span class="">0</span>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="media mt-3">
-                                            <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
-                                                 class="mr-3 rounded-circle"
-                                                 style="width: 55px; height: 55px;" />
-                                            <div class="media-body">
-                                                <h5 class="mt-0">Media heading</h5>
-                                                <p class="pr-4">
-                                                    <textarea class="w-100">
-                                                    </textarea>
-                                                </p>
-                                                <p class="text-right pr-4">
-                                                    <a class=""><i class="fas fa-edit text-white"></i></a>
-                                                </p>
+                                            <div class="media mt-3">
+                                                <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
+                                                     class="mr-3 rounded-circle"
+                                                     style="width: 55px; height: 55px;" />
+                                                <div class="media-body">
+                                                    <h5 class="mt-0">Media heading</h5>
+                                                    <p class="pr-4">
+                                                        <textarea class="w-100">
+                                                        </textarea>
+                                                    </p>
+                                                    <p class="text-right pr-4">
+                                                        <a class=""><i class="fas fa-edit text-white"></i></a>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>*@
+                                </div>*@
 
                         </div>
                     </div>
