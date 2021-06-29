@@ -2,7 +2,7 @@
 @model Tachey001.ViewModel.Member.MemberGroup
 @Styles.Render("~/Assets/css/member.css")
 @{
-    ViewBag.Title = "Setting";
+    ViewBag.Title = "Setting"; Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 @{
     Dictionary<string, string> link_corr = new Dictionary<string, string>();
@@ -70,7 +70,7 @@
     </div>
 
     <!-- 內容 -->
-    <div class="row">
+    <div class="row mt-5rem">
 
         <!-- 左邊使用者資訊 -->
         <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
@@ -171,7 +171,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="wide-icon" src="~/Assets/img/icon-hahow.png" />
                                             </div>
-                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                            <h5 class="unbinded-account inline-block marg-l-25 " style="color:black">
                                                 尚未建立 Hahow 帳號
                                             </h5>
                                         </div>
@@ -187,7 +187,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-hahow-half.png"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
                                             </div>
-                                            <h5 class="binded-account inline-block marg-l-25">
+                                            <h5 class="binded-account inline-block marg-l-25" style="color:black">
                                                 已建立帳號@(item.Account)
                                             </h5>
                                         </div>
@@ -211,7 +211,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="wide-icon" src="~/Assets/img/icon-google.svg">
                                             </div>
-                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                            <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
                                                 尚未連結 Google 帳號
                                             </h5>
                                         </div>
@@ -227,7 +227,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-google-half.svg"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
                                             </div>
-                                            <h5 class="binded-account inline-block marg-l-25">
+                                            <h5 class="binded-account inline-block marg-l-25" style="color:black">
                                                 連結為@(item.Google)
                                             </h5>
                                         </div>
@@ -251,7 +251,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="wide-icon" src="~/Assets/img/icon-fb.png" />
                                             </div>
-                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                            <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
                                                 尚未連結 Facebook 帳號
                                             </h5>
                                         </div>
@@ -267,7 +267,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-fb-half.png"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
                                             </div>
-                                            <h5 class="binded-account inline-block marg-l-25">
+                                            <h5 class="binded-account inline-block marg-l-25" style="color:black">
                                                 連結為@(item.Facebook)
                                             </h5>
                                         </div>
@@ -291,7 +291,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="wide-icon" src="~/Assets/img/icon-line.svg">
                                             </div>
-                                            <h5 class="unbinded-account inline-block marg-l-25">
+                                            <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
                                                 尚未連結 LINE 帳號
                                             </h5>
                                         </div>
@@ -307,7 +307,7 @@
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-line-half.png"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
                                             </div>
-                                            <h5 class="binded-account inline-block marg-l-25">
+                                            <h5 class="binded-account inline-block marg-l-25" style="color:black">
                                                 連結為@(item.Line)
                                             </h5>
                                         </div>

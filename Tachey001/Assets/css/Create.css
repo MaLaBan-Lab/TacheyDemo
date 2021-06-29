@@ -52,12 +52,12 @@ h1 {
 .online {
   padding: 12% 0;
 }
-.card_wrap,
-.card_wrap .card,
-.good_teacher,
-.online {
-  background-color: rgb(243, 243, 241);
-}
+    .card_wrap,
+    .card_wrap .card,
+    .good_teacher,
+    .online {
+        background-color: rgb(39 33 49);
+    }
     .also_wrap .title::after,
     .good_teacher .title::after,
     .step .title::after,

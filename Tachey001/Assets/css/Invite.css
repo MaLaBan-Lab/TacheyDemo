@@ -116,3 +116,6 @@ a.hahow-green:hover{
 .border-lg{
   border-left: 2px solid #ccc;
 }
+.bg-know {
+    background-color: rgb(255 255 255 / 86%);
+}
