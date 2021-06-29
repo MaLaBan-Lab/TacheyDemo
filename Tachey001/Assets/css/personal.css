@@ -325,13 +325,14 @@ body {
 	overflow: hidden;
 }
 
-.user-digt .profile {
-	background: linear-gradient(rgb(2, 170, 176), rgb(0, 205, 172));
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	flex-flow: column;
-}
+	.user-digt .profile {
+		background-image: url(https://i.pinimg.com/564x/b5/cb/d6/b5cbd62dd87e25a0818dac3253cd343f.jpg);
+		background-repeat: repeat-x;
+		display: flex;
+		-webkit-box-align: center;
+		align-items: center;
+		flex-flow: column;
+	}
 
 .user-digt .profile .profile-image-wrapper {
 	position: relative;

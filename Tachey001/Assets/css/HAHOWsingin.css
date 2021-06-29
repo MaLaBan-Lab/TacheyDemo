@@ -12,7 +12,9 @@
     background: orange;
     color: #fff;
 }
-
+.w-15rem {
+    width: 11rem;
+}
 .bg-orange {
     background-color: #faa831;
 }

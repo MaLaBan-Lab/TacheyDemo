@@ -52,12 +52,12 @@ h1 {
 .online {
   padding: 12% 0;
 }
-.card_wrap,
-.card_wrap .card,
-.good_teacher,
-.online {
-  background-color: rgb(243, 243, 241);
-}
+    .card_wrap,
+    .card_wrap .card,
+    .good_teacher,
+    .online {
+        background-color: rgb(31 52 78);
+    }
     .also_wrap .title::after,
     .good_teacher .title::after,
     .step .title::after,
@@ -83,7 +83,7 @@ h1 {
 .bigpic_wrap {
     max-height: 360px;
     padding: 5vh 0;
-    background-image: url(https://hahow.in/static/media/kv2.2fc014cb.jpg);
+    background-image: url(https://i.redd.it/gi1vmrzwfts31.png);
     background-size: cover;
     background-position: center center;
     text-align: center;

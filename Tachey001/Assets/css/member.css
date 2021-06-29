@@ -3,6 +3,7 @@
 	width: 272px;
 	max-width: 100%;
 }
+.mt-5rem{margin-top:5rem;}
 
 @media (min-width: 520px) {
 	.container {
@@ -267,7 +268,7 @@ textarea {
 	border-radius: 3px;
 	border: none;
 	text-align: center;
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(255 255 255 / 86%);
 	box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
 	overflow: auto;
 }
@@ -301,7 +302,7 @@ h1 {
 	}
 
 	.user-info .profile-wrap {
-		background: url(https://hahow.in/static/media/profile-bg.f593da78.png) 0% 0% / contain repeat-x;
+		background-image: url(https://i.pinimg.com/564x/b5/cb/d6/b5cbd62dd87e25a0818dac3253cd343f.jpg);
 		background-repeat: repeat-x;
 	}
 
@@ -452,7 +453,7 @@ h1 {
 .signin-way-block {
 	width: 100%;
 	display: block;
-	background-color: white;
+	background-color: #dedce2;
 }
 
 	.signin-way-block .local-bar,
@@ -575,6 +576,7 @@ h1 {
 	.info-block .hint {
 		color: rgba(0, 0, 0, 0.43);
 		font-size: 14px;
+		
 	}
 
 	.info-block .save-basic-info-btn {
@@ -592,11 +594,13 @@ h1 {
 
 		.info-sub-block .birthday-wrap .date-wrap select.bday-year {
 			width: calc((100% - 90px) * 0.43);
+			border-radius: 7px;
 		}
 
 		.info-sub-block .birthday-wrap .date-wrap select.bday-month,
 		.info-sub-block .birthday-wrap .date-wrap select.bday-day {
 			width: calc((100% - 90px) * 0.27);
+			border-radius: 7px;
 		}
 
 		.info-sub-block .birthday-wrap .date-wrap select {
@@ -889,6 +893,7 @@ h1 {
 
 .reg-ddlist {
 	padding: 12px 20px;
+	border-radius: 7px;
 }
 
 .reg-ddlist .dropdown-toggle {

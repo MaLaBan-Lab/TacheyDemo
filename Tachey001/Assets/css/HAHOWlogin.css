@@ -12,9 +12,11 @@
     margin: 0;
     list-style: none;
 }
-
+.w-15rem{
+    width:11rem;
+}
 .bg-green {
-    background-color: #1b717d;
+    background-color: #002B56;
 }
 
 .boxleft {
@@ -131,7 +133,7 @@ input {
 }
 
 .bussines-a {
-    background-color: #1b717d;
+    background-color: #002B56;
 }
 
 #a-span {
