@@ -1,4 +1,6 @@
 ﻿@using Tachey001.Models
+@using Microsoft.AspNet.Identity
+@model Tachey001.ViewModel.Card_highlight_Group
 @{
     List<CourseCategory> categoryList = new List<CourseCategory>();
 
@@ -8,6 +10,21 @@
     {
         categoryList = context.CourseCategory.ToList();
         detailList = context.CategoryDetail.ToList();
+    }
+}
+@{
+    string photoUrl = null;
+
+    using (TacheyContext context = new TacheyContext())
+    {
+        var result = context.Member.Find(User.Identity.GetUserId());
+
+        if (result != null)
+        {
+            photoUrl = result.Photo;
+        }
+
+        context.SaveChanges();
     }
 }
 
@@ -28,6 +45,9 @@
     @Styles.Render("~/Assets/css/nav.css")
     @Styles.Render("~/Assets/css/HomePage.css")
     @Styles.Render("~/Assets/css/navbar-blue.css")
+    @*@Styles.Render("~/Assets/css/HAHOWcart.css")*@
+
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
 <body style="padding-top: 0px; padding-bottom: 0px">
@@ -94,7 +114,71 @@
         <!-- <div id="nav-space"></div> -->
 
         <div class="collapse navbar-collapse  grow-0" id="navbarSupportedContent">
-            @Html.Partial("_LoginPartial")
+
+            @*@Html.Partial("_LoginPartial", Model)*@
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="@Url.Action("Console", "Member")">
+                                <i class="fas fa-pencil-alt"></i>
+                                我的課程
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                            <div class="dropdown-menu-right dropdown-menu " aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-white" href="@Url.Action("Cart", "Member")">購物車</a>
+
+                                <ul class="dropdown-item list-unstyled" data-spy="scroll">
+
+                                    @foreach (var item in Model.cartPartialCardViewModels)
+                                    {
+                                        <li>
+                                            @Html.Partial("_CartPartialCard", item);
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+
+
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div id="user-menu"><img src="@photoUrl" alt="" id="user-logo"></div>
+                            </a>
+                            <div class="dropdown-menu user-logo-content text-white" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-white" href="@Url.Action("Point", "Member" )">積分</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Setting", "Member")">帳號設定</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Profile", "Member")">個人檔案</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Orders", "Member")">訂單紀錄</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Coupons", "Member")">我的折扣</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Invite", "Member")">邀請朋友</a>
+                                <a class="dropdown-item text-white" href="javascript:document.getElementById('logoutForm').submit()">登出</a>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">@Html.ActionLink("註冊", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-white" })</li>
+                    <li class="nav-item ">@Html.ActionLink("登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-white" })</li>
+                </ul>
+            }
         </div>
     </nav>
 
@@ -286,7 +370,7 @@
             });
             document.querySelector('.center>.item-video>iframe').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')
         }
-                                    // 影片
+                                                // 影片
 
     </script>
     @RenderSection("scripts", required: false)

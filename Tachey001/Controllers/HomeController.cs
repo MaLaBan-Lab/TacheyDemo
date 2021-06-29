@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Tachey001.Models;
 using Tachey001.Service.Home;
+using Tachey001.Service.Member;
 using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
@@ -16,9 +17,11 @@ namespace Tachey001.Controllers
         //要叫Service
         //初始化=隨時要用他都叫得到
         private HomeService _homeService;
+        private MemberService _memberService;
         public HomeController()
         {
             _homeService = new HomeService();
+            _memberService = new MemberService();
         }
         public ActionResult Index()
         {
@@ -28,6 +31,7 @@ namespace Tachey001.Controllers
             var getcommentviewmodel = _homeService.GetCommentViewModel();
             var getcoursecardviewmodels = _homeService.GetCourseCardViewModels(MemberId);
             var gethighlightcourseviewmodel = _homeService.GetHighlightCourseViewModels();
+            var getcartpartialcardviewmodel = _memberService.GetCartPartialViewModel(MemberId);
             //再創一個group viewmodel包裝傳回view  <-規則
             //var result 最大包的
             //要找人的時候都要先初始化他 <-雞蛋糕 ˇ藍圖
@@ -38,7 +42,8 @@ namespace Tachey001.Controllers
                 //也可以小括號用.的
                 highlightViewModels = gethighlightcourseviewmodel,
                 commentViewModels = getcommentviewmodel,
-                courseCardViewModels = getcoursecardviewmodels
+                courseCardViewModels = getcoursecardviewmodels,
+                cartPartialCardViewModels= getcartpartialcardviewmodel
             };
             //丟入view
             return View(result);

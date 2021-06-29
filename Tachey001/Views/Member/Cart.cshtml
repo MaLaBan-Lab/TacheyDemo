@@ -30,7 +30,7 @@
                                 <!-- 小記>約0 -->
                                 <div class="border-bottom-box">
                                     <div class="entry sub-total">
-                                        <span class="title">小計</span><span class="ntd">NT$0</span>
+                                        <span class="title">小計</span><span class="ntd">@Model.total.ToString("C0")</span>
                                     </div>
                                     <div class="paid-in-twd">
                                         <div class="text-right">
@@ -41,9 +41,9 @@
                                     </div>
 
                                     <div class="total-amount text-right">
-                                        <h3 class="marg-tb-0">NT$0</h3>
+                                        <h3 class="marg-tb-0">@Model.total.ToString("C0")</h3>
                                     </div>
-                                    <div class="approximate-total text-right">約 NT$0</div>
+                                    <div class="approximate-total text-right">約 @Model.total.ToString("C0")</div>
                                 </div>
                                 <button class="sc-1a6j6ze-0 RcKEn marg-t-20">@Html.ActionLink("來去結帳", "check", "Pay", null, new { @class = "text-white text-decoration-none" })</button>
                             </div>

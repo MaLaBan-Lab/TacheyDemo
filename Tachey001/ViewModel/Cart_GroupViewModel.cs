@@ -9,6 +9,9 @@ namespace Tachey001.ViewModel
     {//大籃子裝三個小包
         public List<CartPartialCardViewModel> cartpartialViewModels { get; set; }
         public List<consoleViewModel> courseCardViewModels { get; set; }
+        public decimal total { get; set; }
+
+
 
     }
 }
