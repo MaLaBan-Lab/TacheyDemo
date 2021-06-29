@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Tachey001.APIModels;
 using Tachey001.Models;
 using Tachey001.Service.Home;
 using Tachey001.Service.Member;
@@ -68,13 +69,9 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult CourseCard(HttpPostedFileBase file)
         {
-            if (file.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/FileUploads"), fileName);
-                file.SaveAs(path);
-            }
-            return RedirectToAction("CourseCard");
+            GoogleDriveAPIHelper.UplaodFileOnDrive(file);
+            ViewBag.Success = "File Uploaded on Google Drive";
+            return View();
         }
     }
 }
