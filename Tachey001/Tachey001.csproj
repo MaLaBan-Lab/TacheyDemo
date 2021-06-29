@@ -256,6 +256,7 @@
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
     <Compile Include="ViewModel\Course\AnswerCard.cs" />
+    <Compile Include="ViewModel\Course\CourseCateDet.cs" />
     <Compile Include="ViewModel\Course\MainGroup.cs" />
     <Compile Include="ViewModel\Course\Main_Video.cs" />
     <Compile Include="ViewModel\Course\QuestionCard.cs" />
@@ -313,6 +314,7 @@
     <Content Include="Assets\img\播放圖.svg" />
     <Content Include="Assets\img\超連結圖.jpg" />
     <Content Include="Assets\img\醜圖.jpg" />
+    <Content Include="Assets\js\choiceForStep.js" />
     <Content Include="Assets\js\choice.js" />
     <Content Include="Assets\js\coupons.js" />
     <Content Include="Assets\js\course.js" />
@@ -569,6 +571,7 @@
     <Content Include="Views\Shared\CartCourseTemplate.cshtml" />
     <Content Include="Views\Shared\_AnswerPartial.cshtml" />
     <Content Include="Views\Shared\_QuestionPartial.cshtml" />
+    <Content Include="Views\Shared\_ChoiceForStep.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

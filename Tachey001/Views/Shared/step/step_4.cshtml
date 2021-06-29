@@ -29,7 +29,8 @@
                         </div>
                     </div>
                     <div class="col-12 mb-4">
-                        <label for="basic-url">選擇課程種類</label>
+                        @Html.Partial("_ChoiceForStep", Model.memberGroup)
+                        @*<label for="basic-url">選擇課程種類</label>
                         @foreach (var item in Model.courseCategory)
                         {
                             <div class="col-12">
@@ -44,7 +45,7 @@
                                 }
                                 <hr />
                             </div>
-                        }
+                        }*@
                     </div>
                     <!--<div class="col-12 mb-4">
                         <label for="basic-url">選擇課程種類細項</label>
@@ -66,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-secondary btn-lg px-5">
+                <button type="" class="btn btn-outline-secondary btn-lg px-5">
                     儲存，下一步
                     @*@Html.ActionLink("下一步", "Step5", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
                 </button>

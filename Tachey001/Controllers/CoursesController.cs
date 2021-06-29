@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,9 @@ using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Tachey001.Models;
 using Tachey001.Service.Course;
+using Tachey001.Service.Member;
 using Tachey001.ViewModel.Course;
+using Tachey001.ViewModel.Member;
 
 namespace Tachey001.Controllers
 {
@@ -18,12 +21,16 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
+        private MemberService _memberService;
+        private TacheyContext _context;
 
         //初始化CourseService
         public CoursesController()
         {
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
+            _memberService = new MemberService();
+            _context = new TacheyContext();
         }
 
         [AllowAnonymous]
@@ -77,14 +84,48 @@ namespace Tachey001.Controllers
         //開課10步驟 GET
         public ActionResult Step(int? id, string CourseId)
         {
+            var UserId = User.Identity.GetUserId();
+
+            var courseCategory = _context.CourseCategory.Select(x => x);
+            Dictionary<string, string> interestDic = new Dictionary<string, string>();
+            foreach (var group in courseCategory)
+            {
+                interestDic.Add(group.CategoryID.ToString(), group.CategoryName);
+            }
+            // all 選項 - 子選項
+            Dictionary<string, ArrayList> interestDicSub = new Dictionary<string, ArrayList>();
+            ArrayList interestArr = new ArrayList();
+            var groups = _context.CategoryDetail.GroupBy(x => x.CategoryID);
+            foreach (var group in groups)
+            {
+                interestArr = new ArrayList();
+                foreach (var detail in group)
+                {
+                    interestArr.Add(detail.DetailName);
+                }
+                interestDicSub.Add(interestDic[group.Key.ToString()], interestArr);
+            }
+            ViewBag.interestDetil = interestDicSub;
             //取得當前登入會員ID
-            ViewBag.UserId = User.Identity.GetUserId();
+            ViewBag.UserId = UserId;
             //取得當前開課步驟
             ViewBag.Id = id;
             //取得當前開課的課程ID
             ViewBag.CourseId = CourseId;
 
+            var CourseCateDet = _courseService.courseCateDet(CourseId);
+            var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
+            var getcourseviewmodels = _memberService.GetCourseData();
+
+            var mem = new MemberGroup
+            {
+                courseCateDet = CourseCateDet,
+                memberViewModels = getmemberviewmodels,
+                courseViewModels = getcourseviewmodels,
+            };
+
             var result = _courseService.GetStepGroup(CourseId);
+            result.memberGroup = mem;
 
             return View(result);
         }
@@ -96,6 +137,12 @@ namespace Tachey001.Controllers
             _courseService.UpdateStep(id, group, formCollection, CourseId);
 
             return RedirectToAction("Step", "Courses", new { id = (id + 1), CourseID = CourseId });
+        }
+        //課程種類Post
+        [HttpPost]
+        public void CategoryStep(string clickedOption, int? id, string CourseId)
+        {
+            _courseService.ChangeCategory(clickedOption, CourseId);
         }
         //創新課程，加入課程ID
         public ActionResult NewCourseStep()

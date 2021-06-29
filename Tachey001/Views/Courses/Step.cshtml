@@ -1,6 +1,8 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 @section topCSS{
     @Styles.Render("~/Assets/css/step.css")
+    @Styles.Render("~/Assets/css/member.css")
+    @Styles.Render("~/Assets/css/choice.css")
     <style>
         #chapter i {
             cursor: pointer;
@@ -80,6 +82,10 @@
         {
             @Html.Partial($"step/step_{ViewBag.Id}", Model)
             @Scripts.Render("~/Assets/js/step.js")
+            if (@ViewBag.Id == 4)
+            {
+                @Scripts.Render("~/Assets/js/choiceForStep.js")
+            }
         }
     </div>
 </div>
@@ -147,27 +153,27 @@
             newDiv.classList.add('py-2')
             newDiv.classList.add('chapterBox')
             newDiv.innerHTML = `
-                <h4>
-                  <i class="fas fa-align-justify mr-2"></i>
-                  <span class="chapterName">章節${count + 1}</span>
-                  <input type="text" class="w-75 chapterInput" name="${count + 1}">
-                  <i class="far fa-window-close" onclick="deleteChapter()"></i>
-                </h4>
-                <hr>
-                <h5 class="text-right">
-                  <span>-新增單元</span>
-                  <i class="far fa-plus-square" onclick="newUnit()"></i>
-                </h5>
-                <div class="drag-sort-enable unitBox">
-                  <h5 class="text-right">
-                    <input type="text" class="invisible w-25" name="${count + 1}-1">
-                    <i class="fas fa-align-justify mr-2"></i>
-                    <span>單元1</span>
-                    <input type="text" class="w-50" name="${count + 1}-1">
-                    <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
-                  </h5>
-                </div>
-              `
+                            <h4>
+                              <i class="fas fa-align-justify mr-2"></i>
+                              <span class="chapterName">章節${count + 1}</span>
+                              <input type="text" class="w-75 chapterInput" name="${count + 1}">
+                              <i class="far fa-window-close" onclick="deleteChapter()"></i>
+                            </h4>
+                            <hr>
+                            <h5 class="text-right">
+                              <span>-新增單元</span>
+                              <i class="far fa-plus-square" onclick="newUnit()"></i>
+                            </h5>
+                            <div class="drag-sort-enable unitBox">
+                              <h5 class="text-right">
+                                <input type="text" class="invisible w-25" name="${count + 1}-1">
+                                <i class="fas fa-align-justify mr-2"></i>
+                                <span>單元1</span>
+                                <input type="text" class="w-50" name="${count + 1}-1">
+                                <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+                              </h5>
+                            </div>
+                          `
 
             chapter.appendChild(newDiv)
             enableDragSort('drag-sort-enable')
@@ -182,12 +188,12 @@
             var h5 = document.createElement('h5')
             h5.classList.add('text-right')
             h5.innerHTML = `
-                <input type="text" class="invisible w-25" name="${count + 1}">
-                <i class="fas fa-align-justify mr-2"></i>
-                <span>單元${count + 1}</span>
-                <input type="text" class="w-50" name="${count + 1}">
-                <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
-              `
+                            <input type="text" class="invisible w-25" name="${count + 1}">
+                            <i class="fas fa-align-justify mr-2"></i>
+                            <span>單元${count + 1}</span>
+                            <input type="text" class="w-50" name="${count + 1}">
+                            <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+                          `
             unit.appendChild(h5)
             enableDragSort('drag-sort-enable')
             sortUpdate()
