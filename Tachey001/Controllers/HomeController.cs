@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNet.Identity;
-using Tachey001.APIModels;
+using Tachey001.AccountModels;
 using Tachey001.Models;
 using Tachey001.Service.Home;
 using Tachey001.Service.Member;
@@ -44,7 +47,7 @@ namespace Tachey001.Controllers
                 highlightViewModels = gethighlightcourseviewmodel,
                 commentViewModels = getcommentviewmodel,
                 courseCardViewModels = getcoursecardviewmodels,
-                cartPartialCardViewModels= getcartpartialcardviewmodel
+                cartPartialCardViewModels = getcartpartialcardviewmodel
             };
             //丟入view
             return View(result);
@@ -69,9 +72,47 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult CourseCard(HttpPostedFileBase file)
         {
-            GoogleDriveAPIHelper.UplaodFileOnDrive(file);
-            ViewBag.Success = "File Uploaded on Google Drive";
-            return View();
+            //Stream streamFile = file.InputStream;
+            //背景作業 不中斷操作
+            //var task = new SendFileTask();
+            //task.Run(streamFile);
+
+            //初始化Cloudinary認證
+            var myAccount = new Account
+            {
+                Cloud = Credientials.Cloud,
+                ApiKey = Credientials.ApiKey,
+                ApiSecret = Credientials.ApiSecret
+            };
+            //初始化Cloudinary
+            Cloudinary _cloudinary = new Cloudinary(myAccount);
+
+            ////Cloudinary photo
+            //var uploadParams = new ImageUploadParams()
+            //{
+            //    //File = new FileDescription(@"C:\Users\User\Desktop\梗圖\aj1.jpg")
+            //    File = new FileDescription(file.FileName, file.InputStream)
+            //};
+
+            //var uploadResult = _cloudinary.Upload(uploadParams);
+
+            //ViewBag.Url = uploadResult.Url;
+
+            //Cloudinary video
+            var uploadParams = new VideoUploadParams()
+            {
+                //File = new FileDescription(@"C:\Users\User\Desktop\小龍蝦.mp4"),
+                File = new FileDescription("1-1", file.InputStream),
+
+                PublicId = "1-1",
+                Overwrite = true,
+            };
+
+            var uploadResult = _cloudinary.UploadLarge(uploadParams);
+
+            ViewBag.Url = uploadResult.Url;
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

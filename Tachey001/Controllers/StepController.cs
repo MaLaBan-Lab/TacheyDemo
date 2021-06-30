@@ -9,14 +9,10 @@ namespace Tachey001.Controllers
     public class StepController : Controller
     {
         // GET: Step
-        public ActionResult Index(int? id)
-        {
-
-
-            return View();
-        }
         public ActionResult Index()
         {
+
+
             return View();
         }
     }
