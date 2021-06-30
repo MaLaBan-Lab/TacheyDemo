@@ -10,6 +10,8 @@ using Tachey001.Models;
 using Tachey001.Service;
 using Tachey001.Service.Course;
 using Tachey001.ViewModel.Course;
+using PagedList;
+using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
 {
@@ -30,13 +32,23 @@ namespace Tachey001.Controllers
             _consoleService = new consoleService();
         }
 
-
+        private int pageSize = 20;
         [AllowAnonymous]
-        public ActionResult All()
+        public ActionResult All( int page = 1 )
         {
             var result = _consoleService.GetConsoleData();
 
-            return View(result);
+            int currentPage = page < 1 ? 1 : page;
+            var oresult = result.OrderBy(x => x.CourseID);
+            var rresult = oresult.ToPagedList(currentPage, pageSize);
+
+            var newresult = new consoleallViewModel
+            {
+                consoleViews = result,
+                pageConsole = rresult
+            };
+
+            return View(newresult);
         }
 
         [AllowAnonymous]

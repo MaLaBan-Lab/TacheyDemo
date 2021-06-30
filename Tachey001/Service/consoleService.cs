@@ -5,6 +5,8 @@ using System.Web;
 using Tachey001.Models;
 using Tachey001.Repository;
 using Tachey001.ViewModel;
+using PagedList;
+
 
 namespace Tachey001.Service
 {
@@ -19,7 +21,6 @@ namespace Tachey001.Service
             _consoleRepository = new consoleRepository();
             _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
-
         public List<consoleViewModel> GetConsoleData()
         {
             var course = _tacheyRepository.GetAll<Models.Course>();
@@ -38,9 +39,11 @@ namespace Tachey001.Service
                              MemberID = m.MemberID,
                              Photo = m.Photo,
                              CategoryID = c.CategoryID,
-                             DetailID = c.CategoryDetailsID
+                             DetailID = c.CategoryDetailsID,
+                             CreateDate = c.CreateDate
                          };
 
+            
             return result.ToList();
         }
 

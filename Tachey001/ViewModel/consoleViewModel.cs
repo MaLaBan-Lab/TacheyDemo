@@ -22,5 +22,6 @@ namespace Tachey001.ViewModel
         public int? DetailID { get; set; }
         public string CategoryName { get; set; }
         public string DetailName { get; set; }
+        public DateTime? CreateDate { get; set; }
     }
 }
