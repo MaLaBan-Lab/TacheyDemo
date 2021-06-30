@@ -11,7 +11,7 @@
         <h2>上架你的才華</h2>
         <p>一起將你的熱情與技能分享給全世界！</p>
         <div class="btn_wrap">
-            <button class="btn btn-info m-auto">@Html.ActionLink("一步步開始提案", "NewCourseStep", "Courses", new { @class = "text-white text-decoration-none" })</button>
+            <button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "NewCourseStep", "Courses", new { @class = "text-white text-decoration-none" })</button>
         </div>
     </div>
 </section>
@@ -20,8 +20,9 @@
 <section class="card_wrap" style="color:white">
     <div class="card col-6 col-lg-3 border-0">
         <div class="card_img">
-            <img src="data:image/png;base64,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"
-                 class="card-img-top" alt="...">
+            @*<img src="data:image/png;base64,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"
+        class="card-img-top" alt="...">*@
+            <img src="https://i.ibb.co/Fbq0NdW/graduated.png" alt="Alternate Text" class="card-img-top"/>
         </div>
         <div class="card-body">
             <p class="card-title" style="color:white">505,000+ 位</p>
@@ -35,7 +36,7 @@
 
     <div class="card col-6 col-lg-3 border-0">
         <div class="card_img">
-            <img src="data:image/png;base64,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"
+            <img src="https://i.ibb.co/GHN03Lw/open-book.png"
                  class="card-img-top" alt="...">
         </div>
         <div class="card-body">
@@ -48,7 +49,7 @@
 
     <div class="card col-6 col-lg-3 border-0">
         <div class="card_img">
-            <img src="data:image/png;base64,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"
+            <img src="https://i.ibb.co/nkN1wDt/salary.png"
                  class="card-img-top" alt="...">
         </div>
         <div class="card-body">
@@ -63,7 +64,7 @@
 
     <div class="card col-6 col-lg-3 border-0">
         <div class="card_img">
-            <img src="data:image/png;base64,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"
+            <img src="https://i.ibb.co/wYKxVZB/success.png"
                  class="card-img-top" alt="...">
         </div>
         <div class="card-body">
@@ -127,24 +128,24 @@
         <h2 style="color:white">好老師3元素</h2>
     </div>
     <div class="container">
-        <div class="card col-12 col-md-10 col-lg-4">
+        <div class="card col-12 col-md-10 col-lg-4 card-color">
             <div class="card-body">
-                <h2 class="card-text">完成募資課程提案</h2>
-                <p class="card-text">8 步驟創造你的課程提案，Hahow 將會審核課程，讓你順利募資，朝下一個目標邁進。</p>
+                <h2 class="card-text color-az">完成募資課程提案</h2>
+                <p class="card-text color-az">8 步驟創造你的課程提案，Hahow 將會審核課程，讓你順利募資，朝下一個目標邁進。</p>
             </div>
         </div>
 
-        <div class="card col-12 col-md-10 col-lg-4">
+        <div class="card col-12 col-md-10 col-lg-4 card-color ">
             <div class="card-body">
-                <h2 class="card-text">準備優質課程內容</h2>
-                <p class="card-text">當你的知識技能點亮每個人的生活，讓學生再次體驗純粹的熱情，將會有越來越多人加入你的課程。</p>
+                <h2 class="card-text color-az">準備優質課程內容</h2>
+                <p class="card-text color-az">當你的知識技能點亮每個人的生活，讓學生再次體驗純粹的熱情，將會有越來越多人加入你的課程。</p>
             </div>
         </div>
 
-        <div class="card col-12 col-md-10  col-lg-4">
+        <div class="card col-12 col-md-10  col-lg-4 card-color ">
             <div class="card-body">
-                <h2 class="card-text">準備優質課程內容</h2>
-                <p class="card-text">每個階段隨時掌控與學生的交流，回答問題或提供鼓勵，一起滿足學習渴望，得到分享的充實。</p>
+                <h2 class="card-text color-az">準備優質課程內容</h2>
+                <p class="card-text color-az">每個階段隨時掌控與學生的交流，回答問題或提供鼓勵，一起滿足學習渴望，得到分享的充實。</p>
             </div>
         </div>
     </div>
@@ -157,27 +158,27 @@
             <h2 class="text-white">開課流程</h2>
         </div>
 
-        <div class="card col-12 col-md-5 col-lg-4">
+        <div class="card  card-color col-12 col-md-5 col-lg-4">
             <a href="#" target="_blank">
                 <div class="card-body">
                     <div class="content_wrap">
                         <div class="num">1</div>
                         <div class="num_title">尋找主題</div>
                     </div>
-                    <div class="card-text">你想教的、是否也是線上學習者想付費學習的？點擊教學，帶你一步步分析客群、驗證需求、塑造與其他資源的差異與優勢！</div>
+                    <div class="card-text color-know">你想教的、是否也是線上學習者想付費學習的？點擊教學，帶你一步步分析客群、驗證需求、塑造與其他資源的差異與優勢！</div>
                 </div>
             </a>
         </div>
 
 
-        <div class="card col-12 col-md-5 col-lg-4">
+        <div class="card  card-color col-12 col-md-5 col-lg-4">
             <a href="#" target="_blank">
                 <div class="card-body">
                     <div class="content_wrap">
                         <div class="num">2</div>
                         <div class="num_title">編輯提案</div>
                     </div>
-                    <div class="card-text">
+                    <div class="card-text color-know">
                         安排時間擬定課程架構，拍攝 1~3 分鐘的募資影片， Step by step 完成提案！更多開課小撇步請參考 Hahow 開課教學 系列文章。
                     </div>
                 </div>
@@ -185,50 +186,50 @@
         </div>
 
 
-        <div class="card col-12 col-md-5 col-lg-4">
+        <div class="card card-color col-12 col-md-5 col-lg-4">
             <a href="#" target="_blank">
                 <div class="card-body">
                     <div class="content_wrap">
                         <div class="num">3</div>
                         <div class="num_title">提案審核</div>
                     </div>
-                    <div class="card-text">恭喜你！募資成功後就可以開始製作課程囉，上傳課程影片，提供參考講義，準備字幕，別讓期待的學生等太久！</div>
+                    <div class="card-text color-know">恭喜你！募資成功後就可以開始製作課程囉，上傳課程影片，提供參考講義，準備字幕，別讓期待的學生等太久！</div>
                 </div>
             </a>
         </div>
 
-        <div class="card col-12 col-md-5 col-lg-4">
+        <div class="card card-color col-12 col-md-5 col-lg-4">
             <a href="#" target="_blank">
                 <div class="card-body">
                     <div class="content_wrap">
                         <div class="num">4</div>
                         <div class="num_title">募資階段</div>
                     </div>
-                    <div class="card-text">你想教的、是否也是線上學習者想付費學習的？點擊教學，帶你一步步分析客群、驗證需求、塑造與其他資源的差異與優勢！</div>
+                    <div class="card-text color-know">你想教的、是否也是線上學習者想付費學習的？點擊教學，帶你一步步分析客群、驗證需求、塑造與其他資源的差異與優勢！</div>
                 </div>
             </a>
         </div>
 
-        <div class="card col-12 col-md-5 col-lg-4">
+        <div class="card card-color col-12 col-md-5 col-lg-4">
             <a href="#" target="_blank">
                 <div class="card-body">
                     <div class="content_wrap">
                         <div class="num">5</div>
                         <div class="num_title">製作課程</div>
                     </div>
-                    <div class="card-text">你想教的、是否也是線上學習者想付費學習的？點擊教學，帶你一步步分析客群、驗證需求、塑造與其他資源的差異與優勢！</div>
+                    <div class="card-text color-know">你想教的、是否也是線上學習者想付費學習的？點擊教學，帶你一步步分析客群、驗證需求、塑造與其他資源的差異與優勢！</div>
                 </div>
             </a>
         </div>
 
-        <div class="card col-12 col-md-5 col-lg-4">
+        <div class="card card-color col-12 col-md-5 col-lg-4">
             <a href="#" target="_blank">
                 <div class="card-body">
                     <div class="content_wrap">
                         <div class="num">6</div>
                         <div class="num_title">審核開課</div>
                     </div>
-                    <div class="card-text">在預定開課日前將課程提交給 Hahow ，審核通過後即可正式開課！別忘了善用討論區與作業區，持續交流互動，創造更多收入！</div>
+                    <div class="card-text color-know">在預定開課日前將課程提交給 Hahow ，審核通過後即可正式開課！別忘了善用討論區與作業區，持續交流互動，創造更多收入！</div>
                 </div>
             </a>
         </div>
@@ -241,7 +242,7 @@
     <div class="container">
         <div class="apply col-12">
             <h2>課程製作服務</h2>
-            <p>想和 Hahow 一起更完整地打造獨一無二的課程嗎？歡迎申請 Hahow 專業的「課程製作服務」，通過審核後，我們將提供編輯提案與課程攝影服務，讓 Hahow 助你一臂之力。</p>
+            <p class="color-p">想和 Hahow 一起更完整地打造獨一無二的課程嗎？歡迎申請 Hahow 專業的「課程製作服務」，通過審核後，我們將提供編輯提案與課程攝影服務，讓 Hahow 助你一臂之力。</p>
             <div class="btn_wrap">
                 <button class="btn btn-outline-light m-auto">點此申請</button>
             </div>
@@ -260,14 +261,14 @@
         <div class="card col-12 col-md-10 col-lg-6">
             <div class="card-body">
                 <p class="card-text">不會拍影片？分潤不太懂？審核要多久？ 所有疑難雜症這裡有解</p>
-                <button class="btn btn-outline-dark m-auto">常見問題</button>
+                <button class="btn btn-outline-dark m-auto btn-y">常見問題</button>
             </div>
         </div>
 
         <div class="card col-12 col-md-10 col-lg-6">
             <div class="card-body">
                 <p class="card-text">除了疑難雜症外，更想做出專業好課程？真實的秘辛與教學這裡看</p>
-                <button class="btn btn-outline-dark m-auto">開課教學</button>
+                <button class="btn btn-outline-dark m-auto btn-w">開課教學</button>
             </div>
         </div>
 
@@ -280,7 +281,7 @@
         <h2>上架你的才華</h2>
         <p>一起將你的熱情與技能分享給全世界！</p>
         <div class="btn_wrap">
-            <button class="btn btn-info m-auto">@Html.ActionLink("開始提案", "Step", "Courses", new { @class = "text-white text-decoration-none"})</button>
+            <button class="btn btn-info btn-pink m-auto">@Html.ActionLink("開始提案", "Step", "Courses", new { @class = "text-white text-decoration-none"})</button>
         </div>
     </div>
 </section>

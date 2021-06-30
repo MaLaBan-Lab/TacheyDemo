@@ -5,6 +5,64 @@ body {
 }
 
 
+.color-know{
+    color:gray;
+}
+
+
+.card-color {
+    background-color:#e5e5e53d;
+}
+
+.color-az {
+    color: azure;
+}
+
+.card-color {
+    background-color: rgb(31 52 78 / 0%);
+}
+
+.btn-y:hover {
+    background-color: #EBD84B;
+    
+}
+.btn-w:hover{
+    background-color:white;
+    color:black;
+}
+.btn-pur {
+    background-color: #B69AC2;
+    border-color: #6e6b6b;
+}
+    .btn-pur:hover {
+       background-color: #244A8C;
+       color:white;
+    }
+.btn-pink {
+    background-color: #F38BA4;
+    border-color: #ffffff;
+}
+    .btn-pink:hover {
+        background-color: #0F4196;
+        border-color: #e4fbff;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .step a,
 .step a:active,
 .step a:link,
@@ -33,12 +91,15 @@ h1 {
 .step p,
 .apply_wrap p,
 .online p {
-    color: #000000a6;
+    /*color: #000000a6;*/
+    
+}
+.color-p{
+background-color: #2B1933;
 }
 .bigpic_wrap .btn,
 .apply_wrap .btn,
-.online .btn
-{
+.online .btn {
     width: 260px;
     height: 50px;
 }
@@ -88,10 +149,11 @@ h1 {
     background-position: center center;
     text-align: center;
 }
-.bigpic_wrap.bottom {
-    background-size: auto;
-    background-image: url(https://hahow.in/static/media/bg-btmcta.3d2dce53.jpg);
-}
+    .bigpic_wrap.bottom {
+        background-size: auto;
+        background-image: url(https://preview.redd.it/o2uszjks34x41.png?width=960&crop=smart&auto=webp&s=d7f3d6e231423a1519172abfb5f8d09ac0b96a63);
+        background-size: cover;
+    }
 .bigpic_wrap h2 {
     font-size: 32px;
     color: white;
@@ -159,10 +221,10 @@ h1 {
   font-size: 30px;
 }
 
-.good_teacher .card {
-  margin: 0 auto 5%;
-  border-bottom: 6px solid rgb(0, 190, 164);
-}
+    .good_teacher .card {
+        margin: 0 auto 5%;
+        border-bottom: 6px solid rgb(194 189 122);
+    }
 .good_teacher .card h2 {
   line-height: 23px;
   font-size: 23px;
@@ -180,32 +242,32 @@ h1 {
   font-size: 30px;
 }
 .step .card {
-  border: 3px solid rgba(0, 0, 0, 0.24);
-  max-width: 370px;
-  margin: 15% auto;
-  padding: 30px 20px;
-  line-height: 1.5em;
+    border: 3px solid rgb(118 49 49 / 24%);
+    max-width: 370px;
+    margin: 15% auto;
+    padding: 30px 20px;
+    line-height: 1.5em;
 }
 .step .content_wrap {
   position: relative;
   top: -55px;
-  background-color: white;
+  /*background-color: white;*/
   display: inline-block;
   padding: 0 10px;
 }
     .step .content_wrap .num {
         font-size: 90px;
-        color: rgb(61 231 41 / 18%);
+        color: rgb(224 227 31 / 18%);
     }
-.step .content_wrap .num_title {
-  font-size: 23px;
-  margin: -15px 0 0 22px;
-  color: rgba(0, 0, 0, 0.4);
-  font-weight: bold;
-}
+    .step .content_wrap .num_title {
+        font-size: 23px;
+        margin: -15px 0 0 22px;
+        color: rgb(255 245 245 / 88%);
+        font-weight: bold;
+    }
 .step .card-text {
-  padding: 0 0 20px;
-  color: rgba(0, 0, 0, 0.7);
+    padding: 0 0 20px;
+    color: rgb(252 249 249);
 }
 
 /* ========================= apply start============================= */
@@ -247,9 +309,9 @@ h1 {
   border-radius: 3px;
   margin: 0 auto 20px;
 }
-.online .card:last-child {
-  background: rgb(46, 225, 179);
-}
+    .online .card:last-child {
+        background: rgb(235 216 75);
+    }
 
 .online .card .card-body {
   padding: 40px 20px;
@@ -373,14 +435,14 @@ h1 {
     margin: 5% auto;
   }
     .step .card:hover {
-        border: 3px solid rgb(225 183 46);
+        border: 3px solid rgb(118 112 91);
         cursor: pointer;
         transition: 0.5s;
     }
-  .step .card:hover .num {
-    color: rgb(46, 225, 179);
-    transition: 0.5s;
-  }
+        .step .card:hover .num {
+            color: rgb(229 223 16);
+            transition: 0.5s;
+        }
   .step .card:nth-child(3n-1) {
     top: 0px;
   }
