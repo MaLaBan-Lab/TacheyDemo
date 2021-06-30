@@ -49,6 +49,7 @@
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
 </head>
 <body style="padding-top: 0px; padding-bottom: 0px">
     <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top  justify-content-between shadow-sm">
@@ -80,14 +81,14 @@
                                     @item.CategoryName
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
+                                    <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses",new { categoryid = item.CategoryID})">
                                         所有@(item.CategoryName)
                                     </a>
                                     @foreach (var detail in detailList)
                                     {
                                         if (detail.CategoryID == item.CategoryID)
                                         {
-                                            <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
+                                            <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses",new { detailid = detail.DetailID})">
                                                 @detail.DetailName
                                             </a>
                                         }
@@ -375,5 +376,6 @@
     </script>
     @RenderSection("scripts", required: false)
     @RenderSection("endJS", required: false)
+
 </body>
 </html>

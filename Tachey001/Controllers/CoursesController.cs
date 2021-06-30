@@ -8,9 +8,12 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Tachey001.Models;
+using Tachey001.Service;
 using Tachey001.Service.Course;
 using Tachey001.Service.Member;
 using Tachey001.ViewModel.Course;
+using PagedList;
+using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
 
 namespace Tachey001.Controllers
@@ -21,6 +24,9 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
+        private consoleService _consoleService;
+        
+
         private MemberService _memberService;
         private TacheyContext _context;
 
@@ -31,20 +37,49 @@ namespace Tachey001.Controllers
             _courseService = new CourseService();
             _memberService = new MemberService();
             _context = new TacheyContext();
+            _consoleService = new consoleService();
+        }
+
+        private int pageSize = 20;
+        [AllowAnonymous]
+        public ActionResult All( int page = 1 )
+        {
+            var result = _consoleService.GetConsoleData();
+
+            int currentPage = page < 1 ? 1 : page;
+            var oresult = result.OrderBy(x => x.CourseID);
+            var rresult = oresult.ToPagedList(currentPage, pageSize);
+
+            var newresult = new consoleallViewModel
+            {
+                consoleViews = result,
+                pageConsole = rresult
+            };
+
+            return View(newresult);
         }
 
         [AllowAnonymous]
-        public ActionResult All()
+        public ActionResult Group(int? categoryid, int? detailid)
         {
-            var result = _courseService.GetCourseData();
 
+            if (categoryid != null)
+            {
+                var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
+                ViewBag.categoryname = cname.CategoryName;
+                ViewBag.detailname = "所有" + cname.CategoryName;
+
+            }
+
+            if (detailid != null)
+            {
+                var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
+                ViewBag.detailname = dname.DetailName;
+                ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
+            }
+
+            var result = _consoleService.GetGroupData(categoryid,detailid);
             return View(result);
-        }
-
-        [AllowAnonymous]
-        public ActionResult Group()
-        {
-            return View();
         }
 
         [AllowAnonymous]

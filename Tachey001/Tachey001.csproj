@@ -321,6 +321,7 @@
     <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
     <Compile Include="Service\Order\OrderService.cs" />
+    <Compile Include="Service\SearchService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
     <Compile Include="ViewModel\consoleallViewModel.cs" />
@@ -415,6 +416,7 @@
     <Content Include="Content\brands.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
     <Content Include="Content\solid.css" />
