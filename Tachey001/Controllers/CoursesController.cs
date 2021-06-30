@@ -24,20 +24,20 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
-        private consoleService _consoleService;
-        
-
         private MemberService _memberService;
         private TacheyContext _context;
+
+        private consoleService _consoleService;
+        
 
         //初始化CourseService
         public CoursesController()
         {
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
+            _consoleService = new consoleService();
             _memberService = new MemberService();
             _context = new TacheyContext();
-            _consoleService = new consoleService();
         }
 
         private int pageSize = 20;
