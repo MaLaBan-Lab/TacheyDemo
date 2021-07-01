@@ -183,48 +183,48 @@ namespace Tachey001.Controllers
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
             return View(model);
         }
-        public ActionResult RegisterLine(string code, string state)
-        {
-            if (state == "12345abcde")
-            {
+        //public ActionResult RegisterLine(string code, string state)
+        //{
+        //    if (state == "12345abcde")
+        //    {
                 
-                WebClient wc = new WebClient();
-                wc.Encoding = Encoding.UTF8;
-                wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-                string result = string.Empty;
-                NameValueCollection nvc = new NameValueCollection();
-                //string LineLoginUrl = "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1656163525&redirect_uri=https://localhost:44394/Account/RegisterLine&state=12345abcde&scope=profile%20openid&nonce=09876xyz";
+        //        WebClient wc = new WebClient();
+        //        wc.Encoding = Encoding.UTF8;
+        //        wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+        //        string result = string.Empty;
+        //        NameValueCollection nvc = new NameValueCollection();
+        //        //string LineLoginUrl = "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1656163525&redirect_uri=https://localhost:44394/Account/RegisterLine&state=12345abcde&scope=profile%20openid&nonce=09876xyz";
 
-                try
-                {
-                    //取回Token
-                    string ApiUrl_Token = "https://api.line.me/oauth2/v2.1/token";
-                    nvc.Add("grant_type", "authorization_code");
-                    nvc.Add("code", code);
-                    nvc.Add("redirect_uri", "填入導回的網址");
-                    nvc.Add("client_id", "1656163525");
-                    nvc.Add("client_secret", "87a29eb6c97c02a8f1c649a8f2a8da22");
-                    string JsonStr = Encoding.UTF8.GetString(wc.UploadValues(ApiUrl_Token, "POST", nvc));
-                    //LineLoginToken ToKenObj = JsonConvert.DeserializeObject<LineLoginToken>(JsonStr);
-                    wc.Headers.Clear();
+        //        try
+        //        {
+        //            //取回Token
+        //            string ApiUrl_Token = "https://api.line.me/oauth2/v2.1/token";
+        //            nvc.Add("grant_type", "authorization_code");
+        //            nvc.Add("code", code);
+        //            nvc.Add("redirect_uri", "填入導回的網址");
+        //            nvc.Add("client_id", "1656163525");
+        //            nvc.Add("client_secret", "87a29eb6c97c02a8f1c649a8f2a8da22");
+        //            string JsonStr = Encoding.UTF8.GetString(wc.UploadValues(ApiUrl_Token, "POST", nvc));
+        //            //LineLoginToken ToKenObj = JsonConvert.DeserializeObject<LineLoginToken>(JsonStr);
+        //            wc.Headers.Clear();
 
-                    //取回User Profile
-                    string ApiUrl_Profile = "https://api.line.me/v2/profile";
-                    //wc.Headers.Add("Authorization", "Bearer " + ToKenObj.access_token);
-                    string UserProfile = wc.DownloadString(ApiUrl_Profile);
-                    //LineProfile ProfileObj = JsonConvert.DeserializeObject<LineProfile>(UserProfile);
+        //            //取回User Profile
+        //            string ApiUrl_Profile = "https://api.line.me/v2/profile";
+        //            //wc.Headers.Add("Authorization", "Bearer " + ToKenObj.access_token);
+        //            string UserProfile = wc.DownloadString(ApiUrl_Profile);
+        //            //LineProfile ProfileObj = JsonConvert.DeserializeObject<LineProfile>(UserProfile);
 
-                    return RedirectToAction("RegisterTacheyMember", "Account");
-                    //return RedirectToAction("UserProfile", "Home", new { displayName = ProfileObj.displayName, pictureUrl = ProfileObj.pictureUrl });
-                }
-                catch (Exception ex)
-                {
-                    string msg = ex.Message;
-                    throw;
-                }
-            }
-            return View();
-        }
+        //            return RedirectToAction("RegisterTacheyMember", "Account");
+        //            //return RedirectToAction("UserProfile", "Home", new { displayName = ProfileObj.displayName, pictureUrl = ProfileObj.pictureUrl });
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            string msg = ex.Message;
+        //            throw;
+        //        }
+        //    }
+        //    return View();
+        //}
             //註冊Tachey會員資料表
         public ActionResult RegisterTacheyMember()
         {
@@ -233,12 +233,13 @@ namespace Tachey001.Controllers
                 var email = User.Identity.GetUserName();
 
                 PersonalUrl personalUrl = new PersonalUrl { MemberID = User.Identity.GetUserId() };
-                Member member = new Member { 
-                    MemberID = User.Identity.GetUserId(), 
-                    Email = email,Name="匿名", 
+                Member member = new Member {
+                    MemberID = User.Identity.GetUserId(),
+                    Email = email, Name = "匿名",
                     JoinTime = DateTime.Now,
-                    Photo= "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM" ,
-                    About="嗨 ~"
+                    Photo = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM",
+                    Theme = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM",
+                    About ="嗨 ~"
                 };
 
                 context.Member.Add(member);
