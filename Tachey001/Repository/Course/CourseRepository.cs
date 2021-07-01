@@ -84,5 +84,11 @@ namespace Tachey001.Repository.Course
 
             _tacheyContext.Dispose();
         }
+        //Read 讀取擁有的課程表
+        //public IEnumerable<Owner> GetOwner(string MemberId)
+        //{
+        //    var result = _tacheyContext.Owner.Find(MemberId);
+        //    yield return result;
+        //}
     }
 }

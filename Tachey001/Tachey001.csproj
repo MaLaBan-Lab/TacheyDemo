@@ -253,6 +253,7 @@
     <Compile Include="ViewModel\Course\AllCourse.cs" />
     <Compile Include="ViewModel\CommentViewModel.cs" />
     <Compile Include="ViewModel\Course\AnswerCard.cs" />
+    <Compile Include="ViewModel\Course\HaveCourse.cs" />
     <Compile Include="ViewModel\Course\MainGroup.cs" />
     <Compile Include="ViewModel\Course\Main_Video.cs" />
     <Compile Include="ViewModel\Course\QuestionCard.cs" />
@@ -563,6 +564,7 @@
     <Content Include="Views\Shared\CartCourseTemplate.cshtml" />
     <Content Include="Views\Shared\_AnswerPartial.cshtml" />
     <Content Include="Views\Shared\_QuestionPartial.cshtml" />
+    <Content Include="Views\Shared\Lock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

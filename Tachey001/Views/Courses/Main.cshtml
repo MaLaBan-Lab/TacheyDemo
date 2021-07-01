@@ -32,7 +32,7 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe name="VideoIframe" width="100%" height="100%" src="@ViewBag.TryVedio"
+                <iframe name="VideoIframe" width="100%" height="100%" src="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)"
                         title="video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -44,7 +44,7 @@
                         <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元、6 項作業，共 2230 分鐘</p>
                         <div>
                             <span>當前單元</span>
-                            <a href="" target="VideoIframe">
+                            <a href="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)" target="VideoIframe">
                                 <span>試看</span>
                             </a>
                         </div>
@@ -58,7 +58,7 @@
 
                 <div class="class_content">
                     <div class="wrap col-12">
-                        <a href="@ViewBag.TryVedio" target="VideoIframe">
+                        <a href="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)" target="VideoIframe">
                             <div class="list active">
                                 <div class="icon">
                                     <i class="fa fa-play" aria-hidden="true"></i>
@@ -69,48 +69,97 @@
                         </a>
                     </div>
 
-                    <!-- 課程章節 -->
-                    <div class="accordion" id="accordion">
-                        @{foreach (var ch in Model.Main_Video.courseChapters)
-                            {
-                                <div class="wrap">
-                                    <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
-                                            aria-controls="toggle_@ch.ChapterID">
-                                        <div class="lists">
-                                            <div class="icon">
-                                                <i class="fa fa-th-list" aria-hidden="true"></i>
+                    @if (Model.GetOwner.MemberID == ViewBag.MemberId)
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
                                             </div>
-                                            <div class="text">第@(ch.ChapterID)章 </div>
-                                            <div class="arrow">
-                                                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <!-- 課程單元 -->
-                                <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    @foreach (var un in Model.Main_Video.courseUnits)
-                                    {
-                                        if (ch.ChapterID == un.ChapterID)
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
                                         {
-                                            <div class="content">
-                                                <a href="@un.CourseURL" target="VideoIframe">
-                                                    <div class="list">
-                                                        <div class="icon">
-                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="@un.CourseURL" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-play" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
                                                         </div>
-                                                        <div class="text">單元@(un.UnitID) @un.UnitName</div>
-                                                        <div class="time">00:06</div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                    </a>
+                                                </div>
+                                            }
                                         }
-                                    }
-                                </div>
+                                    </div>
+                                }
                             }
-                        }
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
+                                        {
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
@@ -146,7 +195,7 @@
 
         <div class="price_wrap col-12 col-md-3 col-lg-3">
             <p>課程售價</p>
-            <h2>NT$4,200</h2>
+            <h2>@Model.Main_Video.OriginalPrice.ToString("#0")</h2>
         </div>
 
         <div class="buy_wrap col-12 col-md-4 col-lg-4">
