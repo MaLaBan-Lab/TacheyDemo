@@ -108,6 +108,7 @@ namespace Tachey001.Controllers
             }
             ViewBag.Id = id;
             ViewBag.YnN = YnN;
+            ViewBag.UserId = MemberId;
 
             var result = new MainGroup()
             {

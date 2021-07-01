@@ -401,6 +401,7 @@
     <Content Include="Assets\js\course.js" />
     <Content Include="Assets\js\HAHOWlogin.js" />
     <Content Include="Assets\js\Invite.js" />
+    <Content Include="Assets\js\Like.js" />
     <Content Include="Assets\js\Main.js" />
     <Content Include="Assets\js\member.js" />
     <Content Include="Assets\js\nav.js" />

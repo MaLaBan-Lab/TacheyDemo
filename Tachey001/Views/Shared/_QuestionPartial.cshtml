@@ -11,8 +11,8 @@
         </p>
         <p>
             <span class="">@Model.QuestionDate</span><button class="btn">
-                <i class="far fa-heart text-white"></i>
-            </button><span class="">@Model.LikeAmount</span><button class="btn"
+                <i class="far fa-heart text-white QLike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID"></i>
+            </button><span class="QLikeNum">@Model.LikeAmount</span><button class="btn"
                                                     type="button"
                                                     data-toggle="collapse"
                                                     data-target="#collapse-@Model.QuestionID">
