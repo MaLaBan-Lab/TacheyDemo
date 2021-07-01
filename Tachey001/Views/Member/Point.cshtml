@@ -4,6 +4,7 @@
 @Styles.Render("~/Assets/css/hahow-point.css")
 @{
     ViewBag.Title = "Point";
+    Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
 <!-- 標題 -->
@@ -427,8 +428,9 @@
                     {
                         <div class="no-stuff text-center vertical-horizontal-center get-point fade out">
                             <div class="pad-tb-30">
-                                <img alt="No POSITIVE Hahow Point History"
-                                     src="https://hahow.in/static/media/icon-empty.39f7f2df.svg">
+                                @*<img alt="No POSITIVE Hahow Point History"
+        src="https://hahow.in/static/media/icon-empty.39f7f2df.svg">*@
+                                <i class="fas fa-search text-white"></i>
                                 <p>目前沒有已用的點數</p>
                             </div>
                         </div>

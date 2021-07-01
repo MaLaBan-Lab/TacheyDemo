@@ -1,4 +1,5 @@
 ﻿@using Tachey001.Models
+@using Microsoft.AspNet.Identity
 @{
     List<CourseCategory> categoryList = new List<CourseCategory>();
 
@@ -10,7 +11,21 @@
         detailList = context.CategoryDetail.ToList();
     }
 }
+@{
+    string photoUrl = null;
 
+    using (TacheyContext context = new TacheyContext())
+    {
+        var result = context.Member.Find(User.Identity.GetUserId());
+
+        if (result != null)
+        {
+            photoUrl = result.Photo;
+        }
+
+        context.SaveChanges();
+    }
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +43,9 @@
     @RenderSection("topCSS", required: false)
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Assets/css/record.css")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <!--<nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top bg-light justify-content-between shadow-sm">
@@ -160,7 +176,57 @@
         <!-- <div id="nav-space"></div> -->
 
         <div class="collapse navbar-collapse  grow-0" id="navbarSupportedContent">
-            @Html.Partial("_LoginPartial")
+
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="@Url.Action("Console", "Member")">
+                                <i class="fas fa-pencil-alt"></i>
+                                我的課程
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-white" href="@Url.Action("Cart", "Member")">購物車</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div id="user-menu"><img src="@photoUrl" alt="" id="user-logo"></div>
+                            </a>
+                            <div class="dropdown-menu user-logo-content text-white" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-white" href="@Url.Action("Point", "Member" )">積分</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Setting", "Member")">帳號設定</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Profile", "Member")">個人檔案</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Orders", "Member")">訂單紀錄</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Coupons", "Member")">我的折扣</a>
+                                <a class="dropdown-item text-white" href="@Url.Action("Invite", "Member")">邀請朋友</a>
+                                <a class="dropdown-item text-white" href="javascript:document.getElementById('logoutForm').submit()">登出</a>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">@Html.ActionLink("註冊", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-white" })</li>
+                    <li class="nav-item ">@Html.ActionLink("登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-white" })</li>
+                </ul>
+            }
+
         </div>
     </nav>
 

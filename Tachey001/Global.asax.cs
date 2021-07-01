@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Tachey001.AccountModels;
 
 namespace Tachey001
 {
@@ -18,6 +19,12 @@ namespace Tachey001
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        protected void Application_PreSendRequestHeaders()
+        {
+            Response.Headers.Remove("X-Frame-Options");
+            Response.AddHeader("X-Frame-Options", "AllowAll");
+
         }
     }
 }

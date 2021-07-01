@@ -18,5 +18,10 @@ namespace Tachey001.ViewModel
         public string Photo { get; set; }
         public int AvgScore { get; set; }
         public bool favorite { get; set; }
+        public int? CategoryID { get; set; }
+        public int? DetailID { get; set; }
+        public string CategoryName { get; set; }
+        public string DetailName { get; set; }
+        public DateTime? CreateDate { get; set; }
     }
 }

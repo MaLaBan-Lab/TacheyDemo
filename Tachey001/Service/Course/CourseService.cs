@@ -178,21 +178,45 @@ namespace Tachey001.Service.Course
             }
             else if (id == 4)
             {
-                var detail = _tacheyRepository.Get<CategoryDetail>(x => x.DetailID == group.course.CategoryDetailsID);
-
                 result.OriginalPrice = group.course.OriginalPrice;
                 result.PreOrderPrice = group.course.PreOrderPrice;
                 result.TotalMinTime = group.course.TotalMinTime;
-                if (detail != null)
-                {
-                    result.CategoryID = detail.CategoryID;
-                }
-                result.CategoryDetailsID = group.course.CategoryDetailsID;
             }
             else if (id == 5)
             {
                 result.Introduction = group.course.Introduction;
             }
+            _tacheyRepository.SaveChanges();
+        }
+        //取得對應課程分類名稱
+        public List<CourseCateDet> courseCateDet(string CourseId)
+        {
+            var currCourse = _tacheyRepository.GetAll<Models.Course>(x => x.CourseID == CourseId);
+            var category = _tacheyRepository.GetAll<CourseCategory>();
+            var detail = _tacheyRepository.GetAll<CategoryDetail>();
+
+            var result = from c in currCourse
+                         join cat in category on c.CategoryID equals cat.CategoryID
+                         join det in detail on c.CategoryDetailsID equals det.DetailID
+                         select new CourseCateDet
+                         {
+                             CourseID = c.CourseID,
+                             CategoryID = c.CategoryID,
+                             DetailID = c.CategoryDetailsID,
+                             CategoryName = cat.CategoryName,
+                             DetailName = det.DetailName
+                         };
+
+            return result.ToList();
+        }
+        //修改課程分類
+        public void ChangeCategory(string clickedOption, string CourseId)
+        {
+            var detail = _tacheyRepository.Get<CategoryDetail>(x => x.DetailName == clickedOption);
+            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            result.CategoryID = detail.CategoryID;
+            result.CategoryDetailsID = detail.DetailID;
+            _tacheyRepository.Update(result);
             _tacheyRepository.SaveChanges();
         }
         //課程章節新增修改
@@ -229,20 +253,20 @@ namespace Tachey001.Service.Course
                     else
                     {
                         newUnit.ChapterID = i;
-                        newUnit.UnitID = $"{i}-{chapterCount}";
                         if (chapterCount % 2 == 0)
                         {
                             newUnit.UnitName = item;
                         }
                         else
                         {
+                            newUnit.UnitID = $"{i}-{(chapterCount+1)/2}";
                             newUnit.CourseURL = item;
                         }
                     }
                     if (chapterCount != 0 && chapterCount % 2 == 0)
                     {
                         _tacheyRepository.Create(newUnit);
-                        newUnit = new CourseUnit();
+                        newUnit = new CourseUnit() { CourseID = CourseId };
                     }
                     chapterCount++;
                 }

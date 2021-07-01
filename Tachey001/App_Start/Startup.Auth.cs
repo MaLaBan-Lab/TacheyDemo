@@ -55,8 +55,10 @@ namespace Tachey001
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "522413578931098",
-               appSecret: "aa407cbe0f0b05bbadba8914df91c586");
+                 appId: "924538288391157",
+                appSecret: "aeb19976ac9b6f4423232f1daf9620fe");
+            // appId: "522413578931098",
+            //appSecret: "aa407cbe0f0b05bbadba8914df91c586");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

@@ -141,9 +141,11 @@ body {
 #advertising-span {
     color: #FCDE0A;
 }
-
-    /* 第二塊 */
-    /* 延伸閱讀 */
+.mt-2rem{
+    margin-bottom:2rem;
+}
+/* 第二塊 */
+/* 延伸閱讀 */
 .reading {
     /*background-color: #f3f3f1;*/
     background-image: url(https://media.discordapp.net/attachments/845189336801476628/852422501098061844/image0.jpg);
@@ -183,16 +185,19 @@ body {
         border-radius: 16px;
         background-color: white;
     }
-
-
-    /* 延伸閱讀 */
-    /* 第一塊輪盤 */
-    
-    .item {
-        height: 100%;
-        width: 100%;
-
-    }
+.style-t {
+    width: 71%;
+    margin-top: 12rem;
+    margin-left: 12rem;
+    position: absolute;
+    display:block;
+}
+/* 延伸閱讀 */
+/* 第一塊輪盤 */
+.item {
+    height: 100%;
+    width: 100%;
+}
 
     .item>img {
         height: 350px;
@@ -497,7 +502,9 @@ body {
 
     @media screen and (max-width:992px) {
 
-
+        .display-n {
+            display: none;
+        }
         /* 頁尾 */
         .footer-block {
             order: 2;
@@ -535,9 +542,9 @@ body {
             margin-top: 5rem;
         }
 
-        .search-content {
-            text-align: center;
-        }
+.search-content {
+    text-align: center;
+}
 
         .search-form {
             display: flex;

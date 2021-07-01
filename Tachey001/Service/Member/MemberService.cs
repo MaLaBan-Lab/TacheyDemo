@@ -320,6 +320,17 @@ namespace Tachey001.Service.Member
                          select new CourseCardViewModel { Photo = m.Photo, Title = c.Title, TotalMinTime = c.TotalMinTime, OriginalPrice = c.OriginalPrice, TitlePageImageURL = c.TitlePageImageURL };
             return result.ToList();
         }
+        public  decimal Caltotal(string memberId)
+        {
+            //呼叫方法用東西接
+            var Cartlist = GetCartPartialViewModel(memberId);
+            decimal totalprice = 0;
+            foreach (var p in Cartlist)
+            {
+                totalprice= p.OriginalPrice+totalprice;
+            }
+            return totalprice;
+        }
 
     }
 }
