@@ -34,6 +34,7 @@
                 </video> -->
                 <iframe name="VideoIframe" width="100%" height="100%" src="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)"
                         title="video player" frameborder="0"
+                        scrolling="no"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
@@ -142,7 +143,7 @@
                                             if (ch.ChapterID == un.ChapterID)
                                             {
                                                 <div class="content">
-                                                    <a href="" target="VideoIframe">
+                                                    <a href="~/Assets/img/lock.jpg" target="VideoIframe">
                                                         <div class="list">
                                                             <div class="icon">
                                                                 <i class="fa fa-lock" aria-hidden="true"></i>

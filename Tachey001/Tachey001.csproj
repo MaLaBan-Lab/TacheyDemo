@@ -387,6 +387,7 @@
     <Content Include="Assets\css\record.css" />
     <Content Include="Assets\css\score.css" />
     <Content Include="Assets\css\step.css" />
+    <Content Include="Assets\img\lock.jpg" />
     <Content Include="Assets\img\右圖左下.jpg" />
     <Content Include="Assets\img\右圖底部.jpg" />
     <Content Include="Assets\img\吉祥物.jpg" />
