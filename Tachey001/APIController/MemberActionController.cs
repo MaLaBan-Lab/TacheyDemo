@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
-using Tachey001.Service.Member;
+using Tachey001.Service;
 using Tachey001.ViewModel.ApiViewModel;
 
 namespace Tachey001.APIController
@@ -13,10 +13,12 @@ namespace Tachey001.APIController
     public class MemberActionController : ApiController
     {
         private MemberService _memberService;
+        private CourseService _courseService;
 
         public MemberActionController()
         {
             _memberService = new MemberService();
+            _courseService = new CourseService();
         }
         //收藏功能
         [HttpGet]
@@ -32,12 +34,13 @@ namespace Tachey001.APIController
                 return new ApiResult(ApiStatus.Fail, ex.Message, null);
             }
         }
+        //問題點讚功能
         [HttpGet]
-        public ApiResult Like(string MemberId, string CourseID, int QuestionID)
+        public ApiResult QLike(string MemberId, string CourseID, int QuestionID)
         {
             try
             {
-                _memberService.CreateOwner(MemberId, CourseID);
+                _courseService.CreateQLike(MemberId, CourseID, QuestionID);
                 return new ApiResult(ApiStatus.Success, CourseID, null);
             }
             catch (Exception ex)
@@ -45,12 +48,14 @@ namespace Tachey001.APIController
                 return new ApiResult(ApiStatus.Fail, ex.Message, null);
             }
         }
+        //回答點讚功能
         [HttpGet]
-        public ApiResult Test()
+        public ApiResult ALike(string MemberId, string CourseID, int QuestionID, int AnswerID)
         {
             try
             {
-                return new ApiResult(ApiStatus.Success, "成功!9527", null);
+                _courseService.CreateALike(MemberId, CourseID, QuestionID, AnswerID);
+                return new ApiResult(ApiStatus.Success, CourseID, null);
             }
             catch (Exception ex)
             {

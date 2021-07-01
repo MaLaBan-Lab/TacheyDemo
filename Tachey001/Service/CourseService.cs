@@ -7,7 +7,7 @@ using Tachey001.Models;
 using Tachey001.Repository;
 using Tachey001.ViewModel.Course;
 
-namespace Tachey001.Service.Course
+namespace Tachey001.Service
 {
     public class CourseService
     {
@@ -325,10 +325,11 @@ namespace Tachey001.Service.Course
                             group all by all.QuestionID into g
                             select new { id = g.Key, amount = g.Count() };
 
-            var allLike = _tacheyRepository.GetAll<QuestionLike>(x => x.CourseID == CourseId);
-            var countLike = from all in allLike
-                            group all by all.CourseID into g
-                            select new { ID = g.Key, Count = g.Count() };
+            //取得問題喜歡數
+            var allQLike = _tacheyRepository.GetAll<QuestionLike>(x => x.CourseID == CourseId);
+
+            //取得回答喜歡數
+            var allALike = _tacheyRepository.GetAll<AnswerLike>(x => x.CourseID == CourseId);
 
             var allA = from a in ans
                        join q in ques on a.QuestionID equals q.QuestionID
@@ -337,11 +338,11 @@ namespace Tachey001.Service.Course
                        {
                            CourseID = a.CourseID,
                            QuestionID = a.QuestionID,
+                           AnswerID = a.AnswerID,
                            Name = m.Name,
                            Photo = m.Photo,
                            AnswerContent = a.AnswerContent,
-                           AnswerDate = a.AnswerDate,
-                           LikeAmount = 0
+                           AnswerDate = a.AnswerDate
                        };
             var allQ = from q in ques
                        join m in member on q.MemberID equals m.MemberID
@@ -355,7 +356,7 @@ namespace Tachey001.Service.Course
                            CurrentPhoto = currentMember.Photo,
                            QuestionContent = q.QuestionContent,
                            QuestionDate = q.QuestionDate,
-                           LikeAmount = 0,
+                           GetAnswerCards = new List<AnswerCard>(),
                            AnsAmount = 0
                          };
             var result = allQ.ToList();
@@ -363,6 +364,15 @@ namespace Tachey001.Service.Course
 
             foreach (var Q in result)
             {
+                //問題按讚的所有會員
+                //foreach (var Ql in allQLike)
+                //{
+                //    if(Q.QuestionID == Ql.QuestionID)
+                //    {
+                //        Q.AllMemberID.Add(Ql.MemberID);
+                //    }
+                //}
+                //回答的總人數
                 foreach (var all in AnsAmount)
                 {
                     if(all.id == Q.QuestionID)
@@ -370,18 +380,55 @@ namespace Tachey001.Service.Course
                         Q.AnsAmount = all.amount;
                     }
                 }
-                var list = new List<AnswerCard>();
+                //回答List塞入
                 foreach (var A in allAList)
                 {
                     if(Q.QuestionID == A.QuestionID)
                     {
-                        list.Add(A);
+                        //回答按讚的所有會員
+                        //foreach (var Al in allALike)
+                        //{
+                        //    if(A.QuestionID == Al.QuestionID && A.AnswerID == Al.AnswerID)
+                        //    {
+                        //        A.AllMemberID.Add(Al.MemberID);
+                        //    }
+                        //}
+                        Q.GetAnswerCards.Add(A);
                     }
                 }
-                Q.GetAnswerCards = list;
             }
 
             return result;
+        }
+        //Create課程問題點讚
+        public void CreateQLike(string MemberId, string CourseId, int QuestionId)
+        {
+            var ToF = _tacheyRepository.Get<QuestionLike>(x => x.MemberID == MemberId && x.CourseID == CourseId && x.QuestionID == QuestionId);
+            if (ToF == null)
+            {
+                var result = new QuestionLike { MemberID = MemberId, CourseID = CourseId, QuestionID = QuestionId };
+                _tacheyRepository.Create(result);
+            }
+            else
+            {
+                _tacheyRepository.Delete(ToF);
+            }
+            _tacheyRepository.SaveChanges();
+        }
+        //Create課程回答點讚
+        public void CreateALike(string MemberId, string CourseId, int QuestionId, int AnswerId)
+        {
+            var ToF = _tacheyRepository.Get<AnswerLike>(x => x.MemberID == MemberId && x.CourseID == CourseId && x.QuestionID == QuestionId && x.AnswerID == AnswerId);
+            if (ToF == null)
+            {
+                var result = new AnswerLike { MemberID = MemberId, CourseID = CourseId, QuestionID=QuestionId, AnswerID = AnswerId };
+                _tacheyRepository.Create(result);
+            }
+            else
+            {
+                _tacheyRepository.Delete(ToF);
+            }
+            _tacheyRepository.SaveChanges();
         }
         //Create創建課程發問
         public void CreateQuestion(Question question, string CourseId, string MemberId)

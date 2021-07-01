@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNet.Identity;
 using Tachey001.AccountModels;
-using Tachey001.Models;
-using Tachey001.Service.Home;
-using Tachey001.Service.Member;
+using Tachey001.Service;
 using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers

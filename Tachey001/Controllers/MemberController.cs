@@ -5,11 +5,8 @@ using System.Linq;
 using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Service;
-using Tachey001.Service.Course;
-using Tachey001.Service.Order;
 using Tachey001.ViewModel;
 using System.Collections;
-using Tachey001.Service.Member;
 using Tachey001.ViewModel.Member;
 using Tachey001.Repository;
 
