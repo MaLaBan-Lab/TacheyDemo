@@ -10,21 +10,15 @@ using Tachey001.AccountModels;
 
 namespace Tachey001
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
-        protected void Application_PreSendRequestHeaders()
-        {
-            Response.Headers.Remove("X-Frame-Options");
-            Response.AddHeader("X-Frame-Options", "AllowAll");
-
         }
     }
 }

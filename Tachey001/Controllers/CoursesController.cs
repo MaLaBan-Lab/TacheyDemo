@@ -15,6 +15,10 @@ using Tachey001.ViewModel.Course;
 using PagedList;
 using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
+using System.IO;
+using CloudinaryDotNet;
+using Tachey001.AccountModels;
+using CloudinaryDotNet.Actions;
 
 namespace Tachey001.Controllers
 {
@@ -148,16 +152,19 @@ namespace Tachey001.Controllers
                 interestDicSub.Add(interestDic[group.Key.ToString()], interestArr);
             }
             ViewBag.interestDetil = interestDicSub;
+
+            var CourseCateDet = _courseService.courseCateDet(CourseId);
+            var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
+            var getcourseviewmodels = _memberService.GetCourseData();
+
             //取得當前登入會員ID
             ViewBag.UserId = UserId;
             //取得當前開課步驟
             ViewBag.Id = id;
             //取得當前開課的課程ID
             ViewBag.CourseId = CourseId;
-
-            var CourseCateDet = _courseService.courseCateDet(CourseId);
-            var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
-            var getcourseviewmodels = _memberService.GetCourseData();
+            //取得當前會員頭像
+            ViewBag.MemberPhoto = getmemberviewmodels[0].Photo;
 
             var mem = new MemberGroup
             {
@@ -249,6 +256,35 @@ namespace Tachey001.Controllers
             _courseService.CreateAnswer(questionCard, CourseId, QuestionId, MemberID);
 
             return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
+        }
+        //Post上傳圖片並返回成功訊息
+        [HttpPost]
+        public JsonResult CoursePhotoUpload()
+        {
+            string photoUrl = "";
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase file = Request.Files[i];
+
+                var myAccount = new Account
+                {
+                    Cloud = Credientials.Cloud,
+                    ApiKey = Credientials.ApiKey,
+                    ApiSecret = Credientials.ApiSecret
+                };
+
+                Cloudinary _cloudinary = new Cloudinary(myAccount);
+
+                var uploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription("1-1", file.InputStream),
+                    PublicId = "1-1"
+                };
+
+                photoUrl = _cloudinary.Upload(uploadParams).Url.ToString();
+            }
+
+            return Json("上傳了" + Request.Files.Count + "個檔案" + Environment.NewLine + "網址 : " + photoUrl);
         }
     }
 }

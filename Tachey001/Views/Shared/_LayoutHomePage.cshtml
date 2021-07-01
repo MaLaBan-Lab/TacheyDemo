@@ -1,6 +1,6 @@
 ﻿@using Tachey001.Models
 @using Microsoft.AspNet.Identity
-@model Tachey001.ViewModel.Card_highlight_Group
+@*@model Tachey001.ViewModel.Card_highlight_Group*@
 @{
     List<CourseCategory> categoryList = new List<CourseCategory>();
 
@@ -138,17 +138,13 @@
                             <div class="dropdown-menu-right dropdown-menu " aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item text-white" href="@Url.Action("Cart", "Member")">購物車</a>
 
-                                <ul class="dropdown-item list-unstyled" data-spy="scroll">
-
-                                    @foreach (var item in Model.cartPartialCardViewModels)
+                                    @*@foreach (var item in Model.cartPartialCardViewModels)
                                     {
                                         <li>
                                             @Html.Partial("_CartPartialCard", item);
                                         </li>
-                                    }
+                                    }*@
 
-
-                                </ul>
                             </div>
 
 

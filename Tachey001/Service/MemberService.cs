@@ -27,7 +27,26 @@ namespace Tachey001.Service.Member
             _HomeRepository = new HomeRepository();
             _MemberRepository = new MemberRepository();
         }
+        //創建會員表
+        public void CreateMember(string userId, string email)
+        {
+            var personalUrl = new PersonalUrl { MemberID = userId };
 
+            var member = new Models.Member
+            {
+                MemberID = userId,
+                Email = email,
+                Name = "匿名",
+                JoinTime = DateTime.Now,
+                Photo = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM",
+                About = "嗨 ~"
+            };
+
+            _tacheyRepository.Create<Models.Member>(member);
+            _tacheyRepository.Create<PersonalUrl>(personalUrl);
+
+            _tacheyRepository.SaveChanges();
+        }
         public MemberViewModel GetMemberData(string MemberId)
         {
             var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);

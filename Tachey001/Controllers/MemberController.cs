@@ -551,8 +551,6 @@ namespace Tachey001.Controllers
             _orderService.DeleteOrder(cancel);
             _orderService.DeleteOrderDetail(cancel);
             return RedirectToAction("Orders",new { type = 2});
-            
-            return View();
         }
 
         public ActionResult Profile()
@@ -612,11 +610,6 @@ namespace Tachey001.Controllers
             };
             //丟入view
             return View(result);
-        }
-        //收藏功能
-        public void Owner(string MemberId, string CourseID)
-        {
-            _memberService.CreateOwner(MemberId, CourseID);
         }
         //取消收藏
         public ActionResult DelOwner(string MemberId, string CourseID)

@@ -9,17 +9,20 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Tachey001.Models;
+using Tachey001.Service.Member;
 
 namespace Tachey001.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private MemberService _memberService;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            _memberService = new MemberService();
         }
 
         [AllowAnonymous]
@@ -182,24 +185,10 @@ namespace Tachey001.Controllers
         //註冊Tachey會員資料表
         public ActionResult RegisterTacheyMember()
         {
-            using (TacheyContext context = new TacheyContext())
-            {
-                var email = User.Identity.GetUserName();
+            var UserId = User.Identity.GetUserName();
+            var Email = User.Identity.GetUserName();
 
-                PersonalUrl personalUrl = new PersonalUrl { MemberID = User.Identity.GetUserId() };
-                Member member = new Member { 
-                    MemberID = User.Identity.GetUserId(), 
-                    Email = email,Name="匿名", 
-                    JoinTime = DateTime.Now,
-                    Photo= "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM" ,
-                    About="嗨 ~"
-                };
-
-                context.Member.Add(member);
-                context.PersonalUrl.Add(personalUrl);
-
-                context.SaveChanges();
-            }
+            _memberService.CreateMember(UserId, Email);
 
             return RedirectToAction("Index", "Home");
         }
@@ -372,9 +361,41 @@ namespace Tachey001.Controllers
                 case SignInStatus.Failure:
                 default:
                     // 若使用者沒有帳戶，請提示使用者建立帳戶
+                    //ViewBag.ReturnUrl = returnUrl;
+                    //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                    //return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        return RedirectToAction("Index", "Manage");
+                    }
+
+                    if (ModelState.IsValid)
+                    {
+                        // 從外部登入提供者處取得使用者資訊
+                        var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                        if (info == null)
+                        {
+                            return View("ExternalLoginFailure");
+                        }
+                        var user = new ApplicationUser { UserName = loginInfo.Email, Email = loginInfo.Email };
+                        var resultU = await UserManager.CreateAsync(user);
+                        if (resultU.Succeeded)
+                        {
+                            resultU = await UserManager.AddLoginAsync(user.Id, info.Login);
+
+                            //註冊
+                            _memberService.CreateMember(user.Id, loginInfo.Email);
+
+                            if (resultU.Succeeded)
+                            {
+                                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                                return RedirectToLocal(returnUrl);
+                            }
+                        }
+                    }
+
                     ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return RedirectToAction("Index", "Home");
             }
         }
 
