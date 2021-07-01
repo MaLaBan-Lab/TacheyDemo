@@ -1,14 +1,23 @@
 ﻿@model Tachey001.ViewModel.Course.AllCourse
 
-@{ 
-    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
-    if(Model.TitlePageImageURL != null)
+@{
+    var col = 3;
+
+    if (HttpContext.Current.Request.RawUrl == "/Member/Profile")
     {
-        titleUrl = Model.TitlePageImageURL;
-            }
+        col = 4;
+    }
 }
 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+@{
+    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
+    if (Model.TitlePageImageURL != null)
+    {
+        titleUrl = Model.TitlePageImageURL;
+    }
+}
+
+<div class="col-xl-@col col-lg-4 col-md-6 col-sm-12">
 
     <div class="card my-5">
         <div class="row no-gutters justify-content-center">

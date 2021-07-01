@@ -55,9 +55,7 @@ namespace Tachey001.Controllers
             {
                 consoleViews = ConsoleViews,
                 allCourses = AllCourses
-
             };
-
 
             return View(result);
         }
@@ -90,11 +88,13 @@ namespace Tachey001.Controllers
             var UserId = User.Identity.GetUserId();
             var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
             var getcourseviewmodels = _memberService.GetCourseData();
+            var getaspNetUserLogins = _memberService.GetAspNetUserLogins(UserId);
 
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,
                 courseViewModels = getcourseviewmodels,
+                aspNetUserLogins = getaspNetUserLogins,
             };
 
             // 職業行業選項
@@ -555,12 +555,14 @@ namespace Tachey001.Controllers
         {
             var UserId = User.Identity.GetUserId();
             var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
+            var ConsoleViews = _memberService.GetConsoleData(UserId);
+            var AllCourses = _courseService.GetCourseData(UserId);
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,
+                consoleViews = ConsoleViews,
+                allCourses = AllCourses
             };
-
-
 
             ViewBag.giveCourseCount = from p in _context.Course where p.MemberID == UserId select p; // 已開設
             ViewBag.giveCourseCount = Enumerable.Count(ViewBag.giveCourseCount);

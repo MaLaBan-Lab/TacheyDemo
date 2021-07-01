@@ -56,7 +56,17 @@
         }
     }
 }
+@{
+    var PhotoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
+    foreach (var i in Model.memberViewModels)
+    {
+        if (i.Photo != null)
+        {
+            PhotoUrl = i.Photo;
+        }
+    }
 
+}
 
 <div class="container">
 
@@ -158,41 +168,27 @@
                                   currentitem="false"></span>
                             <!-- 彈跳提示 -->
                             <div class="type-dark" id="about-login" data-id="tooltip" style="left: 611px; top: 167px;">
-                                <span>你現有的登入方式，以及可進行的相關動作</span>
+                                <span>你現有的登入方式</span>
                             </div>
                         </label>
                         <div class="signin-way-block">
-                            @foreach (var item in Model.memberViewModels)
+                            @if (Enumerable.Count(Model.aspNetUserLogins) == 0)
                             {
-                                <!-- hahow -->
+                                <!-- Hahow -->
                                 <div class="local-bar marg-t-30 pad-b-30 clearfix">
-                                    @if (item.Account == null)
-                                    {
-                                        <div class="left-block">
-                                            <div class="auth-provider-icon inline-block">
-                                                <img alt="icon" class="wide-icon" src="~/Assets/img/icon-hahow.png" />
-                                            </div>
-                                            <h5 class="unbinded-account inline-block marg-l-25 " style="color:black">
-                                                尚未建立 Hahow 帳號
-                                            </h5>
+                                    <div class="left-block">
+                                        <div class="auth-provider-icon inline-block">
+                                            <img alt="icon" class="narrow-icon narrow-icon-tachey" src="https://i.imgur.com/CG3B9gp.jpg"><img alt="pic" class="profile-image" src=@(PhotoUrl) width="">
                                         </div>
-                                        <div class="right-block">
-                                            <div class="inline-block text-underline marg-r-5 link-gray ">
-                                                建立並連結帳號
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="left-block">
-                                            <div class="auth-provider-icon inline-block">
-                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-hahow-half.png"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
-                                            </div>
-                                            <h5 class="binded-account inline-block marg-l-25" style="color:black">
-                                                已建立帳號@(item.Account)
-                                            </h5>
-                                        </div>
-                                        <div class="right-block">
+                                        <h5 class="binded-account inline-block marg-l-25" style="color:black">
+                                            已建立帳號
+                                            @foreach (var j in Model.memberViewModels)
+                                            {
+                                                @(j.Email)
+                                            }
+                                        </h5>
+                                    </div>
+                                    @*<div class="right-block">
                                             <div class="inline-block text-underline marg-r-5 link-gray ">
                                                 修改密碼
                                             </div>
@@ -201,126 +197,209 @@
                                             <div class="inline-block text-underline marg-r-5 link-gray ">
                                                 帳號與個人網址
                                             </div>
-                                        </div>
-                                    }
+                                        </div>*@
                                 </div>
+
                                 <!-- google -->
                                 <div class="google-bar marg-t-30 pad-b-30 clearfix">
-                                    @if (item.Google == null)
+                                    <div class="left-block">
+                                        <div class="auth-provider-icon inline-block">
+                                            <img alt="icon" class="wide-icon" src="~/Assets/img/icon-google.svg">
+                                        </div>
+                                        <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
+                                            未連結 Google 帳號
+                                        </h5>
+                                    </div>
+                                    @*<div class="right-block">
+                                            <div class="inline-block text-underline marg-r-5 link-gray ">
+                                                建立並連結帳號
+                                            </div>
+                                        </div>*@
+                                </div>
+
+                                <!-- facebook -->
+                                <div class="facebook-bar marg-t-30 pad-b-30 clearfix">
+                                    <div class="left-block">
+                                        <div class="auth-provider-icon inline-block">
+                                            <img alt="icon" class="wide-icon" src="~/Assets/img/icon-fb.png" />
+                                        </div>
+                                        <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
+                                            未連結 Facebook 帳號
+                                        </h5>
+                                    </div>
+                                    @*<div class="right-block">
+                                            <div class="inline-block text-underline marg-r-5 link-gray">
+                                                前往連結帳號
+                                            </div>
+                                        </div>*@
+                                </div>
+
+                                <!-- line -->
+                                <div class="line-bar marg-t-30 pad-b-30 clearfix">
+                                    <div class="left-block">
+                                        <div class="auth-provider-icon inline-block">
+                                            <img alt="icon" class="wide-icon" src="~/Assets/img/icon-line.svg">
+                                        </div>
+                                        <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
+                                            未連結 LINE 帳號
+                                        </h5>
+                                    </div>
+                                    @*<div class="right-block text-right">
+                                            <div class="inline-block text-underline marg-r-5 link-gray text-right">
+                                                前往連結帳號
+                                            </div>
+                                        </div>*@
+                                </div>
+                            }
+
+                            @foreach (var item in Model.aspNetUserLogins)
+                            {
+                                <!-- hahow -->
+                                <div class="local-bar marg-t-30 pad-b-30 clearfix">
+                                    <div class="left-block">
+                                        <div class="auth-provider-icon inline-block">
+                                            <img alt="icon" class="wide-icon icon-tachey" src="https://i.imgur.com/CG3B9gp.jpg" />
+                                        </div>
+                                        <h5 class="unbinded-account inline-block marg-l-25 " style="color:black">
+                                            未建立 Tachey 帳號
+                                        </h5>
+                                    </div>
+                                    @*<div class="right-block">
+                                            <div class="inline-block text-underline marg-r-5 link-gray ">
+                                                建立並連結帳號
+                                            </div>
+                                        </div>*@
+                                </div>
+
+                                <!-- google -->
+                                <div class="google-bar marg-t-30 pad-b-30 clearfix">
+                                    @if (item.LoginProvider != "Google")
                                     {
                                         <div class="left-block">
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="wide-icon" src="~/Assets/img/icon-google.svg">
                                             </div>
                                             <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
-                                                尚未連結 Google 帳號
+                                                未連結 Google 帳號
                                             </h5>
                                         </div>
-                                        <div class="right-block">
-                                            <div class="inline-block text-underline marg-r-5 link-gray ">
-                                                建立並連結帳號
-                                            </div>
-                                        </div>
+                                        @*<div class="right-block">
+                                                <div class="inline-block text-underline marg-r-5 link-gray ">
+                                                    建立並連結帳號
+                                                </div>
+                                            </div>*@
                                     }
                                     else
                                     {
                                         <div class="left-block">
                                             <div class="auth-provider-icon inline-block">
-                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-google-half.svg"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
+                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-google-half.svg"><img alt="pic" class="profile-image" src=@(PhotoUrl) width="">
                                             </div>
                                             <h5 class="binded-account inline-block marg-l-25" style="color:black">
-                                                連結為@(item.Google)
+                                                已建立帳號
+                                                @foreach (var j in Model.memberViewModels)
+                                                {
+                                                    @(j.Email)
+                                                }
                                             </h5>
                                         </div>
-                                        <div class="right-block">
+                                        <!--<div class="right-block">
                                             <div>
                                                 <div class="inline-block marg-r-5 unclickable-text" data-for="unbinding" data-tip="如欲取消<br />請先連結其他登入方式" currentitem="false">
                                                     取消連結
-                                                </div>
-                                                <!-- 彈跳提示 -->
-                                                <div class="type-dark" id="unbinding" data-id="tooltip"></div>
+                                                </div>-->
+                                        <!-- 彈跳提示 -->
+                                        <!--<div class="type-dark" id="unbinding" data-id="tooltip"></div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     }
                                 </div>
 
                                 <!-- facebook -->
                                 <div class="facebook-bar marg-t-30 pad-b-30 clearfix">
-                                    @if (item.Facebook == null)
+                                    @if (item.LoginProvider != "Facebook")
                                     {
                                         <div class="left-block">
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="wide-icon" src="~/Assets/img/icon-fb.png" />
                                             </div>
                                             <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
-                                                尚未連結 Facebook 帳號
+                                                未連結 Facebook 帳號
                                             </h5>
                                         </div>
-                                        <div class="right-block">
-                                            <div class="inline-block text-underline marg-r-5 link-gray">
-                                                前往連結帳號
-                                            </div>
-                                        </div>
+                                        @*<div class="right-block">
+                                                <div class="inline-block text-underline marg-r-5 link-gray">
+                                                    前往連結帳號
+                                                </div>
+                                            </div>*@
                                     }
                                     else
                                     {
                                         <div class="left-block">
                                             <div class="auth-provider-icon inline-block">
-                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-fb-half.png"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
+                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-fb-half.png"><img alt="pic" class="profile-image" src=@(PhotoUrl) width="">
                                             </div>
                                             <h5 class="binded-account inline-block marg-l-25" style="color:black">
-                                                連結為@(item.Facebook)
+                                                已建立帳號
+                                                @foreach (var j in Model.memberViewModels)
+                                                {
+                                                    @(j.Email)
+                                                }
                                             </h5>
                                         </div>
-                                        <div class="right-block">
+                                        <!--<div class="right-block">
                                             <div>
                                                 <div class="inline-block marg-r-5 unclickable-text" data-for="unbinding" data-tip="如欲取消<br />請先連結其他登入方式" currentitem="false">
                                                     取消連結
-                                                </div>
-                                                <!-- 彈跳提示 -->
-                                                <div class="type-dark" id="unbinding" data-id="tooltip"></div>
+                                                </div>-->
+                                        <!-- 彈跳提示 -->
+                                        <!--<div class="type-dark" id="unbinding" data-id="tooltip"></div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     }
                                 </div>
 
                                 <!-- line -->
                                 <div class="line-bar marg-t-30 pad-b-30 clearfix">
-                                    @if (item.Line == null)
+                                    @if (item.LoginProvider != "Line")
                                     {
                                         <div class="left-block">
                                             <div class="auth-provider-icon inline-block">
                                                 <img alt="icon" class="wide-icon" src="~/Assets/img/icon-line.svg">
                                             </div>
                                             <h5 class="unbinded-account inline-block marg-l-25" style="color:black">
-                                                尚未連結 LINE 帳號
+                                                未連結 LINE 帳號
                                             </h5>
                                         </div>
-                                        <div class="right-block text-right">
-                                            <div class="inline-block text-underline marg-r-5 link-gray text-right">
-                                                前往連結帳號
-                                            </div>
-                                        </div>
+                                        @*<div class="right-block text-right">
+                                                <div class="inline-block text-underline marg-r-5 link-gray text-right">
+                                                    前往連結帳號
+                                                </div>
+                                            </div>*@
                                     }
                                     else
                                     {
                                         <div class="left-block">
                                             <div class="auth-provider-icon inline-block">
-                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-line-half.png"><img alt="pic" class="profile-image" src=@(item.Photo) width="">
+                                                <img alt="icon" class="narrow-icon" src="~/Assets/img/icon-line-half.png"><img alt="pic" class="profile-image" src=@(PhotoUrl) width="">
                                             </div>
                                             <h5 class="binded-account inline-block marg-l-25" style="color:black">
-                                                連結為@(item.Line)
+                                                已建立帳號
+                                                @foreach (var j in Model.memberViewModels)
+                                                {
+                                                    @(j.Email)
+                                                }
                                             </h5>
                                         </div>
-                                        <div class="right-block">
+                                        <!--<div class="right-block">
                                             <div>
                                                 <div class="inline-block marg-r-5 unclickable-text" data-for="unbinding" data-tip="如欲取消<br />請先連結其他登入方式" currentitem="false">
                                                     取消連結
-                                                </div>
-                                                <!-- 彈跳提示 -->
-                                                <div class="type-dark" id="unbinding" data-id="tooltip"></div>
+                                                </div>-->
+                                        <!-- 彈跳提示 -->
+                                        <!--<div class="type-dark" id="unbinding" data-id="tooltip"></div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     }
                                 </div>
                             }
@@ -329,51 +408,45 @@
                     </div>
 
                     <!-- email -->
-                    <form novalidate="" class="email-form pad-t-30" name="emailForm">
-                        <label for="email">
-                            電子信箱
-                            <span data-tip="true" data-for="verify-email" aria-hidden="true" class="fa fa-question-circle" currentitem="false"></span>
-                            <!-- 彈跳提示 -->
-                            <div class="type-dark" id="verify-email" data-id="tooltip">
-                                <span>驗證信箱，讓 Hahow 帶給你更完整的體驗。</span>
-                            </div>
-                        </label>
-                        @foreach (var item in Model.memberViewModels)
-                        {
-
-
-                            <div class="flex">
-                                <div class="email-input">
-                                    <div class="flex">
-                                        <input placeholder="信箱" type="email" class="mail-input" value=@(item.Email)>
-                                        @*@using (Html.BeginForm("Email", "Member", new { CourseId = ViewBag.MemberId }))
-                                            {
-                                                @Html.AntiForgeryToken()
-
-                                                @Html.EditorFor(m => m.Tool, new { htmlAttributes = new { @class = "mail-input" } })
-                                                                        }*@
-                                    </div>
+                    @*<form novalidate="" class="email-form pad-t-30" name="emailForm">
+                            <label for="email">
+                                電子信箱
+                                <span data-tip="true" data-for="verify-email" aria-hidden="true" class="fa fa-question-circle" currentitem="false"></span>-->
+                                <!-- 彈跳提示 -->
+                                <!--<div class="type-dark" id="verify-email" data-id="tooltip">
+                                    <span>驗證信箱，讓 Hahow 帶給你更完整的體驗。</span>
                                 </div>
+                            </label>
+                            @foreach (var item in Model.memberViewModels)
+                            {
 
-                                @if (item.EmailStatus == null || item.EmailStatus == false)
-                                {
-                                    <button class="verification-btn">
-                                        <div>
-                                            <span aria-hidden="true" class="fas fa-envelope"></span>&nbsp;驗證&nbsp;
+
+                                <div class="flex">
+                                    <div class="email-input">
+                                        <div class="flex">
+                                            <input placeholder="信箱" type="email" class="mail-input" value=@(item.Email)>
                                         </div>
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button disabled class="verification-btn-disable">
-                                        &nbsp;已驗證&nbsp;
-                                    </button>
-                                }
+                                    </div>
+
+                                    @if (item.EmailStatus == null || item.EmailStatus == false)
+                                    {
+                                        <button class="verification-btn">
+                                            <div>
+                                                <span aria-hidden="true" class="fas fa-envelope"></span>&nbsp;驗證&nbsp;
+                                            </div>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button disabled class="verification-btn-disable">
+                                            &nbsp;已驗證&nbsp;
+                                        </button>
+                                    }
 
 
-                            </div>
-                        }
-                    </form>
+                                </div>
+                            }
+                        </form>*@
                 </div>
             </div>
 
@@ -564,224 +637,224 @@
             </div>
 
             <!-- 興趣與喜好 -->
-            <div class="border-setting likes-area" id="likes-area">
+            <div class="border-setting likes-area mb-5" id="likes-area">
                 <div class="ta-l">
                     <!--<p>你的興趣與喜好是什麼呢！？我們將根據以下資訊，提供生日優惠禮以及更加適合你的課程推薦。</p>
                     <label class="marg-t-30" id="user-detail-interests-tags">個人興趣（多選）</label>-->
                     <!-- <div class="relative inline-block">
-            <div class="mask pseudo-btn absolute"></div>
-    </div> -->
+                            <div class="mask pseudo-btn absolute"></div>
+                    </div> -->
                     <!--<button class="oval-btn-plus-text oval-btn" id="user-interest-btn">+</button>-->
                     <!-- 彈跳視窗-我的興趣 -->
                     <!--<div>
-    <div class="overlay-interest" style=" display: none;">
-        <div class="overlay-interest-modal">
-            <h4 class="overlay-interest-h4 pad-tb-15 text-center">
-                我的興趣（多選）
-            </h4>
-            <div overflow="unset"
-                 class="overlay-interest-block">
-                <div class="overlay-interest-size flex-column relative">
-                    <div class="selected-items-bar">
-                        <span class="description inline-block text-bold marg-t-10 marg-b-20">已選興趣：</span>
-                    </div>
-                    <div class="flex-1">
-                        <div>-->
+                    <div class="overlay-interest" style=" display: none;">
+                        <div class="overlay-interest-modal">
+                            <h4 class="overlay-interest-h4 pad-tb-15 text-center">
+                                我的興趣（多選）
+                            </h4>
+                            <div overflow="unset"
+                                 class="overlay-interest-block">
+                                <div class="overlay-interest-size flex-column relative">
+                                    <div class="selected-items-bar">
+                                        <span class="description inline-block text-bold marg-t-10 marg-b-20">已選興趣：</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div>-->
                     <!-- first row -->
                     <!--<div class="categories-wrap flex ">
-            @*@{int count = 0;}
-            @foreach (var i in Model.courseViewModels.courseCategory)
-            {
-
-                if (count >= 4)
-                {
-                    break;
-                }
-                <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
-                    <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
-                    <span class="block">@i.CategoryName</span>
-                </div>
-                count++;
-            }*@
-
-        </div>
-        <div class="interval toggle toggle-first">
-            <div class="items-wrap text-center pad-tb-20 pad-rl-30">
-
-                @*@{count = 0;}
-                @foreach (var i in ViewBag.interestDetil)
-                {
-                    if (count < 4)
-                    {
-                        <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
-                        foreach (var j in i.Value)
+                        @*@{int count = 0;}
+                        @foreach (var i in Model.courseViewModels.courseCategory)
                         {
-                            foreach (var k in Model.memberViewModels)
+
+                            if (count >= 4)
                             {
-                                if (k.Interest != null)
-                                {
-                                    if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
-                                    {
-                                        <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                }
+                                break;
                             }
+                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
+                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                <span class="block">@i.CategoryName</span>
+                            </div>
+                            count++;
+                        }*@
 
-                        }
-                    }
-                    count++;
+                    </div>
+                    <div class="interval toggle toggle-first">
+                        <div class="items-wrap text-center pad-tb-20 pad-rl-30">
 
-                }*@
-            </div>
-        </div>-->
-                    <!-- second row -->
-                    <!--<div class="categories-wrap flex ">
-        @*@{count = 0;}
-        @foreach (var i in Model.courseViewModels.courseCategory)
-        {
-            if (count > 3 && count <= 7)
-            {
-                <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
-                    <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
-                    <span class="block">@i.CategoryName</span>
-                </div>
-            }
-            count++;
-        }*@
-
-    </div>
-    <div class="interval toggle toggle-second">
-        <div class="items-wrap text-center pad-tb-20 pad-rl-30">
-            @*@{count = 0;}
-            @foreach (var i in ViewBag.interestDetil)
-            {
-                if (count > 3 && count <= 7)
-                {
-                    <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
-                    foreach (var j in i.Value)
-                    {
-                        foreach (var k in Model.memberViewModels)
-                        {
-                            if (k.Interest != null)
+                            @*@{count = 0;}
+                            @foreach (var i in ViewBag.interestDetil)
                             {
-                                if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
+                                if (count < 4)
                                 {
-                                    <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                }
-                                else
-                                {
-                                    <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                }
-                            }
-                            else
-                            {
-                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                            }
-                        }
-
-                    }
-                }
-                count++;
-
-            }*@
-        </div>
-    </div>-->
-                    <!-- third row -->
-                    <!--<div class="categories-wrap flex ">
-                                    @*@{count = 0;}
-                                    @foreach (var i in Model.courseViewModels.courseCategory)
+                                    <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                                    foreach (var j in i.Value)
                                     {
-
-                                        if (count > 7)
+                                        foreach (var k in Model.memberViewModels)
                                         {
-                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
-                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
-                                                <span class="block">@i.CategoryName</span>
-                                            </div>
-                                        }
-
-                                        count++;
-                                    }
-                                </div>
-                                <div class="interval toggle toggle-third">
-                                    <div class="items-wrap text-center pad-tb-20 pad-rl-30">
-                                        @{count = 0;}
-                                        @foreach (var i in ViewBag.interestDetil)
-                                        {
-                                            if (count > 7)
+                                            if (k.Interest != null)
                                             {
-                                                <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
-                                                foreach (var j in i.Value)
+                                                if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
                                                 {
-                                                    foreach (var k in Model.memberViewModels)
-                                                    {
-                                                        if (k.Interest != null)
-                                                        {
-                                                            if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
-                                                            {
-                                                                <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
-                                                        }
-                                                    }
-
-
+                                                    <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
                                                 }
                                             }
-                                            count++;
+                                            else
+                                            {
+                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                            }
+                                        }
 
-                                        }*@
-                                    </div>
+                                    }
+                                }
+                                count++;
+
+                            }*@
+                        </div>
+                    </div>-->
+                    <!-- second row -->
+                    <!--<div class="categories-wrap flex ">
+                        @*@{count = 0;}
+                        @foreach (var i in Model.courseViewModels.courseCategory)
+                        {
+                            if (count > 3 && count <= 7)
+                            {
+                                <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
+                                    <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                    <span class="block">@i.CategoryName</span>
                                 </div>
+                            }
+                            count++;
+                        }*@
 
-
-
-                            </div>
-
-
-                        </div>
-                        <div class="confirm marg-t-30">
-                            <button disabled=""
-                                    class="confirm-btn">
-                                確認
-                            </button>
-                        </div>
                     </div>
-                </div><button class="close-button">
-                    <svg class=""
-                         xmlns="http://www.w3.org/2000/svg"
-                         width="25" height="25"
-                         viewBox="0 0 36 36"
-                         style="top: 9px; right: 9px; fill: rgba(0, 0, 0, 0.65); z-index: 2;">
-                        <path d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>-->
+                    <div class="interval toggle toggle-second">
+                        <div class="items-wrap text-center pad-tb-20 pad-rl-30">
+                            @*@{count = 0;}
+                            @foreach (var i in ViewBag.interestDetil)
+                            {
+                                if (count > 3 && count <= 7)
+                                {
+                                    <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                                    foreach (var j in i.Value)
+                                    {
+                                        foreach (var k in Model.memberViewModels)
+                                        {
+                                            if (k.Interest != null)
+                                            {
+                                                if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
+                                                {
+                                                    <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                            }
+                                        }
+
+                                    }
+                                }
+                                count++;
+
+                            }*@
+                        </div>
+                    </div>-->
+                    <!-- third row -->
+                    <!--<div class="categories-wrap flex ">
+                                                    @*@{count = 0;}
+                                                    @foreach (var i in Model.courseViewModels.courseCategory)
+                                                    {
+
+                                                        if (count > 7)
+                                                        {
+                                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
+                                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                                                <span class="block">@i.CategoryName</span>
+                                                            </div>
+                                                        }
+
+                                                        count++;
+                                                    }
+                                                </div>
+                                                <div class="interval toggle toggle-third">
+                                                    <div class="items-wrap text-center pad-tb-20 pad-rl-30">
+                                                        @{count = 0;}
+                                                        @foreach (var i in ViewBag.interestDetil)
+                                                        {
+                                                            if (count > 7)
+                                                            {
+                                                                <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                                                                foreach (var j in i.Value)
+                                                                {
+                                                                    foreach (var k in Model.memberViewModels)
+                                                                    {
+                                                                        if (k.Interest != null)
+                                                                        {
+                                                                            if (Array.IndexOf(k.Interest.Split('/'), j) != -1)
+                                                                            {
+                                                                                <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                                        }
+                                                                    }
+
+
+                                                                }
+                                                            }
+                                                            count++;
+
+                                                        }*@
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="confirm marg-t-30">
+                                            <button disabled=""
+                                                    class="confirm-btn">
+                                                確認
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div><button class="close-button">
+                                    <svg class=""
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         width="25" height="25"
+                                         viewBox="0 0 36 36"
+                                         style="top: 9px; right: 9px; fill: rgba(0, 0, 0, 0.65); z-index: 2;">
+                                        <path d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>-->
                     @Html.Partial("_ChoiceCardPartial")
                     <!-- 彈跳視窗-我的興趣 -->
 
                     <label class="marg-t-30" id="user-detail-recreations">其他個人喜好（多選）</label>
                     <!-- <div class="relative inline-block">
-            <div class="mask pseudo-btn absolute"></div>
-    </div> -->
+                            <div class="mask pseudo-btn absolute"></div>
+                    </div> -->
                     <button class="oval-btn-plus-text oval-btn" id="user-like-btn">+</button>
                     <!-- 彈跳視窗-其他個人喜好 -->
                     <div>
@@ -850,10 +923,10 @@
                         </a>。
                     </p>
                 </div>
-                </div>
+            </div>
 
-                <!-- 轉移課程 -->
-                <div class="border-setting transfer-course">
+            <!-- 轉移課程 -->
+            @*<div class="border-setting transfer-course">
                     <div class="ta-l">
                         <p class="inline-block">
                             申請轉移課程｜欲申請轉移請先閱讀
@@ -867,12 +940,12 @@
                                target="_blank">填表申請</a>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
 
-            </div>
         </div>
     </div>
+</div>
 
-    @Scripts.Render("~/Assets/js/member.js")
-    @Scripts.Render("~/Assets/js/choice.js")
+@Scripts.Render("~/Assets/js/member.js")
+@Scripts.Render("~/Assets/js/choice.js")
