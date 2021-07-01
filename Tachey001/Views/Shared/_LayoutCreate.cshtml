@@ -1,5 +1,4 @@
 ﻿@using Tachey001.Models
-@using Microsoft.AspNet.Identity
 @{
     List<CourseCategory> categoryList = new List<CourseCategory>();
 
@@ -144,14 +143,14 @@
                                     @item.CategoryName
                                 </a>
                                 <div class="dropdown-menu text-white">
-                                    <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
+                                    <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses",new { categoryid = item.CategoryID})">
                                         所有@(item.CategoryName)
                                     </a>
                                     @foreach (var detail in detailList)
                                     {
                                         if (detail.CategoryID == item.CategoryID)
                                         {
-                                            <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
+                                            <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses",new { detailid = detail.DetailID})">
                                                 @detail.DetailName
                                             </a>
                                         }
