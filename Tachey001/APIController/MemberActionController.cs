@@ -33,18 +33,18 @@ namespace Tachey001.APIController
             }
         }
         [HttpGet]
-        //public ApiResult Like(string MemberId, string CourseID, int QuestionID)
-        //{
-        //    try
-        //    {
-        //        //_memberService.CreateOwner(MemberId, CourseID);
-        //        //return new ApiResult(ApiStatus.Success, CourseID, null);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //return new ApiResult(ApiStatus.Fail, ex.Message, null);
-        //    }
-        //}
+        public ApiResult Like(string MemberId, string CourseID, int QuestionID)
+        {
+            try
+            {
+                _memberService.CreateOwner(MemberId, CourseID);
+                return new ApiResult(ApiStatus.Success, CourseID, null);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResult(ApiStatus.Fail, ex.Message, null);
+            }
+        }
         [HttpGet]
         public ApiResult Test()
         {
