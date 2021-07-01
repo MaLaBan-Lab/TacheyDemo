@@ -1,10 +1,13 @@
 ﻿using System;
+using Line.Login.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using Owin.Security.Middleware.Line;
 using Tachey001.Models;
 
 namespace Tachey001
@@ -55,14 +58,42 @@ namespace Tachey001
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "522413578931098",
-               appSecret: "aa407cbe0f0b05bbadba8914df91c586");
+               appId: "924538288391157",
+               appSecret: "aeb19976ac9b6f4423232f1daf9620fe");
+            //var options = new FacebookAuthenticationOptions
+            //{
+            //    AppId = "522413578931098",
+            //    AppSecret = "aa407cbe0f0b05bbadba8914df91c586",
+            //    CallbackPath = new PathString("/Account/ExternalLoginCallback/"),
+            //    Provider = new FacebookAuthenticationProvider
+            //    {
+            //        OnAuthenticated = async context =>
+            //        {
+            //            // Retrieve the OAuth access token to store for subsequent API calls
+            //            string accessToken = context.AccessToken;
+
+            //            // Retrieve the username
+            //            string facebookUserName = context.UserName;
+
+            //            // You can even retrieve the full JSON-serialized user
+            //            var serializedUser = context.User;
+            //        }
+            //    }
+            //};
+            //app.UseFacebookAuthentication(options);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "1037350215092-9rcm57k133ffatrhs0i5tkanv0ppdppp.apps.googleusercontent.com",
                 ClientSecret = "QgQK1ahv7zUXBA5DqXv4NVHq"
             });
+
+            app.UseLineAuthentication(new LineAuthenticationOptions(
+                channelId: "1656163525",
+                channelSecret: "87a29eb6c97c02a8f1c649a8f2a8da22",
+                redirectUri: "https://localhost:44394/line-signin",
+                scope: Scope.OpenId | Scope.Profile | Scope.Email
+            ));
         }
     }
 }

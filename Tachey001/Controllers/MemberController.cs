@@ -240,6 +240,7 @@ namespace Tachey001.Controllers
                     interestDicSub.Add(interestDic[group.Key.ToString()], interestArr);
                 }
                 ViewBag.interestDetil = interestDicSub;
+
                 ViewBag.ListYear = selectListYear;
                 ViewBag.ListMonth = selectListMonth;
                 ViewBag.ListDay = selectListDay;
