@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace Tachey001.APIController
 {
-    public class CourseController : ApiController
+    public class CourseUploadController : ApiController
     {
         
     }

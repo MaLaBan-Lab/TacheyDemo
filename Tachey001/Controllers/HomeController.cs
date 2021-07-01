@@ -72,7 +72,7 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult CourseCard(HttpPostedFileBase file)
         {
-            //Stream streamFile = file.InputStream;
+            Stream streamFile = file.InputStream;
             //背景作業 不中斷操作
             //var task = new SendFileTask();
             //task.Run(streamFile);

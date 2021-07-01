@@ -383,19 +383,21 @@
         })
 
         $(".bookmarkCheck").on('click', function () {
-            if ($(this).hasClass("backgroundBookmarkChecked")) {
-                $(`#text-${$(this).get(0).dataset.courseid}`).text("取消收藏")
-                $(this).removeClass("backgroundBookmarkChecked")
-                $(this).addClass("backgroundBookmarkMove")
-            } else {
-                $(`#text-${$(this).get(0).dataset.courseid}`).text("加入收藏")
-                $(this).addClass("backgroundBookmarkChecked")
-                $(this).removeClass("backgroundBookmarkMove")
-            }
+            var currDom = $(this);
 
-            var url = "/Member/Owner?MemberId=" + $(this).get(0).dataset.memberid + "&CourseId=" + $(this).get(0).dataset.courseid
+            var url = "/api/MemberAction/Owner?MemberId=" + $(this).get(0).dataset.memberid + "&CourseId=" + $(this).get(0).dataset.courseid
 
-            $.get(url)
+            $.get(url, function (res) {
+                if (currDom.hasClass("backgroundBookmarkChecked")) {
+                    $(`#text-${currDom.get(0).dataset.courseid}`).text("已將" + res.ErrMsg + "取消收藏")
+                    currDom.removeClass("backgroundBookmarkChecked")
+                    currDom.addClass("backgroundBookmarkMove")
+                } else {
+                    $(`#text-${currDom.get(0).dataset.courseid}`).text("已將" + res.ErrMsg + "加入收藏")
+                    currDom.addClass("backgroundBookmarkChecked")
+                    currDom.removeClass("backgroundBookmarkMove")
+                }
+            })
         })
 
     </script>

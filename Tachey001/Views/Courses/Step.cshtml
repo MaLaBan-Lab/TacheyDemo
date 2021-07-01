@@ -244,4 +244,43 @@
             })
         }
     </script>
+    <script>
+
+        $("#imageBrowes").change(function () {
+            //當檔案改變後，做一些事 
+            readURL(this);   // this代表<input id="imgInp">
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#targetCourseImg").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#btn-post').click(function () {
+
+            var result = document.getElementById("imageBrowes").files[0]
+            var data = new FormData();
+            data.append("1-1", result);
+
+            $.ajax({
+
+                type: "Post",
+                url: "@Url.Action("CoursePhotoUpload", "Courses")",
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response);
+                }
+
+            })
+
+        })
+
+    </script>
 }
