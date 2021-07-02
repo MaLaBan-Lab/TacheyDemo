@@ -16,5 +16,6 @@ namespace Tachey001.ViewModel
         public string BuyMethod { get; set; }
         public string TitlePageImageURL { get; set; }
         public string CourseName { get; set; }
+        public string CourseID { get; set; }
     }
 }
