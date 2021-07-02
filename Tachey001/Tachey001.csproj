@@ -350,6 +350,7 @@
     <Compile Include="ViewModel\Course\QuestionCard.cs" />
     <Compile Include="ViewModel\Course\ScoreCard.cs" />
     <Compile Include="ViewModel\HighlightCourseViewModel.cs" />
+    <Compile Include="ViewModel\Member\AspNetUserLoginsViewModel.cs" />
     <Compile Include="ViewModel\Member\CourseViewModel.cs" />
     <Compile Include="ViewModel\Member\MemberGroup.cs" />
     <Compile Include="ViewModel\Member\MemberViewModel.cs" />

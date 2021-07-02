@@ -208,6 +208,24 @@ namespace Tachey001.Service
             return result.ToList();
         }
 
+        public List<AspNetUserLoginsViewModel> GetAspNetUserLogins(string MemberId)
+        {
+            var aspNetUserLogins = _tacheyRepository.GetAll<Models.AspNetUserLogins>(x => x.UserId == MemberId);
+            //var member = _memberRepository.GetAllMember();
+            //var point = _memberRepository.GetPoints();
+
+            var result = from m in aspNetUserLogins
+                         where m.UserId == MemberId
+                         select new AspNetUserLoginsViewModel
+                         {
+                             UserId = m.UserId,
+                             LoginProvider = m.LoginProvider,
+                             ProviderKey = m.ProviderKey,
+                         };
+
+            return result.ToList();
+        }
+
         public List<PointViewModel> GetAllCourse(string MemberId)
         {
             var member = _tacheyRepository.GetAll<Models.Member>(x => x.MemberID == MemberId);

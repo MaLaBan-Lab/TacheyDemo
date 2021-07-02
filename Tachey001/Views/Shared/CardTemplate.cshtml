@@ -1,6 +1,15 @@
 ﻿@model Tachey001.ViewModel.consoleViewModel
 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+@{ 
+    var col = 3;
+
+    if (HttpContext.Current.Request.RawUrl == "/Member/Profile")
+    {
+        col = 4;
+    } 
+}
+
+<div class="col-xl-@col col-lg-4 col-md-6 col-sm-12">
     <div class="card my-5">
         <div class="position-absolute bottom-0 right-0 p-3 rounded-pill" style="z-index: 50; right:0; top:0;">
             <div class="toast hide"
