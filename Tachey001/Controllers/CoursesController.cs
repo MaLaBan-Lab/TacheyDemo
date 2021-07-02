@@ -61,13 +61,12 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Group(int? categoryid, int? detailid)
         {
-
             if (categoryid != null)
             {
                 var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
                 ViewBag.categoryname = cname.CategoryName;
                 ViewBag.detailname = "所有" + cname.CategoryName;
-
+                ViewBag.CategoryId = cname.CategoryID;
             }
 
             if (detailid != null)
@@ -75,6 +74,7 @@ namespace Tachey001.Controllers
                 var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
                 ViewBag.detailname = dname.DetailName;
                 ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
+                ViewBag.CategoryId = dname.CategoryID;
             }
 
             var result = _consoleService.GetGroupData(categoryid,detailid);

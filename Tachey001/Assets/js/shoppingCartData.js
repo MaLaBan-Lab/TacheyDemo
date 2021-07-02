@@ -4,17 +4,17 @@ var cartTotalPrice = $("#cartTotalPrice").get(0)
 
 $(function () {
 
-    var currentId = $("#CartBox").get(0).dataset.memberid
-    var url = "/api/MemberAction/GetCartData?MemberId=" + currentId
+    if ($("#CartBox").get(0) != undefined) {
+        var currentId = $("#CartBox").get(0).dataset.memberid
+        var url = "/api/MemberAction/GetCartData?MemberId=" + currentId
 
-    if (currentId != undefined) {
-        $.get(url, function (response) {
-            console.dir(response)
+        if (currentId != undefined) {
+            $.get(url, function (response) {
 
-            response.Result.cartpartialViewModels.forEach(item => {
-                var cartDiv = document.createElement('div');
+                response.Result.cartpartialViewModels.forEach(item => {
+                    var cartDiv = document.createElement('div');
 
-                cartDiv.innerHTML = `
+                    cartDiv.innerHTML = `
                     <a class="dropdown-item text-white my-3" href="/Member/Cart">
                         <div class="media">
                             <img src="${item.TitlePageImageURL}" class="mr-3" style="width:130px; height:70px">
@@ -25,14 +25,17 @@ $(function () {
                         </div>
                     </a>
                 `
-                $("#CartBox").append(cartDiv)
-            })
+                    $("#CartBox").append(cartDiv)
+                })
 
-            cartTitleAmount.innerText = response.Result.cartpartialViewModels.length;
-            cartInnerAmount.innerText = response.Result.cartpartialViewModels.length;
-            cartTotalPrice.innerText = toCurrency(response.Result.total);
-        })
+                cartTitleAmount.innerText = response.Result.cartpartialViewModels.length;
+                cartInnerAmount.innerText = response.Result.cartpartialViewModels.length;
+                cartTotalPrice.innerText = toCurrency(response.Result.total);
+            })
+        }
     }
+
+    
 })
 
 /*將數字千分化*/

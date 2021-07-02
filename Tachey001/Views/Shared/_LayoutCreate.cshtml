@@ -49,71 +49,6 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 <body>
-    <!--<nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top bg-light justify-content-between shadow-sm">
-        <div class="nav-log-wrap">
-            <a href="@Url.Action("Index", "Home")"><img id="Homepage-logo" src="https://i.imgur.com/jcw93c0.jpg" alt=""></a>-->
-    @*<a href="#"><img id="Recruit-logo" src="https://hahow.in/static/images/joinus/2018hiring.svg" alt=""></a>*@
-    <!--</div>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>-->
-    <!-- 下拉選單有2層 -->
-    <!--<div class="collapse navbar-collapse  grow-0" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-th-large"></i>
-                    探索課程
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="@Url.Action("All", "Courses")">所有課程</a>
-                    @foreach (var item in categoryList)
-                    {
-                        <li class="dropright">
-                            <a class="dropdown-item dropdown-toggle" href="#!" data-toggle="dropdown">
-                                @item.CategoryName
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
-                                    所有@(item.CategoryName)
-                                </a>
-                                @foreach (var detail in detailList)
-                                {
-                                    if (detail.CategoryID == item.CategoryID)
-                                    {
-                                        <a class="dropdown-item" href="@Url.Action("Group", "Courses")">
-                                            @detail.DetailName
-                                        </a>
-                                    }
-                                }
-                            </div>
-                        </li>
-                    }
-                </ul>
-            </li>-->
-    <!-- 沒有下拉選單 -->
-    <!--<li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Create","Courses")"><i class="fas fa-pencil-alt"></i>我要開課</a>
-        </li>
-    </ul>-->
-    <!-- 搜尋列 -->
-    <!--<form class="form-inline my-2 my-lg-0 ">
-            <i class="fas fa-search px-2"></i>
-            <input class="form-control mr-sm-2" type="search" placeholder="課程搜尋" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>-->
-    <!-- 移動距離就創一個空的div -->
-    <!-- <div id="nav-space"></div> -->
-    <!-- <div id="nav-space"></div> -->
-    <!--<div class="collapse navbar-collapse  grow-0" id="navbarSupportedContent">
-            @Html.Partial("_LoginPartial")
-        </div>
-    </nav>-->
     <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top  justify-content-between shadow-sm">
         <div class="nav-log-wrap">
             <a href="@Url.Action("Index", "Home")"><img id="Homepage-logo" src="https://i.imgur.com/CG3B9gp.jpg" alt=""></a>
@@ -356,7 +291,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Assets/js/nav.js")
-    @Scripts.Render("~/Assets/js/Main.js")
     @Scripts.Render("~/Assets/js/shoppingCartData.js")
     @RenderSection("scripts", required: false)
     @RenderSection("endJS", required: false)

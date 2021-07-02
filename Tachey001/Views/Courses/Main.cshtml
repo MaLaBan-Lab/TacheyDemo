@@ -427,54 +427,6 @@
             </div>
         </div>
 
-        @*<div class="score-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-8 p-0 border-bottom mt-5 ">
-                            <h4>購課前回答</h4>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-8 p-0 my-4">
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
-                                <form class="form-inline my-2 my-lg-0 w-75">
-                                    <input class="form-control mr-sm-2 w-100 rounded-pill"
-                                           type="search"
-                                           placeholder="搜尋看看~你的問題可能已經有人問過囉 !" />
-                                </form>
-
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav mr-auto">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle"
-                                               href="#"
-                                               id="navbarDropdown"
-                                               role="button"
-                                               data-toggle="dropdown"
-                                               aria-haspopup="true"
-                                               aria-expanded="false">
-                                                日期最新
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">日期最新</a>
-                                                <a class="dropdown-item" href="#">日期最舊</a>
-                                                <a class="dropdown-item" href="#">愛心數</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-outline-secondary my-2 my-sm-0 rounded-pill" type="submit">我的留言</button>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                    </div>
-                </div>
-            </div>*@
-
         <div class="container">
             <div class="row my-5">
                 <div class="col-6 p-0 d-flex flex-column justify-content-center">
@@ -553,18 +505,6 @@ else if (ViewBag.Id == 2)
                         </div>
                         <div class="modal-body text-black">
                             <h3>分數</h3>
-                            @*<span class="star-show choiceStar">
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                </span>*@
                             @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1") 1分
                             @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2") 2分
                             @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3") 3分
@@ -693,11 +633,8 @@ else if (ViewBag.Id == 2)
     </div>
 
     @section endJS{
-        <script>
-
-
-
-        </script>
+        @Scripts.Render("~/Assets/js/point.js")
+        @Scripts.Render("~/Assets/js/Main.js")
     }
 }
 else if (ViewBag.Id == 3)
@@ -708,9 +645,6 @@ else if (ViewBag.Id == 3)
     <div class="container discussions">
         <div class="row">
             <div class="col-xl">
-                <!-- col-xl-3 col-lg-4 col-md-6 col-sm-12 -->
-                <!-- <div class="column-layout-container marg-t-60"> -->
-                <!-- fixed box -->
                 <div class="layout-right-panel sticky-top">
                     <span style="font-size: 0px;"></span>
                     <div class="white-wrap side-card  pad-b-30 border">
@@ -774,50 +708,6 @@ else if (ViewBag.Id == 3)
                             </div>
                         </div>
 
-
-                        <!--<div class="second-row flex">-->
-                        <!-- date search -->
-                        <!--<div class="date-search sort" height="unset" width="unset">
-                            <div class="dropdown btn-group">
-                                <button id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                        type="button" class="dropdown-toggle btn btn-default">
-                                    <span>日期最新</span>
-                                    <span class=""></span>
-                                </button>
-                                <div role="menu" class="dropdown-menu" aria-labelledby="filter-sort">
-                                    <a class="dropdown-item active" href="#">日期最新</a>
-                                    <a class="dropdown-item" href="#">日期最舊</a>
-                                    <a class="dropdown-item" href="#">愛心數</a>
-                                </div>
-                            </div>
-                        </div>-->
-                        <!-- unit search -->
-                        <!--<div class="unit marg-rl-15" height="unset" width="unset">
-                        <div id="unit-dropdown" class="dropdown btn-group">-->
-                        <!-- <button id="filter-unit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-                          type="button" class="dropdown-toggle btn btn-default unit-search-bar">
-                          <div class="input-wrapper"><span aria-hidden="true"
-                              class="fa fa-search fa-fw marg-r-5"></span><input class="pad-tb-0" placeholder="搜尋" value="">
-                          </div> <span class=""></span>
-                        </button> -->
-                        <!--<button id="filter-unit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            type="button" class="dropdown-toggle btn btn-default">
-                                        <span>全部單元</span>
-                                        <span class=""></span>
-                                    </button>
-                                    <div role="menu" class="dropdown-menu" aria-labelledby="filter-unit">
-                                        <a class="dropdown-item active" href="#">全部單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 1 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 2 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 3 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 4 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 5 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 6 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，作業 1</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
 
                     <!-- discuss box -->
@@ -828,12 +718,12 @@ else if (ViewBag.Id == 3)
 
                             @if (Model.GetQuestions.Count() == 0)
                             {
-                            <div class="media p-3">
-                                @*<img src="https://img95.699pic.com/xsj/10/tm/0h.jpg!/fh/300" class="mr-3 rounded-circle" style="width: 55px; height: 55px;" alt="...">*@
-                                <div class="media-body">
-                                    <h3 class="mt-0 text-center">暫無任何發問留言</h3>
+                                <div class="media p-3">
+                                    @*<img src="https://img95.699pic.com/xsj/10/tm/0h.jpg!/fh/300" class="mr-3 rounded-circle" style="width: 55px; height: 55px;" alt="...">*@
+                                    <div class="media-body">
+                                        <h3 class="mt-0 text-center">暫無任何發問留言</h3>
+                                    </div>
                                 </div>
-                            </div>
                             }
                             else
                             {
@@ -847,18 +737,15 @@ else if (ViewBag.Id == 3)
 
                         </div>
                     </div>
-                    <!-- </div> -->
-
                 </div>
             </div>
-            <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-
-            </div> -->
         </div>
     </div>
 
     @section endJS{
         @Scripts.Render("~/Assets/js/Like.js")
+        @Scripts.Render("~/Assets/js/point.js")
+        @Scripts.Render("~/Assets/js/Main.js")
     }
 
 }
@@ -1056,7 +943,10 @@ else if (ViewBag.Id == 4)
             </div>
         </div>
     </div>
+    @section endJS{
+        @Scripts.Render("~/Assets/js/point.js")
+        @Scripts.Render("~/Assets/js/Main.js")
+    }
 }
 
 
-@Scripts.Render("~/Assets/js/point.js")
