@@ -828,17 +828,12 @@ else if (ViewBag.Id == 3)
 
                             @if (Model.GetQuestions.Count() == 0)
                             {
-                                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 mb-2">
-                                    <div class="card border">
-                                        <div class="row no-gutters">
-                                            <div class="col-12">
-                                                <div class="card-body">
-                                                    <h2 class="text-dark text-center">無任何留言</h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="media p-3">
+                                @*<img src="https://img95.699pic.com/xsj/10/tm/0h.jpg!/fh/300" class="mr-3 rounded-circle" style="width: 55px; height: 55px;" alt="...">*@
+                                <div class="media-body">
+                                    <h3 class="mt-0 text-center">暫無任何發問留言</h3>
                                 </div>
+                            </div>
                             }
                             else
                             {

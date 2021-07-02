@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Tachey001.Service;
+using Tachey001.ViewModel;
 using Tachey001.ViewModel.ApiViewModel;
 
 namespace Tachey001.APIController
@@ -56,6 +57,28 @@ namespace Tachey001.APIController
             {
                 _courseService.CreateALike(MemberId, CourseID, QuestionID, AnswerID);
                 return new ApiResult(ApiStatus.Success, CourseID, null);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResult(ApiStatus.Fail, ex.Message, null);
+            }
+        }
+        //取得購物車小卡資料
+        [HttpGet]
+        public ApiResult GetCartData(string MemberId)
+        {
+            try
+            {
+                var getcartcardviewmodels = _memberService.GetCartPartialViewModel(MemberId);
+                var getcaltotal = _memberService.Caltotal(MemberId);
+
+                var result = new Cart_GroupViewModel
+                {
+                    cartpartialViewModels = getcartcardviewmodels,
+                    total = getcaltotal
+                };
+
+                return new ApiResult(ApiStatus.Success, "成功!", result);
             }
             catch (Exception ex)
             {

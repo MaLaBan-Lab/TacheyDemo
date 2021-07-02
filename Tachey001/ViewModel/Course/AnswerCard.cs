@@ -13,6 +13,7 @@ namespace Tachey001.ViewModel.Course
         public string Name { get; set; }
         public string Photo { get; set; }
         public string AnswerContent { get; set; }
+        public List<string> AllMemberId { get; set; }
         public DateTime? AnswerDate { get; set; }
     }
 }

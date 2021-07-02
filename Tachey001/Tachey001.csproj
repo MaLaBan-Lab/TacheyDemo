@@ -416,6 +416,7 @@
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\personal.js" />
     <Content Include="Assets\js\point.js" />
+    <Content Include="Assets\js\shoppingCartData.js" />
     <Content Include="Assets\js\step.js" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />

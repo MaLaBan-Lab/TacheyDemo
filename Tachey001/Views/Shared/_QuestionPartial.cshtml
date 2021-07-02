@@ -1,5 +1,9 @@
 ﻿@model Tachey001.ViewModel.Course.QuestionCard
 
+@{ 
+    var QToF = false;
+}
+
 <div class="media border p-3" id="ques-@Model.QuestionID">
     <img src="@Model.Photo"
          class="mr-3 rounded-circle"
@@ -11,8 +15,37 @@
         </p>
         <p>
             <span class="">@Model.QuestionDate</span><button class="btn">
-                <i class="far fa-heart text-white QLike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID"></i>
-            </button><span class="QLikeNum">0</span><button class="btn"
+
+    @if (Request.IsAuthenticated)
+    {
+        foreach (var item in Model.AllMemberId)
+        {
+            if (item == ViewBag.UserId)
+            {
+                QToF = true;
+            }
+        }
+        if (QToF)
+        {
+            //有按過讚
+            <i class="fas fa-heart text-danger QLike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID"></i>
+        }
+        else
+        {
+            //沒按過讚
+            <i class="far fa-heart text-white QLike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID"></i>
+        }
+    }
+    else
+    {
+        <a href="@Url.Action("Login", "Account")" class="text-decoration-none">
+            <i class="far fa-heart text-white"></i>
+        </a>
+        
+    }
+
+
+</button><span class="QLikeNum">@Model.AllMemberId.Count()</span><button class="btn"
                                                     type="button"
                                                     data-toggle="collapse"
                                                     data-target="#collapse-@Model.QuestionID">

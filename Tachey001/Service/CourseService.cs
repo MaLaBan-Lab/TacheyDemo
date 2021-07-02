@@ -356,7 +356,6 @@ namespace Tachey001.Service
                            CurrentPhoto = currentMember.Photo,
                            QuestionContent = q.QuestionContent,
                            QuestionDate = q.QuestionDate,
-                           GetAnswerCards = new List<AnswerCard>(),
                            AnsAmount = 0
                          };
             var result = allQ.ToList();
@@ -364,14 +363,17 @@ namespace Tachey001.Service
 
             foreach (var Q in result)
             {
+                var Qlist = new List<string>();
                 //問題按讚的所有會員
-                //foreach (var Ql in allQLike)
-                //{
-                //    if(Q.QuestionID == Ql.QuestionID)
-                //    {
-                //        Q.AllMemberID.Add(Ql.MemberID);
-                //    }
-                //}
+                foreach (var Ql in allQLike)
+                {
+                    if (Q.QuestionID == Ql.QuestionID)
+                    {
+                        Qlist.Add(Ql.MemberID);
+                    }
+                }
+                Q.AllMemberId = Qlist;
+
                 //回答的總人數
                 foreach (var all in AnsAmount)
                 {
@@ -380,24 +382,27 @@ namespace Tachey001.Service
                         Q.AnsAmount = all.amount;
                     }
                 }
+                var list = new List<AnswerCard>();
                 //回答List塞入
                 foreach (var A in allAList)
                 {
                     if(Q.QuestionID == A.QuestionID)
                     {
+                        list.Add(A);
+                        var Alist = new List<string>();
                         //回答按讚的所有會員
-                        //foreach (var Al in allALike)
-                        //{
-                        //    if(A.QuestionID == Al.QuestionID && A.AnswerID == Al.AnswerID)
-                        //    {
-                        //        A.AllMemberID.Add(Al.MemberID);
-                        //    }
-                        //}
-                        Q.GetAnswerCards.Add(A);
+                        foreach (var Al in allALike)
+                        {
+                            if (A.QuestionID == Al.QuestionID && A.AnswerID == Al.AnswerID)
+                            {
+                                Alist.Add(Al.MemberID);
+                            }
+                        }
+                        A.AllMemberId = Alist;
                     }
                 }
+                Q.GetAnswerCards = list;
             }
-
             return result;
         }
         //Create課程問題點讚
