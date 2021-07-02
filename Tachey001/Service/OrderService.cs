@@ -7,7 +7,7 @@ using Tachey001.ViewModel;
 using System.Data.Entity;
 using Tachey001.Models;
 
-namespace Tachey001.Service.Order
+namespace Tachey001.Service
 {
     public class OrderService
     {

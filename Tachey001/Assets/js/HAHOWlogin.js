@@ -2,8 +2,12 @@ var userInput = document.querySelector('#user_input'); //抓到輸入帳號的in
 var pwdInput = document.querySelector('#pwd_input'); //抓到輸入密碼的input
 var btnInput = document.querySelector('#input_btn'); //抓到button
 
-userInput.addEventListener('input', btnAllow) //設置監聽事件為input , 觸發方法btnAllow
-pwdInput.addEventListener('input', btnAllow) //設置監聽事件為input , 觸發方法btnAllow
+if (userInput != undefined) {
+    userInput.addEventListener('input', btnAllow) //設置監聽事件為input , 觸發方法btnAllow
+}
+if (pwdInput != undefined) {
+    pwdInput.addEventListener('input', btnAllow) //設置監聽事件為input , 觸發方法btnAllow
+}
 
 function btnAllow() {
     //當帳號欄位不為空值且密碼欄位不為空值

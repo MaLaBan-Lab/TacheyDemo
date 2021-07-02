@@ -11,7 +11,7 @@ using Tachey001.ViewModel;
 using Tachey001.ViewModel.Course;
 using Tachey001.ViewModel.Member;
 
-namespace Tachey001.Service.Member
+namespace Tachey001.Service
 {
     public class MemberService
     {

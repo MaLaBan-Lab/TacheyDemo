@@ -7,7 +7,7 @@ using Tachey001.Models;
 using Tachey001.Repository;
 using Tachey001.Repository.Home;
 
-namespace Tachey001.Service.Home
+namespace Tachey001.Service
 {
     public class HomeService
     {

@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Newtonsoft.Json;
 using Tachey001.Models;
-using Tachey001.Service.Member;
+using Tachey001.Service;
 
 namespace Tachey001.Controllers
 {

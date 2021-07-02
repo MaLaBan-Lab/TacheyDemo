@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 using Tachey001.Models;
 using Tachey001.Service;
-using Tachey001.Service.Course;
-using Tachey001.Service.Member;
 using Tachey001.ViewModel.Course;
 using PagedList;
 using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
-using System.IO;
 using CloudinaryDotNet;
 using Tachey001.AccountModels;
 using CloudinaryDotNet.Actions;
@@ -66,13 +61,12 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Group(int? categoryid, int? detailid)
         {
-
             if (categoryid != null)
             {
                 var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
                 ViewBag.categoryname = cname.CategoryName;
                 ViewBag.detailname = "所有" + cname.CategoryName;
-
+                ViewBag.CategoryId = cname.CategoryID;
             }
 
             if (detailid != null)
@@ -80,6 +74,7 @@ namespace Tachey001.Controllers
                 var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
                 ViewBag.detailname = dname.DetailName;
                 ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
+                ViewBag.CategoryId = dname.CategoryID;
             }
 
             var result = _consoleService.GetGroupData(categoryid,detailid);

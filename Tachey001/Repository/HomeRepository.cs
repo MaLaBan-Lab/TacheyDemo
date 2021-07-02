@@ -1,11 +1,8 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Tachey001.Models;
 using Tachey001.Service;
-using Tachey001.Service.Member;
 
 namespace Tachey001.Repository.Home
 {

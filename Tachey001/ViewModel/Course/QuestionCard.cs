@@ -16,8 +16,8 @@ namespace Tachey001.ViewModel.Course
         public string CurrentPhoto { get; set; }
         public string QuestionContent { get; set; }
         public DateTime? QuestionDate { get; set; }
-        public int LikeAmount { get; set; }
         public int AnsAmount { get; set; }
+        public List<string> AllMemberId { get; set; }
         public Answer PostAnswer { get; set; }
         public List<AnswerCard> GetAnswerCards { get; set; }
     }
