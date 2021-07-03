@@ -34,13 +34,12 @@
                     <div class="col-6 border-right">
                         <div class="input-group mb-3">
                             <div class="custom-file">
-                                @*<input type="file"
-                                           class="custom-file-input"
-                                           id="inputGroupFile02" />
-                                    <label class="custom-file-label text-center"
-                                           for="inputGroupFile02"
-                                           aria-describedby="inputGroupFileAddon02"><i class="far fa-image mx-2"></i>上傳課程封面</label>*@
-                                @Html.EditorFor(m => m.course.TitlePageImageURL, new { htmlAttributes = new { @class = "form-control", @placeholder = "上傳課程封面網址" } })
+                                <input type="file"
+                                       class="custom-file-input"
+                                       id="TitlePageImage" data-CourseID="@ViewBag.CourseId" />
+                                <label class="custom-file-label text-center"
+                                       for="TitlePageImage"><i class="far fa-image mx-2"></i>上傳課程封面</label>
+                                @*@Html.EditorFor(m => m.course.TitlePageImageURL, new { htmlAttributes = new { @class = "form-control", @placeholder = "上傳課程封面網址" } })*@
                             </div>
                         </div>
                         <div class="row">
@@ -54,8 +53,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <input type="file" id="imageBrowes"  />
-                            <div class="btn btn-outline-hahow" id="btn-post">AJAX送出</div>
                         </div>
                         <div class="row">
                             <div class="col-10">
@@ -75,10 +72,21 @@
                                         <div></div>
                                     </div>
                                     <div class="card-header overflow-hidden p-0 position-relative">
-                                        <img src="https://via.placeholder.com/263x165/efefef?text=1000:620"
-                                             class="card-img-top"
-                                             id="targetCourseImg"
-                                             height="150px" />
+                                        @if (Model.course.TitlePageImageURL == null)
+                                        {
+                                            <img src="https://via.placeholder.com/263x165/efefef?text=1000:620"
+                                                 class="card-img-top"
+                                                 id="targetCourseImg"
+                                                 height="150px" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@Model.course.TitlePageImageURL"
+                                                 class="card-img-top"
+                                                 id="targetCourseImg"
+                                                 height="150px" />
+                                        }
+
                                         <div class="
                           position-absolute
                           bg-tape-yellow
@@ -116,13 +124,12 @@
                     <div class="col-6">
                         <div class="input-group mb-3">
                             <div class="custom-file">
-                                @*<input type="file"
+                                <input type="file"
                                            class="custom-file-input"
-                                           id="inputGroupFile02" />
+                                           id="MarketingImage" data-CourseID="@ViewBag.CourseId"/>
                                     <label class="custom-file-label text-center"
-                                           for="inputGroupFile02"
-                                           aria-describedby="inputGroupFileAddon02"><i class="far fa-image mx-2"></i>上傳方形行銷照片</label>*@
-                                @Html.EditorFor(m => m.course.MarketingImageURL, new { htmlAttributes = new { @class = "form-control", @placeholder = "上傳方形行銷照片網址" } })
+                                           for="MarketingImage"><i class="far fa-image mx-2"></i>上傳方形行銷照片</label>
+                                @*@Html.EditorFor(m => m.course.MarketingImageURL, new { htmlAttributes = new { @class = "form-control", @placeholder = "上傳方形行銷照片網址" } })*@
                             </div>
                         </div>
                         <div class="row">

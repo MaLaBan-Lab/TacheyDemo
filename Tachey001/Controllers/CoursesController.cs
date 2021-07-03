@@ -14,6 +14,7 @@ using Tachey001.ViewModel.Member;
 using CloudinaryDotNet;
 using Tachey001.AccountModels;
 using CloudinaryDotNet.Actions;
+using Tachey001.ViewModel.ApiViewModel;
 
 namespace Tachey001.Controllers
 {
@@ -248,32 +249,19 @@ namespace Tachey001.Controllers
         }
         //Post上傳圖片並返回成功訊息
         [HttpPost]
-        public JsonResult CoursePhotoUpload()
+        public JsonResult CoursePhotoUpload(string CourseID)
         {
-            string photoUrl = "";
-            for (int i = 0; i < Request.Files.Count; i++)
+            try
             {
-                HttpPostedFileBase file = Request.Files[i];
-
-                var myAccount = new Account
-                {
-                    Cloud = Credientials.Cloud,
-                    ApiKey = Credientials.ApiKey,
-                    ApiSecret = Credientials.ApiSecret
-                };
-
-                Cloudinary _cloudinary = new Cloudinary(myAccount);
-
-                var uploadParams = new ImageUploadParams()
-                {
-                    File = new FileDescription("1-1", file.InputStream),
-                    PublicId = "1-1"
-                };
-
-                photoUrl = _cloudinary.Upload(uploadParams).Url.ToString();
+                var ReturnUrl = _courseService.PostFileStorage(CourseID, Request.Files[0]);
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
             }
-
-            return Json("上傳了" + Request.Files.Count + "個檔案" + Environment.NewLine + "網址 : " + photoUrl);
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
         }
     }
 }

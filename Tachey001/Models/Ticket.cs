@@ -9,27 +9,25 @@ namespace Tachey001.Models
     [Table("Ticket")]
     public partial class Ticket
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int TicketID { get; set; }
+        public string TicketID { get; set; }
 
-        [Required]
-        [StringLength(80)]
+        [StringLength(128)]
         public string TicketName { get; set; }
 
-        [Required]
-        [StringLength(5)]
-        public string TiketStatus { get; set; }
+        [StringLength(128)]
+        public string TicketStatus { get; set; }
 
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
 
-        public DateTime Ticketdate { get; set; }
+        public DateTime? Ticketdate { get; set; }
 
-        [StringLength(10)]
+        [StringLength(50)]
         public string PayMethod { get; set; }
 
-        [StringLength(20)]
-        public string PoductType { get; set; }
+        [StringLength(50)]
+        public string ProductType { get; set; }
 
-        public int? UseTime { get; set; }
+        [StringLength(50)]
+        public string UseTime { get; set; }
     }
 }

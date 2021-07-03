@@ -63,5 +63,8 @@ namespace Tachey001.Models
         public bool? CreateFinish { get; set; }
 
         public bool? CreateVerify { get; set; }
+
+        [StringLength(4000)]
+        public string PreviewVideo { get; set; }
     }
 }

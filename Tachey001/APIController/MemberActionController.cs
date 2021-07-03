@@ -85,5 +85,17 @@ namespace Tachey001.APIController
                 return new ApiResult(ApiStatus.Fail, ex.Message, null);
             }
         }
+        [HttpPost]
+        public ApiResult Test()
+        {
+            try
+            {
+                return new ApiResult(ApiStatus.Success, "Hey9527", null);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResult(ApiStatus.Fail, ex.Message, null);
+            }
+        }
     }
 }

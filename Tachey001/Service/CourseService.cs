@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Tachey001.AccountModels;
 using Tachey001.Models;
 using Tachey001.Repository;
 using Tachey001.ViewModel.Course;
@@ -156,7 +159,6 @@ namespace Tachey001.Service
             {
                 result.Title = group.course.Title;
                 result.Description = group.course.Description;
-                result.TitlePageImageURL = group.course.TitlePageImageURL;
                 result.MarketingImageURL = group.course.MarketingImageURL;
             }
             else if (id == 2)
@@ -229,39 +231,28 @@ namespace Tachey001.Service
                 int chapterCount = 0;
                 var arr = courseStep[$"{i}"].Split(',');
 
-                var newUnit = new CourseUnit()
-                {
-                    CourseID = CourseId
-                };
-
                 foreach (var item in arr)
                 {
-                    var newChapter = new CourseChapter();
-
                     if (chapterCount == 0)
                     {
-                        newChapter.CourseID = CourseId;
-                        newChapter.ChapterID = i;
-                        newChapter.ChapterName = item;
+                        var newChapter = new CourseChapter()
+                        {
+                            CourseID = CourseId,
+                            ChapterID = i,
+                            ChapterName = item
+                        };
                         _tacheyRepository.Create(newChapter);
                     }
                     else
                     {
-                        newUnit.ChapterID = i;
-                        if (chapterCount % 2 == 0)
-                        {
-                            newUnit.UnitName = item;
-                        }
-                        else
-                        {
-                            newUnit.UnitID = $"{i}-{(chapterCount+1)/2}";
-                            newUnit.CourseURL = item;
-                        }
-                    }
-                    if (chapterCount != 0 && chapterCount % 2 == 0)
-                    {
+                        var newUnit = new CourseUnit() 
+                        { 
+                            CourseID = CourseId,
+                            ChapterID = i,
+                            UnitID = $"{i}-{chapterCount}",
+                            UnitName = item
+                        };
                         _tacheyRepository.Create(newUnit);
-                        newUnit = new CourseUnit() { CourseID = CourseId };
                     }
                     chapterCount++;
                 }
@@ -465,6 +456,28 @@ namespace Tachey001.Service
             _tacheyRepository.Create(result);
             _tacheyRepository.SaveChanges();
         }
+        //儲存雲端上傳圖片，並回傳網址
+        public string PostFileStorage(string CourseId, HttpPostedFileBase file)
+        {
+            var _cloudinary = Credientials.Init();
+
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription("TitlePageImage", file.InputStream),
+                PublicId = "TitlePageImage",
+                Folder = $"Course/{CourseId}"
+            };
+
+            var CallBackUrl = _cloudinary.Upload(uploadParams).Url.ToString();
+
+            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            result.TitlePageImageURL = CallBackUrl;
+            _tacheyRepository.SaveChanges();
+
+            return CallBackUrl;
+        }
+
+
         //取得自訂位數的亂數方法
         private string GetRandomId(int Length)
         {

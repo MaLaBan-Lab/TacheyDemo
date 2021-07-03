@@ -264,16 +264,16 @@
         </div>
     </div>
     <div class="row m-0 justify-content-center pb-4">
-        <div class="col-lg-12 d-flex justify-content-center reading-8 flex-wrap p-0">
+        <div class="col-lg-12 d-flex justify-content-center reading-8 flex-wrap p-2 rounded">
             @foreach (var item in Model.commentViewModels)
             {
                 <div class="col-lg-4 p-0 height-15rem">
                     <div class="comment p-4">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURUdwTAC+owC8pAC+owC/nwC+owC/nwC+owC+pAC+pAC+pAC+owC+pAC+pAQrwd4AAAANdFJOUwClRN8h7xBggL9wj89yAOr7AAAAxUlEQVQY0yWOPQrCUBCE1xj/m9gKQnqb1EJAsLYRUlgEBLGIINhYWAhewMZe8AoeQPACKWIUYzF3cXbfFDt8+3berohI8xCKanPRusdOrZ2+WDMY+TlIfuxoCqUVMF5a88f4AwVB6sBJxAMC/eOIirWDUp8ktuZMsyItYEI7I1KqoVC7uljDYpxPFly3xSfhYaAqjVM3I4SO3pKqBY4qydUi/kIV3EA9eYTR2k16al/pqvGMoQV0dM69PaBk078P7OxRP5Q/PJBxjN9F5jIAAAAASUVORK5CYII="
                              alt="" class="comment-top-img">
-                        <p class="comment-p">
+                        <h4 class="comment-p font-weight-bold my-2">
                             @item.ToTachey
-                        </p>
+                        </h4>
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUdwTAC9owC+owC/nwC+owC+owC/nwC+pAC+pAC+pAC9owC9owC+pAC+pAC+pN9i5Y0AAAAOdFJOUwCb7yDfPhCAv2CvUG/PuzEMbQAAAMlJREFUGNMljz8OAWEQxZ9gZS0JhVZkC4lG9gQaiVKUqo0jOIGIQiMRJxAnUDiAkIjaFaz1r/DOYN5+U8wvb2bel/cBQb0BK+9cj4D8kKyZOpBvoEDybkMDT9gKI+SENprCHFXh7VQrM/CHmfBAWUjQc6ooEBWn3A0wDrt8Af4iZKoYM3vFqsyPsOdOKCiMYmykjnxaz7l7b2ghZPs6mwVEibxp1VT44pqpfcy7kAMgJvu28pkNY/4ip5aGOJkiUx1hfFVHsJpY/wNR/nhLeHAxeQAAAABJRU5ErkJggg=="
                              alt="" class="comment-bot-img">
                         <a href="#" class="comment-a"><img src="@item.Photo" alt="" id="user-logo">@item.Name</a>
