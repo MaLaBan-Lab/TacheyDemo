@@ -66,5 +66,12 @@ namespace Tachey001.Models
 
         [StringLength(4000)]
         public string PreviewVideo { get; set; }
+
+        [StringLength(50)]
+        public string CustomUrl { get; set; }
+
+        public int? MainClick { get; set; }
+
+        public int? CustomClick { get; set; }
     }
 }

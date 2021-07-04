@@ -443,6 +443,7 @@
     <Content Include="Assets\js\nav.js" />
     <Content Include="Assets\js\orders.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
+    <Content Include="Assets\js\Owner.js" />
     <Content Include="Assets\js\personal.js" />
     <Content Include="Assets\js\point.js" />
     <Content Include="Assets\js\postStep.js" />

@@ -128,7 +128,6 @@ function sortUpdate() {
         })
     })
 
-    console.dir(chapterInput)
     chapterInput.forEach((item, index) => {
         item.name = (index + 1)
     })
@@ -140,10 +139,12 @@ function sortUpdate() {
     })
 }
 
-
+//步驟1專用
 //上傳Title圖片
 $("#TitlePageImage").change(function () {
     var CourseId = $("#TitlePageImage").get(0).dataset.courseid;
+    var TitleImagespinner = $("#TitleImage-spinner");
+    TitleImagespinner.removeClass("invisible");
 
     var result = document.getElementById("TitlePageImage").files[0]
     var data = new FormData();
@@ -157,6 +158,7 @@ $("#TitlePageImage").change(function () {
         contentType: false,
         processData: false,
         success: function (response) {
+            TitleImagespinner.addClass("invisible");
             alert("上傳網址 : " + response.ErrMsg);
         }
     })
@@ -174,3 +176,81 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+//步驟6專用
+//上傳預覽影片
+$("#previewVideo").change(function () {
+    var CourseId = $("#previewVideo").get(0).dataset.courseid;
+    var preVideoSpinner = $("#preVideo-spinner");
+    preVideoSpinner.removeClass("invisible");
+
+    var result = document.getElementById("previewVideo").files[0]
+    var data = new FormData();
+    data.append("PreviewVideoUpload", result);
+
+    $.ajax({
+
+        type: "Post",
+        url: `/Courses/CourseVideoUpload?CourseId=${CourseId}`,
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            preVideoSpinner.addClass("invisible");
+            alert("上傳網址 : " + response.ErrMsg);
+        }
+    })
+
+    readVideoURL(this)
+})
+
+function readVideoURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#previewVideoPlayBox").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+//步驟7專用
+//判斷客製網址是否重複
+$("#course_CustomUrl").change(function () {
+    var urlBtn = $("#url-btn")
+    var inputText = $(this).val();
+    var msgBox = $("#msg-box")
+    var CourseId = $("#msg-box").get(0).dataset.courseid;
+
+    $.ajax({
+        type: "Get",
+        url: `/api/MemberAction/CheckUrl?Url=${inputText}&CourseId=${CourseId}`,
+        success: function (res) {
+            if (res.Status == 1) {
+                msgBox.addClass("text-danger")
+                msgBox.removeClass("text-success")
+                msgBox.get(0).innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${res.ErrMsg}`
+                urlBtn.attr("disabled", true)
+            } else {
+                msgBox.addClass("text-success")
+                msgBox.removeClass("text-danger")
+                msgBox.get(0).innerHTML = `<i class="fas fa-check-circle"></i> ${res.ErrMsg}`
+                urlBtn.removeAttr("disabled")
+            }
+        }
+    })
+})
+
+//步驟8專用
+//$("input[name='exampleRadios']").click(function () {
+//    var val = $("input[name='exampleRadios']:checked").val()
+//    $("#LecturerBtn").removeAttr("disabled")
+
+//    //$.ajax({
+//    //    type: "Get",
+//    //    url: `/api/MemberAction/AddLecturer?Id=${val}`,
+//    //    success: function (res) {
+
+//    //    }
+//    //})
+//})

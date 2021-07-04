@@ -85,12 +85,19 @@ namespace Tachey001.APIController
                 return new ApiResult(ApiStatus.Fail, ex.Message, null);
             }
         }
-        [HttpPost]
-        public ApiResult Test()
+        [HttpGet]
+        public ApiResult CheckUrl(string Url, string CourseId)
         {
             try
             {
-                return new ApiResult(ApiStatus.Success, "Hey9527", null);
+                var result = _courseService.CheckUrl(Url, CourseId);
+                if (result)
+                {
+                    //有重複
+                    return new ApiResult(ApiStatus.Fail, "網址已重複，無法使用", null);
+                }
+                //無重複
+                return new ApiResult(ApiStatus.Success, "網址可使用", null);
             }
             catch (Exception ex)
             {

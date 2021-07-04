@@ -141,7 +141,9 @@ namespace Tachey001.Service
                 MemberID = currentUserId, 
                 CategoryID = 1, 
                 CategoryDetailsID = 10001,
-                Title = "無標題"
+                Title = "無標題",
+                MainClick = 0,
+                CustomClick = 0
             };
 
             _tacheyRepository.Create(result);
@@ -168,7 +170,7 @@ namespace Tachey001.Service
                 result.Effect = group.course.Effect;
                 result.CoursePerson = group.course.CoursePerson;
             }
-            else if (id == 3 || id == 6)
+            else if (id == 3)
             {
                 group.formCollection = formCollection;
                 this.UpdateStepUnit(group.formCollection, CourseId);
@@ -182,6 +184,14 @@ namespace Tachey001.Service
             else if (id == 5)
             {
                 result.Introduction = group.course.Introduction;
+            }
+            else if(id == 7)
+            {
+                result.CustomUrl = group.course.CustomUrl;
+            }
+            else if (id == 8)
+            {
+                result.LecturerIdentity = group.course.LecturerIdentity;
             }
             _tacheyRepository.SaveChanges();
         }
@@ -476,8 +486,59 @@ namespace Tachey001.Service
 
             return CallBackUrl;
         }
+        //儲存雲端上傳影片，並回傳網址
+        public string PostVideoStorage(string CourseId, HttpPostedFileBase file)
+        {
+            var _cloudinary = Credientials.Init();
 
+            var uploadParams = new VideoUploadParams()
+            {
+                File = new FileDescription("PreviewVideo", file.InputStream),
+                PublicId = "PreviewVideo",
+                Folder = $"Course/{CourseId}"
+            };
 
+            var CallBackUrl = _cloudinary.UploadLarge(uploadParams).Url.ToString();
+
+            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            result.PreviewVideo = CallBackUrl;
+            _tacheyRepository.SaveChanges();
+
+            return CallBackUrl;
+        }
+        //取得GetCourseId
+        public string GetCourseId(string Id)
+        {
+            var result = _tacheyRepository.Get<Models.Course>(x => x.CustomUrl == Id);
+
+            if (result == null)
+            {
+                return "Index";
+            }
+            return result.CourseID;
+        }
+        //從Custom進入，點擊率+1
+        public void AddCustomClick(string CourseId)
+        {
+            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            result.CustomClick += 1;
+            _tacheyRepository.Update(result);
+            _tacheyRepository.SaveChanges();
+        }
+        //從Main進入，點擊率+1
+        public void AddMainClick(string CourseId)
+        {
+            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            result.MainClick += 1;
+            _tacheyRepository.Update(result);
+            _tacheyRepository.SaveChanges();
+        }
+        //判斷客製網址是否重複
+        public bool CheckUrl(string Url, string CourseId)
+        {
+            var result = _tacheyRepository.Get<Models.Course>(x => x.CustomUrl == Url && x.CourseID != CourseId);
+            return result == null ? false : true;
+        }
         //取得自訂位數的亂數方法
         private string GetRandomId(int Length)
         {
