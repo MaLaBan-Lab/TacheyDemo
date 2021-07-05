@@ -553,5 +553,30 @@ namespace Tachey001.Service
             }
             return new string(chars);
         }
+        //取得是否擁有課程
+        public HaveCourse GetOwner(string MemberId)
+        {
+            var owner = _tacheyRepository.Get<Owner>(x => x.MemberID == MemberId);
+
+            var notfound = new HaveCourse()
+            {
+                MemberID = "notfound",
+                CourseID = "notfound"
+            };
+
+            if (owner == null)
+            {
+                return notfound;
+            }
+
+            var result = new HaveCourse()
+            {
+               MemberID = owner.MemberID,
+               CourseID = owner.CourseID               
+            };
+
+         
+            return result;
+        }
     }
 }

@@ -347,6 +347,7 @@
     <Compile Include="ViewModel\CommentViewModel.cs" />
     <Compile Include="ViewModel\Course\AnswerCard.cs" />
     <Compile Include="ViewModel\Course\CourseCateDet.cs" />
+    <Compile Include="ViewModel\Course\HaveCourse.cs" />
     <Compile Include="ViewModel\Course\MainGroup.cs" />
     <Compile Include="ViewModel\Course\Main_Video.cs" />
     <Compile Include="ViewModel\Course\QuestionCard.cs" />
@@ -410,6 +411,7 @@
     <Content Include="Assets\img\photo.png" />
     <Content Include="Assets\img\point-history-header.jpg" />
     <Content Include="Assets\img\人文.svg" />
+    <Content Include="Assets\img\lock.jpg" />
     <Content Include="Assets\img\右圖左下.jpg" />
     <Content Include="Assets\img\右圖底部.jpg" />
     <Content Include="Assets\img\吉祥物.jpg" />
@@ -773,6 +775,8 @@
     <Content Include="Views\Shared\_QuestionPartial.cshtml" />
     <Content Include="Views\Shared\_ChoiceForStep.cshtml" />
     <Content Include="Views\Step\Index.cshtml" />
+    <Content Include="Views\Courses\LockPage.cshtml" />
+    <Content Include="Views\Shared\_LayoutLock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

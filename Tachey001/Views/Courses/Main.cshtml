@@ -32,9 +32,10 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe name="VideoIframe" width="100%" height="100%" src="@Model.Main_Video.Course.PreviewVideo"
+                <iframe name="VideoIframe" width="100%" height="100%" src="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)"
                         title="video player" frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        scrolling="no"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
             <!-- 選單區 -->
@@ -69,48 +70,97 @@
                         </a>
                     </div>
 
-                    <!-- 課程章節 -->
-                    <div class="accordion" id="accordion">
-                        @{foreach (var ch in Model.Main_Video.courseChapters)
-                            {
-                                <div class="wrap">
-                                    <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
-                                            aria-controls="toggle_@ch.ChapterID">
-                                        <div class="lists">
-                                            <div class="icon">
-                                                <i class="fa fa-th-list" aria-hidden="true"></i>
+                    @if (Model.GetOwner.MemberID == ViewBag.MemberId)
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
                                             </div>
-                                            <div class="text">第@(ch.ChapterID)章 </div>
-                                            <div class="arrow">
-                                                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <!-- 課程單元 -->
-                                <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    @foreach (var un in Model.Main_Video.courseUnits)
-                                    {
-                                        if (ch.ChapterID == un.ChapterID)
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
                                         {
-                                            <div class="content">
-                                                <a href="@un.CourseURL" target="VideoIframe">
-                                                    <div class="list">
-                                                        <div class="icon">
-                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="@un.CourseURL" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-play" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
                                                         </div>
-                                                        <div class="text">單元@(un.UnitID) @un.UnitName</div>
-                                                        <div class="time">00:06</div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                    </a>
+                                                </div>
+                                            }
                                         }
-                                    }
-                                </div>
+                                    </div>
+                                }
                             }
-                        }
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
+                                        {
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="/Courses/LockPage" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
@@ -703,24 +753,69 @@ else if (ViewBag.Id == 3)
                         <div class="white-wrap pad-tb-20">
 
 
+                            @*<div class="media border p-3" id="acc3">
+                                <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
+                                     class="mr-3 rounded-circle"
+                                     style="width: 55px; height: 55px;" />
+                                <div class="media-body">
+                                    <h5 class="mt-0">Media heading</h5>
+                                    <p>
+                                        Standingls are kinda heavy. Heavy is the head that wears the
+                                        crown.
+                                    </p>
+                                    <p>
+                                        <span class="">3天前</span><button class="btn">
+                                            <i class="far fa-heart text-white"></i>
+                                        </button><span class="">0</span><button class="btn"
+                                                                                type="button"
+                                                                                data-toggle="collapse"
+                                                                                data-target="#collapse-three">
+                                            <i class="far fa-comment text-white"></i>
+                                        </button><span class="">0</span>
+                                    </p>
+
                             @if (Model.GetQuestions.Count() == 0)
                             {
                                 <div class="media p-3">
                                     @*<img src="https://img95.699pic.com/xsj/10/tm/0h.jpg!/fh/300" class="mr-3 rounded-circle" style="width: 55px; height: 55px;" alt="...">*@
                                     <div class="media-body">
                                         <h3 class="mt-0 text-center">暫無任何發問留言</h3>
+                                    <div id="collapse-three" class="collapse" data-parent="#acc3">
+                                        <div class="media mt-3">
+                                            <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
+                                                 class="mr-3 rounded-circle"
+                                                 style="width: 55px; height: 55px;" />
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Media heading</h5>
+                                                <p>
+                                                    Standingls are kinda heavy. Heavy is the head that wears the crown. Standingls are kinda heavy. Heavy is the head that wears the crown.
+                                                </p>
+                                                <p>
+                                                    <span class="">3天前</span><button class="btn">
+                                                        <i class="far fa-heart text-white"></i>
+                                                    </button><span class="">0</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="media mt-3">
+                                            <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
+                                                 class="mr-3 rounded-circle"
+                                                 style="width: 55px; height: 55px;" />
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Media heading</h5>
+                                                <p class="pr-4">
+                                                    <textarea class="w-100">
+                                                    </textarea>
+                                                </p>
+                                                <p class="text-right pr-4">
+                                                    <a class=""><i class="fas fa-edit text-white"></i></a>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            }
-                            else
-                            {
-                                foreach (var item in Model.GetQuestions)
-                                {
-                                    @Html.Partial("_QuestionPartial", item);
-                                }
-                            }
-
-
+                            </div>*@
 
                         </div>
                     </div>

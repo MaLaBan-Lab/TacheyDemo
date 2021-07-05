@@ -105,12 +105,17 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
         {
-            var MemberId = User.Identity.GetUserId();
+            if (CourseId == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
+            var MemberId = User.Identity.GetUserId();
             var YnN = _courseService.Scored(MemberId, CourseId);
             var video = _courseService.GetCourseVideoData(CourseId);
             var allScore = _courseService.GetAllScore(CourseId);
             var allQuestion = _courseService.GetAllQuestions(MemberId, CourseId);
+            var isown = _courseService.GetOwner(MemberId);
 
             //從主頁進入，點擊率+1
             _courseService.AddMainClick(CourseId);
@@ -121,6 +126,7 @@ namespace Tachey001.Controllers
             }
             ViewBag.Id = id;
             ViewBag.YnN = YnN;
+            ViewBag.MemberId = MemberId;
             ViewBag.UserId = MemberId;
 
             var result = new MainGroup()
@@ -129,10 +135,16 @@ namespace Tachey001.Controllers
                 GetCourseScore = allScore,
                 GetQuestions = allQuestion,
                 PostCourseScore = new CourseScore(),
-                PostCourseQuestion = new Question()
+                PostCourseQuestion = new Question(),
+                GetOwner = isown
             };
 
             return View(result);
+        }
+        [AllowAnonymous]
+        public ActionResult LockPage()
+        {
+            return View();
         }
         //開課10步驟 GET
         public ActionResult Step(int? id, string CourseId)
