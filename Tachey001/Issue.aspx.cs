@@ -98,7 +98,7 @@ namespace Issue
                     var invoice_name = member.Name;
                     var invoice_email = member.Email;
 
-                    var invoice = new Invoice { OrderID = OrderID, InvoiceType = "電子發票", InvoiceName = invoice_name, InvoiceEmail = invoice_email, InvoiceNum = obj.InvoiceNumber,InvoiceDate = DateTime.Parse(obj.InvoiceDate) ,InvoiceRandomNum= new Random().Next(0, 9999)};
+                    var invoice = new Invoice { OrderID = OrderID, InvoiceType = "電子發票", InvoiceName = invoice_name, InvoiceEmail = invoice_email, InvoiceNum = obj.InvoiceNumber, InvoiceDate = DateTime.Parse(obj.InvoiceDate), InvoiceRandomNum = new Random().Next(0, 9999) };
                     _context.Invoice.Add(invoice);
 
                     var o1 = _context.Order.Find(OrderID);
@@ -106,7 +106,7 @@ namespace Issue
                     o1.PayDate = DateTime.Now;
                     _context.SaveChanges();
                 }
-                    temp = string.Format("開立發票結果<br> InvoiceDate={0}<br> InvoiceNumber={1}<br> RandomNumber={2}<br> RtnCode={3} <br> RtnCode={4} ", obj.InvoiceDate, obj.InvoiceNumber, obj.RandomNumber, obj.RtnCode, obj.RtnMsg);
+                temp = string.Format("開立發票結果<br> InvoiceDate={0}<br> InvoiceNumber={1}<br> RandomNumber={2}<br> RtnCode={3} <br> RtnCode={4} ", obj.InvoiceDate, obj.InvoiceNumber, obj.RandomNumber, obj.RtnCode, obj.RtnMsg);
 
 
             }
@@ -120,7 +120,7 @@ namespace Issue
             Response.Write(temp);
         }
 
-            private static bool isJSON2(String str)
+        private static bool isJSON2(String str)
         {
             bool result = false;
             try
@@ -135,4 +135,4 @@ namespace Issue
             return result;
         }
     }
-    }
+}

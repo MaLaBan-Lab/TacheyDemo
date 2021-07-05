@@ -554,29 +554,12 @@ namespace Tachey001.Service
             return new string(chars);
         }
         //取得是否擁有課程
-        public HaveCourse GetOwner(string MemberId)
+        public bool GetOwner(string MemberId, string CourseId)
         {
-            var owner = _tacheyRepository.Get<Owner>(x => x.MemberID == MemberId);
-
-            var notfound = new HaveCourse()
-            {
-                MemberID = "notfound",
-                CourseID = "notfound"
-            };
-
-            if (owner == null)
-            {
-                return notfound;
-            }
-
-            var result = new HaveCourse()
-            {
-               MemberID = owner.MemberID,
-               CourseID = owner.CourseID               
-            };
-
-         
-            return result;
+            var oID = _tacheyRepository.Get<Order>(x => x.MemberID == MemberId);
+            if (oID == null) return false;
+            var oD = _tacheyRepository.Get<Order_Detail>(x => x.OrderID == oID.OrderID && x.CourseID == CourseId); ;
+            return oD == null ? false : true;
         }
     }
 }

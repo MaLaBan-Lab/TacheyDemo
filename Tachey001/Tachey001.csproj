@@ -117,8 +117,8 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin.Security.Middleware.Line, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.Security.Middleware.Line.0.1.1\lib\Owin.Security.Middleware.Line.dll</HintPath>
@@ -217,9 +217,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -230,9 +227,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -281,8 +275,6 @@
     <Compile Include="AioCheckOut.aspx.designer.cs">
       <DependentUpon>AioCheckOut.aspx</DependentUpon>
     </Compile>
-    <Compile Include="APIController\CourseController.cs" />
-    <Compile Include="APIController\MemberController.cs" />
     <Compile Include="AccountModels\Credientials.cs" />
     <Compile Include="APIController\CourseUploadController.cs" />
     <Compile Include="APIController\MemberActionController.cs" />
@@ -353,10 +345,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\consoleRepository.cs" />
     <Compile Include="Repository\CheckoutRepository.cs" />
-    <Compile Include="Repository\Course\CourseRepository.cs" />
-    <Compile Include="Repository\Home\HomeRepository.cs" />
-    <Compile Include="Repository\Order\OrderRepository.cs" />
-    <Compile Include="Repository\Pay\PayRepository.cs" />
+    <Compile Include="Repository\PayRepository.cs" />
     <Compile Include="Repository\HomeRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\TacheyRepository.cs" />
@@ -367,6 +356,7 @@
     <Compile Include="Service\HomeService.cs" />
     <Compile Include="Service\MemberService.cs" />
     <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\PayService.cs" />
     <Compile Include="Service\SearchService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\ApiModel\ApiResult.cs" />

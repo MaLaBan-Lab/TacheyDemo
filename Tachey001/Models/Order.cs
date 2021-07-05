@@ -12,7 +12,7 @@ namespace Tachey001.Models
         public string OrderID { get; set; }
 
         [StringLength(128)]
-        public string CourseID { get; set; }
+        public string UsePoint { get; set; }
 
         [StringLength(128)]
         public string TicketID { get; set; }

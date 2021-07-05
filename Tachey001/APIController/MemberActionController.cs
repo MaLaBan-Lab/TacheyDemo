@@ -85,6 +85,7 @@ namespace Tachey001.APIController
                 return new ApiResult(ApiStatus.Fail, ex.Message, null);
             }
         }
+        //檢查客製url是否重複
         [HttpGet]
         public ApiResult CheckUrl(string Url, string CourseId)
         {

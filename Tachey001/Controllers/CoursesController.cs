@@ -115,7 +115,7 @@ namespace Tachey001.Controllers
             var video = _courseService.GetCourseVideoData(CourseId);
             var allScore = _courseService.GetAllScore(CourseId);
             var allQuestion = _courseService.GetAllQuestions(MemberId, CourseId);
-            var isown = _courseService.GetOwner(MemberId);
+            var isown = _courseService.GetOwner(MemberId, CourseId);
 
             //從主頁進入，點擊率+1
             _courseService.AddMainClick(CourseId);
