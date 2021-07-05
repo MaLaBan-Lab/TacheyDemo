@@ -109,12 +109,12 @@ namespace Tachey001.Service
             var detail = _tacheyRepository.GetAll<CategoryDetail>().FirstOrDefault(x => x.DetailID == course.CategoryDetailsID);
 
             var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId);
+
             var unit = _tacheyRepository.GetAll<CourseUnit>(x => x.CourseID == CourseId);
 
             var result = new Main_Video
             {
-                CourseID = course.CourseID,
-                CourseTitle = course.Title,
+                Course = course,
                 CategoryName = category.CategoryName,
                 DetailName = detail.DetailName,
                 courseChapters = chapter,
@@ -478,7 +478,7 @@ namespace Tachey001.Service
                 Folder = $"Course/{CourseId}"
             };
 
-            var CallBackUrl = _cloudinary.Upload(uploadParams).Url.ToString();
+            var CallBackUrl = _cloudinary.Upload(uploadParams).SecureUrl.ToString();
 
             var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
             result.TitlePageImageURL = CallBackUrl;
@@ -498,7 +498,7 @@ namespace Tachey001.Service
                 Folder = $"Course/{CourseId}"
             };
 
-            var CallBackUrl = _cloudinary.UploadLarge(uploadParams).Url.ToString();
+            var CallBackUrl = _cloudinary.UploadLarge(uploadParams).SecureUrl.ToString();
 
             var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
             result.PreviewVideo = CallBackUrl;
