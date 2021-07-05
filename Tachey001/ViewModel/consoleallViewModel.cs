@@ -11,7 +11,6 @@ namespace Tachey001.ViewModel
     {
         public List<consoleViewModel> consoleViews { get; set; }
         public List<AllCourse> allCourses { get; set; }
-
         public IPagedList<consoleViewModel> pageConsole { get; set; }
 
     }
