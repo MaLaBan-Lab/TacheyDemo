@@ -9,9 +9,9 @@
 
 
 @*@section topcss
-{
-    <link href="~/Content/PagedList.css">
-}*@
+    {
+        <link href="~/Content/PagedList.css">
+    }*@
 
 
 <div class="container">
@@ -24,6 +24,7 @@
                            id="site-search"
                            name="q"
                            placeholder=" 熱門搜尋 : procreate" />
+                    <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
                 </div>
 
                 <div class="sortcourse">
@@ -70,8 +71,8 @@
                 </div>
 
                 <div class="coursebtn">
-                    <button class="text-secondary">熱門課程</button>
-                    <button class="text-secondary">猜你想學</button>
+                    <button class="text-secondary" id="hot">熱門課程</button>
+                    <button class="text-secondary" id="learning">猜你想學</button>
                 </div>
             </div>
         </div>
@@ -87,3 +88,5 @@
         @Html.PagedListPager(Model.pageConsole, page => Url.Action("All", "Courses", new { page }))
     </div>
 </div>
+
+@Scripts.Render("~/Assets/js/CourseAll.js")

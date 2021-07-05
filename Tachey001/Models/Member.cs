@@ -46,10 +46,10 @@ namespace Tachey001.Models
 
         public DateTime? Birthday { get; set; }
 
-        [StringLength(80)]
+        [StringLength(4000)]
         public string Interest { get; set; }
 
-        [StringLength(80)]
+        [StringLength(4000)]
         public string Like { get; set; }
 
         [StringLength(80)]
