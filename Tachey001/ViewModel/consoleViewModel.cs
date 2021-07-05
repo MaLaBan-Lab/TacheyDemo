@@ -23,5 +23,6 @@ namespace Tachey001.ViewModel
         public string CategoryName { get; set; }
         public string DetailName { get; set; }
         public DateTime? CreateDate { get; set; }
+        public int CountBuyCourse { get; set; }
     }
 }

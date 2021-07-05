@@ -43,6 +43,12 @@ namespace Tachey001.Repository
 
             return result;
         }
+        public IQueryable<Order_Detail> GetOrder()
+        {
+            var result = _tacheyContext.Order_Detail;
+
+            return result;
+        }
         //取得指定課程資料表
         public Models.Course GetCurrentCourse(string currentId)
         {
