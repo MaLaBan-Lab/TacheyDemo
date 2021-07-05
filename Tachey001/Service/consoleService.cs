@@ -14,11 +14,9 @@ namespace Tachey001.Service
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
-        private consoleRepository _consoleRepository;
         //初始化資料庫邏輯
         public consoleService()
         {
-            _consoleRepository = new consoleRepository();
             _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
 
@@ -144,7 +142,6 @@ namespace Tachey001.Service
             int currentPage = page < 1 ? 1 : page;
             var oresult = result.OrderBy(x => x.CreateDate);
             var rresult = oresult.ToPagedList(currentPage, pageSize);
-
 
             return rresult;
         }

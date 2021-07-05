@@ -26,7 +26,6 @@ namespace Tachey001.Controllers
         private CourseService _courseService;
         private MemberService _memberService;
         private TacheyContext _context;
-
         private consoleService _consoleService;
         
 
@@ -161,6 +160,8 @@ namespace Tachey001.Controllers
             var allScore = _courseService.GetAllScore(CourseId);
             var allQuestion = _courseService.GetAllQuestions(MemberId, CourseId);
             var isown = _courseService.GetOwner(MemberId, CourseId);
+            var CourseScore = new CourseScore();
+            var Question = new Question();
 
             //從主頁進入，點擊率+1
             _courseService.AddMainClick(CourseId);
@@ -172,15 +173,14 @@ namespace Tachey001.Controllers
             ViewBag.Id = id;
             ViewBag.YnN = YnN;
             ViewBag.MemberId = MemberId;
-            ViewBag.UserId = MemberId;
 
             var result = new MainGroup()
             {
                 Main_Video = video,
                 GetCourseScore = allScore,
                 GetQuestions = allQuestion,
-                PostCourseScore = new CourseScore(),
-                PostCourseQuestion = new Question(),
+                PostCourseScore = CourseScore,
+                PostCourseQuestion = Question,
                 GetOwner = isown
             };
 

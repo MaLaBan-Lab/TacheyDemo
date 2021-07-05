@@ -2,33 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tachey001.Repository.Order;
 using Tachey001.ViewModel;
 using System.Data.Entity;
 using Tachey001.Models;
+using Tachey001.Repository;
 
 namespace Tachey001.Service
 {
     public class OrderService
     {
         //宣告資料庫邏輯
-        private OrderRepository _orderRepository;
-        private TacheyContext _context;
+        private TacheyRepository _tacheyRepository;
         //初始化資料庫邏輯
         public OrderService()
         {
-            _context = new TacheyContext();
-            _orderRepository = new OrderRepository();
+            _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
-
-
         public IEnumerable<OrderRecordSuccess> GetOrderSuccess(string currentID)
         {
-            
-            var order = _orderRepository.GetAllOrder();
-            var order_detail = _orderRepository.GetAllOrder_Detail();
-            var invoice = _orderRepository.GetAllInvoice();
-            var course = _orderRepository.GetAlLCourse();
+            var order = _tacheyRepository.GetAll<Order>();
+            var order_detail = _tacheyRepository.GetAll<Order_Detail>();
+            var invoice = _tacheyRepository.GetAll<Invoice>();
+            var course = _tacheyRepository.GetAll<Course>();
 
             var result = from O in order
                               join OD in order_detail on O.OrderID equals OD.OrderID
@@ -60,10 +55,10 @@ namespace Tachey001.Service
         public IEnumerable<OrderRecordSuccess> GetOrderWait(string currentID)
         {
 
-            var order = _orderRepository.GetAllOrder();
-            var order_detail = _orderRepository.GetAllOrder_Detail();
-            var invoice = _orderRepository.GetAllInvoice();
-            var course = _orderRepository.GetAlLCourse();
+            var order = _tacheyRepository.GetAll<Order>();
+            var order_detail = _tacheyRepository.GetAll<Order_Detail>();
+            var invoice = _tacheyRepository.GetAll<Invoice>();
+            var course = _tacheyRepository.GetAll<Course>();
 
             var result = from O in order
                          join OD in order_detail on O.OrderID equals OD.OrderID
@@ -93,9 +88,9 @@ namespace Tachey001.Service
         }
         public IEnumerable<OrderRecordOther> GetOrderError(string currentID)
         {
-            var order = _orderRepository.GetAllOrder();
-            var order_detail = _orderRepository.GetAllOrder_Detail();
-            var course = _orderRepository.GetAlLCourse();
+            var order = _tacheyRepository.GetAll<Order>();
+            var order_detail = _tacheyRepository.GetAll<Order_Detail>();
+            var course = _tacheyRepository.GetAll<Course>();
             var result = from O in order
                          join OD in order_detail on O.OrderID equals OD.OrderID
                          join _course in course on OD.CourseID equals _course.CourseID
@@ -118,24 +113,27 @@ namespace Tachey001.Service
 
         public void DeleteOrder( String orderID)
         {
-            var target = _context.Order.Find(orderID);
-            _context.Order.Remove(target);
+            var result = _tacheyRepository.Get<Order>(x => x.OrderID == orderID);
 
-            _context.SaveChanges();
+            _tacheyRepository.Delete(result);
+
+            _tacheyRepository.SaveChanges();
         }
         public void DeleteOrderDetail(String orderID)
         {
-            var target = _context.Order_Detail.Find(orderID);
-            _context.Order_Detail.Remove(target);
+            var result = _tacheyRepository.Get<Order_Detail>(x => x.OrderID == orderID);
 
-            _context.SaveChanges();
+            _tacheyRepository.Delete(result);
+
+            _tacheyRepository.SaveChanges();
         }
         public void DeleteInvoice(String orderID)
         {
-            var target = _context.Invoice.Find(orderID);
-            _context.Invoice.Remove(target);
+            var result = _tacheyRepository.Get<Invoice>(x => x.OrderID == orderID);
 
-            _context.SaveChanges();
+            _tacheyRepository.Delete(result);
+
+            _tacheyRepository.SaveChanges();
         }
     }
 }

@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Tachey001.Models;
-using Tachey001.Repository.Pay;
+using Tachey001.Repository;
 using Tachey001.ViewModel.Pay;
 
 namespace Tachey001.Service.Pay
 {
     public class PayService
     {
-        private PayRepository _payRepository;
-        private TacheyContext _context;
+        private TacheyRepository _tacheyRepository;
         //初始化資料庫邏輯
         public PayService()
         {
-            _context = new TacheyContext();
-            _payRepository = new PayRepository();
+            _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
         public void CreateOrder(string orderId ,string currentId,string payMethod,string ticketId)
         {
@@ -29,27 +27,27 @@ namespace Tachey001.Service.Pay
                 PayMethod= payMethod,
                 PayDate = null
             };
-            _context.Order.Add(order_new);
-            _context.SaveChanges();
+            _tacheyRepository.Create(order_new);
+            _tacheyRepository.SaveChanges();
         }
         public void CreateOrder_Detail(string orderId,string currentid)
         {
-            var shoppingCart = _payRepository.GetAllShoppingCart().Where(x=>x.MemberID == currentid);
+            var shoppingCart = _tacheyRepository.GetAll<ShoppingCart>(x => x.MemberID == currentid);
             foreach (var item in shoppingCart)
             {
-                var course = _payRepository.GetAllCourse().FirstOrDefault(x=>x.CourseID ==item.CourseID);
+                var course = _tacheyRepository.Get<Course>(x => x.CourseID == item.CourseID);
                 var od = new Order_Detail
                 {
                     OrderID = orderId,CourseID = item.CourseID,UnitPrice=course.OriginalPrice,CourseName= course.Title,BuyMethod="課程售價"
                 };
-                _context.Order_Detail.Add(od);
-                _context.SaveChanges();
+                _tacheyRepository.Create(od);
+                _tacheyRepository.SaveChanges();
             }
         }
         public IQueryable<DiscountCard> GetDiscountCard(string currentId)
         {
-            var ticket = _payRepository.GetAllTicket();
-            var ticetowner = _payRepository.GetAllTicketOwner();
+            var ticket = _tacheyRepository.GetAll<Ticket>();
+            var ticetowner = _tacheyRepository.GetAll<TicketOwner>();
             var result = from ticketowner in ticetowner
                          join t in ticket on ticketowner.TicketID equals t.TicketID
                          where ticketowner.MemberID == currentId
@@ -65,26 +63,23 @@ namespace Tachey001.Service.Pay
                              UseTime = t.UseTime
                          };
          
-
             return result;
         }
         public decimal GetTotalPrice(string currentId)
         {
             decimal result = 0;
-            var shoppingCart = _payRepository.GetAllShoppingCart().Where(x => x.MemberID == currentId);
+            var shoppingCart = _tacheyRepository.GetAll<ShoppingCart>(x => x.MemberID == currentId);
             foreach (var item in shoppingCart)
             {
-                var course = _payRepository.GetAllCourse().FirstOrDefault(x => x.CourseID == item.CourseID);
+                var course = _tacheyRepository.Get<Course>(x => x.CourseID == item.CourseID);
                 result = result + course.OriginalPrice;
                 
             }
             return result;
         }
-
-
         public decimal? FindDiscount(string ticketId)
         {
-            var ticket = _payRepository.GetAllTicket().Where(x => x.TicketID == ticketId).First();
+            var ticket = _tacheyRepository.Get<Ticket>(x => x.TicketID == ticketId);
             var result = ticket.Discount;
 
             return result;

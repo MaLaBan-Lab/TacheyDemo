@@ -32,7 +32,7 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe name="VideoIframe" width="100%" height="100%" src="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)"
+                <iframe name="VideoIframe" width="100%" height="100%" src="@Model.Main_Video.Course.PreviewVideo"
                         title="video player" frameborder="0"
                         scrolling="no"
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -205,8 +205,14 @@
                 <span class="text-white">心動嗎~</span>
             </div>
             <div class="btn_wrap">
-                <button class="btn btn-outline-hahow">馬上購買</button>
-                @*<button class="btn btn-outline-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>*@
+                @if (Model.GetOwner)
+                {
+                    <button class="btn btn-outline-hahow" disabled>已購買</button>
+                }
+                else
+                {
+                    <button class="btn btn-outline-hahow">馬上購買</button>
+                }
             </div>
         </div>
     </div>
