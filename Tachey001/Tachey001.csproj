@@ -47,14 +47,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ecpay.EInvoice.Integration">
-      <HintPath>..\..\..\測試2\text\bin\Ecpay.EInvoice.Integration.dll</HintPath>
-    </Reference>
-    <Reference Include="ECPay.Payment.Integration">
-      <HintPath>..\..\..\測試2\text\bin\ECPay.Payment.Integration.dll</HintPath>
-    </Reference>
     <Reference Include="CloudinaryDotNet, Version=1.15.2.0, Culture=neutral, PublicKeyToken=c8234dc617ae7841, processorArchitecture=MSIL">
       <HintPath>..\packages\CloudinaryDotNet.1.15.2\lib\net452\CloudinaryDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Ecpay.EInvoice.Integration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assets\dll\Ecpay.EInvoice.Integration.dll</HintPath>
+    </Reference>
+    <Reference Include="ECPay.Payment.Integration, Version=1.0.0.7, Culture=neutral, PublicKeyToken=afb33c1e6a3b1bbd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assets\dll\ECPay.Payment.Integration.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -422,6 +424,8 @@
     <Content Include="Assets\css\record.css" />
     <Content Include="Assets\css\score.css" />
     <Content Include="Assets\css\step.css" />
+    <Content Include="Assets\dll\Ecpay.EInvoice.Integration.dll" />
+    <Content Include="Assets\dll\ECPay.Payment.Integration.dll" />
     <Content Include="Assets\img\cover-default.png" />
     <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\img\frog-3.png" />
