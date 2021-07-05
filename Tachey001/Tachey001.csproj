@@ -461,6 +461,7 @@
     <Content Include="Assets\js\choice.js" />
     <Content Include="Assets\js\coupons.js" />
     <Content Include="Assets\js\course.js" />
+    <Content Include="Assets\js\CourseAll.js" />
     <Content Include="Assets\js\HAHOWlogin.js" />
     <Content Include="Assets\js\Invite.js" />
     <Content Include="Assets\js\Like.js" />
@@ -805,6 +806,7 @@
     <Content Include="Views\Step\Index.cshtml" />
     <Content Include="Views\Courses\LockPage.cshtml" />
     <Content Include="Views\Shared\_LayoutLock.cshtml" />
+    <Content Include="Views\Shared\PageListCardTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

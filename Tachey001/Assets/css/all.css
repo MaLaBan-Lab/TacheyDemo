@@ -10,8 +10,11 @@
     width: 40%;
 }
 .searchcourse input{
-    width: 100%;
+    width: 90%;
     border-radius: 5px;
+}
+.searchcourse button{
+    border-radius: 10px;
 }
 .coursebtn button{
     margin: 5px;
