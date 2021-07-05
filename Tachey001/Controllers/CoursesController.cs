@@ -14,6 +14,7 @@ using Tachey001.ViewModel.Member;
 using CloudinaryDotNet;
 using Tachey001.AccountModels;
 using CloudinaryDotNet.Actions;
+using Tachey001.ViewModel.ApiViewModel;
 
 namespace Tachey001.Controllers
 {
@@ -86,6 +87,20 @@ namespace Tachey001.Controllers
         {
             return View();
         }
+        //課程影片自訂Url
+        [AllowAnonymous]
+        public ActionResult Custom(string id)
+        {
+            var getCourseId = _courseService.GetCourseId(id);
+            
+            if(id == "Index" || getCourseId == "Index")
+            {
+                return RedirectToAction("All", "Courses");
+            }
+            //從行銷網址進去，客戶點擊+1
+            _courseService.AddCustomClick(getCourseId);
+            return RedirectToAction("Main", "Courses", new { id=1, CourseId = getCourseId });
+        }
         //課程影片頁面
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
@@ -96,6 +111,9 @@ namespace Tachey001.Controllers
             var video = _courseService.GetCourseVideoData(CourseId);
             var allScore = _courseService.GetAllScore(CourseId);
             var allQuestion = _courseService.GetAllQuestions(MemberId, CourseId);
+
+            //從主頁進入，點擊率+1
+            _courseService.AddMainClick(CourseId);
 
             if (id == null)
             {
@@ -172,8 +190,10 @@ namespace Tachey001.Controllers
         [ValidateInput(false)]
         public ActionResult Step(int? id, StepGroup group, FormCollection formCollection, string CourseId)
         {
-            _courseService.UpdateStep(id, group, formCollection, CourseId);
-
+            if(id != 6)
+            {
+                _courseService.UpdateStep(id, group, formCollection, CourseId);
+            }
             return RedirectToAction("Step", "Courses", new { id = (id + 1), CourseID = CourseId });
         }
         //課程種類Post
@@ -193,16 +213,6 @@ namespace Tachey001.Controllers
 
             //導向開課步驟，並傳入課程ID路由
             return RedirectToAction("Step", "Courses", new { id = 0, CourseId = returnCourseId });
-        }
-        [HttpPost]
-        public ActionResult Step8(string CourseId)
-        {
-            return RedirectToAction("Step", "Courses", new { id = 8, CourseId = CourseId });
-        }
-        [HttpPost]
-        public ActionResult Step9(string CourseId)
-        {
-            return RedirectToAction("Step", "Courses", new { id = 9, CourseId = CourseId });
         }
         //完成課程，送出審核
         public ActionResult StepFinish(string CourseId)
@@ -248,32 +258,35 @@ namespace Tachey001.Controllers
         }
         //Post上傳圖片並返回成功訊息
         [HttpPost]
-        public JsonResult CoursePhotoUpload()
+        public JsonResult CoursePhotoUpload(string CourseID)
         {
-            string photoUrl = "";
-            for (int i = 0; i < Request.Files.Count; i++)
+            try
             {
-                HttpPostedFileBase file = Request.Files[i];
-
-                var myAccount = new Account
-                {
-                    Cloud = Credientials.Cloud,
-                    ApiKey = Credientials.ApiKey,
-                    ApiSecret = Credientials.ApiSecret
-                };
-
-                Cloudinary _cloudinary = new Cloudinary(myAccount);
-
-                var uploadParams = new ImageUploadParams()
-                {
-                    File = new FileDescription("1-1", file.InputStream),
-                    PublicId = "1-1"
-                };
-
-                photoUrl = _cloudinary.Upload(uploadParams).Url.ToString();
+                var ReturnUrl = _courseService.PostFileStorage(CourseID, Request.Files[0]);
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
             }
-
-            return Json("上傳了" + Request.Files.Count + "個檔案" + Environment.NewLine + "網址 : " + photoUrl);
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
+        }
+        //Post上傳影片並返回成功訊息
+        [HttpPost]
+        public JsonResult CourseVideoUpload(string CourseID)
+        {
+            try
+            {
+                var ReturnUrl = _courseService.PostVideoStorage(CourseID, Request.Files[0]);
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
         }
     }
 }
