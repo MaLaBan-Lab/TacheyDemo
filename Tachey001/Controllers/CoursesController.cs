@@ -54,10 +54,10 @@ namespace Tachey001.Controllers
         {
             var result = _consoleService.GetCardsHotPageList(page);
 
-            return View(result);
+            return PartialView("PageListCardTemplate", result);
         }
         //最高評價
-        public ActionResult Orderbycs( int page = 1)
+        public ActionResult Orderbycs(int page = 1)
         {
             var result = _consoleService.OrderByCourseScore( page);
 

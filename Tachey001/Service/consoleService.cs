@@ -168,7 +168,7 @@ namespace Tachey001.Service
                 }
             }
 
-            var result = all.OrderByDescending(x => x.CountBuyCourse);
+            var result = all.OrderByDescending(x => x.CountBuyCourse).Take(24);
 
             int currentPage = page < 1 ? 1 : page;
 

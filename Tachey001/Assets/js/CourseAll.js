@@ -6,35 +6,91 @@
     };
 })(jQuery);
 
+// 猜你想學
 $("#learning").on('click', function () {
-    let actionUrl = "GuessYouLike";
-    
-    $.post(actionUrl, function (data) {
-        console.log("123");
-    })
-    .fail(function (e) {
-        console.log("something wrong...");
-    })
+    $.ajax({
+        url: "GuessYouLike",
+        cache: false,
+        type: "get",
+        success: function (result) {
+            $("#proposalAttachments").html(result);
+        }
+    });
 });
 
+// 熱門排序
 $("#hot").on('click', function () {
-    let actionUrl = "AllHot";
-
-    $.post(actionUrl, function (data) {
-        console.log("123");
-    })
-    .fail(function (e) {
-        console.log("something wrong...");
-    })
+    $.ajax({
+        url: "AllHot",
+        cache: false,
+        type: "get",
+        success: function (result) {
+            $("#proposalAttachments").html(result);
+        }
+    });
 });
 
+// 搜尋
 $(".search-btn").on('click', function () {
-    let actionUrl = "Search";
+    $.ajax({
+        url: "Search",
+        cache: false,
+        type: "get",
+        data: { search: $("site-search").val() },
+        success: function (result) {
+            $("#proposalAttachments").html(result);
+        }
+    });
+});
 
-    $.post(actionUrl, function (data) {
-        console.log("123");
-    })
-    .fail(function (e) {
-        console.log("something wrong...");
-    })
+// 最新(預設)
+$("#new").on('click', function () {
+    $("#btnGroupDrop1").val(this.text().toString());
+    $.ajax({
+        url: "All",
+        cache: false,
+        type: "get",
+        success: function (result) {
+            $("#proposalAttachments").html(result);
+        }
+    });
+});
+
+// 最多人數
+$("#pn").on('click', function () {
+    $("#btnGroupDrop1").val(this.text().toString());
+    $.ajax({
+        url: "Orderbypn",
+        cache: false,
+        type: "get",
+        success: function (result) {
+            $("#proposalAttachments").html(result);
+        }
+    });
+});
+
+// 最長課時
+$("#ct").on('click', function () {
+    $("#btnGroupDrop1").val(this.text().toString());
+    $.ajax({
+        url: "Orderbyct",
+        cache: false,
+        type: "get",
+        success: function (result) {
+            $("#proposalAttachments").html(result);
+        }
+    });
+});
+
+// 最高評價
+$("#cs").on('click', function () {
+    $("#btnGroupDrop1").val(this.text().toString());
+    $.ajax({
+        url: "Orderbycs",
+        cache: false,
+        type: "get",
+        success: function (result) {
+            $("#proposalAttachments").html(result);
+        }
+    });
 });

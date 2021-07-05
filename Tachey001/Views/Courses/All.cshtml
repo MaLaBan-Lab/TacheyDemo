@@ -61,10 +61,10 @@
                                 排序
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item text-white" href="#">最新(預設)</a>
-                                <a class="dropdown-item text-white" href="#">最多人數</a>
-                                <a class="dropdown-item text-white" href="#">最長課時</a>
-                                <a class="dropdown-item text-white" href="#">最高評價</a>
+                                <a class="dropdown-item text-white" href="#" id="new">最新(預設)</a>
+                                <a class="dropdown-item text-white" href="#" id="pn">最多人數</a>
+                                <a class="dropdown-item text-white" href="#" id="ct">最長課時</a>
+                                <a class="dropdown-item text-white" href="#" id="cs">最高評價</a>
                             </div>
                         </div>
                     </div>
@@ -72,22 +72,15 @@
 
                 <div class="coursebtn">
                     <button class="text-secondary" id="hot">熱門課程</button>
-                    <button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "AllHot", "Courses", new { @class = "text-white text-decoration-none" })</button>
+                    @*<button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "AllHot", "Courses", new { @class = "text-white text-decoration-none" })</button>*@
                     <button class="text-secondary" id="learning">猜你想學</button>
-                    <button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "GuessYouLike", "Courses", new { @class = "text-white text-decoration-none" })</button>
+                    @*<button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "GuessYouLike", "Courses", new { @class = "text-white text-decoration-none" })</button>*@
                 </div>
             </div>
         </div>
     </div>
-    <div class="row mt-5">
-        @foreach (var item in Model)
-        {
-            @Html.Partial("CardTemplate", item)
-        }
-
-    </div>
-    <div class="row mx-auto">
-        @Html.PagedListPager(Model, page => Url.Action("All", "Courses", new { page }))
+    <div id="proposalAttachments">
+        @Html.Partial("PageListCardTemplate", Model)
     </div>
 </div>
 
