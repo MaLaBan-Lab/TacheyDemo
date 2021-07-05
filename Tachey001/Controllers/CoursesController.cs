@@ -40,24 +40,69 @@ namespace Tachey001.Controllers
             _context = new TacheyContext();
         }
 
-        private int pageSize = 20;
         [AllowAnonymous]
-        public ActionResult All( int page = 1 )
+        //最新排序
+        public ActionResult All(int page = 1)
         {
-            var result = _consoleService.GetConsoleData();
-
-            int currentPage = page < 1 ? 1 : page;
-            var oresult = result.OrderBy(x => x.CourseID);
-            var rresult = oresult.ToPagedList(currentPage, pageSize);
-
-            var newresult = new consoleallViewModel
-            {
-                consoleViews = result,
-                pageConsole = rresult
-            };
-
-            return View(newresult);
+            var result = _consoleService.GetCardsPageList(page);
+            
+            return View(result);
         }
+
+        //熱門排序
+        public ActionResult AllHot(int page = 1)
+        {
+            var result = _consoleService.GetCardsHotPageList(page);
+
+            return View(result);
+        }
+        //最高評價
+        public ActionResult Orderbycs( int page = 1)
+        {
+            var result = _consoleService.OrderByCourseScore( page);
+
+            return View(result);
+        }
+
+        //搜尋
+
+        [HttpGet]
+        public ActionResult Search(int page = 1)
+        {
+            var result = _consoleService.GetCardsPageList(page);
+
+            return View(result);
+        }
+        [HttpPost]
+        public ActionResult Search(string search, int page = 1)
+        {
+            var result = _consoleService.Search(search, page);
+
+            return View(result);
+        }
+
+
+        ////猜你想學
+        //public ActionResult GuessYouLike(int page = 1)
+        //{
+        //    var currentId = User.Identity.GetUserId();
+        //    ViewBag.UserId = currentId;
+
+        //    var result = _consoleService.GuessYouLike(currentId, page);
+
+        //    return View(result);
+        //}
+        //[HttpPost]
+        //public ActionResult GuessYouLike(int page = 1)
+        //{
+        //    var currentId = User.Identity.GetUserId();
+        //    ViewBag.UserId = currentId;
+
+        //    var result = _consoleService.GuessYouLike(currentId,page);
+
+        //    return View(result);
+        //}
+
 
         [AllowAnonymous]
         public ActionResult Group(int? categoryid, int? detailid)
