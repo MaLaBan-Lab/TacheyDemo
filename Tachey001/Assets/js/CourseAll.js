@@ -18,7 +18,7 @@ $("#learning").on('click', function () {
 });
 
 $("#hot").on('click', function () {
-    let actionUrl = "GuessYouLike";
+    let actionUrl = "AllHot";
 
     $.post(actionUrl, function (data) {
         console.log("123");
@@ -29,7 +29,7 @@ $("#hot").on('click', function () {
 });
 
 $(".search-btn").on('click', function () {
-    let actionUrl = "GuessYouLike";
+    let actionUrl = "Search";
 
     $.post(actionUrl, function (data) {
         console.log("123");
