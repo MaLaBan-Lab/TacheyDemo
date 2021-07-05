@@ -90,24 +90,14 @@ namespace Tachey001
                 ClientSecret = "QgQK1ahv7zUXBA5DqXv4NVHq"
             });
             
-            if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("127.0.0.1"))
-            {
-                app.UseLineAuthentication(new LineAuthenticationOptions(
-                    channelId: "1656163525",
-                    channelSecret: "87a29eb6c97c02a8f1c649a8f2a8da22",
-                    redirectUri: "https://localhost:44394/line-signin",
-                    scope: Scope.OpenId | Scope.Profile | Scope.Email
-                ));
-            }
-            else
-            {
-                app.UseLineAuthentication(new LineAuthenticationOptions(
-                    channelId: "1656163525",
-                    channelSecret: "87a29eb6c97c02a8f1c649a8f2a8da22",
-                    redirectUri: "https://tachey.azurewebsites.net/line-signin",
-                    scope: Scope.OpenId | Scope.Profile | Scope.Email
-                ));
-            }
+            
+            app.UseLineAuthentication(new LineAuthenticationOptions(
+                channelId: "1656163525",
+                channelSecret: "87a29eb6c97c02a8f1c649a8f2a8da22",
+                redirectUri: "https://localhost:44394/line-signin", // "https://tachey.azurewebsites.net/line-signin"
+                scope: Scope.OpenId | Scope.Profile | Scope.Email
+            ));
+            
         }
     }
 }

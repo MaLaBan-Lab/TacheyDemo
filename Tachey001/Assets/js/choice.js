@@ -46,7 +46,7 @@ $("#user-interest-btn").on('click', function () {
     $('.toggle-second').css("display", "none");
     $('.toggle-third').removeClass("bshow");
     $('.toggle-third').css("display", "none");
-    check_intervals_btn_disable();
+    //check_intervals_btn_disable();
 });
 
 $(".toggle-btn-interest-first").on('click', function () {
@@ -159,7 +159,7 @@ $('.toggle-btn-interval').on('click', function () {
         $(this).removeClass('intervals-btn-checked');
         $(this).addClass('intervals-btn');
     }
-    check_intervals_btn_disable();
+    //check_intervals_btn_disable();
     // 確認按鈕
     chk_btn_cou = document.querySelectorAll(".intervals-btn-checked");
     if (chk_btn_cou.length > 0) {
