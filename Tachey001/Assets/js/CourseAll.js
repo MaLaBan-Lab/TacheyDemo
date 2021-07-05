@@ -8,7 +8,7 @@
 
 $("#learning").on('click', function () {
     let actionUrl = "GuessYouLike";
-
+    
     $.post(actionUrl, function (data) {
         console.log("123");
     })
