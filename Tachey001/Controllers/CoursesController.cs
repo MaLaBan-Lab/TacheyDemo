@@ -127,6 +127,11 @@ namespace Tachey001.Controllers
 
             return View(result);
         }
+        [AllowAnonymous]
+        public ActionResult LockPage()
+        {
+            return View();
+        }
         //開課10步驟 GET
         public ActionResult Step(int? id, string CourseId)
         {

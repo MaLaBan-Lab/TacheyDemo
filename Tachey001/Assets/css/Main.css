@@ -81,7 +81,7 @@ body {
 .video_wrap {
     position: relative;
     padding-bottom: 40.5%;
-    height: 0;
+    /*height: 0;*/
     /*overflow: hidden;*/
 }
 .video_wrap iframe {

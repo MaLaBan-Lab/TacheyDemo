@@ -719,6 +719,8 @@
     <Content Include="Views\Shared\_QuestionPartial.cshtml" />
     <Content Include="Views\Shared\_ChoiceForStep.cshtml" />
     <Content Include="Views\Step\Index.cshtml" />
+    <Content Include="Views\Courses\LockPage.cshtml" />
+    <Content Include="Views\Shared\_LayoutLock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
