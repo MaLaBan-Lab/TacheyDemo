@@ -109,7 +109,8 @@ namespace Tachey001.Service
                              PayDate = O.PayDate,
                              PayMethod = O.PayMethod,
                              UnitPrice = OD.UnitPrice,
-                             BuyMethod = OD.BuyMethod
+                             BuyMethod = OD.BuyMethod,
+                             CourseID = OD.CourseID
                          };
 
             return result;

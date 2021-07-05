@@ -32,8 +32,9 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe name="VideoIframe" width="100%" height="100%" src="@Model.Main_Video.Course.PreviewVideo"
+                <iframe name="VideoIframe" width="100%" height="100%" src="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)"
                         title="video player" frameborder="0"
+                        scrolling="no"
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
@@ -69,48 +70,97 @@
                         </a>
                     </div>
 
-                    <!-- 課程章節 -->
-                    <div class="accordion" id="accordion">
-                        @{foreach (var ch in Model.Main_Video.courseChapters)
-                            {
-                                <div class="wrap">
-                                    <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
-                                            aria-controls="toggle_@ch.ChapterID">
-                                        <div class="lists">
-                                            <div class="icon">
-                                                <i class="fa fa-th-list" aria-hidden="true"></i>
+                    @if (Model.GetOwner)
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
                                             </div>
-                                            <div class="text">第@(ch.ChapterID)章 </div>
-                                            <div class="arrow">
-                                                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <!-- 課程單元 -->
-                                <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    @foreach (var un in Model.Main_Video.courseUnits)
-                                    {
-                                        if (ch.ChapterID == un.ChapterID)
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
                                         {
-                                            <div class="content">
-                                                <a href="@un.CourseURL" target="VideoIframe">
-                                                    <div class="list">
-                                                        <div class="icon">
-                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="@un.CourseURL" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-play" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
                                                         </div>
-                                                        <div class="text">單元@(un.UnitID) @un.UnitName</div>
-                                                        <div class="time">00:06</div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                    </a>
+                                                </div>
+                                            }
                                         }
-                                    }
-                                </div>
+                                    </div>
+                                }
                             }
-                        }
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
+                                        {
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="/Courses/LockPage" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
@@ -282,15 +332,15 @@
                             </div>
                         </div>
                         @*<div class="d-flex w-50">
-                            <div class="mr-3">
-                                <img src="https://hahow.in/static/media/icon-homework.f69f73e0.svg"
-                                     alt="" />
-                            </div>
-                            <div class="d-flex flex-column ">
-                                <span>作業數</span>
-                                <span>1 份作業</span>
-                            </div>
-                        </div>*@
+                                <div class="mr-3">
+                                    <img src="https://hahow.in/static/media/icon-homework.f69f73e0.svg"
+                                         alt="" />
+                                </div>
+                                <div class="d-flex flex-column ">
+                                    <span>作業數</span>
+                                    <span>1 份作業</span>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="d-flex  my-5">
                         <div class="light-height-45">
@@ -385,32 +435,32 @@
                 </div>
 
                 @*<div class="col-8 my-5 p-0">
-                    <h3 class="hahow-green">關於老師 KidPro醫學級兒童發展教育團隊 //</h3>
-                    <div class="card my-5 border-0">
-                        <div class="row no-gutters">
-                            <div class="col-1 pt-3">
-                                <div class="photo-img position-relative">
-                                    <img src="https://hahow-production.imgix.net/6041acdafc20d2d7aa40c3d9?w=100&auto=format&sat=0&s=dfe6043f51505253326d695702bd25ee"
-                                         alt="..."
-                                         class="w-100 position-absolute center" />
+                        <h3 class="hahow-green">關於老師 KidPro醫學級兒童發展教育團隊 //</h3>
+                        <div class="card my-5 border-0">
+                            <div class="row no-gutters">
+                                <div class="col-1 pt-3">
+                                    <div class="photo-img position-relative">
+                                        <img src="https://hahow-production.imgix.net/6041acdafc20d2d7aa40c3d9?w=100&auto=format&sat=0&s=dfe6043f51505253326d695702bd25ee"
+                                             alt="..."
+                                             class="w-100 position-absolute center" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-11 pl-3">
-                                <div class="card-body">
-                                    <h3 class="card-title text-secondary mb-4">
-                                        <i class="fab fa-facebook-square mr-2"></i>
-                                        <i class="fab fa-youtube-square mr-2"></i>
-                                        <i class="fas fa-home"></i>
-                                    </h3>
-                                    <p class="card-text text-secondary">
-                                        由職能治療師、物理治療師、語言治療師、兒科醫師，共同組成的團隊。由擁有臺大醫院15年臨床經驗的恬兒職能治療師協助號召、聚集多種兒童發展醫學專業，來提供專業的育兒、教養知識。
-                                        服務內容包含:專業/親職講座、幼童發展潛能評估、學前發展核心能力培養遊戲課程、教具玩具開發。
-                                    </p>
+                                <div class="col-11 pl-3">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-secondary mb-4">
+                                            <i class="fab fa-facebook-square mr-2"></i>
+                                            <i class="fab fa-youtube-square mr-2"></i>
+                                            <i class="fas fa-home"></i>
+                                        </h3>
+                                        <p class="card-text text-secondary">
+                                            由職能治療師、物理治療師、語言治療師、兒科醫師，共同組成的團隊。由擁有臺大醫院15年臨床經驗的恬兒職能治療師協助號召、聚集多種兒童發展醫學專業，來提供專業的育兒、教養知識。
+                                            服務內容包含:專業/親職講座、幼童發展潛能評估、學前發展核心能力培養遊戲課程、教具玩具開發。
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
             </div>
         </div>
 

@@ -553,5 +553,13 @@ namespace Tachey001.Service
             }
             return new string(chars);
         }
+        //取得是否擁有課程
+        public bool GetOwner(string MemberId, string CourseId)
+        {
+            var oID = _tacheyRepository.Get<Order>(x => x.MemberID == MemberId);
+            if (oID == null) return false;
+            var oD = _tacheyRepository.Get<Order_Detail>(x => x.OrderID == oID.OrderID && x.CourseID == CourseId); ;
+            return oD == null ? false : true;
+        }
     }
 }

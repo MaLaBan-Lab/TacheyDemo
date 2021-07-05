@@ -149,8 +149,9 @@ body {
     justify-content:center;
 }
 .advertising-text {
-    font-size: 20px;
+    font-size: 34px;
     background-color: #11082F;
+    margin-bottom:3%;
 }
 
 #advertising-span {
@@ -617,7 +618,7 @@ body {
 
 
         .item>img {
-            height: 200px;
+            height: 250px;
         }
 
         /* 第一塊輪盤 */
