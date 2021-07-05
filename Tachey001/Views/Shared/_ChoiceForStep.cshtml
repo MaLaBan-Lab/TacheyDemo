@@ -1,0 +1,269 @@
+﻿@model Tachey001.ViewModel.Member.MemberGroup
+
+@*@if(HttpContext.Current.Request.RawUrl == "/Member/Profile")
+    {
+        @col = 4;
+    }*@
+
+<p class="courseid" id="@ViewBag.CourseId">課程的分類是什麼呢！？提供課程的分類選擇並介紹給別人適合你的課程推薦。</p>
+<label class="marg-t-30" id="user-detail-interests-tags">課程分類</label>
+<div class="oval-btn-plus-text oval-btn" id="user-interest-btn">+</div>
+<div>
+    <div class="overlay-interest" style=" display: none;">
+        <div class="overlay-interest-modal">
+            <h4 class="overlay-interest-h4 pad-tb-15 text-center">
+                課程的分類（單選）
+            </h4>
+            <div overflow="unset"
+                 class="overlay-interest-block">
+                <div class="overlay-interest-size flex-column relative">
+                    <div class="selected-items-bar">
+                        <span class="description inline-block text-bold marg-t-10 marg-b-20">已選分類：</span>
+                    </div>
+                    <div class="flex-1">
+                        <div>
+                            <!-- first row -->
+                            <div class="categories-wrap flex ">
+                                @{int count = 0; bool interest = false;}
+                                @foreach (var i in Model.courseViewModels.courseCategory)
+                                {
+                                    interest = false;
+                                    foreach (var j in ViewBag.interestDetil[i.CategoryName])
+                                    {
+                                        foreach (var k in Model.courseCateDet)
+                                        {
+                                            if (k.DetailName != null)
+                                            {
+                                                if (k.DetailName == j)
+                                                {
+                                                    interest = true;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (count >= 4)
+                                    {
+                                        break;
+                                    }
+                                    if (interest == true)
+                                    {
+                                        <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
+                                            <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                            <span class="block">@i.CategoryName</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
+                                            <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                            <span class="block">@i.CategoryName</span>
+                                        </div>
+                                    }
+                                    count++;
+                                }
+                            </div>
+                            <div class="interval toggle toggle-first">
+                                <div class="items-wrap text-center pad-tb-20 pad-rl-30 m-3">
+
+                                    @{count = 0;}
+                                    @foreach (var i in ViewBag.interestDetil)
+                                    {
+                                        if (count < 4)
+                                        {
+                                            <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                                            foreach (var j in i.Value)
+                                            {
+                                                foreach (var k in Model.courseCateDet)
+                                                {
+                                                    if (k.DetailName != null)
+                                                    {
+                                                        if (k.DetailName == j)
+                                                        {
+                                                            <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                        count++;
+
+                                    }
+                                </div>
+                            </div>
+                            <!-- second row -->
+                            <div class="categories-wrap flex ">
+                                @{count = 0; interest = false;}
+                                @foreach (var i in Model.courseViewModels.courseCategory)
+                                {
+                                    interest = false;
+                                    foreach (var j in ViewBag.interestDetil[i.CategoryName])
+                                    {
+                                        foreach (var k in Model.courseCateDet)
+                                        {
+                                            if (k.DetailName != null)
+                                            {
+                                                if (k.DetailName == j)
+                                                {
+                                                    interest = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (count > 3 && count <= 7)
+                                    {
+                                        if (interest == true)
+                                        {
+                                            <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
+                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                                <span class="block">@i.CategoryName</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
+                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                                <span class="block">@i.CategoryName</span>
+                                            </div>
+                                        }
+                                    }
+                                    count++;
+                                }
+
+                            </div>
+                            <div class="interval toggle toggle-second">
+                                <div class="items-wrap text-center pad-tb-20 pad-rl-30 m-3">
+                                    @{count = 0;}
+                                    @foreach (var i in ViewBag.interestDetil)
+                                    {
+                                        if (count > 3 && count <= 7)
+                                        {
+                                            <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                                            foreach (var j in i.Value)
+                                            {
+                                                foreach (var k in Model.courseCateDet)
+                                                {
+                                                    if (k.DetailName != null)
+                                                    {
+                                                        if (k.DetailName == j)
+                                                        {
+                                                            <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                        count++;
+
+                                    }
+                                </div>
+                            </div>
+                            <!-- third row -->
+                            <div class="categories-wrap flex ">
+                                @{count = 0; interest = false;}
+                                @foreach (var i in Model.courseViewModels.courseCategory)
+                                {
+                                    interest = false;
+                                    foreach (var j in ViewBag.interestDetil[i.CategoryName])
+                                    {
+                                        foreach (var k in Model.courseCateDet)
+                                        {
+                                            if (k.DetailName != null)
+                                            {
+                                                if (k.DetailName == j)
+                                                {
+                                                    interest = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (count > 7)
+                                    {
+                                        if (interest == true)
+                                        {
+                                            <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
+                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                                <span class="block">@i.CategoryName</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
+                                                <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
+                                                <span class="block">@i.CategoryName</span>
+                                            </div>
+                                        }
+                                    }
+
+                                    count++;
+                                }
+                            </div>
+                            <div class="interval toggle toggle-third">
+                                <div class="items-wrap text-center pad-tb-20 pad-rl-30 m-3">
+                                    @{count = 0;}
+                                    @foreach (var i in ViewBag.interestDetil)
+                                    {
+                                        if (count > 7)
+                                        {
+                                            <span class="text-bold text-center toggle" id=title_@(count)>@i.Key</span>
+                                            foreach (var j in i.Value)
+                                            {
+                                                foreach (var k in Model.courseCateDet)
+                                                {
+                                                    if (k.DetailName != null)
+                                                    {
+                                                        if (k.DetailName == j)
+                                                        {
+                                                            <span class="intervals-btn-checked toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="intervals-btn toggle-btn-interval marg-t-10 marg-r-10 text-center toggle dat_@count" role="button">@j</span>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        count++;
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="confirm marg-t-30">
+                        <input type="button" disabled="" class="confirm-btn" value="確認" />
+                    </div>
+                </div>
+            </div>
+            @*<button class="close-button">
+                <svg class="" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 36" style="top: 9px; right: 9px; fill: rgba(0, 0, 0, 0.65); z-index: 2;">
+                    <path d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"></path>
+                </svg>
+            </button>*@
+        </div>
+    </div>
+</div>

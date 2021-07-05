@@ -7,7 +7,6 @@
     {
         col = 4;
     } }
-@*如果沒用頭像會給預設頭像*@
 @{ var photoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
     var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
     if (Model.TitlePageImageURL != null)
@@ -51,7 +50,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
                 <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
                     <img src="@titleUrl"
-                         class="card-img-top" style="width:262px; height:164px" />
+                         class="card-img-top" style="height:164px" />
                     <div class="
                     position-absolute
                     bg-hahow-dark-green

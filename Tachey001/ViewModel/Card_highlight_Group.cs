@@ -12,5 +12,6 @@ namespace Tachey001.ViewModel
         public List<HighlightCourseViewModel> highlightViewModels { get; set; }
         public List<CourseCardViewModel> courseCardViewModels { get; set; }
         public List<CommentViewModel> commentViewModels { get; set; }
+        public List<CartPartialCardViewModel> cartPartialCardViewModels { get; set; }
     }
 }

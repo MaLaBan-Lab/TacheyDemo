@@ -11,9 +11,11 @@ namespace Tachey001.Models
     {
         public int QuestionID { get; set; }
 
+        [Required]
         [StringLength(128)]
         public string CourseID { get; set; }
 
+        [Required]
         [StringLength(128)]
         public string MemberID { get; set; }
 

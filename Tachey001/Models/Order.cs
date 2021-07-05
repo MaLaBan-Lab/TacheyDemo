@@ -11,7 +11,11 @@ namespace Tachey001.Models
     {
         public string OrderID { get; set; }
 
-        public int? TicketID { get; set; }
+        [StringLength(128)]
+        public string UsePoint { get; set; }
+
+        [StringLength(128)]
+        public string TicketID { get; set; }
 
         [StringLength(128)]
         public string MemberID { get; set; }
@@ -21,7 +25,7 @@ namespace Tachey001.Models
 
         public DateTime? OrderDate { get; set; }
 
-        [StringLength(50)]
+        [StringLength(128)]
         public string PayMethod { get; set; }
 
         public DateTime? PayDate { get; set; }

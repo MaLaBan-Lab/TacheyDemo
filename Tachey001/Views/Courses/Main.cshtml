@@ -18,12 +18,12 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="@Url.Action("Group","Courses")">@Model.Main_Video.CategoryName</a></li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("Group","Courses", new { detailid = Model.Main_Video.Course.CategoryDetailsID})">@Model.Main_Video.CategoryName</a></li>
                 <li class="breadcrumb-item  text-white active" aria-current="page">@Model.Main_Video.DetailName</li>
             </ol>
         </nav>
         <!-- title 區塊 -->
-        <h2 class="title text-center">@Model.Main_Video.CourseTitle</h2>
+        <h2 class="title text-center">@Model.Main_Video.Course.Title</h2>
 
         <!-- 主要內容 -->
         <div class="main_wrap col-12">
@@ -32,19 +32,20 @@
                 <!-- <video width="100%" height="100%" crossorigin="" poster="/Hahow/img/test1.png" controls>
                     <source type="video/mp4" src="/Hahow/sources/test.mp4" label="480p" size="480">
                 </video> -->
-                <iframe name="VideoIframe" width="100%" height="100%" src="@ViewBag.TryVedio"
+                <iframe name="VideoIframe" width="100%" height="100%" src="@Html.Raw(Model.Main_Video.courseUnits.FirstOrDefault(x=>x.ChapterID == 1).CourseURL)"
                         title="video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        scrolling="no"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
             <!-- 選單區 -->
             <div class="menu_wrap col-12 col-sm-12 col-lg-4">
                 <div class="title col-12">
                     <div class="col-10 p-0">
-                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元、6 項作業，共 2230 分鐘</p>
+                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元，共 2230 分鐘</p>
                         <div>
                             <span>當前單元</span>
-                            <a href="@ViewBag.TryVedio" target="VideoIframe">
+                            <a href="@Model.Main_Video.Course.PreviewVideo" target="VideoIframe">
                                 <span>試看</span>
                             </a>
                         </div>
@@ -58,7 +59,7 @@
 
                 <div class="class_content">
                     <div class="wrap col-12">
-                        <a href="@ViewBag.TryVedio" target="VideoIframe">
+                        <a href="@Model.Main_Video.Course.PreviewVideo" target="VideoIframe">
                             <div class="list active">
                                 <div class="icon">
                                     <i class="fa fa-play" aria-hidden="true"></i>
@@ -69,48 +70,97 @@
                         </a>
                     </div>
 
-                    <!-- 課程章節 -->
-                    <div class="accordion" id="accordion">
-                        @{foreach (var ch in Model.Main_Video.courseChapters)
-                            {
-                                <div class="wrap">
-                                    <button class="btn_control btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
-                                            aria-controls="toggle_@ch.ChapterID">
-                                        <div class="lists">
-                                            <div class="icon">
-                                                <i class="fa fa-th-list" aria-hidden="true"></i>
+                    @if (Model.GetOwner)
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
                                             </div>
-                                            <div class="text">第@(ch.ChapterID)章 </div>
-                                            <div class="arrow">
-                                                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <!-- 課程單元 -->
-                                <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    @foreach (var un in Model.Main_Video.courseUnits)
-                                    {
-                                        if (ch.ChapterID == un.ChapterID)
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
                                         {
-                                            <div class="content">
-                                                <a href="@un.CourseURL" target="VideoIframe">
-                                                    <div class="list">
-                                                        <div class="icon">
-                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="@un.CourseURL" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-play" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
                                                         </div>
-                                                        <div class="text">單元@(un.UnitID) @un.UnitName</div>
-                                                        <div class="time">00:06</div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                    </a>
+                                                </div>
+                                            }
                                         }
-                                    }
-                                </div>
+                                    </div>
+                                }
                             }
-                        }
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- 課程章節 -->
+                        <div class="accordion" id="accordion">
+                            @{foreach (var ch in Model.Main_Video.courseChapters)
+                                {
+                                    <div class="wrap">
+                                        <button class="btn_control btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#toggle_@ch.ChapterID" aria-expanded="true"
+                                                aria-controls="toggle_@ch.ChapterID">
+                                            <div class="lists">
+                                                <div class="icon">
+                                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="text">第@(ch.ChapterID)章 </div>
+                                                <div class="arrow">
+                                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <!-- 課程單元 -->
+                                    <div id="toggle_@ch.ChapterID" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        @foreach (var un in Model.Main_Video.courseUnits)
+                                        {
+                                            if (ch.ChapterID == un.ChapterID)
+                                            {
+                                                <div class="content">
+                                                    <a href="/Courses/LockPage" target="VideoIframe">
+                                                        <div class="list">
+                                                            <div class="icon">
+                                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="text">單元@(un.UnitID) @un.UnitName</div>
+                                                            <div class="time">00:06</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
@@ -146,16 +196,16 @@
 
         <div class="price_wrap col-12 col-md-3 col-lg-3">
             <p>課程售價</p>
-            <h2>NT$4,200</h2>
+            <h2>@Model.Main_Video.Course.OriginalPrice.ToString("C0")</h2>
         </div>
 
         <div class="buy_wrap col-12 col-md-4 col-lg-4">
             <div class="collect">
                 <i class="fa fa-bookmark" aria-hidden="true"></i>
-                <span>心動嗎~</span>
+                <span class="text-white">心動嗎~</span>
             </div>
             <div class="btn_wrap">
-                <button class="btn btn-outline-hahow">加入購物車</button>
+                <button class="btn btn-outline-hahow">馬上購買</button>
                 @*<button class="btn btn-outline-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>*@
             </div>
         </div>
@@ -169,52 +219,52 @@
         @if (ViewBag.Id == 1)
         {
             <div class="seletor-item seletor-ckecked" id="main">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.CourseID})">課程簡介</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.Course.CourseID})">課程簡介</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="main">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.CourseID})">課程簡介</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.Course.CourseID})">課程簡介</a>
             </div>
         }
 
         @if (ViewBag.Id == 2)
         {
             <div class="seletor-item seletor-ckecked" id="feedbacks">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.CourseID})">課程評價</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.Course.CourseID})">課程評價</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="feedbacks">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.CourseID})">課程評價</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.Course.CourseID})">課程評價</a>
             </div>
         }
 
         @if (ViewBag.Id == 3)
         {
             <div class="seletor-item seletor-ckecked" id="discussions">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.CourseID})">問題討論</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})">問題討論</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="discussions">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.CourseID})">問題討論</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})">問題討論</a>
             </div>
         }
 
         @if (ViewBag.Id == 4)
         {
             <div class="seletor-item seletor-ckecked" id="assignments">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.CourseID})">作業成果</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="assignments">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.CourseID})">作業成果</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
             </div>
         }
 
@@ -236,7 +286,7 @@
                                 class="btn btn-outline-hahow w-100 my-4 py-3 px-5">
                             <div class="text-scale-12">
                                 <i class="fas fa-bookmark mr-1"></i>
-                                加入書籤
+                                加入收藏
                             </div>
                         </button>
                     </div>
@@ -256,7 +306,7 @@
                             </div>
                             <div class="d-flex flex-column ">
                                 <span>課程時長</span>
-                                <span>4 小時 46 分鐘</span>
+                                <span>總共 : @Model.Main_Video.courseUnits.Count() 部影片</span>
                             </div>
                         </div>
                         <div class="d-flex w-50">
@@ -266,7 +316,7 @@
                             </div>
                             <div class="d-flex flex-column ">
                                 <span>單元數</span>
-                                <span>9 章節 22 單元</span>
+                                <span>@Model.Main_Video.courseChapters.Count() 章節 @Model.Main_Video.courseUnits.Count() 單元</span>
                             </div>
                         </div>
                     </div>
@@ -281,16 +331,16 @@
                                 <span>14 位同學</span>
                             </div>
                         </div>
-                        <div class="d-flex w-50">
-                            <div class="mr-3">
-                                <img src="https://hahow.in/static/media/icon-homework.f69f73e0.svg"
-                                     alt="" />
-                            </div>
-                            <div class="d-flex flex-column text-secondary">
-                                <span>作業數</span>
-                                <span>1 份作業</span>
-                            </div>
-                        </div>
+                        @*<div class="d-flex w-50">
+                                <div class="mr-3">
+                                    <img src="https://hahow.in/static/media/icon-homework.f69f73e0.svg"
+                                         alt="" />
+                                </div>
+                                <div class="d-flex flex-column ">
+                                    <span>作業數</span>
+                                    <span>1 份作業</span>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="d-flex  my-5">
                         <div class="light-height-45">
@@ -320,16 +370,7 @@
                 <div class="col-12 my-5 p-0">
                     <h3 class="hahow-green mb-5">你可以學到 //</h3>
                     <div class="m-0 ">
-                        <h6>1. 知道感覺統合包含哪七個感覺，以及它的理論元素</h6>
-                        <h6>
-                            2.
-                            知道感覺統合對孩子的發展影響，以及注意孩子的表現對應的感覺統合問題
-                        </h6>
-                        <h6>3. 掌握適當的感覺統合遊戲操作方式，給孩子最恰到好處的刺激</h6>
-                        <h6>
-                            4.
-                            透過適量感覺統合刺激，幫助孩子發展專注力、學習力、情緒、動作、自理、人際關係
-                        </h6>
+                        <h5>@Model.Main_Video.Course.Effect</h5>
                     </div>
                 </div>
 
@@ -337,18 +378,16 @@
                     <h3 class="hahow-green">課程詳情 //</h3>
                     <div class="border-bottom">
                         <img class="w-100 my-5"
-                             src="https://hahow-production.imgix.net/60a72142ef911635f877298f?w=1000&auto=format&sat=0&s=7c19db8e058e137a802609933ede799a"
+                             src="@Model.Main_Video.Course.TitlePageImageURL"
                              alt="" />
-                        <h4 class="text-secondary">
-                            常覺得孩子難搞？我們可以從「感覺統合」來改善
+                        <h4 class="text-white">
+                            <i class="fas fa-chevron-circle-right"></i> 簡短的課程描述
                         </h4>
                     </div>
-                    <div class="my-4 ">
-                        <h6>您是否記得這世界曾經如此陌生？</h6>
+                    <div class="my-4">
+                        <h5>@Model.Main_Video.Course.Description</h5>
                         <p class="text-justify">
-                            還記得超級英雄剛得到超能力的樣子嗎？總是不懂得控制自己——跑得太快，跳得太高，把東西拉壞。看得太清楚、聽得太敏銳，覺得這個世界好亮好吵，感到害怕，想把感覺關掉卻做不到，直到訓練好一陣子才漸漸適應自己的超能力。
-                            其實，0 到 2
-                            歲的孩子剛來到這個世界上，也像忽然得到超能力一樣，一邊急速成長發育，一邊認識這個世界；對於色彩、氣味、聲音，都感到陌生，對於溫度、觸感都覺得不熟悉，甚至覺得太過刺激。所以有些孩子，容易分心、反應慢，莫名其妙的逃避或哭鬧，踩在草地或沙地上就不舒服、穿上某些衣服就扭來扭去、新衣服一定要把標籤剪掉，總是跌跌撞撞、動作魯莽、極度討厭肢體碰觸。這些，都可能是感覺統合失調所造成的。
+                            @Html.Raw(Model.Main_Video.Course.Introduction)
                         </p>
                     </div>
                 </div>
@@ -358,9 +397,27 @@
                     <div class="my-4">
                         <h6>
                             <i class="fas fa-chevron-circle-right"></i>
+                            需要用到的工具/材料/軟體
+                        </h6>
+                        <p class="text-white pl-3">
+                            @Model.Main_Video.Course.Tool
+                        </p>
+                    </div>
+                    <div class="my-4">
+                        <h6>
+                            <i class="fas fa-chevron-circle-right"></i>
+                            適合什麼程度的學生
+                        </h6>
+                        <p class="text-white pl-3">
+                            @Model.Main_Video.Course.CourseLevel
+                        </p>
+                    </div>
+                    <div class="my-4">
+                        <h6>
+                            <i class="fas fa-chevron-circle-right"></i>
                             需要具備的背景知識
                         </h6>
-                        <p class="text-black-50">
+                        <p class="text-white pl-3">
                             課程內容深入淺出，是專屬為「孕期媽咪」以及「0-2
                             歲寶寶的照顧者」所設計的課程。如：父母、阿公阿嬤、保母、托嬰、幼教人員等相關行業，都很適合這堂課程。
                         </p>
@@ -370,115 +427,47 @@
                             <i class="fas fa-chevron-circle-right"></i>
                             需要具備的背景知識
                         </h6>
-                        <p class="text-black-50">
-                            課程內容深入淺出，是專屬為「孕期媽咪」以及「0-2
-                            歲寶寶的照顧者」所設計的課程。如：父母、阿公阿嬤、保母、托嬰、幼教人員等相關行業，都很適合這堂課程。
-                        </p>
-                    </div>
-                    <div class="my-4">
-                        <h6>
-                            <i class="fas fa-chevron-circle-right"></i>
-                            需要具備的背景知識
-                        </h6>
-                        <p class="text-black-50">
-                            課程內容深入淺出，是專屬為「孕期媽咪」以及「0-2
-                            歲寶寶的照顧者」所設計的課程。如：父母、阿公阿嬤、保母、托嬰、幼教人員等相關行業，都很適合這堂課程。
-                        </p>
-                    </div>
-                    <div class="my-4">
-                        <h6>
-                            <i class="fas fa-chevron-circle-right"></i>
-                            需要具備的背景知識
-                        </h6>
-                        <p class="text-black-50">
+                        <p class="text-white pl-3">
                             課程內容深入淺出，是專屬為「孕期媽咪」以及「0-2
                             歲寶寶的照顧者」所設計的課程。如：父母、阿公阿嬤、保母、托嬰、幼教人員等相關行業，都很適合這堂課程。
                         </p>
                     </div>
                 </div>
 
-                <div class="col-8 my-5 p-0">
-                    <h3 class="hahow-green">關於老師 KidPro醫學級兒童發展教育團隊 //</h3>
-                    <div class="card my-5 border-0">
-                        <div class="row no-gutters">
-                            <div class="col-1 pt-3">
-                                <div class="photo-img position-relative">
-                                    <img src="https://hahow-production.imgix.net/6041acdafc20d2d7aa40c3d9?w=100&auto=format&sat=0&s=dfe6043f51505253326d695702bd25ee"
-                                         alt="..."
-                                         class="w-100 position-absolute center" />
+                @*<div class="col-8 my-5 p-0">
+                        <h3 class="hahow-green">關於老師 KidPro醫學級兒童發展教育團隊 //</h3>
+                        <div class="card my-5 border-0">
+                            <div class="row no-gutters">
+                                <div class="col-1 pt-3">
+                                    <div class="photo-img position-relative">
+                                        <img src="https://hahow-production.imgix.net/6041acdafc20d2d7aa40c3d9?w=100&auto=format&sat=0&s=dfe6043f51505253326d695702bd25ee"
+                                             alt="..."
+                                             class="w-100 position-absolute center" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-11 pl-3">
-                                <div class="card-body">
-                                    <h3 class="card-title text-secondary mb-4">
-                                        <i class="fab fa-facebook-square mr-2"></i>
-                                        <i class="fab fa-youtube-square mr-2"></i>
-                                        <i class="fas fa-home"></i>
-                                    </h3>
-                                    <p class="card-text text-secondary">
-                                        由職能治療師、物理治療師、語言治療師、兒科醫師，共同組成的團隊。由擁有臺大醫院15年臨床經驗的恬兒職能治療師協助號召、聚集多種兒童發展醫學專業，來提供專業的育兒、教養知識。
-                                        服務內容包含:專業/親職講座、幼童發展潛能評估、學前發展核心能力培養遊戲課程、教具玩具開發。
-                                    </p>
+                                <div class="col-11 pl-3">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-secondary mb-4">
+                                            <i class="fab fa-facebook-square mr-2"></i>
+                                            <i class="fab fa-youtube-square mr-2"></i>
+                                            <i class="fas fa-home"></i>
+                                        </h3>
+                                        <p class="card-text text-secondary">
+                                            由職能治療師、物理治療師、語言治療師、兒科醫師，共同組成的團隊。由擁有臺大醫院15年臨床經驗的恬兒職能治療師協助號召、聚集多種兒童發展醫學專業，來提供專業的育兒、教養知識。
+                                            服務內容包含:專業/親職講座、幼童發展潛能評估、學前發展核心能力培養遊戲課程、教具玩具開發。
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>*@
             </div>
         </div>
-
-        @*<div class="score-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-8 p-0 border-bottom mt-5 ">
-                            <h4>購課前回答</h4>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-8 p-0 my-4">
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
-                                <form class="form-inline my-2 my-lg-0 w-75">
-                                    <input class="form-control mr-sm-2 w-100 rounded-pill"
-                                           type="search"
-                                           placeholder="搜尋看看~你的問題可能已經有人問過囉 !" />
-                                </form>
-
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav mr-auto">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle"
-                                               href="#"
-                                               id="navbarDropdown"
-                                               role="button"
-                                               data-toggle="dropdown"
-                                               aria-haspopup="true"
-                                               aria-expanded="false">
-                                                日期最新
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">日期最新</a>
-                                                <a class="dropdown-item" href="#">日期最舊</a>
-                                                <a class="dropdown-item" href="#">愛心數</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-outline-secondary my-2 my-sm-0 rounded-pill" type="submit">我的留言</button>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                    </div>
-                </div>
-            </div>*@
 
         <div class="container">
             <div class="row my-5">
                 <div class="col-6 p-0 d-flex flex-column justify-content-center">
-                    <h4><a href="" class="hahow-green">前往問題討論區 >></a></h4>
+                    <h4><a href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})" class="hahow-green">前往問題討論區 >></a></h4>
                     <span>
                         課程開課後的課程相關討論，都會在問題討論區進行，來看看已購課同學們的討論吧～
                     </span>
@@ -539,7 +528,7 @@ else if (ViewBag.Id == 2)
 
         <!-- Modal -->
         @*課程評價表單*@
-        @using (Html.BeginForm("CreateScore", "Courses", new { CourseId = Model.Main_Video.CourseID }))
+        @using (Html.BeginForm("CreateScore", "Courses", new { CourseId = Model.Main_Video.Course.CourseID }))
         {
             @Html.AntiForgeryToken()
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -553,18 +542,6 @@ else if (ViewBag.Id == 2)
                         </div>
                         <div class="modal-body text-black">
                             <h3>分數</h3>
-                            @*<span class="star-show choiceStar">
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                    <i class="fas fa-star star-gray position-relative">
-                                    </i>
-                                </span>*@
                             @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1") 1分
                             @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2") 2分
                             @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3") 3分
@@ -693,11 +670,8 @@ else if (ViewBag.Id == 2)
     </div>
 
     @section endJS{
-        <script>
-
-
-
-        </script>
+        @Scripts.Render("~/Assets/js/point.js")
+        @Scripts.Render("~/Assets/js/Main.js")
     }
 }
 else if (ViewBag.Id == 3)
@@ -708,9 +682,6 @@ else if (ViewBag.Id == 3)
     <div class="container discussions">
         <div class="row">
             <div class="col-xl">
-                <!-- col-xl-3 col-lg-4 col-md-6 col-sm-12 -->
-                <!-- <div class="column-layout-container marg-t-60"> -->
-                <!-- fixed box -->
                 <div class="layout-right-panel sticky-top">
                     <span style="font-size: 0px;"></span>
                     <div class="white-wrap side-card  pad-b-30 border">
@@ -739,7 +710,7 @@ else if (ViewBag.Id == 3)
                 </div>
 
                 @*Modal*@
-                @using (Html.BeginForm("CreateQuestion", "Courses", new { CourseId = Model.Main_Video.CourseID }))
+                @using (Html.BeginForm("CreateQuestion", "Courses", new { CourseId = Model.Main_Video.Course.CourseID }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="modal fade" id="exampleModal" tabindex="-1">
@@ -774,50 +745,6 @@ else if (ViewBag.Id == 3)
                             </div>
                         </div>
 
-
-                        <!--<div class="second-row flex">-->
-                        <!-- date search -->
-                        <!--<div class="date-search sort" height="unset" width="unset">
-                            <div class="dropdown btn-group">
-                                <button id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                        type="button" class="dropdown-toggle btn btn-default">
-                                    <span>日期最新</span>
-                                    <span class=""></span>
-                                </button>
-                                <div role="menu" class="dropdown-menu" aria-labelledby="filter-sort">
-                                    <a class="dropdown-item active" href="#">日期最新</a>
-                                    <a class="dropdown-item" href="#">日期最舊</a>
-                                    <a class="dropdown-item" href="#">愛心數</a>
-                                </div>
-                            </div>
-                        </div>-->
-                        <!-- unit search -->
-                        <!--<div class="unit marg-rl-15" height="unset" width="unset">
-                        <div id="unit-dropdown" class="dropdown btn-group">-->
-                        <!-- <button id="filter-unit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-                          type="button" class="dropdown-toggle btn btn-default unit-search-bar">
-                          <div class="input-wrapper"><span aria-hidden="true"
-                              class="fa fa-search fa-fw marg-r-5"></span><input class="pad-tb-0" placeholder="搜尋" value="">
-                          </div> <span class=""></span>
-                        </button> -->
-                        <!--<button id="filter-unit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            type="button" class="dropdown-toggle btn btn-default">
-                                        <span>全部單元</span>
-                                        <span class=""></span>
-                                    </button>
-                                    <div role="menu" class="dropdown-menu" aria-labelledby="filter-unit">
-                                        <a class="dropdown-item active" href="#">全部單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 1 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 2 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 3 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 4 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 5 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，第 6 單元</a>
-                                        <a class="dropdown-item" href="#">第 1 章，作業 1</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
 
                     <!-- discuss box -->
@@ -825,80 +752,39 @@ else if (ViewBag.Id == 3)
                     <div class="discuss-box">
                         <div class="white-wrap pad-tb-20">
 
-                            @foreach (var item in Model.GetQuestions)
+
+                            @if (Model.GetQuestions.Count() == 0)
                             {
-                                @Html.Partial("_QuestionPartial", item);
-                            }
-
-                            @*<div class="media border p-3" id="acc3">
-                                <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
-                                     class="mr-3 rounded-circle"
-                                     style="width: 55px; height: 55px;" />
-                                <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5>
-                                    <p>
-                                        Standingls are kinda heavy. Heavy is the head that wears the
-                                        crown.
-                                    </p>
-                                    <p>
-                                        <span class="">3天前</span><button class="btn">
-                                            <i class="far fa-heart text-white"></i>
-                                        </button><span class="">0</span><button class="btn"
-                                                                                type="button"
-                                                                                data-toggle="collapse"
-                                                                                data-target="#collapse-three">
-                                            <i class="far fa-comment text-white"></i>
-                                        </button><span class="">0</span>
-                                    </p>
-
-                                    <div id="collapse-three" class="collapse" data-parent="#acc3">
-                                        <div class="media mt-3">
-                                            <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
-                                                 class="mr-3 rounded-circle"
-                                                 style="width: 55px; height: 55px;" />
-                                            <div class="media-body">
-                                                <h5 class="mt-0">Media heading</h5>
-                                                <p>
-                                                    Standingls are kinda heavy. Heavy is the head that wears the crown. Standingls are kinda heavy. Heavy is the head that wears the crown.
-                                                </p>
-                                                <p>
-                                                    <span class="">3天前</span><button class="btn">
-                                                        <i class="far fa-heart text-white"></i>
-                                                    </button><span class="">0</span>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div class="media mt-3">
-                                            <img src="https://i1.achangpro.com/img.inmywordz.com/uploads/20170824164424_47.jpg"
-                                                 class="mr-3 rounded-circle"
-                                                 style="width: 55px; height: 55px;" />
-                                            <div class="media-body">
-                                                <h5 class="mt-0">Media heading</h5>
-                                                <p class="pr-4">
-                                                    <textarea class="w-100">
-                                                    </textarea>
-                                                </p>
-                                                <p class="text-right pr-4">
-                                                    <a class=""><i class="fas fa-edit text-white"></i></a>
-                                                </p>
-                                            </div>
-                                        </div>
+                                <div class="media p-3">
+                                    @*<img src="https://img95.699pic.com/xsj/10/tm/0h.jpg!/fh/300" class="mr-3 rounded-circle" style="width: 55px; height: 55px;" alt="...">*@
+                                    <div class="media-body">
+                                        <h3 class="mt-0 text-center">暫無任何發問留言</h3>
                                     </div>
                                 </div>
-                            </div>*@
+                            }
+                            else
+                            {
+                                foreach (var item in Model.GetQuestions)
+                                {
+                                    @Html.Partial("_QuestionPartial", item);
+                                }
+                            }
+
+
 
                         </div>
                     </div>
-                    <!-- </div> -->
-
                 </div>
             </div>
-            <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-
-            </div> -->
         </div>
     </div>
+
+    @section endJS{
+        @Scripts.Render("~/Assets/js/Like.js")
+        @Scripts.Render("~/Assets/js/point.js")
+        @Scripts.Render("~/Assets/js/Main.js")
+    }
+
 }
 else if (ViewBag.Id == 4)
 {
@@ -1094,7 +980,10 @@ else if (ViewBag.Id == 4)
             </div>
         </div>
     </div>
+    @section endJS{
+        @Scripts.Render("~/Assets/js/point.js")
+        @Scripts.Render("~/Assets/js/Main.js")
+    }
 }
 
 
-@Scripts.Render("~/Assets/js/point.js")

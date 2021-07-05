@@ -16,9 +16,9 @@ namespace Tachey001.Repository
             _tacheyContext = new TacheyContext();
         }
         
-        public IQueryable<Invoice> GetInvoice()
+        public IQueryable<Member> GetMember()
         {
-            var result = _tacheyContext.Invoice;
+            var result = _tacheyContext.Member;
             return result;
         }
 

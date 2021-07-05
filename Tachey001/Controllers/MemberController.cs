@@ -1,18 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using Tachey001.Models;
 using Tachey001.Service;
-using Tachey001.Service.Course;
-using Tachey001.Service.Order;
 using Tachey001.ViewModel;
 using System.Collections;
-using Tachey001.Service.Member;
 using Tachey001.ViewModel.Member;
 using Tachey001.Repository;
 
@@ -58,9 +52,7 @@ namespace Tachey001.Controllers
             {
                 consoleViews = ConsoleViews,
                 allCourses = AllCourses
-
             };
-
 
             return View(result);
         }
@@ -93,11 +85,13 @@ namespace Tachey001.Controllers
             var UserId = User.Identity.GetUserId();
             var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
             var getcourseviewmodels = _memberService.GetCourseData();
+            var getaspNetUserLogins = _memberService.GetAspNetUserLogins(UserId);
 
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,
                 courseViewModels = getcourseviewmodels,
+                aspNetUserLogins = getaspNetUserLogins,
             };
 
             // 職業行業選項
@@ -258,6 +252,7 @@ namespace Tachey001.Controllers
                     interestDicSub.Add(interestDic[group.Key.ToString()], interestArr);
                 }
                 ViewBag.interestDetil = interestDicSub;
+
                 ViewBag.ListYear = selectListYear;
                 ViewBag.ListMonth = selectListMonth;
                 ViewBag.ListDay = selectListDay;
@@ -551,20 +546,20 @@ namespace Tachey001.Controllers
             _orderService.DeleteOrder(cancel);
             _orderService.DeleteOrderDetail(cancel);
             return RedirectToAction("Orders",new { type = 2});
-            
-            return View();
         }
 
         public ActionResult Profile()
         {
             var UserId = User.Identity.GetUserId();
             var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
+            var ConsoleViews = _memberService.GetConsoleData(UserId);
+            var AllCourses = _courseService.GetCourseData(UserId);
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,
+                consoleViews = ConsoleViews,
+                allCourses = AllCourses
             };
-
-
 
             ViewBag.giveCourseCount = from p in _context.Course where p.MemberID == UserId select p; // 已開設
             ViewBag.giveCourseCount = Enumerable.Count(ViewBag.giveCourseCount);
@@ -599,6 +594,7 @@ namespace Tachey001.Controllers
             ViewBag.MemberId = currentId;
             var getcartcardviewmodels = _memberService.GetCartPartialViewModel(currentId);
             var getcoursecardviewmodels = _memberService.GetConsoleData(currentId);
+            var getcaltotal = _memberService.Caltotal(currentId);
             //資料是複數就要toloist,引用的型別是單數所以無法使用
             //return View(getcoursecardviewmodels);
             var result = new Cart_GroupViewModel
@@ -606,15 +602,11 @@ namespace Tachey001.Controllers
                 //跟他說要放甚麼 like select new
                 //也可以小括號用.的
                 cartpartialViewModels = getcartcardviewmodels,
-                courseCardViewModels = getcoursecardviewmodels
+                courseCardViewModels = getcoursecardviewmodels,
+                total = getcaltotal
             };
             //丟入view
             return View(result);
-        }
-        //收藏功能
-        public void Owner(string MemberId, string CourseID)
-        {
-            _memberService.CreateOwner(MemberId, CourseID);
         }
         //取消收藏
         public ActionResult DelOwner(string MemberId, string CourseID)
@@ -642,15 +634,9 @@ namespace Tachey001.Controllers
         //刪除購物車卡片
         public ActionResult DeleteRowCarts(string CourseId, string MemberId)
         {
-            try
-            {
-                _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
-                return RedirectToAction("Cart", "Member");
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Cart", "Member");
-            }
+            _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
+
+            return RedirectToAction("Cart", "Member");
         }
     }
 }

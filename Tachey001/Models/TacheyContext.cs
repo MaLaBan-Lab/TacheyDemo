@@ -38,6 +38,7 @@ namespace Tachey001.Models
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
+        public virtual DbSet<TicketOwner> TicketOwner { get; set; }
         public virtual DbSet<PersonalUrl> PersonalUrl { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -75,7 +76,7 @@ namespace Tachey001.Models
 
             modelBuilder.Entity<Ticket>()
                 .Property(e => e.Discount)
-                .HasPrecision(1, 1);
+                .HasPrecision(18, 1);
         }
     }
 }

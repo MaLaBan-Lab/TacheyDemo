@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 using Tachey001.Models;
 using Tachey001.Service;
-using Tachey001.Service.Course;
 using Tachey001.ViewModel.Course;
 using PagedList;
 using Tachey001.ViewModel;
+using Tachey001.ViewModel.Member;
+using CloudinaryDotNet;
+using Tachey001.AccountModels;
+using CloudinaryDotNet.Actions;
+using Tachey001.ViewModel.ApiViewModel;
 
 namespace Tachey001.Controllers
 {
@@ -21,6 +24,9 @@ namespace Tachey001.Controllers
         private TacheyContext tacheyDb;
         //宣告CourseService
         private CourseService _courseService;
+        private MemberService _memberService;
+        private TacheyContext _context;
+
         private consoleService _consoleService;
         
 
@@ -30,6 +36,8 @@ namespace Tachey001.Controllers
             tacheyDb = new TacheyContext();
             _courseService = new CourseService();
             _consoleService = new consoleService();
+            _memberService = new MemberService();
+            _context = new TacheyContext();
         }
 
         [AllowAnonymous]
@@ -99,13 +107,12 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult Group(int? categoryid, int? detailid)
         {
-
             if (categoryid != null)
             {
                 var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
                 ViewBag.categoryname = cname.CategoryName;
                 ViewBag.detailname = "所有" + cname.CategoryName;
-
+                ViewBag.CategoryId = cname.CategoryID;
             }
 
             if (detailid != null)
@@ -113,6 +120,7 @@ namespace Tachey001.Controllers
                 var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
                 ViewBag.detailname = dname.DetailName;
                 ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
+                ViewBag.CategoryId = dname.CategoryID;
             }
 
             var result = _consoleService.GetGroupData(categoryid,detailid);
@@ -124,16 +132,38 @@ namespace Tachey001.Controllers
         {
             return View();
         }
+        //課程影片自訂Url
+        [AllowAnonymous]
+        public ActionResult Custom(string id)
+        {
+            var getCourseId = _courseService.GetCourseId(id);
+            
+            if(id == "Index" || getCourseId == "Index")
+            {
+                return RedirectToAction("All", "Courses");
+            }
+            //從行銷網址進去，客戶點擊+1
+            _courseService.AddCustomClick(getCourseId);
+            return RedirectToAction("Main", "Courses", new { id=1, CourseId = getCourseId });
+        }
         //課程影片頁面
         [AllowAnonymous]
         public ActionResult Main(int? id, string CourseId)
         {
-            var MemberId = User.Identity.GetUserId();
+            if (CourseId == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
+            var MemberId = User.Identity.GetUserId();
             var YnN = _courseService.Scored(MemberId, CourseId);
             var video = _courseService.GetCourseVideoData(CourseId);
             var allScore = _courseService.GetAllScore(CourseId);
             var allQuestion = _courseService.GetAllQuestions(MemberId, CourseId);
+            var isown = _courseService.GetOwner(MemberId, CourseId);
+
+            //從主頁進入，點擊率+1
+            _courseService.AddMainClick(CourseId);
 
             if (id == null)
             {
@@ -141,6 +171,8 @@ namespace Tachey001.Controllers
             }
             ViewBag.Id = id;
             ViewBag.YnN = YnN;
+            ViewBag.MemberId = MemberId;
+            ViewBag.UserId = MemberId;
 
             var result = new MainGroup()
             {
@@ -148,22 +180,65 @@ namespace Tachey001.Controllers
                 GetCourseScore = allScore,
                 GetQuestions = allQuestion,
                 PostCourseScore = new CourseScore(),
-                PostCourseQuestion = new Question()
+                PostCourseQuestion = new Question(),
+                GetOwner = isown
             };
 
             return View(result);
         }
+        [AllowAnonymous]
+        public ActionResult LockPage()
+        {
+            return View();
+        }
         //開課10步驟 GET
         public ActionResult Step(int? id, string CourseId)
         {
+            var UserId = User.Identity.GetUserId();
+
+            var courseCategory = _context.CourseCategory.Select(x => x);
+            Dictionary<string, string> interestDic = new Dictionary<string, string>();
+            foreach (var group in courseCategory)
+            {
+                interestDic.Add(group.CategoryID.ToString(), group.CategoryName);
+            }
+            // all 選項 - 子選項
+            Dictionary<string, ArrayList> interestDicSub = new Dictionary<string, ArrayList>();
+            ArrayList interestArr = new ArrayList();
+            var groups = _context.CategoryDetail.GroupBy(x => x.CategoryID);
+            foreach (var group in groups)
+            {
+                interestArr = new ArrayList();
+                foreach (var detail in group)
+                {
+                    interestArr.Add(detail.DetailName);
+                }
+                interestDicSub.Add(interestDic[group.Key.ToString()], interestArr);
+            }
+            ViewBag.interestDetil = interestDicSub;
+
+            var CourseCateDet = _courseService.courseCateDet(CourseId);
+            var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
+            var getcourseviewmodels = _memberService.GetCourseData();
+
             //取得當前登入會員ID
-            ViewBag.UserId = User.Identity.GetUserId();
+            ViewBag.UserId = UserId;
             //取得當前開課步驟
             ViewBag.Id = id;
             //取得當前開課的課程ID
             ViewBag.CourseId = CourseId;
+            //取得當前會員頭像
+            ViewBag.MemberPhoto = getmemberviewmodels[0].Photo;
+
+            var mem = new MemberGroup
+            {
+                courseCateDet = CourseCateDet,
+                memberViewModels = getmemberviewmodels,
+                courseViewModels = getcourseviewmodels,
+            };
 
             var result = _courseService.GetStepGroup(CourseId);
+            result.memberGroup = mem;
 
             return View(result);
         }
@@ -172,9 +247,17 @@ namespace Tachey001.Controllers
         [ValidateInput(false)]
         public ActionResult Step(int? id, StepGroup group, FormCollection formCollection, string CourseId)
         {
-            _courseService.UpdateStep(id, group, formCollection, CourseId);
-
+            if(id != 6)
+            {
+                _courseService.UpdateStep(id, group, formCollection, CourseId);
+            }
             return RedirectToAction("Step", "Courses", new { id = (id + 1), CourseID = CourseId });
+        }
+        //課程種類Post
+        [HttpPost]
+        public void CategoryStep(string clickedOption, int? id, string CourseId)
+        {
+            _courseService.ChangeCategory(clickedOption, CourseId);
         }
         //創新課程，加入課程ID
         public ActionResult NewCourseStep()
@@ -187,16 +270,6 @@ namespace Tachey001.Controllers
 
             //導向開課步驟，並傳入課程ID路由
             return RedirectToAction("Step", "Courses", new { id = 0, CourseId = returnCourseId });
-        }
-        [HttpPost]
-        public ActionResult Step8(string CourseId)
-        {
-            return RedirectToAction("Step", "Courses", new { id = 8, CourseId = CourseId });
-        }
-        [HttpPost]
-        public ActionResult Step9(string CourseId)
-        {
-            return RedirectToAction("Step", "Courses", new { id = 9, CourseId = CourseId });
         }
         //完成課程，送出審核
         public ActionResult StepFinish(string CourseId)
@@ -239,6 +312,38 @@ namespace Tachey001.Controllers
             _courseService.CreateAnswer(questionCard, CourseId, QuestionId, MemberID);
 
             return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
+        }
+        //Post上傳圖片並返回成功訊息
+        [HttpPost]
+        public JsonResult CoursePhotoUpload(string CourseID)
+        {
+            try
+            {
+                var ReturnUrl = _courseService.PostFileStorage(CourseID, Request.Files[0]);
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
+        }
+        //Post上傳影片並返回成功訊息
+        [HttpPost]
+        public JsonResult CourseVideoUpload(string CourseID)
+        {
+            try
+            {
+                var ReturnUrl = _courseService.PostVideoStorage(CourseID, Request.Files[0]);
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
         }
     }
 }

@@ -1,14 +1,23 @@
 ﻿@model Tachey001.ViewModel.Course.AllCourse
 
-@{ 
-    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
-    if(Model.TitlePageImageURL != null)
+@{
+    var col = 3;
+
+    if (HttpContext.Current.Request.RawUrl == "/Member/Profile")
     {
-        titleUrl = Model.TitlePageImageURL;
-            }
+        col = 4;
+    }
 }
 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+@{
+    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
+    if (Model.TitlePageImageURL != null)
+    {
+        titleUrl = Model.TitlePageImageURL;
+    }
+}
+
+<div class="col-xl-@col col-lg-4 col-md-6 col-sm-12">
 
     <div class="card my-5">
         <div class="row no-gutters justify-content-center">
@@ -40,7 +49,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
                 <a href="@Url.Action("Main", "Courses", new { CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
                     <img src="@titleUrl"
-                         class="card-img-top" style="width:262px; height:164px" />
+                         class="card-img-top" style="height:164px" />
                     <div class="
                     position-absolute
                     bg-hahow-dark-green

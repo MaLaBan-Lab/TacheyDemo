@@ -1,5 +1,9 @@
 ﻿@model Tachey001.ViewModel.Course.AnswerCard
 
+@{ 
+    var AToF = false;
+}
+
 <div class="media mt-3">
     <img src="@Model.Photo"
          class="mr-3 rounded-circle"
@@ -11,8 +15,25 @@
         </p>
         <p>
             <span class="">@Model.AnswerDate</span><button class="btn">
-                <i class="far fa-heart text-white"></i>
-            </button><span class="">@Model.LikeAmount</span>
+
+    @foreach (var item in Model.AllMemberId)
+    {
+        if(item == ViewBag.UserId)
+        {
+            AToF = true;
+        }
+    }
+    @if (AToF)
+    {
+    <i class="fas fa-heart text-danger ALike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID" data-AnswerID="@Model.AnswerID"></i>
+
+    }
+    else
+    {
+    <i class="far fa-heart text-white ALike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID" data-AnswerID="@Model.AnswerID"></i>
+    }
+
+</button><span class="">@Model.AllMemberId.Count()</span>
         </p>
     </div>
 </div>

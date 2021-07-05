@@ -38,8 +38,16 @@
                     <a href="@Url.Action("Step", new { id = 7, CourseId = Model.course.CourseID} )" class="text-secondary">課程網址</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    @if (Model.course.CustomUrl == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增課程網址喔～</span>
+                    }
+                    else
+                    {
+                <span class="text-secondary">https://localhost:44394/Course/cm/@(Model.course.CustomUrl)</span>
+                    }
+
                 </div>
             </div>
             <div class="row justify-content-center my-4">
@@ -50,7 +58,7 @@
                     @if (Model.course.Description == null)
                     {
                         <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增課程網址喔～</span>
+                        <span class="text-secondary">還沒有新增課程描述喔～</span>
                     }
                     else
                     {
@@ -63,8 +71,15 @@
                     <a href="@Url.Action("Step", new { id = 6, CourseId = Model.course.CourseID} )" class="text-secondary">課程影片</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程影片喔～</span>
+                    @if (Model.course.PreviewVideo == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增課程影片喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary text-break">@Model.course.PreviewVideo</span>
+                    }
                 </div>
             </div>
             <div class="row justify-content-center my-4">
@@ -136,8 +151,15 @@
                     <a href="@Url.Action("Step", new { id = 3, CourseId = Model.course.CourseID} )" class="text-secondary">課程單元</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增課程單元喔～</span>
+                    @if (Model.courseChapter.Count() == 0)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增課程單元喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">課程共 : @Model.courseChapter.Count() 章節，@Model.courseUnit.Count() 單元</span>
+                    }
                 </div>
             </div>
             <div class="row justify-content-center my-4">
@@ -145,8 +167,16 @@
                     <a href="@Url.Action("Step", new { id = 8, CourseId = Model.course.CourseID} )" class="text-secondary">老師身份</a>
                 </div>
                 <div class="col-7">
-                    <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                    <span class="text-secondary">還沒有新增老師身份喔～</span>
+                    @if (Model.course.LecturerIdentity == null)
+                    {
+                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
+                        <span class="text-secondary">還沒有新增老師身份喔～</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">@Model.course.LecturerIdentity</span>
+                    }
+
                 </div>
             </div>
         </div>

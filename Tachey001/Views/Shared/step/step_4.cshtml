@@ -29,46 +29,17 @@
                         </div>
                     </div>
                     <div class="col-12 mb-4">
-                        <label for="basic-url">選擇課程種類</label>
-                        @foreach (var item in Model.courseCategory)
-                        {
-                            <div class="col-12">
-                                @item.CategoryName :
-                                @foreach (var detail in Model.categoryDetails)
-                                {
-                                    if (item.CategoryID == detail.CategoryID)
-                                    {
-                                        @Html.RadioButtonFor(m => m.course.CategoryDetailsID, $"{detail.DetailID}")
-                                        @detail.DetailName
-                                    }
-                                }
-                                <hr />
-                            </div>
-                        }
+                        @Html.Partial("_ChoiceForStep", Model.memberGroup)
                     </div>
-                    <!--<div class="col-12 mb-4">
-                        <label for="basic-url">選擇課程種類細項</label>
-                        <div class="input-group mb-2">-->
-                    @*<input type="text"
-                        class="form-control"
-                        id="basic-url"
-                        aria-describedby="basic-addon3" />*@
-                    <!--</div>
-                    </div>-->
                     <div class="col-12 mb-4">
                         <label for="basic-url">預計課程長度（以分鐘計算，最短 20 分鐘）</label>
                         <div class="input-group mb-2">
-                            @*<input type="text"
-                                class="form-control"
-                                id="basic-url"
-                                aria-describedby="basic-addon3" />*@
                             @Html.EditorFor(m => m.course.TotalMinTime, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-secondary btn-lg px-5">
+                <button type="" class="btn btn-outline-secondary btn-lg px-5">
                     儲存，下一步
-                    @*@Html.ActionLink("下一步", "Step5", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
                 </button>
             </div>
             <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">

@@ -1,0 +1,61 @@
+﻿@model Tachey001.ViewModel.Pay.DiscountCard
+
+
+<div class="discount-wrap discountcard mb-5" value ="@(Model.TicketID)">
+    <div class="container">
+        <div class="row  ">
+            <div class="col-2 p-15 border-right-0 border py-2 bg-light">
+                <div class="w-100 border-right text-center">
+                    <span class="record-green p-discount d-block">@Model.TicketName</span>
+                </div>
+            </div>
+            <div class="col-10 d-flex  record-text border-left-0 border flex-column bg-light">
+                <span class="d-block py-2">【職涯封印解除】全站課程單堂 @Model.TicketName</span>
+                <span class="d-block pt-2">有效日期: @Model.Ticketdate</span>
+            </div>
+        </div>
+    </div>
+    <div class="container ">
+        <div class="row ">
+            <div class="accordion" id="a123@(Model.TicketID)"></div>
+            <div class="card w-100">
+                <div id="a123@(Model.TicketID)" class="collapse " aria-labelledby="headingOne" data-parent="#a123@(Model.TicketID)">
+                    <div class="wrap bg-orange w-100 border record-Collapse">
+                        <div class="invoice-wrap d-flex flex-wrap">
+                            <div class="col-12 record-color ">
+                                <div class="record-text py-2 d-flex justify-content-between">
+                                    <span>商品類型 &emsp;&emsp;@Model.PoductType</span>
+                                </div>
+                            </div>
+                            <div class="col-12 record-color ">
+                                <div class="record-text py-2 d-flex justify-content-between">
+                                    <span>使用限制 &emsp;&emsp;單一商品滿一元即可使用</span>
+                                </div>
+                            </div>
+                            <div class="col-12 record-color ">
+                                <div class="record-text py-2 d-flex justify-content-between">
+                                    <span>付款方式 &emsp;&emsp;@Model.PayMethod</span>
+                                </div>
+                            </div>
+                            <div class="col-12 record-color ">
+                                <div class="record-text py-2 d-flex justify-content-between">
+                                    <span>使用次數 &emsp;&emsp;@Model.UseTime</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-center" type="button"
+                                data-toggle="collapse" data-target="#a123@(Model.TicketID)" aria-expanded="true"
+                                aria-controls="collapseOne">
+                            <span class="record-arrow"><i class="fas fa-arrow-down"></i></span>
+                            <span class="record-detail">查看詳細</span>
+                        </button>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

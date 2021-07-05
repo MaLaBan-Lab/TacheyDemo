@@ -1,10 +1,16 @@
   /* 第一塊 */
+.background-img {
+    background-image: url(https://i.pinimg.com/564x/10/49/d6/1049d649d7908fdab4205dfd18f95410.jpg);
+    background-size: cover;
+}
+
+
 body {
     background-image: url(https://i.imgur.com/QHRNmJr.jpg);
     color: white;
 }
     .search-content {
-        font-size: 31px;
+        font-size: 35px;
         font-family: sans-serif;
         color:white;
     }
@@ -39,20 +45,24 @@ body {
     left: 0;
 }
 
-    .search-input {
-        height: 40px;
-        width: 85%;
-        position: relative;
-    }
+.search-input {
+    height: 40px;
+    width: 85%;
+    position: relative;
+    outline-style: none;
+    border: 1px solid #ccc;
+    border-radius: 44px;
+}
 
     .search-input:focus-visible {
         outline: none;
     }
 
-    .search-btn {
-        height: 40px;
-        width: 15%;
-    }
+.search-btn {
+    height: 40px;
+    width: 15%;
+    border-radius: 166px;
+}
 
 .search-3 {
     max-width: 23%;
@@ -63,7 +73,7 @@ body {
 .search-a {
     text-decoration: none;
     font-size: 8px;
-    color: #00bea4;
+    color: #b1cdc9;
     padding: 2px 2px;
     background-color: rgba(46, 225, 179, 0.1);
     border-radius: 16px;
@@ -126,6 +136,11 @@ body {
         height: 20%;
         z-index: 1;
     }
+/*.hover-pic:hover {
+    transform: scale(1.2,1.2);
+    transition: .5s;
+}*/
+    
 
     /* 第一塊 */
     /* 第二塊 */
@@ -134,19 +149,20 @@ body {
     justify-content:center;
 }
 .advertising-text {
-    font-size: 20px;
+    font-size: 34px;
     background-color: #11082F;
+    margin-bottom:3%;
 }
 
 #advertising-span {
     color: #FCDE0A;
 }
-
-    /* 第二塊 */
-    /* 延伸閱讀 */
+.mt-2rem{
+    margin-bottom:2rem;
+}
+/* 第二塊 */
+/* 延伸閱讀 */
 .reading {
-    /*background-color: #f3f3f1;*/
-    background-image: url(https://media.discordapp.net/attachments/845189336801476628/852422501098061844/image0.jpg);
     background-size: cover;
     padding-bottom: 5rem;
 }
@@ -183,16 +199,55 @@ body {
         border-radius: 16px;
         background-color: white;
     }
-
-
-    /* 延伸閱讀 */
-    /* 第一塊輪盤 */
+.style-t {
+    width: 71%;
+    margin-top: 7rem;
+    margin-left: 12rem;
+    position: absolute;
+    display: block;
+    position: absolute;
     
-    .item {
-        height: 100%;
-        width: 100%;
-
+    z-index: 100;
+    top: 70px;
+    left: 20%;
+    -webkit-animation: bounce-down 1.6s linear infinite;
+    animation: bounce-down 2.3s linear infinite;
+}
+@-webkit-keyframes bounce-down {
+    25% {
+        -webkit-transform: translateY(-10px);
     }
+
+    50%, 100% {
+        -webkit-transform: translateY(0);
+    }
+
+    75% {
+        -webkit-transform: translateY(10px);
+    }
+}
+
+@keyframes bounce-down {
+    25% {
+        transform: translateY(-10px);
+    }
+
+    50%, 100% {
+        transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(10px);
+    }
+}
+
+}
+/* 延伸閱讀 */
+/* 第一塊輪盤 */
+.item {
+    height: 100%;
+    width: 100%;
+}
 
     .item>img {
         height: 350px;
@@ -434,7 +489,6 @@ body {
     }
 
     .card-logo {
-        background-image: url(圖片/太陽.jpg);
         width: 72px;
         height: 72px;
         flex: 0 0 auto;
@@ -497,7 +551,9 @@ body {
 
     @media screen and (max-width:992px) {
 
-
+        .display-n {
+            display: none;
+        }
         /* 頁尾 */
         .footer-block {
             order: 2;
@@ -535,9 +591,9 @@ body {
             margin-top: 5rem;
         }
 
-        .search-content {
-            text-align: center;
-        }
+.search-content {
+    text-align: center;
+}
 
         .search-form {
             display: flex;
@@ -562,7 +618,7 @@ body {
 
 
         .item>img {
-            height: 200px;
+            height: 250px;
         }
 
         /* 第一塊輪盤 */

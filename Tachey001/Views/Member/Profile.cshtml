@@ -4,13 +4,23 @@
 @Styles.Render("~/Assets/css/card.css")
 
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = "Profile"; Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
+@{ 
+    var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
+    foreach (var i in Model.memberViewModels)
+    {
+        if (i.Theme != null)
+        {
+            titleUrl = i.Theme;
+        }
+    }
 
+}
 @{
 
-//IEnumerable<PersonalUrl> personalUrls = ViewData["PersonalUrls"] as IEnumerable<PersonalUrl>;
-//IEnumerable<Member> members = ViewData["Members"] as IEnumerable<Member>;
+    //IEnumerable<PersonalUrl> personalUrls = ViewData["PersonalUrls"] as IEnumerable<PersonalUrl>;
+    //IEnumerable<Member> members = ViewData["Members"] as IEnumerable<Member>;
 }
 
 <div class="container">
@@ -303,27 +313,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="preview pad-tb-15 pad-rl-30">
+                        @*<div class="preview pad-tb-15 pad-rl-30">
                             <button class="preview-btn mwun marg-rl-auto">預覽我的檔案</button>
-                        </div>
+                        </div>*@
                     </div>
                 </section>
             </div>
         </div>
 
         <!-- 右邊資訊填寫 -->
-        <div class="col-xl-9">
+        <div class="col-xl-9 " style="color:#f1f1f1">
             <!-- 個人頁面 -->
             <section class="marg-b-30">
                 <div class="personal-page pad-rl-0">
                     <div class="ta-l">
                         <div class="relative pad-rl-0">
                             <div class="cover-image">
-                                @foreach (var item in Model.memberViewModels)
-                                {
-                                    <img alt="icon" class="" src=@(item.Theme)>
-                                }
-
+                                <img alt="icon" class="" src=@(titleUrl)>
                             </div>
                             <div class="upload-btn">
                                 <input accept=".jpg,.png" id="file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@>
@@ -377,19 +383,15 @@
             <!-- 我開的課 -->
             <div class="marg-b-30">
                 <div class="course-overview underline">
-                    <h4>我開的課</h4><span class="spacer"></span><input type="checkbox" checked="">公開我開的課
+                    <h4>我開的課</h4><span class="spacer"></span>@*<input type="checkbox" checked="">公開我開的課*@
                 </div>
                 <!-- 課程卡 -->
                 <div class="course-card">
                     <div class="briefs-container row mt-1">
-                        @*@{
-
-                                ViewBag.ParentViewBag = ViewBag;
-                            }*@
-                        @*@for (var i = 0; i < 30; i++)
-                            {
-                                @Html.Partial("CardTemplate")
-                            }*@
+                        @foreach (var item in Model.allCourses)
+                        {
+                            @Html.Partial("CreateCardTemplate", item)
+                        }
                     </div>
                 </div>
             </div>
@@ -397,15 +399,15 @@
             <!-- 我修的課 -->
             <div class="marg-b-30">
                 <div class="course-overview underline">
-                    <h4>我修的課</h4><span class="spacer"></span><input type="checkbox" checked="">公開我修的課
+                    <h4>我修的課</h4><span class="spacer"></span>@*<input type="checkbox" checked="">公開我修的課*@
                 </div>
                 <!-- 課程卡 -->
                 <div class="course-card">
                     <div class="briefs-container row mt-1">
-                        @*@for (var i = 0; i < 30; i++)
-                            {
-                                @Html.Partial("CardTemplate")
-                            }*@
+                        @foreach (var item in Model.consoleViews)
+                        {
+                            @Html.Partial("CardTemplate", item)
+                        }
                     </div>
                 </div>
             </div>
@@ -413,15 +415,15 @@
             <!-- 我收藏的課 -->
             <div class="marg-b-30">
                 <div class="course-overview underline">
-                    <h4>我收藏的課</h4><span class="spacer"></span><input type="checkbox" checked="">公開我收藏的課
+                    <h4>我收藏的課</h4><span class="spacer"></span>@*<input type="checkbox" checked="">公開我收藏的課*@
                 </div>
                 <!-- 課程卡 -->
                 <div class="course-card">
                     <div class="briefs-container row mt-1">
-                        @*@for (var i = 0; i < 30; i++)
-                            {
-                                @Html.Partial("CardTemplate")
-                            }*@
+                        @foreach (var item in Model.consoleViews)
+                        {
+                            @Html.Partial("CardTemplate", item)
+                        }
                     </div>
                 </div>
             </div>
@@ -452,10 +454,11 @@
             <!--</div>
                 </div>
             </div>-->
+
             <!-- 我的課程作品 -->
             <div class="marg-b-30">
                 <div class="course-overview underline">
-                    <h4>我的課程作品</h4><span class="spacer"></span><input type="checkbox" checked="">公開我的課程作品
+                    <h4>我的課程作品</h4><span class="spacer"></span>@*<input type="checkbox" checked="">公開我的課程作品*@
                 </div>
                 <!-- 課程卡 -->
                 <div class="course-card">
