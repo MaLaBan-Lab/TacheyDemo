@@ -7,10 +7,7 @@ namespace Tachey001.ViewModel
 {
     public class CheckoutViewModel
     {
-        public string InvoiceType { get; set; }
-        public string InvoiceName { get; set; }
-
-        public string InvoiceEmail { get; set; }
-        public string OrderID { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
     }
 }

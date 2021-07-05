@@ -39,9 +39,9 @@
 
 <div class="container mb-5">
     <div class="row px-3">
-        <div class="accordion" id="a@(Model.OrderID)"></div>
+        <div class="accordion" id="a@(Model.OrderID)@(Model.UnitPrice)"></div>
         <div class="card w-100">
-            <div id="collapse@(Model.OrderID)" class="collapse " aria-labelledby="headingOne" data-parent="#a@(Model.OrderID)">
+            <div id="collapse@(Model.OrderID)@(Model.UnitPrice)" class="collapse " aria-labelledby="headingOne" data-parent="#a@(Model.OrderID)@(Model.UnitPrice)">
                 <div class="wrap bg-orange w-100 border record-Collapse">
                     <h6 class="p-15  w-100  m-0 pt-2">發票資訊</h6>
                     <div class="invoice-wrap d-flex flex-wrap">
@@ -85,7 +85,7 @@
             </div>
             <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-center" type="button" data-toggle="collapse" data-target="#collapse@(Model.OrderID)" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-link btn-block text-center" type="button" data-toggle="collapse" data-target="#collapse@(Model.OrderID)@(Model.UnitPrice)" aria-expanded="true" aria-controls="collapseOne">
                         <span class="record-arrow"><i class="fas fa-arrow-down"></i></span>
                         <span class="record-detail">查看詳細</span>
                     </button>
