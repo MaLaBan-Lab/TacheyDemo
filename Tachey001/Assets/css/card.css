@@ -259,3 +259,6 @@
     font-size: 20px;
     line-height: 1;
 }
+    .more-class:hover {
+        color: #bdb15e;
+    }

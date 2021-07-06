@@ -4,6 +4,23 @@
 	max-width: 100%;
 }
 
+.c-w {
+	color: #003f78;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (min-width: 520px) {
 		.container {
 				max-width: 520px;
@@ -316,9 +333,11 @@ body {
 	border-radius: 3px;
 	border: none;
 	text-align: center;
-	background-color: rgb(255, 255, 255);
+	/*background-color: #111015;*/
 	box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
 	overflow: auto;
+	color: #003f78;
+	background: linear-gradient( 5deg, rgb(158 147 182) 0%, rgb(168 195 233) 100%);
 }
 
 .user-digt {
@@ -484,7 +503,8 @@ img {
 	justify-content: center;
 	position: relative;
 	border-bottom: 2px solid rgba(0, 0, 0, 0.12);
-	background-color: rgb(255, 255, 255);
+	/*background-color: #0a0a25;*/ background: linear-gradient( 5deg, rgb(157 137 200) 0%, rgb(168 195 233) 100%);
+	
 }
 
 .course>div {
@@ -494,11 +514,11 @@ img {
 	flex-flow: column;
 }
 
-.course>div .txt-small {
-	color: rgb(204, 204, 204);
-	line-height: 18px;
-	margin-top: 10px;
-}
+	.course > div .txt-small {
+		color: rgb(66 90 209);
+		line-height: 18px;
+		margin-top: 10px;
+	}
 
 .txt-small {
 	font-size: 14px;
@@ -510,7 +530,7 @@ img {
 }
 
 .user-info-edit {
-	background-color: rgb(255, 255, 255);
+	/*background: linear-gradient( 5deg, rgb(158 147 182) 0%, rgb(168 195 233) 100%);*/
 }
 
 .user-info-edit .info.editable {

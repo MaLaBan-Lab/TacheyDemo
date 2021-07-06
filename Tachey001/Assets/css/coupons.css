@@ -13,9 +13,10 @@ body {
 }
 
 .change-btn {
-    background-color: #170633;
-    color: #ccc;
-    border: .4px solid white;
+    /*background: linear-gradient( 40deg, rgb(86 86 192) 0%, rgb(119 79 165) 100%);*/
+    background-color: #7c80fa;
+    color: #ffecec;
+    border: 0.4px solid #181717;
 }
 
 .check-b:hover .change-btn {
@@ -23,7 +24,9 @@ body {
 }
 
 .text-black-20 {
-  color: #ccc;
+    color: #ccc;
+    background: linear-gradient( 40deg, rgb(86 86 192) 0%, rgb(119 79 165) 100%);
+    border-radius: 21px;
 }
 
 .btn-tape {
@@ -34,5 +37,5 @@ body {
 }
 
 .border-bottom-yellow {
-    border-bottom: .4px solid white;
+    border-bottom: 0.4px solid #181717
 }

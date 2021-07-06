@@ -47,10 +47,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
-                <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-4 overflow-hidden mb-2 border pic-size" 
+">
+                <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100" >
                     <img src="@titleUrl"
-                         class="card-img-top" style="width:262px; height:164px" />
+                         class="card-img-top" style="        width: 100%;
+        height: 180px;
+" />
                     <div class="
                     position-absolute
                     bg-hahow-dark-green
@@ -84,12 +87,12 @@
                     </a>
                 }
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify cardTitle">
-                <h4 class="card-title text-justify font-weight-normal text-secondary">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-8 text-justify cardTitle">
+                <h4 class="card-title text-justify font-weight-normal text-secondary " style="padding-left:15px ;padding-right:14px; padding-top: 16px">
                     @Model.Title
                 </h4>
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2" style="padding-left: 10px;">
                 <span class="card-text text-black-50">
                     <span class="star-show">
                         <i class="fas fa-star star-gray position-relative">
@@ -134,7 +137,7 @@
                     <span class="course-time">@Model.TotalMinTime</span>分鐘
                 </span>
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2 pa-10" >
                 <span class="card-text text-black-50 mr-4">
                     <span class="course-people-before">
                         <i class="far fa-clock"></i>
