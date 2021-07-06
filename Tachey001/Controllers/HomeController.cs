@@ -65,16 +65,12 @@ namespace Tachey001.Controllers
             var _cloudinary = Credientials.Init();
 
             SearchResult result = _cloudinary.Search()
-                .Expression("folder=Course/7QmfVoaSH68w/*")
+                .Expression("folder=Course/7QmfVoaSH68w/Video")
                 .Execute();
 
-            var fileList = new List<string>();
-            foreach (var item in result.Resources)
-            {
-                fileList.Add(item.FileName);
-            }
+            var url = result.Resources.Find(x => x.FileName == "5._電腦如何計算_zlaned").SecureUrl;
 
-            ViewBag.List = fileList;
+            ViewBag.List = result.Resources;
             return View();
         }
         [HttpPost]
