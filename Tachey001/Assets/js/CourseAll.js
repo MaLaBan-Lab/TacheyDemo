@@ -21,7 +21,7 @@ $("#learning").on('click', function () {
 // 熱門排序
 $("#hot").on('click', function () {
     $.ajax({
-        url: "AllHot",
+        url: "/Courses/AllHot",
         cache: false,
         type: "get",
         success: function (result) {

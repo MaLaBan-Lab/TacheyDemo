@@ -48,6 +48,23 @@ namespace Tachey001.Controllers
             return View(result);
         }
 
+        //最多人數排序
+        public ActionResult Orderbypn(int page = 1)
+        {
+            var result = _consoleService.GetCardsHotPageList(page);
+
+            return View(result);
+        }
+
+        //最常課時
+        public ActionResult Orderbyct(int page = 1)
+        {
+            var result = _consoleService.OrderByTotalTimeOfCourse(page);
+
+            return View(result);
+        }
+
+
         //熱門排序
         public ActionResult AllHot(int page = 1)
         {
@@ -62,6 +79,7 @@ namespace Tachey001.Controllers
 
             return View(result);
         }
+
 
         //搜尋
 

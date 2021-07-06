@@ -145,7 +145,41 @@ namespace Tachey001.Service
 
             return rresult;
         }
+
+
         //熱門排序
+        public IPagedList<consoleViewModel> AllHot(int page)
+        {
+            var course = _tacheyRepository.GetAll<Models.Course>();
+            var member = _tacheyRepository.GetAll<Models.Member>();
+            var orderTail = _tacheyRepository.GetAll<Models.Order_Detail>();
+
+            var result = from c in course
+                         join m in member on c.MemberID equals m.MemberID
+                         select new consoleViewModel
+                         {
+                             CourseID = c.CourseID,
+                             Title = c.Title,
+                             Description = c.Description,
+                             TitlePageImageURL = c.TitlePageImageURL,
+                             OriginalPrice = c.OriginalPrice,
+                             TotalMinTime = c.TotalMinTime,
+                             MemberID = m.MemberID,
+                             Photo = m.Photo,
+                             CategoryID = c.CategoryID,
+                             DetailID = c.CategoryDetailsID,
+                             CreateDate = c.CreateDate
+                         };
+
+            int currentPage = page < 1 ? 1 : page;
+            var oresult = result.OrderBy(x => x.CreateDate);
+            var rresult = oresult.ToPagedList(currentPage, pageSize);
+
+            return rresult;
+        }
+        
+        
+        //最多人數排序
         public IPagedList<consoleViewModel> GetCardsHotPageList(int page)
         {
             var all = GetConsoleData();
@@ -174,7 +208,7 @@ namespace Tachey001.Service
             return rresult;
         }
 
-        //最常客時
+        //最常課時
         public IPagedList<consoleViewModel> OrderByTotalTimeOfCourse(int page)
         {
             var course = _tacheyRepository.GetAll<Models.Course>();
