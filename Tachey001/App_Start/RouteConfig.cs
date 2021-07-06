@@ -14,6 +14,12 @@ namespace Tachey001
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "FindCustomCourseUrl",
+                url: "Course/cm/{id}",
+                defaults: new { controller = "Courses", action = "Custom", id = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

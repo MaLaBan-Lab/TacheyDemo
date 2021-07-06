@@ -1,6 +1,6 @@
 ﻿@using Tachey001.Models
 @using Microsoft.AspNet.Identity
-@model Tachey001.ViewModel.Card_highlight_Group
+@*@model Tachey001.ViewModel.Card_highlight_Group*@
 @{
     List<CourseCategory> categoryList = new List<CourseCategory>();
 
@@ -44,11 +44,14 @@
     @Styles.Render("~/Assets/css/card.css")
     @Styles.Render("~/Assets/css/nav.css")
     @Styles.Render("~/Assets/css/HomePage.css")
+    @RenderSection("topCSS", required: false)
+    @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Assets/css/navbar-blue.css")
     @*@Styles.Render("~/Assets/css/HAHOWcart.css")*@
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
 </head>
 <body style="padding-top: 0px; padding-bottom: 0px">
     <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top  justify-content-between shadow-sm">
@@ -80,14 +83,14 @@
                                     @item.CategoryName
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
+                                    <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses",new { categoryid = item.CategoryID})">
                                         所有@(item.CategoryName)
                                     </a>
                                     @foreach (var detail in detailList)
                                     {
                                         if (detail.CategoryID == item.CategoryID)
                                         {
-                                            <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses")">
+                                            <a class="dropdown-item text-white" href="@Url.Action("Group", "Courses",new { detailid = detail.DetailID})">
                                                 @detail.DetailName
                                             </a>
                                         }
@@ -106,7 +109,7 @@
             <form class="form-inline my-2 my-lg-0 ">
                 <i class="fas fa-search px-2 text-white"></i>
                 <input class="form-control mr-sm-2" type="search" placeholder="課程搜尋" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-warning my-2 my-sm-0" type="submit">搜尋</button>
             </form>
         </div>
         <!-- 移動距離就創一個空的div -->
@@ -130,24 +133,51 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle text-white position-relative" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="badge badge-pill badge-danger position-absolute" style="left:30%;top:-15%" id="cartTitleAmount">0</span>
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
-                            <div class="dropdown-menu-right dropdown-menu " aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-white" href="@Url.Action("Cart", "Member")">購物車</a>
+                            <div class="dropdown-menu-right dropdown-menu">
 
-                                <ul class="dropdown-item list-unstyled" data-spy="scroll">
+                                @*購物車內容外框*@
+                                <div class="overflow-auto" style="height:250px" id="CartBox" data-MemberId="@User.Identity.GetUserId()">
 
-                                    @foreach (var item in Model.cartPartialCardViewModels)
-                                    {
-                                        <li>
-                                            @Html.Partial("_CartPartialCard", item);
-                                        </li>
-                                    }
+                                    @*<div>
+                                        <a class="dropdown-item text-white" href="@Url.Action("Cart", "Member")">
+                                            <div class="media">
+                                                <img src="https://res.cloudinary.com/dzaevdqyt/image/upload/v1625130067/1-1.jpg" class="mr-3" style="width:130px; height:70px">
+                                                <div class="media-body d-flex flex-column justify-content-between overflow-hidden" style="height:70px">
+                                                    <div class="m-0">漫遊程海 | Python 入門到製作遊戲演算法</div>
+                                                    <div class="m-0 d-flex justify-content-between"><span>已開課</span><span class="text-right">NT$0</span></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>*@
 
+                                </div>
 
-                                </ul>
+                                @*購物車按鈕*@
+                                <div>
+                                    <div class="media px-4 py-2 d-flex">
+                                        <div class="media-body mt-3 d-flex flex-column justify-content-between w-25 h-100">
+                                            <div class="m-0 text-white">
+                                                總計<span id="cartInnerAmount">0</span>堂課
+                                            </div>
+                                            <div class="m-0 text-white d-flex justify-content-between">
+                                                <h4><span>NT$</span><span id="cartTotalPrice">0</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="w-75 h-100 text-right align-self-center">
+                                            <a href="@Url.Action("Cart", "Member")" class="text-decoration-none">
+                                                <div class="btn btn-warning w-75 h-100 text-black">
+                                                    前往購物車
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
 
@@ -237,11 +267,11 @@
                             <a class="dropdown-item" style="color:white" href="#">TW&nbsp;台灣 &nbsp;新台幣(&nbsp;TWD&nbsp;)</a>
                             <a class="dropdown-item" style="color:white" href="#">HK&nbsp;香港 &nbsp;港幣幣(&nbsp;HKD&nbsp;)</a>
                             <a class="dropdown-item" style="color:white" href="#">MY&nbsp;馬來西亞 &nbsp;林吉特(&nbsp;MYR&nbsp;)</a>
-                            <a class="dropdown-item"  style="color:white" href="#">US&nbsp;美國 &nbsp;美元(&nbsp;USD&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">US&nbsp;美國 &nbsp;美元(&nbsp;USD&nbsp;)</a>
                             <a class="dropdown-item" style="color:white" href="#">JP&nbsp;日本 &nbsp;日圓(&nbsp;JPY&nbsp;)</a>
                             <a class="dropdown-item" style="color:white" href="#">CN&nbsp;中國 &nbsp;人民幣(&nbsp;CNY&nbsp;)</a>
                             <a class="dropdown-item" style="color:white" href="#">MO&nbsp;澳門 &nbsp;澳門幣(&nbsp;MOP&nbsp;)</a>
-                            <a class="dropdown-item" style="color:white"  href="#">SG&nbsp;新加坡 &nbsp;新幣(&nbsp;SGD&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">SG&nbsp;新加坡 &nbsp;新幣(&nbsp;SGD&nbsp;)</a>
                             <a class="dropdown-item" style="color:white" href="#">AU&nbsp;澳洲 &nbsp;澳幣(&nbsp;AUD&nbsp;)</a>
                             <a class="dropdown-item" style="color:white" href="#">CU&nbsp;加拿大 &nbsp;加幣(&nbsp;CAD&nbsp;)</a>
                         </div>
@@ -274,6 +304,7 @@
             crossorigin="anonymous"></script>
     @Scripts.Render("~/Assets/js/owl.carousel.min.js")
     @Scripts.Render("~/Assets/js/nav.js")
+    @Scripts.Render("~/Assets/js/shoppingCartData.js")
 
     @*@Scripts.Render("~/bundles/modernizr")*@
     <script>
@@ -370,10 +401,12 @@
             });
             document.querySelector('.center>.item-video>iframe').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')
         }
-                                                // 影片
+                                                    // 影片
 
     </script>
+
     @RenderSection("scripts", required: false)
     @RenderSection("endJS", required: false)
+
 </body>
 </html>

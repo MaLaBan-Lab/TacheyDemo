@@ -169,6 +169,11 @@ textarea {
 	padding-left: 15px;
 }
 
+.pad-rl-30 {
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
 .pad-rl-60 {
 	padding-right: 60px;
 	padding-left: 60px;
@@ -470,6 +475,18 @@ h1 {
 			height: 48px;
 			border-radius: 0px 6px 6px 0px;
 		}
+
+.narrow-icon-tachey {
+	width: 48px;
+	height: 48px;
+	border-radius: 6px 0px 0px 6px;
+}
+
+.icon-tachey {
+	width: 96px;
+	height: 48px;
+	border-radius: 6px 6px 6px 6px;
+}
 
 		.signin-way-block .local-bar .left-block .unbinded-account,
 		.signin-way-block .google-bar .left-block .unbinded-account,
@@ -951,7 +968,7 @@ button,
 }
 
 /* 彈跳視窗-我的興趣 */
-.overlay-interest, .overlay-likes, .overlay-jobs {
+/*.overlay-interest, .overlay-likes, .overlay-jobs {
 	background: rgba(0, 0, 0, 0.75);
 	display: flex;
 	justify-content: center;
@@ -1004,9 +1021,9 @@ button,
 }
 
 .interval {
-	position: relative;
+	position: relative;*/
 	/*overflow: hidden;*/
-}
+/*}
 
 .toggle {
 	display: none;
@@ -1129,7 +1146,7 @@ button[disabled], html input[disabled] {
 	padding: 0;
 	background-color: transparent;
 	display: flex;
-}
+}*/
 
 /* 彈跳視窗-其他個人喜好 */
 .likes-btn, .jobs-btn, .intervals-btn {

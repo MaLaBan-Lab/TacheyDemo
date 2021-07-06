@@ -157,8 +157,9 @@ body {
     font-size: 20px;
 }
 .advertising-text {
-    font-size: 20px;
+    font-size: 34px;
     background-color: #11082F;
+    margin-bottom:3%;
 }
 
 #advertising-span {
@@ -170,8 +171,6 @@ body {
 /* 第二塊 */
 /* 延伸閱讀 */
 .reading {
-    /*background-color: #f3f3f1;*/
-    background-image: url(https://media.discordapp.net/attachments/845189336801476628/852422501098061844/image0.jpg);
     background-size: cover;
     padding-bottom: 5rem;
 }
@@ -500,7 +499,6 @@ body {
     }
 
     .card-logo {
-        background-image: url(圖片/太陽.jpg);
         width: 72px;
         height: 72px;
         flex: 0 0 auto;
@@ -662,7 +660,7 @@ body {
 
 
         .item>img {
-            height: 200px;
+            height: 250px;
         }
 
         /* 第一塊輪盤 */

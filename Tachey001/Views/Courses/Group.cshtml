@@ -1,6 +1,7 @@
-﻿
+﻿@model List<Tachey001.ViewModel.consoleViewModel>
 @{
-    ViewBag.Title = "音樂類"; Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    //ViewBag.Title = "音樂類";
+    Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
 @Styles.Render("~/Assets/css/group.css")
@@ -11,12 +12,12 @@
         <div class="col-6">
             <nav class="bg-white p-0">
                 <ol class="breadcrumb  px-0 bg-color-160633">
-                    <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">攝影</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">所有影集</li>
+                    <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="@Url.Action("Group", "Courses",new { CategoryId = ViewBag.CategoryId})">@ViewBag.categoryname</a></li>
+                    <li class="breadcrumb-item active"><span class="text-white">@ViewBag.detailname</span></li>
                 </ol>
             </nav>
             <h1 class="text-hahow-green mb-4">
-                攝影
+                @ViewBag.detailname
             </h1>
             <p class="text-justify text-white">
                 線上攝影課程，從影像創作、攝影打光開始學習，掌握 Premiere、PhotoShop 等影像剪輯、後製軟體能力，用影像創作說出自己的故事。
@@ -30,9 +31,9 @@
 
 <div class="container">
     <div class="row">
-        @for (var i = 0; i < 30; i++)
-        {
-            @Html.Partial("CardTemplate")
-        }
+        @foreach (var item in Model)
+            {
+                @Html.Partial("CardTemplate",item)
+            }
     </div>
 </div>

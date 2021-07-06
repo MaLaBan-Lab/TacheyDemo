@@ -1,10 +1,13 @@
-﻿
-@*記得單複數*@
-@model Tachey001.ViewModel.CheckoutViewModel
+﻿@*記得單複數*@
+@model Tachey001.ViewModel.Pay.PayGroup
 @Styles.Render("~/Assets/css/HAHOWcheckout.css")
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+    var ticketId = ViewBag.ticketID;
+    var totalPrice = (ViewBag.totalPrice * ViewBag.discount).ToString("c0");
+
+
 }
 
 
@@ -71,7 +74,7 @@
                     <div>
                         <div class="sc-3vzzj9-4 fbVttR input-wrapper flex">
                             <input id="customerName"
-                                   placeholder="請填入真實姓名" class="sc-3vzzj9-3 fgjnMp input-element" value="@Model.InvoiceName ">
+                                   placeholder="請填入真實姓名" class="sc-3vzzj9-3 fgjnMp input-element" value="@Model.checkoutViewModel.Name ">
                         </div>
                     </div>
                 </div>
@@ -84,7 +87,7 @@
                         <div class="sc-3vzzj9-4 fbVttR input-wrapper flex">
                             <input id="customerEmail"
                                    placeholder="請填入電子信箱" type="email" class="sc-3vzzj9-3 fgjnMp input-element"
-                                   value=@Model.InvoiceEmail>
+                                   value=@Model.checkoutViewModel.Email>
                         </div>
                     </div>
                 </div>
@@ -95,7 +98,7 @@
             <div class="form-block">
                 <!-- 發票類型 -->
                 <div class="half-width-field">
-                    <label class="marg-r-10" for="invoiceType">@Model.InvoiceType</label>
+                    <label class="marg-r-10" for="invoiceType">電子發票</label>
                     <span class="text-error">如需開立統編，請選擇統編發票</span>
                     <div class=" dpIEcd" height="40px" width="100%">
                         <div class="dropdown btn-group-vertical btn-block w-100">
@@ -156,10 +159,10 @@
                                 <b>如何秒速視譜？驚人的獨家視譜法</b>
                                 <div class="entry purchasePlan-price">
                                     <span class="title">課程售價</span>
-                                    <span class="ntd">NT$2,580</span>
+                                    <span class="ntd">@totalPrice</span>
                                 </div>
                                 <div class="total-amount text-right">
-                                    <h3 class="marg-tb-0">NT$2,400</h3>
+                                    <h3 class="marg-tb-0">@totalPrice</h3>
                                 </div>
 
 
@@ -176,6 +179,7 @@
                                     <div class="mb-3">
                                         <div class="mb-3">
                                             <div class="flex align-items-center text-left mt-3">
+
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
                                                            name="flexRadioDefault" id="flexRadioDefault1">
@@ -184,11 +188,16 @@
                                                                         class="fa fa-question-circle marg-l-5 ml-2"
                                                                         data-for="coupon-restriction-tooltip"
                                                                         currentitem="false">
+
                                                             <div class="icon-text">
                                                                 <p>100 HP 折抵 NT$1 ( 多人同行等優惠無法並用 )</p>
                                                             </div>
+                                                      
                                                         </i>
                                                     </label>
+                                                </div>
+                                                <div id="r1" class="d-flex justify-content-between text-decoration-none">
+                                                  
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
@@ -197,6 +206,12 @@
                                                         我有折扣代碼
                                                     </label>
                                                 </div>
+                                                <div id="r2" class="d-flex justify-content-between text-decoration-none">
+                                                    @if (ticketId != null)
+                                                    {
+                                                        <a href="#" id="pay-cancel2">X取消</a> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discpuntCoupon">使用我的折扣券</button>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +219,7 @@
                                 </section>
                             </div>
 
-                            <button class="sc-1a6j6ze-0 RcKEn marg-t-20 mt-3">同意並送出</button>
+                            <button class="sc-1a6j6ze-0 RcKEn marg-t-20 mt-3" onclick="location.href='@Url.Action("create", "Pay",new { ticketId=ticketId})'">同意並送出</button>
                             <div class="onpsza-0 kjsCqb">
                                 點擊上方按鈕即表示您已依〈<a target="_blank" class="onpsza-1 hbVGjm"
                                                 href="/paying-user-agreement">Hahow 網際網路課程購買暨服務契約</a>〉第1.1條期間審閱完畢，並同意契約條款。
@@ -219,8 +234,42 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="discpuntCoupon" tabindex="-1" aria-labelledby="discpuntCouponLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="discpuntCouponLabel">我的折扣券</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    關閉
+                    <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
+                </button>
+            </div>
+            <div class="modal-price">
+                <h4 class="before text-center">
+                    <span>原訂單金額</span>
+                    <span>NT$3,000</span>
+                </h4>
+                <h4 class="after text-center">
+                    <span>折扣後金額</span>
+                    <span>NT$3,000</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!-- 第一個項目 -->
+                @foreach (var item in Model.discountCards)
+                {
+                    @Html.Partial("_discountCard", item);
+                }
 
-
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancelbtn btn btn-secondary close" data-dismiss="modal">取消</button>
+                <button type="button" class="changebtn btn btn-secondary btn-use">套用</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

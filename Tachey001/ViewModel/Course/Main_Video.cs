@@ -8,11 +8,12 @@ namespace Tachey001.ViewModel.Course
 {
     public class Main_Video
     {
-        public string CourseID { get; set; }
-        public string CourseTitle { get; set; }
+        public Models.Course Course { get; set; }
         public string CategoryName { get; set; }
         public string DetailName { get; set; }
-        public IEnumerable<CourseChapter> courseChapters { get; set; }
-        public IEnumerable<CourseUnit> courseUnits { get; set; }
+        public decimal OriginalPrice { get; set; }
+        public decimal? PreOrderPrice { get; set; }
+        public List<CourseChapter> courseChapters { get; set; }
+        public List<CourseUnit> courseUnits { get; set; }
     }
 }

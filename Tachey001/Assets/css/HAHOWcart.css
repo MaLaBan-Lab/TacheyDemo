@@ -376,6 +376,15 @@ top-container {
     cursor: pointer;
     color: white;
 }
+
+.func-btn:hover a{
+    color:yellow !important;
+}
+
+.func-btn:hover {
+    color: yellow !important;
+}
+
 .marg-l-30 {
     margin-left: 30px;
 }
