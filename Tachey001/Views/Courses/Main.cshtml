@@ -42,7 +42,7 @@
             <div class="menu_wrap col-12 col-sm-12 col-lg-4">
                 <div class="title col-12">
                     <div class="col-10 p-0">
-                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元，共 2230 分鐘</p>
+                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元，共 @Model.Main_Video.Course.TotalMinTime 分鐘</p>
                         <div>
                             <span>當前單元</span>
                             <a href="@Model.Main_Video.Course.PreviewVideo" target="VideoIframe">
@@ -185,7 +185,7 @@
             <div class="inline-block">
                 <div class="item">
                     <i class="far fa-clock fa-4x"></i>
-                    <p>2,230 分鐘</p>
+                    <p>@Model.Main_Video.Course.TotalMinTime 分鐘</p>
                 </div>
                 <div class="item">
                     <i class="far fa-file-alt fa-4x"></i>
@@ -284,7 +284,7 @@
     <!--課程介紹-->
     <!-- content -->
     <div>
-        <div class="container position-relative">
+        @*<div class="container position-relative">
             <div class="row book-mark-box">
                 <div class="col-12 my-4 book-mark px-5">
                     <div class="text-center">
@@ -298,7 +298,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="container">
             <div class="row">
@@ -575,57 +575,76 @@ else if (ViewBag.Id == 2)
             <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div>
-                        <h4 class="mr-4 text-50">5.0</h4>
+                        <h4 class="mr-4 text-50">@Model.GetCourseScore.Average(x => x.Score)</h4>
                     </div>
                     <div class="score-box text-20 pt-3">
                         <span class="star-show">
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x=>x.Score) > 0)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 1)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 2)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 3)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 4)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
                             </i>
                         </span>
-                        <p class="text-black-50"><span>4</span>則評價</p>
+                        <p class="text-white"><span>@Model.GetCourseScore.Count()</span>則評價</p>
                     </div>
                 </div>
             </div>

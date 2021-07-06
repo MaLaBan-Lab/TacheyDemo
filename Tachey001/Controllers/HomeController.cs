@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using CloudinaryDotNet;
@@ -61,6 +62,19 @@ namespace Tachey001.Controllers
         }
         public ActionResult CourseCard()
         {
+            var _cloudinary = Credientials.Init();
+
+            SearchResult result = _cloudinary.Search()
+                .Expression("folder=Course/7QmfVoaSH68w/*")
+                .Execute();
+
+            var fileList = new List<string>();
+            foreach (var item in result.Resources)
+            {
+                fileList.Add(item.FileName);
+            }
+
+            ViewBag.List = fileList;
             return View();
         }
         [HttpPost]
