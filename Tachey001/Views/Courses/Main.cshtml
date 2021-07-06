@@ -285,20 +285,20 @@
     <!-- content -->
     <div>
         @*<div class="container position-relative">
-            <div class="row book-mark-box">
-                <div class="col-12 my-4 book-mark px-5">
-                    <div class="text-center">
-                        <button type="button"
-                                class="btn btn-outline-hahow w-100 my-4 py-3 px-5">
-                            <div class="text-scale-12">
-                                <i class="fas fa-bookmark mr-1"></i>
-                                加入收藏
-                            </div>
-                        </button>
+                <div class="row book-mark-box">
+                    <div class="col-12 my-4 book-mark px-5">
+                        <div class="text-center">
+                            <button type="button"
+                                    class="btn btn-outline-hahow w-100 my-4 py-3 px-5">
+                                <div class="text-scale-12">
+                                    <i class="fas fa-bookmark mr-1"></i>
+                                    加入收藏
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
 
         <div class="container">
             <div class="row">
@@ -548,11 +548,78 @@ else if (ViewBag.Id == 2)
                         </div>
                         <div class="modal-body text-black">
                             <h3>分數</h3>
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1") 1分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2") 2分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3") 3分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "4") 4分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "5") 5分
+                            <span class="star-show position-relative">
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1", new { @id = "star1" , @class= "invisible position-absolute" })
+                                <label class="" for="star1">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2", new { @id = "star2", @class = "invisible position-absolute" })
+                                <label class="" for="star2">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3", new { @id = "star3", @class = "invisible position-absolute" })
+                                <label class="" for="star3">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "4", new { @id = "star4", @class = "invisible position-absolute" })
+                                <label class="" for="star4">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "5", new { @id = "star5", @class = "invisible position-absolute" })
+                                <label class="" for="star5">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                            </span>
                             <h3>標題</h3>
                             @Html.TextBoxFor(m => m.PostCourseScore.Title, null, new { @class = "w-100" })
                             <h3>內容</h3>
@@ -580,7 +647,7 @@ else if (ViewBag.Id == 2)
                     <div class="score-box text-20 pt-3">
                         <span class="star-show">
                             <i class="fas fa-star star-gray position-relative">
-                                @if (Model.GetCourseScore.Average(x=>x.Score) > 0)
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 0)
                                 {
                                     <i class="
                             fas

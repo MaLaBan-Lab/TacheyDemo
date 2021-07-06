@@ -23,3 +23,18 @@ $jq(document).on('ready', function () {
 //		$(".get-point").addClass("fade out");
 //		$(".used-point").removeClass("fade out");
 //});
+
+//console.dir($("input[name='PostCourseScore.Score']"))
+
+$("input[name='PostCourseScore.Score']").click(function () {
+	var starArr = $(".score-star")
+	var val = $(this).val()
+
+	starArr.each(function (index) {
+		if (index < val) {
+			$(this).removeClass("invisible")
+		} else {
+			$(this).addClass("invisible")
+        }
+    })
+})
