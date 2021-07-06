@@ -224,7 +224,7 @@ namespace Tachey001.Controllers
             //註冊Tachey會員資料表
         public ActionResult RegisterTacheyMember()
         {
-            var UserId = User.Identity.GetUserName();
+            var UserId = User.Identity.GetUserId();
             var Email = User.Identity.GetUserName();
 
             _memberService.CreateMember(UserId, Email);
@@ -421,14 +421,14 @@ namespace Tachey001.Controllers
                         if (resultU.Succeeded)
                         {
                             resultU = await UserManager.AddLoginAsync(user.Id, info.Login);
-
                             //註冊
                             _memberService.CreateMember(user.Id, loginInfo.Email);
 
                             if (resultU.Succeeded)
                             {
                                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                                return RedirectToLocal(returnUrl);
+                                return RedirectToAction("RegisterTacheyMember", "Account");
+                                //return RedirectToLocal(returnUrl);
                             }
                         }
                     }
