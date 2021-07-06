@@ -102,15 +102,15 @@ namespace Tachey001.Service
         //取得課程影片所需欄位
         public Main_Video GetCourseVideoData(string CourseId)
         {
-            var course = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var course = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
 
-            var category = _tacheyRepository.GetAll<CourseCategory>().FirstOrDefault(x => x.CategoryID == course.CategoryID);
+            var category = _tacheyRepository.Get<CourseCategory>(x => x.CategoryID == course.CategoryID);
 
-            var detail = _tacheyRepository.GetAll<CategoryDetail>().FirstOrDefault(x => x.DetailID == course.CategoryDetailsID);
+            var detail = _tacheyRepository.Get<CategoryDetail>(x => x.DetailID == course.CategoryDetailsID);
 
-            var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId);
+            var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId).ToList();
 
-            var unit = _tacheyRepository.GetAll<CourseUnit>(x => x.CourseID == CourseId);
+            var unit = _tacheyRepository.GetAll<CourseUnit>(x => x.CourseID == CourseId).ToList();
 
             var result = new Main_Video
             {

@@ -16,20 +16,16 @@ namespace Tachey001.Controllers
     public class MemberController : Controller
     { 
         private TacheyContext _context;
-       
-        private TacheyContext tacheyDb;
         //宣告CourseService
         private consoleService _consoleService;
         private CourseService _courseService;
         //宣告OrderService
         private OrderService _orderService;
         private MemberService _memberService;
-        private MemberRepository _memberRepository;
 
         //初始化CourseService
         public MemberController()
         {
-            tacheyDb = new TacheyContext();
             _consoleService = new consoleService();
             _courseService = new CourseService();
             _context = new TacheyContext();
@@ -37,7 +33,6 @@ namespace Tachey001.Controllers
             //初始化
             _orderService = new OrderService();
             _memberService = new MemberService();
-            _memberRepository = new MemberRepository();
         }
         // GET: Member
         public ActionResult Console()
@@ -464,14 +459,14 @@ namespace Tachey001.Controllers
         [HttpPost]
         public ActionResult Email(string Title, string Description, string TitlePageImageURL, string MarketingImageURL, string CourseId)
         {
-            var result = tacheyDb.Course.Find(CourseId);
+            var result = _context.Course.Find(CourseId);
 
             result.Title = Title;
             result.Description = Description;
             result.TitlePageImageURL = TitlePageImageURL;
             result.MarketingImageURL = MarketingImageURL;
 
-            tacheyDb.SaveChanges();
+            _context.SaveChanges();
 
             return RedirectToAction("Step", "Courses", new { id = 2, CourseId = CourseId });
         }
@@ -512,24 +507,6 @@ namespace Tachey001.Controllers
                     ViewBag.id = 0;
                 else
                     ViewBag.id = 3;
-        //    var currentId = User.Identity.GetUserId();
-        //    var OrderRecord = from O in tacheyDb.Order
-        //                     join OD in tacheyDb.Order_Detail on O.OrderID equals OD.OrderID
-        //                     join invoice in tacheyDb.Invoice on O.OrderID equals invoice.OrderID
-        //                     where O.MemberID == currentId
-        //                     select new OrderRecord
-        //                     {
-        //                         OrderDate =O.OrderDate,
-        //                         PayDate=O.PayDate,
-        //                         PayMethod=O.PayMethod,
-        //                         UnitPrice=OD.UnitPrice,
-        //                         InvoiceType=invoice.InvoiceType,
-        //                         InvoiceName=invoice.InvoiceName,
-        //                         InvoiceEmail=invoice.InvoiceEmail,
-        //                         InvoiceDate=invoice.InvoiceDate,
-        //                         InvoiceNum=invoice.InvoiceNum,
-        //                         InvoiceRandomNum=invoice.InvoiceRandomNum
-        //                     };
 
                 return View(AllTypeData);
             }
@@ -566,13 +543,13 @@ namespace Tachey001.Controllers
             ViewBag.takeCourseCount = from p in _context.CourseBuyed where p.MemberID == UserId select p; // 已參加
             ViewBag.takeCourseCount = Enumerable.Count(ViewBag.takeCourseCount);
 
-            // 課程var courseList = tacheyDb.Course.Where(x => x.MemberID == currentId).Select(x => x).ToList();
+            // 課程var courseList = _context.Course.Where(x => x.MemberID == currentId).Select(x => x).ToList();
             ViewBag.courseGive = (from p in _context.Course where p.MemberID == UserId select p).ToList(); // 開課
             ViewBag.courseTake = from p in _context.CourseBuyed where p.MemberID == UserId select p; // 修課
             ViewBag.courseFavorites = from p in _context.Owner where p.MemberID == UserId select p; // 收藏
             ViewBag.courseWork = from p in _context.Homework where p.MemberID == UserId select p; // 作品
 
-            ViewBag.UserPhoto = tacheyDb.Member.Find(UserId).Photo;
+            ViewBag.UserPhoto = _context.Member.Find(UserId).Photo;
 
             return View(result);
         }
@@ -619,6 +596,7 @@ namespace Tachey001.Controllers
         public ActionResult AddCart(string MemberId, string CourseID)
         {
             _memberService.CreateCart(MemberId, CourseID);
+
             _memberService.CreateOwner(MemberId, CourseID);
 
             return RedirectToAction("Cart", "Member");
@@ -634,7 +612,7 @@ namespace Tachey001.Controllers
         //刪除購物車卡片
         public ActionResult DeleteRowCarts(string CourseId, string MemberId)
         {
-            _memberRepository.DeleteCurrentIdRowCart(CourseId, MemberId);
+            _memberService.DeleteCurrentIdRowCart(CourseId, MemberId);
 
             return RedirectToAction("Cart", "Member");
         }

@@ -14,11 +14,9 @@ namespace Tachey001.Service
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
-        private consoleRepository _consoleRepository;
         //初始化資料庫邏輯
         public consoleService()
         {
-            _consoleRepository = new consoleRepository();
             _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
 
@@ -145,43 +143,33 @@ namespace Tachey001.Service
             var oresult = result.OrderBy(x => x.CreateDate);
             var rresult = oresult.ToPagedList(currentPage, pageSize);
 
-
             return rresult;
         }
         //熱門排序
         public IPagedList<consoleViewModel> GetCardsHotPageList(int page)
         {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            var orderTail = _tacheyRepository.GetAll<Models.Order_Detail>();
+            var all = GetConsoleData();
 
-            var result = from c in course
-                         join m in member on c.MemberID equals m.MemberID
-                         join od in orderTail on c.CourseID equals od.CourseID
-                         select new consoleViewModel
-                         {
-                             CourseID = c.CourseID,
-                             Title = c.Title,
-                             Description = c.Description,
-                             TitlePageImageURL = c.TitlePageImageURL,
-                             OriginalPrice = c.OriginalPrice,
-                             TotalMinTime = c.TotalMinTime,
-                             MemberID = m.MemberID,
-                             Photo = m.Photo,
-                             CategoryID = c.CategoryID,
-                             DetailID = c.CategoryDetailsID,
-                             CreateDate = c.CreateDate
+            var oD = _tacheyRepository.GetAll<Models.Order_Detail>()
+                                                                .GroupBy(x => x.CourseID)
+                                                                .Select(x => new { id = x.Key, Count = x.Count() });
 
-                         };
+            foreach (var C in all)
+            {
+                foreach (var item in oD)
+                {
+                    if (C.CourseID == item.id)
+                    {
+                        C.CountBuyCourse = item.Count;
+                    }
+                }
+            }
+
+            var result = all.OrderByDescending(x => x.CountBuyCourse).Take(24);
 
             int currentPage = page < 1 ? 1 : page;
-            var oresult = result.GroupBy(x => x.CourseID).Select(x => new consoleViewModel
-            {
-                CourseID = x.Key,
-                CountBuyCourse = x.Count()
-            }).OrderBy(x => x.CountBuyCourse);
-            var rresult = oresult.ToPagedList(currentPage, pageSize);
 
+            var rresult = result.ToPagedList(currentPage, pageSize);
 
             return rresult;
         }

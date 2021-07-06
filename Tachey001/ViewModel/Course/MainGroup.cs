@@ -8,7 +8,6 @@ namespace Tachey001.ViewModel.Course
 {
     public class MainGroup
     {
-        public Models.Course GetCourse { get; set; }
         public Main_Video Main_Video { get; set; }
         public CourseScore PostCourseScore { get; set; }
         public List<ScoreCard> GetCourseScore { get; set; }

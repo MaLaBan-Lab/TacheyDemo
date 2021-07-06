@@ -5,27 +5,24 @@ using System.Web;
 using Tachey001.ViewModel;
 using Tachey001.Models;
 using Tachey001.Repository;
-using Tachey001.Repository.Home;
 
 namespace Tachey001.Service
 {
     public class HomeService
     {
         //跟Repository拿資料
-        private HomeRepository _HomeRepository;
         private TacheyRepository _tacheyRepository;
         //初始化資料庫邏輯
         public HomeService()
         {
-            _HomeRepository = new HomeRepository();
             _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
         //作方法篩選資料
         public List<CommentViewModel> GetCommentViewModel()
         {
             //select完成變成view model
-            var member = _HomeRepository.GetMembers();
-            var coursescore = _HomeRepository.GetCourseScores();
+            var member = _tacheyRepository.GetAll<Member>();
+            var coursescore = _tacheyRepository.GetAll<CourseScore>();
             var result = from m in member
                          join c in coursescore on m.MemberID equals c.MemberID 
                          select new CommentViewModel { Name = m.Name, Photo = m.Photo, ToTachey = c.ToTachey };
@@ -42,7 +39,8 @@ namespace Tachey001.Service
             var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
             {
                 id = z.Key,
-                score = z.Average(x => x.Score)
+                score = z.Average(x => x.Score),
+                total = z.Count()
             });
 
             var all = from c in course
@@ -68,6 +66,7 @@ namespace Tachey001.Service
                     if (item.CourseID == score.id)
                     {
                         item.AvgScore = Convert.ToInt32(score.score);
+                        item.TotalScore = score.total;
                     }
                 }
             }
@@ -90,7 +89,7 @@ namespace Tachey001.Service
         }
         public List<HighlightCourseViewModel> GetHighlightCourseViewModels()
         {
-            var course = _HomeRepository.GetCourses();
+            var course = _tacheyRepository.GetAll<Course>();
             var result = from c in course
                          select new HighlightCourseViewModel
                          {

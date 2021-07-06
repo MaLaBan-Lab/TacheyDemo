@@ -13,7 +13,7 @@ namespace Tachey001.ViewModel.Course
         public string DetailName { get; set; }
         public decimal OriginalPrice { get; set; }
         public decimal? PreOrderPrice { get; set; }
-        public IEnumerable<CourseChapter> courseChapters { get; set; }
-        public IEnumerable<CourseUnit> courseUnits { get; set; }
+        public List<CourseChapter> courseChapters { get; set; }
+        public List<CourseUnit> courseUnits { get; set; }
     }
 }

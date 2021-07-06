@@ -1,0 +1,12 @@
+﻿@model IPagedList<Tachey001.ViewModel.consoleViewModel>
+
+<div class="row mt-5" id="proposalAttachments">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("CardTemplate", item)
+    }
+
+</div>
+<div class="row mx-auto">
+    @Html.PagedListPager(Model, page => Url.Action("All", "Courses", new { page }))
+</div>

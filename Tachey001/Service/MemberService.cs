@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Repository;
-using Tachey001.Repository.Home;
 using Tachey001.ViewModel;
 using Tachey001.ViewModel.Course;
 using Tachey001.ViewModel.Member;
@@ -17,15 +16,9 @@ namespace Tachey001.Service
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
-       
-        private HomeRepository _HomeRepository;
-        private MemberRepository _MemberRepository;
         public MemberService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
-            
-            _HomeRepository = new HomeRepository();
-            _MemberRepository = new MemberRepository();
         }
         //創建會員表
         public void CreateMember(string userId, string email)
@@ -305,7 +298,7 @@ namespace Tachey001.Service
 
             return result;
         }
-        //判斷是否收藏
+        //加入收藏
         public void CreateOwner(string MemberId, string CourseId)
         {
             var ToF = _tacheyRepository.Get<Owner>(x => x.MemberID == MemberId && x.CourseID == CourseId);
@@ -338,8 +331,8 @@ namespace Tachey001.Service
         public List<CartPartialCardViewModel> GetCartPartialViewModel(string memberId)
         {
 
-            var course = _MemberRepository.GetCourses();
-            var shoppingcart = _MemberRepository.GetShoppingCarts();
+            var course = _tacheyRepository.GetAll<Course>();
+            var shoppingcart = _tacheyRepository.GetAll<ShoppingCart>();
             var result = from c in course
                          join s in shoppingcart on c.CourseID equals s.CourseID
                          //shoppingCartID=MemberController的Cart裡抓到的會員ID
@@ -350,8 +343,8 @@ namespace Tachey001.Service
 
         public List<CourseCardViewModel> GetCourseCardViewModels()
         {
-            var member = _HomeRepository.GetMembers();
-            var course = _HomeRepository.GetCourses();
+            var member = _tacheyRepository.GetAll<Member>();
+            var course = _tacheyRepository.GetAll<Course>();
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
                          select new CourseCardViewModel { Photo = m.Photo, Title = c.Title, TotalMinTime = c.TotalMinTime, OriginalPrice = c.OriginalPrice, TitlePageImageURL = c.TitlePageImageURL };
@@ -368,6 +361,11 @@ namespace Tachey001.Service
             }
             return totalprice;
         }
-
+        public void DeleteCurrentIdRowCart(string outsideCourseId, string outsideMemberId)
+        {
+            var result = _tacheyRepository.Get<ShoppingCart>(x => x.MemberID == outsideMemberId && x.CourseID == outsideCourseId);
+            _tacheyRepository.Delete(result);
+            _tacheyRepository.SaveChanges();
+        }
     }
 }
