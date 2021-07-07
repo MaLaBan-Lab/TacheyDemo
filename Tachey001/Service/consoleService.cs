@@ -157,14 +157,19 @@ namespace Tachey001.Service
         {
             var course = _tacheyRepository.GetAll<Models.Course>();
             var member = _tacheyRepository.GetAll<Models.Member>();
+
+            var order = _tacheyRepository.GetAll<Models.Order>(x=>x.MemberID== currutId);
             var oderdetail = _tacheyRepository.GetAll<Models.Order_Detail>();
-            
+
+            var ode = from o in order
+                      join od in oderdetail on o.OrderID equals od.OrderID
+                      select new { o.OrderID, o.MemberID, od.CourseID };
 
 
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
-                         join o in oderdetail on c.CourseID equals o.CourseID
-                         where m.MemberID == currutId
+                         join o in ode on c.CourseID equals o.CourseID
+                         where o.MemberID == currutId
                          select new consoleViewModel
                          {
                              CourseID = c.CourseID,
