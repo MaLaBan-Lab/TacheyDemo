@@ -6,7 +6,9 @@ body {
 .hahow-orange {
   color: #fa8b00;
 }
-
+.bc-c {
+    background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(91 158 190) 100%);
+}
 .hahow-green {
   color: rgb(0, 190, 164);
 }
