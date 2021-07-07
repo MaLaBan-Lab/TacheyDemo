@@ -593,6 +593,13 @@ namespace Tachey001.Controllers
             return RedirectToAction("Cart", "Member");
         }
         //加入購物車
+        public ActionResult AddCartOnly(string MemberId, string CourseID)
+        {
+            _memberService.CreateCart(MemberId, CourseID);
+
+            return RedirectToAction("Cart", "Member");
+        }
+        //加入購物車
         public ActionResult AddCart(string MemberId, string CourseID)
         {
             _memberService.CreateCart(MemberId, CourseID);
