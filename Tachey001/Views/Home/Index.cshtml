@@ -14,11 +14,17 @@
                     最有趣的<span class="search-half">線上課程平台</span><br>
                     學那些學校不會教的事
                 </h1>
-                <form class="form-inline my-2 my-lg-0 d-flex search-form">
+                @using (Html.BeginForm("Search", "Courses", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 d-flex search-form" }))
+                {
                     <input class="bg-gray border-0 m-0 search-input" type="search" placeholder="今天想學習什麼?"
-                           aria-label="Search">
+                           aria-label="Search" id="site-search">
                     <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
-                </form>
+                }
+                @*<form class="form-inline my-2 my-lg-0 d-flex search-form">
+                    <input class="bg-gray border-0 m-0 search-input" type="search" placeholder="今天想學習什麼?"
+                           aria-label="Search" id="site-search">
+                    <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
+                </form>*@
                 <div class="search-a-wrap my-2">
                     <a href="#" class="search-a d-inline-block">優惠此時此課</a>
                     <a href="#" class="search-a d-inline-block">國際化人才</a>
@@ -341,35 +347,35 @@
         </div>
 
         <div class="row m-0">
-                    <div class="col-4">
-                        <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片1.jpg" alt="">
-                        <h5 class="reading-h5 m-0">零基礎也能自學法文 —— 從文字到 Podcast、影片，免費法語自學</h5>
-                        <span class="d-block reading-date my-2">Dec 10, 2020</span>
-                        <p class="reading-date mb-2 collapse" id="collapseContent1">
-                            語言自學達人 Chihya
-                            繼兩年前自學德文後，又靠著自學建立了法文聽說讀寫的基礎。這篇文章會分享她自學法文的經驗，並提供「以中文、英文、或法文學習法文」的多種教材，如果你也正在找法文
-                        </p>
-                        <a class="reading-more" data-toggle="collapse" href="#collapseContent1" role="button" aria-expanded="false">閱讀更多</a>
-                    </div>
-                    <div class="col-4">
-                        <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片2.jpg" alt="">
-                        <h5 class="reading-h5 m-0">【2021】上升星座運勢：安心之法與人生發展策略</h5>
-                        <span class="d-block reading-date my-2">Dec 30, 2020</span>
-                        <p class="reading-date mb-2 collapse" id="collapseContent2">
-                            面對 2020
-                            年的不確定性，很多人心中的不安全感越來越深重。星象雖然會影響人世間的吉凶禍福，斗轉星移所產生的外在事件，人類可能無法全然控制，但是你可以決定你的「心」要如何去應對未來
-                        </p>
-                        <a class="reading-more" data-toggle="collapse" href="#collapseContent2" role="button" aria-expanded="false">閱讀更多</a>
-                    </div>
-                    <div class="col-4">
-                        <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片3.jpg" alt="">
-                        <h5 class="reading-h5 m-0">資深聲音培訓師周震宇 —— 聲音反映出人的內在，而溝通是一生的</h5>
-                        <span class="d-block reading-date my-2">Jan 8, 2021</span>
-                        <p class="reading-date mb-2 collapse" id="collapseContent3">
-                            「聲音反映出人的內在，而溝通是一生的自我覺察。」這是聲音訓練師周震宇亟欲傳達的核心概念。在聲波的交會當中，人們建立交集、共識，進而生長成為有意義的關係。你的每一次開口，也可
-                        </p>
-                        <a class="reading-more" data-toggle="collapse" href="#collapseContent3" role="button" aria-expanded="false">閱讀更多</a>
-                    </div>
+            <div class="col-4">
+                <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片1.jpg" alt="">
+                <h5 class="reading-h5 m-0">零基礎也能自學法文 —— 從文字到 Podcast、影片，免費法語自學</h5>
+                <span class="d-block reading-date my-2">Dec 10, 2020</span>
+                <p class="reading-date mb-2 collapse" id="collapseContent1">
+                    語言自學達人 Chihya
+                    繼兩年前自學德文後，又靠著自學建立了法文聽說讀寫的基礎。這篇文章會分享她自學法文的經驗，並提供「以中文、英文、或法文學習法文」的多種教材，如果你也正在找法文
+                </p>
+                <a class="reading-more" data-toggle="collapse" href="#collapseContent1" role="button" aria-expanded="false">閱讀更多</a>
+            </div>
+            <div class="col-4">
+                <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片2.jpg" alt="">
+                <h5 class="reading-h5 m-0">【2021】上升星座運勢：安心之法與人生發展策略</h5>
+                <span class="d-block reading-date my-2">Dec 30, 2020</span>
+                <p class="reading-date mb-2 collapse" id="collapseContent2">
+                    面對 2020
+                    年的不確定性，很多人心中的不安全感越來越深重。星象雖然會影響人世間的吉凶禍福，斗轉星移所產生的外在事件，人類可能無法全然控制，但是你可以決定你的「心」要如何去應對未來
+                </p>
+                <a class="reading-more" data-toggle="collapse" href="#collapseContent2" role="button" aria-expanded="false">閱讀更多</a>
+            </div>
+            <div class="col-4">
+                <img class="reading-pic" src="~/Assets/img/延伸閱讀圖片3.jpg" alt="">
+                <h5 class="reading-h5 m-0">資深聲音培訓師周震宇 —— 聲音反映出人的內在，而溝通是一生的</h5>
+                <span class="d-block reading-date my-2">Jan 8, 2021</span>
+                <p class="reading-date mb-2 collapse" id="collapseContent3">
+                    「聲音反映出人的內在，而溝通是一生的自我覺察。」這是聲音訓練師周震宇亟欲傳達的核心概念。在聲波的交會當中，人們建立交集、共識，進而生長成為有意義的關係。你的每一次開口，也可
+                </p>
+                <a class="reading-more" data-toggle="collapse" href="#collapseContent3" role="button" aria-expanded="false">閱讀更多</a>
+            </div>
         </div>
     </div>
 
@@ -378,4 +384,5 @@
 
 @section endJS{
     @Scripts.Render("~/Assets/js/Owner.js")
+    @*@Scripts.Render("~/Assets/js/HomeIndex.js")*@
 }

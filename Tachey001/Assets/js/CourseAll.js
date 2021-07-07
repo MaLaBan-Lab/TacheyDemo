@@ -36,7 +36,7 @@ $(".search-btn").on('click', function () {
         url: "Search",
         cache: false,
         type: "get",
-        data: { search: $("site-search").val() },
+        data: { search: $("#site-search").val() },
         success: function (result) {
             $("#proposalAttachments").html(result);
         }
