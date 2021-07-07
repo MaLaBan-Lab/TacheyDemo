@@ -11,6 +11,7 @@ using Owin.Security.Middleware.Line;
 using Tachey001.Models;
 using Line.Login.Models;
 using System.Web;
+using System.Web.Hosting;
 
 namespace Tachey001
 {
@@ -89,12 +90,21 @@ namespace Tachey001
                 ClientId = "1037350215092-9rcm57k133ffatrhs0i5tkanv0ppdppp.apps.googleusercontent.com",
                 ClientSecret = "QgQK1ahv7zUXBA5DqXv4NVHq"
             });
-            
-            
+
+            string lineLoginUri = string.Empty;
+            if (HostingEnvironment.IsDevelopmentEnvironment)
+            {
+                lineLoginUri = "https://localhost:44394/line-signin";
+            }
+            else
+            {
+                lineLoginUri = "https://tachey.azurewebsites.net/line-signin";
+            }
+
             app.UseLineAuthentication(new LineAuthenticationOptions(
                 channelId: "1656163525",
                 channelSecret: "87a29eb6c97c02a8f1c649a8f2a8da22",
-                redirectUri: "https://localhost:44394/line-signin", // "https://tachey.azurewebsites.net/line-signin"
+                redirectUri: lineLoginUri,
                 scope: Scope.OpenId | Scope.Profile | Scope.Email
             ));
             

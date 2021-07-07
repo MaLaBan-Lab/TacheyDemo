@@ -168,10 +168,9 @@ $('.toggle-btn-interval').on('click', function () {
     else {
         $('.confirm-btn').attr('disabled', true);
     }
-
-
-    confirm_btn("/Courses/CategoryStep", "intervals");
 });
+
+confirm_btn("/Courses/CategoryStep", "intervals");
 
 function confirm_btn(url, blockname) {
     let chk_btn = "";
