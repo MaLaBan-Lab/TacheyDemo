@@ -39,12 +39,12 @@
                                     <a class="no-pointer" href="/">
                                         @foreach (var item in Model.memberViewModels)
                                         {
-                                            <img src=@(item.Photo) width="" class="user-img">
+                                            <img src=@(item.Photo) class="user-img">
                                         }
                                     </a>
                                 </div>
                                 <div class="upload-btn">
-                                    <input accept=".jpg,.png" id="photo_file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@>
+                                    <input id="photo_file" type="file" class="update-behind-btn" onchange="uploadTheme(this)">
                                     <div class="click-container">
                                         <button class="cancel-btn-photo" height="50px" width="50px">
                                             <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>

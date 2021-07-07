@@ -12,7 +12,7 @@
                         <label for="basic-url">課程標題</label>
                         <div class="input-group mb-2">
                             @Html.HiddenFor(m => m.course.CourseID)
-                            @Html.EditorFor(m => m.course.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "課程標題" } })
+                            @Html.EditorFor(m => m.course.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "課程標題", @required="required" } })
                         </div>
                         <label for="basic-url" class="text-black-50 fs-5">吸引人的標題很重要</label>
                     </div>
@@ -21,7 +21,7 @@
                     <div class="col-12">
                         <label for="basic-url">簡短的課程描述（建議 64 字內）</label>
                         <div class="input-group mb-3">
-                            @Html.EditorFor(m => m.course.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "輸入文字" } })
+                            @Html.EditorFor(m => m.course.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "輸入文字", @required = "required" } })
                         </div>
                     </div>
                 </div>

@@ -16,15 +16,18 @@ namespace Tachey001.Service.Pay
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
-        public void CreateOrder(string orderId ,string currentId,string payMethod,string ticketId)
+        public void CreateOrder(string orderId, string currentId, string payMethod, string ticketId, string usepoint)
         {
             DateTime localDate = DateTime.Now;
             var order_new = new Models.Order
             {
-                OrderID = orderId, TicketID = ticketId,
+                OrderID = orderId,
+                UsePoint = usepoint,
+                TicketID = ticketId,
                 MemberID = currentId,
-                OrderStatus = "wait",OrderDate = localDate,
-                PayMethod= payMethod,
+                OrderStatus = "wait",
+                OrderDate = localDate,
+                PayMethod = payMethod,
                 PayDate = null
             };
             _tacheyRepository.Create(order_new);
@@ -86,6 +89,17 @@ namespace Tachey001.Service.Pay
             var result = ticket.Discount;
 
             return result;
+        }
+        public int GetOwnerPoint(string currentId)
+        {
+            var point = _tacheyRepository.GetAll<Point>(x => x.MemberID == currentId);
+            var totalPoint = 0;
+            foreach (var item in point)
+            {
+                totalPoint = item.PointNum + totalPoint;
+            }
+
+            return totalPoint;
         }
     }
 }

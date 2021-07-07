@@ -174,6 +174,7 @@ namespace Tachey001.Controllers
             ViewBag.Id = id;
             ViewBag.YnN = YnN;
             ViewBag.MemberId = MemberId;
+            ViewBag.UserId = MemberId;
             ViewBag.CourseId = CourseId;
 
             var result = new MainGroup()

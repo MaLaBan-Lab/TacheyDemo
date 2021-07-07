@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <label for="basic-url">學生需要用到的工具/材料/軟體（若為付費軟體務必標明）</label>
                         <div class="input-group mb-3">
-                            @Html.EditorFor(m => m.course.Tool, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.course.Tool, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         </div>
                         <label for="basic-url" class="text-black-50 fs-5">記得清楚標明版本、型號等資訊。詳細建議參考右側《課前資訊撰寫指南與範例》</label>
                     </div>
@@ -21,7 +21,7 @@
                     <div class="col-12">
                         <label for="basic-url">這堂課適合什麼程度的學生？需具備哪些背景知識？（如：初學、進階）</label>
                         <div class="input-group mb-3">
-                            @Html.EditorFor(m => m.course.CourseLevel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.course.CourseLevel, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         </div>
                         <label for="basic-url" class="text-black-50 fs-5">
                             <ul>
@@ -37,7 +37,7 @@
                     <div class="col-12">
                         <label for="basic-url">上完這堂課後，學生可以達成的學習成效是什麼？</label>
                         <div class="input-group mb-3">
-                            @Html.EditorFor(m => m.course.Effect, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.course.Effect, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         </div>
                         <label for="basic-url" class="text-black-50 fs-5">
                             <ul>
@@ -55,7 +55,7 @@
                     <div class="col-12">
                         <label for="basic-url">哪些人適合這堂課呢？</label>
                         <div class="input-group mb-3">
-                            @Html.EditorFor(m => m.course.CoursePerson, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.course.CoursePerson, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         </div>
                         <label for="basic-url" class="text-black-50 fs-5">
                             <ul>

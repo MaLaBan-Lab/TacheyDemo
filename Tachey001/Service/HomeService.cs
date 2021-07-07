@@ -48,6 +48,7 @@ namespace Tachey001.Service
                          select new CourseCardViewModel
                          {
                              CourseID = c.CourseID,
+                             MemberID = c.MemberID,
                              Photo = m.Photo,
                              Title = c.Title,
                              TotalMinTime = c.TotalMinTime,

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Tachey001.AccountModels;
 using Tachey001.Models;
 using Tachey001.Repository;
 using Tachey001.ViewModel;
@@ -366,6 +369,26 @@ namespace Tachey001.Service
             var result = _tacheyRepository.Get<ShoppingCart>(x => x.MemberID == outsideMemberId && x.CourseID == outsideCourseId);
             _tacheyRepository.Delete(result);
             _tacheyRepository.SaveChanges();
+        }
+        //儲存雲端上傳課程封面圖片，並回傳網址
+        public string PostFileStorage(string MemberId, HttpPostedFileBase file)
+        {
+            var _cloudinary = Credientials.Init();
+
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription("MemberPhoto", file.InputStream),
+                PublicId = $"{MemberId}",
+                Folder = $"Member"
+            };
+
+            var CallBackUrl = _cloudinary.Upload(uploadParams).SecureUrl.ToString();
+
+            var result = _tacheyRepository.Get<Member>(x => x.MemberID == MemberId);
+            result.Photo = CallBackUrl;
+            _tacheyRepository.SaveChanges();
+
+            return CallBackUrl;
         }
     }
 }
