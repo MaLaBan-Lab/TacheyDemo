@@ -18,29 +18,36 @@ namespace Tachey001.Service.Pay
             _context = new TacheyContext();
             _payRepository = new PayRepository();
         }
-        public void CreateOrder(string orderId ,string currentId,string payMethod,string ticketId)
+        public void CreateOrder(string orderId, string currentId, string payMethod, string ticketId,string usepoint)
         {
             DateTime localDate = DateTime.Now;
             var order_new = new Models.Order
             {
-                OrderID = orderId, TicketID = ticketId,
+                OrderID = orderId,
+                UsePoint = usepoint,
+                TicketID = ticketId,
                 MemberID = currentId,
-                OrderStatus = "wait",OrderDate = localDate,
-                PayMethod= payMethod,
+                OrderStatus = "wait",
+                OrderDate = localDate,
+                PayMethod = payMethod,
                 PayDate = null
             };
             _context.Order.Add(order_new);
             _context.SaveChanges();
         }
-        public void CreateOrder_Detail(string orderId,string currentid)
+        public void CreateOrder_Detail(string orderId, string currentid)
         {
-            var shoppingCart = _payRepository.GetAllShoppingCart().Where(x=>x.MemberID == currentid);
+            var shoppingCart = _payRepository.GetAllShoppingCart().Where(x => x.MemberID == currentid);
             foreach (var item in shoppingCart)
             {
-                var course = _payRepository.GetAllCourse().FirstOrDefault(x=>x.CourseID ==item.CourseID);
+                var course = _payRepository.GetAllCourse().FirstOrDefault(x => x.CourseID == item.CourseID);
                 var od = new Order_Detail
                 {
-                    OrderID = orderId,CourseID = item.CourseID,UnitPrice=course.OriginalPrice,CourseName= course.Title,BuyMethod="課程售價"
+                    OrderID = orderId,
+                    CourseID = item.CourseID,
+                    UnitPrice = course.OriginalPrice,
+                    CourseName = course.Title,
+                    BuyMethod = "課程售價"
                 };
                 _context.Order_Detail.Add(od);
                 _context.SaveChanges();
@@ -64,7 +71,7 @@ namespace Tachey001.Service.Pay
                              PoductType = t.ProductType,
                              UseTime = t.UseTime
                          };
-         
+
 
             return result;
         }
@@ -76,7 +83,7 @@ namespace Tachey001.Service.Pay
             {
                 var course = _payRepository.GetAllCourse().FirstOrDefault(x => x.CourseID == item.CourseID);
                 result = result + course.OriginalPrice;
-                
+
             }
             return result;
         }
@@ -89,5 +96,18 @@ namespace Tachey001.Service.Pay
 
             return result;
         }
+
+        public int GetOwnerPoint(string currentId)
+        {
+            var point = _payRepository.GetAllPoint().Where(x => x.MemberID == currentId);
+            var totalPoint = 0;
+            foreach (var item in point)
+            {
+                totalPoint = item.PointNum + totalPoint;
+            }
+
+            return totalPoint;
+        }
+
     }
 }
