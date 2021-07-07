@@ -11,7 +11,7 @@
                     <label for="basic-url" class="text-black-50">課程網址（由 1 ~ 10 個小寫英文、數字及 - 組成）</label>
                     <div class="input-group mb-3">
                         @*<input type="text" class="form-control rounded" id="basic-url" aria-describedby="basic-addon3">*@
-                        @Html.EditorFor(m => m.course.CustomUrl, new { htmlAttributes = new { @class = "w-100 form-control" } })
+                        @Html.EditorFor(m => m.course.CustomUrl, new { htmlAttributes = new { @class = "w-100 form-control", @required="required" } })
                         @*<span class="btn btn-secondary mx-4 px-5" id="inputGroupFileAddon02">確認</span>*@
                     </div>
                     <label id="msg-box" class="fs-5 w-100" data-CourseID="@ViewBag.CourseId"></label>

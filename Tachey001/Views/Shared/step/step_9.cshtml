@@ -214,9 +214,33 @@
     <div class="row my-5 justify-content-center">
         <div class="col-10">
             <div class="row justify-content-center">
-                <button type="button" class="btn btn-outline-secondary btn-lg px-5 w-25 mx-3">
-                    @Html.ActionLink("送出審核", "StepFinish", "Courses", new { CourseId = Model.course.CourseID }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })
-                </button>
+                @if
+                    (
+                    Model.course.Title == null ||
+                    Model.course.Description == null ||
+                    Model.course.CustomUrl == null ||
+                    Model.course.Effect == null ||
+                    Model.course.Tool == null ||
+                    Model.course.TitlePageImageURL == null ||
+                    Model.course.CourseLevel == null ||
+                    Model.course.CoursePerson == null ||
+                    Model.course.Introduction == null ||
+                    Model.course.LecturerIdentity == null ||
+                    Model.courseChapter.Count() == 0||
+                    Model.course.PreviewVideo==null
+                    )
+                {
+                    <button type="button" class="btn btn-secondary btn-lg px-5 w-25 mx-3" disabled>
+                        未填寫完成
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-5 w-25 mx-3">
+                        @Html.ActionLink("送出審核", "StepFinish", "Courses", new { CourseId = Model.course.CourseID }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })
+                    </button>
+                }
+
             </div>
         </div>
     </div>

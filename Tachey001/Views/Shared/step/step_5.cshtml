@@ -37,7 +37,7 @@
 
                         <!-- This container will become the editable. -->
                         @*<textarea name="content" id="editor"></textarea>*@
-                        @Html.TextAreaFor(m=>m.course.Introduction, new { @id = "editor", @class = "border"})
+                        @Html.TextAreaFor(m=>m.course.Introduction, new { htmlAttributes = new { @id = "editor", @class = "border", @required="required" } })
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-secondary btn-lg px-5">
