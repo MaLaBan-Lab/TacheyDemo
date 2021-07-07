@@ -466,7 +466,7 @@ namespace Tachey001.Service
             _tacheyRepository.Create(result);
             _tacheyRepository.SaveChanges();
         }
-        //儲存雲端上傳圖片，並回傳網址
+        //儲存雲端上傳課程封面圖片，並回傳網址
         public string PostFileStorage(string CourseId, HttpPostedFileBase file)
         {
             var _cloudinary = Credientials.Init();
@@ -480,7 +480,7 @@ namespace Tachey001.Service
 
             var CallBackUrl = _cloudinary.Upload(uploadParams).SecureUrl.ToString();
 
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.TitlePageImageURL = CallBackUrl;
             _tacheyRepository.SaveChanges();
 
@@ -556,6 +556,8 @@ namespace Tachey001.Service
         //取得是否擁有課程
         public bool GetOwner(string MemberId, string CourseId)
         {
+            var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
+            if (result.MemberID == MemberId) return true;
             var oID = _tacheyRepository.Get<Order>(x => x.MemberID == MemberId);
             if (oID == null) return false;
             var oD = _tacheyRepository.Get<Order_Detail>(x => x.OrderID == oID.OrderID && x.CourseID == CourseId); ;
