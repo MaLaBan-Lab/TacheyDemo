@@ -39,68 +39,82 @@ namespace Tachey001.Controllers
             _context = new TacheyContext();
         }
 
+        //最新排序(預設)
         [AllowAnonymous]
-        //最新排序
         public ActionResult All(int page = 1)
         {
             var result = _consoleService.GetCardsPageList(page);
-            
+
             return View(result);
         }
 
+        //猜你想學
+        public ActionResult GuessYouLike(int page = 1)
+        {
+            var currentId = User.Identity.GetUserId();
+            ViewBag.UserId = currentId;
+
+            var result = _consoleService.GuessYouLike(currentId, page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        
+
         //熱門排序
+        [AllowAnonymous]
         public ActionResult AllHot(int page = 1)
+        {
+            var result = _consoleService.AllHot(page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+
+        //搜尋
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Search(string search, int page = 1)
+        {
+            var result = _consoleService.Search(search, page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        
+        //最新排序
+        [AllowAnonymous]
+        public ActionResult AllNew(int page = 1)
+        {
+            var result = _consoleService.GetCardsPageList(page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+
+        //最多人數排序
+        [AllowAnonymous]
+        public ActionResult Orderbypn(int page = 1)
         {
             var result = _consoleService.GetCardsHotPageList(page);
 
             return PartialView("PageListCardTemplate", result);
         }
+
+        //最常課時
+        [AllowAnonymous]
+        public ActionResult Orderbyct(int page = 1)
+        {
+            var result = _consoleService.OrderByTotalTimeOfCourse(page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+
+
         //最高評價
+        [AllowAnonymous]
         public ActionResult Orderbycs(int page = 1)
         {
             var result = _consoleService.OrderByCourseScore( page);
 
-            return View(result);
+            return PartialView("PageListCardTemplate", result);
         }
-
-        //搜尋
-
-        [HttpGet]
-        public ActionResult Search(int page = 1)
-        {
-            var result = _consoleService.GetCardsPageList(page);
-
-            return View(result);
-        }
-        [HttpPost]
-        public ActionResult Search(string search, int page = 1)
-        {
-            var result = _consoleService.Search(search, page);
-
-            return View(result);
-        }
-
-
-        ////猜你想學
-        //public ActionResult GuessYouLike(int page = 1)
-        //{
-        //    var currentId = User.Identity.GetUserId();
-        //    ViewBag.UserId = currentId;
-
-        //    var result = _consoleService.GuessYouLike(currentId, page);
-
-        //    return View(result);
-        //}
-        //[HttpPost]
-        //public ActionResult GuessYouLike(int page = 1)
-        //{
-        //    var currentId = User.Identity.GetUserId();
-        //    ViewBag.UserId = currentId;
-
-        //    var result = _consoleService.GuessYouLike(currentId,page);
-
-        //    return View(result);
-        //}
 
 
         [AllowAnonymous]
