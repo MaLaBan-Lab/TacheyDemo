@@ -48,26 +48,17 @@ namespace Tachey001.Controllers
             return View(result);
         }
 
-        ////猜你想學
-        //public ActionResult GuessYouLike(int page = 1)
-        //{
-        //    var currentId = User.Identity.GetUserId();
-        //    ViewBag.UserId = currentId;
+        //猜你想學
+        public ActionResult GuessYouLike(int page = 1)
+        {
+            var currentId = User.Identity.GetUserId();
+            ViewBag.UserId = currentId;
 
-        //    var result = _consoleService.GuessYouLike(currentId, page);
+            var result = _consoleService.GuessYouLike(currentId, page);
 
-        //    return View(result);
-        //}
-        //[HttpPost]
-        //public ActionResult GuessYouLike(int page = 1)
-        //{
-        //    var currentId = User.Identity.GetUserId();
-        //    ViewBag.UserId = currentId;
-
-        //    var result = _consoleService.GuessYouLike(currentId,page);
-
-        //    return View(result);
-        //}
+            return PartialView("PageListCardTemplate", result);
+        }
+        
 
         //熱門排序
         [AllowAnonymous]
@@ -81,14 +72,6 @@ namespace Tachey001.Controllers
         //搜尋
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult Search(int page = 1)
-        {
-            var result = _consoleService.GetCardsPageList(page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-        [AllowAnonymous]
-        [HttpPost]
         public ActionResult Search(string search, int page = 1)
         {
             var result = _consoleService.Search(search, page);

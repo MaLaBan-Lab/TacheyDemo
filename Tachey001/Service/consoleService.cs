@@ -28,6 +28,8 @@ namespace Tachey001.Service
             var coursescore = _tacheyRepository.GetAll<CourseScore>();
             var owner = _tacheyRepository.GetAll<Owner>();
             var od = _tacheyRepository.GetAll<Order_Detail>();
+            var category = _tacheyRepository.GetAll<Models.CourseCategory>();
+            var detail = _tacheyRepository.GetAll<Models.CategoryDetail>();
 
             var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
             {
@@ -63,6 +65,27 @@ namespace Tachey001.Service
                       };
 
             var result = all.ToList();
+
+            foreach (var item in result)
+            {
+                foreach (var ca in category)
+                {
+                    if (item.CategoryID == ca.CategoryID)
+                    {
+                        item.CategoryName = ca.CategoryName;
+                    }
+                }
+
+                foreach (var de in detail)
+                {
+                    if (item.DetailID == de.DetailID)
+                    {
+                        item.DetailName = de.DetailName;
+                    }
+                }
+            }
+
+
 
             foreach (var item in result)
             {
@@ -223,13 +246,14 @@ namespace Tachey001.Service
 
             var ss = search.FirstOrDefault().Split('/');
 
-
+            var last = ss.Reverse().Skip(1);
+            //var last = ss.Last()
 
             var all = GetConsoleData();
-            var result = new List<consoleViewModel>();
+
 
             //result = all.Where(x => x.DetailID == detailid).Select(x => x).ToList();
-            result = all.Where(x => ss.Any(x.DetailName.Contains) || ss.Any(x.CategoryName.Contains)).Select(x => x).ToList();
+            var result = all.Where(x => last.Any(x.DetailName.Contains)).Select(x => x).ToList();
 
 
 
@@ -258,11 +282,11 @@ namespace Tachey001.Service
         //搜尋
         public IPagedList<consoleViewModel> Search(string search, int page)
         {
-            var result = GetConsoleData().Where(x => x.Title.Contains(search));
+            var result = GetConsoleData();
 
 
             int currentPage = page < 1 ? 1 : page;
-            var oresult = result.OrderBy(x => x.CreateDate);
+            var oresult = result.Where(x => x.Title.Contains($"{search}")).OrderBy(x => x.CreateDate);
             var rresult = oresult.ToPagedList(currentPage, pageSize);
 
 
