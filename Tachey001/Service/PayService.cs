@@ -38,11 +38,14 @@ namespace Tachey001.Service.Pay
                 var course = _tacheyRepository.Get<Course>(x => x.CourseID == item.CourseID);
                 var od = new Order_Detail
                 {
-                    OrderID = orderId,CourseID = item.CourseID,UnitPrice=course.OriginalPrice,CourseName= course.Title,BuyMethod="課程售價"
+                    OrderID = orderId,
+                    CourseID = item.CourseID,
+                    UnitPrice=course.OriginalPrice,
+                    CourseName= course.Title,BuyMethod="課程售價"
                 };
                 _tacheyRepository.Create(od);
-                _tacheyRepository.SaveChanges();
             }
+            _tacheyRepository.SaveChanges();
         }
         public IQueryable<DiscountCard> GetDiscountCard(string currentId)
         {

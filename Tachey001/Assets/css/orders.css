@@ -19,21 +19,23 @@ body {
     color:white;
 }
 .change-btn {
-    background-color: #170633;
+    background-color: #7250a8;
     /*color: #777;*/
-    border: 1px solid #ddd
+    border: 1px solid #0d0d0d;
+    /*background: linear-gradient( 15deg, rgb(95 38 171) 0%, rgb(223 124 241 / 87%) 100%);*/
+    border-radius: 21px;
 }
-
     .change-btn:hover {
         color: #FFEB00;
         border: 1px solid #FFEB00;
     }
 
 .text-black-20 {
-  color: #ccc;
+    color: #ccc;
+    background: linear-gradient( 40deg, rgb(86 86 192) 0%, rgb(119 79 165) 100%);
+    border-radius: 21px;
 }
-
-.btn-tape{
+    .btn-tape{
   left: 0;
   top: 0;
   width: 100%;

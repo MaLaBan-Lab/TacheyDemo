@@ -44,7 +44,7 @@
                                     </a>
                                 </div>
                                 <div class="upload-btn">
-                                    <input accept=".jpg,.png" id="photo_file" type="file" class="update-behind-btn" @*onchange="uploadTheme(this)"*@>
+                                    <input id="photo_file" type="file" class="update-behind-btn" onchange="uploadTheme(this)">
                                     <div class="click-container">
                                         <button class="cancel-btn-photo" height="50px" width="50px">
                                             <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
@@ -174,13 +174,13 @@
                             <!--彈跳視窗-->
 
                         </div>
-                        <div class="course">
+                        <div class="course c-w">
                             <div><span class="txt-small">已參加</span><span class="hightlight">@(ViewBag.takeCourseCount) 堂課</span></div>
                             <div><span class="txt-small">已開設</span><span class="hightlight">@(ViewBag.giveCourseCount) 堂課</span></div>
                         </div>
 
                         <!-- 關於我 -->
-                        <div class="user-info-edit pad-rl-30 mt-3">
+                        <div class="user-info-edit pad-rl-30 mt-3 c-w">
                             @using (Html.BeginForm("ProfileAbout", "Member", FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
@@ -322,7 +322,10 @@
         </div>
 
         <!-- 右邊資訊填寫 -->
-        <div class="col-xl-9 " style="color:#f1f1f1">
+        <div class="col-xl-9 " style="    color: #f1f1f1;
+        background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(91 158 190) 100%);
+        
+    ">
             <!-- 個人頁面 -->
             <section class="marg-b-30">
                 <div class="personal-page pad-rl-0">
@@ -382,8 +385,8 @@
 
             <!-- 我開的課 -->
             <div class="marg-b-30">
-                <div class="course-overview underline">
-                    <h4>我開的課</h4><span class="spacer"></span>@*<input type="checkbox" checked="">公開我開的課*@
+                <div class="course-overview underline text-white">
+                    <h4>我開的課</h4><span class="spacer"></span><input type="checkbox" checked="">公開我開的課
                 </div>
                 <!-- 課程卡 -->
                 <div class="course-card">

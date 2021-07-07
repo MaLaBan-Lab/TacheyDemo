@@ -191,6 +191,7 @@ namespace Tachey001.Controllers
             var allScore = _courseService.GetAllScore(CourseId);
             var allQuestion = _courseService.GetAllQuestions(MemberId, CourseId);
             var isown = _courseService.GetOwner(MemberId, CourseId);
+            var isCarted = _courseService.GetCarted(MemberId, CourseId);
             var CourseScore = new CourseScore();
             var Question = new Question();
 
@@ -204,6 +205,8 @@ namespace Tachey001.Controllers
             ViewBag.Id = id;
             ViewBag.YnN = YnN;
             ViewBag.MemberId = MemberId;
+            ViewBag.UserId = MemberId;
+            ViewBag.CourseId = CourseId;
 
             var result = new MainGroup()
             {
@@ -212,7 +215,8 @@ namespace Tachey001.Controllers
                 GetQuestions = allQuestion,
                 PostCourseScore = CourseScore,
                 PostCourseQuestion = Question,
-                GetOwner = isown
+                GetOwner = isown,
+                GetCarted = isCarted
             };
 
             return View(result);

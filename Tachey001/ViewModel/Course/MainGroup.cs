@@ -14,5 +14,6 @@ namespace Tachey001.ViewModel.Course
         public Question PostCourseQuestion { get; set; }
         public List<QuestionCard> GetQuestions { get; set; }
         public bool GetOwner { get; set; }
+        public bool GetCarted { get; set; }
     }
 }

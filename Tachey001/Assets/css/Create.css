@@ -31,12 +31,13 @@ body {
     color:black;
 }
 .btn-pur {
-    background-color: #B69AC2;
+    background-color: #dacab4;
+    ;
     border-color: #6e6b6b;
 }
     .btn-pur:hover {
-       background-color: #244A8C;
-       color:white;
+        background-color: #8977b2;
+        color: white;
     }
 .btn-pink {
     background-color: #F38BA4;
@@ -46,7 +47,10 @@ body {
         background-color: #0F4196;
         border-color: #e4fbff;
     }
-
+    .t-black{
+        color:black !important;
+    }
+    
 
 
 

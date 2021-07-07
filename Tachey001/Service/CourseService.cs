@@ -271,7 +271,7 @@ namespace Tachey001.Service
         //取得當前課程評價
         public List<ScoreCard> GetAllScore(string CourseId)
         {
-            var score = _tacheyRepository.GetAll<CourseScore>(x=>x.CourseID == CourseId);
+            var score = _tacheyRepository.GetAll<CourseScore>(x => x.CourseID == CourseId);
             var member = _tacheyRepository.GetAll<Models.Member>();
 
             var result = from s in score
@@ -560,6 +560,13 @@ namespace Tachey001.Service
             if (oID == null) return false;
             var oD = _tacheyRepository.Get<Order_Detail>(x => x.OrderID == oID.OrderID && x.CourseID == CourseId); ;
             return oD == null ? false : true;
+        }
+        //取得是否加入購物車
+        public bool GetCarted(string MemberId, string CourseId)
+        {
+            var ToF = _tacheyRepository.Get<ShoppingCart>(x => x.MemberID == MemberId && x.CourseID == CourseId);
+           
+            return ToF == null ? false : true;
         }
     }
 }
