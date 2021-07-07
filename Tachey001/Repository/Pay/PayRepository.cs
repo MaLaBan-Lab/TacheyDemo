@@ -53,5 +53,11 @@ namespace Tachey001.Repository.Pay
 
             return result;
         }
+        public IQueryable<Point> GetAllPoint()
+        {
+            var result = _context.Point;
+
+            return result;
+        }
     }
 }

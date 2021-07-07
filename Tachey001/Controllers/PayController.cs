@@ -26,7 +26,7 @@ namespace Tachey001.Controllers
             _checkoutService = new CheckoutService();
         }
         // GET: Pay
-        public ActionResult check(string ticketId = null)
+        public ActionResult check(string ticketId = null,string usepoint = null)
         {
           //  onclick = "location.href='@Url.Action("Orders", "Member",new { type=1})
             var currentId = User.Identity.GetUserId();
@@ -42,19 +42,25 @@ namespace Tachey001.Controllers
             else
                 ViewBag.discount = 1;
 
+            ViewBag.usePoint = usepoint; 
+            ViewBag.totalPoint =  _payService.GetOwnerPoint(currentId);
+
             return View(paygroup);
         }
-        public ActionResult create(string ticketId)
+        public ActionResult create(string ticketId ,string usepoint)
         {
             var currentId = User.Identity.GetUserId();
             var orderID = "Tachey" + new Random().Next(0, 99999).ToString();
             if (ticketId != null)
-                _payService.CreateOrder(orderID,currentId,"信用卡",ticketId);
+                _payService.CreateOrder(orderID, currentId, "信用卡", ticketId, null);
+            else if (usepoint == "use")
+                _payService.CreateOrder(orderID, currentId, "信用卡", "0", usepoint);
             else
-                _payService.CreateOrder(orderID, currentId, "信用卡", "0");
+                _payService.CreateOrder(orderID, currentId, "信用卡", "0", null);
 
             _payService.CreateOrder_Detail(orderID, currentId);
             Session["ID"] = orderID;
+            //var test = usepoint;
             return Redirect("~/AioCheckOut.aspx");
             //return View();
         }
