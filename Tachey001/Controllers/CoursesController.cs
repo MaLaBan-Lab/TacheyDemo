@@ -49,6 +49,7 @@ namespace Tachey001.Controllers
         }
 
         //猜你想學
+        [AllowAnonymous]
         public ActionResult GuessYouLike(int page = 1)
         {
             var currentId = User.Identity.GetUserId();
@@ -78,7 +79,16 @@ namespace Tachey001.Controllers
 
             return PartialView("PageListCardTemplate", result);
         }
-        
+
+        //首頁搜尋
+        [AllowAnonymous]
+        public ActionResult SearchPage(FormCollection form, int page = 1)
+        {
+            var result = _consoleService.Search(form["sitesearch"], page);
+
+            return View("All", result);
+        }
+
         //最新排序
         [AllowAnonymous]
         public ActionResult AllNew(int page = 1)

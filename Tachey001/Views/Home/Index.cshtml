@@ -14,10 +14,10 @@
                     最有趣的<span class="search-half">線上課程平台</span><br>
                     學那些學校不會教的事
                 </h1>
-                @using (Html.BeginForm("Search", "Courses", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 d-flex search-form" }))
+                @using (Html.BeginForm("SearchPage", "Courses", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 d-flex search-form" }))
                 {
                     <input class="bg-gray border-0 m-0 search-input" type="search" placeholder="今天想學習什麼?"
-                           aria-label="Search" id="site-search">
+                           aria-label="Search" id="site-search" name="sitesearch">
                     <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
                 }
                 @*<form class="form-inline my-2 my-lg-0 d-flex search-form">
@@ -384,5 +384,4 @@
 
 @section endJS{
     @Scripts.Render("~/Assets/js/Owner.js")
-    @*@Scripts.Render("~/Assets/js/HomeIndex.js")*@
 }
