@@ -191,9 +191,9 @@ textarea {
 .pad-tb-20 {
 	padding-top: 20px;
 	padding-bottom: 20px;
+	background: linear-gradient( 5deg, rgb(158 147 182) 0%, rgb(168 195 233) 100%);
 }
-
-.marg-t-10 {
+	.marg-t-10 {
 	margin-top: 10px;
 }
 
@@ -268,7 +268,7 @@ textarea {
 	border-radius: 3px;
 	border: none;
 	text-align: center;
-	background-color: rgb(255 255 255 / 86%);
+	/*background-color: rgb(255 255 255 / 86%);*/
 	box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
 	overflow: auto;
 }
@@ -360,8 +360,7 @@ h1 {
 	align-items: center;
 	-webkit-box-pack: justify;
 	justify-content: space-between;
-	background-color: rgb(255, 249, 225);
-	padding: 30px 50px;
+	background-color: rgb(65 147 192);
 	font-size: 14px;
 }
 
@@ -392,7 +391,7 @@ h1 {
 	.info-state .status {
 		margin-right: 5px;
 		text-decoration: underline;
-		color: rgb(250, 139, 0);
+		color: rgb(255 206 204);
 		cursor: pointer;
 	}
 
@@ -440,6 +439,7 @@ h1 {
 .sign-in {
 	padding: 40px 50px;
 	margin-top: 30px;
+	background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(91 158 190) 100%);
 }
 
 	.sign-in .email-form button {
@@ -455,7 +455,7 @@ h1 {
 .signin-way-block {
 	width: 100%;
 	display: block;
-	background-color: #dedce2;
+	/*background-color: #dedce2;*/
 }
 
 	.signin-way-block .local-bar,
@@ -520,7 +520,7 @@ h1 {
 
 .link-gray {
 	cursor: pointer;
-	color: rgb(101, 101, 101);
+	color: rgb(67 63 63);
 }
 
 .text-underline {
@@ -538,8 +538,8 @@ h1 {
 	white-space: nowrap;
 	user-select: none;
 	font-weight: 400;
-	background-color: rgb(250, 139, 0);
-	color: white;
+	background-color: rgb(234 219 112);
+	color: #472c2c;
 	padding: 5px 32px;
 	font-size: 16px;
 	border-radius: 3px;
@@ -585,7 +585,12 @@ h1 {
 .info-block {
 	padding: 40px 50px;
 	margin-top: 30px;
+	background: linear-gradient( 338deg, rgb(147 117 235) 0%, rgb(177 144 246) 100%);
 }
+
+}
+
+
 
 	.info-block .hint {
 		color: rgba(0, 0, 0, 0.43);
@@ -759,8 +764,8 @@ h1 {
 	white-space: nowrap;
 	user-select: none;
 	font-weight: 400;
-	background-color: rgb(250, 139, 0);
-	color: white;
+	background-color: rgb(234 219 112);
+	color: #472c2c;
 	padding: 5px 32px;
 	font-size: 16px;
 	border-radius: 3px;
@@ -773,6 +778,7 @@ h1 {
 	padding: 40px 50px 20px;
 	margin-top: 30px;
 	overflow: unset;
+	background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(205 169 255) 100%);
 }
 
 	.reg-lang-block label {
@@ -933,17 +939,22 @@ button,
 .link-primary {
 	cursor: pointer;
 	color: rgb(250, 139, 0);
+	
 }
 
 /* 興趣與喜好 */
 .likes-area {
 	padding: 40px 50px 20px;
 	margin-top: 30px;
+	background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(205 169 255) 100%);
+}
+
 }
 
 	.likes-area .hint {
 		font-size: 14px;
 		color: rgba(0, 0, 0, 0.43);
+		background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(205 169 255) 100%);
 	}
 
 /* 轉移課程 */
@@ -951,6 +962,9 @@ button,
 	padding: 40px 50px;
 	margin-top: 30px;
 	margin-bottom: 100px;
+	background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(205 169 255) 100%);
+}
+
 }
 
 /* 彈跳視窗-我的興趣 */
