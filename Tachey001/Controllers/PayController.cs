@@ -79,7 +79,6 @@ namespace Tachey001.Controllers
             {
                 var temp = _context.ShoppingCart.Find(currentId, item.CourseID);
                 _context.ShoppingCart.Remove(temp);
-
             }
             _context.SaveChanges();
             return RedirectToAction("Orders", "Member");
