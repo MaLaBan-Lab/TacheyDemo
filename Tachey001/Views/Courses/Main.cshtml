@@ -42,7 +42,7 @@
             <div class="menu_wrap col-12 col-sm-12 col-lg-4">
                 <div class="title col-12">
                     <div class="col-10 p-0">
-                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元，共 2230 分鐘</p>
+                        <p>@Model.Main_Video.courseChapters.Count() 個章節，@Model.Main_Video.courseUnits.Count() 段單元，共 @Model.Main_Video.Course.TotalMinTime 分鐘</p>
                         <div>
                             <span>當前單元</span>
                             <a href="@Model.Main_Video.Course.PreviewVideo" target="VideoIframe">
@@ -185,7 +185,7 @@
             <div class="inline-block">
                 <div class="item">
                     <i class="far fa-clock fa-4x"></i>
-                    <p>2,230 分鐘</p>
+                    <p>@Model.Main_Video.Course.TotalMinTime 分鐘</p>
                 </div>
                 <div class="item">
                     <i class="far fa-file-alt fa-4x"></i>
@@ -205,13 +205,36 @@
                 <span class="text-white">心動嗎~</span>
             </div>
             <div class="btn_wrap">
-                @if (Model.GetOwner)
+                @if (Model.Main_Video.Course.MemberID != User.Identity.GetUserId())
                 {
-                    <button class="btn btn-outline-hahow" disabled>已購買</button>
-                }
-                else
-                {
-                    <button class="btn btn-outline-hahow">馬上購買</button>
+                    if (Model.GetOwner)
+                    {
+                        <button class="btn btn-outline-hahow" disabled>已購買</button>
+                    }
+                    else
+                    {
+                        if (Request.IsAuthenticated)
+                        {
+                            if (!Model.GetCarted)
+                            {
+                                <button class="btn btn-outline-hahow">
+                                    <a href="@Url.Action("AddCartOnly", "Member", new { MemberId = ViewBag.MemberId, CourseId = ViewBag.CourseId })" class="btn-outline-hahow border-0 w-100 h-100 text-decoration-none">加入購物車</a>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-hahow">
+                                    <a href="@Url.Action("Cart", "Member")" class="btn-outline-hahow border-0 w-100 h-100 text-decoration-none">已加入購物車，前往付款</a>
+                                </button>
+                            }
+                        }
+                        else
+                        {
+                            <button class="btn btn-outline-hahow">
+                                <a href="@Url.Action("Login", "Account", new { returnUrl = Request.RawUrl})" class="btn-outline-hahow border-0 w-100 h-100 text-decoration-none">登入後，加入購物車</a>
+                            </button>
+                        }
+                    }
                 }
             </div>
         </div>
@@ -263,7 +286,7 @@
 
         @if (ViewBag.Id == 4)
         {
-            <div class="seletor-item seletor-ckecked" id="assignments">
+            @*<div class="seletor-item seletor-ckecked" id="assignments">
                 <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
             </div>
         }
@@ -271,7 +294,7 @@
         {
             <div class="seletor-item" id="assignments">
                 <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
-            </div>
+            </div>*@
         }
 
 
@@ -284,21 +307,21 @@
     <!--課程介紹-->
     <!-- content -->
     <div>
-        <div class="container position-relative">
-            <div class="row book-mark-box">
-                <div class="col-12 my-4 book-mark px-5">
-                    <div class="text-center">
-                        <button type="button"
-                                class="btn btn-outline-hahow w-100 my-4 py-3 px-5">
-                            <div class="text-scale-12">
-                                <i class="fas fa-bookmark mr-1"></i>
-                                加入收藏
-                            </div>
-                        </button>
+        @*<div class="container position-relative">
+                <div class="row book-mark-box">
+                    <div class="col-12 my-4 book-mark px-5">
+                        <div class="text-center">
+                            <button type="button"
+                                    class="btn btn-outline-hahow w-100 my-4 py-3 px-5">
+                                <div class="text-scale-12">
+                                    <i class="fas fa-bookmark mr-1"></i>
+                                    加入收藏
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>*@
 
         <div class="container">
             <div class="row">
@@ -500,21 +523,33 @@ else if (ViewBag.Id == 2)
                     <!-- Button trigger modal -->
                     @if (Request.IsAuthenticated)
                     {
-                        if (ViewBag.YnN)
+                        if (Model.GetOwner)
                         {
-                            <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" data-toggle="modal" data-target="#exampleModal">
-                                <div class="text-scale-12">
-                                    <i class="far fa-star"></i>
-                                    課程評價
-                                </div>
-                            </button>
+                            if (ViewBag.YnN)
+                            {
+                                <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" data-toggle="modal" data-target="#exampleModal">
+                                    <div class="text-scale-12">
+                                        <i class="far fa-star"></i>
+                                        課程評價
+                                    </div>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" disabled>
+                                    <div class="text-scale-12">
+                                        <i class="far fa-star"></i>
+                                        已評價過
+                                    </div>
+                                </button>
+                            }
                         }
                         else
                         {
                             <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" disabled>
                                 <div class="text-scale-12">
                                     <i class="far fa-star"></i>
-                                    已評價過
+                                    購買完才能評價
                                 </div>
                             </button>
                         }
@@ -548,11 +583,78 @@ else if (ViewBag.Id == 2)
                         </div>
                         <div class="modal-body text-black">
                             <h3>分數</h3>
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1") 1分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2") 2分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3") 3分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "4") 4分
-                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "5") 5分
+                            <span class="star-show position-relative">
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1", new { htmlAttributes = new { @id = "star1", @class = "invisible position-absolute", @required="required" } })
+                                <label class="" for="star1">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2", new { @id = "star2", @class = "invisible position-absolute" })
+                                <label class="" for="star2">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3", new { @id = "star3", @class = "invisible position-absolute" })
+                                <label class="" for="star3">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "4", new { @id = "star4", @class = "invisible position-absolute" })
+                                <label class="" for="star4">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "5", new { @id = "star5", @class = "invisible position-absolute" })
+                                <label class="" for="star5">
+                                    <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                    </i>
+                                </label>
+                            </span>
                             <h3>標題</h3>
                             @Html.TextBoxFor(m => m.PostCourseScore.Title, null, new { @class = "w-100" })
                             <h3>內容</h3>
@@ -575,57 +677,83 @@ else if (ViewBag.Id == 2)
             <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div>
-                        <h4 class="mr-4 text-50">5.0</h4>
+                        @if (Model.GetCourseScore.Average(x => x.Score) == null)
+                        {
+                            <h4 class="mr-4 text-50">0</h4>
+                        }
+                        else
+                        {
+                            <h4 class="mr-4 text-50">@Math.Ceiling(@Convert.ToDouble(Model.GetCourseScore.Average(x => x.Score)))</h4>
+                        }
                     </div>
                     <div class="score-box text-20 pt-3">
                         <span class="star-show">
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 0)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 1)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 2)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 3)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
+
                             </i>
                             <i class="fas fa-star star-gray position-relative">
-                                <i class="
-                      fas
-                      fa-star
-                      star-yellow
-                      position-absolute
-                      star-display
-                    "></i>
+                                @if (Model.GetCourseScore.Average(x => x.Score) > 4)
+                                {
+                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                }
                             </i>
                         </span>
-                        <p class="text-black-50"><span>4</span>則評價</p>
+                        <p class="text-white"><span>@Model.GetCourseScore.Count()</span>則評價</p>
                     </div>
                 </div>
             </div>

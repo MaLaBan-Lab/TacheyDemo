@@ -9,6 +9,7 @@ using Tachey001.ViewModel;
 using System.Collections;
 using Tachey001.ViewModel.Member;
 using Tachey001.Repository;
+using Tachey001.ViewModel.ApiViewModel;
 
 namespace Tachey001.Controllers
 {
@@ -593,6 +594,13 @@ namespace Tachey001.Controllers
             return RedirectToAction("Cart", "Member");
         }
         //加入購物車
+        public ActionResult AddCartOnly(string MemberId, string CourseID)
+        {
+            _memberService.CreateCart(MemberId, CourseID);
+
+            return RedirectToAction("Cart", "Member");
+        }
+        //加入購物車
         public ActionResult AddCart(string MemberId, string CourseID)
         {
             _memberService.CreateCart(MemberId, CourseID);
@@ -615,6 +623,23 @@ namespace Tachey001.Controllers
             _memberService.DeleteCurrentIdRowCart(CourseId, MemberId);
 
             return RedirectToAction("Cart", "Member");
+        }
+        //會員頭像上傳
+        [HttpPost]
+        public JsonResult MemberPhotoUpload()
+        {
+            try
+            {
+                var MemberId = User.Identity.GetUserId();
+                var ReturnUrl = _memberService.PostFileStorage(MemberId, Request.Files[0]);
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
         }
     }
 }

@@ -39,7 +39,8 @@ namespace Tachey001.Service
             var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
             {
                 id = z.Key,
-                score = z.Average(x => x.Score)
+                score = z.Average(x => x.Score),
+                total = z.Count()
             });
 
             var all = from c in course
@@ -47,6 +48,7 @@ namespace Tachey001.Service
                          select new CourseCardViewModel
                          {
                              CourseID = c.CourseID,
+                             MemberID = c.MemberID,
                              Photo = m.Photo,
                              Title = c.Title,
                              TotalMinTime = c.TotalMinTime,
@@ -65,6 +67,7 @@ namespace Tachey001.Service
                     if (item.CourseID == score.id)
                     {
                         item.AvgScore = Convert.ToInt32(score.score);
+                        item.TotalScore = score.total;
                     }
                 }
             }

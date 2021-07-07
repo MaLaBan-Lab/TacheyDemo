@@ -37,7 +37,7 @@ $(function () {
                             <img src="${item.TitlePageImageURL}" class="mr-3" style="width:130px; height:70px">
                             <div class="media-body d-flex flex-column justify-content-between overflow-hidden" style="width:300px; height:70px">
                                 <div class="m-0">${item.Title}</div>
-                                <div class="m-0 d-flex justify-content-between"><span>已開課</span><span class="text-right">NT$${item.OriginalPrice}</span></div>
+                                <div class="m-0 d-flex justify-content-between"><span>已開課</span><span class="text-right">NT$${toCurrency(item.OriginalPrice)}</span></div>
                             </div>
                         </div>
                     </a>

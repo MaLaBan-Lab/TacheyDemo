@@ -16,15 +16,18 @@ namespace Tachey001.Service.Pay
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
-        public void CreateOrder(string orderId ,string currentId,string payMethod,string ticketId)
+        public void CreateOrder(string orderId, string currentId, string payMethod, string ticketId, string usepoint)
         {
             DateTime localDate = DateTime.Now;
             var order_new = new Models.Order
             {
-                OrderID = orderId, TicketID = ticketId,
+                OrderID = orderId,
+                UsePoint = usepoint,
+                TicketID = ticketId,
                 MemberID = currentId,
-                OrderStatus = "wait",OrderDate = localDate,
-                PayMethod= payMethod,
+                OrderStatus = "wait",
+                OrderDate = localDate,
+                PayMethod = payMethod,
                 PayDate = null
             };
             _tacheyRepository.Create(order_new);
@@ -38,11 +41,14 @@ namespace Tachey001.Service.Pay
                 var course = _tacheyRepository.Get<Course>(x => x.CourseID == item.CourseID);
                 var od = new Order_Detail
                 {
-                    OrderID = orderId,CourseID = item.CourseID,UnitPrice=course.OriginalPrice,CourseName= course.Title,BuyMethod="課程售價"
+                    OrderID = orderId,
+                    CourseID = item.CourseID,
+                    UnitPrice=course.OriginalPrice,
+                    CourseName= course.Title,BuyMethod="課程售價"
                 };
                 _tacheyRepository.Create(od);
-                _tacheyRepository.SaveChanges();
             }
+            _tacheyRepository.SaveChanges();
         }
         public IQueryable<DiscountCard> GetDiscountCard(string currentId)
         {
@@ -83,6 +89,17 @@ namespace Tachey001.Service.Pay
             var result = ticket.Discount;
 
             return result;
+        }
+        public int GetOwnerPoint(string currentId)
+        {
+            var point = _tacheyRepository.GetAll<Point>(x => x.MemberID == currentId);
+            var totalPoint = 0;
+            foreach (var item in point)
+            {
+                totalPoint = item.PointNum + totalPoint;
+            }
+
+            return totalPoint;
         }
     }
 }

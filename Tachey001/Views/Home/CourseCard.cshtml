@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
+<h2 class="text-white">雲端資料:</h2>
+@foreach (var item in ViewBag.List)
+{
+    <h2 class="text-white">@item.FileName @item.Url</h2>
+}
+
 <h2>Index</h2>
 
 @using (Html.BeginForm("CourseCard", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -23,4 +29,5 @@
         </div>
     </div>
 }
+
 

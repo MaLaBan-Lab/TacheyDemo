@@ -25,12 +25,12 @@
     }
     @if (AToF)
     {
-    <i class="fas fa-heart text-danger ALike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID" data-AnswerID="@Model.AnswerID"></i>
+    <i class="fas fa-heart text-danger ALike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.MemberId" data-QuestionID="@Model.QuestionID" data-AnswerID="@Model.AnswerID"></i>
 
     }
     else
     {
-    <i class="far fa-heart text-white ALike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.UserId" data-QuestionID="@Model.QuestionID" data-AnswerID="@Model.AnswerID"></i>
+    <i class="far fa-heart text-white ALike" data-CourseId=@Model.CourseID data-MemberId="@ViewBag.MemberId" data-QuestionID="@Model.QuestionID" data-AnswerID="@Model.AnswerID"></i>
     }
 
 </button><span class="">@Model.AllMemberId.Count()</span>

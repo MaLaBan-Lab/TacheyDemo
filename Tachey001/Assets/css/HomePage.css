@@ -47,7 +47,7 @@ body {
 
 .search-input {
     height: 40px;
-    width: 85%;
+    /*width: 85%;*/
     position: relative;
     outline-style: none;
     border: 1px solid #ccc;
@@ -62,6 +62,7 @@ body {
     height: 40px;
     width: 15%;
     border-radius: 166px;
+ 
 }
 
 .search-3 {
@@ -81,12 +82,16 @@ body {
     white-space: nowrap;
 }
 
-    #ug-pic {
-        display: block;
-        width: 35%;
-        padding:0px;
+    .search-a:hover {
+       
+        color: #bdb15e;
         
     }
+#ug-pic {
+    display: block;
+    width: 35%;
+    padding: 0px;
+}
 
     .search-right {
         position: relative;
@@ -148,6 +153,9 @@ body {
     display:flex;
     justify-content:center;
 }
+.advertising-textt {
+    font-size: 20px;
+}
 .advertising-text {
     font-size: 34px;
     background-color: #11082F;
@@ -202,7 +210,7 @@ body {
 .style-t {
     width: 71%;
     margin-top: 7rem;
-    margin-left: 12rem;
+    margin-left: 9rem;
     position: absolute;
     display: block;
     position: absolute;
@@ -279,12 +287,12 @@ body {
     color: #FCDE0A;
 }
 
-    .comment {
-        font-size: 14px;
-        height: 300px;
-        /*background-color: white;*/
-        position: relative;
-    }
+.comment {
+    font-size: 14px;
+    height: 345px;
+    background-color: #423a51;
+    position: relative;
+}
 
     #student-say {
         /*background-color: #e6eff0;*/
@@ -314,14 +322,13 @@ body {
     }
 
 
-    .comment-a {
-
-        position: absolute;
-        bottom: 5px;
-        right: 50px;
-        text-decoration: none;
-        color: #00bea4;
-    }
+.comment-a {
+    position: absolute;
+    right: 54px;
+    top: 316px;
+    text-decoration: none;
+    color: #00bea4;
+}
 
 /* 好學生評論 */
 /* 貓頭鷹 */
@@ -366,20 +373,21 @@ body {
     /* 字卡 */
 
 
-    .card-txt {
-        padding: 14px 20px;
-        width: 80%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        color:black;
-        visibility: hidden;
-        background-color: white;
-        z-index: 2;
-        font-size: 14px;
-        border: 3px solid rgb(243, 243, 241);
-        border-radius: 12px;
-    }
+.card-txt {
+    padding: 14px 20px;
+    width: 80%;
+    height: 422px;
+    position: absolute;
+    top: 16px;
+    color: black;
+    visibility: hidden;
+    background-color: white;
+    z-index: 2;
+    font-size: 14px;
+    border: 3px solid rgb(243, 243, 241);
+    border-radius: 12px;
+    border-style: groove;
+}
     .card-1{
         right:-82%
     }
@@ -406,15 +414,17 @@ body {
         color: #00bea4;
     }
 
-    .item:hover .card-txt {
-        visibility: visible;
-    }
+.item:hover .card-txt {
+    visibility: visible;
+    box-shadow: 12px 8px 6px rgb(90 57 57 / 70%);
+}
 
 
 
-    .card-txt:hover {
-        visibility: visible;
-    }
+.card-txt:hover {
+    visibility: visible;
+   /* box-shadow: 12px 8px 6px rgb(90 57 57 / 70%);*/
+}
 
     /* 字卡 */
     /* 哥哥卡片 */
@@ -546,7 +556,15 @@ body {
             max-width: 62%;
             padding: 0;
         }
-       
+        .search-form {
+            width: 480px;
+        }
+        .search-input {
+            width: 318px;
+        }
+        .search-btn {
+            margin-left: .3rem;
+        }
     }
 
     @media screen and (max-width:992px) {
@@ -554,6 +572,30 @@ body {
         .display-n {
             display: none;
         }
+        .pic-size {
+            height: 80px;
+            margin-top: 10px;
+            padding-left: 10px !important;
+        }
+        .pa-10 {
+         padding-left: 10px !important;
+        }
+        .advertising-text {
+            background-color: #233e81;
+        }
+        .comment {
+            height: 263px;
+        }
+        .search-input {
+            width: 372px;
+        }
+        .search-btn {
+            width: 55px;
+            margin-left: 1rem;
+        }
+
+
+
         /* 頁尾 */
         .footer-block {
             order: 2;
@@ -609,7 +651,7 @@ body {
         /* 延伸閱讀 */
 .reading-8 {
     max-width: 100%;
-    background-color: #423a51;
+/*    background-color: #423a51;*/
  
 }
 
@@ -624,7 +666,7 @@ body {
         /* 第一塊輪盤 */
         /* 好學生評論 */
         .comment {
-            height: 100%;
+            /*height: 100%;*/
         }
 
 

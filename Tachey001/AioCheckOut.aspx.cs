@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Tachey001.Models;
-
+using Tachey001.Service.Pay;
 
 namespace text
 {
@@ -14,6 +14,7 @@ namespace text
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            PayService _payService = new PayService();
             string product_name = "";
             decimal product_price = 0.0m;
             string product_id = Session["ID"].ToString();
@@ -26,13 +27,6 @@ namespace text
                               select p;
                 var count = product.Count();
                 var order = _context.Order.Where(x => x.OrderID == product_id).First();
-                if (order.TicketID != "0")
-                {
-                    var ticket = _context.Ticket.Where(x => x.TicketID == order.TicketID).First();
-                    discount = (decimal)ticket.Discount;
-                }
-                else
-                    discount = 1;
                 
                 
 
@@ -54,6 +48,20 @@ namespace text
 
                 }
                 product_name =  $"{count}個課程總共:";
+
+                if (order.TicketID != "0")
+                {
+                    var ticket = _context.Ticket.Where(x => x.TicketID == order.TicketID).First();
+                    discount = (decimal)ticket.Discount;
+                }
+                else if (order.UsePoint == "use")
+                {
+                    discount = 1;
+                    var totalpoint = _payService.GetOwnerPoint(order.MemberID) / 100;
+                    product_price = product_price - totalpoint;
+                }
+                else
+                    discount = 1;
 
 
             }

@@ -48,28 +48,31 @@
                         上課囉
                     </div>
                 </a>
-                @if (Request.IsAuthenticated)
+                @if (Model.MemberID != User.Identity.GetUserId())
                 {
-                    if (Model.favorite)
+                    if (Request.IsAuthenticated)
                     {
-                        <div class="ToastBtn backgroundBookmark backgroundBookmarkChecked position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
-                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                        </div>
+                        if (Model.favorite)
+                        {
+                            <div class="ToastBtn backgroundBookmark backgroundBookmarkChecked position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                                <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="ToastBtn backgroundBookmark backgroundBookmarkMove position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                                <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                            </div>
+                        }
                     }
                     else
                     {
-                        <div class="ToastBtn backgroundBookmark backgroundBookmarkMove position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
-                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                        </div>
+                        <a href="@Url.Action("Login", "Account")" class="text-decoration-none p-0 w-100 h-100">
+                            <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                                <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                            </div>
+                        </a>
                     }
-                }
-                else
-                {
-                    <a href="@Url.Action("Login", "Account")" class="text-decoration-none p-0 w-100 h-100">
-                        <div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
-                            <i class="far fa-bookmark hahow-orange line-height-40"></i>
-                        </div>
-                    </a>
                 }
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 text-justify cardTitle">
