@@ -15,7 +15,7 @@
                                 class="form-control"
                                 id="basic-url"
                                 aria-describedby="basic-addon3" />*@
-                            @Html.EditorFor(m => m.course.OriginalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.course.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "100" } })
                         </div>
                     </div>
                     <div class="col-12 mb-4">
@@ -25,7 +25,7 @@
                                 class="form-control"
                                 id="basic-url"
                                 aria-describedby="basic-addon3" />*@
-                            @Html.EditorFor(m => m.course.PreOrderPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.course.PreOrderPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "50" } })
                         </div>
                     </div>
                     <div class="col-12 mb-4">
@@ -34,7 +34,7 @@
                     <div class="col-12 mb-4">
                         <label for="basic-url">預計課程長度（以分鐘計算，最短 20 分鐘）</label>
                         <div class="input-group mb-2">
-                            @Html.EditorFor(m => m.course.TotalMinTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.course.TotalMinTime, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "20" } })
                         </div>
                     </div>
                 </div>
