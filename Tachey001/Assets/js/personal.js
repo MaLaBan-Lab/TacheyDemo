@@ -110,25 +110,48 @@ function uploadTheme(e) {
     if (!file) {
         return;
     }
+    var data = new FormData();
+    data.append("Photo", file);
 
-    //檔案上傳
-    //...
-    //檔案上傳
+    $.ajax({
 
-    //上傳後將檔案清除
+        type: "Post",
+        url: "/Member/MemberPhotoUpload",
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            alert("上傳網址 : " + response.ErrMsg);
+        }
+    })
+
+    //上傳後將檔案清除 更新頭像
+    readURL(e)
     e.value = '';
+}
+
+//更新圖片
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(".user-img").attr('src', e.target.result);
+            $("#user-logo").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 // 頭貼上傳按鈕
 $(".click-container").on('click', function () {
     // 具備不具備上傳功能
-    console.log($(".cancel-btn-photo").children());
+    //console.log($(".cancel-btn-photo").children());
     if ($(".cancel-btn-photo").children().hasClass("fa-cloud-upload-alt")) {
         photo_file.click();
         $(".user-img").attr("src", "/Assets/img/吉祥物.jpg"); // 使用者上傳圖片
     }
     else {
-        $(".user-img").attr("src", "/Assets/img/photo.jpg"); // 預設圖片
+        $(".user-img").attr("src", "/Assets/img/photo.png"); // 預設圖片
     }
     $(".cancel-btn-photo").children().toggleClass("fas fa-cloud-upload-alt fas fa-times");
 });

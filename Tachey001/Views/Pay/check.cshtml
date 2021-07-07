@@ -4,9 +4,16 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+
+
+    if (ViewBag.usePoint != null)
+    {
+        ViewBag.totalPrice = ViewBag.totalPrice - ViewBag.totalPoint/100;
+    }
+
     var ticketId = ViewBag.ticketID;
     var totalPrice = (ViewBag.totalPrice * ViewBag.discount).ToString("c0");
-
+    var totalPoint = ViewBag.totalPoint;
 
 }
 
@@ -159,10 +166,10 @@
                                 <b>如何秒速視譜？驚人的獨家視譜法</b>
                                 <div class="entry purchasePlan-price">
                                     <span class="title">課程售價</span>
-                                    <span class="ntd">@totalPrice</span>
+                                    <span class="ntd" id="money1" value="@ViewBag.totalPrice">@totalPrice</span>
                                 </div>
                                 <div class="total-amount text-right">
-                                    <h3 class="marg-tb-0">@totalPrice</h3>
+                                    <h3 class="marg-tb-0 " id="money2">@totalPrice</h3>
                                 </div>
 
 
@@ -182,7 +189,7 @@
 
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
-                                                           name="flexRadioDefault" id="flexRadioDefault1">
+                                                           name="flexRadioDefault" id="flexRadioDefault1" >
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         我有Hahow Point<i data-tip="true"
                                                                         class="fa fa-question-circle marg-l-5 ml-2"
@@ -196,8 +203,11 @@
                                                         </i>
                                                     </label>
                                                 </div>
-                                                <div id="r1" class="d-flex justify-content-between text-decoration-none">
-
+                                                <div id="r1" class="d-flex justify-content-between text-decoration-none" value="@totalPoint" check="null">
+                                                  @if (ViewBag.usePoint != null)
+                                                  {
+                                                    <span>@(totalPoint)Hp折抵Nt@(totalPoint/100)</span> <a href="#" id="pay-cancel1">X取消</a>
+                                                  }
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
@@ -206,7 +216,7 @@
                                                         我有折扣代碼
                                                     </label>
                                                 </div>
-                                                <div id="r2" class="d-flex justify-content-between text-decoration-none">
+                                                <div id="r2" class="d-flex justify-content-between text-decoration-none" check="null">
                                                     @if (ticketId != null)
                                                     {
                                                         <a href="#" id="pay-cancel2">X取消</a> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discpuntCoupon">使用我的折扣券</button>
@@ -218,8 +228,11 @@
 
                                 </section>
                             </div>
+                            @{ 
 
-                            <button class="sc-1a6j6ze-0 RcKEn marg-t-20 mt-3" onclick="location.href='@Url.Action("create", "Pay",new { ticketId=ticketId})'">同意並送出</button>
+                                var tet = ViewBag.usePoint;
+                            }
+                            <button id="send" class="sc-1a6j6ze-0 RcKEn marg-t-20 mt-3" sendvalue="null">同意並送出</button>
                             <div class="onpsza-0 kjsCqb">
                                 點擊上方按鈕即表示您已依〈<a target="_blank" class="onpsza-1 hbVGjm"
                                                 href="/paying-user-agreement">Hahow 網際網路課程購買暨服務契約</a>〉第1.1條期間審閱完畢，並同意契約條款。
@@ -240,7 +253,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center" id="discpuntCouponLabel">我的折扣券</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="pay-close">
                     關閉
                     <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
                 </button>
