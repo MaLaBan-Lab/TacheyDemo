@@ -23,12 +23,12 @@
 
 .search-half {
     position: relative;
-    color: rgb(233 229 77);
+    color: rgb(233, 229 ,77);
 }
 
     .search-half::before {
         content: "";
-        background-color: rgb(82 10 121);
+        background-color: rgb(82, 10 ,121);
         z-index: -1;
         position: absolute;
         height: 20px;
