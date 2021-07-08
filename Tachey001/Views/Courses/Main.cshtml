@@ -65,7 +65,7 @@
                                     <i class="fa fa-play" aria-hidden="true"></i>
                                 </div>
                                 <div class="title">課程介紹</div>
-                                <div class="time">02:28</div>
+                                @*<div class="time">02:28</div>*@
                             </div>
                         </a>
                     </div>
@@ -104,7 +104,7 @@
                                                                 <i class="fa fa-play" aria-hidden="true"></i>
                                                             </div>
                                                             <div class="text">單元@(un.UnitID) @un.UnitName</div>
-                                                            <div class="time">00:06</div>
+                                                            @*<div class="time">00:06</div>*@
                                                         </div>
                                                     </a>
                                                 </div>
@@ -149,7 +149,7 @@
                                                                 <i class="fa fa-lock" aria-hidden="true"></i>
                                                             </div>
                                                             <div class="text">單元@(un.UnitID) @un.UnitName</div>
-                                                            <div class="time">00:06</div>
+                                                            @*<div class="time">00:06</div>*@
                                                         </div>
                                                     </a>
                                                 </div>
@@ -287,14 +287,14 @@
         @if (ViewBag.Id == 4)
         {
             @*<div class="seletor-item seletor-ckecked" id="assignments">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
-            </div>
-        }
-        else
-        {
-            <div class="seletor-item" id="assignments">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
-            </div>*@
+                        <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="seletor-item" id="assignments">
+                        <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
+                    </div>*@
         }
 
 
@@ -584,7 +584,7 @@ else if (ViewBag.Id == 2)
                         <div class="modal-body text-black">
                             <h3>分數</h3>
                             <span class="star-show position-relative">
-                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1", new { htmlAttributes = new { @id = "star1", @class = "invisible position-absolute", @required="required" } })
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1", new { htmlAttributes = new { @id = "star1", @class = "invisible position-absolute", @required = "required" } })
                                 <label class="" for="star1">
                                     <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
                                         <i class="
