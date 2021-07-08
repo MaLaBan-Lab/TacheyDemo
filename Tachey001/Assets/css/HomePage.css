@@ -327,7 +327,7 @@ body {
     right: 54px;
     top: 316px;
     text-decoration: none;
-    color: #00bea4;
+    color: #5caec8;
 }
 
 /* 好學生評論 */
@@ -448,9 +448,9 @@ body {
         transform: rotate(45deg);
     }
 
-    .bg-hahow-dark-orange {
-        background: #00bea4;
-    }
+.bg-hahow-dark-orange {
+    background: #87b5c4;
+}
 
     .card:hover img {
         transform: scale(1.2);
@@ -488,9 +488,9 @@ body {
         transform: scale(1.2);
     }
 
-    .card-RM {
-        color: #00bea4;
-    }
+.card-RM {
+    color: #87b5c4;
+}
 
     .card-divide {
         height: 2px;
