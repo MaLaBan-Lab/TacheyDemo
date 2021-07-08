@@ -534,11 +534,13 @@ namespace Tachey001.Controllers
             var UserId = User.Identity.GetUserId();
             var getmemberviewmodels = _memberService.GetAllMemberData(UserId);
             var ConsoleViews = _memberService.GetConsoleData(UserId);
+            var ConsoleViews1 = _consoleService.GetConsoleData1(UserId);
             var AllCourses = _courseService.GetCourseData(UserId);
             var result = new MemberGroup
             {
                 memberViewModels = getmemberviewmodels,
                 consoleViews = ConsoleViews,
+                consoleViews1 = ConsoleViews1,
                 allCourses = AllCourses
             };
 

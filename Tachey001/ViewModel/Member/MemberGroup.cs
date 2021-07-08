@@ -17,6 +17,7 @@ namespace Tachey001.ViewModel.Member
         public StepGroup courseViewModels { get; set; }
         public List<CourseCateDet> courseCateDet { get; set; }
         public List<consoleViewModel> consoleViews { get; set; }
+        public List<consoleViewModel> consoleViews1 { get; set; }
         public List<AllCourse> allCourses { get; set; }
         public List<AspNetUserLoginsViewModel> aspNetUserLogins { get; set; }
     }
