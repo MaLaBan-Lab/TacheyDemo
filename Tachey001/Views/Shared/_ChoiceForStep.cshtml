@@ -7,6 +7,12 @@
 
 <p class="courseid" id="@ViewBag.CourseId">課程的分類是什麼呢！？提供課程的分類選擇並介紹給別人適合你的課程推薦。</p>
 <label class="marg-t-30" id="user-detail-interests-tags">課程分類</label>
+
+<div class="relative inline-block" id="show-block">
+    <div class="mask pseudo-btn absolute"></div>
+    @*<span class="choiced-card marg-b-10 marg-r-10 toggle inline-block text-center" role="button">影像創作</span>*@
+</div>
+
 <div class="oval-btn-plus-text oval-btn" id="user-interest-btn">+</div>
 <div>
     <div class="overlay-interest" style=" display: none;">
@@ -48,7 +54,7 @@
                                     }
                                     if (interest == true)
                                     {
-                                        <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
+                                        <div class="kind-btn kind-btn-choiced category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
                                             <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                             <span class="block">@i.CategoryName</span>
                                         </div>
@@ -123,7 +129,7 @@
                                     {
                                         if (interest == true)
                                         {
-                                            <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
+                                            <div class="kind-btn kind-btn-choiced category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
                                                 <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                                 <span class="block">@i.CategoryName</span>
                                             </div>
@@ -199,7 +205,7 @@
                                     {
                                         if (interest == true)
                                         {
-                                            <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
+                                            <div class="kind-btn kind-btn-choiced category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
                                                 <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                                 <span class="block">@i.CategoryName</span>
                                             </div>

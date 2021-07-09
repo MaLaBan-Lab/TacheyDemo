@@ -11,18 +11,19 @@ $jq(document).on('ready', function () {
 		});
 
 });
-//$("#used-point").on('click', function(){
-//		$("#used-point").addClass("active-tab");
-//		$("#get-point").removeClass("active-tab");
-//		$(".used-point").addClass("fade out");
-//		$(".get-point").removeClass("fade out");
-//});
-//$("#get-point").on('click', function(){
-//		$("#get-point").addClass("active-tab");
-//		$("#used-point").removeClass("active-tab");
-//		$(".get-point").addClass("fade out");
-//		$(".used-point").removeClass("fade out");
-//});
+
+$("#used-point").on('click', function(){
+		$("#used-point").addClass("active-tab");
+		$("#get-point").removeClass("active-tab");
+		$(".used-point").addClass("fade out");
+		$(".get-point").removeClass("fade out");
+});
+$("#get-point").on('click', function(){
+		$("#get-point").addClass("active-tab");
+		$("#used-point").removeClass("active-tab");
+		$(".get-point").addClass("fade out");
+		$(".used-point").removeClass("fade out");
+});
 
 //console.dir($("input[name='PostCourseScore.Score']"))
 

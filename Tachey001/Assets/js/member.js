@@ -239,6 +239,8 @@ function confirm_btn(url, blockname) {
         // 失效按鈕 避免連點
         $('.confirm-btn').attr('disabled', true);
 
+        show_block(blockname);
+
         let chk_btn_cou = document.querySelectorAll("." + blockname + "-btn-checked");
 
         chk_btn_cou.forEach(function (val, index) {
@@ -255,6 +257,21 @@ function confirm_btn(url, blockname) {
             console.log("something wrong...");
         })
     });
+}
+
+show_block('likes');
+show_block('jobs');
+
+// 顯示已選擇的子選項
+function show_block(blockname) {
+    let proliferate = '';
+    chk_btn_cou = document.querySelectorAll("." + blockname + "-btn-checked"); // 已選擇的子選項
+    console.log(chk_btn_cou);
+    if (chk_btn_cou.length > 0) {
+        chk_btn_cou.forEach(element => proliferate += "<span class=\"choiced-card marg-b-10 marg-r-10 inline-block text-center\" role=\"button\">" + element.innerText + "</span>");
+        console.log(proliferate);
+        $('#show-block-' + blockname).html(proliferate);
+    }
 }
 
 

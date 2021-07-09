@@ -2,6 +2,12 @@
 
 <p>你的興趣與喜好是什麼呢！？我們將根據以下資訊，提供生日優惠禮以及更加適合你的課程推薦。</p>
 <label class="marg-t-30" id="user-detail-interests-tags">個人興趣（多選）</label>
+
+<div class="relative inline-block" id="show-block">
+    <div class="mask pseudo-btn absolute"></div>
+    @*<span class="choiced-card marg-b-10 marg-r-10 toggle inline-block text-center" role="button">影像創作</span>*@
+</div>
+
 <button class="oval-btn-plus-text oval-btn" id="user-interest-btn">+</button>
 <div>
     <div class="overlay-interest" style=" display: none;">
@@ -43,14 +49,14 @@
                                     }
                                     if (interest == true)
                                     {
-                                        <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
+                                        <div class="kind-btn kind-btn-choiced category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" value=@(i.CategoryName) id=@(count)>
                                             <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                             <span class="block">@i.CategoryName</span>
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" id=@(count)>
+                                        <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-first" value=@(i.CategoryName) id=@(count)>
                                             <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                             <span class="block">@i.CategoryName</span>
                                         </div>
@@ -118,14 +124,14 @@
                                     {
                                         if (interest == true)
                                         {
-                                            <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
+                                            <div class="kind-btn kind-btn-choiced category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" value=@(i.CategoryName)  id=@(count)>
                                                 <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                                 <span class="block">@i.CategoryName</span>
                                             </div>
                                         }
                                         else
                                         {
-                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" id=@(count)>
+                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-second" value=@(i.CategoryName) id=@(count)>
                                                 <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                                 <span class="block">@i.CategoryName</span>
                                             </div>
@@ -194,14 +200,14 @@
                                     {
                                         if (interest == true)
                                         {
-                                            <div class="kind-btn selected category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
+                                            <div class="kind-btn kind-btn-choiced category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" value=@(i.CategoryName) id=@(count)>
                                                 <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                                 <span class="block">@i.CategoryName</span>
                                             </div>
                                         }
                                         else
                                         {
-                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" id=@(count)>
+                                            <div class="kind-btn category flex-column align-items-center justify-center inline-block pseudo-btn toggle-btn-interest-third" value=@(i.CategoryName) id=@(count)>
                                                 <img alt="Category icon" class="block" src="/Assets/img/@(i.CategoryName).svg">
                                                 <span class="block">@i.CategoryName</span>
                                             </div>
