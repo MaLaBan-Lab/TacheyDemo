@@ -1,46 +1,43 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
-@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@*@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
 
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-sm-11 m-4">
                 <div class="row text-secondary my-4">
-                    <div class="col-12 mb-4">
-                        <label for="basic-url">定價（最低為 $100 元）</label>
-                        <div class="input-group mb-2">
-                            @*<input type="text"
-                                class="form-control"
-                                id="basic-url"
-                                aria-describedby="basic-addon3" />*@
-                            @Html.EditorFor(m => m.course.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "100" } })
+                    <form action="Step" method="post" id="Step4Form">
+                        @Html.HiddenFor(m => m.course.CourseID)
+                        <div class="col-12 mb-4">
+                            <label for="basic-url">定價（最低為 $100 元）</label>
+                            <div class="input-group mb-2">
+                                @Html.EditorFor(m => m.course.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "100" } })
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 mb-4">
-                        <label for="basic-url">預購價格（最低為 $50 元）</label>
-                        <div class="input-group mb-2">
-                            @*<input type="text"
-                                class="form-control"
-                                id="basic-url"
-                                aria-describedby="basic-addon3" />*@
-                            @Html.EditorFor(m => m.course.PreOrderPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "50" } })
+                        <div class="col-12 mb-4">
+                            <label for="basic-url">預購價格（最低為 $50 元）</label>
+                            <div class="input-group mb-2">
+                                @*<input type="text"
+                class="form-control"
+                id="basic-url"
+                aria-describedby="basic-addon3" />*@
+                                @Html.EditorFor(m => m.course.PreOrderPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "50" } })
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 mb-4">
-                        @Html.Partial("_ChoiceForStep", Model.memberGroup)
-                    </div>
-                    <div class="col-12 mb-4">
-                        <label for="basic-url">預計課程長度（以分鐘計算，最短 20 分鐘）</label>
-                        <div class="input-group mb-2">
-                            @Html.EditorFor(m => m.course.TotalMinTime, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "20" } })
+                        <div class="col-12 mb-4">
+                            @Html.Partial("_ChoiceForStep", Model.memberGroup)
                         </div>
-                    </div>
+                        <div class="col-12 mb-4">
+                            <label for="basic-url">預計課程長度（以分鐘計算，最短 20 分鐘）</label>
+                            <div class="input-group mb-2">
+                                @Html.EditorFor(m => m.course.TotalMinTime, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "20" } })
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <button type="" class="btn btn-outline-secondary btn-lg px-5">
-                    儲存，下一步
-                </button>
+                <input onclick="postStep(4)" type="button" value="下一步" class="btn btn-outline-secondary btn-lg px-5">
             </div>
             <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
                 <div class="row bg-light-gray px-3">
@@ -109,4 +106,4 @@
         </div>
     </div>
 
-}
+@*  *@}

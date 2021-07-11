@@ -1,9 +1,9 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@*@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
 
     <div class="container">
         <div class="row">
@@ -28,7 +28,7 @@
                     </video>
                 </div>
                 <div class="row m-3">
-                    <button type="submit" class="btn btn-outline-secondary btn-lg px-5">
+                    <button type="submit" onclick="changePage(7)" class="btn btn-outline-secondary btn-lg px-5">
                         下一步
                     </button>
                 </div>
@@ -82,4 +82,4 @@
         </div>
     </div>
 
-}
+@*  *@}

@@ -15,10 +15,12 @@ using CloudinaryDotNet;
 using Tachey001.AccountModels;
 using CloudinaryDotNet.Actions;
 using Tachey001.ViewModel.ApiViewModel;
+using Tachey001.ViewModel.SignalR;
+using Microsoft.AspNet.SignalR;
 
 namespace Tachey001.Controllers
 {
-    [Authorize]
+    [System.Web.Http.Authorize]
     public class CoursesController : Controller
     {
         private TacheyContext tacheyDb;
@@ -43,11 +45,81 @@ namespace Tachey001.Controllers
         [AllowAnonymous]
         public ActionResult All(int page = 1)
         {
-            var result = _consoleService.GetCardsPageList(page);
+            var MemberId = User.Identity.GetUserId();
+            ViewBag.UserId = MemberId;
+            var all = _consoleService.GetCardsPageList(page);
+            var owner = _consoleService.GetOwners(MemberId);
+
+            var result = new consoleallViewModel()
+            {
+                pageConsole = all,
+                GetOwners = owner
+            };
 
             return View(result);
         }
+        [AllowAnonymous]
+        public ActionResult FindCategory(string category)
+        {
+            int categoryid = _consoleService.ReturnCategoryId(category);
+            int detailid = _consoleService.ReturnDetailId(category);
+            if (categoryid == 0 && detailid == 0)
+            {
+                return RedirectToAction("All");
+            }
+            else
+            {
+                if(categoryid != 0)
+                {
+                    var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
+                    ViewBag.categoryname = cname.CategoryName;
+                    ViewBag.categoryEname = cname.CategoryEngName;
+                    ViewBag.CategoryId = cname.CategoryID;
+                }
+                if (detailid != 0)
+                {
+                    var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
+                    ViewBag.detailname = dname.DetailName;
+                    ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
+                    ViewBag.categoryEname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryEngName;
+                    ViewBag.CategoryId = dname.CategoryID;
+                }
 
+                var MemberId = User.Identity.GetUserId();
+                ViewBag.UserId = MemberId;
+                var all = _consoleService.GetGroupData(categoryid, detailid);
+                var owner = _consoleService.GetOwners(MemberId);
+                var result = new consoleallViewModel()
+                {
+                    consoleViews = all,
+                    GetOwners = owner
+                };
+
+                return View(result);
+            }
+        }
+        [AllowAnonymous]
+        public ActionResult Group(int? categoryid, int? detailid)
+        {
+            if (categoryid != null)
+            {
+                var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
+                ViewBag.categoryname = cname.CategoryName;
+                ViewBag.detailname = "所有" + cname.CategoryName;
+                ViewBag.CategoryId = cname.CategoryID;
+            }
+
+            if (detailid != null)
+            {
+                var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
+                ViewBag.detailname = dname.DetailName;
+                ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
+                ViewBag.CategoryId = dname.CategoryID;
+            }
+
+            var result = _consoleService.GetGroupData(categoryid, detailid);
+            return View(result);
+        }
         //猜你想學
         public ActionResult GuessYouLike(int page = 1)
         {
@@ -115,31 +187,6 @@ namespace Tachey001.Controllers
 
             return PartialView("PageListCardTemplate", result);
         }
-
-
-        [AllowAnonymous]
-        public ActionResult Group(int? categoryid, int? detailid)
-        {
-            if (categoryid != null)
-            {
-                var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
-                ViewBag.categoryname = cname.CategoryName;
-                ViewBag.detailname = "所有" + cname.CategoryName;
-                ViewBag.CategoryId = cname.CategoryID;
-            }
-
-            if (detailid != null)
-            {
-                var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
-                ViewBag.detailname = dname.DetailName;
-                ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
-                ViewBag.CategoryId = dname.CategoryID;
-            }
-
-            var result = _consoleService.GetGroupData(categoryid,detailid);
-            return View(result);
-        }
-
         [AllowAnonymous]
         public ActionResult Create()
         {
@@ -210,7 +257,7 @@ namespace Tachey001.Controllers
             return View();
         }
         //開課10步驟 GET
-        public ActionResult Step(int? id, string CourseId)
+        public ActionResult Step(string CourseId)
         {
             var UserId = User.Identity.GetUserId();
 
@@ -241,8 +288,6 @@ namespace Tachey001.Controllers
 
             //取得當前登入會員ID
             ViewBag.UserId = UserId;
-            //取得當前開課步驟
-            ViewBag.Id = id;
             //取得當前開課的課程ID
             ViewBag.CourseId = CourseId;
             //取得當前會員頭像
@@ -263,13 +308,26 @@ namespace Tachey001.Controllers
         //開課10步驟 POST
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Step(int? id, StepGroup group, FormCollection formCollection, string CourseId)
+        public JsonResult Step(int? id, StepGroup group, FormCollection formCollection)
         {
-            if(id != 6)
+            try
             {
-                _courseService.UpdateStep(id, group, formCollection, CourseId);
+                _courseService.UpdateStep(id, group, formCollection, group.course.CourseID);
+                var result = new ApiResult(ApiStatus.Success, "儲存成功", null);
+                return Json(result);
             }
-            return RedirectToAction("Step", "Courses", new { id = (id + 1), CourseID = CourseId });
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
+        }
+        [HttpGet]
+        public ActionResult StepCheck(string CourseId)
+        {
+            var result = _courseService.GetStepGroup(CourseId);
+
+            return PartialView("_StepCheck", result);
         }
         //課程種類Post
         [HttpPost]
@@ -287,7 +345,7 @@ namespace Tachey001.Controllers
             var returnCourseId = _courseService.NewCourseStep(currentUserId);
 
             //導向開課步驟，並傳入課程ID路由
-            return RedirectToAction("Step", "Courses", new { id = 0, CourseId = returnCourseId });
+            return RedirectToAction("Step", "Courses", new {CourseId = returnCourseId });
         }
         //完成課程，送出審核
         public ActionResult StepFinish(string CourseId)

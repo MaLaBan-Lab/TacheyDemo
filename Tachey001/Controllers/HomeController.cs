@@ -17,10 +17,12 @@ namespace Tachey001.Controllers
         //初始化=隨時要用他都叫得到
         private HomeService _homeService;
         private MemberService _memberService;
+        private consoleService _consoleService;
         public HomeController()
         {
             _homeService = new HomeService();
             _memberService = new MemberService();
+            _consoleService = new consoleService();
         }
         public ActionResult Index()
         {
@@ -28,7 +30,9 @@ namespace Tachey001.Controllers
             ViewBag.UserId = MemberId;
             //var用碗去接我要的東西
             var getcommentviewmodel = _homeService.GetCommentViewModel();
-            var getcoursecardviewmodels = _homeService.GetCourseCardViewModels(MemberId);
+            //var getcoursecardviewmodels = _homeService.GetCourseCardViewModels(MemberId);
+            var getcoursecardviewmodels = _consoleService.test();
+            var owner = _consoleService.GetOwners(MemberId);
             var gethighlightcourseviewmodel = _homeService.GetHighlightCourseViewModels();
             var getcartpartialcardviewmodel = _memberService.GetCartPartialViewModel(MemberId);
             //再創一個group viewmodel包裝傳回view  <-規則
@@ -41,8 +45,9 @@ namespace Tachey001.Controllers
                 //也可以小括號用.的
                 highlightViewModels = gethighlightcourseviewmodel,
                 commentViewModels = getcommentviewmodel,
-                courseCardViewModels = getcoursecardviewmodels,
-                cartPartialCardViewModels = getcartpartialcardviewmodel
+                cartPartialCardViewModels = getcartpartialcardviewmodel,
+                consoleViewModels = getcoursecardviewmodels,
+                GetOwners = owner
             };
             //丟入view
             return View(result);
@@ -73,50 +78,12 @@ namespace Tachey001.Controllers
             ViewBag.List = result.Resources;
             return View();
         }
-        [HttpPost]
+        [HttpGet]
         public ActionResult CourseCard(HttpPostedFileBase file)
         {
-            Stream streamFile = file.InputStream;
-            //背景作業 不中斷操作
-            //var task = new SendFileTask();
-            //task.Run(streamFile);
+            var result = _consoleService.test();
 
-            //初始化Cloudinary認證
-            var myAccount = new Account
-            {
-                Cloud = Credientials.Cloud,
-                ApiKey = Credientials.ApiKey,
-                ApiSecret = Credientials.ApiSecret
-            };
-            //初始化Cloudinary
-            Cloudinary _cloudinary = new Cloudinary(myAccount);
-
-            ////Cloudinary photo
-            //var uploadParams = new ImageUploadParams()
-            //{
-            //    //File = new FileDescription(@"C:\Users\User\Desktop\梗圖\aj1.jpg")
-            //    File = new FileDescription(file.FileName, file.InputStream)
-            //};
-
-            //var uploadResult = _cloudinary.Upload(uploadParams);
-
-            //ViewBag.Url = uploadResult.Url;
-
-            //Cloudinary video
-            var uploadParams = new VideoUploadParams()
-            {
-                //File = new FileDescription(@"C:\Users\User\Desktop\小龍蝦.mp4"),
-                File = new FileDescription("1-1", file.InputStream),
-
-                PublicId = "1-1",
-                Overwrite = true,
-            };
-
-            var uploadResult = _cloudinary.UploadLarge(uploadParams);
-
-            ViewBag.Url = uploadResult.Url;
-
-            return RedirectToAction("Index", "Home");
+            return View();
         }
     }
 }

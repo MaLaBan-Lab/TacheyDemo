@@ -1,12 +1,13 @@
 ﻿@*回傳資料型別*@
-@model　Tachey001.ViewModel.CourseCardViewModel
+@model　Tachey001.ViewModel.consoleViewModel
 
 @{ var col = 3;
 
     if (HttpContext.Current.Request.RawUrl == "/Member/Cart")
     {
         col = 4;
-    } }
+    } 
+  }
 @{ var photoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
     var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
     if (Model.TitlePageImageURL != null)
@@ -92,7 +93,7 @@
                 }
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-8 text-justify cardTitle">
-                <h4 class="card-title text-justify font-weight-normal text-secondary " style="padding-left:15px ;padding-right:14px; padding-top: 16px">
+                <h4 class="card-title text-justify font-weight-normal text-secondary ">
                     @Model.Title
                 </h4>
             </div>

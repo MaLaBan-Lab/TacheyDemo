@@ -16,17 +16,19 @@ namespace Tachey001.Service
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
+        private Cloudinary _cloudinary;
 
         //初始化資料庫邏輯
         public CourseService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
+            _cloudinary = Credientials.Init();
         }
         //取得渲染課程卡片所需資料欄位
         public List<AllCourse> GetCourseData()
         {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
+            var course = _tacheyRepository.GetAll<Course>();
+            var member = _tacheyRepository.GetAll<Member>();
 
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
@@ -69,16 +71,26 @@ namespace Tachey001.Service
         //刪除指定課程資料
         public void DeleteCurrentIdCourseData(string id)
         {
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == id);
+            var Course = _tacheyRepository.Get<Course>(x => x.CourseID == id);
+            var CScore = _tacheyRepository.GetAll<CourseScore>(x => x.CourseID == id);
+            var Owner = _tacheyRepository.GetAll<Owner>(x => x.CourseID == id);
+            var Cart = _tacheyRepository.GetAll<ShoppingCart>(x => x.CourseID == id);
+            var Que = _tacheyRepository.GetAll<Question>(x => x.CourseID == id);
+            var Ans = _tacheyRepository.GetAll<Answer>(x => x.CourseID == id);
 
-            _tacheyRepository.Delete(result);
+            _tacheyRepository.Delete(Course);
+            _tacheyRepository.Delete(CScore);
+            _tacheyRepository.Delete(Owner);
+            _tacheyRepository.Delete(Cart);
+            _tacheyRepository.Delete(Que);
+            _tacheyRepository.Delete(Ans);
 
             _tacheyRepository.SaveChanges();
         }
         //取得開課View渲染資料
         public StepGroup GetStepGroup(string CourseId)
         {
-            var currentCourse = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var currentCourse = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
 
             var chapterList = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId);
 
@@ -155,50 +167,44 @@ namespace Tachey001.Service
         // 更新開課步驟
         public void UpdateStep(int? id, StepGroup group, FormCollection formCollection, string CourseId)
         {
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
 
-            if (id == 1)
+            switch (id)
             {
-                result.Title = group.course.Title;
-                result.Description = group.course.Description;
-                result.MarketingImageURL = group.course.MarketingImageURL;
-            }
-            else if (id == 2)
-            {
-                result.Tool = group.course.Tool;
-                result.CourseLevel = group.course.CourseLevel;
-                result.Effect = group.course.Effect;
-                result.CoursePerson = group.course.CoursePerson;
-            }
-            else if (id == 3)
-            {
-                group.formCollection = formCollection;
-                this.UpdateStepUnit(group.formCollection, CourseId);
-            }
-            else if (id == 4)
-            {
-                result.OriginalPrice = group.course.OriginalPrice;
-                result.PreOrderPrice = group.course.PreOrderPrice;
-                result.TotalMinTime = group.course.TotalMinTime;
-            }
-            else if (id == 5)
-            {
-                result.Introduction = group.course.Introduction;
-            }
-            else if(id == 7)
-            {
-                result.CustomUrl = group.course.CustomUrl;
-            }
-            else if (id == 8)
-            {
-                result.LecturerIdentity = group.course.LecturerIdentity;
+                case 1:
+                    result.Title = group.course.Title;
+                    result.Description = group.course.Description;
+                    break;
+                case 2:
+                    result.Tool = group.course.Tool;
+                    result.CourseLevel = group.course.CourseLevel;
+                    result.Effect = group.course.Effect;
+                    result.CoursePerson = group.course.CoursePerson;
+                    break;
+                case 3:
+                    this.UpdateStepUnit(formCollection, CourseId);
+                    break;
+                case 4:
+                    result.OriginalPrice = group.course.OriginalPrice;
+                    result.PreOrderPrice = group.course.PreOrderPrice;
+                    result.TotalMinTime = group.course.TotalMinTime;
+                    break;
+                case 5:
+                    result.Introduction = group.course.Introduction;
+                    break;
+                case 7:
+                    result.CustomUrl = group.course.CustomUrl;
+                    break;
+                case 8:
+                    result.LecturerIdentity = group.course.LecturerIdentity;
+                    break;
             }
             _tacheyRepository.SaveChanges();
         }
         //取得對應課程分類名稱
         public List<CourseCateDet> courseCateDet(string CourseId)
         {
-            var currCourse = _tacheyRepository.GetAll<Models.Course>(x => x.CourseID == CourseId);
+            var currCourse = _tacheyRepository.GetAll<Course>(x => x.CourseID == CourseId);
             var category = _tacheyRepository.GetAll<CourseCategory>();
             var detail = _tacheyRepository.GetAll<CategoryDetail>();
 
@@ -220,7 +226,7 @@ namespace Tachey001.Service
         public void ChangeCategory(string clickedOption, string CourseId)
         {
             var detail = _tacheyRepository.Get<CategoryDetail>(x => x.DetailName == clickedOption);
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.CategoryID = detail.CategoryID;
             result.CategoryDetailsID = detail.DetailID;
             _tacheyRepository.Update(result);
@@ -469,8 +475,6 @@ namespace Tachey001.Service
         //儲存雲端上傳課程封面圖片，並回傳網址
         public string PostFileStorage(string CourseId, HttpPostedFileBase file)
         {
-            var _cloudinary = Credientials.Init();
-
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription("TitlePageImage", file.InputStream),
@@ -489,8 +493,6 @@ namespace Tachey001.Service
         //儲存雲端上傳影片，並回傳網址
         public string PostVideoStorage(string CourseId, HttpPostedFileBase file)
         {
-            var _cloudinary = Credientials.Init();
-
             var uploadParams = new VideoUploadParams()
             {
                 File = new FileDescription("PreviewVideo", file.InputStream),
@@ -500,7 +502,7 @@ namespace Tachey001.Service
 
             var CallBackUrl = _cloudinary.UploadLarge(uploadParams).SecureUrl.ToString();
 
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.PreviewVideo = CallBackUrl;
             _tacheyRepository.SaveChanges();
 
@@ -509,7 +511,7 @@ namespace Tachey001.Service
         //取得GetCourseId
         public string GetCourseId(string Id)
         {
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CustomUrl == Id);
+            var result = _tacheyRepository.Get<Course>(x => x.CustomUrl == Id);
 
             if (result == null)
             {
@@ -520,7 +522,7 @@ namespace Tachey001.Service
         //從Custom進入，點擊率+1
         public void AddCustomClick(string CourseId)
         {
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.CustomClick += 1;
             _tacheyRepository.Update(result);
             _tacheyRepository.SaveChanges();
@@ -528,7 +530,7 @@ namespace Tachey001.Service
         //從Main進入，點擊率+1
         public void AddMainClick(string CourseId)
         {
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId);
+            var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.MainClick += 1;
             _tacheyRepository.Update(result);
             _tacheyRepository.SaveChanges();
@@ -536,7 +538,7 @@ namespace Tachey001.Service
         //判斷客製網址是否重複
         public bool CheckUrl(string Url, string CourseId)
         {
-            var result = _tacheyRepository.Get<Models.Course>(x => x.CustomUrl == Url && x.CourseID != CourseId);
+            var result = _tacheyRepository.Get<Course>(x => x.CustomUrl == Url && x.CourseID != CourseId);
             return result == null ? false : true;
         }
         //取得自訂位數的亂數方法

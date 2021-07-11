@@ -19,16 +19,18 @@ namespace Tachey001.Service
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
+        private DapperRepository _dapperRepository;
         public MemberService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
+            _dapperRepository = new DapperRepository();
         }
         //創建會員表
         public void CreateMember(string userId, string email)
         {
             var personalUrl = new PersonalUrl { MemberID = userId };
 
-            var member = new Models.Member
+            var member = new Member
             {
                 MemberID = userId,
                 Email = email,
@@ -276,7 +278,6 @@ namespace Tachey001.Service
                          {
                              CourseID = c.CourseID,
                              Title = c.Title,
-                             Description = c.Description,
                              TitlePageImageURL = c.TitlePageImageURL,
                              OriginalPrice = c.OriginalPrice,
                              TotalMinTime = c.TotalMinTime,
@@ -334,16 +335,8 @@ namespace Tachey001.Service
         public List<CartPartialCardViewModel> GetCartPartialViewModel(string memberId)
         {
 
-            var course = _tacheyRepository.GetAll<Course>();
-            var shoppingcart = _tacheyRepository.GetAll<ShoppingCart>();
-            var result = from c in course
-                         join s in shoppingcart on c.CourseID equals s.CourseID
-                         //shoppingCartID=MemberController的Cart裡抓到的會員ID
-                         where s.MemberID == memberId
-                         select new CartPartialCardViewModel { Title = c.Title, TitlePageImageURL = c.TitlePageImageURL, CreateVerify = c.CreateVerify, OriginalPrice = c.OriginalPrice, CourseID = s.CourseID };
-            return result.ToList();
+            return _dapperRepository.GetCartPartialViewModel(memberId);
         }
-
         public List<CourseCardViewModel> GetCourseCardViewModels()
         {
             var member = _tacheyRepository.GetAll<Member>();

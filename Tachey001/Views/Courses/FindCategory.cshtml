@@ -1,0 +1,55 @@
+﻿@model Tachey001.ViewModel.consoleallViewModel
+@{
+    //ViewBag.Title = "音樂類";
+    Layout = "~/Views/Shared/_LayoutCreate.cshtml";
+}
+
+@section topCSS{
+    @Styles.Render("~/Assets/css/group.css")
+}
+
+
+<div class="container-fluid ">
+    <div class="row justify-content-center my-3">
+        <div class="col-6">
+            <nav class="bg-white p-0">
+                <ol class="breadcrumb  px-0 bg-color-160633">
+                    <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="@Url.Action("All", "Courses")">所有課程</a></li>
+                    @if (ViewBag.detailname != null)
+                    {
+                        <li class="breadcrumb-item active"><a class="text-white text-decoration-none" href="@Url.Action("FindCategory", "Courses", new { category = $"{ViewBag.categoryEname}"})">@ViewBag.categoryname</a></li>
+                        <li class="breadcrumb-item active"><span class="text-white">@ViewBag.detailname</span></li>
+                    }
+                    else
+                    {
+                        <li class="breadcrumb-item active"><span class="text-white">@ViewBag.categoryname</span></li>
+                    }
+                </ol>
+            </nav>
+            <h1 class="text-hahow-green mb-4">
+                @ViewBag.categoryname
+                @ViewBag.detailname
+            </h1>
+            <p class="text-justify text-white">
+                線上攝影課程，從影像創作、攝影打光開始學習，掌握 Premiere、PhotoShop 等影像剪輯、後製軟體能力，用影像創作說出自己的故事。
+            </p>
+        </div>
+        <div class="col-4 text-center">
+            <img src="https://hahow.in/static/images/seo-header.png" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.consoleViews)
+        {
+            item.favorite = Model.GetOwners.Any(x => x.CourseID == item.CourseID);
+            @Html.Partial("CardTemplate", item)
+        }
+    </div>
+</div>
+
+@section endJS{
+    @Scripts.Render("~/Assets/js/Owner.js")
+}

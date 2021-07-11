@@ -1,7 +1,7 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 @section topCSS{
     @Styles.Render("~/Assets/css/step.css")
-    @Styles.Render("~/Assets/css/member.css")
+    @Styles.Render("~/Assets/css/memberForStep.css")
     @Styles.Render("~/Assets/css/choice.css")
     <style>
         #chapter i {
@@ -24,70 +24,69 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-7 my-5 d-flex justify-content-between p-0"
-             id="step-progress">
+        <div class="col-7 my-5 d-flex justify-content-between p-0" id="step-progress">
             <div class="progress position-absolute bg-hahow-orange">
                 <div class="progress-bar bg-hahow-green"
                      role="progressbar"
-                     style="width:  @num%"
                      id="progress-bar"></div>
             </div>
-            <a href="@Url.Action("Step", new { id = 0, CourseId = ViewBag.CourseId} )">
-                <button type="button"
-                        class="btn bg-hahow-green btn-circle"
-                        title="開始">
-                    0
-                </button>
-            </a>
-            @for (int i = 1; i < 10; i++)
-            {
-                <a href="@Url.Action("Step", new { id = i, CourseId = ViewBag.CourseId} )">
-                    @if (ViewBag.Id >= i)
+            <div class="w-100">
+                <ul class="nav d-flex justify-content-between position-relative">
+                    <li class="nav-item">
+                        <a class="tab-btn active" id="step0-tab" data-toggle="tab" href="#step0">
+                            <button type="button"
+                                    class="btn bg-hahow-green btn-circle stepBtn"
+                                    title="開始">
+                                0
+                            </button>
+                        </a>
+                    </li>
+                    @for (int i = 1; i < 10; i++)
                     {
-                        <button type="button"
-                                class="btn bg-hahow-green btn-circle"
-                                title="@titleText[i-1]">
-                            @i
-                        </button>
+                        <li class="">
+                            <a class="tab-btn" id="step@(i)-tab" data-toggle="tab" href="#step@(i)">
+                                <button type="button"
+                                        class="btn bg-hahow-orange btn-circle stepBtn"
+                                        title="@titleText[i-1]">
+                                    @i
+                                </button>
+                            </a>
+                        </li>
                     }
-                    else
-                    {
-                        <button type="button"
-                                class="btn bg-hahow-orange btn-circle"
-                                title="@titleText[i-1]">
-                            @i
-                        </button>
-                    }
-                </a>
-            }
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.course.CourseID)
+    <div class="row justify-content-center">
+        <div class="col-12 text-center text-white pl-0">
+            <h6 id="titleContentH2">歡迎加入 Tachey 好老師的行列</h6>
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-12 text-center text-mc">
-            <h1 id="titleContentH1">歡迎加入 Tachey 好老師的行列</h1>
+        <div class="col-12 text-center text-white pl-0 mb-1">
+            <h4 id="titleContentH4" class="text-center">跟著 Tachey 一步一步完成提案吧！</h4>
         </div>
     </div>
-    <div class="row justify-content-center m-2">
-        <div class="col-12 text-center text-mc text-secondary">
-            <h4 id="titleContentH4">跟著 Tachey 一步一步完成募資提案吧！</h4>
-        </div>
-    </div>
-    <div class="row justify-content-center bg-white mb-5"
-         id="contentHTML">
-        @if (@ViewBag.Id == null)
-        {
+    <div class="row tab-content justify-content-center bg-white mb-5" id="contentHTML">
+
+        <div class="tab-pane active" id="step0">
             @Html.Partial($"step/step_0", Model)
-        }
-        else
+        </div>
+        @for (int i = 1; i < 10; i++)
         {
-            @Html.Partial($"step/step_{ViewBag.Id}", Model)
-            @Scripts.Render("~/Assets/js/step.js")
-            if (@ViewBag.Id == 4)
-            {
-                @Scripts.Render("~/Assets/js/choiceForStep.js")
-            }
+            <div class="tab-pane" id="step@(i)">
+                @Html.Partial($"step/step_{i}", Model)
+            </div>
         }
+
     </div>
+
+    @*顯示訊息框*@
+<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; top: 0;" id="PostMsgBox">
+    
+</div>
+
 </div>
 
 @section endJS{
@@ -100,4 +99,5 @@
             });
     </script>
     @Scripts.Render("~/Assets/js/postStep.js")
+    @Scripts.Render("~/Assets/js/choiceForStep.js")
 }

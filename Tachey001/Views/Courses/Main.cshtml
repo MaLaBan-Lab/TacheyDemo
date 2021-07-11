@@ -18,8 +18,8 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="@Url.Action("Group","Courses", new { detailid = Model.Main_Video.Course.CategoryDetailsID})">@Model.Main_Video.CategoryName</a></li>
-                <li class="breadcrumb-item  text-white active" aria-current="page">@Model.Main_Video.DetailName</li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("FindCategory","Courses", new { category = Model.Main_Video.CategoryName})">@Model.Main_Video.CategoryName</a></li>
+                <li class="breadcrumb-item  text-white active"><a href="@Url.Action("FindCategory","Courses", new { category = Model.Main_Video.DetailName})">@Model.Main_Video.DetailName</a></li>
             </ol>
         </nav>
         <!-- title 區塊 -->

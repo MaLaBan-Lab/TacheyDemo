@@ -56,7 +56,7 @@ namespace Tachey001.Controllers
             return View(result);
         }
         //刪除指定課程卡片
-        public ActionResult DeleteCourse(int? id, string CourseId)
+        public ActionResult DeleteCourse(string CourseId)
         {
             _courseService.DeleteCurrentIdCourseData(CourseId);
 
