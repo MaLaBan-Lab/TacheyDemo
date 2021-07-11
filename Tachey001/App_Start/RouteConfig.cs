@@ -16,15 +16,15 @@ namespace Tachey001
             //講師行銷Url
             routes.MapRoute(
                 name: "FindCustomCourseUrl",
-                url: "Course/cm/{id}",
-                defaults: new { controller = "Courses", action = "Custom", id = "Index" }
+                url: "Course/cm/{id}/{type}",
+                defaults: new { controller = "Courses", action = "Custom", id = "Index", type = "Intro" }
             );
 
             //課程影片Url
             routes.MapRoute(
                 name: "FindCourseVideoUrl",
-                url: "Course/mn/{id}",
-                defaults: new { controller = "Courses", action = "Main", id = "Index" }
+                url: "Course/mn/{id}/{type}",
+                defaults: new { controller = "Courses", action = "Main", id = "Index", type="Intro" }
             );
 
             //課程分類Url

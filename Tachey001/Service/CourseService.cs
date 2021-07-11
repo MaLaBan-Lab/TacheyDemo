@@ -508,6 +508,11 @@ namespace Tachey001.Service
 
             return CallBackUrl;
         }
+        //確認正確CourseId
+        public bool CheckCourseId(string Id)
+        {
+            return _tacheyRepository.Get<Course>(x => x.CourseID == Id) != null ? true : false;
+        }
         //取得GetCourseId
         public string GetCourseId(string Id)
         {

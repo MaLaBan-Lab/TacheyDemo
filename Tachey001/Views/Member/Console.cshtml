@@ -4,9 +4,13 @@
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
-@Styles.Render("~/Assets/css/console.css")
-@Styles.Render("~/Assets/css/nav.css")
-@Styles.Render("~/Assets/css/navbar-blue.css")
+@section topCSS{
+    @Styles.Render("~/Assets/css/console.css")
+    @Styles.Render("~/Assets/css/nav.css")
+    @Styles.Render("~/Assets/css/navbar-blue.css")
+}
+
+
 <div class="container">
     <div class="row">
         <div class="col-12 text-center mt-5">
@@ -38,9 +42,9 @@
     </div>
     <div class="row">
         @foreach (var item in Model.consoleViews1)
-            {
-                @Html.Partial("CardTemplate", item)
-            }
+        {
+            @Html.Partial("CardTemplate", item)
+        }
     </div>
     <div class="row mt-5">
         <div class="col-12 p-0">
@@ -51,7 +55,14 @@
     <div class="row">
         @foreach (var item in Model.consoleViews)
         {
-            @Html.Partial("CardTemplate", item)
+            foreach (var o in Model.GetOwners)
+            {
+                if (o.MemberID == ViewBag.UserId && item.CourseID==o.CourseID)
+                {
+                    item.favorite = true;
+                    @Html.Partial("CardTemplate", item)
+                }
+            }
         }
     </div>
 </div>

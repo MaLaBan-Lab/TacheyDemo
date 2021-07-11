@@ -268,6 +268,10 @@ function postStep(num) {
         processData: false,
         contentType: false,
         success: function (response) {
+            if (num == 7) {
+                var val = $("#course_CustomUrl").val();
+                $("#basic-url").text(`你可以經由下方網址宣傳課程： https://localhost:44394/Course/cm/${val}`)
+            }
             console.log(response.ErrMsg)
             changePage(num + 1)
             StepCheckUpdate(CourseId)

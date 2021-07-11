@@ -99,95 +99,6 @@ namespace Tachey001.Controllers
             }
         }
         [AllowAnonymous]
-        public ActionResult Group(int? categoryid, int? detailid)
-        {
-            if (categoryid != null)
-            {
-                var cname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == categoryid);
-                ViewBag.categoryname = cname.CategoryName;
-                ViewBag.detailname = "所有" + cname.CategoryName;
-                ViewBag.CategoryId = cname.CategoryID;
-            }
-
-            if (detailid != null)
-            {
-                var dname = tacheyDb.CategoryDetail.FirstOrDefault(x => x.DetailID == detailid);
-                ViewBag.detailname = dname.DetailName;
-                ViewBag.categoryname = tacheyDb.CourseCategory.FirstOrDefault(x => x.CategoryID == dname.CategoryID).CategoryName;
-                ViewBag.CategoryId = dname.CategoryID;
-            }
-
-            var result = _consoleService.GetGroupData(categoryid, detailid);
-            return View(result);
-        }
-        //猜你想學
-        public ActionResult GuessYouLike(int page = 1)
-        {
-            var currentId = User.Identity.GetUserId();
-            ViewBag.UserId = currentId;
-
-            var result = _consoleService.GuessYouLike(currentId, page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-        
-
-        //熱門排序
-        [AllowAnonymous]
-        public ActionResult AllHot(int page = 1)
-        {
-            var result = _consoleService.AllHot(page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-
-        //搜尋
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult Search(string search, int page = 1)
-        {
-            var result = _consoleService.Search(search, page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-        
-        //最新排序
-        [AllowAnonymous]
-        public ActionResult AllNew(int page = 1)
-        {
-            var result = _consoleService.GetCardsPageList(page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-
-        //最多人數排序
-        [AllowAnonymous]
-        public ActionResult Orderbypn(int page = 1)
-        {
-            var result = _consoleService.GetCardsHotPageList(page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-
-        //最常課時
-        [AllowAnonymous]
-        public ActionResult Orderbyct(int page = 1)
-        {
-            var result = _consoleService.OrderByTotalTimeOfCourse(page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-
-
-        //最高評價
-        [AllowAnonymous]
-        public ActionResult Orderbycs(int page = 1)
-        {
-            var result = _consoleService.OrderByCourseScore( page);
-
-            return PartialView("PageListCardTemplate", result);
-        }
-        [AllowAnonymous]
         public ActionResult Create()
         {
             return View();
@@ -204,15 +115,28 @@ namespace Tachey001.Controllers
             }
             //從行銷網址進去，客戶點擊+1
             _courseService.AddCustomClick(getCourseId);
-            return RedirectToAction("Main", "Courses", new { id=1, CourseId = getCourseId });
+            return RedirectToAction("Main", "Courses", new { id= id });
         }
         //課程影片頁面
         [AllowAnonymous]
-        public ActionResult Main(int? id, string CourseId)
+        public ActionResult Main(string id, string type)
         {
-            if (CourseId == null)
+            var CourseId = _courseService.GetCourseId(id);
+
+            if(id == "Index")
             {
                 return RedirectToAction("Index", "Home");
+            }
+            if (CourseId == "Index")
+            {
+                if (_courseService.CheckCourseId(id))
+                {
+                    CourseId = id;
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             var MemberId = User.Identity.GetUserId();
@@ -228,11 +152,7 @@ namespace Tachey001.Controllers
             //從主頁進入，點擊率+1
             _courseService.AddMainClick(CourseId);
 
-            if (id == null)
-            {
-                id = 1;
-            }
-            ViewBag.Id = id;
+            ViewBag.type = type;
             ViewBag.YnN = YnN;
             ViewBag.MemberId = MemberId;
             ViewBag.UserId = MemberId;
@@ -420,6 +340,65 @@ namespace Tachey001.Controllers
                 var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
                 return Json(result);
             }
+        }
+        //猜你想學
+        public ActionResult GuessYouLike(int page = 1)
+        {
+            var currentId = User.Identity.GetUserId();
+            ViewBag.UserId = currentId;
+
+            var result = _consoleService.GuessYouLike(currentId, page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        //熱門排序
+        [AllowAnonymous]
+        public ActionResult AllHot(int page = 1)
+        {
+            var result = _consoleService.AllHot(page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        //搜尋
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Search(string search, int page = 1)
+        {
+            var result = _consoleService.Search(search, page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        //最新排序
+        [AllowAnonymous]
+        public ActionResult AllNew(int page = 1)
+        {
+            var result = _consoleService.GetCardsPageList(page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        //最多人數排序
+        [AllowAnonymous]
+        public ActionResult Orderbypn(int page = 1)
+        {
+            var result = _consoleService.GetCardsHotPageList(page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        //最常課時
+        [AllowAnonymous]
+        public ActionResult Orderbyct(int page = 1)
+        {
+            var result = _consoleService.OrderByTotalTimeOfCourse(page);
+
+            return PartialView("PageListCardTemplate", result);
+        }
+        //最高評價
+        [AllowAnonymous]
+        public ActionResult Orderbycs(int page = 1)
+        {
+            var result = _consoleService.OrderByCourseScore(page);
+
+            return PartialView("PageListCardTemplate", result);
         }
     }
 }

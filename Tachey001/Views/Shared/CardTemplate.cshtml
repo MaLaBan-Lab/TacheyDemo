@@ -1,12 +1,13 @@
 ﻿@model Tachey001.ViewModel.consoleViewModel
 
 @{ 
+    var url = Model.CustomUrl == null ? Model.CourseID : Model.CustomUrl;
     var col = 3;
 
     if (HttpContext.Current.Request.RawUrl == "/Member/Profile")
     {
         col = 4;
-    } 
+    }
 }
 
 <div class="col-xl-@col col-lg-4 col-md-6 col-sm-12">
@@ -36,7 +37,7 @@
                 </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-2 overflow-hidden mb-2 border">
-                <a href="@Url.Action("Main", "Courses", new { id = 1,CourseId = Model.CourseID})" class="text-decoration-none p-0 w-100 h-100">
+                <a href="@Url.Action("Main", "Courses", new { id = url})" class="text-decoration-none p-0 w-100 h-100">
                     <img src="@Model.TitlePageImageURL"
                          class="card-img-top" style="height:164px" />
                     <div class="

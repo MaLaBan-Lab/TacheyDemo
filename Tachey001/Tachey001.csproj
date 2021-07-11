@@ -757,7 +757,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Courses\All.cshtml" />
-    <Content Include="Views\Courses\Group.cshtml" />
     <Content Include="Views\Courses\Step.cshtml" />
     <Content Include="Views\Member\Console.cshtml" />
     <Content Include="Views\Member\Point.cshtml" />

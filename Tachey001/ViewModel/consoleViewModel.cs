@@ -9,6 +9,7 @@ namespace Tachey001.ViewModel
     public class consoleViewModel
     {
         public string CourseID { get; set; }
+        public string CustomUrl { get; set; }
         public string Title { get; set; }
         public string TitlePageImageURL { get; set; }
         public decimal OriginalPrice { get; set; }

@@ -15,7 +15,7 @@
                             @Html.EditorFor(m => m.course.CustomUrl, new { htmlAttributes = new { @class = "w-100 form-control", @required = "required" } })
                         </div>
                         <label id="msg-box" class="fs-5 w-100" data-CourseID="@ViewBag.CourseId"></label>
-                        <label for="basic-url" class="text-black-50 fs-5">你可以經由下方網址宣傳課程： https://localhost:44394/Course/cm/@(Model.course.CustomUrl)</label>
+                        <label for="basic-url" class="text-black-50 fs-5" id="basic-url">你可以經由下方網址宣傳課程： https://localhost:44394/Course/cm/@(Model.course.CustomUrl)</label>
                     </div>
                 </form>
                 <div class="row m-3">
