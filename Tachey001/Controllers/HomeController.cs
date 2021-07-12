@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using CloudinaryDotNet;
@@ -7,6 +8,7 @@ using CloudinaryDotNet.Actions;
 using Microsoft.AspNet.Identity;
 using Tachey001.AccountModels;
 using Tachey001.Service;
+using Tachey001.Util;
 using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
@@ -78,12 +80,23 @@ namespace Tachey001.Controllers
             ViewBag.List = result.Resources;
             return View();
         }
-        [HttpGet]
-        public ActionResult CourseCard(HttpPostedFileBase file)
+        public JsonResult LongRunningProcess()
         {
-            var result = _consoleService.test();
+            //THIS COULD BE SOME LIST OF DATA
+            int itemsCount = 50;
 
-            return View();
+            for (int i = 0; i <= itemsCount; i++)
+            {
+                //SIMULATING SOME TASK
+                Thread.Sleep(50);
+
+                //CALLING A FUNCTION THAT CALCULATES PERCENTAGE AND SENDS THE DATA TO THE CLIENT
+                //itemsCount 總容量
+                //i現在上傳量
+                Functions.SendProgress("Process in progress...", i, itemsCount);
+            }
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 }

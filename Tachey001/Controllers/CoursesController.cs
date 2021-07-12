@@ -11,12 +11,7 @@ using Tachey001.ViewModel.Course;
 using PagedList;
 using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
-using CloudinaryDotNet;
-using Tachey001.AccountModels;
-using CloudinaryDotNet.Actions;
 using Tachey001.ViewModel.ApiViewModel;
-using Tachey001.ViewModel.SignalR;
-using Microsoft.AspNet.SignalR;
 
 namespace Tachey001.Controllers
 {
@@ -332,6 +327,8 @@ namespace Tachey001.Controllers
             try
             {
                 var ReturnUrl = _courseService.PostVideoStorage(CourseID, Request.Files[0]);
+
+
                 var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
                 return Json(result);
             }

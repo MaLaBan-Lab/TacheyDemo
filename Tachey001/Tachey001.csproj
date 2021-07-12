@@ -311,6 +311,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\ProgressHub.cs" />
     <Compile Include="Issue.aspx.cs">
       <DependentUpon>Issue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -364,6 +365,7 @@
     <Compile Include="Service\PayService.cs" />
     <Compile Include="Service\SearchService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\Functions.cs" />
     <Compile Include="ViewModel\ApiModel\ApiResult.cs" />
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
     <Compile Include="ViewModel\consoleallViewModel.cs" />
@@ -393,7 +395,6 @@
     <Compile Include="ViewModel\CartPartialCardViewModel.cs" />
     <Compile Include="ViewModel\Pay\DiscountCard.cs" />
     <Compile Include="ViewModel\Pay\PayGroup.cs" />
-    <Compile Include="ViewModel\SignalR\ProgressHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AioCheckOut.aspx" />

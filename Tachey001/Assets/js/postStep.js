@@ -2,6 +2,25 @@
     $('[data-toggle="tooltip"]').tooltip();
 });
 
+var progress = $.connection.progressHub;
+
+// Create a function that the hub can call back to display messages.
+progress.client.AddProgress = function (message, percentage) {
+    $(`.toast`).toast('show')
+    $('#ProgressMessage').get(0).innerText = percentage;
+    $('#ProgressPercent').width(percentage);
+
+    if (percentage == "100%") {
+        $(`.toast`).toast('hide')
+        $('#ProgressMessage').get(0).innerText = '0%';
+        $('#ProgressPercent').width('0%');
+    }
+};
+
+$.connection.hub.start().done(function () {
+    var connectionId = $.connection.hub.id;
+});
+
 var CourseId = $("#course_CourseID").val();
 
 let titleContent = [
@@ -272,7 +291,6 @@ function postStep(num) {
                 var val = $("#course_CustomUrl").val();
                 $("#basic-url").text(`你可以經由下方網址宣傳課程： https://localhost:44394/Course/cm/${val}`)
             }
-            console.log(response.ErrMsg)
             changePage(num + 1)
             StepCheckUpdate(CourseId)
             PostToast(num, response.ErrMsg)
@@ -283,11 +301,10 @@ function postStep(num) {
     })
 }
 
-$(`.toast`).toast('show')
 
 function PostToast(Num, Msg) {
     $('#PostMsgBox').append(`
-        <div class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" id="toast${Num}">
+        <div class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" id="toast${Num}">
             <div class="toast-header">
                 <strong class="mr-auto">提示訊息</strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -301,6 +318,37 @@ function PostToast(Num, Msg) {
     `)
 
     $(`#toast${Num}`).toast('show')
+    setTimeout(function () {
+        $(`#toast${Num}`).remove();
+    }, 2500);
+}
+
+function FilePostToast(Num) {
+    $('#PostMsgBox').append(`
+        <div class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" id="toast${Num}">
+            <div class="toast-header">
+                <strong class="mr-auto">提示訊息</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body d-flex mx-5" id="toast-body-${Num}">
+                <p class="mr-1">檔案上傳中 ... </p>
+                <div class="spinner-border text-secondary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    `)
+
+    $(`#toast${Num}`).toast('show')
+}
+
+function DelToast(Num) {
+    $(`#toast-body-${Num}`).html("<p class=''>檔案上傳成功</p>")
+    setTimeout(function () {
+        $(`#toast${Num}`).animate().remove();
+    }, 2500);
 }
 
 //更新步驟9
@@ -320,23 +368,20 @@ function StepCheckUpdate(CourseId) {
 //上傳Title圖片
 $("#TitlePageImage").change(function () {
     var CourseId = $("#TitlePageImage").get(0).dataset.courseid;
-    var TitleImagespinner = $("#TitleImage-spinner");
-    TitleImagespinner.removeClass("invisible");
 
     var result = document.getElementById("TitlePageImage").files[0]
     var data = new FormData();
     data.append("TitlePageImageUpload", result);
 
+    FilePostToast(1);
     $.ajax({
-
         type: "Post",
         url: `/Courses/CoursePhotoUpload?CourseId=${CourseId}`,
         data: data,
         contentType: false,
         processData: false,
         success: function (response) {
-            TitleImagespinner.addClass("invisible");
-            alert("上傳網址 : " + response.ErrMsg);
+            DelToast(1);
         }
     })
 
@@ -358,24 +403,35 @@ function readURL(input) {
 //上傳預覽影片
 $("#previewVideo").change(function () {
     var CourseId = $("#previewVideo").get(0).dataset.courseid;
-    var preVideoSpinner = $("#preVideo-spinner");
-    preVideoSpinner.removeClass("invisible");
 
     var result = document.getElementById("previewVideo").files[0]
     var data = new FormData();
     data.append("PreviewVideoUpload", result);
 
+    FilePostToast(6);
     $.ajax({
-
         type: "Post",
         url: `/Courses/CourseVideoUpload?CourseId=${CourseId}`,
         data: data,
         contentType: false,
         processData: false,
         success: function (response) {
-            preVideoSpinner.addClass("invisible");
-            alert("上傳網址 : " + response.ErrMsg);
-        }
+            DelToast(6);
+        },
+        //xhr: function () {
+        //    var xhr = new window.XMLHttpRequest(); // 建立xhr(XMLHttpRequest)物件
+        //    xhr.upload.addEventListener("progress", function (progressEvent) { // 監聽ProgressEvent
+        //        if (progressEvent.lengthComputable) {
+        //            var percentComplete = progressEvent.loaded / progressEvent.total;
+        //            var percentVal = Math.round(percentComplete * 100) + "%";
+
+        //            $(`.toast`).toast('show')
+        //            $('#ProgressMessage').get(0).innerText = percentVal;
+        //            $('#ProgressPercent').width(percentVal);
+        //        }
+        //    }, false);
+        //    return xhr; // 注意必須將xhr(XMLHttpRequest)物件回傳
+        //}
     })
 
     readVideoURL(this)

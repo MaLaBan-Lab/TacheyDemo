@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using CloudinaryDotNet.Actions;
 using Tachey001.AccountModels;
 using Tachey001.Models;
 using Tachey001.Repository;
+using Tachey001.Util;
 using Tachey001.ViewModel.Course;
 
 namespace Tachey001.Service
@@ -500,7 +502,10 @@ namespace Tachey001.Service
                 Folder = $"Course/{CourseId}"
             };
 
+            var f = new StreamReader(file.InputStream).ReadToEnd();
+            
             var CallBackUrl = _cloudinary.UploadLarge(uploadParams).SecureUrl.ToString();
+            //Functions.SendProgress("影片上傳中 ... ", , file.ContentLength);
 
             var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.PreviewVideo = CallBackUrl;
