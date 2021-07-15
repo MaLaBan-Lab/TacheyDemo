@@ -334,7 +334,6 @@ namespace Tachey001.Service
         }
         public List<CartPartialCardViewModel> GetCartPartialViewModel(string memberId)
         {
-
             return _dapperRepository.GetCartPartialViewModel(memberId);
         }
         public List<CourseCardViewModel> GetCourseCardViewModels()

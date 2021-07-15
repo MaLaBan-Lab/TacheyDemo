@@ -417,21 +417,7 @@ $("#previewVideo").change(function () {
         processData: false,
         success: function (response) {
             DelToast(6);
-        },
-        //xhr: function () {
-        //    var xhr = new window.XMLHttpRequest(); // 建立xhr(XMLHttpRequest)物件
-        //    xhr.upload.addEventListener("progress", function (progressEvent) { // 監聽ProgressEvent
-        //        if (progressEvent.lengthComputable) {
-        //            var percentComplete = progressEvent.loaded / progressEvent.total;
-        //            var percentVal = Math.round(percentComplete * 100) + "%";
-
-        //            $(`.toast`).toast('show')
-        //            $('#ProgressMessage').get(0).innerText = percentVal;
-        //            $('#ProgressPercent').width(percentVal);
-        //        }
-        //    }, false);
-        //    return xhr; // 注意必須將xhr(XMLHttpRequest)物件回傳
-        //}
+        }
     })
 
     readVideoURL(this)

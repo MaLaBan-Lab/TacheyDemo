@@ -570,10 +570,18 @@ namespace Tachey001.Service
         {
             var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             if (result.MemberID == MemberId) return true;
-            var oID = _tacheyRepository.Get<Order>(x => x.MemberID == MemberId);
-            if (oID == null) return false;
-            var oD = _tacheyRepository.Get<Order_Detail>(x => x.OrderID == oID.OrderID && x.CourseID == CourseId); ;
-            return oD == null ? false : true;
+            var oID = _tacheyRepository.GetAll<Order>(x => x.MemberID == MemberId);
+            if (oID.Count()==0) return false;
+            var oDList = new List<Order_Detail>();
+            foreach (var item in oID)
+            {
+                var oD = _tacheyRepository.Get<Order_Detail>(x => x.OrderID == item.OrderID && x.CourseID == CourseId);
+                if (oD != null)
+                {
+                    oDList.Add(oD);
+                }
+            }
+            return oDList.Count() == 0 ? false : true;
         }
         //取得是否加入購物車
         public bool GetCarted(string MemberId, string CourseId)
