@@ -10,6 +10,7 @@ using Ecpay.EInvoice.Integration.Enumeration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Tachey001.Models;
+using Tachey001.Service.Pay;
 
 
 //一般開立發票
@@ -17,6 +18,7 @@ namespace Issue
 {
     public partial class Issue : System.Web.UI.Page
     {
+        PayService _payService = new PayService();
         protected void Page_Load(object sender, EventArgs e)
         {
             //1. 設定開立發票資訊
@@ -100,6 +102,11 @@ namespace Issue
 
                     var invoice = new Invoice { OrderID = OrderID, InvoiceType = "電子發票", InvoiceName = invoice_name, InvoiceEmail = invoice_email, InvoiceNum = obj.InvoiceNumber, InvoiceDate = DateTime.Parse(obj.InvoiceDate), InvoiceRandomNum = new Random().Next(0, 9999) };
                     _context.Invoice.Add(invoice);
+
+                    if (order.UsePoint == "use")
+                    {
+                        _payService.DelPoint(order.MemberID);
+                    }
 
                     var o1 = _context.Order.Find(OrderID);
                     o1.OrderStatus = "success";

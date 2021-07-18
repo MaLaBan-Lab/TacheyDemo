@@ -10,10 +10,12 @@ namespace Tachey001.Service.Pay
 {
     public class PayService
     {
+        private TacheyContext _context;
         private TacheyRepository _tacheyRepository;
         //初始化資料庫邏輯
         public PayService()
         {
+            _context = new TacheyContext();
             _tacheyRepository = new TacheyRepository(new TacheyContext());
         }
         public void CreateOrder(string orderId, string currentId, string payMethod, string ticketId, string usepoint)
@@ -92,7 +94,7 @@ namespace Tachey001.Service.Pay
         }
         public int GetOwnerPoint(string currentId)
         {
-            var point = _tacheyRepository.GetAll<Point>(x => x.MemberID == currentId);
+            var point = _tacheyRepository.GetAll<Point>(x => x.MemberID == currentId && x.Status ==false);
             var totalPoint = 0;
             foreach (var item in point)
             {
@@ -100,6 +102,34 @@ namespace Tachey001.Service.Pay
             }
 
             return totalPoint;
+        }
+        public void DelPoint(string currentId)
+        {
+            var point = _tacheyRepository.GetAll<Point>(x => x.MemberID == currentId && x.Status == false);
+            var totalPoint = 0;
+            Point lastpoint = new Point();
+            foreach (var item in point)
+            {
+                totalPoint = totalPoint + item.PointNum;
+                var p = _context.Point.Find(item.PointID);
+                p.Status = true;
+                lastpoint = item;
+            }
+            if (totalPoint % 100 != 0)
+            {
+                Point p = new Point
+                {
+                    PointID = lastpoint.PointID + 1,
+                    MemberID = currentId,
+                    PointName = lastpoint.PointName,
+                    PointNum = totalPoint%100,
+                    GetTime = lastpoint.GetTime,
+                    Deadline = lastpoint.Deadline,
+                    Status = false
+                };
+                _context.Point.Add(p);
+            }
+            _context.SaveChanges();
         }
     }
 }

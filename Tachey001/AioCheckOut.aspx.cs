@@ -59,6 +59,7 @@ namespace text
                     discount = 1;
                     var totalpoint = _payService.GetOwnerPoint(order.MemberID) / 100;
                     product_price = product_price - totalpoint;
+                 
                 }
                 else
                     discount = 1;
