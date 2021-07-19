@@ -113,8 +113,6 @@ namespace Issue
             else
             {
                 temp = json;
-
-
             }
             Response.Redirect("~/Pay/success");
             Response.Write(temp);

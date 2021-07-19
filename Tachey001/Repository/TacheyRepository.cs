@@ -10,7 +10,7 @@ namespace Tachey001.Repository
 {
     public class TacheyRepository
     {
-        private DbContext _context;
+        public readonly DbContext _context;
         public TacheyRepository(DbContext context)
         {
             _context = context;

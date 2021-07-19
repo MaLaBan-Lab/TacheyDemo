@@ -366,6 +366,7 @@
     <Compile Include="Service\SearchService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\Functions.cs" />
+    <Compile Include="ViewModel\ApiModel\OperationResult.cs" />
     <Compile Include="ViewModel\ApiModel\ApiResult.cs" />
     <Compile Include="ViewModel\Card_highlight_Group.cs" />
     <Compile Include="ViewModel\consoleallViewModel.cs" />

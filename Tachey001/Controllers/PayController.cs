@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Tachey001.Models;
 using Tachey001.Service;
 using Tachey001.Service.Pay;
+using Tachey001.ViewModel.ApiViewModel;
 using Tachey001.ViewModel.Pay;
 
 namespace Tachey001.Controllers
@@ -50,19 +51,18 @@ namespace Tachey001.Controllers
         public ActionResult create(string ticketId ,string usepoint)
         {
             var currentId = User.Identity.GetUserId();
-            var orderID = "Tachey" + new Random().Next(0, 99999).ToString();
-            if (ticketId != null)
-                _payService.CreateOrder(orderID, currentId, "信用卡", ticketId, null);
-            else if (usepoint == "use")
-                _payService.CreateOrder(orderID, currentId, "信用卡", "0", usepoint);
-            else
-                _payService.CreateOrder(orderID, currentId, "信用卡", "0", null);
 
-            _payService.CreateOrder_Detail(orderID, currentId);
-            Session["ID"] = orderID;
-            //var test = usepoint;
-            return Redirect("~/AioCheckOut.aspx");
-            //return View();
+            var result = _payService.OrderCreate(currentId, ticketId, usepoint);
+
+            if (result.IsSuccessful)
+            {
+                Session["ID"] = result.Exception;
+                return Redirect("~/AioCheckOut.aspx");
+            }
+            else
+            {
+                return RedirectToAction("Error", "Pay");
+            }
         }
         public ActionResult Error()
         {
@@ -79,14 +79,7 @@ namespace Tachey001.Controllers
         }
         public ActionResult success()
         {
-            var currentId = User.Identity.GetUserId();
-            var shoppingCarts = _context.ShoppingCart.Where(x => x.MemberID == currentId);
-            foreach (var item in shoppingCarts)
-            {
-                var temp = _context.ShoppingCart.Find(currentId, item.CourseID);
-                _context.ShoppingCart.Remove(temp);
-            }
-            _context.SaveChanges();
+
             return RedirectToAction("Orders", "Member");
         }
     }
