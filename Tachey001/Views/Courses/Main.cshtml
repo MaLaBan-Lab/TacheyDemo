@@ -18,8 +18,8 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="@Url.Action("Group","Courses", new { detailid = Model.Main_Video.Course.CategoryDetailsID})">@Model.Main_Video.CategoryName</a></li>
-                <li class="breadcrumb-item  text-white active" aria-current="page">@Model.Main_Video.DetailName</li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("FindCategory","Courses", new { category = Model.Main_Video.CategoryName})">@Model.Main_Video.CategoryName</a></li>
+                <li class="breadcrumb-item  text-white active"><a href="@Url.Action("FindCategory","Courses", new { category = Model.Main_Video.DetailName})">@Model.Main_Video.DetailName</a></li>
             </ol>
         </nav>
         <!-- title 區塊 -->
@@ -245,42 +245,42 @@
 <!-- seletor -->
 <div class="container">
     <div class="seletor mb-5">
-        @if (ViewBag.Id == 1)
+        @if (ViewBag.type == "Intro")
         {
             <div class="seletor-item seletor-ckecked" id="main">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.Course.CourseID})">課程簡介</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = Model.Main_Video.Course.CourseID, type = "Intro"})">課程簡介</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="main">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.Course.CourseID})">課程簡介</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = Model.Main_Video.Course.CourseID, type = "Intro"})">課程簡介</a>
             </div>
         }
 
-        @if (ViewBag.Id == 2)
+        @if (ViewBag.type == "Score")
         {
             <div class="seletor-item seletor-ckecked" id="feedbacks">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.Course.CourseID})">課程評價</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new {id = Model.Main_Video.Course.CourseID, type = "Score"})">課程評價</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="feedbacks">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.Course.CourseID})">課程評價</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = Model.Main_Video.Course.CourseID, type = "Score"})">課程評價</a>
             </div>
         }
 
-        @if (ViewBag.Id == 3)
+        @if (ViewBag.type == "Ques")
         {
             <div class="seletor-item seletor-ckecked" id="discussions">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})">問題討論</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new {id = Model.Main_Video.Course.CourseID, type = "Ques"})">問題討論</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="discussions">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})">問題討論</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new {id = Model.Main_Video.Course.CourseID, type = "Ques"})">問題討論</a>
             </div>
         }
 
@@ -301,7 +301,7 @@
     </div>
 </div>
 
-@if (ViewBag.Id == 1)
+@if (ViewBag.type == "Intro")
 {
     @Styles.Render("~/Assets/css/intro.css")
     <!--課程介紹-->
@@ -509,7 +509,7 @@
         </div>
     </div>
 }
-else if (ViewBag.Id == 2)
+else if (ViewBag.type == "Score")
 {
     @Styles.Render("~/Assets/css/score.css")
     <!--課程評價-->
@@ -808,7 +808,7 @@ else if (ViewBag.Id == 2)
         @Scripts.Render("~/Assets/js/Main.js")
     }
 }
-else if (ViewBag.Id == 3)
+else if (ViewBag.type == "Ques")
 {
 
     <!--問題討論-->

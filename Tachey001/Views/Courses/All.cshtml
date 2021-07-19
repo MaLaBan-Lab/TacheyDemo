@@ -1,17 +1,12 @@
-﻿@model IPagedList<Tachey001.ViewModel.consoleViewModel>
+﻿@model Tachey001.ViewModel.consoleallViewModel
 @{
     ViewBag.Title = "All";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml"; }
 
-@Styles.Render("~/Assets/css/all.css")
-@Styles.Render("~/Assets/css/card.css")
-@Styles.Render("~/Content/PagedList.css")
-
-
-@*@section topcss
-    {
-        <link href="~/Content/PagedList.css">
-    }*@
+@section topCSS{
+    @Styles.Render("~/Assets/css/all.css")
+    @Styles.Render("~/Content/PagedList.css")
+}
 
 
 <div class="container">
@@ -80,11 +75,21 @@
         </div>
     </div>
     <div id="proposalAttachments">
-        @Html.Partial("PageListCardTemplate", Model)
+        <div class="row mt-5" id="proposalAttachments">
+            @foreach (var item in Model.pageConsole)
+            {
+                item.favorite = Model.GetOwners.Any(x => x.CourseID == item.CourseID);
+                @Html.Partial("CardTemplate", item)
+            }
+
+        </div>
+        <div class="row mx-auto">
+            @Html.PagedListPager(Model.pageConsole, page => Url.Action("All", "Courses", new { page }))
+        </div>
     </div>
 </div>
 
 @section endJS{
-
+    @Scripts.Render("~/Assets/js/Owner.js")
     @Scripts.Render("~/Assets/js/CourseAll.js")
 }

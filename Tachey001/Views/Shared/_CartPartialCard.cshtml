@@ -1,5 +1,9 @@
-﻿
-@model Tachey001.ViewModel.CartPartialCardViewModel
+﻿@model Tachey001.ViewModel.CartPartialCardViewModel
+
+@{ 
+    var url = Model.CustomUrl == null ? Model.CourseID : Model.CustomUrl;
+}
+
 <div>
     @*<div class="purchase-plans-header flex marg-t-20">
             <span class="course-name w-25">課程名稱</span>
@@ -10,12 +14,12 @@
     <section class="sc-1bv2ylx-0 gQwyiQ marg-t-20">
         <div class="top-container pad-tb-15 pad-rl-15 border">
             <div class="course-info flex flex-1">
-                <a href="/courses/5ce99ccdea2d0500209afca2">
+                <a href="@Url.Action("Main", "Courses", new { id = url })">
                     <img class="cx4oas-0  course-cover-img marg-b-5 marg-r-15 loaded" src="@Model.TitlePageImageURL">
                 </a>
                 <div class="title-col">
                     <span class="course-title">
-                        <a href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.CourseID})" class="a-color text-decoration-none">@Model.Title</a>
+                        <a href="@Url.Action("Main", "Courses", new { id = url })" class="a-color text-decoration-none">@Model.Title</a>
                     </span>
 
                 </div>

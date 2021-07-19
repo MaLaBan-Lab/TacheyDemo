@@ -41,22 +41,24 @@ namespace Tachey001.Controllers
             var currentId = User.Identity.GetUserId();
             ViewBag.UserId = currentId;
 
+
             var ConsoleViews = _consoleService.GetConsoleData(currentId);
             var ConsoleViews1 = _consoleService.GetConsoleData1(currentId);
-
             var AllCourses = _courseService.GetCourseData(currentId);
+            var owner = _consoleService.GetOwners(currentId);
 
             var result = new consoleallViewModel
             {
                 consoleViews = ConsoleViews,
                 consoleViews1 = ConsoleViews1,
-                allCourses = AllCourses
+                allCourses = AllCourses,
+                GetOwners = owner
             };
 
             return View(result);
         }
         //刪除指定課程卡片
-        public ActionResult DeleteCourse(int? id, string CourseId)
+        public ActionResult DeleteCourse(string CourseId)
         {
             _courseService.DeleteCurrentIdCourseData(CourseId);
 

@@ -1,9 +1,9 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@*@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
 
     <div class="container">
         <div class="row">
@@ -11,46 +11,47 @@
                 <div class="row m-3 mb-2 border-bottom">
                     <button type="button" class="btn btn-hahow-green btn-lg mb-3" onclick="newChapter()">新增章節</button>
                 </div>
-                <div class="drag-sort-enable row justify-content-center text-secondary" id="chapter">
+                <form action="Step" method="post" id="Step3Form">
+                    @Html.HiddenFor(m => m.course.CourseID)
+                    <div class="drag-sort-enable row justify-content-center text-secondary" id="chapter">
 
-                    @foreach (var ch in Model.courseChapter)
-                    {
-                        <div class="col-11 border my-1 py-2 chapterBox">
-                            <h4>
-                                <i class="fas fa-align-justify mr-2"></i>
-                                <span class="chapterName">章節1</span>
-                                <input type="text" class="w-75 chapterInput" name="1" value="@ch.ChapterName">
-                                <i class="far fa-window-close" onclick="deleteChapter()"></i>
-                            </h4>
-                            <hr>
-                            <h5 class="text-right">
-                                <span>-新增單元</span>
-                                <i class="far fa-plus-square" onclick="newUnit()"></i>
-                            </h5>
-                            <div class="drag-sort-enable unitBox">
-
-                                @foreach (var un in Model.courseUnit)
-                                {
-                                    if (ch.ChapterID == un.ChapterID)
-                                    {
-                                <h5 class="text-right">
-                                    @*<input type="text" class="invisible w-25" name="1" value="@un.CourseURL">*@
+                        @foreach (var ch in Model.courseChapter)
+                        {
+                            <div class="col-11 border my-1 py-2 chapterBox">
+                                <h4>
                                     <i class="fas fa-align-justify mr-2"></i>
-                                    <span>單元1</span>
-                                    <input type="text" class="w-75" name="1" value="@un.UnitName">
-                                    <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+                                    <span class="chapterName">章節1</span>
+                                    <input type="text" class="w-75 chapterInput" name="1" value="@ch.ChapterName">
+                                    <i class="far fa-window-close" onclick="deleteChapter()"></i>
+                                </h4>
+                                <hr>
+                                <h5 class="text-right">
+                                    <span>-新增單元</span>
+                                    <i class="far fa-plus-square" onclick="newUnit()"></i>
                                 </h5>
+                                <div class="drag-sort-enable unitBox">
+
+                                    @foreach (var un in Model.courseUnit)
+                                    {
+                                        if (ch.ChapterID == un.ChapterID)
+                                        {
+                                            <h5 class="text-right">
+                                                <i class="fas fa-align-justify mr-2"></i>
+                                                <span>單元1</span>
+                                                <input type="text" class="w-75" name="1" value="@un.UnitName">
+                                                <i class="far fa-window-close mx-1" onclick="deleteUnit()"></i>
+                                            </h5>
+                                        }
                                     }
-                                }
 
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
 
-
-                </div>
+                    </div>
+                </form>
                 <div class="row m-3">
-                    <input type="submit" value="儲存，下一步" class="btn btn-outline-secondary btn-lg px-5" />
+                    <input type="button" onclick="postStep(3)" value="下一步" class="btn btn-outline-secondary btn-lg px-5" />
                 </div>
             </div>
             <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
@@ -98,4 +99,4 @@
         </div>
     </div>
 
-}
+@*  *@}

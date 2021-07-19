@@ -1,4 +1,139 @@
-﻿//課程章節單元
+﻿$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+var progress = $.connection.progressHub;
+
+// Create a function that the hub can call back to display messages.
+progress.client.AddProgress = function (message, percentage) {
+    $(`.toast`).toast('show')
+    $('#ProgressMessage').get(0).innerText = percentage;
+    $('#ProgressPercent').width(percentage);
+
+    if (percentage == "100%") {
+        $(`.toast`).toast('hide')
+        $('#ProgressMessage').get(0).innerText = '0%';
+        $('#ProgressPercent').width('0%');
+    }
+};
+
+$.connection.hub.start().done(function () {
+    var connectionId = $.connection.hub.id;
+});
+
+var CourseId = $("#course_CourseID").val();
+
+let titleContent = [
+    {
+        h2: "歡迎加入 Tachey 好老師的行列",
+        h4: "跟著 Tachey 一步一步完成提案吧！",
+    },
+    {
+        h2: "好的標題和敘述很重要！",
+        h4: "提供的資訊越詳細，越能提高學生上課的意願！",
+    },
+    {
+        h2: "哪些學生適合這堂課？",
+        h4: "課程提供越多資訊，越會提高學生上課的意願喔！",
+    },
+    {
+        h2: "預計的單元架構與作業",
+        h4: "安排單元架構，讓學生清楚看見學習過程的每一步，並設計作業練習",
+    },
+    {
+        h2: "來定個吸引人的價格吧！",
+        h4: "價格低一點，學生多一點！",
+    },
+    {
+        h2: "加上更詳細的課程內容！",
+        h4: "圖片加上文字，發揮你的創意！",
+    },
+    {
+        h2: "用募資影片簡介課程內容！",
+        h4: "影片包含主題、適合族群和課程目標",
+    },
+    {
+        h2: "自訂專屬的行銷網址",
+        h4: "以此網址行銷宣傳可獲得較高的分潤喔！",
+    },
+    {
+        h2: "老師開課身份確認",
+        h4: "",
+    },
+    {
+        h2: "恭喜你成功地完成了提案編輯囉！",
+        h4: "在送出審核前做最後的檢查與預覽吧",
+    },
+];
+
+//更換Title文字
+function changeStep(num) {
+    let titleContentH2 = document.getElementById("titleContentH2");
+    let titleContentH4 = document.getElementById("titleContentH4");
+
+    titleContentH2.innerText = titleContent[num].h2;
+    titleContentH4.innerText = titleContent[num].h4;
+}
+
+//更換進度條
+$('.stepBtn').click(function () {
+    var val = $(this).get(0).innerText
+    $("#progress-bar").attr({ style: `width:${val * 11}%` })
+
+    $('.stepBtn').each(function (index) {
+        if (index <= val) {
+            $(this).addClass("bg-hahow-green")
+            $(this).removeClass("bg-hahow-orange")
+        } else {
+            $(this).addClass("bg-hahow-orange")
+            $(this).removeClass("bg-hahow-green")
+        }
+    })
+
+    changeStep(val)
+    
+})
+
+//更換步驟
+function changePage(val) {
+    $('.tab-pane').each(function (index) {
+        if (index == val) {
+            $(this).addClass("active")
+        } else {
+            $(this).removeClass("active")
+        }
+    })
+
+    $('.tab-btn').each(function (index) {
+        if (index == val) {
+            $(this).addClass("active")
+        } else {
+            $(this).removeClass("active")
+        }
+    })
+
+    $("#progress-bar").attr({ style: `width:${val * 11}%` })
+
+    $('.stepBtn').each(function (index) {
+        if (index <= val) {
+            $(this).addClass("bg-hahow-green")
+            $(this).removeClass("bg-hahow-orange")
+        } else {
+            $(this).addClass("bg-hahow-orange")
+            $(this).removeClass("bg-hahow-green")
+        }
+    })
+
+    changeStep(val)
+    $("html,body").animate(
+        {
+            scrollTop: 0,
+        },
+        600
+    );
+}
+
+//課程章節單元
 function enableDragSort(listClass) {
     const sortableLists = document.getElementsByClassName(listClass);
     Array.prototype.map.call(sortableLists, (list) => { enableDragList(list) });
@@ -139,27 +274,114 @@ function sortUpdate() {
     })
 }
 
+//POST Step Fun
+function postStep(num) {
+    var intro = $(".ck-content").get(0).innerHTML;
+    $("* [name='course.Introduction']").html(intro);
+    var data = new FormData($(`#Step${num}Form`)[0]);
+
+    $.ajax({
+        type: "POST",
+        url: `/Courses/Step?id=${num}`,
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (num == 7) {
+                var val = $("#course_CustomUrl").val();
+                $("#basic-url").text(`你可以經由下方網址宣傳課程： https://localhost:44394/Course/cm/${val}`)
+            }
+            changePage(num + 1)
+            StepCheckUpdate(CourseId)
+            PostToast(num, response.ErrMsg)
+        },
+        error: function (err) {
+            console.log(err.ErrMsg)
+        }
+    })
+}
+
+
+function PostToast(Num, Msg) {
+    $('#PostMsgBox').append(`
+        <div class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" id="toast${Num}">
+            <div class="toast-header">
+                <strong class="mr-auto">提示訊息</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <p class="mx-5">${Msg}</p>
+            </div>
+        </div>
+    `)
+
+    $(`#toast${Num}`).toast('show')
+    setTimeout(function () {
+        $(`#toast${Num}`).remove();
+    }, 2500);
+}
+
+function FilePostToast(Num) {
+    $('#PostMsgBox').append(`
+        <div class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" id="toast${Num}">
+            <div class="toast-header">
+                <strong class="mr-auto">提示訊息</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body d-flex mx-5" id="toast-body-${Num}">
+                <p class="mr-1">檔案上傳中 ... </p>
+                <div class="spinner-border text-secondary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    `)
+
+    $(`#toast${Num}`).toast('show')
+}
+
+function DelToast(Num) {
+    $(`#toast-body-${Num}`).html("<p class=''>檔案上傳成功</p>")
+    setTimeout(function () {
+        $(`#toast${Num}`).animate().remove();
+    }, 2500);
+}
+
+//更新步驟9
+function StepCheckUpdate(CourseId) {
+    return (
+        $.ajax({
+            type: "Get",
+            url: `/Courses/StepCheck?CourseId=${CourseId}`,
+            success: function (res) {
+                $('#StepCheck-Container').html(res);
+            }
+        })
+    )
+}
+
 //步驟1專用
 //上傳Title圖片
 $("#TitlePageImage").change(function () {
     var CourseId = $("#TitlePageImage").get(0).dataset.courseid;
-    var TitleImagespinner = $("#TitleImage-spinner");
-    TitleImagespinner.removeClass("invisible");
 
     var result = document.getElementById("TitlePageImage").files[0]
     var data = new FormData();
     data.append("TitlePageImageUpload", result);
 
+    FilePostToast(1);
     $.ajax({
-
         type: "Post",
         url: `/Courses/CoursePhotoUpload?CourseId=${CourseId}`,
         data: data,
         contentType: false,
         processData: false,
         success: function (response) {
-            TitleImagespinner.addClass("invisible");
-            alert("上傳網址 : " + response.ErrMsg);
+            DelToast(1);
         }
     })
 
@@ -181,24 +403,35 @@ function readURL(input) {
 //上傳預覽影片
 $("#previewVideo").change(function () {
     var CourseId = $("#previewVideo").get(0).dataset.courseid;
-    var preVideoSpinner = $("#preVideo-spinner");
-    preVideoSpinner.removeClass("invisible");
 
     var result = document.getElementById("previewVideo").files[0]
     var data = new FormData();
     data.append("PreviewVideoUpload", result);
 
+    FilePostToast(6);
     $.ajax({
-
         type: "Post",
         url: `/Courses/CourseVideoUpload?CourseId=${CourseId}`,
         data: data,
         contentType: false,
         processData: false,
         success: function (response) {
-            preVideoSpinner.addClass("invisible");
-            alert("上傳網址 : " + response.ErrMsg);
-        }
+            DelToast(6);
+        },
+        //xhr: function () {
+        //    var xhr = new window.XMLHttpRequest(); // 建立xhr(XMLHttpRequest)物件
+        //    xhr.upload.addEventListener("progress", function (progressEvent) { // 監聽ProgressEvent
+        //        if (progressEvent.lengthComputable) {
+        //            var percentComplete = progressEvent.loaded / progressEvent.total;
+        //            var percentVal = Math.round(percentComplete * 100) + "%";
+
+        //            $(`.toast`).toast('show')
+        //            $('#ProgressMessage').get(0).innerText = percentVal;
+        //            $('#ProgressPercent').width(percentVal);
+        //        }
+        //    }, false);
+        //    return xhr; // 注意必須將xhr(XMLHttpRequest)物件回傳
+        //}
     })
 
     readVideoURL(this)
@@ -240,17 +473,3 @@ $("#course_CustomUrl").change(function () {
         }
     })
 })
-
-//步驟8專用
-//$("input[name='exampleRadios']").click(function () {
-//    var val = $("input[name='exampleRadios']:checked").val()
-//    $("#LecturerBtn").removeAttr("disabled")
-
-//    //$.ajax({
-//    //    type: "Get",
-//    //    url: `/api/MemberAction/AddLecturer?Id=${val}`,
-//    //    success: function (res) {
-
-//    //    }
-//    //})
-//})

@@ -31,8 +31,8 @@ namespace Tachey001.Service
         }
         public List<CourseCardViewModel> GetCourseCardViewModels(string MemberId)
         {
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            var course = _tacheyRepository.GetAll<Models.Course>();
+            var member = _tacheyRepository.GetAll<Member>();
+            var course = _tacheyRepository.GetAll<Course>();
             var coursescore = _tacheyRepository.GetAll<CourseScore>();
             var owner = _tacheyRepository.GetAll<Owner>(x => x.MemberID == MemberId);
 
@@ -44,7 +44,8 @@ namespace Tachey001.Service
             });
 
             var all = from c in course
-                         join m in member on c.MemberID equals m.MemberID
+                         join mem in member on c.MemberID equals mem.MemberID into gj
+                         from m in gj.DefaultIfEmpty()
                          select new CourseCardViewModel
                          {
                              CourseID = c.CourseID,

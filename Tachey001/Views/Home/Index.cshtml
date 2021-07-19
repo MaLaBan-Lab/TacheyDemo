@@ -301,9 +301,11 @@
 
 
     <div class="row">
-        @foreach (var item in Model.courseCardViewModels)
+        @foreach (var item in Model.consoleViewModels)
         {
-            @Html.Partial("_CourseCardPartial", item)}
+            item.favorite = Model.GetOwners.Any(x => x.CourseID == item.CourseID);
+            @Html.Partial("_CourseCardPartial", item)
+        }
     </div>
 
 </div>

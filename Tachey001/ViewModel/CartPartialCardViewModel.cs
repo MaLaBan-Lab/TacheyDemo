@@ -10,9 +10,9 @@ namespace Tachey001.ViewModel
     {
         public string Title { get; set; }
         public string TitlePageImageURL { get; set; }
-
         public bool? CreateVerify { get; set; }
         public decimal OriginalPrice { get; set; }
         public string CourseID { get; set; }
+        public string CustomUrl { get; set; }
     }
 }

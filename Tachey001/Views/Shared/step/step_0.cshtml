@@ -1,7 +1,7 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 <div class="container">
     <div class="row justify-content-center my-3">
-        <div class="col-5 text-center text-muted text-mc">
+        <div class="col-6 text-center text-muted text-mc">
             <h6>接下來我們會一步步的開始編輯課程，主要的內容包含了</h6>
         </div>
     </div>
@@ -82,14 +82,10 @@
             </div>
         </div>
     </div>
-    @using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
-    {
-        @Html.AntiForgeryToken()
+    
         <div class="row justify-content-center">
             <div class="col-3 btn btn-hahow-green m-5 p-0">
-                <button type="submit" class=" btn btn-hahow-green w-100 h-100">開始編輯</button>
-                @*@Html.ActionLink("點擊開課", "Step1", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }, new { @class = "text-decoration-none text-white w-100 h-100" })*@
+                <button onclick="changePage(1)" type="button" class=" btn btn-hahow-green w-100 h-100">開始編輯</button>
             </div>
         </div>
-    }
 </div>

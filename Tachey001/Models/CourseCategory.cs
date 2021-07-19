@@ -16,5 +16,8 @@ namespace Tachey001.Models
         [Required]
         [StringLength(40)]
         public string CategoryName { get; set; }
+
+        [StringLength(40)]
+        public string CategoryEngName { get; set; }
     }
 }
