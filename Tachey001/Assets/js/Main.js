@@ -30,3 +30,31 @@ window.onload = function () {
 
     });
 }
+
+
+
+//POST Step Fun
+function postScore(CId) {
+    var data = new FormData($(`#ScorePost`)[0]);
+    console.dir(data);
+
+    $.ajax({
+        type: "POST",
+        url: `/Courses/CreateScore?CourseId=${CId}`,
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if ($('#emptyScore') != undefined) {
+                $('#emptyScore').remove();
+            }
+            $('#ScoreContainer').append(response)
+            $('#scoreBtn').attr('disabled', true)
+
+            $('#exampleModal').modal('hide')
+        },
+        error: function (err) {
+            console.log(err.ErrMsg)
+        }
+    })
+}

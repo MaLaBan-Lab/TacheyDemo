@@ -7,6 +7,7 @@ namespace Tachey001.ViewModel.Course
 {
     public class ScoreCard
     {
+        public string MemberID { get; set; }
         public string Name { get; set; }
         public string Photo { get; set; }
         public int? Score { get; set; }

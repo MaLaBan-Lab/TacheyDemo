@@ -99,7 +99,7 @@
 }
 
 .line-height-30 {
-    line-height: 30px;
+    line-height: 30px !important;
 }
 
 .card-img-top {
@@ -146,6 +146,18 @@
     color: #FFEB00 !important;
 }
 
+@media (min-width: 1200px){
+    .card-img-top {
+        height: 180px;
+    }
+}
+
+@media (min-width: 991px){
+    .card-img-top {
+        height: 160px;
+    }
+}
+
 @media (min-width: 768px) {
     .cardTitle {
         height: 60px;
@@ -175,6 +187,10 @@
         transform: scale(1.2);
     }
 
+    .card-img-top {
+        height: 180px;
+    }
+
     .card:hover .backgroundBookmarkMove {
         bottom: 5%;
     }
@@ -188,9 +204,9 @@
         background-color: #fa8b00;
     }
 
-        .backgroundBookmark:hover i {
-            color: white;
-        }
+    .backgroundBookmark:hover i {
+        color: white;
+    }
 
     .card-bottom {
         height: 6px;
@@ -218,6 +234,10 @@
 }
 
 @media (max-width: 767px) {
+    .backgroundTape{
+        display:none;
+    }
+
     .card-title-image {
         display: none;
     }
@@ -230,9 +250,9 @@
         background-color: #fa8b00;
     }
 
-        .backgroundBookmark-sm:hover i {
-            color: white;
-        }
+    .backgroundBookmark-sm:hover i {
+        color: white;
+    }
 
     .card-bottom {
         height: 2px;
@@ -240,6 +260,8 @@
 
     .card-img-top {
         width: 90%;
+        height:50px;
+        margin-right: 5px !important;
     }
 
     .card {

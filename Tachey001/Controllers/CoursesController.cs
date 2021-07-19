@@ -282,7 +282,10 @@ namespace Tachey001.Controllers
 
             _courseService.CreateScore(courseScore.PostCourseScore, CourseId, MemberID);
 
-            return RedirectToAction("Main", "Courses", new { id = 2, CourseId = CourseId });
+            var Score = _courseService.GetAllScore(CourseId).First(x=>x.MemberID==MemberID);
+
+            return PartialView("CourseScoreCard", Score);
+            //return RedirectToAction("Main", "Courses", new { id = 2, CourseId = CourseId });
         }
         [HttpPost]
         //課程發問 POST
