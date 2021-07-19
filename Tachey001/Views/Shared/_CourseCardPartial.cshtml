@@ -1,7 +1,7 @@
 ﻿@*回傳資料型別*@
 @model　Tachey001.ViewModel.consoleViewModel
 
-@{ 
+@{
     var url = Model.CustomUrl == null ? Model.CourseID : Model.CustomUrl;
     var col = 3;
 
@@ -9,7 +9,7 @@
     {
         col = 4;
     }
-  }
+}
 @{ var photoUrl = "https://lh3.googleusercontent.com/proxy/OXfpYhZBwg2BRO2Po_gPGwkVLmYVNowH3Va_q5fk62d0dNB9lusU3K79z8QihWT1BCr6XAHN_MaB1Ofw0GtaXjxEPx4HG22LLhAM1lGKRDQbQvkbYEM";
     var titleUrl = "https://www.kphoto.com.tw/image/catalog/Product/ASS/58_slate_grey.gif";
     if (Model.TitlePageImageURL != null)
@@ -19,8 +19,8 @@
     if (Model.Photo != null)
     {
         photoUrl = Model.Photo;
-    } 
- }
+    }
+}
 
 
 
@@ -51,13 +51,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-4 overflow-hidden mb-2 border pic-size"
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-4 overflow-hidden mb-2 border"
                  ">
                 <a href="@Url.Action("Main", "Courses", new { id = url})" class="text-decoration-none p-0 w-100 h-100">
                     <img src="@titleUrl"
-                         class="card-img-top" style="        width: 100%;
-        height: 180px;
-" />
+                         class="card-img-top" style="width: 100%;" />
                     <div class="
                     position-absolute
                     bg-hahow-dark-green
@@ -99,7 +97,7 @@
                     @Model.Title
                 </h4>
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2" style="padding-left: 10px;">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
                 <span class="card-text text-black-50">
                     <span class="star-show">
                         <i class="fas fa-star star-gray position-relative">
@@ -141,24 +139,57 @@
                     <span class="couse-time-before">
                         <i class="far fa-clock"></i>
                     </span>
-                    <span class="course-time">@Model.TotalMinTime</span>分鐘
+                    <span class="course-time"> @Model.TotalMinTime </span>分鐘
                 </span>
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2 pa-10" >
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2 pa-10">
                 <span class="card-text text-black-50 mr-4">
                     <span class="course-people-before">
-                        <i class="far fa-clock"></i>
+                        <i class="fas fa-user-alt"></i>
                     </span>
-                    <span class="course-people">0</span>人
+                    <span class="course-people"> @Model.CountBuyCourse </span>人
                 </span>
                 <div class="card-text hahow-dark-green classPrice">
                     <span>@Model.OriginalPrice.ToString("C0")</span>
                 </div>
             </div>
             <div class="col-xl-0 col-lg-0 col-md-0 col-sm-3 col-6 mb-2 text-right">
-                <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
-                    <i class="far fa-bookmark hahow-orange line-height-30"></i>
-                </span>
+                @if (Model.MemberID != User.Identity.GetUserId())
+                {
+                    if (Request.IsAuthenticated)
+                    {
+                        if (Model.favorite)
+                        {
+                            @*<div class="ToastBtn backgroundBookmark backgroundBookmarkChecked position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                                </div>*@
+                            <span class="backgroundBookmark-sm d-inline-block text-center mx-3" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                                <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            @*<div class="ToastBtn backgroundBookmark backgroundBookmarkMove position-absolute text-center bookmarkCheck" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                                </div>*@
+                            <span class="backgroundBookmark-sm d-inline-block text-center mx-3" data-MemberId="@ViewBag.UserId" data-CourseId="@Model.CourseID">
+                                <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                            </span>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" class="text-decoration-none p-0 w-100 h-100">
+                            @*<div class="backgroundBookmark backgroundBookmarkMove position-absolute text-center">
+                                    <i class="far fa-bookmark hahow-orange line-height-40"></i>
+                                </div>*@
+
+                            <span class="backgroundBookmark-sm d-inline-block text-center mx-3">
+                                <i class="far fa-bookmark hahow-orange line-height-30"></i>
+                            </span>
+                        </a>
+                    }
+                }
             </div>
         </div>
         <div class="card-bottom bg-hahow-dark-green"></div>
