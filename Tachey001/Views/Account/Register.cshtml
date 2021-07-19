@@ -16,8 +16,9 @@
                     <img  src="https://upload.cc/i1/2021/07/19/M8zQHn.png
 " alt="" class="my-4 w-15rem">
                 </a>
-                <p class="m-b-2 text-white">今天也要透過學習，成為更好的自己</p>
-                <img src="https://hahow.in/static/media/slogan-signup-0.ed92fb45.svg" alt="" class="col-xs-0">
+                <p class="m-b-2 " style="        color: #560000
+">今天也要透過學習，成為更好的自己</p>
+                <img src="https://i.pinimg.com/564x/d4/c4/c1/d4c4c1ca4aabc661f44f22f3d78d7c00.jpg" alt="" class="col-xs-0 flower">
             </div>
         </div>
 
@@ -83,21 +84,21 @@
                     @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
                     <div class="boxrightinnermiddle-2icon boxrightinnermiddle-2icon-email">
                         <i class="far fa-envelope i-email"></i>
-                        @Html.TextBoxFor(m => m.Email, new { @class = "my-2" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "my-2 rad" })
                     </div>
-                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger " })
                     <div class="boxrightinnermiddle-2icon">
                         <i class="fas fa-unlock-alt"></i>
-                        @Html.PasswordFor(m => m.Password, new { @class = "my-2" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "my-2 rad" })
                     </div>
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
                     <div class="boxrightinnermiddle-2icon">
                         <i class="fas fa-unlock-alt"></i>
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "my-2" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "my-2 rad" })
                     </div>
                     @Html.ValidationSummary("", new { @class = "text-danger" })
                     <button class="my-2 d-flex justify-content-center">
-                        <input type="submit" class="w-100 h-100 border-0" value="註冊" />
+                        <input type="submit" class="w-100 h-100 border-0" value="註冊"/>
                     </button>
                 </div>
 

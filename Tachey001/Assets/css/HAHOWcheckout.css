@@ -13,9 +13,22 @@
 }
 
 .container-fluid-padiing {
-    height: 168vh;
+    /*height: 168vh;*/
 }
-
+.inputcss {
+    border: 0;
+    background-color: #2269da;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 116px;
+    height: 36px;
+}
+    .inputcss:hover {
+        color: #003C9D;
+        background-color: #fff;
+        border: 2px #003C9D solid;
+    }
 .heading {
     margin-top: 0px;
     padding-top: 0px;

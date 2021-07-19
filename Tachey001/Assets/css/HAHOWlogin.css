@@ -16,7 +16,7 @@
     width:11rem;
 }
 .bg-green {
-    background-color: #002B56;
+    background-color: #352540;
 }
 
 .boxleft {
@@ -40,7 +40,10 @@
     flex-direction: column;
     justify-content: center;
 }
-
+.rad {
+    border-radius: 11px;
+    padding-left: 1rem;
+}
 .boxrightinner {
     display: flex;
     flex-direction: column;

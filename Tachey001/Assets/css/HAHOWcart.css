@@ -18,8 +18,8 @@ body {
 }
 .cart-area {
     margin-bottom: 60px;
-    width: 55vw;
-/*    height: 75vh;*/
+/*    width: 55vw;
+    height: 75vh;*/
 }
 
 .main-container {
@@ -80,16 +80,7 @@ body {
     height: 216px;
 }
 
-.right-area {
-    flex: 0 1 260px;
-    order: 2;
-    margin-left: 3rem;
-    width: 260px;
-    position: sticky;
-    top: 5rem;
-    /* background-color: white; */
 
-}
 
 .left-area {
     padding-left: 1rem;
@@ -353,6 +344,7 @@ top-container {
 }
 .pad-r-20 {
     padding-right: 20px;
+    padding-right: 20px;
 }
 .flex {
     display: flex;
@@ -393,11 +385,25 @@ top-container {
         display: flex;
         
     }
+    .right-area {
+        flex: 0 1 260px;
+        order: 2;
+        margin-left: 3rem;
+        width: 260px;
+        position: sticky;
+        top: 5rem;
+        /* background-color: white; */
+    }
 }
 
 @media(max-width:992px){
     .purchase-plans-header {
         display: none;
+    }
+    .right-area {
+        
+        margin-left: 0rem;
+        
     }
 }
     @media (max-width: 1200px) {
@@ -408,7 +414,7 @@ top-container {
 
         .cart-area {
             /* margin-bottom: 60px; */
-            width: 55vw;
+            /*width: 55vw;*/
             height: 75vh;
         }
 
@@ -436,7 +442,7 @@ top-container {
         }
 
         .sticky-outer-wrapper {
-            width: 90vw;
+            width: 94vw;
         }
 
         .sticky-inner-wrapper {
@@ -450,6 +456,7 @@ top-container {
             display: flex;
             margin-right: 0rem;
             padding-left: 0rem;
+            flex-direction: column;
         }
 
         .right-area {
