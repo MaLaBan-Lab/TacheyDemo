@@ -3,6 +3,7 @@
 @{var i = 0;
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+   
 }
 
 <!-- 第一塊 -->
@@ -14,7 +15,7 @@
                     最有趣的<span class="search-half">線上課程平台</span><br>
                     學那些學校不會教的事
                 </h1>
-                <form class="form-inline my-2 my-lg-0 d-flex search-form">
+                <form class="form-inline my-2 my-lg-0 d-flex search-form flex-nowrap">
                     <input class="bg-gray border-0 m-0 search-input" type="search" placeholder="今天想學習什麼?"
                            aria-label="Search">
                     <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
@@ -124,9 +125,9 @@
         </div>
         <div class="col-8 my-1">
             <h3 class="trywatch-text">
-                <span>一天</span>
+                @*<span>一天</span>
                 <span id="trywatch-span" class="mx-2">五試看</span>
-                <span>00 點更新，遇見命定課程在這裡</span>
+                <span>00 點更新，遇見命定課程在這裡</span>*@
             </h3>
         </div>
     </div>
@@ -231,16 +232,17 @@
                 @foreach (var item in Model.highlightViewModels)
                 {
 
-                    if (i <= 1)
-                    {
+                    @Html.Partial("_HomePageCard", item)
+                    @*if (i <= 1)
+            {
 
-                        @Html.Partial("_HighlightCardPartial", item) i++;
-                    }
-                    else
-                    { @Html.Partial("_HighlightCardPartial_3", item)}
-
-
+                @Html.Partial("_HighlightCardPartial", item) i++;
             }
+            else
+            { @Html.Partial("_HighlightCardPartial_3", item)}*@
+
+
+                }
 
 
             </div>
@@ -270,12 +272,12 @@
                     <div class="comment p-4">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURUdwTAC+owC8pAC+owC/nwC+owC/nwC+owC+pAC+pAC+pAC+owC+pAC+pAQrwd4AAAANdFJOUwClRN8h7xBggL9wj89yAOr7AAAAxUlEQVQY0yWOPQrCUBCE1xj/m9gKQnqb1EJAsLYRUlgEBLGIINhYWAhewMZe8AoeQPACKWIUYzF3cXbfFDt8+3berohI8xCKanPRusdOrZ2+WDMY+TlIfuxoCqUVMF5a88f4AwVB6sBJxAMC/eOIirWDUp8ktuZMsyItYEI7I1KqoVC7uljDYpxPFly3xSfhYaAqjVM3I4SO3pKqBY4qydUi/kIV3EA9eYTR2k16al/pqvGMoQV0dM69PaBk078P7OxRP5Q/PJBxjN9F5jIAAAAASUVORK5CYII="
                              alt="" class="comment-top-img">
-                        <h4 class="comment-p font-weight-bold my-2">
+                        <p class="comment-p font-weight-bold my-2">
                             @item.ToTachey
-                        </h4>
+                        </p>
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAVBAMAAACqMuMoAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUdwTAC9owC+owC/nwC+owC+owC/nwC+pAC+pAC+pAC9owC9owC+pAC+pAC+pN9i5Y0AAAAOdFJOUwCb7yDfPhCAv2CvUG/PuzEMbQAAAMlJREFUGNMljz8OAWEQxZ9gZS0JhVZkC4lG9gQaiVKUqo0jOIGIQiMRJxAnUDiAkIjaFaz1r/DOYN5+U8wvb2bel/cBQb0BK+9cj4D8kKyZOpBvoEDybkMDT9gKI+SENprCHFXh7VQrM/CHmfBAWUjQc6ooEBWn3A0wDrt8Af4iZKoYM3vFqsyPsOdOKCiMYmykjnxaz7l7b2ghZPs6mwVEibxp1VT44pqpfcy7kAMgJvu28pkNY/4ip5aGOJkiUx1hfFVHsJpY/wNR/nhLeHAxeQAAAABJRU5ErkJggg=="
                              alt="" class="comment-bot-img">
-                        <a href="#" class="comment-a"><img src="@item.Photo" alt="" id="user-logo">@item.Name</a>
+                        @*<a href="#" class="comment-a"><img src="@item.Photo" alt="" id="user-logo">@item.Name</a>*@
                     </div>
                 </div>
             }
@@ -295,17 +297,29 @@
                  class="recommend-img px-15">
             <h2 class=" card-h2-title">猜你想學</h2>
         </div>
-        <a href="#" class="more-class" style="position: absolute; right: 0; bottom: 0;">更多熱門課程<i class="fas fa-arrow-right"></i></a>
+        @*<a href="#" class="more-class" style="position: absolute; right: 0; bottom: 0;">更多熱門課程<i class="fas fa-arrow-right"></i></a>*@
     </div>
 
 
 
-    <div class="row">
-        @foreach (var item in Model.consoleViewModels)
-        {
-            item.favorite = Model.GetOwners.Any(x => x.CourseID == item.CourseID);
-            @Html.Partial("_CourseCardPartial", item)
+    <div class="row" id="CardArea">
+        @{
+           
+            var topeight = Model.consoleViewModels.Take(8);
+            foreach (var item in topeight)
+            {
+                item.favorite = Model.GetOwners.Any(x => x.CourseID == item.CourseID);
+
+                @Html.Partial("_CourseCardPartial", item)
+            }
         }
+       
+
+    </div>
+    <div class="row">
+        <div class="col-12" id="Changetext">
+            <button id="morecourse" class="w-100 btn btn-dark mb-3">更多課程</button>
+        </div>
     </div>
 
 </div>
