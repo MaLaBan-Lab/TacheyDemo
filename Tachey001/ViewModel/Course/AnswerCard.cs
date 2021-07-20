@@ -11,6 +11,7 @@ namespace Tachey001.ViewModel.Course
         public string CourseID { get; set; }
         public int QuestionID { get; set; }
         public int AnswerID { get; set; }
+        public string MemberID { get; set; }
         public string Name { get; set; }
         public string Photo { get; set; }
         [StringLength(4000)]

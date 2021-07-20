@@ -280,12 +280,13 @@ namespace Tachey001.Service
         public List<ScoreCard> GetAllScore(string CourseId)
         {
             var score = _tacheyRepository.GetAll<CourseScore>(x => x.CourseID == CourseId);
-            var member = _tacheyRepository.GetAll<Models.Member>();
+            var member = _tacheyRepository.GetAll<Member>();
 
             var result = from s in score
                          join m in member on s.MemberID equals m.MemberID
                          select new ScoreCard
                          {
+                             MemberID = m.MemberID,
                              Name = m.Name,
                              Photo = m.Photo,
                              Score = s.Score,
@@ -348,6 +349,7 @@ namespace Tachey001.Service
                            CourseID = a.CourseID,
                            QuestionID = a.QuestionID,
                            AnswerID = a.AnswerID,
+                           MemberID = m.MemberID,
                            Name = m.Name,
                            Photo = m.Photo,
                            AnswerContent = a.AnswerContent,
@@ -359,6 +361,7 @@ namespace Tachey001.Service
                        {
                            CourseID = q.CourseID,
                            QuestionID = q.QuestionID,
+                           MemberID = m.MemberID,
                            Name = m.Name,
                            Photo = m.Photo,
                            CurrentName = currentMember.Name,

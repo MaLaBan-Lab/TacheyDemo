@@ -282,7 +282,9 @@ namespace Tachey001.Controllers
 
             _courseService.CreateScore(courseScore.PostCourseScore, CourseId, MemberID);
 
-            return RedirectToAction("Main", "Courses", new { id = 2, CourseId = CourseId });
+            var Score = _courseService.GetAllScore(CourseId).First(x=>x.MemberID==MemberID);
+
+            return PartialView("CourseScoreCard", Score);
         }
         [HttpPost]
         //課程發問 POST
@@ -292,7 +294,9 @@ namespace Tachey001.Controllers
 
             _courseService.CreateQuestion(mainGroup.PostCourseQuestion, CourseId, MemberID);
 
-            return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
+            var Question = _courseService.GetAllQuestions(MemberID, CourseId).Last(x=>x.MemberID == MemberID);
+
+            return PartialView("_QuestionPartial", Question);
         }
         [HttpPost]
         //課程發問 回答 POST
@@ -302,7 +306,13 @@ namespace Tachey001.Controllers
 
             _courseService.CreateAnswer(questionCard, CourseId, QuestionId, MemberID);
 
-            return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
+            var Ans = _courseService.GetAllQuestions(MemberID, CourseId)
+                .First(x => x.CourseID == CourseId && x.QuestionID == QuestionId).GetAnswerCards
+                .Last(x=>x.MemberID == MemberID);
+
+            return PartialView("_AnswerPartial", Ans);
+
+            //return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
         }
         //Post上傳圖片並返回成功訊息
         [HttpPost]
