@@ -278,7 +278,6 @@ function sortUpdate() {
 function postStep(num) {
     var intro = $(".ck-content").get(0).innerHTML;
     $("* [name='course.Introduction']").html(intro);
-    console.log(intro)
     var data = new FormData($(`#Step${num}Form`)[0]);
 
     $.ajax({
