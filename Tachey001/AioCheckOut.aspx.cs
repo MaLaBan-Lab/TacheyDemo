@@ -28,8 +28,6 @@ namespace text
                 var count = product.Count();
                 var order = _context.Order.Where(x => x.OrderID == product_id).First();
                 
-                
-
                
                 foreach (var item in product)
                 {

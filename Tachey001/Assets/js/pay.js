@@ -70,7 +70,12 @@ btn_use.addEventListener("click", function () {
     close.click();
     money1.innerHTML = "NT$" + Math.round(totalprice * discount).toString();
     money2.innerHTML = "NT$" + Math.round(totalprice * discount).toString();
-    var url = "/Pay/check?ticketId=" + value
+    var url;
+    if (value == null) {
+        url = "/Pay/check"
+    } else {
+        url = "/Pay/check?ticketId=" + value
+    }
     $.get(url, function () {
         send.setAttribute("sendvalue", value)
     });
@@ -90,7 +95,7 @@ if (check2 != "null")
 
 send.addEventListener("click", function () {
     var sendvalue = send.getAttribute("sendvalue");
-    if (sendvalue == null) {
+    if (sendvalue == null && value == null) {
         var url = "/Pay/create";
         $.get(url, function () {
             var url = "https://localhost:44394/AioCheckOut.aspx";

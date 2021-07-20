@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Tachey001.Models;
 using Tachey001.Repository;
+using Tachey001.ViewModel.ApiViewModel;
 using Tachey001.ViewModel.Pay;
 
 namespace Tachey001.Service.Pay
@@ -12,45 +14,74 @@ namespace Tachey001.Service.Pay
     {
         private TacheyContext _context;
         private TacheyRepository _tacheyRepository;
+        private DbContext _context;
         //初始化資料庫邏輯
-        public PayService()
+        public PayService() 
         {
             _context = new TacheyContext();
             _tacheyRepository = new TacheyRepository(new TacheyContext());
+            _context = _tacheyRepository._context;
         }
-        public void CreateOrder(string orderId, string currentId, string payMethod, string ticketId, string usepoint)
+        public OperationResult OrderCreate(string currentId, string ticketId, string usepoint)
         {
-            DateTime localDate = DateTime.Now;
-            var order_new = new Models.Order
+            var orderID = "Tachey" + new Random().Next(0, 99999).ToString();
+            usepoint = usepoint == "use" ? usepoint : null;
+            ticketId = ticketId == "null" ? "0" : ticketId;
+            var result = new OperationResult();
+            using (var transcation = _context.Database.BeginTransaction())
             {
-                OrderID = orderId,
-                UsePoint = usepoint,
-                TicketID = ticketId,
-                MemberID = currentId,
-                OrderStatus = "wait",
-                OrderDate = localDate,
-                PayMethod = payMethod,
-                PayDate = null
-            };
-            _tacheyRepository.Create(order_new);
-            _tacheyRepository.SaveChanges();
-        }
-        public void CreateOrder_Detail(string orderId,string currentid)
-        {
-            var shoppingCart = _tacheyRepository.GetAll<ShoppingCart>(x => x.MemberID == currentid);
-            foreach (var item in shoppingCart)
-            {
-                var course = _tacheyRepository.Get<Course>(x => x.CourseID == item.CourseID);
-                var od = new Order_Detail
+                try
                 {
-                    OrderID = orderId,
-                    CourseID = item.CourseID,
-                    UnitPrice=course.OriginalPrice,
-                    CourseName= course.Title,BuyMethod="課程售價"
-                };
-                _tacheyRepository.Create(od);
+                    //Create Order 創建Order表
+                    DateTime localDate = DateTime.Now;
+                    var order_new = new Order
+                    {
+                        OrderID = orderID,
+                        UsePoint = usepoint,
+                        TicketID = ticketId,
+                        MemberID = currentId,
+                        OrderStatus = "wait",
+                        OrderDate = localDate,
+                        PayMethod = "信用卡",
+                        PayDate = null
+                    };
+                    _tacheyRepository.Create(order_new);
+                    _tacheyRepository.SaveChanges();
+
+                    //Create OD 創建Order Detail表
+                    var shoppingCart = _tacheyRepository.GetAll<ShoppingCart>(x => x.MemberID == currentId);
+                    foreach (var item in shoppingCart)
+                    {
+                        var course = _tacheyRepository.Get<Course>(x => x.CourseID == item.CourseID);
+                        var od = new Order_Detail
+                        {
+                            OrderID = orderID,
+                            CourseID = item.CourseID,
+                            UnitPrice = course.OriginalPrice,
+                            CourseName = course.Title,
+                            BuyMethod = "課程售價"
+                        };
+                        _tacheyRepository.Create(od);
+                    }
+                    _tacheyRepository.SaveChanges();
+
+                    //Delete SC 刪除購物車商品
+                    var shoppingCarts = _tacheyRepository.GetAll<ShoppingCart>(x => x.MemberID == currentId);
+                    _tacheyRepository.DeleteRange(shoppingCarts);
+                    _tacheyRepository.SaveChanges();
+
+                    result.IsSuccessful = true;
+                    result.Exception = orderID;
+                    transcation.Commit();
+                }
+                catch(Exception ex)
+                {
+                    result.IsSuccessful = false;
+                    result.Exception = ex.Message;
+                    transcation.Rollback();
+                }
             }
-            _tacheyRepository.SaveChanges();
+            return result;
         }
         public IQueryable<DiscountCard> GetDiscountCard(string currentId)
         {

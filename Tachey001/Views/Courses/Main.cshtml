@@ -2,6 +2,8 @@
 
 @section topCSS{
     @Styles.Render("~/Assets/css/discussions.css")
+    @Styles.Render("~/Assets/css/intro.css")
+    @Styles.Render("~/Assets/css/score.css")
 }
 
 @{
@@ -18,8 +20,8 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item text-white"><a href="@Url.Action("All","Courses")">所有課程</a></li>
-                <li class="breadcrumb-item text-white"><a href="@Url.Action("Group","Courses", new { detailid = Model.Main_Video.Course.CategoryDetailsID})">@Model.Main_Video.CategoryName</a></li>
-                <li class="breadcrumb-item  text-white active" aria-current="page">@Model.Main_Video.DetailName</li>
+                <li class="breadcrumb-item text-white"><a href="@Url.Action("FindCategory","Courses", new { category = Model.Main_Video.CategoryName})">@Model.Main_Video.CategoryName</a></li>
+                <li class="breadcrumb-item  text-white active"><a href="@Url.Action("FindCategory","Courses", new { category = Model.Main_Video.DetailName})">@Model.Main_Video.DetailName</a></li>
             </ol>
         </nav>
         <!-- title 區塊 -->
@@ -245,85 +247,65 @@
 <!-- seletor -->
 <div class="container">
     <div class="seletor mb-5">
-        @if (ViewBag.Id == 1)
+
+        <ul class="nav">
+            <li class="seletor-item" style="width:33%;">
+                <a class="inline-block text-center active" id="Intro-tab" data-toggle="tab" href="#Intro">課程簡介</a>
+            </li>
+            <li class="seletor-item" style="width:33%;">
+                <a class="inline-block text-center" id="Score-tab" data-toggle="tab" href="#Score">課程評價</a>
+            </li>
+            <li class="seletor-item" style="width:33%;">
+                <a class="inline-block text-center" id="Ques-tab" data-toggle="tab" href="#Ques">問題討論</a>
+            </li>
+        </ul>
+
+        @*@if (ViewBag.type == "Intro")
         {
             <div class="seletor-item seletor-ckecked" id="main">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.Course.CourseID})">課程簡介</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = Model.Main_Video.Course.CourseID, type = "Intro"})">課程簡介</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="main">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 1, CourseId = Model.Main_Video.Course.CourseID})">課程簡介</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = Model.Main_Video.Course.CourseID, type = "Intro"})">課程簡介</a>
             </div>
         }
 
-        @if (ViewBag.Id == 2)
+        @if (ViewBag.type == "Score")
         {
             <div class="seletor-item seletor-ckecked" id="feedbacks">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.Course.CourseID})">課程評價</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new {id = Model.Main_Video.Course.CourseID, type = "Score"})">課程評價</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="feedbacks">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 2, CourseId = Model.Main_Video.Course.CourseID})">課程評價</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = Model.Main_Video.Course.CourseID, type = "Score"})">課程評價</a>
             </div>
         }
 
-        @if (ViewBag.Id == 3)
+        @if (ViewBag.type == "Ques")
         {
             <div class="seletor-item seletor-ckecked" id="discussions">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})">問題討論</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new {id = Model.Main_Video.Course.CourseID, type = "Ques"})">問題討論</a>
             </div>
         }
         else
         {
             <div class="seletor-item" id="discussions">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})">問題討論</a>
+                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new {id = Model.Main_Video.Course.CourseID, type = "Ques"})">問題討論</a>
             </div>
-        }
-
-        @if (ViewBag.Id == 4)
-        {
-            @*<div class="seletor-item seletor-ckecked" id="assignments">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
-            </div>
-        }
-        else
-        {
-            <div class="seletor-item" id="assignments">
-                <a class="inline-block text-center" href="@Url.Action("Main", "Courses", new { id = 4, CourseId = Model.Main_Video.Course.CourseID})">作業成果</a>
-            </div>*@
-        }
-
+        }*@
 
     </div>
 </div>
 
-@if (ViewBag.Id == 1)
-{
-    @Styles.Render("~/Assets/css/intro.css")
-    <!--課程介紹-->
-    <!-- content -->
-    <div>
-        @*<div class="container position-relative">
-                <div class="row book-mark-box">
-                    <div class="col-12 my-4 book-mark px-5">
-                        <div class="text-center">
-                            <button type="button"
-                                    class="btn btn-outline-hahow w-100 my-4 py-3 px-5">
-                                <div class="text-scale-12">
-                                    <i class="fas fa-bookmark mr-1"></i>
-                                    加入收藏
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+<div class="container position-relative discussions">
+    <div class="tab-content">
+        <div class="tab-pane active" id="Intro">
 
-        <div class="container">
             <div class="row">
                 <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 my-4 p-0">
                     <h3 class="hahow-green mb-5">關於課程 //</h3>
@@ -360,16 +342,7 @@
                                 <span>14 位同學</span>
                             </div>
                         </div>
-                        @*<div class="d-flex w-50">
-                                <div class="mr-3">
-                                    <img src="https://hahow.in/static/media/icon-homework.f69f73e0.svg"
-                                         alt="" />
-                                </div>
-                                <div class="d-flex flex-column ">
-                                    <span>作業數</span>
-                                    <span>1 份作業</span>
-                                </div>
-                            </div>*@
+
                     </div>
                     <div class="d-flex  my-5">
                         <div class="light-height-45">
@@ -491,6 +464,581 @@
                         </div>
                     </div>*@
             </div>
+
+            <div class="row my-5">
+                <div class="col-6 p-0 d-flex flex-column justify-content-center">
+                    <h4><a href="@Url.Action("Main", "Courses", new { id = 3, CourseId = Model.Main_Video.Course.CourseID})" class="hahow-green">前往問題討論區 >></a></h4>
+                    <span>
+                        課程開課後的課程相關討論，都會在問題討論區進行，來看看已購課同學們的討論吧～
+                    </span>
+                </div>
+                <div class="col-2 p-0">
+                    <img src="https://hahow.in/static/media/go-to-learning.4d47f3ed.svg"
+                         alt="..." />
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane" id="Score">
+
+            <div class="row book-mark-box">
+                <div class="col-12 my-4 book-mark px-5">
+                    <div class="text-center">
+                        <h6 class="mt-5 text-white">和大家分享完成課程的心得吧！</h6>
+                        <!-- Button trigger modal -->
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (Model.GetOwner)
+                            {
+                                if (ViewBag.YnN)
+                                {
+                                    <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" data-toggle="modal" data-target="#exampleModal" id="scoreBtn">
+                                        <div class="text-scale-12">
+                                            <i class="far fa-star"></i>
+                                            課程評價
+                                        </div>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" disabled>
+                                        <div class="text-scale-12">
+                                            <i class="far fa-star"></i>
+                                            已評價過
+                                        </div>
+                                    </button>
+                                }
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3" disabled>
+                                    <div class="text-scale-12">
+                                        <i class="far fa-star"></i>
+                                        購買完才能評價
+                                    </div>
+                                </button>
+                            }
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-outline-hahow w-100 my-4 py-3 text-decoration-none">
+                                <div class="text-scale-12">
+                                    <i class="fas fa-user"></i>
+                                    登入後評價
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            
+                @*@using (Html.BeginForm("CreateScore", "Courses", new { CourseId = Model.Main_Video.Course.CourseID }))
+                {
+                    @Html.AntiForgeryToken()*@
+                    <div class="modal fade" id="exampleModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal-tachey-box">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">為這堂課，打個分數吧~</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="text-white">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="CreateScore" method="post" id="ScorePost">
+                                    <div class="modal-body text-black">
+                                        <h3>分數</h3>
+                                        <span class="star-show position-relative">
+                                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1", new { @id = "star1", @class = "invisible position-absolute", @required = "required" })
+                                            <label class="" for="star1">
+                                                <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                                </i>
+                                            </label>
+                                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "2", new { @id = "star2", @class = "invisible position-absolute" })
+                                            <label class="" for="star2">
+                                                <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                                </i>
+                                            </label>
+                                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "3", new { @id = "star3", @class = "invisible position-absolute" })
+                                            <label class="" for="star3">
+                                                <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                                </i>
+                                            </label>
+                                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "4", new { @id = "star4", @class = "invisible position-absolute" })
+                                            <label class="" for="star4">
+                                                <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                                </i>
+                                            </label>
+                                            @Html.RadioButtonFor(m => m.PostCourseScore.Score, "5", new { @id = "star5", @class = "invisible position-absolute" })
+                                            <label class="" for="star5">
+                                                <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
+                                                    <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                                           score-star
+                                           invisible
+                          "></i>
+                                                </i>
+                                            </label>
+                                        </span>
+                                        <h3>標題</h3>
+                                        @Html.TextBoxFor(m => m.PostCourseScore.Title, null, new { @class = "w-100" })
+                                        <h3>內容</h3>
+                                        @Html.TextAreaFor(m => m.PostCourseScore.ScoreContent, new { @class = "w-100" })
+                                        <h3>給老師</h3>
+                                        @Html.TextAreaFor(m => m.PostCourseScore.ToTeacher, new { @class = "w-100" })
+                                        <h3>給Tachey</h3>
+                                        @Html.TextAreaFor(m => m.PostCourseScore.ToTachey, new { @class = "w-100" })
+                                    </div>
+                                </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                        <button type="button" class="btn btn-primary" onclick="postScore('@ViewBag.CourseId')">送出</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* } *@
+                
+
+            <div class="row justify-content-between mt-5 score-box-content">
+                <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div>
+                            @if (Model.GetCourseScore.Average(x => x.Score) == null)
+                            {
+                                <h4 class="mr-4 text-50" id="scoreAvg">0</h4>
+                            }
+                            else
+                            {
+                                <h4 class="mr-4 text-50" id="scoreAvg">@Math.Ceiling(@Convert.ToDouble(Model.GetCourseScore.Average(x => x.Score)))</h4>
+                            }
+                        </div>
+                        <div class="score-box text-20 pt-3">
+                            <span class="star-show" id="scoreStar">
+                                <i class="fas fa-star star-gray position-relative">
+                                    @if (Model.GetCourseScore.Average(x => x.Score) > 0)
+                                    {
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                    }
+
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    @if (Model.GetCourseScore.Average(x => x.Score) > 1)
+                                    {
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                    }
+
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    @if (Model.GetCourseScore.Average(x => x.Score) > 2)
+                                    {
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                    }
+
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    @if (Model.GetCourseScore.Average(x => x.Score) > 3)
+                                    {
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                    }
+
+                                </i>
+                                <i class="fas fa-star star-gray position-relative">
+                                    @if (Model.GetCourseScore.Average(x => x.Score) > 4)
+                                    {
+                                        <i class="
+                            fas
+                            fa-star
+                            star-yellow
+                            position-absolute
+                            star-display
+                          "></i>
+                                    }
+                                </i>
+                            </span>
+                            <p class="text-white"><span id="scorePeople">@Model.GetCourseScore.Count()</span>則評價</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="ScoreContainer">
+
+                @if (Model.GetCourseScore.Count == 0)
+                {
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 score-content mb-2" id="emptyScore">
+                        <div class="card border-0 score-content">
+                            <div class="row no-gutters">
+                                <div class="col-12">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <span class="star-show star-out">
+                                                <i class="fas fa-star star-gray position-relative">
+                                                </i>
+                                                <i class="fas fa-star star-gray position-relative">
+                                                </i>
+                                                <i class="fas fa-star star-gray position-relative">
+                                                </i>
+                                                <i class="fas fa-star star-gray position-relative">
+                                                </i>
+                                                <i class="fas fa-star star-gray position-relative">
+                                                </i>
+                                            </span>
+                                        </h5>
+                                        <h2 class="card-title text-secondary text-center">無任何評價</h2>
+                                        <p class="card-text text-white text-justify">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    foreach (var item in Model.GetCourseScore)
+                    {
+                        @Html.Partial("CourseScoreCard", item);
+                    }
+                }
+
+            </div>
+
+        </div>
+        <div class="tab-pane" id="Ques">
+
+            <div class="row">
+                <div class="col-xl">
+                    <div class="layout-right-panel">
+                        <span style="font-size: 0px;"></span>
+                        <div class="white-wrap side-card  pad-b-30 border w-100 mb-5">
+                            <h4 class="heading text-center">參與討論，讓學習更精彩</h4>
+                            <div class="pad-rl-25 text-left">
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3 border" data-toggle="modal" data-target="#QuesModal">
+                                        <div>
+                                            <i class="far fa-comment mr-1"></i>
+                                            <span>發表留言</span>
+                                        </div>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login", "Account")" class="btn btn-outline-hahow w-100 my-4 py-3 border text-decoration-none">
+                                        <div>
+                                            <span>登入後留言</span>
+                                        </div>
+                                    </a>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Modal*@
+                    @*@using (Html.BeginForm("CreateQuestion", "Courses", new { CourseId = Model.Main_Video.Course.CourseID }))
+                    {
+                        @Html.AntiForgeryToken()*@
+                
+                    <div class="modal fade" id="QuesModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal-tachey-box">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">提出您的疑問吧~</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="text-white">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="CreateQuestion" method="post" id="QuesPost">
+                                    <div class="modal-body text-black">
+                                        <h3>問題</h3>
+                                        @Html.TextAreaFor(m => m.PostCourseQuestion.QuestionContent, new { @class = "w-100" })
+                                    </div>
+                                </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                        <button type="submit" class="btn btn-primary" onclick="postQues('@ViewBag.CourseId')">送出</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    @* } *@
+
+                    <div class="main-wrap">
+                        <!--<div class="flex marg-b-30">-->
+                            <!-- search bar -->
+                            <!--<div class="flex flex-1">
+                                <div class="search flex-1 marg-r-5">
+                                    <span aria-hidden="true" class="fa fa-search fa-fw marg-r-5"></span>
+                                    <input class="form-control" type="search" placeholder="搜尋看看～你的問題可能已經有人問過囉！" aria-label="Search">
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <!-- discuss box -->
+                        @*課程發問*@
+                        <div class="discuss-box">
+                            <div class="white-wrap pad-tb-20" id="QuesContainer">
+
+                                @if (Model.GetQuestions.Count() == 0)
+                                {
+                                    <div class="media p-3" id="emptyQues">
+                                        @*<img src="https://img95.699pic.com/xsj/10/tm/0h.jpg!/fh/300" class="mr-3 rounded-circle" style="width: 55px; height: 55px;" alt="...">*@
+                                        <div class="media-body">
+                                            <h3 class="mt-0 text-center">暫無任何發問留言</h3>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.GetQuestions)
+                                    {
+                                        @Html.Partial("_QuestionPartial", item);
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.type == "Intro")
+{
+
+    <!--課程介紹-->
+    <!-- content -->
+    <!--div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 my-4 p-0">
+                    <h3 class="hahow-green mb-5">關於課程 //</h3>
+                    <div class="d-flex justify-content-between mb-4">
+                        <div class="d-flex w-50">
+                            <div class="mr-3">
+                                <img src="https://hahow.in/static/media/icon-time.71567444.svg"
+                                     alt="" />
+                            </div>
+                            <div class="d-flex flex-column ">
+                                <span>課程時長</span>
+                                <span>總共 : @Model.Main_Video.courseUnits.Count() 部影片</span>
+                            </div>
+                        </div>
+                        <div class="d-flex w-50">
+                            <div class="mr-3">
+                                <img src="https://hahow.in/static/media/icon-chapter.f2250f6f.svg"
+                                     alt="" />
+                            </div>
+                            <div class="d-flex flex-column ">
+                                <span>單元數</span>
+                                <span>@Model.Main_Video.courseChapters.Count() 章節 @Model.Main_Video.courseUnits.Count() 單元</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex w-50">
+                            <div class="mr-3">
+                                <img src="https://hahow.in/static/media/icon-classmate.bc904925.svg"
+                                     alt="" />
+                            </div>
+                            <div class="d-flex flex-column ">
+                                <span>課程總人數</span>
+                                <span>14 位同學</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-flex  my-5">
+                        <div class="light-height-45">
+                            <img src="https://hahow.in/static/media/icon-dialog.18040558.svg"
+                                 alt=""
+                                 class="mr-3" />
+                        </div>
+                        <div class="
+                d-inline-block
+                bg-light-gray
+                light-height-45
+                h-30
+                px-3
+                rounded
+                position-relative
+              ">
+                            <div class="date-content"></div>
+                            沒有期限、不限觀看次數，完成課程還有完課證明！
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-3 p-0">
+                    <div class="border-bottom-short"></div>
+                </div>
+
+                <div class="col-12 my-5 p-0">
+                    <h3 class="hahow-green mb-5">你可以學到 //</h3>
+                    <div class="m-0 ">
+                        <h5>@Model.Main_Video.Course.Effect</h5>
+                    </div>
+                </div>
+
+                <div class="col-8 my-5 p-0">
+                    <h3 class="hahow-green">課程詳情 //</h3>
+                    <div class="border-bottom">
+                        <img class="w-100 my-5"
+                             src="@Model.Main_Video.Course.TitlePageImageURL"
+                             alt="" />
+                        <h4 class="text-white">
+                            <i class="fas fa-chevron-circle-right"></i> 簡短的課程描述
+                        </h4>
+                    </div>
+                    <div class="my-4">
+                        <h5>@Model.Main_Video.Course.Description</h5>
+                        <p class="text-justify">
+                            @Html.Raw(Model.Main_Video.Course.Introduction)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-8 my-5 p-0">
+                    <h3 class="hahow-green mb-5">上課前的準備 //</h3>
+                    <div class="my-4">
+                        <h6>
+                            <i class="fas fa-chevron-circle-right"></i>
+                            需要用到的工具/材料/軟體
+                        </h6>
+                        <p class="text-white pl-3">
+                            @Model.Main_Video.Course.Tool
+                        </p>
+                    </div>
+                    <div class="my-4">
+                        <h6>
+                            <i class="fas fa-chevron-circle-right"></i>
+                            適合什麼程度的學生
+                        </h6>
+                        <p class="text-white pl-3">
+                            @Model.Main_Video.Course.CourseLevel
+                        </p>
+                    </div>
+                    <div class="my-4">
+                        <h6>
+                            <i class="fas fa-chevron-circle-right"></i>
+                            需要具備的背景知識
+                        </h6>
+                        <p class="text-white pl-3">
+                            課程內容深入淺出，是專屬為「孕期媽咪」以及「0-2
+                            歲寶寶的照顧者」所設計的課程。如：父母、阿公阿嬤、保母、托嬰、幼教人員等相關行業，都很適合這堂課程。
+                        </p>
+                    </div>
+                    <div class="my-4">
+                        <h6>
+                            <i class="fas fa-chevron-circle-right"></i>
+                            需要具備的背景知識
+                        </h6>
+                        <p class="text-white pl-3">
+                            課程內容深入淺出，是專屬為「孕期媽咪」以及「0-2
+                            歲寶寶的照顧者」所設計的課程。如：父母、阿公阿嬤、保母、托嬰、幼教人員等相關行業，都很適合這堂課程。
+                        </p>
+                    </div>
+                </div>-->
+
+                @*<div class="col-8 my-5 p-0">
+                        <h3 class="hahow-green">關於老師 KidPro醫學級兒童發展教育團隊 //</h3>
+                        <div class="card my-5 border-0">
+                            <div class="row no-gutters">
+                                <div class="col-1 pt-3">
+                                    <div class="photo-img position-relative">
+                                        <img src="https://hahow-production.imgix.net/6041acdafc20d2d7aa40c3d9?w=100&auto=format&sat=0&s=dfe6043f51505253326d695702bd25ee"
+                                             alt="..."
+                                             class="w-100 position-absolute center" />
+                                    </div>
+                                </div>
+                                <div class="col-11 pl-3">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-secondary mb-4">
+                                            <i class="fab fa-facebook-square mr-2"></i>
+                                            <i class="fab fa-youtube-square mr-2"></i>
+                                            <i class="fas fa-home"></i>
+                                        </h3>
+                                        <p class="card-text text-secondary">
+                                            由職能治療師、物理治療師、語言治療師、兒科醫師，共同組成的團隊。由擁有臺大醫院15年臨床經驗的恬兒職能治療師協助號召、聚集多種兒童發展醫學專業，來提供專業的育兒、教養知識。
+                                            服務內容包含:專業/親職講座、幼童發展潛能評估、學前發展核心能力培養遊戲課程、教具玩具開發。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+            <!--</div>
         </div>
 
         <div class="container">
@@ -507,11 +1055,12 @@
                 </div>
             </div>
         </div>
-    </div>
+
+    </div>-->
 }
-else if (ViewBag.Id == 2)
+else if (ViewBag.type == "Score")
 {
-    @Styles.Render("~/Assets/css/score.css")
+
     <!--課程評價-->
     <!-- content -->
     <div class="container position-relative">
@@ -584,7 +1133,7 @@ else if (ViewBag.Id == 2)
                         <div class="modal-body text-black">
                             <h3>分數</h3>
                             <span class="star-show position-relative">
-                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1", new { htmlAttributes = new { @id = "star1", @class = "invisible position-absolute", @required="required" } })
+                                @Html.RadioButtonFor(m => m.PostCourseScore.Score, "1", new { htmlAttributes = new { @id = "star1", @class = "invisible position-absolute", @required = "required" } })
                                 <label class="" for="star1">
                                     <i class="fas fa-star star-gray position-relative mr-1" style="cursor:pointer">
                                         <i class="
@@ -803,12 +1352,8 @@ else if (ViewBag.Id == 2)
 
     </div>
 
-    @section endJS{
-        @Scripts.Render("~/Assets/js/point.js")
-        @Scripts.Render("~/Assets/js/Main.js")
-    }
 }
-else if (ViewBag.Id == 3)
+else if (ViewBag.type == "Ques")
 {
 
     <!--問題討論-->
@@ -886,7 +1431,6 @@ else if (ViewBag.Id == 3)
                     <div class="discuss-box">
                         <div class="white-wrap pad-tb-20">
 
-
                             @if (Model.GetQuestions.Count() == 0)
                             {
                                 <div class="media p-3">
@@ -904,220 +1448,17 @@ else if (ViewBag.Id == 3)
                                 }
                             }
 
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    @section endJS{
-        @Scripts.Render("~/Assets/js/Like.js")
-        @Scripts.Render("~/Assets/js/point.js")
-        @Scripts.Render("~/Assets/js/Main.js")
-    }
-
-}
-else if (ViewBag.Id == 4)
-{
-    @Styles.Render("~/Assets/css/assignments.css")
-    <!--作業成果-->
-    <!-- content -->
-    <div class="container assignments">
-        <div class="row">
-            <div class="col-xl">
-
-                <div class="screen">
-                    <!-- search bar -->
-                    <div class="select-bar">
-                        <h4>作業單元：</h4>
-                        <select class="select-option">
-                            <option value="">請選擇</option>
-                            <option value="">第 1 章，作業 1 題目：本課程無作業設計，不過歡迎大家留下觀看心得於作業區！</option>
-                        </select>
-                    </div>
-
-                    <!-- works-area -->
-                    <div class="creation-list">
-                        <h4>所有同學作品</h4>
-                        <div class="row">
-                            <!-- work-card -->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="creation-cover-image">
-                                        <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
-                                            <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
-                                        </a>
-                                        <div class="hh-like">
-                                            <span class="fa fa-heart-o"></span>
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="profile-wrap pad-b-20 block">
-                                            <div class="profile-image absolute">
-                                                <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" class="header-image">
-                                                </a>
-                                            </div>
-                                            <a href="#">
-                                                <div class="text-wrap block relative">驅動知識生態系論壇</div>
-                                            </a>
-                                            <a class="block text-sm" target="_self" href="/">dses5335</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- work-card -->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="creation-cover-image">
-                                        <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
-                                            <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
-                                        </a>
-                                        <div class="hh-like">
-                                            <span class="fa fa-heart-o"></span>
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="profile-wrap pad-b-20 block">
-                                            <div class="profile-image absolute">
-                                                <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" class="header-image">
-                                                </a>
-                                            </div>
-                                            <a href="#">
-                                                <div class="text-wrap block relative">驅動知識生態系論壇</div>
-                                            </a>
-                                            <a class="block text-sm" target="_self" href="/">dses5335</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- work-card -->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="creation-cover-image">
-                                        <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
-                                            <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
-                                        </a>
-                                        <div class="hh-like">
-                                            <span class="fa fa-heart-o"></span>
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="profile-wrap pad-b-20 block">
-                                            <div class="profile-image absolute">
-                                                <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" class="header-image">
-                                                </a>
-                                            </div>
-                                            <a href="#">
-                                                <div class="text-wrap block relative">驅動知識生態系論壇</div>
-                                            </a>
-                                            <a class="block text-sm" target="_self" href="/">dses5335</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- work-card -->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="creation-cover-image">
-                                        <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
-                                            <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
-                                        </a>
-                                        <div class="hh-like">
-                                            <span class="fa fa-heart-o"></span>
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="profile-wrap pad-b-20 block">
-                                            <div class="profile-image absolute">
-                                                <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" class="header-image">
-                                                </a>
-                                            </div>
-                                            <a href="#">
-                                                <div class="text-wrap block relative">驅動知識生態系論壇</div>
-                                            </a>
-                                            <a class="block text-sm" target="_self" href="/">dses5335</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- work-card -->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="creation-cover-image">
-                                        <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
-                                            <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
-                                        </a>
-                                        <div class="hh-like">
-                                            <span class="fa fa-heart-o"></span>
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="profile-wrap pad-b-20 block">
-                                            <div class="profile-image absolute">
-                                                <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" class="header-image">
-                                                </a>
-                                            </div>
-                                            <a href="#">
-                                                <div class="text-wrap block relative">驅動知識生態系論壇</div>
-                                            </a>
-                                            <a class="block text-sm" target="_self" href="/">dses5335</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- work-card -->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="card" style="width: 18rem;">
-                                    <div class="creation-cover-image">
-                                        <a class="block" href="/creations/60a27fb21d7dad93eaecb335">
-                                            <img src="/Assets/img/member/photo.png" class="card-img-top" alt="">
-                                        </a>
-                                        <div class="hh-like">
-                                            <span class="fa fa-heart-o"></span>
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="profile-wrap pad-b-20 block">
-                                            <div class="profile-image absolute">
-                                                <a class="" href="/">
-                                                    <img src="/Assets/img/member/photo.png" class="header-image">
-                                                </a>
-                                            </div>
-                                            <a href="#">
-                                                <div class="text-wrap block relative">驅動知識生態系論壇</div>
-                                            </a>
-                                            <a class="block text-sm" target="_self" href="/">dses5335</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    @section endJS{
-        @Scripts.Render("~/Assets/js/point.js")
-        @Scripts.Render("~/Assets/js/Main.js")
-    }
+    
 }
 
-
+@section endJS{
+    @Scripts.Render("~/Assets/js/Like.js")
+    @Scripts.Render("~/Assets/js/point.js")
+    @Scripts.Render("~/Assets/js/Main.js")
+}

@@ -348,12 +348,6 @@ body {
   border-bottom: 1px solid rgb(204, 204, 204);
 }
 
-.layout-right-panel {
-  width: 315px;
-  float: right;
-  margin-left: 50px;
-}
-
 /* search bar */
 .flex-1 {
   flex: 1 1 0%;
@@ -693,4 +687,14 @@ select,
 textarea {
   outline: none;
   text-decoration: none;
+}
+
+@media (min-width: 992px){
+	.layout-right-panel {
+		width: 315px;
+		float: right;
+		margin-left: 50px;
+		position: sticky;
+		top: 0;
+	}
 }

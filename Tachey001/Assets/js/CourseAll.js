@@ -21,7 +21,7 @@ $("#learning").on('click', function () {
 // 熱門排序
 $("#hot").on('click', function () {
     $.ajax({
-        url: "AllHot",
+        url: "/Courses/AllHot",
         cache: false,
         type: "get",
         success: function (result) {
@@ -36,7 +36,7 @@ $(".search-btn").on('click', function () {
         url: "Search",
         cache: false,
         type: "get",
-        data: { search: $("site-search").val() },
+        data: { search: $("#site-search").val() },
         success: function (result) {
             $("#proposalAttachments").html(result);
         }
@@ -45,9 +45,9 @@ $(".search-btn").on('click', function () {
 
 // 最新(預設)
 $("#new").on('click', function () {
-    $("#btnGroupDrop1").val(this.text().toString());
+    //$("#btnGroupDrop1").val(this.text().toString());
     $.ajax({
-        url: "All",
+        url: "AllNew",
         cache: false,
         type: "get",
         success: function (result) {
@@ -58,7 +58,7 @@ $("#new").on('click', function () {
 
 // 最多人數
 $("#pn").on('click', function () {
-    $("#btnGroupDrop1").val(this.text().toString());
+    //$("#btnGroupDrop1").val(this.text().toString());
     $.ajax({
         url: "Orderbypn",
         cache: false,
@@ -71,7 +71,7 @@ $("#pn").on('click', function () {
 
 // 最長課時
 $("#ct").on('click', function () {
-    $("#btnGroupDrop1").val(this.text().toString());
+    //$("#btnGroupDrop1").val(this.text().toString());
     $.ajax({
         url: "Orderbyct",
         cache: false,
@@ -84,7 +84,7 @@ $("#ct").on('click', function () {
 
 // 最高評價
 $("#cs").on('click', function () {
-    $("#btnGroupDrop1").val(this.text().toString());
+    //$("#btnGroupDrop1").val(this.text().toString());
     $.ajax({
         url: "Orderbycs",
         cache: false,

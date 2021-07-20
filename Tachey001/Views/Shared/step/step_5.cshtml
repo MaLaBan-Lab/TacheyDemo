@@ -1,9 +1,9 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@*@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-sm-11 m-4">
@@ -31,17 +31,18 @@
                 </div>
                 <div class="row text-secondary">
                     <div class="col-12 mb-5">
-                        <!-- The toolbar will be rendered in this container. -->
-                        <div id="toolbar-container">
-                        </div>
+                        <form action="Step" method="post" id="Step5Form">
+                            @Html.HiddenFor(m => m.course.CourseID)
 
-                        <!-- This container will become the editable. -->
-                        @*<textarea name="content" id="editor"></textarea>*@
-                        @Html.TextAreaFor(m=>m.course.Introduction, new { @id = "editor", @class = "border"})
+                            <div id="toolbar-container">
+                            </div>
+                            @Html.TextAreaFor(m => m.course.Introduction, new { @id = "editor", @class = "border" })
+
+                         </form>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-secondary btn-lg px-5">
-                    儲存，下一步
+                <button type="button" onclick="postStep(5)" class="btn btn-outline-secondary btn-lg px-5">
+                    下一步
                     @*@Html.ActionLink("下一步", "Step6", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
                 </button>
             </div>
@@ -75,4 +76,4 @@
         </div>
     </div>
 
-}
+@*  *@}

@@ -6,7 +6,8 @@ using Tachey001.Models;
 using Tachey001.Repository;
 using Tachey001.ViewModel;
 using PagedList;
-
+using Dapper;
+using System.Data.SqlClient;
 
 namespace Tachey001.Service
 {
@@ -14,63 +15,69 @@ namespace Tachey001.Service
     {
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
+        private DapperRepository _dapperRepository;
         //初始化資料庫邏輯
         public consoleService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
+            _dapperRepository = new DapperRepository();
+        }
+        //取得所有課程資訊
+        public List<consoleViewModel> test()
+        {
+            var result = _dapperRepository.GetCourse();
+
+            return result;
+        }
+        //取得收藏表
+        public List<Owner> GetOwners(string MId)
+        {
+            var result = _dapperRepository.GetOwners(MId);
+
+            return result;
+        }
+        //找尋cat ID
+        public int ReturnCategoryId(string category)
+        {
+            var result = _tacheyRepository.Get<CourseCategory>(x => x.CategoryEngName == category || x.CategoryName == category);
+
+            return result == null ? 0 : result.CategoryID;
+        }
+        //找尋det ID
+        public int ReturnDetailId(string category)
+        {
+            var result = _tacheyRepository.Get<CategoryDetail>(x => x.DetailName == category);
+
+            return result == null ? 0 : result.DetailID;
+        }
+        //顯示console我收藏的課
+        public List<consoleViewModel> GetConsoleData(string currutId)
+        {
+            return _dapperRepository.GetCourse(currutId);
         }
 
-        //顯示所有
-        public List<consoleViewModel> GetConsoleData()
+        //顯示console我修的課
+        public List<consoleViewModel> GetConsoleData1(string currutId)
         {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
+            var course = _tacheyRepository.GetAll<Course>();
+            var member = _tacheyRepository.GetAll<Member>();
+
+            var order = _tacheyRepository.GetAll<Order>(x=>x.MemberID== currutId);
+            var oderdetail = _tacheyRepository.GetAll<Order_Detail>();
+
+            var ode = from o in order
+                      join od in oderdetail on o.OrderID equals od.OrderID
+                      select new { o.OrderID, o.MemberID, od.CourseID };
+
 
             var result = from c in course
                          join m in member on c.MemberID equals m.MemberID
-                         select new consoleViewModel
-                         {
-                             CourseID = c.CourseID,
-                             Title = c.Title,
-                             Description = c.Description,
-                             TitlePageImageURL = c.TitlePageImageURL,
-                             OriginalPrice = c.OriginalPrice,
-                             TotalMinTime = c.TotalMinTime,
-                             MemberID = m.MemberID,
-                             Photo = m.Photo,
-                             CategoryID = c.CategoryID,
-                             DetailID = c.CategoryDetailsID,
-                             CreateDate = c.CreateDate
-                         };
-
-
-            return result.ToList();
-        }
-
-        //顯示console
-        public List<consoleViewModel> GetConsoleData(string currutId)
-        {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            var coursescore = _tacheyRepository.GetAll<Models.CourseScore>();
-            var owner = _tacheyRepository.GetAll<Models.Owner>();
-
-            var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
-            {
-                id = z.Key,
-                score = z.Average(x => x.Score)
-            });
-
-
-            var result = from o in owner
-                         join m in member on o.MemberID equals m.MemberID
-                         join c in course on o.CourseID equals c.CourseID
+                         join o in ode on c.CourseID equals o.CourseID
                          where o.MemberID == currutId
                          select new consoleViewModel
                          {
                              CourseID = c.CourseID,
                              Title = c.Title,
-                             Description = c.Description,
                              TitlePageImageURL = c.TitlePageImageURL,
                              OriginalPrice = c.OriginalPrice,
                              TotalMinTime = c.TotalMinTime,
@@ -79,16 +86,7 @@ namespace Tachey001.Service
 
                          };
 
-            foreach (var item in result)
-            {
-                foreach (var score in advscore)
-                {
-                    if (item.CourseID == score.id)
-                    {
-                        item.AvgScore = Convert.ToInt32(score.score);
-                    }
-                }
-            }
+            
 
             return result.ToList();
         }
@@ -96,16 +94,16 @@ namespace Tachey001.Service
         //依照分類顯示（路由）
         public List<consoleViewModel> GetGroupData(int? categoryid, int? detailid)
         {
-            var category = _tacheyRepository.GetAll<Models.CourseCategory>();
-            var detail = _tacheyRepository.GetAll<Models.CategoryDetail>();
-            var all = GetConsoleData();
+            var category = _tacheyRepository.GetAll<CourseCategory>();
+            var detail = _tacheyRepository.GetAll<CategoryDetail>();
+            var all = test();
             var result = new List<consoleViewModel>();
 
-            if (categoryid == null)
+            if (categoryid == null || categoryid == 0)
             {
                 result = all.Where(x => x.DetailID == detailid).Select(x => x).ToList();
             }
-            if (detailid == null)
+            if (detailid == null || detailid == 0)
             {
 
                 result = all.Where(x => x.CategoryID == categoryid).Select(x => x).ToList();
@@ -114,30 +112,73 @@ namespace Tachey001.Service
             return result;
         }
 
+        //猜你想學
+        public IPagedList<consoleViewModel> GuessYouLike(string currutId, int page)
+        {
+            var course = _tacheyRepository.GetAll<Course>();
+            var member = _tacheyRepository.GetAll<Member>();
+            var category = _tacheyRepository.GetAll<CourseCategory>();
+            var detail = _tacheyRepository.GetAll<CategoryDetail>();
+
+            var search = from m in member
+                         where m.MemberID == currutId
+                         select m.Interest;
+
+            var ss = search.FirstOrDefault().Split('/');
+
+            var last = ss.Reverse().Skip(1);
+            //var last = ss.Last()
+
+            var all = test();
+
+
+            //result = all.Where(x => x.DetailID == detailid).Select(x => x).ToList();
+            var result = all.Where(x => last.Any(x.DetailName.Contains)).Select(x => x).ToList();
+
+
+
+
+            int currentPage = page < 1 ? 1 : page;
+            var oresult = result.OrderBy(x => x.CreateDate);
+            var rresult = oresult.ToPagedList(currentPage, pageSize);
+
+
+            return rresult;
+        }
+
+        //熱門排序
+        public IPagedList<consoleViewModel> AllHot(int page)
+        {
+            var result = test();
+
+            int currentPage = page < 1 ? 1 : page;
+            var oresult = result.OrderByDescending(x => x.MainClick);
+            var rresult = oresult.ToPagedList(currentPage, pageSize);
+
+            return rresult;
+        }
+
+
+        //搜尋
+        public IPagedList<consoleViewModel> Search(string search, int page)
+        {
+            var result = test();
+
+
+            int currentPage = page < 1 ? 1 : page;
+            var oresult = result.Where(x => x.Title.Contains($"{search}")).OrderBy(x => x.CreateDate);
+            var rresult = oresult.ToPagedList(currentPage, pageSize);
+
+
+            return rresult;
+        }
+
         //最新排序
         private int pageSize = 24;
         public IPagedList<consoleViewModel> GetCardsPageList(int page)
         {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            var orderTail = _tacheyRepository.GetAll<Models.Order_Detail>();
 
-            var result = from c in course
-                         join m in member on c.MemberID equals m.MemberID
-                         select new consoleViewModel
-                         {
-                             CourseID = c.CourseID,
-                             Title = c.Title,
-                             Description = c.Description,
-                             TitlePageImageURL = c.TitlePageImageURL,
-                             OriginalPrice = c.OriginalPrice,
-                             TotalMinTime = c.TotalMinTime,
-                             MemberID = m.MemberID,
-                             Photo = m.Photo,
-                             CategoryID = c.CategoryID,
-                             DetailID = c.CategoryDetailsID,
-                             CreateDate = c.CreateDate
-                         };
+            var result = test();
 
             int currentPage = page < 1 ? 1 : page;
             var oresult = result.OrderBy(x => x.CreateDate);
@@ -145,27 +186,13 @@ namespace Tachey001.Service
 
             return rresult;
         }
-        //熱門排序
+
+        //最多人數排序
         public IPagedList<consoleViewModel> GetCardsHotPageList(int page)
         {
-            var all = GetConsoleData();
+            var all = test();
 
-            var oD = _tacheyRepository.GetAll<Models.Order_Detail>()
-                                                                .GroupBy(x => x.CourseID)
-                                                                .Select(x => new { id = x.Key, Count = x.Count() });
-
-            foreach (var C in all)
-            {
-                foreach (var item in oD)
-                {
-                    if (C.CourseID == item.id)
-                    {
-                        C.CountBuyCourse = item.Count;
-                    }
-                }
-            }
-
-            var result = all.OrderByDescending(x => x.CountBuyCourse).Take(24);
+            var result = all.OrderByDescending(x =>x.CountBuyCourse);
 
             int currentPage = page < 1 ? 1 : page;
 
@@ -174,30 +201,13 @@ namespace Tachey001.Service
             return rresult;
         }
 
-        //最常客時
+        //最長課時
         public IPagedList<consoleViewModel> OrderByTotalTimeOfCourse(int page)
         {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
-
-            var result = from c in course
-                         join m in member on c.MemberID equals m.MemberID
-                         select new consoleViewModel
-                         {
-                             CourseID = c.CourseID,
-                             Title = c.Title,
-                             Description = c.Description,
-                             TitlePageImageURL = c.TitlePageImageURL,
-                             OriginalPrice = c.OriginalPrice,
-                             TotalMinTime = c.TotalMinTime,
-                             MemberID = m.MemberID,
-                             Photo = m.Photo,
-                             CategoryID = c.CategoryID,
-                             DetailID = c.CategoryDetailsID
-                         };
+            var result = test();
 
             int currentPage = page < 1 ? 1 : page;
-            var oresult = result.OrderBy(x => x.TotalMinTime);
+            var oresult = result.OrderByDescending(x => x.TotalMinTime);
             var rresult = oresult.ToPagedList(currentPage, pageSize);
 
 
@@ -205,117 +215,19 @@ namespace Tachey001.Service
         }
 
         //最高評價
-        public IPagedList<consoleViewModel> OrderByCourseScore( int page )
+        public IPagedList<consoleViewModel> OrderByCourseScore(int page)
         {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            var coursescore = _tacheyRepository.GetAll<Models.CourseScore>();
-            var owner = _tacheyRepository.GetAll<Models.Owner>();
-
-            var advscore = coursescore.GroupBy(x => x.CourseID).Select(z => new
-            {
-                id = z.Key,
-                score = z.Average(x => x.Score)
-            });
-
-
-            var result = from o in owner
-                         join m in member on o.MemberID equals m.MemberID
-                         join c in course on o.CourseID equals c.CourseID
-                         select new consoleViewModel
-                         {
-                             CourseID = c.CourseID,
-                             Title = c.Title,
-                             Description = c.Description,
-                             TitlePageImageURL = c.TitlePageImageURL,
-                             OriginalPrice = c.OriginalPrice,
-                             TotalMinTime = c.TotalMinTime,
-                             MemberID = m.MemberID,
-                             Photo = m.Photo
-
-                         };
-
-            foreach (var item in result)
-            {
-                foreach (var score in advscore)
-                {
-                    if (item.CourseID == score.id)
-                    {
-                        item.AvgScore = Convert.ToInt32(score.score);
-                    }
-                }
-            }
+           
+            var result = test();
 
             int currentPage = page < 1 ? 1 : page;
-            var oresult = result.OrderBy(x => x.AvgScore);
+            var oresult = result.OrderByDescending(x => x.AvgScore);
             var rresult = oresult.ToPagedList(currentPage, pageSize);
 
 
             return rresult;
         }
 
-        //搜尋
-        public IPagedList<consoleViewModel> Search(string search, int page)
-        {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            
-            var result = from m in member 
-                         join c in course on m.MemberID equals c.MemberID
-                         where c.Title.Contains(search)
-                         select new consoleViewModel
-                         {
-                             CourseID = c.CourseID,
-                             Title = c.Title,
-                             Description = c.Description,
-                             TitlePageImageURL = c.TitlePageImageURL,
-                             OriginalPrice = c.OriginalPrice,
-                             TotalMinTime = c.TotalMinTime,
-                             MemberID = m.MemberID,
-                             Photo = m.Photo
-
-                         };
-
-
-            int currentPage = page < 1 ? 1 : page;
-            var oresult = result.OrderBy(x => x.CreateDate);
-            var rresult = oresult.ToPagedList(currentPage, pageSize);
-
-
-            return rresult;
-        }
-
-        //猜你想學
-        public IPagedList<consoleViewModel> GuessYouLike(string currutId, int page)
-        {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            var category = _tacheyRepository.GetAll<Models.CourseCategory>();
-            var detail = _tacheyRepository.GetAll<Models.CategoryDetail>();
-
-            var search = from m in member
-                         where m.MemberID == currutId
-                         select m.Interest;
-
-            var ss = search.FirstOrDefault().Split('/');
-
-
-
-            var all = GetConsoleData();
-            var result = new List<consoleViewModel>();
-
-            //result = all.Where(x => x.DetailID == detailid).Select(x => x).ToList();
-            result = all.Where(x => ss.Any(x.DetailName.Contains) || ss.Any(x.CategoryName.Contains)).Select(x => x).ToList();
-
-
-
-
-            int currentPage = page < 1 ? 1 : page;
-            var oresult = result.OrderBy(x => x.CreateDate);
-            var rresult = oresult.ToPagedList(currentPage, pageSize);
-
-
-            return rresult;
-        }
-    }    
+        
+    }
 }

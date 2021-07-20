@@ -4,30 +4,29 @@
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 }
 
+
 <h2 class="text-white">雲端資料:</h2>
-@foreach (var item in ViewBag.List)
-{
-    <h2 class="text-white">@item.FileName @item.Url</h2>
-}
 
-<h2>Index</h2>
+<button onclick="StartProcess()" type="button" class="btn btn-primary btn-success">測試</button>
 
-@using (Html.BeginForm("CourseCard", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="control-label col-sm-2">選擇檔案</label>
-            <div class="col-sm-10">
-                <input type="file" name="file">
-            </div>
-        </div>
-        <h1>Url : @ViewBag.Url</h1>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" value="提交" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
-}
+<div class="progress">
+    <div id="ProgressMessage" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
+</div>
 
+<script>
+    //CALLING METHOD IN THE CONTROLLER TO DO SOME WORK
+    function StartProcess() {
 
+        $.getJSON("/Home/LongRunningProcess",
+            {},
+            function (data) {
+                if (!data) {
+                    console.log("Success");
+                }
+                else {
+                    alert(data);
+                }
+            });
+    }
+
+</script>

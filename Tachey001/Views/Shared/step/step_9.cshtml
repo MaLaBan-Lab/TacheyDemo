@@ -15,196 +15,13 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 1, CourseId = Model.course.CourseID} )" class="text-secondary">課程標題</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.Title == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增課程標題喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">@Model.course.Title</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 7, CourseId = Model.course.CourseID} )" class="text-secondary">課程網址</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.CustomUrl == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增課程網址喔～</span>
-                    }
-                    else
-                    {
-                <span class="text-secondary">https://localhost:44394/Course/cm/@(Model.course.CustomUrl)</span>
-                    }
-
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 1, CourseId = Model.course.CourseID} )" class="text-secondary">課程描述</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.Description == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增課程描述喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">@Model.course.Description</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 6, CourseId = Model.course.CourseID} )" class="text-secondary">課程影片</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.PreviewVideo == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增課程影片喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary text-break">@Model.course.PreviewVideo</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.course.CourseID} )" class="text-secondary">需要工具</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.Tool == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增需要工具喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">@Model.course.Tool</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.course.CourseID} )" class="text-secondary">背景知識</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.CourseLevel == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增背景知識喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">@Model.course.CourseLevel</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.course.CourseID} )" class="text-secondary">課程成就</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.Effect == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增課程成就喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">@Model.course.Effect</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 2, CourseId = Model.course.CourseID} )" class="text-secondary">適合族群</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.CoursePerson == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增適合族群喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">@Model.course.CoursePerson</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 3, CourseId = Model.course.CourseID} )" class="text-secondary">課程單元</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.courseChapter.Count() == 0)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增課程單元喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">課程共 : @Model.courseChapter.Count() 章節，@Model.courseUnit.Count() 單元</span>
-                    }
-                </div>
-            </div>
-            <div class="row justify-content-center my-4">
-                <div class="col-2">
-                    <a href="@Url.Action("Step", new { id = 8, CourseId = Model.course.CourseID} )" class="text-secondary">老師身份</a>
-                </div>
-                <div class="col-7">
-                    @if (Model.course.LecturerIdentity == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增老師身份喔～</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">@Model.course.LecturerIdentity</span>
-                    }
-
-                </div>
-            </div>
-        </div>
-        <div class="col-5">
-            <div class="row my-4 border-bottom">
-                <div class="col-12 pb-4">
-                    <a href="@Url.Action("Step", new { id = 5, CourseId = Model.course.CourseID} )" class="text-secondary">詳細的課程內容</a>
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-12">
-                    @if (Model.course.Introduction == null)
-                    {
-                        <i class="fas fa-exclamation-triangle hahow-orange"></i>
-                        <span class="text-secondary">還沒有新增詳細的課程內容喔～</span>
-                    }
-                    else
-                    {
-                        <div class="text-secondary">@Html.Raw(Model.course.Introduction)</div>
-                    }
-                </div>
-            </div>
-        </div>
+    <div class="row justify-content-center" id="StepCheck-Container">
+        @Html.Partial($"_StepCheck", Model)
     </div>
     <div class="row justify-content-center text-secondary my-4">
         <div class="col-6">
             <div class="row justify-content-center">
-                <span class="text-center">送出審核前，再次檢查提案內容是否符合<a href="">「審核標準」</a></span>
+                <span class="text-center">送出審核前，再次檢查提案內容是否符合</span>
             </div>
             <div class="row justify-content-center">
                 <span>如此可以加快 Hahow 為你審核的速度，也有助於讓提案更順利地上架募資唷！</span>
@@ -214,9 +31,32 @@
     <div class="row my-5 justify-content-center">
         <div class="col-10">
             <div class="row justify-content-center">
-                <button type="button" class="btn btn-outline-secondary btn-lg px-5 w-25 mx-3">
-                    @Html.ActionLink("送出審核", "StepFinish", "Courses", new { CourseId = Model.course.CourseID }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })
-                </button>
+                @if
+                    (
+                    Model.course.Title == null ||
+                    Model.course.Description == null ||
+                    Model.course.CustomUrl == null ||
+                    Model.course.Effect == null ||
+                    Model.course.Tool == null ||
+                    Model.course.TitlePageImageURL == null ||
+                    Model.course.CourseLevel == null ||
+                    Model.course.CoursePerson == null ||
+                    Model.course.Introduction == null ||
+                    Model.course.LecturerIdentity == null ||
+                    Model.courseChapter.Count() == 0 ||
+                    Model.course.PreviewVideo == null
+                    )
+                {
+                    <button type="button" class="btn btn-secondary btn-lg px-5 w-25 mx-3" disabled>
+                        未填寫完成
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-5 w-25 mx-3">
+                        @Html.ActionLink("送出審核", "StepFinish", "Courses", new { CourseId = Model.course.CourseID }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })
+                    </button>
+                }
             </div>
         </div>
     </div>
