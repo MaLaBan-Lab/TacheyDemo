@@ -68,7 +68,7 @@ function postScore(CId) {
                 }
             })
 
-            $('#exampleModal').modal('hide')
+            //$('#exampleModal').modal('hide')
         },
         error: function (err) {
             console.log(err.ErrMsg)
@@ -92,7 +92,7 @@ function postQues(CId) {
             }
             $('#QuesContainer').append(response)
 
-            $('#QuesModal').modal('hide')
+            //$('#QuesModal').modal('hide')
         },
         error: function (err) {
             console.log(err.ErrMsg)

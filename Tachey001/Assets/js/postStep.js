@@ -2,24 +2,24 @@
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-var progress = $.connection.progressHub;
+//var progress = $.connection.progressHub;
 
-// Create a function that the hub can call back to display messages.
-progress.client.AddProgress = function (message, percentage) {
-    $(`.toast`).toast('show')
-    $('#ProgressMessage').get(0).innerText = percentage;
-    $('#ProgressPercent').width(percentage);
+//// Create a function that the hub can call back to display messages.
+//progress.client.AddProgress = function (message, percentage) {
+//    $(`.toast`).toast('show')
+//    $('#ProgressMessage').get(0).innerText = percentage;
+//    $('#ProgressPercent').width(percentage);
 
-    if (percentage == "100%") {
-        $(`.toast`).toast('hide')
-        $('#ProgressMessage').get(0).innerText = '0%';
-        $('#ProgressPercent').width('0%');
-    }
-};
+//    if (percentage == "100%") {
+//        $(`.toast`).toast('hide')
+//        $('#ProgressMessage').get(0).innerText = '0%';
+//        $('#ProgressPercent').width('0%');
+//    }
+//};
 
-$.connection.hub.start().done(function () {
-    var connectionId = $.connection.hub.id;
-});
+//$.connection.hub.start().done(function () {
+//    var connectionId = $.connection.hub.id;
+//});
 
 var CourseId = $("#course_CourseID").val();
 
@@ -278,6 +278,7 @@ function sortUpdate() {
 function postStep(num) {
     var intro = $(".ck-content").get(0).innerHTML;
     $("* [name='course.Introduction']").html(intro);
+    console.log(intro)
     var data = new FormData($(`#Step${num}Form`)[0]);
 
     $.ajax({
