@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Tachey001.Models;
 using Tachey001.ViewModel;
 
 namespace Tachey001.ViewModel
@@ -10,8 +11,10 @@ namespace Tachey001.ViewModel
     {
         //大籃子裝三個小包
         public List<HighlightCourseViewModel> highlightViewModels { get; set; }
+        public List<consoleViewModel> consoleViewModels { get; set; }
         public List<CourseCardViewModel> courseCardViewModels { get; set; }
         public List<CommentViewModel> commentViewModels { get; set; }
         public List<CartPartialCardViewModel> cartPartialCardViewModels { get; set; }
+        public List<Owner> GetOwners { get; set; }
     }
 }

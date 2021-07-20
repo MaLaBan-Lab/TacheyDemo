@@ -1,10 +1,10 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
 
-@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@*@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
-    @Html.AntiForgeryToken()
-
+    @Html.AntiForgeryToken()*@
+<form action="Step" method="post" id="Step2Form">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-sm-11 m-4">
@@ -12,6 +12,7 @@
                     <div class="col-12">
                         <label for="basic-url">學生需要用到的工具/材料/軟體（若為付費軟體務必標明）</label>
                         <div class="input-group mb-3">
+                            @Html.HiddenFor(m => m.course.CourseID)
                             @Html.EditorFor(m => m.course.Tool, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         </div>
                         <label for="basic-url" class="text-black-50 fs-5">記得清楚標明版本、型號等資訊。詳細建議參考右側《課前資訊撰寫指南與範例》</label>
@@ -68,9 +69,9 @@
                     </div>
                 </div>
                 <!--<button type="button" class="btn btn-outline-secondary btn-lg px-5">-->
-                    @*@Html.ActionLink("下一步", "Step3", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
+                @*@Html.ActionLink("下一步", "Step3", "Courses", new { CourseId = ViewBag.CourseId }, new { @class = "btn-outline-secondary text-decoration-none w-100 h-100" })*@
                 <!--</button>-->
-                <input type="submit" value="儲存，下一步" class="btn btn-outline-secondary btn-lg px-5" />
+                <input type="button" value="下一步" onclick="postStep(2)" class="btn btn-outline-secondary btn-lg px-5" />
             </div>
             <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
                 <div class="row bg-light-gray px-3">
@@ -92,5 +93,5 @@
             </div>
         </div>
     </div>
-
-}
+</form>
+@*  *@}

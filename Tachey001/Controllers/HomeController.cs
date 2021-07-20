@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using CloudinaryDotNet;
@@ -7,6 +8,7 @@ using CloudinaryDotNet.Actions;
 using Microsoft.AspNet.Identity;
 using Tachey001.AccountModels;
 using Tachey001.Service;
+using Tachey001.Util;
 using Tachey001.ViewModel;
 
 namespace Tachey001.Controllers
@@ -17,10 +19,12 @@ namespace Tachey001.Controllers
         //初始化=隨時要用他都叫得到
         private HomeService _homeService;
         private MemberService _memberService;
+        private consoleService _consoleService;
         public HomeController()
         {
             _homeService = new HomeService();
             _memberService = new MemberService();
+            _consoleService = new consoleService();
         }
         public ActionResult Index()
         {
@@ -28,7 +32,9 @@ namespace Tachey001.Controllers
             ViewBag.UserId = MemberId;
             //var用碗去接我要的東西
             var getcommentviewmodel = _homeService.GetCommentViewModel();
-            var getcoursecardviewmodels = _homeService.GetCourseCardViewModels(MemberId);
+            //var getcoursecardviewmodels = _homeService.GetCourseCardViewModels(MemberId);
+            var getcoursecardviewmodels = _consoleService.test();
+            var owner = _consoleService.GetOwners(MemberId);
             var gethighlightcourseviewmodel = _homeService.GetHighlightCourseViewModels();
             var getcartpartialcardviewmodel = _memberService.GetCartPartialViewModel(MemberId);
             //再創一個group viewmodel包裝傳回view  <-規則
@@ -41,8 +47,9 @@ namespace Tachey001.Controllers
                 //也可以小括號用.的
                 highlightViewModels = gethighlightcourseviewmodel,
                 commentViewModels = getcommentviewmodel,
-                courseCardViewModels = getcoursecardviewmodels,
-                cartPartialCardViewModels = getcartpartialcardviewmodel
+                cartPartialCardViewModels = getcartpartialcardviewmodel,
+                consoleViewModels = getcoursecardviewmodels,
+                GetOwners = owner
             };
             //丟入view
             return View(result);
@@ -73,50 +80,23 @@ namespace Tachey001.Controllers
             ViewBag.List = result.Resources;
             return View();
         }
-        [HttpPost]
-        public ActionResult CourseCard(HttpPostedFileBase file)
+        public JsonResult LongRunningProcess()
         {
-            Stream streamFile = file.InputStream;
-            //背景作業 不中斷操作
-            //var task = new SendFileTask();
-            //task.Run(streamFile);
+            //THIS COULD BE SOME LIST OF DATA
+            int itemsCount = 50;
 
-            //初始化Cloudinary認證
-            var myAccount = new Account
+            for (int i = 0; i <= itemsCount; i++)
             {
-                Cloud = Credientials.Cloud,
-                ApiKey = Credientials.ApiKey,
-                ApiSecret = Credientials.ApiSecret
-            };
-            //初始化Cloudinary
-            Cloudinary _cloudinary = new Cloudinary(myAccount);
+                //SIMULATING SOME TASK
+                Thread.Sleep(50);
 
-            ////Cloudinary photo
-            //var uploadParams = new ImageUploadParams()
-            //{
-            //    //File = new FileDescription(@"C:\Users\User\Desktop\梗圖\aj1.jpg")
-            //    File = new FileDescription(file.FileName, file.InputStream)
-            //};
+                //CALLING A FUNCTION THAT CALCULATES PERCENTAGE AND SENDS THE DATA TO THE CLIENT
+                //itemsCount 總容量
+                //i現在上傳量
+                Functions.SendProgress("Process in progress...", i, itemsCount);
+            }
 
-            //var uploadResult = _cloudinary.Upload(uploadParams);
-
-            //ViewBag.Url = uploadResult.Url;
-
-            //Cloudinary video
-            var uploadParams = new VideoUploadParams()
-            {
-                //File = new FileDescription(@"C:\Users\User\Desktop\小龍蝦.mp4"),
-                File = new FileDescription("1-1", file.InputStream),
-
-                PublicId = "1-1",
-                Overwrite = true,
-            };
-
-            var uploadResult = _cloudinary.UploadLarge(uploadParams);
-
-            ViewBag.Url = uploadResult.Url;
-
-            return RedirectToAction("Index", "Home");
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 }

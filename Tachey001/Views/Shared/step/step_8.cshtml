@@ -1,68 +1,69 @@
 ﻿@model Tachey001.ViewModel.Course.StepGroup
 
-@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
+@*@using (Html.BeginForm("Step", "Courses", new { id = ViewBag.Id, CourseId = ViewBag.CourseId }))
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
 
     <div class="container">
         <div class="row p-5">
             <div class="col-12">
-                <div class="row m-3 mb-1">
-                    <div class="form-check d-flex">
-                        <h5>
-                            @Html.RadioButtonFor(m => m.course.LecturerIdentity, "個人（自然人）", new { id = "l1", @class = "form-check-input", @required="required" } )
-                            @*<input class="form-check-input" type="radio" name="exampleRadios" value="個人（自然人）" id="defaultCheck1">*@
-                            <label class="form-check-label text-muted" for="l1">
-                                <span>
-                                    個人（自然人）
-                                </span>
-                                開課
-                            </label>
-                        </h5>
+                <form action="Step" method="post" id="Step8Form">
+                    @Html.HiddenFor(m => m.course.CourseID)
+                    <div class="row m-3 mb-1">
+                        <div class="form-check d-flex">
+                            <h5>
+                                @Html.RadioButtonFor(m => m.course.LecturerIdentity, "個人（自然人）", new { id = "l1", @class = "form-check-input", @required = "required" })
+                                @*<input class="form-check-input" type="radio" name="exampleRadios" value="個人（自然人）" id="defaultCheck1">*@
+                                <label class="form-check-label text-muted" for="l1">
+                                    <span>
+                                        個人（自然人）
+                                    </span>
+                                    開課
+                                </label>
+                            </h5>
+                        </div>
                     </div>
-                </div>
-                <div class="row m-3 mb-1">
-                    <div class="form-check d-flex">
-                        <h5>
-                            @Html.RadioButtonFor(m=>m.course.LecturerIdentity, "工作室 / 公司（法人）", new { id="l2", @class = "form-check-input" })
-                            @*<input class="form-check-input" type="radio" name="exampleRadios" value="工作室 / 公司（法人）" id="defaultCheck2">*@
-                            <label class="form-check-label text-muted" for="l2">
-                                <span>
-                                    工作室 / 公司（法人）
-                                </span>
-                                開課
-                                <a href="" class="hahow-orange">企業開課注意事項
-                            </label>
-                        </h5>
+                    <div class="row m-3 mb-1">
+                        <div class="form-check d-flex">
+                            <h5>
+                                @Html.RadioButtonFor(m => m.course.LecturerIdentity, "工作室 / 公司（法人）", new { id = "l2", @class = "form-check-input" })
+                                @*<input class="form-check-input" type="radio" name="exampleRadios" value="工作室 / 公司（法人）" id="defaultCheck2">*@
+                                <label class="form-check-label text-muted" for="l2">
+                                    <span>
+                                        工作室 / 公司（法人）
+                                    </span>
+                                    開課
+                                    <a href="" class="hahow-orange">企業開課注意事項</a>
+                                </label>
+                            </h5>
+                        </div>
                     </div>
-                </div>
-                <div class="row m-3 mb-1">
-                    <div class="form-check d-flex">
-                        <h5>
-                            @Html.RadioButtonFor(m => m.course.LecturerIdentity, "境外人士（非擁有中華民國國籍）", new { id="l3", @class= "form-check-input" })
-                            @*<input class="form-check-input" type="radio" name="exampleRadios" value="境外人士（非擁有中華民國國籍）" id="defaultCheck3">*@
-                            <label class="form-check-label text-muted" for="l3">
-                                <span>
-                                    境外人士（非擁有中華民國國籍）
-                                </span>
-                                開課且「非長期居住於台澎金馬地區」<a href="" class="hahow-orange">境外人士開課注意事項
-                            </label>
-                        </h5>
+                    <div class="row m-3 mb-1">
+                        <div class="form-check d-flex">
+                            <h5>
+                                @Html.RadioButtonFor(m => m.course.LecturerIdentity, "境外人士（非擁有中華民國國籍）", new { id = "l3", @class = "form-check-input" })
+                                @*<input class="form-check-input" type="radio" name="exampleRadios" value="境外人士（非擁有中華民國國籍）" id="defaultCheck3">*@
+                                <label class="form-check-label text-muted" for="l3">
+                                    <span>
+                                        境外人士（非擁有中華民國國籍）
+                                    </span>
+                                    開課且「非長期居住於台澎金馬地區」<a href="" class="hahow-orange">境外人士開課注意事項</a>
+                                </label>
+                            </h5>
+                        </div>
                     </div>
-                </div>
-                <div class="row m-3">
-                    <p class="text-muted">
-                        <span class="hahow-orange">提醒：</span>確認選擇後，該帳號<span class="hahow-orange">不得再次更改「開課身份」</span>，未來若有任何需要調整、協助的地方，歡迎聯繫你的 Hahow
-                        專屬專案企劃夥伴，或透過右下角客服告訴我們 。
-                    </p>
-                </div>
-                <div class="row m-3">
-                    <button id="LecturerBtn" type="submit" class="btn btn-outline-secondary btn-lg px-5">
-                        下一步
-                    </button>
-                </div>
+                    <div class="row m-3">
+                        <p class="text-muted">
+                            <span class="hahow-orange">提醒：</span>確認選擇後，該帳號<span class="hahow-orange">不得再次更改「開課身份」</span>，未來若有任何需要調整、協助的地方，歡迎聯繫你的 Hahow
+                            專屬專案企劃夥伴，或透過右下角客服告訴我們 。
+                        </p>
+                    </div>
+                 </form>
+                    <div class="row m-3">
+                        <input id="LecturerBtn" onclick="postStep(8)" value="下一步" type="button" class="btn btn-outline-secondary btn-lg px-5">
+                    </div>
             </div>
         </div>
     </div>
 
-}
+@*  *@}

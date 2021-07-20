@@ -9,8 +9,8 @@ namespace Tachey001.ViewModel
     public class consoleViewModel
     {
         public string CourseID { get; set; }
+        public string CustomUrl { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
         public string TitlePageImageURL { get; set; }
         public decimal OriginalPrice { get; set; }
         public int? TotalMinTime { get; set; }
@@ -25,7 +25,6 @@ namespace Tachey001.ViewModel
         public string DetailName { get; set; }
         public DateTime? CreateDate { get; set; }
         public int CountBuyCourse { get; set; }
-
         public int? MainClick { get; set; }
     }
 }
