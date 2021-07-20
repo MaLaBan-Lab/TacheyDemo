@@ -445,3 +445,10 @@ body {
     padding: 10px 60px;
   }
 }
+
+
+@media (max-width:768px){
+    .buy_wrap {
+        display:none;
+    }
+}
