@@ -144,16 +144,16 @@
                                 <div class="overflow-auto" style="height:250px" id="CartBox" data-MemberId="@User.Identity.GetUserId()">
 
                                     @*<div>
-                                            <a class="dropdown-item text-white" href="@Url.Action("Cart", "Member")">
-                                                <div class="media">
-                                                    <img src="https://res.cloudinary.com/dzaevdqyt/image/upload/v1625130067/1-1.jpg" class="mr-3" style="width:130px; height:70px">
-                                                    <div class="media-body d-flex flex-column justify-content-between overflow-hidden" style="height:70px">
-                                                        <div class="m-0">漫遊程海 | Python 入門到製作遊戲演算法</div>
-                                                        <div class="m-0 d-flex justify-content-between"><span>已開課</span><span class="text-right">NT$0</span></div>
-                                                    </div>
+                                        <a class="dropdown-item text-white" href="@Url.Action("Cart", "Member")">
+                                            <div class="media">
+                                                <img src="https://res.cloudinary.com/dzaevdqyt/image/upload/v1625130067/1-1.jpg" class="mr-3" style="width:130px; height:70px">
+                                                <div class="media-body d-flex flex-column justify-content-between overflow-hidden" style="height:70px">
+                                                    <div class="m-0">漫遊程海 | Python 入門到製作遊戲演算法</div>
+                                                    <div class="m-0 d-flex justify-content-between"><span>已開課</span><span class="text-right">NT$0</span></div>
                                                 </div>
-                                            </a>
-                                        </div>*@
+                                            </div>
+                                        </a>
+                                    </div>*@
 
                                 </div>
 
@@ -221,9 +221,9 @@
     <div class="container-fuild footer mb-0">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
+                <div class="col-3 footer-block p-0">
                     <h3 class="footer-h3">關於</h3>
-                    <ul class="footer-ul">
+                    <ul>
                         <li><a href="#" class="footer-content">關於我們</a></li>
                         <li><a href="#" class="footer-content">加入Hahow</a></li>
                         <li><a href="#" class="footer-content">使用者條款</a></li>
@@ -232,9 +232,9 @@
                         <li><a href="#" class="footer-content">功能更新</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
+                <div class="col-3 footer-block p-0">
                     <h3 class="footer-h3">幫助</h3>
-                    <ul class="footer-ul">
+                    <ul>
                         <li><a href="#" class="footer-content">企業學習方案</a></li>
                         <li><a href="#" class="footer-content">異業合作洽談</a></li>
                         <li><a href="#" class="footer-content">常見問題</a></li>
@@ -244,9 +244,9 @@
                         <li><a href="#" class="footer-content">填課程問卷拿優惠</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
-                    <h3 class="footer-h3">社群</h3>
-                    <ul class="footer-ul">
+                <div class="col-3 footer-block p-0">
+                    <h3 class="footer-h3">追蹤動態</h3>
+                    <ul>
                         <li><a href="#" class="footer-content">Facebook</a></li>
                         <li><a href="#" class="footer-content">Instagram</a></li>
                         <li><a href="#" class="footer-content">LINE</a></li>
@@ -255,49 +255,43 @@
 
                     </ul>
                 </div>
-                <!--<div class="col-3 footer-block footer-last-block p-0">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>輸入地點</span>-->
-                <!-- <span id="footer-space"></span> -->
-                <!--</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item btn-item-first" href="#">輸入地點</a>
-                        <a class="dropdown-item" style="color:white" href="#">TW&nbsp;台灣 &nbsp;新台幣(&nbsp;TWD&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">HK&nbsp;香港 &nbsp;港幣幣(&nbsp;HKD&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">MY&nbsp;馬來西亞 &nbsp;林吉特(&nbsp;MYR&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">US&nbsp;美國 &nbsp;美元(&nbsp;USD&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">JP&nbsp;日本 &nbsp;日圓(&nbsp;JPY&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">CN&nbsp;中國 &nbsp;人民幣(&nbsp;CNY&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">MO&nbsp;澳門 &nbsp;澳門幣(&nbsp;MOP&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">SG&nbsp;新加坡 &nbsp;新幣(&nbsp;SGD&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">AU&nbsp;澳洲 &nbsp;澳幣(&nbsp;AUD&nbsp;)</a>
-                        <a class="dropdown-item" style="color:white" href="#">CU&nbsp;加拿大 &nbsp;加幣(&nbsp;CAD&nbsp;)</a>
+                <div class="col-3 footer-block footer-last-block p-0">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>輸入地點</span>
+                            <!-- <span id="footer-space"></span> -->
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item btn-item-first" href="#">輸入地點</a>
+                            <a class="dropdown-item" style="color:white" href="#">TW&nbsp;台灣 &nbsp;新台幣(&nbsp;TWD&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">HK&nbsp;香港 &nbsp;港幣幣(&nbsp;HKD&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">MY&nbsp;馬來西亞 &nbsp;林吉特(&nbsp;MYR&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">US&nbsp;美國 &nbsp;美元(&nbsp;USD&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">JP&nbsp;日本 &nbsp;日圓(&nbsp;JPY&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">CN&nbsp;中國 &nbsp;人民幣(&nbsp;CNY&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">MO&nbsp;澳門 &nbsp;澳門幣(&nbsp;MOP&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">SG&nbsp;新加坡 &nbsp;新幣(&nbsp;SGD&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">AU&nbsp;澳洲 &nbsp;澳幣(&nbsp;AUD&nbsp;)</a>
+                            <a class="dropdown-item" style="color:white" href="#">CU&nbsp;加拿大 &nbsp;加幣(&nbsp;CAD&nbsp;)</a>
+                        </div>
                     </div>
-                </div>-->
-                <!--<div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>語言選擇</span>-->
-                <!-- <span id="footer-space"></span> -->
-                <!--</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" style="color:white" href="#">繁體中文</a>
-                        <a class="dropdown-item" style="color:white" href="#">簡體中文</a>
+                    <div class="dropdown mt-3">
+                        <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>語言選擇</span>
+                            <!-- <span id="footer-space"></span> -->
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" style="color:white" href="#">繁體中文</a>
+                            <a class="dropdown-item" style="color:white" href="#">簡體中文</a>
+                        </div>
+                        <span class="pb-3 pt-2 footer-content">Hahow 好學校 © All Rights Reserved.</span>
                     </div>
-                    <span class="pb-3 pt-2 footer-content">Hahow 好學校 © All Rights Reserved.</span>
-                </div>-->
-
-
-
-
-
+                </div>
             </div>
-            <div class="col-12 footer-block pb-3 pt-2 footer-content text-right">Hahow 好學校 © All Rights Reserved.</div>
         </div>
     </div>
-
 
     @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")*@
@@ -311,7 +305,6 @@
     @Scripts.Render("~/Assets/js/owl.carousel.min.js")
     @Scripts.Render("~/Assets/js/nav.js")
     @Scripts.Render("~/Assets/js/shoppingCartData.js")
-    @Scripts.Render("~/Assets/js/Homepage.js")
 
     @*@Scripts.Render("~/bundles/modernizr")*@
     <script>
@@ -408,7 +401,7 @@
             });
             document.querySelector('.center>.item-video>iframe').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')
         }
-                                                        // 影片
+                                                    // 影片
 
     </script>
 
