@@ -3,13 +3,13 @@ body {
 }
 
 .change-btn-checked {
-  background-color: rgb(243, 243, 241);
-  color: rgb(250, 139, 0);
-  border: 0px solid;
+    background-color: rgb(35 35 26);
+    color: rgb(234 232 230);
+    border: 0px solid;
 }
 
-.change-btn-checked-border{
-  border-bottom: 5px solid rgb(250, 139, 0);
+.change-btn-checked-border {
+    border-bottom: 5px solid rgb(110 60 149);
 }
 
 .change-btn {
@@ -20,7 +20,7 @@ body {
 }
 
 .check-b:hover .change-btn {
-  color: yellow;
+    color: #2c2c2c;
 }
 
 .text-black-20 {

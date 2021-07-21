@@ -94,10 +94,10 @@
     user-select: none;
 }
 
-.kind-btn:hover, .kind-btn.selected:hover {
-    color: white;
-    background-image: linear-gradient(rgb(253, 191, 0), rgb(250, 139, 0));
-}
+    .kind-btn:hover, .kind-btn.selected:hover {
+        color: white;
+        background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(205 169 255) 100%);
+    }
 
 .kind-selected {
     color: white;
@@ -159,8 +159,8 @@ button[disabled], html input[disabled] {
     white-space: nowrap;
     user-select: none;
     font-weight: 400;
-    background-color: rgb(250, 139, 0);
-    color: white;
+    background-color: rgb(245 224 77);
+    color: #473c3c;
     padding: 5px 40px;
     font-size: 20px;
     border-radius: 3px;

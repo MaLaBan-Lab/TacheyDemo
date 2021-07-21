@@ -939,8 +939,7 @@ button,
 
 .link-primary {
 	cursor: pointer;
-	color: rgb(250, 139, 0);
-	
+	color: rgb(29 35 219);
 }
 
 /* 興趣與喜好 */
@@ -1166,8 +1165,8 @@ button[disabled], html input[disabled] {
 	border-radius: 100px;
 	border: 1px solid rgb(204, 204, 204);
 	cursor: pointer;
-	color: white;
-	background-color: rgb(250, 139, 0);
+	color: rgb(38 26 12);
+	background-color: rgb(213 206 195);
 	border: 1px solid transparent;
 }
 
@@ -1204,7 +1203,8 @@ button[disabled], html input[disabled] {
 }
 
 .likes-btn:hover, .jobs-btn:hover, .student-dropdown .dropdown-toggle:hover, .intervals-btn:hover {
-	color: rgb(250, 139, 0);
+	color: rgb(186 172 193);
+	background-color: #474747;
 }
 
 .student-dropdown .dropdown-toggle:active, .student-dropdown .dropdown-toggle:hover, .student-dropdown .dropdown-toggle:focus {

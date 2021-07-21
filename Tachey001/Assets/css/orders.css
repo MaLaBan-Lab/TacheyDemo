@@ -8,10 +8,12 @@ body {
     color: #ccc;
 }
 .change-btn-checked {
-    background-color: #6B01C7;
+    background-color: #7d2cc4;
     color: white;
-    border: 1px solid #ddd
+    border: 1px solid #ddd;
+    border-radius: 21px;
 }
+
 .far{
     color:white;
 }
