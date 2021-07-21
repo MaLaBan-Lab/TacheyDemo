@@ -349,6 +349,7 @@ namespace Tachey001.Service
                            CourseID = a.CourseID,
                            QuestionID = a.QuestionID,
                            AnswerID = a.AnswerID,
+                           MemberID = m.MemberID,
                            Name = m.Name,
                            Photo = m.Photo,
                            AnswerContent = a.AnswerContent,
@@ -360,6 +361,7 @@ namespace Tachey001.Service
                        {
                            CourseID = q.CourseID,
                            QuestionID = q.QuestionID,
+                           MemberID = m.MemberID,
                            Name = m.Name,
                            Photo = m.Photo,
                            CurrentName = currentMember.Name,

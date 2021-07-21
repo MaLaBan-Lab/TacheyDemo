@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using Tachey001.AccountModels;
 using Tachey001.Service;
 using Tachey001.Util;
@@ -98,5 +100,20 @@ namespace Tachey001.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetHomePageCard(int start = 0)
+        {
+            var getcoursecardviewmodels = _consoleService.test();
+            var top4 = getcoursecardviewmodels.Skip(start).Take(1);
+            consoleViewModel result = null ;
+            foreach (var item in top4)
+            {
+                result = item;
+            }
+            if (result != null)
+                return PartialView("_CourseCardPartial", result);
+            else
+                return null;
+        }
+      
     }
 }

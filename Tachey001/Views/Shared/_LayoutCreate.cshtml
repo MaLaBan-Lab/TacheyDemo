@@ -42,7 +42,7 @@
     @RenderSection("topCSS", required: false)
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Assets/css/record.css")
-    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/jquery")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
@@ -290,12 +290,10 @@
 
     </div>
 
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Assets/js/nav.js")
     @Scripts.Render("~/Assets/js/shoppingCartData.js")
-    <script src="~/Scripts/jquery.signalR-2.4.2.min.js" type="text/javascript"></script>
-    <script src="/signalr/Hubs"></script>
     @RenderSection("scripts", required: false)
     @RenderSection("endJS", required: false)
 
