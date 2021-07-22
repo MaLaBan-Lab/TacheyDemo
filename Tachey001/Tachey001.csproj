@@ -824,6 +824,7 @@
     <Content Include="Views\Shared\_StepCheck.cshtml" />
     <Content Include="Views\Courses\FindCategory.cshtml" />
     <Content Include="Views\Shared\_HomePageCard.cshtml" />
+    <Content Include="Views\Shared\_VideoPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
