@@ -2,24 +2,24 @@
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-var progress = $.connection.progressHub;
+//var progress = $.connection.progressHub;
 
-// Create a function that the hub can call back to display messages.
-progress.client.AddProgress = function (message, percentage) {
-    $(`.toast`).toast('show')
-    $('#ProgressMessage').get(0).innerText = percentage;
-    $('#ProgressPercent').width(percentage);
+//// Create a function that the hub can call back to display messages.
+//progress.client.AddProgress = function (message, percentage) {
+//    $(`.toast`).toast('show')
+//    $('#ProgressMessage').get(0).innerText = percentage;
+//    $('#ProgressPercent').width(percentage);
 
-    if (percentage == "100%") {
-        $(`.toast`).toast('hide')
-        $('#ProgressMessage').get(0).innerText = '0%';
-        $('#ProgressPercent').width('0%');
-    }
-};
+//    if (percentage == "100%") {
+//        $(`.toast`).toast('hide')
+//        $('#ProgressMessage').get(0).innerText = '0%';
+//        $('#ProgressPercent').width('0%');
+//    }
+//};
 
-$.connection.hub.start().done(function () {
-    var connectionId = $.connection.hub.id;
-});
+//$.connection.hub.start().done(function () {
+//    var connectionId = $.connection.hub.id;
+//});
 
 var CourseId = $("#course_CourseID").val();
 
@@ -428,6 +428,41 @@ function readVideoURL(input) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $("#previewVideoPlayBox").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+//步驟6專用
+//上傳課程影片
+$(".courseVideoPost").change(function () {
+    var CourseId = $(this).get(0).dataset.courseid;
+    var UnitId = $(this).get(0).dataset.unitid;
+
+    var result = $(this).get(0).files[0]
+    var data = new FormData();
+    data.append(`${UnitId}`, result);
+
+    FilePostToast(UnitId);
+    $.ajax({
+        type: "Post",
+        url: `/Courses/MainCourseVideoUpload?CourseId=${CourseId}&UnitId=${UnitId}`,
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            DelToast(UnitId);
+        }
+    })
+
+    readCourseVideoURL(this, UnitId)
+})
+
+function readCourseVideoURL(input, unitId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(`#courseVideoPlayBox-${unitId}`).attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }

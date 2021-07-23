@@ -285,7 +285,6 @@ namespace Tachey001.Controllers
             var Score = _courseService.GetAllScore(CourseId).First(x=>x.MemberID==MemberID);
 
             return PartialView("CourseScoreCard", Score);
-            //return RedirectToAction("Main", "Courses", new { id = 2, CourseId = CourseId });
         }
         [HttpPost]
         //課程發問 POST
@@ -295,7 +294,9 @@ namespace Tachey001.Controllers
 
             _courseService.CreateQuestion(mainGroup.PostCourseQuestion, CourseId, MemberID);
 
-            return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
+            var Question = _courseService.GetAllQuestions(MemberID, CourseId).Last(x=>x.MemberID == MemberID);
+
+            return PartialView("_QuestionPartial", Question);
         }
         [HttpPost]
         //課程發問 回答 POST
@@ -305,7 +306,13 @@ namespace Tachey001.Controllers
 
             _courseService.CreateAnswer(questionCard, CourseId, QuestionId, MemberID);
 
-            return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
+            var Ans = _courseService.GetAllQuestions(MemberID, CourseId)
+                .First(x => x.CourseID == CourseId && x.QuestionID == QuestionId).GetAnswerCards
+                .Last(x=>x.MemberID == MemberID);
+
+            return PartialView("_AnswerPartial", Ans);
+
+            //return RedirectToAction("Main", "Courses", new { id = 3, CourseId = CourseId });
         }
         //Post上傳圖片並返回成功訊息
         [HttpPost]
@@ -332,6 +339,22 @@ namespace Tachey001.Controllers
                 var ReturnUrl = _courseService.PostVideoStorage(CourseID, Request.Files[0]);
 
 
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
+        }
+        //Post上傳課程影片並返回成功訊息
+        [HttpPost]
+        public JsonResult MainCourseVideoUpload(string CourseID, string UnitId)
+        {
+            try
+            {
+                var ReturnUrl = _courseService.PostCourseVideoStorage(CourseID, UnitId, Request.Files[0]);
                 var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
                 return Json(result);
             }

@@ -477,6 +477,7 @@
     <Content Include="Assets\js\course.js" />
     <Content Include="Assets\js\CourseAll.js" />
     <Content Include="Assets\js\HAHOWlogin.js" />
+    <Content Include="Assets\js\Homepage.js" />
     <Content Include="Assets\js\Invite.js" />
     <Content Include="Assets\js\Like.js" />
     <Content Include="Assets\js\Main.js" />
@@ -823,6 +824,8 @@
     <Content Include="Views\Shared\PageListCardTemplate.cshtml" />
     <Content Include="Views\Shared\_StepCheck.cshtml" />
     <Content Include="Views\Courses\FindCategory.cshtml" />
+    <Content Include="Views\Shared\_HomePageCard.cshtml" />
+    <Content Include="Views\Shared\_VideoPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

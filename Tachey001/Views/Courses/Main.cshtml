@@ -632,7 +632,7 @@
                                 </form>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                        <button type="button" class="btn btn-primary" onclick="postScore('@ViewBag.CourseId')">送出</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="postScore('@ViewBag.CourseId')">送出</button>
                                     </div>
                             </div>
                         </div>
@@ -646,15 +646,15 @@
                         <div>
                             @if (Model.GetCourseScore.Average(x => x.Score) == null)
                             {
-                                <h4 class="mr-4 text-50">0</h4>
+                                <h4 class="mr-4 text-50" id="scoreAvg">0</h4>
                             }
                             else
                             {
-                                <h4 class="mr-4 text-50">@Math.Ceiling(@Convert.ToDouble(Model.GetCourseScore.Average(x => x.Score)))</h4>
+                                <h4 class="mr-4 text-50" id="scoreAvg">@Math.Ceiling(@Convert.ToDouble(Model.GetCourseScore.Average(x => x.Score)))</h4>
                             }
                         </div>
                         <div class="score-box text-20 pt-3">
-                            <span class="star-show">
+                            <span class="star-show" id="scoreStar">
                                 <i class="fas fa-star star-gray position-relative">
                                     @if (Model.GetCourseScore.Average(x => x.Score) > 0)
                                     {
@@ -720,7 +720,7 @@
                                     }
                                 </i>
                             </span>
-                            <p class="text-white"><span>@Model.GetCourseScore.Count()</span>則評價</p>
+                            <p class="text-white"><span id="scorePeople">@Model.GetCourseScore.Count()</span>則評價</p>
                         </div>
                     </div>
                 </div>
@@ -773,14 +773,14 @@
 
             <div class="row">
                 <div class="col-xl">
-                    <div class="layout-right-panel sticky-top">
+                    <div class="layout-right-panel">
                         <span style="font-size: 0px;"></span>
-                        <div class="white-wrap side-card  pad-b-30 border">
+                        <div class="white-wrap side-card  pad-b-30 border w-100 mb-5">
                             <h4 class="heading text-center">參與討論，讓學習更精彩</h4>
                             <div class="pad-rl-25 text-left">
                                 @if (Request.IsAuthenticated)
                                 {
-                                    <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3 border" data-toggle="modal" data-target="#exampleModal">
+                                    <button type="button" class="btn btn-outline-hahow w-100 my-4 py-3 border" data-toggle="modal" data-target="#QuesModal">
                                         <div>
                                             <i class="far fa-comment mr-1"></i>
                                             <span>發表留言</span>
@@ -801,30 +801,34 @@
                     </div>
 
                     @*Modal*@
-                    @using (Html.BeginForm("CreateQuestion", "Courses", new { CourseId = Model.Main_Video.Course.CourseID }))
+                    @*@using (Html.BeginForm("CreateQuestion", "Courses", new { CourseId = Model.Main_Video.Course.CourseID }))
                     {
-                        @Html.AntiForgeryToken()
-                        <div class="modal fade" id="exampleModal" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content modal-tachey-box">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">提出您的疑問吧~</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true" class="text-white">&times;</span>
-                                        </button>
-                                    </div>
+                        @Html.AntiForgeryToken()*@
+                
+                    <div class="modal fade" id="QuesModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal-tachey-box">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">提出您的疑問吧~</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="text-white">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="CreateQuestion" method="post" id="QuesPost">
                                     <div class="modal-body text-black">
                                         <h3>問題</h3>
                                         @Html.TextAreaFor(m => m.PostCourseQuestion.QuestionContent, new { @class = "w-100" })
                                     </div>
+                                </form>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                        <button type="submit" class="btn btn-primary">送出</button>
+                                        <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="postQues('@ViewBag.CourseId')">送出</button>
                                     </div>
-                                </div>
                             </div>
                         </div>
-                    }
+                    </div>
+                
+                    @* } *@
 
                     <div class="main-wrap">
                         <!--<div class="flex marg-b-30">-->
@@ -840,11 +844,11 @@
                         <!-- discuss box -->
                         @*課程發問*@
                         <div class="discuss-box">
-                            <div class="white-wrap pad-tb-20">
+                            <div class="white-wrap pad-tb-20" id="QuesContainer">
 
                                 @if (Model.GetQuestions.Count() == 0)
                                 {
-                                    <div class="media p-3">
+                                    <div class="media p-3" id="emptyQues">
                                         @*<img src="https://img95.699pic.com/xsj/10/tm/0h.jpg!/fh/300" class="mr-3 rounded-circle" style="width: 55px; height: 55px;" alt="...">*@
                                         <div class="media-body">
                                             <h3 class="mt-0 text-center">暫無任何發問留言</h3>
