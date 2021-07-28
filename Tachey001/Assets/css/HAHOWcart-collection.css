@@ -12,7 +12,7 @@ body {
 
 .cart-area {
     /* margin-bottom: 60px; */
-    width: 55vw;
+   /* width: 55vw;*/
     /* height: 75vh; */
 }
 /*button*/
@@ -112,7 +112,7 @@ body {
 .right-area {
     flex: 0 1 260px;
     order: 2;
-    margin-left: 30px;
+   /* margin-left: 30px;*/
     width: 260px;
     /* background-color: white; */
 }

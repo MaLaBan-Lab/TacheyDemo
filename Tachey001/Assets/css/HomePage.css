@@ -87,7 +87,7 @@ body {
 }
 
     .search-a:hover {
-        color: #bdb15e;
+        color: rgb(146 197 129);
     }
 
 #ug-pic {
@@ -217,7 +217,7 @@ body {
 .style-t {
     width: 71%;
     margin-top: 7rem;
-    margin-left: 9rem;
+    margin-left: 5rem;
     position: absolute;
     display: block;
     position: absolute;
@@ -334,7 +334,7 @@ body {
     right: 54px;
     top: 316px;
     text-decoration: none;
-    color: #00bea4;
+    color: #5caec8;
 }
 
 /* 好學生評論 */
@@ -574,8 +574,14 @@ body {
     }
 }
 
-@media screen and (max-width:992px) {
+    
 
+@media screen and (max-width:992px) {
+    .p-12345 {
+        padding-left: 15px;
+        padding-right: 14px;
+        padding-top: 16px;
+    }
     .display-n {
         display: none;
     }

@@ -434,6 +434,7 @@
     <Content Include="Assets\dll\Ecpay.EInvoice.Integration.dll" />
     <Content Include="Assets\dll\ECPay.Payment.Integration.dll" />
     <Content Include="Assets\img\cover-default.png" />
+    <Content Include="Assets\img\favicon-20210723115909549.ico" />
     <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\img\frog-3.png" />
     <Content Include="Assets\img\frog-hp.png" />

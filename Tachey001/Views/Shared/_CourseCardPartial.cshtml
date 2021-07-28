@@ -26,7 +26,7 @@
 
 
 <div class="col-xl-@col col-lg-4 col-md-6 col-sm-12">
-    <div class="card my-5">
+    <div class="card my-5 card-bg">
         <div class="position-absolute bottom-0 right-0 p-3 rounded-pill" style="z-index: 50; right:0; top:0;">
             <div class="toast hide"
                  id="toast-@Model.CourseID"
@@ -59,9 +59,9 @@
                     <div class="
                     position-absolute
                     bg-hahow-dark-green
-                    text-center text-white
+                    text-center 
                     backgroundTape
-                  ">
+                  " style="color:black">
                         上課囉
                     </div>
                 </a>
@@ -93,7 +93,7 @@
                 }
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-8 text-justify cardTitle">
-                <h4 class="card-title text-justify font-weight-normal text-secondary ">
+                <h4 class="card-title  font-weight-normal  p-12345 h4-color" >
                     @Model.Title
                 </h4>
             </div>
@@ -135,7 +135,7 @@
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-2 col-6 mb-2">
-                <span class="card-text text-black-50">
+                <span class="card-text text-c">
                     <span class="couse-time-before">
                         <i class="far fa-clock"></i>
                     </span>

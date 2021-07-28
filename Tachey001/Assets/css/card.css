@@ -7,16 +7,26 @@
     left: 0;
 }
 
+.card-bg {
+    background-color: #160531 !important;
+    border: 5px #282119 solid
+}
 .hahow-orange {
     color: #fa8b00;
 }
-
+.text-c {
+    color:rgb(255 255 249 / 67%) !important;
+}
+.h4-color {
+    /*color: #7477D9;*/
+    color: #e6e7ff;
+}
 .hahow-dark-orange {
     color: rgb(238, 100, 87);
 }
 
 .hahow-dark-green {
-    color: rgb(0, 190, 164);
+    color: #FCDE0A;
 }
 
 .bg-hahow-green {
@@ -25,7 +35,7 @@
 }
 
 .bg-hahow-dark-green {
-    background: rgb(0, 190, 164);
+    background: #87b5c4;
 }
 
 .bg-hahow-green:hover {
@@ -99,10 +109,14 @@
 .fa-bookmark {
     transform: scale(1.2);
 }
-
+.card-img-top {
+    /*width: 90%;*/
+    height:44px;
+    margin-right: 5px !important;
+}
 .card:hover .cartBox {
     visibility: visible !important;
-    background-color: black;
+    background-color: lightpink;
     opacity: 0.9;
     z-index: 5;
 }
@@ -121,8 +135,10 @@
 
 .card:hover .editBox {
     visibility: visible !important;
-    background-color: black;
-    opacity: 0.9;
+    /*background-color: mediumpurple;*/
+    /*background-color: #A16AA3;*/
+    /*background-color: #F8C5B4;*/
+    background-color: #A4AFDD; opacity: 0.9;
     z-index: 5;
 }
 
@@ -172,11 +188,14 @@
     }
 
     .card:hover .card-img-top {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 
     .card-img-top {
-        height: 180px;
+        width: 86%;
+         height: 84%; 
+        /* padding: 13px; */
+        margin-top: 1rem;
     }
 
     .card:hover .backgroundBookmarkMove {
@@ -248,7 +267,7 @@
 
     .card-img-top {
         width: 90%;
-        height:50px;
+        /*height:50px;*/
         margin-right: 5px !important;
     }
 

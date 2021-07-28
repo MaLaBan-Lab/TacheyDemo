@@ -13,10 +13,11 @@
                 <div class="none m-3">
                 </div>
                 <a href="">
-                    <img src="https://i.imgur.com/CG3B9gp.jpg" alt="" class="my-4 w-15rem">
+                    <img src="https://upload.cc/i1/2021/07/19/M8zQHn.png" alt="" class="my-4 w-15rem">
                 </a>
                 <p class="m-b-2 text-white">今天也要透過學習，成為更好的自己</p>
-                <img src="https://hahow.in/static/media/slogan-login-1.4bf05dd3.svg" alt="" class="col-xs-0">
+                <img src="https://i.pinimg.com/564x/85/4c/3d/854c3dd9d515534668bd88cf34680fab.jpg" alt="" class="col-xs-0" style="width: 64%;">
+              
             </div>
         </div>
 
@@ -75,32 +76,33 @@
                             @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
                             <div class="boxrightinnermiddle-2icon">
                                 <i class="far fa-envelope i-email"></i>
-                                @Html.TextBoxFor(m => m.Email, new { @class = "my-2" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "my-2 rad" })
                             </div>
                             @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
                             <div class="boxrightinnermiddle-2icon">
                                 <i class="fas fa-unlock-alt"></i>
-                                @Html.PasswordFor(m => m.Password, new { @class = "my-2" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "my-2 rad" })
                             </div>
                             @Html.ValidationSummary("", new { @class = "text-danger" })
-                            <button type="submit" class="my-2 d-flex justify-content-center"
+                            <button type="submit" class="my-2 d-flex justify-content-center b-1-login"
                                     id="input_btn">
-                                <input type="submit" value="登入" class="w-100 h-100 border-0" />
+                                <input type="submit" value="登入" class="w-100 h-100 border-0" style=" border-radius: 16px; padding-left: 1rem;"/>
                             </button>
                         </div>
 
                     }
 
-                    <div class="boxrightinnermiddle d-flex justify-content-center my-3 justify-content-around">
+                    @*<div class="boxrightinnermiddle d-flex justify-content-center my-3 justify-content-around">
                         <div class="text-muted">---------</div>
                         <span class="text-muted"> 企業用戶入口</span>
                         <div class="text-muted">---------</div>
                     </div>
                     <a href="#" class="bussines-a">
                         <div>
-                            <img src="https://hahow.in/static/media/logo-white.e547f0d1.svg" alt="" class="my-2">
+                            <img src="https://upload.cc/i1/2021/07/19/M8zQHn.png
+" alt="" class="my-2" style="width:30%">
                             <span id="a-span">企業用戶入口</span>
-                        </div>
+                        </div>*@
                     </a>
                 </div>
             </div>
