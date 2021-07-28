@@ -445,6 +445,7 @@
     <Content Include="Assets\img\icon-hahow.png" />
     <Content Include="Assets\img\icon-line-half.png" />
     <Content Include="Assets\img\icon-line.svg" />
+    <Content Include="Assets\img\MainBackground.png" />
     <Content Include="Assets\img\photo.png" />
     <Content Include="Assets\img\point-history-header.jpg" />
     <Content Include="Assets\img\人文.svg" />

@@ -22,13 +22,12 @@ body {
 
 .nav-link:hover {
     /*color: #fac227 !important;*/
-    font-size: 19px
+    /*font-size: 19px*/
 }
-
 .dropdown-item:hover {
     color: #fac227 !important;
     background-color: #002b56;
-    font-size: 19px
+    /*font-size: 19px*/
 }
 
 .dropdown-menu {
@@ -37,19 +36,19 @@ body {
 
 .search-half {
     position: relative;
-    color: rgb(233 229 77);
+    color: rgb(233 ,229 ,77);
 }
 
-    .search-half::before {
-        content: "";
-        background-color: rgb(82 10 121);
-        z-index: -1;
-        position: absolute;
-        height: 20px;
-        width: 100%;
-        top: 15px;
-        left: 0;
-    }
+.search-half::before {
+    content: "";
+    background-color: rgb(82 ,10 ,121);
+    z-index: -1;
+    position: absolute;
+    height: 20px;
+    width: 100%;
+    top: 15px;
+    left: 0;
+}
 
 .search-input {
     height: 40px;
