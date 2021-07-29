@@ -2,11 +2,16 @@ body {
   margin: 0;
   padding: 0;
 }
-
+/*::selection {
+    background: #b65132;
+    color: #002b56;
+}*/
 .hahow-orange {
-  color: #fa8b00;
+    color: #3014c5;
 }
-
+.bc-c {
+    background: linear-gradient( 338deg, rgb(127 100 229) 0%, rgb(91 158 190) 100%);
+}
 .hahow-green {
   color: rgb(0, 190, 164);
 }
@@ -28,7 +33,7 @@ a:hover {
 }
 
 .bg-darkgray {
-  background-color: rgb(234, 234, 234);
+    background-color: rgb(210 105 105);
 }
 
 .btn-circle {
@@ -38,8 +43,8 @@ a:hover {
 }
 
 .bg-hahow-green {
-  background: rgb(46, 225, 179);
-  color: white;
+    background: #ff7878;
+    color: white;
 }
 
 .bg-hahow-green:hover {
@@ -79,14 +84,14 @@ a:hover {
 }
 
 .btn-hahow-green {
-  background-color: rgb(0, 190, 164);
-  color: white;
+    background-color: #fff;
+    color: black;
 }
 
-.btn-hahow-green:hover {
-  background-color: rgb(0, 143, 124);
-  color: white;
-}
+    .btn-hahow-green:hover {
+        background-color: #c6090980;
+        color: white;
+    }
 
 .bg-hahow-light-green {
   background-color: rgba(0, 190, 165, 0.11);
@@ -105,7 +110,9 @@ a:hover {
 .line-height {
   line-height: 30px;
 }
-
+.yellow {
+    background-color: #f8cd4b !important;
+}
 .fs-5 {
   font-size: 14px;
 }
@@ -156,15 +163,25 @@ a:hover {
   width: 50px;
   height: 500px;
 }
-
-.btn-outline-secondary:hover {
-  background-color: #fff;
-  color: rgb(0, 190, 164);
+.btn-outline-secondary {
+    background-color: #fff;
+    color: rgb(0 0 0);
 }
-
+    .btn-outline-secondary {
+        background-color: white;
+        color: black;
+    }
+.btn-outline-secondary:hover {
+    background-color: #c6090980;
+    color: rgb(255 255 255);
+}
 .btn-outline-orange:hover {
-  background-color: #fff;
-  color: #fa8b00;
+    background-color: white;
+    color: black;
+}
+.btn-outline-orange:hover {
+    background-color: #c6090980;
+    color: white;
 }
 
 .custom-file-label::after {
@@ -174,10 +191,10 @@ a:hover {
     z-index: 5;
 }
 
-.custom-file-label:hover{
-    cursor: pointer;
-    color: #fa8b00;
-}
+    .custom-file-label:hover {
+        cursor: pointer;
+        color: #6b01c7;
+    }
 
 .fa-none{
     visibility: hidden;
