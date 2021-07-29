@@ -433,6 +433,41 @@ function readVideoURL(input) {
     }
 }
 
+//步驟6專用
+//上傳課程影片
+$(".courseVideoPost").change(function () {
+    var CourseId = $(this).get(0).dataset.courseid;
+    var UnitId = $(this).get(0).dataset.unitid;
+
+    var result = $(this).get(0).files[0]
+    var data = new FormData();
+    data.append(`${UnitId}`, result);
+
+    FilePostToast(UnitId);
+    $.ajax({
+        type: "Post",
+        url: `/Courses/MainCourseVideoUpload?CourseId=${CourseId}&UnitId=${UnitId}`,
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            DelToast(UnitId);
+        }
+    })
+
+    readCourseVideoURL(this, UnitId)
+})
+
+function readCourseVideoURL(input, unitId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(`#courseVideoPlayBox-${unitId}`).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 //步驟7專用
 //判斷客製網址是否重複
 $("#course_CustomUrl").change(function () {

@@ -348,6 +348,22 @@ namespace Tachey001.Controllers
                 return Json(result);
             }
         }
+        //Post上傳課程影片並返回成功訊息
+        [HttpPost]
+        public JsonResult MainCourseVideoUpload(string CourseID, string UnitId)
+        {
+            try
+            {
+                var ReturnUrl = _courseService.PostCourseVideoStorage(CourseID, UnitId, Request.Files[0]);
+                var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                return Json(result);
+            }
+        }
         //猜你想學
         public ActionResult GuessYouLike(int page = 1)
         {

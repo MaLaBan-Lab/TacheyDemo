@@ -446,6 +446,7 @@
     <Content Include="Assets\img\icon-hahow.png" />
     <Content Include="Assets\img\icon-line-half.png" />
     <Content Include="Assets\img\icon-line.svg" />
+    <Content Include="Assets\img\MainBackground.png" />
     <Content Include="Assets\img\photo.png" />
     <Content Include="Assets\img\point-history-header.jpg" />
     <Content Include="Assets\img\人文.svg" />
@@ -825,6 +826,7 @@
     <Content Include="Views\Shared\_StepCheck.cshtml" />
     <Content Include="Views\Courses\FindCategory.cshtml" />
     <Content Include="Views\Shared\_HomePageCard.cshtml" />
+    <Content Include="Views\Shared\_VideoPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

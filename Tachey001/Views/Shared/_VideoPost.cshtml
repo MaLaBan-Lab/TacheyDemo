@@ -1,0 +1,11 @@
+﻿@model Tachey001.Models.CourseUnit
+
+<div class="w-50">
+    <div class="w-100">
+        <label for="courseVideo-@(Model.UnitID)" class="btn btn-outline-secondary btn-outline-orange btn-lg py-2 px-5 mr-3 fs-5 text-black-50">單元 @(Model.UnitID) 上傳</label>
+        <input type="file" class="custom-file-input courseVideoPost" id="courseVideo-@(Model.UnitID)" data-CourseID="@ViewBag.CourseId" data-UnitID="@Model.UnitID" style="width:5px" />
+    </div>
+    <video controls="controls" class="w-75 border" id="courseVideoPlayBox-@(Model.UnitID)">
+        <source src="@Model.CourseURL" type="video/mp4" />
+    </video>
+</div>
