@@ -93,7 +93,6 @@ namespace Tachey001.Controllers
                 return View(result);
             }
         }
-        [AllowAnonymous]
         public ActionResult Create()
         {
             return View();
