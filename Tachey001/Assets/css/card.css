@@ -193,7 +193,7 @@
 
     .card-img-top {
         width: 86%;
-         height: 84%; 
+         /*height: 84%;*/ 
         /* padding: 13px; */
         margin-top: 1rem;
     }
