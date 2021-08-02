@@ -15,7 +15,7 @@ using Tachey001.ViewModel.ApiViewModel;
 
 namespace Tachey001.Controllers
 {
-    [System.Web.Http.Authorize]
+    [Authorize]
     public class CoursesController : Controller
     {
         private TacheyContext tacheyDb;
@@ -93,7 +93,6 @@ namespace Tachey001.Controllers
                 return View(result);
             }
         }
-        [AllowAnonymous]
         public ActionResult Create()
         {
             return View();
