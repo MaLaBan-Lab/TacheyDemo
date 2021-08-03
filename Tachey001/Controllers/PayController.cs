@@ -64,6 +64,11 @@ namespace Tachey001.Controllers
                 return RedirectToAction("Error", "Pay");
             }
         }
+        public ActionResult PayAgain(string OrderID)
+        {
+            Session["ID"] = OrderID;
+            return Redirect("~/AioCheckOut.aspx");
+        }
         public ActionResult Error()
         {
             //var orderID = Session["ID"].ToString();
@@ -79,7 +84,6 @@ namespace Tachey001.Controllers
         }
         public ActionResult success()
         {
-
             return RedirectToAction("Orders", "Member");
         }
     }
