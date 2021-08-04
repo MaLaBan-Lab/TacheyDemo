@@ -9,10 +9,8 @@ namespace Tachey001.Models
     [Table("Point")]
     public partial class Point
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PointID { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string MemberID { get; set; }
 
@@ -22,10 +20,14 @@ namespace Tachey001.Models
 
         public int PointNum { get; set; }
 
-        public DateTime GetTime { get; set; }
-
-        public DateTime Deadline { get; set; }
+        public int ValidDate { get; set; }
 
         public bool Status { get; set; }
+
+        [StringLength(30)]
+        public string GetTime { get; set; }
+
+        [StringLength(30)]
+        public string Deadline { get; set; }
     }
 }
