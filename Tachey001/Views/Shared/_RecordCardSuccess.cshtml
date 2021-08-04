@@ -1,17 +1,23 @@
 ﻿@model OrderRecordSuccess
 
-
+@{
+    string price = string.Empty;
+    if (Model.UnitPrice.HasValue)
+    {
+        price = Model.UnitPrice.Value.ToString("C0");
+    }
+}
 
 <div class="container">
     <div class="row px-3 ">
         <div class="col-7 border-right-0 border bg-white">
             <div class=" d-inline-block mr-3 record-color ">
-                <div class="record-text py-2">訂單成立:@Model.OrderDate</div>
-                <div class="record-text py-2">付款時間:@Model.PayDate</div>
+                <div class="record-text py-2">訂單成立 : @Model.OrderDate</div>
+                <div class="record-text py-2">付款時間 : @Model.PayDate</div>
             </div>
             <div class=" d-inline-block record-color ">
-                <div class="record-text py-2">付款方式:@Model.PayMethod</div>
-                <div class="record-text py-2">實付金額:<span class="record-orange">@Model.UnitPrice</span></div>
+                <div class="record-text py-2">付款方式 : @Model.PayMethod</div>
+                <div class="record-text py-2">實付金額 : <span class="record-orange">@price</span></div>
             </div>
         </div>
         <div class="col-5 d-flex justify-content-end align-items-center record-text border-left-0 border bg-white">
@@ -28,11 +34,11 @@
                      alt="" class="record-img mr-2">
             </a>
             <a href="#" class="record-link d-inline-block">
-                <span class="record-text">創業先修，你準備好了嗎？</span>
+                <span class="record-text">@Model.CourseName</span>
             </a>
         </div>
         <div class="col-7 d-flex justify-content-end align-items-center record-text border-left-0 border bg-white">
-            <span>@Model.UnitPrice</span>
+            <span>@price</span>
         </div>
     </div>
 </div>
@@ -70,15 +76,15 @@
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-12 fs-12 mb-2">
                             <span class="border-bottom w-100 d-block">售價</span>
-                            <span class="d-block py-1 record-color">@Model.UnitPrice</span>
+                            <span class="d-block py-1 record-color">@price</span>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-12 fs-12 mb-2">
                             <span class="border-bottom w-100 d-block">實付價格</span>
-                            <span class="d-block py-1 record-color"> @Model.UnitPrice</span>
+                            <span class="d-block py-1 record-color">@price</span>
                         </div>
                         <div class="col-12 text-right fs-20">
                             <span>實付金額:</span>
-                            <span>@Model.UnitPrice</span>
+                            <span>@price</span>
                         </div>
                     </div>
                 </div>

@@ -588,7 +588,7 @@ namespace Tachey001.Service
         {
             var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             if (result.MemberID == MemberId) return true;
-            var oID = _tacheyRepository.GetAll<Order>(x => x.MemberID == MemberId);
+            var oID = _tacheyRepository.GetAll<Order>(x => x.MemberID == MemberId && x.OrderStatus=="success");
             if (oID.Count()==0) return false;
             var oDList = new List<Order_Detail>();
             foreach (var item in oID)

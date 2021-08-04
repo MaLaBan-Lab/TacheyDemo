@@ -62,7 +62,7 @@ namespace Tachey001.Service
             var course = _tacheyRepository.GetAll<Course>();
             var member = _tacheyRepository.GetAll<Member>();
 
-            var order = _tacheyRepository.GetAll<Order>(x=>x.MemberID== currutId);
+            var order = _tacheyRepository.GetAll<Order>(x=>x.MemberID== currutId && x.OrderStatus=="success");
             var oderdetail = _tacheyRepository.GetAll<Order_Detail>();
 
             var ode = from o in order
