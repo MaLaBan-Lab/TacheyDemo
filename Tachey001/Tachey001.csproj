@@ -344,6 +344,7 @@
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\PersonalUrl.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\PointOwner.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionLike.cs" />
     <Compile Include="Models\sysdac_history_internal.cs" />
