@@ -33,6 +33,7 @@ namespace Tachey001.Models
         public virtual DbSet<Order_Detail> Order_Detail { get; set; }
         public virtual DbSet<Owner> Owner { get; set; }
         public virtual DbSet<Point> Point { get; set; }
+        public virtual DbSet<PointOwner> PointOwner { get; set; }
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<QuestionLike> QuestionLike { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }

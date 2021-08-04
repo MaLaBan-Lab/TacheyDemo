@@ -504,14 +504,29 @@ namespace Tachey001.Service
                 PublicId = "PreviewVideo",
                 Folder = $"Course/{CourseId}"
             };
-
-            var f = new StreamReader(file.InputStream).ReadToEnd();
             
             var CallBackUrl = _cloudinary.UploadLarge(uploadParams).SecureUrl.ToString();
-            //Functions.SendProgress("影片上傳中 ... ", , file.ContentLength);
 
             var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.PreviewVideo = CallBackUrl;
+            _tacheyRepository.SaveChanges();
+
+            return CallBackUrl;
+        }
+        //儲存雲端上傳課程影片，並回傳網址
+        public string PostCourseVideoStorage(string CourseId, string UnitId, HttpPostedFileBase file)
+        {
+            var uploadParams = new VideoUploadParams()
+            {
+                File = new FileDescription("PreviewVideo", file.InputStream),
+                PublicId = UnitId,
+                Folder = $"Course/{CourseId}/Video"
+            };
+
+            var CallBackUrl = _cloudinary.UploadLarge(uploadParams).SecureUrl.ToString();
+
+            var result = _tacheyRepository.Get<CourseUnit>(x => x.CourseID == CourseId && x.UnitID == UnitId);
+            result.CourseURL = CallBackUrl;
             _tacheyRepository.SaveChanges();
 
             return CallBackUrl;
@@ -573,7 +588,7 @@ namespace Tachey001.Service
         {
             var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             if (result.MemberID == MemberId) return true;
-            var oID = _tacheyRepository.GetAll<Order>(x => x.MemberID == MemberId);
+            var oID = _tacheyRepository.GetAll<Order>(x => x.MemberID == MemberId && x.OrderStatus=="success");
             if (oID.Count()==0) return false;
             var oDList = new List<Order_Detail>();
             foreach (var item in oID)

@@ -102,6 +102,7 @@ namespace Tachey001.Controllers
         }
         public ActionResult GetHomePageCard(int start = 0)
         {
+            ViewBag.UserId = User.Identity.GetUserId();
             var getcoursecardviewmodels = _consoleService.test();
             var top4 = getcoursecardviewmodels.Skip(start).Take(1);
             consoleViewModel result = null ;

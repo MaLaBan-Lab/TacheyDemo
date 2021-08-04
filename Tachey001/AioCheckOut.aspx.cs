@@ -18,7 +18,7 @@ namespace text
             string product_name = "";
             decimal product_price = 0.0m;
             string product_id = Session["ID"].ToString();
-            decimal discount = 0;
+            decimal discount = 1;
 
             using (TacheyContext _context = new TacheyContext())
             {
@@ -31,19 +31,7 @@ namespace text
                
                 foreach (var item in product)
                 {
-                    //time++;
-                    //if (time == count)
-                    //{
-                    //    product_name += "\""+item.CourseName + "\"" +$"{count}個課程總共:";
-                    //}
-                    //else
-                    //{
-                    //    product_name += "\""+item.CourseName +"\""+ "，";
-                    //}
                     product_price = product_price + (decimal)item.UnitPrice;
-
-
-
                 }
                 product_name =  $"{count}個課程總共:";
 
@@ -54,14 +42,9 @@ namespace text
                 }
                 else if (order.UsePoint == "use")
                 {
-                    discount = 1;
                     var totalpoint = _payService.GetOwnerPoint(order.MemberID) / 100;
                     product_price = product_price - totalpoint;
                 }
-                else
-                    discount = 1;
-
-
             }
 
 
@@ -112,8 +95,7 @@ namespace text
                     ///基本參數
 
                     //廠商的交易編號
-                    oPayment.Send.MerchantTradeNo = Session["ID"].ToString();
-                    
+                    oPayment.Send.MerchantTradeNo = "Tachey" + new Random().Next(0, 99999).ToString();
 
                     //廠商的交易時間  格式為：yyyy / MM / dd HH: mm: ss
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -243,12 +225,12 @@ namespace text
             }
             catch (Exception ex)
             {
-                using (TacheyContext _context = new TacheyContext())
-                {
-                    var o1 = _context.Order.Find(Session["ID"].ToString());
-                    o1.OrderStatus = "error";
-                    _context.SaveChanges();
-                }
+                //using (TacheyContext _context = new TacheyContext())
+                //{
+                //    var o1 = _context.Order.Find(Session["ID"].ToString());
+                //    o1.OrderStatus = "error";
+                //    _context.SaveChanges();
+                //}
                 Response.Redirect("~/Pay/Error");
                 // 例外錯誤處理。
                 enErrors.Add(ex.Message);

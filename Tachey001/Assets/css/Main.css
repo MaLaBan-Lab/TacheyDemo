@@ -36,18 +36,18 @@ body {
   padding-top: 10px;
 }
 .hero_wrap::after {
-  top: 0px;
-  left: 0px;
-  z-index: -1;
-  content: "";
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  filter: blur(5px);
-  background-image: url("https://images.api.hahow.in/images/5f99af09f506d3716bf91b53");
-  z-index: -1;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    filter: blur(5px);
+    background-image: url("/Assets/img/MainBackground.png");
+    z-index: -1;
 }
 .hero_wrap h2 {
   color: white;
@@ -95,7 +95,7 @@ body {
 /* ========================= 選單外層 start ============================= */
 .menu_wrap {
   position: absolute;
-  top: -110%;
+  top: -140%;
   left: 0;
   padding: 0;
   background-color: gray;
@@ -284,36 +284,53 @@ body {
 
 /*  ========================= 購買區塊 =========================  */
 .buy_wrap {
-  position: fixed;
-  bottom: 0;
-  padding: 15px;
-  background-color: white;
-  border-top: 2px solid rgb(233, 230, 230);
-  z-index:9;
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    background-color: rgb(0, 0, 0,0.9);
+    border-top: 2px solid rgb(233, 230, 230);
+    z-index: 9;
 }
 .buy_wrap .collect {
   cursor:pointer;
   margin-bottom: 15px;
   padding: 0 10%;
   font-size:13px;
-  color:gray;
    transition:0.5s;
    display:inline-block;
 }
-.buy_wrap .collect:hover{
-    color:black;
+.buy_wrap .collect .fa{
+    color:white;
 }
+
 .buy_wrap .btn_wrap {
   display: flex;
   justify-content: space-evenly;
 }
 .buy_wrap .btn_wrap > button:first-child {
   padding: 10px 70px;
+  font-size:16px;
 }
 .buy_wrap .btn_wrap > button {
   font-size: 20px;
   padding: 10px 25px;
 }
+@media screen and (min-width: 300px) {
+    .menu_wrap {
+        top: -180%;
+    }
+}
+@media screen and (min-width: 350px) {
+    .menu_wrap {
+        top: -150%;
+    }
+}
+@media screen and (min-width: 400px) {
+    .menu_wrap {
+        top: -140%;
+    }
+}
+
 @media screen and (min-width: 768px) {
   /* ========================= 共用 start ============================= */
   body {
@@ -362,11 +379,18 @@ body {
   }
   .buy_wrap .btn_wrap > button:first-child {
     padding: 10px 20px;
+  font-size:26px;
+
   }
   .buy_wrap .btn_wrap > button {
     font-size: 20px;
     padding: 10px 25px;
   }
+}
+@media screen and (min-width: 767px)and (max-width: 769px) {
+    .hero_wrap {
+        height: auto;
+    }
 }
 @media screen and (min-width: 992px) {
   /* ========================= 共用 start ============================= */

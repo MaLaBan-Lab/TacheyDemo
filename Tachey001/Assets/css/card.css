@@ -7,16 +7,26 @@
     left: 0;
 }
 
+.card-bg {
+    background-color: #160531 !important;
+    border: 5px #282119 solid
+}
 .hahow-orange {
     color: #fa8b00;
 }
-
+.text-c {
+    color:rgb(255 255 249 / 67%) !important;
+}
+.h4-color {
+    /*color: #7477D9;*/
+    color: #e6e7ff;
+}
 .hahow-dark-orange {
     color: rgb(238, 100, 87);
 }
 
 .hahow-dark-green {
-    color: rgb(0, 190, 164);
+    color: #FCDE0A;
 }
 
 .bg-hahow-green {
@@ -25,7 +35,7 @@
 }
 
 .bg-hahow-dark-green {
-    background: rgb(0, 190, 164);
+    background: #87b5c4;
 }
 
 .bg-hahow-green:hover {
@@ -99,10 +109,13 @@
 .fa-bookmark {
     transform: scale(1.2);
 }
-
+.card-img-top {
+    height:160px;
+    margin-right: 5px !important;
+}
 .card:hover .cartBox {
     visibility: visible !important;
-    background-color: black;
+    background-color: lightpink;
     opacity: 0.9;
     z-index: 5;
 }
@@ -121,8 +134,7 @@
 
 .card:hover .editBox {
     visibility: visible !important;
-    background-color: black;
-    opacity: 0.9;
+    background-color: #A4AFDD; opacity: 0.9;
     z-index: 5;
 }
 
@@ -134,19 +146,51 @@
     color: #FFEB00 !important;
 }
 
-@media (min-width: 1200px){
+
+@media (max-width: 767px) {
+    .card-img-box {
+        display: none;
+    }
+
+    .backgroundTape {
+        display: none;
+    }
+
+    .card-title-image {
+        display: none;
+    }
+
+    .backgroundBookmark {
+        display: none;
+    }
+
+    .backgroundBookmark-sm:hover {
+        background-color: #fa8b00;
+    }
+
+        .backgroundBookmark-sm:hover i {
+            color: white;
+        }
+
+    .card-bottom {
+        height: 2px;
+    }
+
     .card-img-top {
-        height: 180px;
+        width: 90%;
+        /*height:50px;*/
+        margin-right: 5px !important;
+    }
+
+    .card {
+        border: 0px
     }
 }
 
-@media (min-width: 991px){
-    .card-img-top {
-        height: 160px;
-    }
-}
+
 
 @media (min-width: 768px) {
+
     .cardTitle {
         height: 60px;
         overflow: hidden;
@@ -172,11 +216,11 @@
     }
 
     .card:hover .card-img-top {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 
     .card-img-top {
-        height: 180px;
+        /*width: 86%;*/
     }
 
     .card:hover .backgroundBookmarkMove {
@@ -221,42 +265,6 @@
     }
 }
 
-@media (max-width: 767px) {
-    .backgroundTape{
-        display:none;
-    }
-
-    .card-title-image {
-        display: none;
-    }
-
-    .backgroundBookmark {
-        display: none;
-    }
-
-    .backgroundBookmark-sm:hover {
-        background-color: #fa8b00;
-    }
-
-    .backgroundBookmark-sm:hover i {
-        color: white;
-    }
-
-    .card-bottom {
-        height: 2px;
-    }
-
-    .card-img-top {
-        width: 90%;
-        height:50px;
-        margin-right: 5px !important;
-    }
-
-    .card {
-        border: 0px
-    }
-}
-
 .px-15 {
     padding: 0 15px;
 }
@@ -284,3 +292,15 @@
     .more-class:hover {
         color: #bdb15e;
     }
+
+@media (min-width: 991px) {
+    .card-img-top {
+        height: 160px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-img-top {
+        height: 160px;
+    }
+}

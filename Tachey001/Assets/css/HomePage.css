@@ -22,13 +22,12 @@ body {
 
 .nav-link:hover {
     /*color: #fac227 !important;*/
-    font-size: 19px
+    /*font-size: 19px*/
 }
-
 .dropdown-item:hover {
     color: #fac227 !important;
     background-color: #002b56;
-    font-size: 19px
+    /*font-size: 19px*/
 }
 
 .dropdown-menu {
@@ -37,19 +36,19 @@ body {
 
 .search-half {
     position: relative;
-    color: rgb(233 229 77);
+    color: rgb(233 ,229 ,77);
 }
 
-    .search-half::before {
-        content: "";
-        background-color: rgb(82 10 121);
-        z-index: -1;
-        position: absolute;
-        height: 20px;
-        width: 100%;
-        top: 15px;
-        left: 0;
-    }
+.search-half::before {
+    content: "";
+    background-color: rgb(82 ,10 ,121);
+    z-index: -1;
+    position: absolute;
+    height: 20px;
+    width: 100%;
+    top: 15px;
+    left: 0;
+}
 
 .search-input {
     height: 40px;
@@ -88,7 +87,7 @@ body {
 }
 
     .search-a:hover {
-        color: #bdb15e;
+        color: rgb(146 197 129);
     }
 
 #ug-pic {
@@ -218,7 +217,7 @@ body {
 .style-t {
     width: 71%;
     margin-top: 7rem;
-    margin-left: 9rem;
+    margin-left: 5rem;
     position: absolute;
     display: block;
     position: absolute;
@@ -335,7 +334,7 @@ body {
     right: 54px;
     top: 316px;
     text-decoration: none;
-    color: #00bea4;
+    color: #5caec8;
 }
 
 /* 好學生評論 */
@@ -575,8 +574,14 @@ body {
     }
 }
 
-@media screen and (max-width:992px) {
+    
 
+@media screen and (max-width:992px) {
+    .p-12345 {
+        padding-left: 15px;
+        padding-right: 14px;
+        padding-top: 16px;
+    }
     .display-n {
         display: none;
     }

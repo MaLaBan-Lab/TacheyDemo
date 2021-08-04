@@ -344,6 +344,7 @@
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\PersonalUrl.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\PointOwner.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionLike.cs" />
     <Compile Include="Models\sysdac_history_internal.cs" />
@@ -434,6 +435,7 @@
     <Content Include="Assets\dll\Ecpay.EInvoice.Integration.dll" />
     <Content Include="Assets\dll\ECPay.Payment.Integration.dll" />
     <Content Include="Assets\img\cover-default.png" />
+    <Content Include="Assets\img\favicon-20210723115909549.ico" />
     <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\img\frog-3.png" />
     <Content Include="Assets\img\frog-hp.png" />
@@ -445,6 +447,7 @@
     <Content Include="Assets\img\icon-hahow.png" />
     <Content Include="Assets\img\icon-line-half.png" />
     <Content Include="Assets\img\icon-line.svg" />
+    <Content Include="Assets\img\MainBackground.png" />
     <Content Include="Assets\img\photo.png" />
     <Content Include="Assets\img\point-history-header.jpg" />
     <Content Include="Assets\img\人文.svg" />
@@ -824,6 +827,7 @@
     <Content Include="Views\Shared\_StepCheck.cshtml" />
     <Content Include="Views\Courses\FindCategory.cshtml" />
     <Content Include="Views\Shared\_HomePageCard.cshtml" />
+    <Content Include="Views\Shared\_VideoPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,6 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-sm-11 m-4">
+                @*預覽影片*@
                 <div class="row m-3 mb-5 border-bottom">
                     <div class="w-100">
                         <label class="text-black-50">課程預覽影片 - 上傳一個 1 ~ 3 分鐘的課程大綱影片</label>
@@ -16,19 +17,38 @@
                         <label for="previewVideo" class="btn btn-outline-secondary btn-outline-orange btn-lg py-2 px-5 mr-3 fs-5 text-black-50"><i class="fas fa-cloud-upload-alt mx-2"></i>上傳</label>
                         <input type="file" class="custom-file-input" id="previewVideo" data-CourseID="@ViewBag.CourseId" style="width:5px" />
                     </div>
-                        <span class="text-black-50 fs-5">強烈建議影片格式：長寬比為 16 : 9，解析度為 1080p 畫質。</span>
+                    <span class="text-black-50 fs-5">強烈建議影片格式：長寬比為 16 : 9，解析度為 1080p 畫質。</span>
                     <label for="basic-url" class="text-black-50 fs-5">建議檔案格式 mp4, mov</label>
                 </div>
-                <div class="row m-3">
-                    <video controls="controls" class="w-100" id="previewVideoPlayBox">
+                <div class="row m-3 mb-5">
+                    <video controls="controls" class="w-100 border" id="previewVideoPlayBox">
                         <source src="@Model.course.PreviewVideo" type="video/mp4" />
                     </video>
                 </div>
+
+                <div class="row m-3 mb-5 border-bottom">
+                    <div class="w-100">
+                        <label class="text-black-50">課程影片 - 上傳完整的課程影片</label>
+                    </div>
+                    <span class="text-black-50 fs-5">強烈建議影片格式：長寬比為 16 : 9，解析度為 1080p 畫質。</span>
+                    <label for="basic-url" class="text-black-50 fs-5">建議檔案格式 mp4, mov</label>
+                </div>
+                @*課程影片*@
+            <div class="row m-3">
+
+                @foreach (var item in Model.courseUnit)
+                {
+                    @Html.Partial("_VideoPost", item)
+                }
+
+            </div>
+
                 <div class="row m-3">
                     <button type="submit" onclick="changePage(7)" class="btn btn-outline-secondary btn-lg px-5">
                         下一步
                     </button>
                 </div>
+
             </div>
             <div class="col-lg-4 col-sm-11 m-3 text-black-50 text-justify">
                 <div class="row bg-light-gray px-3">

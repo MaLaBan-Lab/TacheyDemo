@@ -526,9 +526,10 @@ background-color: #2B1933;
     font-size: 18px;
   }
   /* ======also start====== */
-  .also_wrap .card {
-    margin-bottom: 8%;
-  }
+    .also_wrap .card {
+        margin-bottom: 6%;
+        height: 229px
+    }
   /* ======step start====== */
 
   .step .card-text {

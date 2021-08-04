@@ -525,7 +525,6 @@ namespace Tachey001.Controllers
 
         public ActionResult DeleteOrder(string cancel)
         {
-            _orderService.DeleteInvoice(cancel);
             _orderService.DeleteOrder(cancel);
             _orderService.DeleteOrderDetail(cancel);
             return RedirectToAction("Orders",new { type = 2});

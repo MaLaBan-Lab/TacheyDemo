@@ -13,10 +13,13 @@ namespace Tachey001.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int DetailID { get; set; }
 
+        public int CategoryID { get; set; }
+
         [Required]
         [StringLength(40)]
         public string DetailName { get; set; }
 
-        public int CategoryID { get; set; }
+        [StringLength(40)]
+        public string DetailEngName { get; set; }
     }
 }

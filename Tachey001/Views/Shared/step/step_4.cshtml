@@ -11,13 +11,13 @@
                     <form action="Step" method="post" id="Step4Form">
                         @Html.HiddenFor(m => m.course.CourseID)
                         <div class="col-12 mb-4">
-                            <label for="basic-url">定價（最低為 $100 元）</label>
+                            <label for="basic-url"style="color:#1a344b;">定價（最低為 $100 元）</label>
                             <div class="input-group mb-2">
                                 @Html.EditorFor(m => m.course.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "100" } })
                             </div>
                         </div>
                         <div class="col-12 mb-4">
-                            <label for="basic-url">預購價格（最低為 $50 元）</label>
+                            <label for="basic-url"style="color:#1a344b;">預購價格（最低為 $50 元）</label>
                             <div class="input-group mb-2">
                                 @*<input type="text"
                 class="form-control"
@@ -30,7 +30,7 @@
                             @Html.Partial("_ChoiceForStep", Model.memberGroup)
                         </div>
                         <div class="col-12 mb-4">
-                            <label for="basic-url">預計課程長度（以分鐘計算，最短 20 分鐘）</label>
+                            <label for="basic-url"style="color:#1a344b;">預計課程長度（以分鐘計算，最短 20 分鐘）</label>
                             <div class="input-group mb-2">
                                 @Html.EditorFor(m => m.course.TotalMinTime, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "20" } })
                             </div>

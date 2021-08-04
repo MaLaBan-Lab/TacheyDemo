@@ -16,14 +16,13 @@
     width:11rem;
 }
 .bg-green {
-    background-color: #002B56;
+    background-color: #352540;
 }
 
 .boxleft {
     display: flex;
     justify-content: space-around;
 }
-
 
 .boxleftinner {
     display: flex;
@@ -41,7 +40,10 @@
     flex-direction: column;
     justify-content: center;
 }
-
+.rad {
+    border-radius: 11px;
+    padding-left: 1rem;
+}
 .boxrightinner {
     display: flex;
     flex-direction: column;
@@ -155,6 +157,7 @@ input {
 .buttonimg-img {
     width: 100%;
     height: 100%;
+    margin-right: 31px;
 }
 
 .boxrightinnertopspan {

@@ -2,7 +2,7 @@
 @model Tachey001.ViewModel.Pay.PayGroup
 @Styles.Render("~/Assets/css/HAHOWcheckout.css")
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "付款頁面";
     Layout = "~/Views/Shared/_LayoutCreate.cshtml";
 
 
@@ -111,10 +111,10 @@
                         <div class="dropdown btn-group-vertical btn-block w-100">
                             <!--  -->
                             <div class="payment w-100">
-                                <select class="w-100">
-                                    <option>電子發票</option>
-                                    <option>捐贈發票</option>
-                                    <option>統編發票</option>
+                                <select class="w-100" id="sel">
+                                    <option value="0">電子發票</option>
+                                    <option value="1">捐贈發票</option>
+                                    <option value="2">統編發票</option>
                                 </select>
                             </div>
                             <!--  -->
@@ -133,7 +133,7 @@
                         <div class="dropdown btn-group-vertical btn-block w-100">
                             <!--  -->
                             <div class="payment w-100">
-                                <select class="w-100">
+                                <select class="w-100" id="sel2">
                                     <option>儲存在Hahow，中獎後寄信通知</option>
                                     <option>自然人憑證條碼</option>
                                     <option>手機條碼</option>
@@ -232,7 +232,7 @@
 
                                 var tet = ViewBag.usePoint;
                             }
-                            <button id="send" class="sc-1a6j6ze-0 RcKEn marg-t-20 mt-3" sendvalue="null">同意並送出</button>
+                            <button id="send" class="sc-1a6j6ze-0 RcKEn marg-t-20 mt-3 inputcss" sendvalue="null ">同意並送出</button>
                             <div class="onpsza-0 kjsCqb">
                                 點擊上方按鈕即表示您已依〈<a target="_blank" class="onpsza-1 hbVGjm"
                                                 href="/paying-user-agreement">Hahow 網際網路課程購買暨服務契約</a>〉第1.1條期間審閱完畢，並同意契約條款。
@@ -286,4 +286,40 @@
 
 @section endJS{
     @Scripts.Render("~/Assets/js/pay.js")
+<script>
+
+
+    $("#sel").change(function () {
+        switch (parseInt($(this).val())) {
+            default:
+            case 0:
+                document.getElementById("sel2").removeAttribute("disabled");
+                $("#sel2 option").remove();
+                
+                var array = ["儲存在Hahow，中獎後寄信通知", "自然人憑證條碼", "手機條碼"];
+               
+                $.each(array, function (i, val) {
+                    $("#sel2").append($("<option value='" + array[i] + "'>" + array[i] + "</option>"));
+                });
+               
+
+                break;
+            case 1:
+                $("#sel2 option").remove();
+                document.getElementById("sel2").setAttribute("disabled", "disabled");
+                
+                break;
+            case 2:
+                document.getElementById("sel2").removeAttribute("disabled");
+                $("#sel2 option").remove();
+                var array = ["儲存在Hahow，中獎後寄信通知", "自然人憑證條碼", "手機條碼"];
+             
+                $.each(array, function (i, val) {
+                    $("#sel2").append($("<option value='" + array[i] + "'>" + array[i] + "</option>"));
+                });
+               
+                break;
+        }
+    });
+    </script>
 }

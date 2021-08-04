@@ -29,5 +29,10 @@ namespace Tachey001.Models
 
         [StringLength(50)]
         public string UseTime { get; set; }
+
+        [StringLength(50)]
+        public string Send { get; set; }
+
+        public DateTime? SendDate { get; set; }
     }
 }

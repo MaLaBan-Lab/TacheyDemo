@@ -1,7 +1,7 @@
 ﻿@*最大籃子的型別*@
 @model Tachey001.ViewModel.Card_highlight_Group
 @{var i = 0;
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Tachey - 最豐富的線上課程";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
    
 }
@@ -16,7 +16,7 @@
                     學那些學校不會教的事
                 </h1>
                 <form class="form-inline my-2 my-lg-0 d-flex search-form flex-nowrap">
-                    <input class="bg-gray border-0 m-0 search-input" type="search" placeholder="今天想學習什麼?"
+                    <input class="bg-gray border-0 m-0 search-input px-3" type="search" placeholder="今天想學習什麼?"
                            aria-label="Search">
                     <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
                 </form>
@@ -332,7 +332,7 @@
                  class="recommend-img px-15">
             <h2 class=" card-h2-title">本週熱門課程</h2>
         </div>
-        <a href="#" class="more-class">更多熱門課程<i class="fas fa-arrow-right"></i></a>
+        @*<a href="#" class="more-class">更多熱門課程<i class="fas fa-arrow-right"></i></a>*@
     </div>
     <div class="row">
         @*資料庫未完成*@
