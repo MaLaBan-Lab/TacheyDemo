@@ -15,10 +15,10 @@ let check1 = r1.getAttribute("check");
 let check2 = r2.getAttribute("check");
 rd1.addEventListener("click", function () {
     point = r1.getAttribute("value");
-    r1.innerHTML = '<span>' + point + 'Hp折抵Nt' + point / 100 + '</span> <a href="#" id="pay-cancel1" class="btn btn-primary">X取消</a>';
+    r1.innerHTML = '<span>' + point + 'Hp折抵Nt' + point / 10 + '</span> <a href="#" id="pay-cancel1" class="btn btn-primary">X取消</a>';
     r2.innerHTML = "";
-    money1.innerHTML = "NT" + (totalprice - point / 100).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0});
-    money2.innerHTML = "NT" + (totalprice - point / 100).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+   /* money1.innerHTML = "NT" + (totalprice - point / 10).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0});*/
+    money2.innerHTML = "NT" + (totalprice - point / 10).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
     let cancel1 = document.getElementById("pay-cancel1");
     cancel1.addEventListener("click", function () {
         window.location.href = '/Pay/check';
@@ -36,8 +36,8 @@ rd2.addEventListener("click", function () {
     r1.innerHTML = "";
     r2.innerHTML = '<a href="#" id="pay-cancel2" class="btn btn-primary">X取消</a>  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discpuntCoupon">使用我的折扣券</button >';
     let cancel2 = document.getElementById("pay-cancel2");
-    money1.innerHTML = "NT$" + (totalprice / 1).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
-    money2.innerHTML = "NT$" + (totalprice / 1).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+    money1.innerHTML = "NT" + (totalprice / 1).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+    money2.innerHTML = "NT" + (totalprice / 1).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
     cancel2.addEventListener("click", function () {
         r2.setAttribute('check', 'null');
         rd2.checked = false;    
@@ -68,8 +68,8 @@ btn_use.addEventListener("click", function () {
 
     var close = document.getElementById("pay-close")
     close.click();
-    money1.innerHTML = "NT$" + Math.round(totalprice * discount).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
-    money2.innerHTML = "NT$" + Math.round(totalprice * discount).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+ /*   money1.innerHTML = "NT$" + Math.round(totalprice * discount).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });*/
+    money2.innerHTML = "NT" + Math.round(totalprice * discount).toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
     var url;
     if (value == null) {
         url = "/Pay/check"
