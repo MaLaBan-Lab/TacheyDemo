@@ -1,4 +1,5 @@
 ﻿@model Tachey001.ViewModel.HighlightCourseViewModel
+
 <div class="item">
     <!--大容器-->
     <div class="flip_wrap">
@@ -35,20 +36,20 @@
                     <h3>課程簡介</h3>
                     <div>
                         <i class="fas fa-hourglass-start"></i>
-                        <span>@Model.TotalMinTime</span>
+                        <span>大約 @Model.TotalMinTime 分鐘</span>
                     </div>
                     <div>
                         <i class="fas fa-book"></i>
-                        <span>4章節15單元</span>
+                        <span> 章節  單元</span>
                     </div>
-                    <div>
+                    @*<div>
                         <i class="fas fa-user-tag"></i>
                         <span>461位同學</span>
                     </div>
                     <div>
                         <i class="fas fa-copy"></i>
                         <span>2份作業</span>
-                    </div>
+                    </div>*@
                     <h3 class="my-2">你可以學到的東西</h3>
                     <p>
                         @Model.Description

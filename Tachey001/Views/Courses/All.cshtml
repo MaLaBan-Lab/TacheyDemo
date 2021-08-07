@@ -13,35 +13,28 @@
     <div class="row">
         <div class="col-12">
             <div class="nav justify-content-between">
-                <div class="searchcourse">
-                    <input class="rounded-pill border"
-                           type="search"
-                           id="site-search"
-                           name="q"
-                           placeholder=" 熱門搜尋 : procreate" />
-                    <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
-                </div>
+
 
                 <div class="sortcourse">
                     @*<div class="btn-group mr-5"
-                             role="group"
-                             aria-label="Button group with nested dropdown">
-                            <div class="btn-group" role="group">
-                                <button id="btnGroupDrop1"
-                                        type="button"
-                                        class="btn dropdown-toggle text-white nav-link"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                    所有課程
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                    <a class="dropdown-item text-white" href="#">所有課程</a>
-                                    <a class="dropdown-item text-white" href="#">審核中</a>
-                                    <a class="dropdown-item text-white" href="#">已開課</a>
-                                </div>
-                            </div>
-                        </div>*@
+                 role="group"
+                 aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1"
+                            type="button"
+                            class="btn dropdown-toggle text-white nav-link"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        所有課程
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item text-white" href="#">所有課程</a>
+                        <a class="dropdown-item text-white" href="#">審核中</a>
+                        <a class="dropdown-item text-white" href="#">已開課</a>
+                    </div>
+                </div>
+            </div>*@
 
                     <div class="btn-group"
                          role="group"
@@ -70,6 +63,15 @@
                     @*<button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "AllHot", "Courses", new { @class = "text-white text-decoration-none" })</button>*@
                     <button class="text-secondary" id="learning">猜你想學</button>
                     @*<button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "GuessYouLike", "Courses", new { @class = "text-white text-decoration-none" })</button>*@
+                </div>
+
+                <div class="searchcourse">
+                    <input class=" border"
+                           type="search"
+                           id="site-search"
+                           name="q"
+                           placeholder=" 熱門搜尋 : procreate" />
+                    <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
                 </div>
             </div>
         </div>

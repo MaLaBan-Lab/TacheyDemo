@@ -449,7 +449,10 @@
     <Content Include="Assets\img\icon-line.svg" />
     <Content Include="Assets\img\MainBackground.png" />
     <Content Include="Assets\img\photo.png" />
+    <Content Include="Assets\img\planet.png" />
     <Content Include="Assets\img\point-history-header.jpg" />
+    <Content Include="Assets\img\space.png" />
+    <Content Include="Assets\img\ufo.png" />
     <Content Include="Assets\img\人文.svg" />
     <Content Include="Assets\img\lock.jpg" />
     <Content Include="Assets\img\右圖左下.jpg" />

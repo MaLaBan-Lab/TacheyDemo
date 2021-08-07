@@ -11,10 +11,17 @@
 }
 .searchcourse input{
     width: 80%;
+    height:85%;
     border-radius: 5px;
+    padding-left:10px;
 }
+
+.searchcourse input:focus{
+    outline: none;
+}
+
 .searchcourse button{
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .coursebtn button{
     margin: 5px;
