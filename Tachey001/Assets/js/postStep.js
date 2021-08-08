@@ -448,7 +448,7 @@ $("#TitlePageImage").change(function () {
     })
 
     //當檔案改變後，做一些事 
-    readURL(this);   // this代表<input id="imgInp">
+    readURL(this);
 });
 
 function readURL(input) {
