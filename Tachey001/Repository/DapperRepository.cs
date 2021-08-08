@@ -11,8 +11,8 @@ namespace Tachey001.Repository
 {
     public class DapperRepository
     {
-        private static string _connectionStr = "data source=bs2021spring.database.windows.net;initial catalog=Tachey;persist security info=True;user id=bs;password=g5gyuv6m*mn@";
-        private SqlConnection _con;
+        private readonly string _connectionStr = "data source=bs2021spring.database.windows.net;initial catalog=Tachey;persist security info=True;user id=bs;password=g5gyuv6m*mn@";
+        private readonly SqlConnection _con;
 
         public DapperRepository()
         {
@@ -93,6 +93,5 @@ namespace Tachey001.Repository
             
             return result;
         }
-        //我修的課
     }
 }
