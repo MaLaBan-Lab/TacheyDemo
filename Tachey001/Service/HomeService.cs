@@ -92,15 +92,22 @@ namespace Tachey001.Service
         public List<HighlightCourseViewModel> GetHighlightCourseViewModels()
         {
             var course = _tacheyRepository.GetAll<Course>();
+
+            var chapter = _tacheyRepository.GetAll<CourseChapter>();
+            var unit = _tacheyRepository.GetAll<CourseChapter>();
+
             var result = from c in course
                          select new HighlightCourseViewModel
                          {
+                             CourseID = c.CourseID,
                              Title = c.Title,
-                             Introduction = c.Introduction,
+                             Effect = c.Effect,
                              TotalMinTime = c.TotalMinTime,
                              Description = c.Description,
-                             TitlePageImageURL = c.TitlePageImageURL
-                         };
+                             TitlePageImageURL = c.TitlePageImageURL,
+                             chapterCount= chapter.Where(x => x.CourseID == c.CourseID).Count(),
+                             unitCount= unit.Where(x => x.CourseID == c.CourseID).Count()
+                        };
 
             return result.ToList();
         }

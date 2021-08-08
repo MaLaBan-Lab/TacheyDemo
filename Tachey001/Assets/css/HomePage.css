@@ -410,6 +410,7 @@ body {
     .card-txt-btn button {
         border-color: #00bea4;
         color: #00bea4;
+        line-height: 2.8em;
     }
 
 /*.item:hover .card-txt {
@@ -500,6 +501,7 @@ body {
 .card-Explan {
     max-width: 70%;
     max-height: 55px;
+    height: 50px;
     color: rgba(0, 0, 0, 0.65);
     font-weight: 600;
     font-size: 10px;
@@ -725,7 +727,7 @@ body {
 }
 
 span[aria-label] {
-    font-size: 140px;
+    font-size: 100px;
     padding: 0 20px;
 }
 
@@ -766,9 +768,10 @@ span[aria-label] {
     backface-visibility: hidden;
     transform: rotateY(180deg);
     background: white;
-    padding: 0 36px;
+    padding: 70px 36px;
     box-sizing: border-box;
     border: 1px solid black;
+    border-radius: 5%;
 }
 
 .flip_wrap:hover .flip {

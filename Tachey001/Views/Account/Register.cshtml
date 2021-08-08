@@ -13,7 +13,7 @@
                 <div class="none m-3">
                 </div>
                 <a href="@Url.Action("Index", "Home")">
-                    <img  src="https://upload.cc/i1/2021/07/19/M8zQHn.png
+                    <img src="https://upload.cc/i1/2021/07/19/M8zQHn.png
 " alt="" class="my-4 w-15rem">
                 </a>
                 <p class="m-b-2 " style="        color: #560000
@@ -30,7 +30,7 @@
                             <img src="https://upload.cc/i1/2021/07/19/M8zQHn.png
 " alt="" class="my-4 xs-right-img">
                         </a>
-                        <b class="m-b-2 text-gray">今天也要透過學習，成為更好的自己</b>
+                        <b class="m-b-2 text-gray text-center">今天也要透過學習，成為更好的自己</b>
 
                     </div>
 
@@ -67,7 +67,7 @@
 
                     <div class="boxrightinnermiddle d-flex justify-content-center my-3">
                         <div class="text-muted">--</div>
-                        <span class="text-muted">或使用 Hahow 帳號密碼登入</span>
+                        <span class="text-muted">或使用 Tachey 帳號密碼註冊</span>
                         <div class="text-muted">--</div>
                     </div>
 
@@ -75,32 +75,32 @@
                     {
                         @Html.AntiForgeryToken()
 
-                <div class="boxrightinnermiddle-2">
-                    @*<div class="boxrightinnermiddle-2icon">
-            <i class="fas fa-user"></i>
-            <input placeholder="帳號(限4-21碼小寫英文數字)" type="text"
-                   class="my-2 boxrightinnermiddle-2-input">
-        </div>*@
-                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
-                    <div class="boxrightinnermiddle-2icon boxrightinnermiddle-2icon-email">
-                        <i class="far fa-envelope i-email"></i>
-                        @Html.TextBoxFor(m => m.Email, new { @class = "my-2 rad" })
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger " })
-                    <div class="boxrightinnermiddle-2icon">
-                        <i class="fas fa-unlock-alt"></i>
-                        @Html.PasswordFor(m => m.Password, new { @class = "my-2 rad" })
-                    </div>
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
-                    <div class="boxrightinnermiddle-2icon">
-                        <i class="fas fa-unlock-alt"></i>
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "my-2 rad" })
-                    </div>
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    <button class="my-2 d-flex justify-content-center">
-                        <input type="submit" class="w-100 h-100 border-0" value="註冊"/>
-                    </button>
-                </div>
+                        <div class="boxrightinnermiddle-2">
+                            @*<div class="boxrightinnermiddle-2icon">
+                                    <i class="fas fa-user"></i>
+                                    <input placeholder="帳號(限4-21碼小寫英文數字)" type="text"
+                                           class="my-2 boxrightinnermiddle-2-input">
+                                </div>*@
+                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                            <div class="boxrightinnermiddle-2icon boxrightinnermiddle-2icon-email">
+                                <i class="far fa-envelope i-email"></i>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "my-2 rad" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger " })
+                            <div class="boxrightinnermiddle-2icon">
+                                <i class="fas fa-unlock-alt"></i>
+                                @Html.PasswordFor(m => m.Password, new { @class = "my-2 rad" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
+                            <div class="boxrightinnermiddle-2icon">
+                                <i class="fas fa-unlock-alt"></i>
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "my-2 rad" })
+                            </div>
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <button class="my-2 d-flex justify-content-center" style="border:0px; border-radius: 5px;">
+                                <input type="submit" class="w-100 h-100 border-0" value="註冊" style="border-radius: 5px; padding-left: 1rem; background-color: #46A3FF; color: white; " />
+                            </button>
+                        </div>
 
                     }
 
@@ -120,4 +120,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var facebookicon = document.querySelector(".fa-facebook-square");
+        facebookicon.classList.add("ml-3");
+    </script>
 }

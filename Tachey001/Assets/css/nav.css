@@ -12,7 +12,9 @@
     .grow-0 {
         flex-grow: 0;
     }
-
+.overflow-auto {
+    overflow: visible !important;
+}
 #Homepage-logo {
     width: 180px;
     height: 65px;

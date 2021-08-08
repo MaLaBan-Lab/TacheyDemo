@@ -1,4 +1,5 @@
 ﻿@model Tachey001.ViewModel.HighlightCourseViewModel
+
 <div class="item">
     <!--大容器-->
     <div class="flip_wrap">
@@ -17,9 +18,9 @@
                             <h4 class="card-h4 text-secondary">@Model.Title</h4>
                         </div>
                         <div class="card-divide"></div>
-                        <div class="card-content">
-                            <div class="card-logo"></div>
-                            <div class="card-Explan text-secondary">
+                        <div class="card-content justify-content-center">
+                            @*<div class="card-logo"></div>*@
+                            <div class="card-Explan text-secondary ">
                                 @Model.Description
                             </div>
                         </div>
@@ -35,26 +36,26 @@
                     <h3>課程簡介</h3>
                     <div>
                         <i class="fas fa-hourglass-start"></i>
-                        <span>@Model.TotalMinTime</span>
+                        <span>大約 @Model.TotalMinTime 分鐘</span>
                     </div>
                     <div>
                         <i class="fas fa-book"></i>
-                        <span>4章節15單元</span>
+                        <span>@Model.chapterCount 章節  @Model.unitCount 單元</span>
                     </div>
-                    <div>
+                    @*<div>
                         <i class="fas fa-user-tag"></i>
                         <span>461位同學</span>
                     </div>
                     <div>
                         <i class="fas fa-copy"></i>
                         <span>2份作業</span>
-                    </div>
+                    </div>*@
                     <h3 class="my-2">你可以學到的東西</h3>
                     <p>
                         @Model.Description
                     </p>
                     <div class="d-flex justify-content-center card-txt-btn">
-                        <a href="#" class="w-100">
+                        <a href="@Url.Action("Main","Courses", new { id = Model.CourseID })" class="w-100">
                             <button class="w-100 bg-white">瞭解課程內容</button>
                         </a>
                     </div>
@@ -63,6 +64,4 @@
             </div>
         </div>
     </div>
-
-
 </div>

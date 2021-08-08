@@ -363,6 +363,7 @@ h1 {
 	justify-content: space-between;
 	background-color: rgb(65 147 192);
 	font-size: 14px;
+	padding-left:10px;
 }
 
 	.info-state > div {
@@ -863,9 +864,9 @@ h1 {
 	padding: 7.5px 20px;
 }
 
-.dropdown-menu a {
+/*.dropdown-menu a {
 	width: 340px;
-}
+}*/
 
 .dropdown-header {
 	padding: 7px 15px;
