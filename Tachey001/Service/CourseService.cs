@@ -480,6 +480,7 @@ namespace Tachey001.Service
         //儲存雲端上傳課程封面圖片，並回傳網址
         public string PostFileStorage(string CourseId, HttpPostedFileBase file)
         {
+            //初始化上傳物件
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription("TitlePageImage", file.InputStream),
@@ -487,8 +488,10 @@ namespace Tachey001.Service
                 Folder = $"Course/{CourseId}"
             };
 
+            //回傳上傳網址
             var CallBackUrl = _cloudinary.Upload(uploadParams).SecureUrl.ToString();
 
+            //儲存至資料庫
             var result = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
             result.TitlePageImageURL = CallBackUrl;
             _tacheyRepository.SaveChanges();

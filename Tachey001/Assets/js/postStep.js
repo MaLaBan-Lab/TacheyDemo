@@ -451,6 +451,7 @@ $("#TitlePageImage").change(function () {
     readURL(this);
 });
 
+//上傳預覽
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

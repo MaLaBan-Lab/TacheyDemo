@@ -38,6 +38,7 @@ $(".search-btn").on('click', function () {
         type: "get",
         data: { search: $("#site-search").val() },
         success: function (result) {
+            console.log(result)
             $("#proposalAttachments").html(result);
         }
     });

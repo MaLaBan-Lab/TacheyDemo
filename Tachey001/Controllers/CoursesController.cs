@@ -35,7 +35,6 @@ namespace Tachey001.Controllers
             _memberService = new MemberService();
             _context = new TacheyContext();
         }
-
         //最新排序(預設)
         [AllowAnonymous]
         public ActionResult All(int page = 1)
@@ -43,6 +42,24 @@ namespace Tachey001.Controllers
             var MemberId = User.Identity.GetUserId();
             ViewBag.UserId = MemberId;
             var all = _consoleService.GetCardsPageList(page);
+            var owner = _consoleService.GetOwners(MemberId);
+
+            var result = new consoleallViewModel()
+            {
+                pageConsole = all,
+                GetOwners = owner
+            };
+
+            return View(result);
+        }
+        //最新排序(預設)
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult All(string Search, int page = 1)
+        {
+            var MemberId = User.Identity.GetUserId();
+            ViewBag.UserId = MemberId;
+            var all = _consoleService.Search(Search, page);
             var owner = _consoleService.GetOwners(MemberId);
 
             var result = new consoleallViewModel()
@@ -336,8 +353,6 @@ namespace Tachey001.Controllers
             try
             {
                 var ReturnUrl = _courseService.PostVideoStorage(CourseID, Request.Files[0]);
-
-
                 var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
                 return Json(result);
             }
