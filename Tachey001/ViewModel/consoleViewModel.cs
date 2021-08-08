@@ -27,5 +27,6 @@ namespace Tachey001.ViewModel
         public DateTime? CreateDate { get; set; }
         public int CountBuyCourse { get; set; }
         public int? MainClick { get; set; }
+        public bool? CreateVerify { get; set; }
     }
 }

@@ -24,7 +24,8 @@ namespace Tachey001.Repository
             string sql = @"SELECT  c.CourseID,c.CustomUrl,c.Title,c.TitlePageImageURL,c.OriginalPrice,c.TotalMinTime,
                                             c.MemberID,m.Photo,AVG(sc.Score)as'AvgScore',
                                             Count(sc.CourseID)as'TotalScore',c.CategoryID,c.CategoryDetailsID,
-                                            cd.DetailName,cc.CategoryName,c.CreateDate,COUNT(od.CourseID)as'CountBuyCourse',c.MainClick
+                                            cd.DetailName,cc.CategoryName,c.CreateDate,COUNT(od.CourseID)as'CountBuyCourse',c.MainClick,
+                                            c.CreateVerify
         
                                             FROM Course as c
                                             left join Member as m on c.MemberID = m.MemberID
@@ -34,7 +35,8 @@ namespace Tachey001.Repository
                                             inner join CourseCategory as cc on c.CategoryID = cc.CategoryID
                                             group by c.CourseID,c.CustomUrl,c.Title,c.TitlePageImageURL,c.OriginalPrice,c.TotalMinTime,
                                                              c.MemberID,c.CategoryID,c.CategoryDetailsID,c.MainClick,c.CreateDate,
-                                                             m.Photo,cd.DetailName,cc.CategoryName
+                                                             m.Photo,cd.DetailName,cc.CategoryName,c.CreateVerify
+											having c.CreateVerify = 1
                                             ";
 
             var result = _con.Query<consoleViewModel>(sql).ToList();

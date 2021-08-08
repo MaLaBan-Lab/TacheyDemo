@@ -81,11 +81,12 @@ namespace Tachey001.Service
             var Ans = _tacheyRepository.GetAll<Answer>(x => x.CourseID == id);
 
             _tacheyRepository.Delete(Course);
-            _tacheyRepository.Delete(CScore);
-            _tacheyRepository.Delete(Owner);
-            _tacheyRepository.Delete(Cart);
-            _tacheyRepository.Delete(Que);
-            _tacheyRepository.Delete(Ans);
+
+            if (CScore.Count() != 0) _tacheyRepository.Delete(CScore);
+            if (Owner.Count() != 0) _tacheyRepository.Delete(Owner);
+            if (Cart.Count() != 0) _tacheyRepository.Delete(Cart);
+            if (Que.Count() != 0) _tacheyRepository.Delete(Que);
+            if (Ans.Count() != 0) _tacheyRepository.Delete(Ans);
 
             _tacheyRepository.SaveChanges();
         }
@@ -144,12 +145,12 @@ namespace Tachey001.Service
             var CourseId = GetRandomId(12);
 
             //檢查是否重複課程ID
-            while (_tacheyRepository.Get<Models.Course>(x => x.CourseID == CourseId) != null)
+            while (_tacheyRepository.Get<Course>(x => x.CourseID == CourseId) != null)
             {
                 CourseId = GetRandomId(12);
             }
 
-            var result = new Models.Course 
+            var result = new Course
             { 
                 CourseID = CourseId, 
                 MemberID = currentUserId, 
@@ -157,7 +158,9 @@ namespace Tachey001.Service
                 CategoryDetailsID = 10001,
                 Title = "無標題",
                 MainClick = 0,
-                CustomClick = 0
+                CustomClick = 0,
+                CreateVerify = false,
+                CreateFinish = false
             };
 
             _tacheyRepository.Create(result);
