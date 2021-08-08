@@ -227,12 +227,12 @@ namespace Tachey001.Controllers
             try
             {
                 _courseService.UpdateStep(id, group, formCollection, group.course.CourseID);
-                var result = new ApiResult(ApiStatus.Success, "儲存成功", null);
+                var result = new ApiResult(ApiStatus.Success, group.course.CourseID, null);
                 return Json(result);
             }
             catch (Exception ex)
             {
-                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                var result = new ApiResult(ApiStatus.Fail, "儲存失敗", null);
                 return Json(result);
             }
         }
@@ -421,6 +421,18 @@ namespace Tachey001.Controllers
             var result = _consoleService.OrderByCourseScore(page);
 
             return PartialView("PageListCardTemplate", result);
+        }
+        /// <summary>
+        /// 新增課程章節後，更新課程影片
+        /// </summary>
+        /// <param name="CourseID"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult Update_Step_Video(string CourseID)
+        {
+            ViewBag.CourseId = CourseID;
+            var result = _courseService.GetStepGroup(CourseID);
+            return PartialView("StepVideo", result);
         }
     }
 }
