@@ -128,11 +128,12 @@ namespace Tachey001.Service.Pay
         }
         public int GetOwnerPoint(string currentId)
         {
-            var point = _tacheyRepository.GetAll<Point>(x => x.MemberID == currentId);
+            var point = _tacheyRepository.GetAll<PointOwner>(x => x.MemberID == currentId);
             var totalPoint = 0;
             foreach (var item in point)
             {
-                totalPoint = item.PointNum + totalPoint;
+                var p = _tacheyRepository.Get<Point>(x => x.PointID == item.PointID);
+                totalPoint = p.PointNum + totalPoint;
             }
 
             return totalPoint;

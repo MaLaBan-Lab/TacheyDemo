@@ -35,14 +35,14 @@ namespace text
                 }
                 product_name =  $"{count}個課程總共:";
 
-                if (order.TicketID != "0")
+                //if (order.TicketID != "0")
+                //{
+                //    var ticket = _context.Ticket.Where(x => x.TicketID == order.TicketID).First();
+                //    discount = (decimal)ticket.Discount;
+                //}
+                 if (order.UsePoint == "use")
                 {
-                    var ticket = _context.Ticket.Where(x => x.TicketID == order.TicketID).First();
-                    discount = (decimal)ticket.Discount;
-                }
-                else if (order.UsePoint == "use")
-                {
-                    var totalpoint = _payService.GetOwnerPoint(order.MemberID) / 100;
+                    var totalpoint = _payService.GetOwnerPoint(order.MemberID) / 10;
                     product_price = product_price - totalpoint;
                 }
             }
