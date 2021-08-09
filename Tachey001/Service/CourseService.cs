@@ -19,12 +19,14 @@ namespace Tachey001.Service
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
         private Cloudinary _cloudinary;
+        private MemoryCacheRepository _memoryCacheRepository;
 
         //初始化資料庫邏輯
         public CourseService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
             _cloudinary = Credientials.Init();
+            _memoryCacheRepository = new MemoryCacheRepository();
         }
         //取得渲染課程卡片所需資料欄位
         public List<AllCourse> GetCourseData()
@@ -117,25 +119,33 @@ namespace Tachey001.Service
         //取得課程影片所需欄位
         public Main_Video GetCourseVideoData(string CourseId)
         {
-            var course = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
+            var key = $"Course.GetCourseVideo.{CourseId}";
+            var result = _memoryCacheRepository.Get<Main_Video>(key);
 
-            var category = _tacheyRepository.Get<CourseCategory>(x => x.CategoryID == course.CategoryID);
-
-            var detail = _tacheyRepository.Get<CategoryDetail>(x => x.DetailID == course.CategoryDetailsID);
-
-            var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId).ToList();
-
-            var unit = _tacheyRepository.GetAll<CourseUnit>(x => x.CourseID == CourseId).ToList();
-
-            var result = new Main_Video
+            if (result != null) return result;
+            else
             {
-                Course = course,
-                CategoryName = category.CategoryName,
-                DetailName = detail.DetailName,
-                courseChapters = chapter,
-                courseUnits = unit
-            };
+                var course = _tacheyRepository.Get<Course>(x => x.CourseID == CourseId);
 
+                var category = _tacheyRepository.Get<CourseCategory>(x => x.CategoryID == course.CategoryID);
+
+                var detail = _tacheyRepository.Get<CategoryDetail>(x => x.DetailID == course.CategoryDetailsID);
+
+                var chapter = _tacheyRepository.GetAll<CourseChapter>(x => x.CourseID == CourseId).ToList();
+
+                var unit = _tacheyRepository.GetAll<CourseUnit>(x => x.CourseID == CourseId).ToList();
+
+                result = new Main_Video
+                {
+                    Course = course,
+                    CategoryName = category.CategoryName,
+                    DetailName = detail.DetailName,
+                    courseChapters = chapter,
+                    courseUnits = unit
+                };
+
+                _memoryCacheRepository.Set(key, result);
+            }
             return result;
         }
         //開新課程
@@ -326,97 +336,107 @@ namespace Tachey001.Service
         //取得當前課程發問
         public List<QuestionCard> GetAllQuestions(string MemberId, string CourseId)
         {
-            var currentMember = new Models.Member { Name = "匿名", Photo = "https://pbs.twimg.com/profile_images/1391260770864967680/ZqdvCZM7_400x400.jpg" };
-            if (MemberId != null)
+
+            var key = $"Course.GetCourseQuestion.{CourseId}";
+            var result = _memoryCacheRepository.Get<List<QuestionCard>>(key);
+
+            if (result != null) return result;
+            else
             {
-                currentMember = _tacheyRepository.Get<Models.Member>(x => x.MemberID == MemberId);
-            }
-            var ques = _tacheyRepository.GetAll<Question>(x => x.CourseID == CourseId);
-            var ans = _tacheyRepository.GetAll<Answer>(x => x.CourseID == CourseId);
-            var member = _tacheyRepository.GetAll<Models.Member>();
-            var AnsAmount = from all in ans
-                            group all by all.QuestionID into g
-                            select new { id = g.Key, amount = g.Count() };
-
-            //取得問題喜歡數
-            var allQLike = _tacheyRepository.GetAll<QuestionLike>(x => x.CourseID == CourseId);
-
-            //取得回答喜歡數
-            var allALike = _tacheyRepository.GetAll<AnswerLike>(x => x.CourseID == CourseId);
-
-            var allA = from a in ans
-                       join q in ques on a.QuestionID equals q.QuestionID
-                       join m in member on a.MemberID equals m.MemberID
-                       select new AnswerCard
-                       {
-                           CourseID = a.CourseID,
-                           QuestionID = a.QuestionID,
-                           AnswerID = a.AnswerID,
-                           MemberID = m.MemberID,
-                           Name = m.Name,
-                           Photo = m.Photo,
-                           AnswerContent = a.AnswerContent,
-                           AnswerDate = a.AnswerDate
-                       };
-            var allQ = from q in ques
-                       join m in member on q.MemberID equals m.MemberID
-                       select new QuestionCard
-                       {
-                           CourseID = q.CourseID,
-                           QuestionID = q.QuestionID,
-                           MemberID = m.MemberID,
-                           Name = m.Name,
-                           Photo = m.Photo,
-                           CurrentName = currentMember.Name,
-                           CurrentPhoto = currentMember.Photo,
-                           QuestionContent = q.QuestionContent,
-                           QuestionDate = q.QuestionDate,
-                           AnsAmount = 0
-                         };
-            var result = allQ.ToList();
-            var allAList = allA.ToList();
-
-            foreach (var Q in result)
-            {
-                var Qlist = new List<string>();
-                //問題按讚的所有會員
-                foreach (var Ql in allQLike)
+                var currentMember = new Member { Name = "匿名", Photo = "https://pbs.twimg.com/profile_images/1391260770864967680/ZqdvCZM7_400x400.jpg" };
+                if (MemberId != null)
                 {
-                    if (Q.QuestionID == Ql.QuestionID)
-                    {
-                        Qlist.Add(Ql.MemberID);
-                    }
+                    currentMember = _tacheyRepository.Get<Member>(x => x.MemberID == MemberId);
                 }
-                Q.AllMemberId = Qlist;
+                var ques = _tacheyRepository.GetAll<Question>(x => x.CourseID == CourseId);
+                var ans = _tacheyRepository.GetAll<Answer>(x => x.CourseID == CourseId);
+                var member = _tacheyRepository.GetAll<Member>();
+                var AnsAmount = from all in ans
+                                group all by all.QuestionID into g
+                                select new { id = g.Key, amount = g.Count() };
 
-                //回答的總人數
-                foreach (var all in AnsAmount)
+                //取得問題喜歡數
+                var allQLike = _tacheyRepository.GetAll<QuestionLike>(x => x.CourseID == CourseId);
+
+                //取得回答喜歡數
+                var allALike = _tacheyRepository.GetAll<AnswerLike>(x => x.CourseID == CourseId);
+
+                var allA = from a in ans
+                           join q in ques on a.QuestionID equals q.QuestionID
+                           join m in member on a.MemberID equals m.MemberID
+                           select new AnswerCard
+                           {
+                               CourseID = a.CourseID,
+                               QuestionID = a.QuestionID,
+                               AnswerID = a.AnswerID,
+                               MemberID = m.MemberID,
+                               Name = m.Name,
+                               Photo = m.Photo,
+                               AnswerContent = a.AnswerContent,
+                               AnswerDate = a.AnswerDate
+                           };
+                var allQ = from q in ques
+                           join m in member on q.MemberID equals m.MemberID
+                           select new QuestionCard
+                           {
+                               CourseID = q.CourseID,
+                               QuestionID = q.QuestionID,
+                               MemberID = m.MemberID,
+                               Name = m.Name,
+                               Photo = m.Photo,
+                               CurrentName = currentMember.Name,
+                               CurrentPhoto = currentMember.Photo,
+                               QuestionContent = q.QuestionContent,
+                               QuestionDate = q.QuestionDate,
+                               AnsAmount = 0
+                           };
+                result = allQ.ToList();
+                var allAList = allA.ToList();
+
+                foreach (var Q in result)
                 {
-                    if(all.id == Q.QuestionID)
+                    var Qlist = new List<string>();
+                    //問題按讚的所有會員
+                    foreach (var Ql in allQLike)
                     {
-                        Q.AnsAmount = all.amount;
-                    }
-                }
-                var list = new List<AnswerCard>();
-                //回答List塞入
-                foreach (var A in allAList)
-                {
-                    if(Q.QuestionID == A.QuestionID)
-                    {
-                        list.Add(A);
-                        var Alist = new List<string>();
-                        //回答按讚的所有會員
-                        foreach (var Al in allALike)
+                        if (Q.QuestionID == Ql.QuestionID)
                         {
-                            if (A.QuestionID == Al.QuestionID && A.AnswerID == Al.AnswerID)
-                            {
-                                Alist.Add(Al.MemberID);
-                            }
+                            Qlist.Add(Ql.MemberID);
                         }
-                        A.AllMemberId = Alist;
                     }
+                    Q.AllMemberId = Qlist;
+
+                    //回答的總人數
+                    foreach (var all in AnsAmount)
+                    {
+                        if (all.id == Q.QuestionID)
+                        {
+                            Q.AnsAmount = all.amount;
+                        }
+                    }
+                    var list = new List<AnswerCard>();
+                    //回答List塞入
+                    foreach (var A in allAList)
+                    {
+                        if (Q.QuestionID == A.QuestionID)
+                        {
+                            list.Add(A);
+                            var Alist = new List<string>();
+                            //回答按讚的所有會員
+                            foreach (var Al in allALike)
+                            {
+                                if (A.QuestionID == Al.QuestionID && A.AnswerID == Al.AnswerID)
+                                {
+                                    Alist.Add(Al.MemberID);
+                                }
+                            }
+                            A.AllMemberId = Alist;
+                        }
+                    }
+                    Q.GetAnswerCards = list;
                 }
-                Q.GetAnswerCards = list;
+
+                _memoryCacheRepository.Set(key, result);
             }
             return result;
         }

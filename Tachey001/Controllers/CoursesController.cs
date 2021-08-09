@@ -12,6 +12,7 @@ using PagedList;
 using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
 using Tachey001.ViewModel.ApiViewModel;
+using Tachey001.Repository;
 
 namespace Tachey001.Controllers
 {
@@ -24,7 +25,6 @@ namespace Tachey001.Controllers
         private MemberService _memberService;
         private TacheyContext _context;
         private consoleService _consoleService;
-        
 
         //初始化CourseService
         public CoursesController()

@@ -27,7 +27,8 @@
 }
 <!DOCTYPE html>
 <html>
-<head><link rel="shortcut icon" href="~/Assets/img/favicon-20210723115909549.ico" />
+<head>
+    <link rel="shortcut icon" href="~/Assets/img/favicon-20210723115909549.ico" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,8 +47,7 @@
     @Scripts.Render("~/bundles/jquery")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
@@ -113,10 +113,10 @@
                 <button class="btn btn-warning my-2 my-sm-0" type="submit">搜尋</button>
             }
             @*<form class="form-inline my-2 my-lg-0 ">
-                <i class="fas fa-search px-2 text-white"></i>
-                <input class="form-control mr-sm-2" type="search" placeholder="課程搜尋" aria-label="Search">
-                <button class="btn btn-warning my-2 my-sm-0" type="submit">搜尋</button>
-            </form>*@
+                    <i class="fas fa-search px-2 text-white"></i>
+                    <input class="form-control mr-sm-2" type="search" placeholder="課程搜尋" aria-label="Search">
+                    <button class="btn btn-warning my-2 my-sm-0" type="submit">搜尋</button>
+                </form>*@
         </div>
         <!-- 移動距離就創一個空的div -->
         <!-- <div id="nav-space"></div> -->
@@ -222,85 +222,85 @@
 
     @RenderBody()
 
-<div class="container-fuild footer mb-0">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
-                <h3 class="footer-h3">關於</h3>
-                <ul class="footer-ul">
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">關於我們</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">加入Tachey</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">使用者條款</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">服務契約</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">隱私權政策</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">功能更新</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
-                <h3 class="footer-h3">幫助</h3>
-                <ul class="footer-ul">
-                    <li><a href="@Url.Action("Contact","Home" )" class="footer-content">企業學習方案</a></li>
-                    <li><a href="@Url.Action("Contact","Home" )" class="footer-content">異業合作洽談</a></li>
-                    <li><a href="@Url.Action("Contact","Home" )" class="footer-content">常見問題</a></li>
-                    <li><a href="@Url.Action("Contact","Home" )" class="footer-content">課程許願池</a></li>
-                    <li><a href="@Url.Action("Contact","Home" )" class="footer-content">兌換課程</a></li>
-                    <li><a href="@Url.Action("Contact","Home" )" class="footer-content">線上課程禮物卡</a></li>
-                    <li><a href="@Url.Action("Contact","Home" )" class="footer-content">填課程問卷拿優惠</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
-                <h3 class="footer-h3">社群</h3>
-                <ul class="footer-ul">
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">Facebook</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">Instagram</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">LINE</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">YouTube</a></li>
-                    <li><a href="@Url.Action("About","Home" )" class="footer-content">Blog</a></li>
+    <div class="container-fuild footer mb-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
+                    <h3 class="footer-h3">關於</h3>
+                    <ul class="footer-ul">
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">關於我們</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">加入Tachey</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">使用者條款</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">服務契約</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">隱私權政策</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">功能更新</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
+                    <h3 class="footer-h3">幫助</h3>
+                    <ul class="footer-ul">
+                        <li><a href="@Url.Action("Contact","Home" )" class="footer-content">企業學習方案</a></li>
+                        <li><a href="@Url.Action("Contact","Home" )" class="footer-content">異業合作洽談</a></li>
+                        <li><a href="@Url.Action("Contact","Home" )" class="footer-content">常見問題</a></li>
+                        <li><a href="@Url.Action("Contact","Home" )" class="footer-content">課程許願池</a></li>
+                        <li><a href="@Url.Action("Contact","Home" )" class="footer-content">兌換課程</a></li>
+                        <li><a href="@Url.Action("Contact","Home" )" class="footer-content">線上課程禮物卡</a></li>
+                        <li><a href="@Url.Action("Contact","Home" )" class="footer-content">填課程問卷拿優惠</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 footer-block p-0">
+                    <h3 class="footer-h3">社群</h3>
+                    <ul class="footer-ul">
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">Facebook</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">Instagram</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">LINE</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">YouTube</a></li>
+                        <li><a href="@Url.Action("About","Home" )" class="footer-content">Blog</a></li>
 
-                </ul>
-            </div>
-            <!--<div class="col-3 footer-block footer-last-block p-0">
-            <div class="dropdown">
+                    </ul>
+                </div>
+                <!--<div class="col-3 footer-block footer-last-block p-0">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>輸入地點</span>-->
+                <!-- <span id="footer-space"></span> -->
+                <!--</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item btn-item-first" href="#">輸入地點</a>
+                        <a class="dropdown-item" style="color:white" href="#">TW&nbsp;台灣 &nbsp;新台幣(&nbsp;TWD&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">HK&nbsp;香港 &nbsp;港幣幣(&nbsp;HKD&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">MY&nbsp;馬來西亞 &nbsp;林吉特(&nbsp;MYR&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">US&nbsp;美國 &nbsp;美元(&nbsp;USD&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">JP&nbsp;日本 &nbsp;日圓(&nbsp;JPY&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">CN&nbsp;中國 &nbsp;人民幣(&nbsp;CNY&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">MO&nbsp;澳門 &nbsp;澳門幣(&nbsp;MOP&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">SG&nbsp;新加坡 &nbsp;新幣(&nbsp;SGD&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">AU&nbsp;澳洲 &nbsp;澳幣(&nbsp;AUD&nbsp;)</a>
+                        <a class="dropdown-item" style="color:white" href="#">CU&nbsp;加拿大 &nbsp;加幣(&nbsp;CAD&nbsp;)</a>
+                    </div>
+                </div>-->
+                <!--<div class="dropdown mt-3">
                 <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>輸入地點</span>-->
-            <!-- <span id="footer-space"></span> -->
-            <!--</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item btn-item-first" href="#">輸入地點</a>
-                    <a class="dropdown-item" style="color:white" href="#">TW&nbsp;台灣 &nbsp;新台幣(&nbsp;TWD&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">HK&nbsp;香港 &nbsp;港幣幣(&nbsp;HKD&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">MY&nbsp;馬來西亞 &nbsp;林吉特(&nbsp;MYR&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">US&nbsp;美國 &nbsp;美元(&nbsp;USD&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">JP&nbsp;日本 &nbsp;日圓(&nbsp;JPY&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">CN&nbsp;中國 &nbsp;人民幣(&nbsp;CNY&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">MO&nbsp;澳門 &nbsp;澳門幣(&nbsp;MOP&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">SG&nbsp;新加坡 &nbsp;新幣(&nbsp;SGD&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">AU&nbsp;澳洲 &nbsp;澳幣(&nbsp;AUD&nbsp;)</a>
-                    <a class="dropdown-item" style="color:white" href="#">CU&nbsp;加拿大 &nbsp;加幣(&nbsp;CAD&nbsp;)</a>
-                </div>
-            </div>-->
-            <!--<div class="dropdown mt-3">
-            <button class="btn btn-secondary dropdown-toggle footer-btn" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span>語言選擇</span>-->
-            <!-- <span id="footer-space"></span> -->
-            <!--</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" style="color:white" href="#">繁體中文</a>
-                    <a class="dropdown-item" style="color:white" href="#">簡體中文</a>
-                </div>
-                <span class="pb-3 pt-2 footer-content">Hahow 好學校 © All Rights Reserved.</span>
-            </div>-->
+                    <span>語言選擇</span>-->
+                <!-- <span id="footer-space"></span> -->
+                <!--</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" style="color:white" href="#">繁體中文</a>
+                        <a class="dropdown-item" style="color:white" href="#">簡體中文</a>
+                    </div>
+                    <span class="pb-3 pt-2 footer-content">Hahow 好學校 © All Rights Reserved.</span>
+                </div>-->
 
 
 
 
 
+            </div>
+            <div class="col-12 footer-block pb-3 pt-2 footer-content text-right">Tachey © All Rights Reserved.</div>
         </div>
-        <div class="col-12 footer-block pb-3 pt-2 footer-content text-right">Tachey © All Rights Reserved.</div>
     </div>
-</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

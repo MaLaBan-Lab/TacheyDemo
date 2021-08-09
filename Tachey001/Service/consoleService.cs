@@ -16,17 +16,27 @@ namespace Tachey001.Service
         //宣告資料庫邏輯
         private TacheyRepository _tacheyRepository;
         private DapperRepository _dapperRepository;
+        private MemoryCacheRepository _memoryCacheRepository;
         //初始化資料庫邏輯
         public consoleService()
         {
             _tacheyRepository = new TacheyRepository(new TacheyContext());
             _dapperRepository = new DapperRepository();
+            _memoryCacheRepository = new MemoryCacheRepository();
         }
         //取得所有課程資訊
-        public List<consoleViewModel> test()
+        public List<consoleViewModel> GetAllCourses()
         {
-            var result = _dapperRepository.GetCourse();
+            var key = "Course.GetAllCourses";
+            var result = _memoryCacheRepository.Get<List<consoleViewModel>>(key);
 
+            if (result != null) return result;
+            else
+            {
+                result = _dapperRepository.GetCourse();
+
+                _memoryCacheRepository.Set(key, result);
+            }
             return result;
         }
         //取得收藏表
@@ -96,7 +106,7 @@ namespace Tachey001.Service
         {
             var category = _tacheyRepository.GetAll<CourseCategory>();
             var detail = _tacheyRepository.GetAll<CategoryDetail>();
-            var all = test();
+            var all = GetAllCourses();
             var result = new List<consoleViewModel>();
 
             if (categoryid == null || categoryid == 0)
@@ -129,7 +139,7 @@ namespace Tachey001.Service
             var last = ss.Reverse().Skip(1);
             //var last = ss.Last()
 
-            var all = test();
+            var all = GetAllCourses();
 
 
             //result = all.Where(x => x.DetailID == detailid).Select(x => x).ToList();
@@ -149,7 +159,7 @@ namespace Tachey001.Service
         //熱門排序
         public IPagedList<consoleViewModel> AllHot(int page)
         {
-            var result = test();
+            var result = GetAllCourses();
 
             int currentPage = page < 1 ? 1 : page;
             var oresult = result.OrderByDescending(x => x.MainClick);
@@ -162,7 +172,7 @@ namespace Tachey001.Service
         //搜尋
         public IPagedList<consoleViewModel> Search(string search, int page)
         {
-            var result = test();
+            var result = GetAllCourses();
 
 
             int currentPage = page < 1 ? 1 : page;
@@ -178,7 +188,7 @@ namespace Tachey001.Service
         public IPagedList<consoleViewModel> GetCardsPageList(int page)
         {
 
-            var result = test();
+            var result = GetAllCourses();
 
             int currentPage = page < 1 ? 1 : page;
             var oresult = result.OrderBy(x => x.CreateDate);
@@ -190,7 +200,7 @@ namespace Tachey001.Service
         //最多人數排序
         public IPagedList<consoleViewModel> GetCardsHotPageList(int page)
         {
-            var all = test();
+            var all = GetAllCourses();
 
             var result = all.OrderByDescending(x =>x.CountBuyCourse);
 
@@ -204,7 +214,7 @@ namespace Tachey001.Service
         //最長課時
         public IPagedList<consoleViewModel> OrderByTotalTimeOfCourse(int page)
         {
-            var result = test();
+            var result = GetAllCourses();
 
             int currentPage = page < 1 ? 1 : page;
             var oresult = result.OrderByDescending(x => x.TotalMinTime);
@@ -218,7 +228,7 @@ namespace Tachey001.Service
         public IPagedList<consoleViewModel> OrderByCourseScore(int page)
         {
            
-            var result = test();
+            var result = GetAllCourses();
 
             int currentPage = page < 1 ? 1 : page;
             var oresult = result.OrderByDescending(x => x.AvgScore);
