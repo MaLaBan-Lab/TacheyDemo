@@ -51,8 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-4 overflow-hidden mb-2 border"
-                 ">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-2 col-4 overflow-hidden mb-2 border card-img-box">
                 <a href="@Url.Action("Main", "Courses", new { id = url})" class="text-decoration-none p-0 w-100 h-100">
                     <img src="@titleUrl"
                          class="card-img-top" style="width: 100%;" />
@@ -92,13 +91,13 @@
                     }
                 }
             </div>
-            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-8 text-justify cardTitle">
-                <h4 class="card-title  font-weight-normal  p-12345 h4-color" >
+            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 text-justify cardTitle">
+                <h4 class="card-title  font-weight-normal h4-color" >
                     @Model.Title
                 </h4>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-3 col-6 mb-2">
-                <span class="card-text text-black-50">
+                <span class="card-text">
                     <span class="star-show">
                         <i class="fas fa-star star-gray position-relative">
                             @if (Model.AvgScore > 0)
@@ -143,7 +142,7 @@
                 </span>
             </div>
             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-4 col-6 mb-2 pa-10">
-                <span class="card-text text-black-50 mr-4">
+                <span class="card-text mr-4">
                     <span class="course-people-before">
                         <i class="fas fa-user-alt"></i>
                     </span>

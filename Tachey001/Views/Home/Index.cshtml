@@ -1,7 +1,7 @@
 ﻿@*最大籃子的型別*@
 @model Tachey001.ViewModel.Card_highlight_Group
 @{var i = 0;
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Tachey - 最豐富的線上課程";
     Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
    
 }
@@ -15,11 +15,16 @@
                     最有趣的<span class="search-half">線上課程平台</span><br>
                     學那些學校不會教的事
                 </h1>
-                <form class="form-inline my-2 my-lg-0 d-flex search-form flex-nowrap">
-                    <input class="bg-gray border-0 m-0 search-input px-3" type="search" placeholder="今天想學習什麼?"
-                           aria-label="Search">
+                @using (Html.BeginForm("All", "Courses", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 d-flex search-form flex-nowrap" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input class="bg-gray border-0 m-0 search-input px-3" type="search" placeholder="今天想學習什麼?" name="Search">
                     <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
-                </form>
+                }
+                @*<form class="form-inline my-2 my-lg-0 d-flex search-form flex-nowrap">
+                    <input class="bg-gray border-0 m-0 search-input px-3" type="search" placeholder="今天想學習什麼?">
+                    <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
+                </form>*@
                 <div class="search-a-wrap my-2">
                     <a href="#" class="search-a d-inline-block">優惠此時此課</a>
                     <a href="#" class="search-a d-inline-block">國際化人才</a>
@@ -71,48 +76,48 @@
 <!-- 第二塊 -->
 <!-- 輪盤一 -->
 <div class="owl-carousel  pb-5 auto-carousel mt-5">
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "03rfzFErpqMi"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_2021hahowday_20210519/2021hahowday_l.png"
+            <img src="https://res.cloudinary.com/tachey/image/upload/v1627566243/image/%E9%9F%B3%E6%A8%82/pexels-wendy-wei-1677710_hngvl2.jpg"
                  alt="">
         </div>
     </a>
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "0r9WGCWxfbzP"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_SV_singing_science_20210519/SV_singing_science_l.png"
+            <img src="https://res.cloudinary.com/tachey/image/upload/v1627566241/image/%E9%9F%B3%E6%A8%82/pexels-ludwig-kwan-2378209_jjci7e.jpg"
                  alt="">
         </div>
     </a>
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "2fe73XYRo4C1"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_202105_fight_for_wealth_20210510/202105_fight_for_wealth_l.png"
+            <img src="https://res.cloudinary.com/tachey/image/upload/v1627566295/image/%E9%9F%B3%E6%A8%82/pexels-nothing-ahead-3423985_mmugxg.jpg"
                  alt="">
         </div>
     </a>
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "6g5Kr6RrN74O"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_bundle_20210322/bundle_l.png" alt="">
+            <img src="https://res.cloudinary.com/tachey/image/upload/v1627567431/image/%E8%AA%9E%E8%A8%80/pexels-pixabay-261859_tqufq4.jpg" alt="">
         </div>
     </a>
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "6M0pZrcfo4SS"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_rifat_english_20210513/rifat_english_l.png"
+            <img src="https://res.cloudinary.com/tachey/image/upload/v1627567545/image/%E8%AA%9E%E8%A8%80/pexels-aleksandar-pasaric-2339009_o89sb2.jpg"
                  alt="">
         </div>
     </a>
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "7k3aMDaOBqQJ"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_bao_bread_20210422/bao_bread_l.png" alt="">
+            <img src="https://res.cloudinary.com/tachey/image/upload/v1627568104/image/%E8%AA%9E%E8%A8%80/pexels-pixabay-267669_h5iuxh.jpg" alt="">
         </div>
     </a>
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "7QmfVoaSH68w"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_procreate2_20210429/procreate2_l.png" alt="">
+            <img src="https://res.cloudinary.com/dzaevdqyt/image/upload/v1625818757/Course/7QmfVoaSH68w/TitlePageImage.png" alt="">
         </div>
     </a>
-    <a href="#">
+    <a href="@Url.Action("Main","Courses", new { id= "8AmfKoaYH33m"})">
         <div class="item">
-            <img src="https://storage.googleapis.com/hh-static/banner_covid2021_20210519/covid2021_l.png" alt="">
+            <img src="https://res.cloudinary.com/tachey/image/upload/v1627568329/image/%E7%A8%8B%E5%BC%8F/pexels-brett-sayles-4508751_ihg6mw.jpg" alt="">
         </div>
     </a>
 </div>
@@ -136,14 +141,14 @@
 <!-- 影片  owl-theme-->
 <div class="owl-carousel  video-carousel">
     <div class="item-video">
-        <iframe id="player1" width="636" height="356" src="https://www.youtube.com/embed/h1PlaMI-Pms?enablejsapi=1"
+        <iframe id="player1" width="636" height="356" src="https://res.cloudinary.com/dzaevdqyt/video/upload/v1625846634/Course/7QmfVoaSH68w/PreviewVideo.mp4?enablejsapi=1"
                 title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
         <div class="content text-center">
-            <h4 class="my-2">網頁</h4>
-            <a href="#">設計網頁-網頁工程師的設計實戰</a>
-            <div>
+            <h4 class="my-2">程式</h4>
+            <a href="@Url.Action("Main","Courses", new { id= "7k3aMDaOBqQJ"})">ASP.NET Core MVC</a>
+            @*<div>
                 <a href="#">
                     <span>4.87</span>
                     <i class="fas fa-star"></i>
@@ -151,18 +156,18 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </a>
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="item-video">
-        <iframe id="player2" width="636" height="356" src="https://www.youtube.com/embed/TCaM1Tl01lQ?enablejsapi=1"
+        <iframe id="player2" width="636" height="356" src="https://res.cloudinary.com/dzaevdqyt/video/upload/v1627902737/Course/8AmfKoaYH33m/PreviewVideo.mp4?enablejsapi=1"
                 title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
         <div class="content text-center">
-            <h4 class="my-2">網頁</h4>
-            <a href="#">設計網頁-網頁工程師的設計實戰</a>
-            <div>
+            <h4 class="my-2">程式</h4>
+            <a href="@Url.Action("Main","Courses", new { id= "8AmfKoaYH33m"})">DBA 訓練營 - SQL Server 資料庫管理入門</a>
+            @*<div>
                 <a href="#">
                     <span>4.87</span>
                     <i class="fas fa-star"></i>
@@ -170,18 +175,18 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </a>
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="item-video">
-        <iframe id="player3" width="636" height="356" src="https://www.youtube.com/embed/TCaM1Tl01lQ?enablejsapi=1"
+        <iframe id="player3" width="636" height="356" src="https://res.cloudinary.com/dzaevdqyt/video/upload/v1627905120/Course/8DwsUsF9kusp/PreviewVideo.mp4?enablejsapi=1"
                 title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
         <div class="content text-center">
-            <h4 class="my-2">網頁</h4>
-            <a href="#">設計網頁-網頁工程師的設計實戰</a>
-            <div>
+            <h4 class="my-2">程式</h4>
+            <a href="@Url.Action("Main","Courses", new { id= "8DwsUsF9kusp"})">精通 Bootstrap 4 - 開發超強不解釋</a>
+            @*<div>
                 <a href="#">
                     <span>4.87</span>
                     <i class="fas fa-star"></i>
@@ -189,25 +194,25 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </a>
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="item-video">
-        <iframe id="player4" width="636" height="356" src="https://www.youtube.com/embed/TCaM1Tl01lQ?enablejsapi=1"
+        <iframe id="player4" width="636" height="356" src="https://res.cloudinary.com/dzaevdqyt/video/upload/v1626107086/Course/aV6KQhxy7wFx/PreviewVideo.mp4?enablejsapi=1"
                 title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
         <div class="content text-center">
-            <h4 class="my-2">網頁</h4>
-            <a href="#">設計網頁-網頁工程師的設計實戰</a>
+            <h4 class="my-2">程式</h4>
+            <a href="@Url.Action("Main","Courses", new { id= "aV6KQhxy7wFx"})">Python</a>
             <div>
-                <a href="#">
+                @*<a href="#">
                     <span>4.87</span>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
-                </a>
+                </a>*@
             </div>
         </div>
     </div>
@@ -254,7 +259,7 @@
 <div id="student-say" class="container pt-5 ">
     <div class="row justify-content-center text-center m-0">
         <div class="col-12">
-            <h2 class="trywatch-h2">Hahow 學生這麼說</h2>
+            <h2 class="trywatch-h2">Tachey 學生這麼說</h2>
         </div>
         <div class="col-12 my-1">
             <h3 class="trywatch-text">
@@ -293,7 +298,7 @@
 <div class="container">
     <div class="row justify-content-lg-between" style="position:relative;">
         <div class="recommend-title-wrap d-flex">
-            <img src="https://hahow.in/static/images/homepage/icon-suggestion.svg" alt=""
+            <img src="~/Assets/img/ufo.png" alt=""
                  class="recommend-img px-15">
             <h2 class=" card-h2-title">猜你想學</h2>
         </div>
@@ -326,13 +331,13 @@
 <!-- 猜你想學 -->
 <!-- 本週熱門課程 -->
 <div class="container">
-    <div class="row justify-content-lg-between">
+    <div class="row justify-content-lg-between mb-3">
         <div class="recommend-title-wrap d-flex">
-            <img src="https://hahow.in/static/images/homepage/popular.png" alt=""
+            <img src="~/Assets/img/planet.png" alt=""
                  class="recommend-img px-15">
-            <h2 class=" card-h2-title">本週熱門課程</h2>
+            <h2 class=" card-h2-title ">延伸閱讀</h2>
         </div>
-        <a href="#" class="more-class">更多熱門課程<i class="fas fa-arrow-right"></i></a>
+        @*<a href="#" class="more-class">更多熱門課程<i class="fas fa-arrow-right"></i></a>*@
     </div>
     <div class="row">
         @*資料庫未完成*@
@@ -351,7 +356,7 @@
         <div class="row m-0">
 
             <div class="col-12">
-                <h4 class="reading-h4 my-3 text-white">延伸閱讀</h4>
+                @*<h4 class="reading-h4 my-3 text-white">延伸閱讀</h4>*@
             </div>
 
         </div>

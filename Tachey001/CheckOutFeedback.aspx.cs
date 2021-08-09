@@ -92,12 +92,12 @@ namespace text
                 else
                 {
                     this.Response.Write(String.Format("0|{0}", String.Join("\\r\\n", enErrors)));
-                    using (TacheyContext _context = new TacheyContext())
-                    {
-                        var o1 = _context.Order.Find(Session["ID"].ToString());
-                        o1.OrderStatus = "error";
-                        _context.SaveChanges();
-                    }
+                    //using (TacheyContext _context = new TacheyContext())
+                    //{
+                    //    var o1 = _context.Order.Find(Session["ID"].ToString());
+                    //    o1.OrderStatus = "error";
+                    //    _context.SaveChanges();
+                    //}
                     Response.Redirect("~/Pay/Error");
                 }
                 this.Response.Flush();

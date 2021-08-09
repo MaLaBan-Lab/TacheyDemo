@@ -293,10 +293,72 @@ function postStep(num) {
             }
             changePage(num + 1)
             StepCheckUpdate(CourseId)
-            PostToast(num, response.ErrMsg)
+            PostToast(num, "儲存成功")
+            if (num == 3) {
+                upVideo(CourseId)
+            }
         },
         error: function (err) {
             console.log(err.ErrMsg)
+        }
+    })
+}
+
+function upVideo(CourseId) {
+    $.ajax({
+        url: `/Courses/Update_Step_Video?CourseID=${CourseId}`,
+        type: "get",
+        success: function (result) {
+            $("#step6").html(result);
+
+            //步驟6專用
+            //上傳預覽影片
+            $("#previewVideo").change(function () {
+                var CourseId = $("#previewVideo").get(0).dataset.courseid;
+
+                var result = document.getElementById("previewVideo").files[0]
+                var data = new FormData();
+                data.append("PreviewVideoUpload", result);
+
+                FilePostToast(6);
+                $.ajax({
+                    type: "Post",
+                    url: `/Courses/CourseVideoUpload?CourseId=${CourseId}`,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        DelToast(6);
+                    }
+                })
+
+                readVideoURL(this)
+            })
+
+            //步驟6專用
+            //上傳課程影片
+            $(".courseVideoPost").change(function () {
+                var CourseId = $(this).get(0).dataset.courseid;
+                var UnitId = $(this).get(0).dataset.unitid;
+
+                var result = $(this).get(0).files[0]
+                var data = new FormData();
+                data.append(`${UnitId}`, result);
+
+                FilePostToast(UnitId);
+                $.ajax({
+                    type: "Post",
+                    url: `/Courses/MainCourseVideoUpload?CourseId=${CourseId}&UnitId=${UnitId}`,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        DelToast(UnitId);
+                    }
+                })
+
+                readCourseVideoURL(this, UnitId)
+            })
         }
     })
 }
@@ -312,7 +374,7 @@ function PostToast(Num, Msg) {
                 </button>
             </div>
             <div class="toast-body">
-                <p class="mx-5">${Msg}</p>
+                <h5><p class="mx-5 text-success"><i class="fas fa-check-circle"></i> ${Msg}</p></h5>
             </div>
         </div>
     `)
@@ -345,7 +407,7 @@ function FilePostToast(Num) {
 }
 
 function DelToast(Num) {
-    $(`#toast-body-${Num}`).html("<p class=''>檔案上傳成功</p>")
+    $(`#toast-body-${Num}`).html(`<h5><p class="text-success"><i class="fas fa-check-circle"></i> 檔案上傳成功</p></h5>`)
     setTimeout(function () {
         $(`#toast${Num}`).animate().remove();
     }, 2500);
@@ -386,9 +448,10 @@ $("#TitlePageImage").change(function () {
     })
 
     //當檔案改變後，做一些事 
-    readURL(this);   // this代表<input id="imgInp">
+    readURL(this);
 });
 
+//上傳預覽
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

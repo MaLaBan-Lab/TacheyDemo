@@ -259,8 +259,8 @@ namespace Tachey001.Service
         //取得收藏的課
         public List<consoleViewModel> GetConsoleData(string currutId)
         {
-            var course = _tacheyRepository.GetAll<Models.Course>();
-            var member = _tacheyRepository.GetAll<Models.Member>();
+            var course = _tacheyRepository.GetAll<Course>();
+            var member = _tacheyRepository.GetAll<Member>();
             var coursescore = _tacheyRepository.GetAll<CourseScore>();
             var owner = _tacheyRepository.GetAll<Owner>();
 
@@ -277,12 +277,13 @@ namespace Tachey001.Service
                          select new consoleViewModel
                          {
                              CourseID = c.CourseID,
+                             CMemberID = c.MemberID,
                              Title = c.Title,
                              TitlePageImageURL = c.TitlePageImageURL,
                              OriginalPrice = c.OriginalPrice,
                              TotalMinTime = c.TotalMinTime,
                              MemberID = m.MemberID,
-                             Photo = m.Photo,
+                             Photo = "",
                              AvgScore = 0,
                              favorite = true
                          };
@@ -296,6 +297,13 @@ namespace Tachey001.Service
                     if (item.CourseID == score.id)
                     {
                         item.AvgScore = Convert.ToInt32(score.score);
+                    }
+                }
+                foreach (var mem in member)
+                {
+                    if(item.CMemberID == mem.MemberID)
+                    {
+                        item.Photo = mem.Photo;
                     }
                 }
             }

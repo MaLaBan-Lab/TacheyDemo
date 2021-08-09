@@ -62,7 +62,6 @@ namespace Tachey001.Service
 
             var result = from O in order
                          join OD in order_detail on O.OrderID equals OD.OrderID
-                         join _invoice in invoice on O.OrderID equals _invoice.OrderID
                          join _course in course on OD.CourseID equals _course.CourseID
                          where O.MemberID == currentID && O.OrderStatus == "wait"
                          select new OrderRecordSuccess
@@ -74,12 +73,6 @@ namespace Tachey001.Service
                              PayDate = O.PayDate,
                              PayMethod = O.PayMethod,
                              UnitPrice = OD.UnitPrice,
-                             InvoiceType = _invoice.InvoiceType,
-                             InvoiceName = _invoice.InvoiceName,
-                             InvoiceEmail = _invoice.InvoiceEmail,
-                             InvoiceDate = _invoice.InvoiceDate,
-                             InvoiceNum = _invoice.InvoiceNum,
-                             InvoiceRandomNum = _invoice.InvoiceRandomNum,
                              BuyMethod = OD.BuyMethod
                          };
 

@@ -22,14 +22,19 @@ namespace Tachey001.Service.Pay
         }
         public OperationResult OrderCreate(string currentId, string ticketId, string usepoint)
         {
+            decimal? discount = 1;
             var orderID = "Tachey" + new Random().Next(0, 99999).ToString();
             usepoint = usepoint == "use" ? usepoint : null;
-            ticketId = ticketId == "null" ? "0" : ticketId;
+            ticketId = ticketId == null || ticketId == "null" ? "0" : ticketId;
             var result = new OperationResult();
             using (var transcation = _context.Database.BeginTransaction())
             {
                 try
                 {
+                    if(ticketId != "0")
+                    {
+                        discount = _tacheyRepository.Get<Ticket>(x => x.TicketID == ticketId).Discount;
+                    }
                     //Create Order 創建Order表
                     DateTime localDate = DateTime.Now;
                     var order_new = new Order
@@ -55,7 +60,7 @@ namespace Tachey001.Service.Pay
                         {
                             OrderID = orderID,
                             CourseID = item.CourseID,
-                            UnitPrice = course.OriginalPrice,
+                            UnitPrice = course.OriginalPrice * discount,
                             CourseName = course.Title,
                             BuyMethod = "課程售價"
                         };
@@ -123,11 +128,12 @@ namespace Tachey001.Service.Pay
         }
         public int GetOwnerPoint(string currentId)
         {
-            var point = _tacheyRepository.GetAll<Point>(x => x.MemberID == currentId);
+            var point = _tacheyRepository.GetAll<PointOwner>(x => x.MemberID == currentId);
             var totalPoint = 0;
             foreach (var item in point)
             {
-                totalPoint = item.PointNum + totalPoint;
+                var p = _tacheyRepository.Get<Point>(x => x.PointID == item.PointID);
+                totalPoint = p.PointNum + totalPoint;
             }
 
             return totalPoint;

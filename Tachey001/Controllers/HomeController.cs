@@ -35,7 +35,7 @@ namespace Tachey001.Controllers
             //var用碗去接我要的東西
             var getcommentviewmodel = _homeService.GetCommentViewModel();
             //var getcoursecardviewmodels = _homeService.GetCourseCardViewModels(MemberId);
-            var getcoursecardviewmodels = _consoleService.test();
+            var getcoursecardviewmodels = _consoleService.GetAllCourses();
             var owner = _consoleService.GetOwners(MemberId);
             var gethighlightcourseviewmodel = _homeService.GetHighlightCourseViewModels();
             var getcartpartialcardviewmodel = _memberService.GetCartPartialViewModel(MemberId);
@@ -102,7 +102,8 @@ namespace Tachey001.Controllers
         }
         public ActionResult GetHomePageCard(int start = 0)
         {
-            var getcoursecardviewmodels = _consoleService.test();
+            ViewBag.UserId = User.Identity.GetUserId();
+            var getcoursecardviewmodels = _consoleService.GetAllCourses();
             var top4 = getcoursecardviewmodels.Skip(start).Take(1);
             consoleViewModel result = null ;
             foreach (var item in top4)

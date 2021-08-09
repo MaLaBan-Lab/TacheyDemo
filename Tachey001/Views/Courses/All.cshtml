@@ -13,35 +13,28 @@
     <div class="row">
         <div class="col-12">
             <div class="nav justify-content-between">
-                <div class="searchcourse">
-                    <input class="rounded-pill border"
-                           type="search"
-                           id="site-search"
-                           name="q"
-                           placeholder=" 熱門搜尋 : procreate" />
-                    <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
-                </div>
+
 
                 <div class="sortcourse">
                     @*<div class="btn-group mr-5"
-                             role="group"
-                             aria-label="Button group with nested dropdown">
-                            <div class="btn-group" role="group">
-                                <button id="btnGroupDrop1"
-                                        type="button"
-                                        class="btn dropdown-toggle text-white nav-link"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                    所有課程
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                    <a class="dropdown-item text-white" href="#">所有課程</a>
-                                    <a class="dropdown-item text-white" href="#">審核中</a>
-                                    <a class="dropdown-item text-white" href="#">已開課</a>
-                                </div>
-                            </div>
-                        </div>*@
+                 role="group"
+                 aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1"
+                            type="button"
+                            class="btn dropdown-toggle text-white nav-link"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        所有課程
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item text-white" href="#">所有課程</a>
+                        <a class="dropdown-item text-white" href="#">審核中</a>
+                        <a class="dropdown-item text-white" href="#">已開課</a>
+                    </div>
+                </div>
+            </div>*@
 
                     <div class="btn-group"
                          role="group"
@@ -71,17 +64,35 @@
                     <button class="text-secondary" id="learning">猜你想學</button>
                     @*<button class="btn btn-pur m-auto">@Html.ActionLink("一步步開始提案", "GuessYouLike", "Courses", new { @class = "text-white text-decoration-none" })</button>*@
                 </div>
+
+                <div class="searchcourse">
+                    <input class=" border"
+                           type="search"
+                           id="site-search"
+                           name="q"
+                           placeholder=" 熱門搜尋 : procreate" />
+                    <button class="search-btn"> <i class="fas fa-search px-2"></i></button>
+                </div>
             </div>
         </div>
     </div>
     <div id="proposalAttachments">
         <div class="row mt-5" id="proposalAttachments">
-            @foreach (var item in Model.pageConsole)
+            @if (Model.pageConsole.Count != 0)
             {
-                item.favorite = Model.GetOwners.Any(x => x.CourseID == item.CourseID);
-                @Html.Partial("CardTemplate", item)
+                foreach (var item in Model.pageConsole)
+                {
+                    item.favorite = Model.GetOwners.Any(x => x.CourseID == item.CourseID);
+                    @Html.Partial("CardTemplate", item)
+                }
             }
-
+            else
+            {
+                <div class="col-12 text-white text-center">
+                    <h3><i class="fas fa-search fa-6x"></i></h3>
+                    <h3>找不到你搜尋的課程</h3>
+                </div>
+            }
         </div>
         <div class="row mx-auto">
             @Html.PagedListPager(Model.pageConsole, page => Url.Action("All", "Courses", new { page }))

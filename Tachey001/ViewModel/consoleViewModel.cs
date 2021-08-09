@@ -9,6 +9,7 @@ namespace Tachey001.ViewModel
     public class consoleViewModel
     {
         public string CourseID { get; set; }
+        public string CMemberID { get; set; }
         public string CustomUrl { get; set; }
         public string Title { get; set; }
         public string TitlePageImageURL { get; set; }
@@ -26,5 +27,6 @@ namespace Tachey001.ViewModel
         public DateTime? CreateDate { get; set; }
         public int CountBuyCourse { get; set; }
         public int? MainClick { get; set; }
+        public bool? CreateVerify { get; set; }
     }
 }

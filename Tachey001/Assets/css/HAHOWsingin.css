@@ -3,7 +3,9 @@
     margin: 0;
     list-style: none;
 }
-
+input:focus{
+    outline:none;
+}
 .boxrightinnertop-fontsize-singin {
     font-size: 30px;
 }
@@ -118,7 +120,7 @@ button {
 }
 
 button img {
-    width: 10%;
+    width: 8%;
 }
 
 .xs-right-title {
@@ -175,9 +177,8 @@ input {
 }
 
 .buttonimg-img {
-    width: 28.88px;
+    width: 31.88px;
     height: 34px;
-
 }
 
 .boxrightinnertopspan {

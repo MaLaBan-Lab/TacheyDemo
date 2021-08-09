@@ -12,21 +12,21 @@
             <div class="boxleftinner pic-height">
                 <div class="none m-3">
                 </div>
-                <a href="">
+                <a href="@Url.Action("Index", "Home")">
                     <img src="https://upload.cc/i1/2021/07/19/M8zQHn.png" alt="" class="my-4 w-15rem">
                 </a>
-                <p class="m-b-2 text-white">今天也要透過學習，成為更好的自己</p>
-                <img src="https://i.pinimg.com/564x/85/4c/3d/854c3dd9d515534668bd88cf34680fab.jpg" alt="" class="col-xs-0" style="width: 64%;">
+                <p class="m-b-2 text-white text-center">今天也要透過學習，成為更好的自己</p>
+                <img src="https://i.pinimg.com/564x/85/4c/3d/854c3dd9d515534668bd88cf34680fab.jpg" alt="" class="leftimg col-xs-0" >
               
             </div>
         </div>
 
         <div class="boxright  col-lg-7 p-0 col-md-7 col-sm-0">
-            <div class="boxrightinner-1 p-4">
+            <div class="boxrightinner-1 ">
                 <div class="boxrightinner col-lg-5 p-0 col-md-7 col-sm-0">
                     <div class="xs-right-title">
                         <a href="@Url.Action("Index", "Home")">
-                            <img src="https://hahow.in/static/images/logo.svg" alt="" class="my-4 xs-right-img">
+                            <img src="https://upload.cc/i1/2021/07/19/M8zQHn.png" alt="" class="my-4 xs-right-img">
                         </a>
                         <b class="m-b-2 text-gray">今天也要透過學習，成為更好的自己</b>
 
@@ -44,7 +44,7 @@
                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                     @*<button class="my-3 b-1-black buttondiv">
                             <div class="button-i">
-                                <i class="fab fa-facebook-square " style="color:white;font-size: 33px; "></i>
+                                <i class="fab fa-facebook-square ml-3" style="color:white;font-size: 33px; "></i>
                             </div>
                             <div class="buttonspan"><span class="spantext ml-3">使用FACEBOOK繼續</span></div>
                         </button>
@@ -64,7 +64,7 @@
 
                     <div class="boxrightinnermiddle d-flex justify-content-center my-3">
                         <div class="text-muted">----</div>
-                        <span class="text-muted">或使用 Hahow 帳號密碼登入</span>
+                        <span class="text-muted">或使用 Tachey 帳號密碼登入</span>
                         <div class="text-muted">----</div>
                     </div>
 
@@ -84,9 +84,9 @@
                                 @Html.PasswordFor(m => m.Password, new { @class = "my-2 rad" })
                             </div>
                             @Html.ValidationSummary("", new { @class = "text-danger" })
-                            <button type="submit" class="my-2 d-flex justify-content-center b-1-login"
-                                    id="input_btn">
-                                <input type="submit" value="登入" class="w-100 h-100 border-0" style=" border-radius: 16px; padding-left: 1rem;"/>
+                            <button type="submit" class="mt-4 d-flex justify-content-center b-1-login "
+                                    id="input_btn" style="border-radius: 5px;">
+                                <input type="submit" value="登入" class=" w-100 h-100 border-0" style="border-radius: 5px; padding-left: 1rem; background-color: #7400A1; color: white; "/>
                             </button>
                         </div>
 
@@ -113,4 +113,9 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Assets/js/HAHOWlogin.js")
+
+    <script>
+        var facebookicon = document.querySelector(".fa-facebook-square");
+        facebookicon.classList.add("ml-3");
+    </script>
 }

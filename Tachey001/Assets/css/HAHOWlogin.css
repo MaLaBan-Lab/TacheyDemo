@@ -1,7 +1,9 @@
 .boxrightinnertop-fontsize-login {
     font-size: 30px;
 }
-
+input:focus {
+    outline: none;
+}
 *::selection {
     background: orange;
     color: #fff;
@@ -22,6 +24,7 @@
 .boxleft {
     display: flex;
     justify-content: space-around;
+    position:relative
 }
 
 .boxleftinner {
@@ -35,6 +38,17 @@
     height: 100vh;
 }
 
+.leftimg {
+    max-height: 75%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 .boxright {
     display: flex;
     flex-direction: column;
@@ -75,6 +89,7 @@ button {
     align-content: center;
     align-items: center;
     -webkit-transition-duration: 0.4s;
+    border:0;
     /* Safari */
     transition-duration: 0.4s;
 }
@@ -110,7 +125,7 @@ button {
 }
 
 button img {
-    width: 10%;
+    width: 9%;
 }
 
 .b-3-gray:hover {
@@ -172,8 +187,11 @@ input {
     display: none;
 }
 
-
-
+@media screen and (max-width:1025px) {
+    .leftimg {
+        top: 0;
+    }
+}
 @media screen and (max-width:767.6px) {
 
     .col-xs-0 {

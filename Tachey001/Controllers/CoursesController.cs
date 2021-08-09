@@ -12,10 +12,11 @@ using PagedList;
 using Tachey001.ViewModel;
 using Tachey001.ViewModel.Member;
 using Tachey001.ViewModel.ApiViewModel;
+using Tachey001.Repository;
 
 namespace Tachey001.Controllers
 {
-    [System.Web.Http.Authorize]
+    [Authorize]
     public class CoursesController : Controller
     {
         private TacheyContext tacheyDb;
@@ -24,7 +25,6 @@ namespace Tachey001.Controllers
         private MemberService _memberService;
         private TacheyContext _context;
         private consoleService _consoleService;
-        
 
         //初始化CourseService
         public CoursesController()
@@ -35,7 +35,6 @@ namespace Tachey001.Controllers
             _memberService = new MemberService();
             _context = new TacheyContext();
         }
-
         //最新排序(預設)
         [AllowAnonymous]
         public ActionResult All(int page = 1)
@@ -43,6 +42,24 @@ namespace Tachey001.Controllers
             var MemberId = User.Identity.GetUserId();
             ViewBag.UserId = MemberId;
             var all = _consoleService.GetCardsPageList(page);
+            var owner = _consoleService.GetOwners(MemberId);
+
+            var result = new consoleallViewModel()
+            {
+                pageConsole = all,
+                GetOwners = owner
+            };
+
+            return View(result);
+        }
+        //最新排序(預設)
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult All(string Search, int page = 1)
+        {
+            var MemberId = User.Identity.GetUserId();
+            ViewBag.UserId = MemberId;
+            var all = _consoleService.Search(Search, page);
             var owner = _consoleService.GetOwners(MemberId);
 
             var result = new consoleallViewModel()
@@ -93,7 +110,6 @@ namespace Tachey001.Controllers
                 return View(result);
             }
         }
-        [AllowAnonymous]
         public ActionResult Create()
         {
             return View();
@@ -228,12 +244,12 @@ namespace Tachey001.Controllers
             try
             {
                 _courseService.UpdateStep(id, group, formCollection, group.course.CourseID);
-                var result = new ApiResult(ApiStatus.Success, "儲存成功", null);
+                var result = new ApiResult(ApiStatus.Success, group.course.CourseID, null);
                 return Json(result);
             }
             catch (Exception ex)
             {
-                var result = new ApiResult(ApiStatus.Fail, ex.Message, null);
+                var result = new ApiResult(ApiStatus.Fail, "儲存失敗", null);
                 return Json(result);
             }
         }
@@ -337,8 +353,6 @@ namespace Tachey001.Controllers
             try
             {
                 var ReturnUrl = _courseService.PostVideoStorage(CourseID, Request.Files[0]);
-
-
                 var result = new ApiResult(ApiStatus.Success, ReturnUrl, null);
                 return Json(result);
             }
@@ -422,6 +436,18 @@ namespace Tachey001.Controllers
             var result = _consoleService.OrderByCourseScore(page);
 
             return PartialView("PageListCardTemplate", result);
+        }
+        /// <summary>
+        /// 新增課程章節後，更新課程影片
+        /// </summary>
+        /// <param name="CourseID"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult Update_Step_Video(string CourseID)
+        {
+            ViewBag.CourseId = CourseID;
+            var result = _courseService.GetStepGroup(CourseID);
+            return PartialView("StepVideo", result);
         }
     }
 }
